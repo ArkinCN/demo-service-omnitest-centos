@@ -1110,9 +1110,12 @@ def _save_profile_capture(
             # points = 实际读到的样本数（上文按读回量如实记录）。两者不一致即说明
             # 触发过 POINTS_BACKOFF 回退，便于离线核查波形分辨率是否被降级。
             m["requestedPoints"] = requested_points
-            if role == "pwm" and duty in (0, 100):
-                m["frequencyHz"] = None
-                m["dutyPercent"] = None
+            # ⚠️ 2026-11-02 修：原实现「命令是 0/100 就把实测值全部置 None」，
+            #    等于按**命令**丢弃**实测**——而固件把 100% 钳到 99%，PWM 仍在开关
+            #    （实测 min −2.56 / max 7.64 满幅），那份实测是有效的。
+            #    改为：只有当**波形本身确实测不出周期**时才按「恒定输出」解释；
+            #    波形测得到就如实上报实测占空比/频率（数据纪律：不编、也不丢）。
+            if role == "pwm" and duty in (0, 100) and m.get("frequencyHz") is None:
                 m["edgeStatus"] = "constant_output_command_no_frequency_claim"
             if role == "pwm" and m["frequencyHz"] is not None and abs(m["frequencyHz"] - 25000) > 2500:
                 m["frequencyHz"] = None

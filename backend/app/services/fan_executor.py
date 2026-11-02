@@ -437,6 +437,35 @@ def _read_wave_csv(csv_path: str) -> dict:
     }
 
 
+def _resolve_run_artifact(path: str) -> str:
+    """把 artifacts 里的绝对路径重新定位到**本进程可见**的 runs 根目录。
+
+    背景（2026-11-02）：硬件采集改由宿主 sidecar 执行后，`start.py` 写入 events 的
+    artifacts 是**宿主绝对路径**（如 /opt/demo-hub/.../runs/<id>/cycle.../CH1.csv），
+    而 backend 跑在容器里，同一批文件挂在 /srv/omnitest/c/hardware/v0.6/runs。
+    直接 open 必然 ENOENT —— 外部现象就是「波形图一个都拿不到」。
+
+    做法：路径本身可读则原样返回；否则按「runs 之后的相对段」拼到本进程的 runs 根上。
+    仍然找不到时返回原路径，让调用方给出真实的错误信息（不掩盖问题）。
+    """
+    try:
+        if os.path.exists(path):
+            return path
+    except OSError:
+        pass
+    parts = str(path).replace("\\", "/").split("/")
+    if "runs" in parts:
+        tail = parts[len(parts) - 1 - parts[::-1].index("runs") + 1:]
+        if tail:
+            candidate = _runs_root_path().joinpath(*tail)
+            try:
+                if candidate.exists():
+                    return str(candidate)
+            except OSError:
+                pass
+    return path
+
+
 def read_capture_waveforms(meta: dict) -> dict:
     """按 capture 元数据（含 artifacts 绝对路径）读取各通道真实波形。
 
@@ -464,7 +493,7 @@ def read_capture_waveforms(meta: dict) -> dict:
         seen_channels.add(channel)
         role = _CHANNEL_ROLES.get(channel, f"ch{channel}")
         try:
-            wave = _read_wave_csv(name)
+            wave = _read_wave_csv(_resolve_run_artifact(name))
         except (OSError, ValueError) as e:
             channels_out.append({
                 "channel": channel, "role": role, "available": False,
