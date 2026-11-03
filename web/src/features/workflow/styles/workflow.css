@@ -1,0 +1,273 @@
+@import './tokens.css';
+
+/* ---------- 布局骨架 ---------- */
+.wf-root {
+  display: grid;
+  grid-template-columns: 264px minmax(0, 1fr) 320px;
+  height: 100vh;
+  overflow: hidden;
+}
+.wf-root > * { min-width: 0; }
+
+/* ---------- 左侧工作流列表 ---------- */
+.wf-sidebar {
+  border-right: 1px solid var(--wf-rule);
+  overflow-y: auto;
+  padding: 16px 12px 32px;
+}
+.wf-sidebar-head { margin: 0 0 4px; font-size: 15px; font-weight: 600; }
+.wf-sidebar-sub { margin: 0 0 16px; font-size: 12px; color: var(--wf-text-faint); }
+
+.wf-group { border-bottom: 1px solid var(--wf-rule); padding-bottom: 8px; margin-bottom: 8px; }
+.wf-group:last-child { border-bottom: none; }
+.wf-group-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--wf-primary);
+  text-align: left;
+}
+.wf-group-head:hover { color: var(--wf-primary-dark); }
+.wf-group-count { font-weight: 400; font-size: 11px; color: var(--wf-text-faint); }
+.wf-group-body { display: flex; flex-direction: column; gap: 6px; padding: 2px 0 6px; }
+
+/* ---------- 工作流卡片 ---------- */
+.wf-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  background: none;
+  border: 1px solid var(--wf-rule);
+  border-radius: var(--wf-radius);
+  padding: 8px 9px;
+  color: var(--wf-text);
+}
+.wf-card:hover { border-color: var(--wf-primary-soft); background: var(--wf-tint); }
+.wf-card[data-active='true'] {
+  border-color: var(--wf-primary);
+  border-width: 1.5px;
+  background: var(--wf-tint);
+}
+.wf-card-top { display: flex; align-items: baseline; justify-content: space-between; gap: 6px; }
+.wf-card-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.wf-card-volt {
+  flex: none;
+  font-size: 10px;
+  font-family: var(--wf-mono);
+  padding: 1px 5px;
+  border: 1px solid var(--wf-primary-soft);
+  border-radius: 3px;
+  color: var(--wf-text-muted);
+}
+.wf-card-volt[data-volt='MIXED'] { border-color: var(--wf-accent); color: var(--wf-accent); }
+.wf-card-volt[data-volt='N/A'] { border-color: var(--wf-rule); color: var(--wf-text-faint); }
+.wf-card-meta {
+  margin-top: 3px;
+  font-size: 11px;
+  color: var(--wf-text-faint);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.wf-card-dot { opacity: 0.5; }
+.wf-card-tag {
+  margin-left: auto;
+  font-size: 10px;
+  padding: 0 4px;
+  border: 1px solid var(--wf-rule);
+  border-radius: 3px;
+}
+.wf-card-thumb { display: flex; height: 3px; margin-top: 7px; gap: 1px; overflow: hidden; }
+.wf-card-thumb > span { display: block; height: 100%; }
+.wf-card-thumb-empty { width: 100%; background: var(--wf-rule); opacity: 0.4; }
+
+/* ---------- 中部画布 ---------- */
+.wf-main { display: flex; flex-direction: column; min-height: 0; }
+.wf-main-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--wf-rule);
+}
+.wf-main-title { margin: 0; font-size: 15px; font-weight: 600; }
+.wf-main-meta { font-size: 11.5px; color: var(--wf-text-faint); }
+.wf-main-actions { margin-left: auto; display: flex; gap: 8px; }
+.wf-btn {
+  font: inherit;
+  font-size: 12px;
+  padding: 5px 12px;
+  border: 1px solid var(--wf-primary);
+  border-radius: var(--wf-radius);
+  background: none;
+  color: var(--wf-primary);
+  cursor: pointer;
+}
+.wf-btn:hover { background: var(--wf-tint); }
+.wf-btn[data-variant='accent'] { border-color: var(--wf-accent); color: var(--wf-accent); }
+.wf-btn[data-variant='accent'][data-on='true'] { background: var(--wf-accent); color: #fff; }
+
+.wf-canvas { flex: 1; min-height: 0; }
+.wf-canvas .react-flow__attribution { display: none; }
+.wf-loading, .wf-error {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  color: var(--wf-text-faint);
+}
+.wf-error { color: var(--wf-accent); }
+
+/* ---------- 画布节点 ---------- */
+.wf-node {
+  width: 172px;
+  box-sizing: border-box;
+  padding: 8px 11px;
+  background: var(--wf-bg);
+  border: 1px solid var(--node-color);
+  border-radius: var(--wf-radius);
+  color: var(--wf-text);
+}
+.wf-node[data-selected='true'] {
+  border-color: var(--wf-accent);
+  border-width: 1.5px;
+  background: var(--node-fill);
+}
+.wf-node-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.wf-node-sub {
+  margin-top: 3px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10.5px;
+  color: var(--wf-text-faint);
+}
+.wf-node-group { color: var(--node-color); font-weight: 500; }
+.wf-node-embed { color: var(--wf-accent); }
+.wf-handle {
+  width: 7px;
+  height: 7px;
+  background: var(--wf-bg);
+  border: 1.5px solid var(--node-color);
+}
+
+/* ---------- 右侧属性抽屉 ---------- */
+.wf-drawer {
+  border-left: 1px solid var(--wf-rule);
+  overflow-y: auto;
+  padding: 16px 14px 40px;
+}
+.wf-drawer-empty {
+  padding: 24px 4px;
+  font-size: 12.5px;
+  color: var(--wf-text-faint);
+  text-align: center;
+}
+.wf-drawer-head { border-bottom: 1px solid var(--wf-rule); padding-bottom: 12px; margin-bottom: 12px; }
+.wf-chip {
+  display: inline-block;
+  font-size: 10.5px;
+  padding: 1px 6px;
+  border: 1px solid;
+  border-radius: 3px;
+}
+.wf-drawer-title { margin: 7px 0 4px; font-size: 14px; font-weight: 600; }
+.wf-drawer-title-input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 7px 0 4px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--wf-text);
+  background: none;
+  border: none;
+  border-bottom: 1px dashed var(--wf-rule);
+  padding: 2px 0;
+}
+.wf-drawer-title-input:focus { outline: none; border-bottom-color: var(--wf-primary); }
+.wf-drawer-type { font-size: 11px; font-family: var(--wf-mono); color: var(--wf-text-faint); }
+.wf-drawer-note {
+  font-size: 11.5px;
+  color: var(--wf-accent);
+  padding: 6px 8px;
+  border: 1px solid var(--wf-accent);
+  border-radius: var(--wf-radius);
+  margin-bottom: 12px;
+}
+
+.wf-params { margin: 0; font-size: 12px; }
+.wf-param { padding: 7px 0; border-bottom: 1px solid var(--wf-rule); }
+.wf-param:last-child { border-bottom: none; }
+.wf-param dt {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--wf-text-muted);
+  font-family: var(--wf-mono);
+  overflow-wrap: anywhere;
+  margin-bottom: 4px;
+}
+.wf-param dd { margin: 0; }
+.wf-input {
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+  font-size: 12px;
+  padding: 3px 6px;
+  border: 1px solid var(--wf-rule);
+  border-radius: 3px;
+  background: var(--wf-bg);
+  color: var(--wf-text);
+}
+.wf-input:focus { outline: none; border-color: var(--wf-primary); }
+.wf-input:disabled { background: #f6f6f5; color: var(--wf-text-faint); }
+.wf-checkbox { accent-color: var(--wf-primary); }
+.wf-expand {
+  font: inherit;
+  font-size: 11.5px;
+  color: var(--wf-primary);
+  background: none;
+  border: 1px dashed var(--wf-primary-soft);
+  border-radius: 3px;
+  padding: 2px 7px;
+  cursor: pointer;
+}
+.wf-expand:hover { background: var(--wf-tint); }
+.wf-json {
+  margin: 6px 0 0;
+  padding: 7px 8px;
+  max-height: 220px;
+  overflow: auto;
+  font-family: var(--wf-mono);
+  font-size: 10.5px;
+  line-height: 1.45;
+  background: var(--wf-tint);
+  border-radius: 3px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

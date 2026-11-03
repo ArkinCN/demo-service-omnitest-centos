@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "config-snapshot/v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "snapshot_id",
+    "scene_id",
+    "locked_at",
+    "locked_by",
+    "product_attributes",
+    "firmware",
+    "interlock_instances",
+    "channel_map"
+  ],
+  "properties": {
+    "schema": {
+      "const": "config-snapshot/v1"
+    },
+    "snapshot_id": {
+      "type": "string",
+      "description": "全局唯一，流程 4 的每轮产物都引用它"
+    },
+    "scene_id": {
+      "type": "string",
+      "description": "场景包标识，如 motor.cooling-fan.fortior-fu6832"
+    },
+    "scene_pack_version": {
+      "type": "string"
+    },
+    "dut": {
+      "type": "object",
+      "required": [
+        "sample_no"
+      ],
+      "properties": {
+        "sample_no": {
+          "type": "string"
+        },
+        "batch": {
+          "type": "string"
+        },
+        "submitted_by": {
+          "type": "string"
+        },
+        "purpose": {
+          "type": "string"
+        }
+      }
+    },
+    "locked_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "locked_by": {
+      "type": "string"
+    },
+    "product_attributes": {
+      "type": "array",
+      "description": "取值与形状与场景包 product-attributes.json 的 attributes 数组一致，另加 origin",
+      "items": {
+        "type": "object",
+        "required": [
+          "key",
+          "value",
+          "origin"
+        ],
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {},
+          "unit": {
+            "type": "string"
+          },
+          "origin": {
+            "enum": [
+              "document",
+              "manual",
+              "suggested"
+            ],
+            "description": "对应 6.2 节的三态来源标记"
+          },
+          "_source": {
+            "type": "object",
+            "properties": {
+              "file": {
+                "type": "string"
+              },
+              "locator": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "firmware": {
+      "type": "object",
+      "required": [
+        "project_path",
+        "param_header_path"
+      ],
+      "properties": {
+        "project_path": {
+          "type": "string",
+          "description": "必须是完整路径，同名工程文件全项目有 15 份"
+        },
+        "param_header_path": {
+          "type": "string"
+        },
+        "macro_total": {
+          "type": "integer"
+        },
+        "macro_whitelist": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "可调宏白名单，来自场景包 control-parameters.json，不是人工数出来的"
+        },
+        "baseline_snapshot_id": {
+          "type": "string"
+        }
+      }
+    },
+    "interlock_instances": {
+      "type": "array",
+      "description": "场景包 safety-interlocks.json 的联锁项在本次测试中的实例",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "blocking",
+          "state"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "如 SI-HW-01 / SI-PROC-04 / SI-PERSON-01"
+          },
+          "type": {
+            "enum": [
+              "硬件",
+              "流程",
+              "人员"
+            ]
+          },
+          "threshold": {
+            "type": "object"
+          },
+          "action": {
+            "type": "string"
+          },
+          "blocking": {
+            "type": "boolean"
+          },
+          "state": {
+            "enum": [
+              "satisfied",
+              "unsatisfied",
+              "waived",
+              "not-applicable"
+            ]
+          },
+          "confirmed_by": {
+            "type": "string"
+          },
+          "confirmed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "waiver_reason": {
+            "type": "string"
+          },
+          "waiver_approver": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "channel_map": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "channel",
+          "signal"
+        ],
+        "properties": {
+          "channel": {
+            "type": "string",
+            "description": "如 CH1"
+          },
+          "signal": {
+            "type": "string",
+            "description": "如 FG1"
+          },
+          "range": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

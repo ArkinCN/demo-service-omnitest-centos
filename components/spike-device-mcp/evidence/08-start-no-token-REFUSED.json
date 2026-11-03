@@ -1,0 +1,19 @@
+{
+    "status": "confirmation_required",
+    "executed": false,
+    "reason": "红线动作，未带 confirm_token，已拒绝执行",
+    "how_to_proceed": "把下面这张凭据交给人：前端在 C 区看板弹出确认条，人点确认后调桥的 POST /confirmations/{token}/approve，再带着同一个 confirm_token 和同一组参数重调本工具。",
+    "confirm_token": "ct_g7G7Wx8fkFo9hDgLrLD8M4xE",
+    "tool": "start",
+    "state": "pending",
+    "prompt": "启动被测电机：台架会真的转起来",
+    "args_preview": {
+        "duty_percent": 60.0,
+        "duration_s": 30.0
+    },
+    "created_at": 1789831809.417886,
+    "expires_at": 1789831989.417886,
+    "seconds_left": 180.0,
+    "approved_by": null,
+    "rejected_reason": null
+}

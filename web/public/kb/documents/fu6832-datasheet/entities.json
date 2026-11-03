@@ -1,0 +1,1650 @@
+{
+  "doc_id": "fu6832-datasheet",
+  "summary": {
+    "parameters": 344,
+    "parameters_matching_customer_h": 0,
+    "registers": 2,
+    "thresholds": 0,
+    "units": 4,
+    "procedure_steps": 0
+  },
+  "parameters": [
+    {
+      "name": "VCC_MODE",
+      "count": 108,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0031",
+      "first_page": 23,
+      "context": "-  单电源高压模式: VCC_MODE = 0 ，外部电源从 VCC 输入 5V ~ 28V ， VDD5 由内部 LDO 产生 -  单电源低压模式: V"
+    },
+    {
+      "name": "FOC_EKIH",
+      "count": 28,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "TIM1_CR4. 0x4068, FOC_EKPL TIM1_DBR1L = TIM1_ IER. 0x4068, FOC_EKIH TIM1_DBR2H = . 0x4068, FOC_EKIL = TIM1_DBR2L. , TIM1_BCORH"
+    },
+    {
+      "name": "FOC_EKIL",
+      "count": 28,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "_DBR1L = TIM1_ IER. 0x4068, FOC_EKIH TIM1_DBR2H = . 0x4068, FOC_EKIL = TIM1_DBR2L. , TIM1_BCORH = . , TIM1_BCORL = . , = . , ="
+    },
+    {
+      "name": "FOC_EKPH",
+      "count": 28,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "TIM1_CR1. 0x4068, = TIM1_CR2. 0x4068, = TIM1_CR3. 0x4068, FOC_EKPH TIM1_DBR1H = TIM1_CR4. 0x4068, FOC_EKPL TIM1_DBR1L = TIM1_"
+    },
+    {
+      "name": "FOC_EKPL",
+      "count": 28,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "= TIM1_CR3. 0x4068, FOC_EKPH TIM1_DBR1H = TIM1_CR4. 0x4068, FOC_EKPL TIM1_DBR1L = TIM1_ IER. 0x4068, FOC_EKIH TIM1_DBR2H = . 0x4"
+    },
+    {
+      "name": "TIM1_BCORH",
+      "count": 28,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "0x4068, TIM1_BCORH = TIM1_CR0. 0x4068, TIM1_BCORL = TIM1_CR1. 0x4068, = TIM1_"
+    },
+    {
+      "name": "TIM1_BCORL",
+      "count": 28,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "0x4068, TIM1_BCORH = TIM1_CR0. 0x4068, TIM1_BCORL = TIM1_CR1. 0x4068, = TIM1_CR2. 0x4068, = TIM1_CR3. 0x406"
+    },
+    {
+      "name": "TIM1_DBR1H",
+      "count": 28,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "0x4068, = TIM1_CR2. 0x4068, = TIM1_CR3. 0x4068, FOC_EKPH TIM1_DBR1H = TIM1_CR4. 0x4068, FOC_EKPL TIM1_DBR1L = TIM1_ IER. 0x4068"
+    },
+    {
+      "name": "TIM1_DBR1L",
+      "count": 28,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "3. 0x4068, FOC_EKPH TIM1_DBR1H = TIM1_CR4. 0x4068, FOC_EKPL TIM1_DBR1L = TIM1_ IER. 0x4068, FOC_EKIH TIM1_DBR2H = . 0x4068, FOC_EK"
+    },
+    {
+      "name": "TIM1_DBR2H",
+      "count": 28,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": ". 0x4068, FOC_EKPL TIM1_DBR1L = TIM1_ IER. 0x4068, FOC_EKIH TIM1_DBR2H = . 0x4068, FOC_EKIL = TIM1_DBR2L. , TIM1_BCORH = . , TIM1_"
+    },
+    {
+      "name": "DRV_SR",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0012",
+      "first_page": 13,
+      "context": "............................................... 209. 18.2.1 DRV_SR (0x4061) .................................................."
+    },
+    {
+      "name": "PI0_EK",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": ".........................................., 1 = 108. 13.4.7 PI0_EK (0x02EA, 0x02EB) .........................................."
+    },
+    {
+      "name": "PI0_EK1",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": ".........................................., 1 = 108. 13.4.6 PI0_EK1 (0x02E8, 0x02E9) .........................................."
+    },
+    {
+      "name": "PI0_KI",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0004",
+      "first_page": 6,
+      "context": ".........................................., 1 = 107. 13.4.3 PI0_KI (0x02E2, 0x02E3) .........................................."
+    },
+    {
+      "name": "PI0_KP",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0004",
+      "first_page": 6,
+      "context": ".........................................., 1 = 106. 13.4.2 PI0_KP (0x02E0, 0x02E1) .........................................."
+    },
+    {
+      "name": "PI0_UKH",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": ".........................................., 1 = 108. 13.4.8 PI0_UKH (0x02EC, 0x02ED) .........................................."
+    },
+    {
+      "name": "PI0_UKL",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": ".........................................., 1 = 109. 13.4.9 PI0_UKL (0x02EE, 0x02EF) .........................................."
+    },
+    {
+      "name": "PI0_UKMIN",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": ".........................................., 1 = 107. 13.4.5 PI0_UKMIN (0x02E6, 0x02E7) .........................................."
+    },
+    {
+      "name": "PI1_EK",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 111. 13.4.15 PI1_EK (0x02DA, 0x02DB) .........................................."
+    },
+    {
+      "name": "PI1_KI",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 109. 13.4.11 PI1_KI (0x02D2, 0x02D3) .........................................."
+    },
+    {
+      "name": "PI1_KP",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 109. 13.4.10 PI1_KP (0x02D0, 0x02D1) .........................................."
+    },
+    {
+      "name": "PI1_UKMAX",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 110. 13.4.12 PI1_UKMAX (0x02D4, 0x02D5) .........................................."
+    },
+    {
+      "name": "PI1_UKMIN",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 110. 13.4.13 PI1_UKMIN (0x02D6, 0x02D7) .........................................."
+    },
+    {
+      "name": "PI2_EK2",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 115. 13.4.27 PI2_EK2 (0x02CE, 0x02CF) .........................................."
+    },
+    {
+      "name": "PI2_KD",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 114. 13.4.26 PI2_KD (0x02CC, 0x02CD) .........................................."
+    },
+    {
+      "name": "PI2_KI",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 112. 13.4.19 PI2_KI (0x02BE, 0x02BF) .........................................."
+    },
+    {
+      "name": "PI2_UKH",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 114. 13.4.24 PI2_UKH (0x02C8, 0x02C9) .........................................."
+    },
+    {
+      "name": "PI2_UKL",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 114. 13.4.25 PI2_UKL (0x02CA, 0x02CB) .........................................."
+    },
+    {
+      "name": "RST_SR",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0001",
+      "first_page": 3,
+      "context": "........................................., 1 = 61. 6.1 复位源 (RST_SR) .........................................................."
+    },
+    {
+      "name": "AD14_DRH",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "D13_DRH. 0x0318, = AD13_DRL. 0x0318, FOC_EKPH TIM1_DBR1H = AD14_DRH. 0x0318, FOC_EKPL TIM1_DBR1L = AD14_DRH. 0x0318, FOC_EKIH T"
+    },
+    {
+      "name": "ADC_CR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0014",
+      "first_page": 15,
+      "context": ".........................................., 1 = 239. 23.4.1 ADC_CR (0x4039) .................................................."
+    },
+    {
+      "name": "ADC_SCYC",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0014",
+      "first_page": 15,
+      "context": ".........................................., 1 = 240. 23.4.3 ADC_SCYC (0x4035, 0x4038) .........................................."
+    },
+    {
+      "name": "AMP0_GAIN",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0017",
+      "first_page": 17,
+      "context": ".........................................., 1 = 260. 28.3.2 AMP0_GAIN (0x4034) .................................................."
+    },
+    {
+      "name": "CAL_CR0",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0013",
+      "first_page": 14,
+      "context": "........................................, 1 = 225. 21.4.2.1 CAL_CR0 (0x4044) CAL_CR1 (0x4045) ................................."
+    },
+    {
+      "name": "CAL_CR1",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0013",
+      "first_page": 14,
+      "context": "......................., 1 = 225. 21.4.2.1 CAL_CR0 (0x4044) CAL_CR1 (0x4045) .................................................."
+    },
+    {
+      "name": "CMP_CR0",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0017",
+      "first_page": 17,
+      "context": ".........................................., 1 = 271. 29.2.1 CMP_CR0 (0xD5) ...................................................."
+    },
+    {
+      "name": "CMP_CR1",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0017",
+      "first_page": 17,
+      "context": ".........................................., 1 = 271. 29.2.2 CMP_CR1 (0xD6) ...................................................."
+    },
+    {
+      "name": "CMP_CR2",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0017",
+      "first_page": 17,
+      "context": ".........................................., 1 = 271. 29.2.3 CMP_CR2 (0xDA) ...................................................."
+    },
+    {
+      "name": "CMP_CR3",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0017",
+      "first_page": 17,
+      "context": ".........................................., 1 = 272. 29.2.4 CMP_CR3 (0xDC) ...................................................."
+    },
+    {
+      "name": "CMP_CR4",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0017",
+      "first_page": 17,
+      "context": ".........................................., 1 = 274. 29.2.5 CMP_CR4 (0xE1) ...................................................."
+    },
+    {
+      "name": "CMP_SAMR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0017",
+      "first_page": 17,
+      "context": ".........................................., 1 = 274. 29.2.6 CMP_SAMR (0x40AD) .................................................."
+    },
+    {
+      "name": "CMP_SR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0018",
+      "first_page": 18,
+      "context": "29.2.7 CMP_SR (0xD7) ...................................................."
+    },
+    {
+      "name": "CRC_BEG",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0018",
+      "first_page": 18,
+      "context": ".........................................., 1 = 289. 32.5.4 CRC_BEG (0x4024) .................................................."
+    },
+    {
+      "name": "CRC_CNT",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0018",
+      "first_page": 18,
+      "context": ".........................................., 1 = 289. 32.5.5 CRC_CNT (0x4025) .................................................."
+    },
+    {
+      "name": "CRC_CR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0018",
+      "first_page": 18,
+      "context": ".........................................., 1 = 288. 32.5.1 CRC_CR (0x4022) .................................................."
+    },
+    {
+      "name": "CRC_DIN",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0018",
+      "first_page": 18,
+      "context": ".........................................., 1 = 288. 32.5.2 CRC_DIN (0x4021) .................................................."
+    },
+    {
+      "name": "CRC_DR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0018",
+      "first_page": 18,
+      "context": ".........................................., 1 = 288. 32.5.3 CRC_DR (0x4023) .................................................."
+    },
+    {
+      "name": "DAC1_DR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": ".........................................., 1 = 249. 24.4.3 DAC1_DR (0x404A) .................................................."
+    },
+    {
+      "name": "DAC_CR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": ".........................................., 1 = 249. 24.4.1 DAC_CR (0x4035) .................................................."
+    },
+    {
+      "name": "DMA0_CR0",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": "............................................... 250. 25.2.1 DMA0_CR0 (0x403A) .................................................."
+    },
+    {
+      "name": "DMA0_LEN",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": ".........................................., 1 = 251. 25.2.3 DMA0_LEN (0x403C) .................................................."
+    },
+    {
+      "name": "DMA1_BAL",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "ALF_CR. 0x4040, TIM1_BCORH = DMA1_BAH. 0x4040, TIM1_BCORL = DMA1_BAL. 0x4040, = UT2_BAUDL. 0x4040, = UT2_BAUDH. 0x4040, FOC_EK"
+    },
+    {
+      "name": "DMA1_CR0",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": ".........................................., 1 = 250. 25.2.2 DMA1_CR0 (0x403B) .................................................."
+    },
+    {
+      "name": "DMA1_LEN",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": ".........................................., 1 = 253. 25.2.5 DMA1_LEN (0x403D) .................................................."
+    },
+    {
+      "name": "DRV_CR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0013",
+      "first_page": 14,
+      "context": ".........................................., 1 = 216. 19.2.1 DRV_CR (0x4062) .................................................."
+    },
+    {
+      "name": "DRV_DTR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0013",
+      "first_page": 14,
+      "context": ".........................................., 1 = 220. 19.2.8 DRV_DTR (0x4060) .................................................."
+    },
+    {
+      "name": "DRV_OUT",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0013",
+      "first_page": 14,
+      "context": ".........................................., 1 = 217. 19.2.3 DRV_OUT (0xF8) ...................................................."
+    },
+    {
+      "name": "EVT_FILT",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0018",
+      "first_page": 18,
+      "context": ".........................................., 1 = 275. 29.2.8 EVT_FILT (0xD9) ...................................................."
+    },
+    {
+      "name": "FLA_CR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0018",
+      "first_page": 18,
+      "context": ".........................................., 1 = 283. 31.3.1 FLA_CR (0x85) ...................................................."
+    },
+    {
+      "name": "FLA_KEY",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0018",
+      "first_page": 18,
+      "context": ".........................................., 1 = 283. 31.3.2 FLA_KEY (0x84) ...................................................."
+    },
+    {
+      "name": "FOC_CR0",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0007",
+      "first_page": 9,
+      "context": ".........................................., 1 = 134. 14.2.1 FOC_CR0 (0x409F) .................................................."
+    },
+    {
+      "name": "FOC_CR1",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0007",
+      "first_page": 9,
+      "context": ".........................................., 1 = 134. 14.2.2 FOC_CR1 (0x40A0) .................................................."
+    },
+    {
+      "name": "FOC_CR2",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0007",
+      "first_page": 9,
+      "context": ".........................................., 1 = 135. 14.2.3 FOC_CR2 (0x40A1) .................................................."
+    },
+    {
+      "name": "FOC_EOMEKLPF",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0008",
+      "first_page": 10,
+      "context": "........................................., 1 = 149. 14.2.40 FOC_EOMEKLPF (0x40D8) .................................................."
+    },
+    {
+      "name": "FOC_RTHECNT",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0007",
+      "first_page": 9,
+      "context": ".............................................. 139. 14.2.12 FOC_RTHECNT (0x40AC) .................................................."
+    },
+    {
+      "name": "FOC_TBLO",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0007",
+      "first_page": 9,
+      "context": ".........................................., 1 = 137. 14.2.6 FOC_TBLO (0x40A4) .................................................."
+    },
+    {
+      "name": "FOC_TGLI",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0007",
+      "first_page": 9,
+      "context": ".........................................., 1 = 136. 14.2.5 FOC_TGLI (0x40A3) .................................................."
+    },
+    {
+      "name": "FOC_THECOR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0007",
+      "first_page": 9,
+      "context": "........................................., 1 = 139. 14.2.13 FOC_THECOR (0x40AD) .................................................."
+    },
+    {
+      "name": "FOC_TRGDLY",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0007",
+      "first_page": 9,
+      "context": ".........................................., 1 = 137. 14.2.7 FOC_TRGDLY (0x40A5) .................................................."
+    },
+    {
+      "name": "FOC_TSMIN",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0007",
+      "first_page": 9,
+      "context": ".........................................., 1 = 136. 14.2.4 FOC_TSMIN (0x40A2) .................................................."
+    },
+    {
+      "name": "I2C_CR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0002",
+      "first_page": 4,
+      "context": "............................................, 1 = 72. 8.3.1 I2C_CR (0x4028) .................................................."
+    },
+    {
+      "name": "I2C_DR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0002",
+      "first_page": 4,
+      "context": "............................................, 1 = 73. 8.3.3 I2C_DR (0x402A) .................................................."
+    },
+    {
+      "name": "I2C_ID",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0002",
+      "first_page": 4,
+      "context": "............................................, 1 = 72. 8.3.2 I2C_ID (0x4029) .................................................."
+    },
+    {
+      "name": "I2C_SR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0002",
+      "first_page": 4,
+      "context": "............................................, 1 = 73. 8.3.4 I2C_SR (0x402B) .................................................."
+    },
+    {
+      "name": "LIN_CR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0003",
+      "first_page": 5,
+      "context": "..........................................., 1 = 93. 11.6.1 LIN_CR (0x40E0) .................................................."
+    },
+    {
+      "name": "LIN_CSR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0004",
+      "first_page": 6,
+      "context": "..........................................., 1 = 93. 11.6.3 LIN_CSR (0x40E2) .................................................."
+    },
+    {
+      "name": "LIN_ID",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0004",
+      "first_page": 6,
+      "context": "..........................................., 1 = 94. 11.6.4 LIN_ID (0x40E3) .................................................."
+    },
+    {
+      "name": "LIN_SIZE",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0004",
+      "first_page": 6,
+      "context": "..........................................., 1 = 95. 11.6.5 LIN_SIZE (0x40E4) .................................................."
+    },
+    {
+      "name": "LIN_SR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0004",
+      "first_page": 6,
+      "context": "11.6.2 LIN_SR (0x40E1) .................................................."
+    },
+    {
+      "name": "MDU_CR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0004",
+      "first_page": 6,
+      "context": ".........................................., 1 = 101. 12.4.1 MDU_CR (0xC1) ...................................................."
+    },
+    {
+      "name": "MDU_D",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0004",
+      "first_page": 6,
+      "context": ".........................................., 1 = 104. 12.4.6 MDU_D (0xCB) ...................................................."
+    },
+    {
+      "name": "MDU_MD",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0004",
+      "first_page": 6,
+      "context": ".........................................., 1 = 101. 12.4.2 MDU_MD (0xCA) ...................................................."
+    },
+    {
+      "name": "P0_OE",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0014",
+      "first_page": 15,
+      "context": ".........................................., 1 = 228. 22.3.1 P0_OE (0xFC) ...................................................."
+    },
+    {
+      "name": "P0_PU",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0014",
+      "first_page": 15,
+      "context": "............................................... 230. 22.3.9 P0_PU (0x4053) .................................................."
+    },
+    {
+      "name": "P1_AN",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0014",
+      "first_page": 15,
+      "context": ".........................................., 1 = 229. 22.3.6 P1_AN (0x4050), 1 = ............................................."
+    },
+    {
+      "name": "P1_OE",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0014",
+      "first_page": 15,
+      "context": ".........................................., 1 = 228. 22.3.2 P1_OE (0xFD) ...................................................."
+    },
+    {
+      "name": "P1_PU",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0014",
+      "first_page": 15,
+      "context": "........................................., 1 = 230. 22.3.10 P1_PU (0x4054) .................................................."
+    },
+    {
+      "name": "P2_AN",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0014",
+      "first_page": 15,
+      "context": "............................................... 229. 22.3.7 P2_AN (0x4051), 1 = ............................................."
+    },
+    {
+      "name": "P2_OE",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0014",
+      "first_page": 15,
+      "context": ".........................................., 1 = 228. 22.3.3 P2_OE (0xFE)....................................................."
+    },
+    {
+      "name": "P2_PU",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0014",
+      "first_page": 15,
+      "context": "........................................., 1 = 230. 22.3.11 P2_PU (0x4055) .................................................."
+    },
+    {
+      "name": "P3_AN",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0014",
+      "first_page": 15,
+      "context": "............................................... 230. 22.3.8 P3_AN (0x4052), 1 = ............................................."
+    },
+    {
+      "name": "P3_OE",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0014",
+      "first_page": 15,
+      "context": ".........................................., 1 = 228. 22.3.4 P3_OE (0xFF) ...................................................."
+    },
+    {
+      "name": "P3_PU",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0014",
+      "first_page": 15,
+      "context": "........................................., 1 = 231. 22.3.12 P3_PU (0x4056) .................................................."
+    },
+    {
+      "name": "P4_OE",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0014",
+      "first_page": 15,
+      "context": ".........................................., 1 = 228. 22.3.5 P4_OE (0xE9) ...................................................."
+    },
+    {
+      "name": "P4_PU",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0014",
+      "first_page": 15,
+      "context": "........................................., 1 = 231. 22.3.13 P4_PU (0x4057) .................................................."
+    },
+    {
+      "name": "PH_SEL",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0014",
+      "first_page": 15,
+      "context": "........................................., 1 = 231. 22.3.14 PH_SEL (0x404C) .................................................."
+    },
+    {
+      "name": "PH_SEL1",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0014",
+      "first_page": 15,
+      "context": "........................................., 1 = 232. 22.3.15 PH_SEL1 (0x404D) .................................................."
+    },
+    {
+      "name": "PI0_UKMAX",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "13.4.4 PI0_UKMAX (0x02E4, 0x02E5) .........................................."
+    },
+    {
+      "name": "PI2_EK1",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 113. 13.4.22 PI2_EK1 (0x02C4, 0x02C5) .........................................."
+    },
+    {
+      "name": "PI2_KP",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 112. 13.4.18 PI2_KP (0x02BC, 0x02BD) .........................................."
+    },
+    {
+      "name": "PI2_UKMAX",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 112. 13.4.20 PI2_UKMAX (0x02C0, 0x02C1) .........................................."
+    },
+    {
+      "name": "PI2_UKMIN",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 113. 13.4.21 PI2_UKMIN (0x02C2, 0x02C3) .........................................."
+    },
+    {
+      "name": "PI3_EK",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 117. 13.4.33 PI3_EK (0x02B2, 0x02B3) .........................................."
+    },
+    {
+      "name": "PI3_EK1",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 116. 13.4.32 PI3_EK1 (0x02B0, 0x02B1) .........................................."
+    },
+    {
+      "name": "PI3_EK2",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0006",
+      "first_page": 8,
+      "context": "13.4.37 PI3_EK2 (0x02BA, 0x02BB) .........................................."
+    },
+    {
+      "name": "PI3_KD",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 118. 13.4.36 PI3_KD (0x02B8, 0x02B9) .........................................."
+    },
+    {
+      "name": "PI3_KI",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 115. 13.4.29 PI3_KI (0x02AA, 0x02AB) .........................................."
+    },
+    {
+      "name": "PI3_KP",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 115. 13.4.28 PI3_KP (0x02A8, 0x02A9) .........................................."
+    },
+    {
+      "name": "PI3_UKH",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 117. 13.4.34 PI3_UKH (0x02B4, 0x02B5) .........................................."
+    },
+    {
+      "name": "PI3_UKL",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 117. 13.4.35 PI3_UKL (0x02B6, 0x02B7)..........................................."
+    },
+    {
+      "name": "PI3_UKMAX",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 116. 13.4.30 PI3_UKMAX (0x02AC, 0x02AD) .........................................."
+    },
+    {
+      "name": "PI3_UKMIN",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0005",
+      "first_page": 7,
+      "context": "........................................., 1 = 116. 13.4.31 PI3_UKMIN (0x02AE, 0x02AF) .........................................."
+    },
+    {
+      "name": "PI_CR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0004",
+      "first_page": 6,
+      "context": ".........................................., 1 = 106. 13.4.1 PI_CR (0xF9) ...................................................."
+    },
+    {
+      "name": "RTC_STA",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0013",
+      "first_page": 14,
+      "context": ".........................................., 1 = 224. 21.3.2 RTC_STA (0x402E) .................................................."
+    },
+    {
+      "name": "SPI_CLK",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0003",
+      "first_page": 5,
+      "context": "9.3.3 SPI_CLK (0x4032) .................................................."
+    },
+    {
+      "name": "SPI_CR0",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0002",
+      "first_page": 4,
+      "context": "............................................, 1 = 81. 9.3.1 SPI_CR0 (0x4030) .................................................."
+    },
+    {
+      "name": "SPI_CR1",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0002",
+      "first_page": 4,
+      "context": "............................................, 1 = 81. 9.3.2 SPI_CR1 (0x4031) .................................................."
+    },
+    {
+      "name": "SPI_DR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0003",
+      "first_page": 5,
+      "context": "............................................, 1 = 83. 9.3.4 SPI_DR (0x4033) .................................................."
+    },
+    {
+      "name": "TIM1_CR0",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0010",
+      "first_page": 11,
+      "context": ".........................................., 1 = 170. 15.3.1 TIM1_CR0 (0x4068) .................................................."
+    },
+    {
+      "name": "TIM1_CR1",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0010",
+      "first_page": 11,
+      "context": ".........................................., 1 = 170. 15.3.2 TIM1_CR1 (0x4069) .................................................."
+    },
+    {
+      "name": "TIM1_CR2",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0010",
+      "first_page": 11,
+      "context": ".........................................., 1 = 171. 15.3.3 TIM1_CR2 (0x406A) .................................................."
+    },
+    {
+      "name": "TIM1_CR3",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0010",
+      "first_page": 11,
+      "context": ".........................................., 1 = 171. 15.3.4 TIM1_CR3 (0x406B) .................................................."
+    },
+    {
+      "name": "TIM1_CR4",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0010",
+      "first_page": 11,
+      "context": ".........................................., 1 = 171. 15.3.5 TIM1_CR4 (0x406C) .................................................."
+    },
+    {
+      "name": "TIM1_SR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0010",
+      "first_page": 11,
+      "context": ".........................................., 1 = 172. 15.3.7 TIM1_SR (0x406E) .................................................."
+    },
+    {
+      "name": "TIM2_CR0",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0011",
+      "first_page": 12,
+      "context": ".........................................., 1 = 197. 16.2.1 TIM2_CR0 (0xA1) ...................................................."
+    },
+    {
+      "name": "TIM2_CR1",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0011",
+      "first_page": 12,
+      "context": ".........................................., 1 = 197. 16.2.2 TIM2_CR1 (0xA9) ...................................................."
+    },
+    {
+      "name": "TIM3_CR0",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0020",
+      "first_page": 20,
+      "context": "[XY] 表示 ABCD 寄存器中的 XY 位 -  寄存器名中的 x 表示类似寄存器。例: TIMx_CR0 表示 TIM3_CR0 和 TIM4_CR0 -  [m : n] 表示位范围。例: [3 : 0] 表示从 bit3 到 bit0 - "
+    },
+    {
+      "name": "TIM4_CR0",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0020",
+      "first_page": 20,
+      "context": "D 寄存器中的 XY 位 -  寄存器名中的 x 表示类似寄存器。例: TIMx_CR0 表示 TIM3_CR0 和 TIM4_CR0 -  [m : n] 表示位范围。例: [3 : 0] 表示从 bit3 到 bit0 -  Pm.n 表示 Po"
+    },
+    {
+      "name": "TSD_CR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0018",
+      "first_page": 18,
+      "context": ".........................................., 1 = 276. 29.2.9 TSD_CR (0x402F) .................................................."
+    },
+    {
+      "name": "UT2_BAUD",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0003",
+      "first_page": 5,
+      "context": "..........................................., 1 = 89. 10.4.3 UT2_BAUD (0x4042, 0x4043) .........................................."
+    },
+    {
+      "name": "UT2_CR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0003",
+      "first_page": 5,
+      "context": "..........................................., 1 = 88. 10.4.1 UT2_CR (0x8A) ...................................................."
+    },
+    {
+      "name": "UT2_DR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0003",
+      "first_page": 5,
+      "context": "..........................................., 1 = 88. 10.4.2 UT2_DR (0x89) ...................................................."
+    },
+    {
+      "name": "UT_CR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0003",
+      "first_page": 5,
+      "context": "..........................................., 1 = 87. 10.3.1 UT_CR (0x98) ...................................................."
+    },
+    {
+      "name": "UT_DR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0003",
+      "first_page": 5,
+      "context": "..........................................., 1 = 87. 10.3.2 UT_DR (0x99) ...................................................."
+    },
+    {
+      "name": "WDT_ARR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0013",
+      "first_page": 14,
+      "context": ".........................................., 1 = 222. 20.3.2 WDT_ARR (0x4027) .................................................."
+    },
+    {
+      "name": "WDT_CR",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0013",
+      "first_page": 14,
+      "context": ".........................................., 1 = 222. 20.3.1 WDT_CR (0x4026) .................................................."
+    },
+    {
+      "name": "AD0_DRH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "= AD7_DRH. 0x0308, FOC_EKIL = AD7_DRL. 0x0300, TIM1_BCORH = AD0_DRH. 0x0300, TIM1_BCORL = AD0_DRL. 0x0300, = AD1_DRH. 0x0300,"
+    },
+    {
+      "name": "AD0_DRL",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "AD7_DRL. 0x0300, TIM1_BCORH = AD0_DRH. 0x0300, TIM1_BCORL = AD0_DRL. 0x0300, = AD1_DRH. 0x0300, = AD1_DRL. 0x0300, FOC_EKPH T"
+    },
+    {
+      "name": "AD10_DRH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "AD9_DRH. 0x0310, = AD9_DRL. 0x0310, FOC_EKPH TIM1_DBR1H = AD10_DRH. 0x0310, FOC_EKPL TIM1_DBR1L = AD10_DRL. 0x0310, FOC_EKIH T"
+    },
+    {
+      "name": "AD10_DRL",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "C_EKPH TIM1_DBR1H = AD10_DRH. 0x0310, FOC_EKPL TIM1_DBR1L = AD10_DRL. 0x0310, FOC_EKIH TIM1_DBR2H = AD11_DRH. 0x0310, FOC_EKIL ="
+    },
+    {
+      "name": "AD11_DRH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "C_EKPL TIM1_DBR1L = AD10_DRL. 0x0310, FOC_EKIH TIM1_DBR2H = AD11_DRH. 0x0310, FOC_EKIL = AD11_DRL. 0x0308, TIM1_BCORH = AD4_DRH."
+    },
+    {
+      "name": "AD11_DRL",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "0x0310, FOC_EKIH TIM1_DBR2H = AD11_DRH. 0x0310, FOC_EKIL = AD11_DRL. 0x0308, TIM1_BCORH = AD4_DRH. 0x0308, TIM1_BCORL = AD4_DRL"
+    },
+    {
+      "name": "AD12_DRH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "IH TIM1_DBR2H = . 0x4000, FOC_EKIL = . 0x0318, TIM1_BCORH = AD12_DRH. 0x0318, TIM1_BCORL = AD12_DRL. 0x0318, = AD13_DRH. 0x0318"
+    },
+    {
+      "name": "AD12_DRL",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "KIL = . 0x0318, TIM1_BCORH = AD12_DRH. 0x0318, TIM1_BCORL = AD12_DRL. 0x0318, = AD13_DRH. 0x0318, = AD13_DRL. 0x0318, FOC_EKPH"
+    },
+    {
+      "name": "AD13_DRH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "BCORH = AD12_DRH. 0x0318, TIM1_BCORL = AD12_DRL. 0x0318, = AD13_DRH. 0x0318, = AD13_DRL. 0x0318, FOC_EKPH TIM1_DBR1H = AD14_DR"
+    },
+    {
+      "name": "AD13_DRL",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "318, TIM1_BCORL = AD12_DRL. 0x0318, = AD13_DRH. 0x0318, = AD13_DRL. 0x0318, FOC_EKPH TIM1_DBR1H = AD14_DRH. 0x0318, FOC_EKPL T"
+    },
+    {
+      "name": "AD1_DRH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "1_BCORH = AD0_DRH. 0x0300, TIM1_BCORL = AD0_DRL. 0x0300, = AD1_DRH. 0x0300, = AD1_DRL. 0x0300, FOC_EKPH TIM1_DBR1H = AD2_DRH."
+    },
+    {
+      "name": "AD1_DRL",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "x0300, TIM1_BCORL = AD0_DRL. 0x0300, = AD1_DRH. 0x0300, = AD1_DRL. 0x0300, FOC_EKPH TIM1_DBR1H = AD2_DRH. 0x0300, FOC_EKPL TI"
+    },
+    {
+      "name": "AD2_DRH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "AD1_DRH. 0x0300, = AD1_DRL. 0x0300, FOC_EKPH TIM1_DBR1H = AD2_DRH. 0x0300, FOC_EKPL TIM1_DBR1L = AD2_DRL. 0x0300, FOC_EKIH TI"
+    },
+    {
+      "name": "AD2_DRL",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "OC_EKPH TIM1_DBR1H = AD2_DRH. 0x0300, FOC_EKPL TIM1_DBR1L = AD2_DRL. 0x0300, FOC_EKIH TIM1_DBR2H = AD3_DRH. 0x0300, FOC_EKIL ="
+    },
+    {
+      "name": "AD3_DRH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "OC_EKPL TIM1_DBR1L = AD2_DRL. 0x0300, FOC_EKIH TIM1_DBR2H = AD3_DRH. 0x0300, FOC_EKIL = AD3_DRL. 0x02F8, TIM1_BCORH = . 0x02F8,"
+    },
+    {
+      "name": "AD3_DRL",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": ". 0x0300, FOC_EKIH TIM1_DBR2H = AD3_DRH. 0x0300, FOC_EKIL = AD3_DRL. 0x02F8, TIM1_BCORH = . 0x02F8, TIM1_BCORL = . 0x02F8, = ."
+    },
+    {
+      "name": "AD4_DRH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "AD11_DRH. 0x0310, FOC_EKIL = AD11_DRL. 0x0308, TIM1_BCORH = AD4_DRH. 0x0308, TIM1_BCORL = AD4_DRL. 0x0308, = AD5_DRH. 0x0308,"
+    },
+    {
+      "name": "AD4_DRL",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "D11_DRL. 0x0308, TIM1_BCORH = AD4_DRH. 0x0308, TIM1_BCORL = AD4_DRL. 0x0308, = AD5_DRH. 0x0308, = AD5_DRL. 0x0308, FOC_EKPH T"
+    },
+    {
+      "name": "AD5_DRH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "1_BCORH = AD4_DRH. 0x0308, TIM1_BCORL = AD4_DRL. 0x0308, = AD5_DRH. 0x0308, = AD5_DRL. 0x0308, FOC_EKPH TIM1_DBR1H = AD6_DRH."
+    },
+    {
+      "name": "AD5_DRL",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "x0308, TIM1_BCORL = AD4_DRL. 0x0308, = AD5_DRH. 0x0308, = AD5_DRL. 0x0308, FOC_EKPH TIM1_DBR1H = AD6_DRH. 0x0308, FOC_EKPL TI"
+    },
+    {
+      "name": "AD6_DRH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "AD5_DRH. 0x0308, = AD5_DRL. 0x0308, FOC_EKPH TIM1_DBR1H = AD6_DRH. 0x0308, FOC_EKPL TIM1_DBR1L = AD6_DRL. 0x0308, FOC_EKIH TI"
+    },
+    {
+      "name": "AD6_DRL",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "OC_EKPH TIM1_DBR1H = AD6_DRH. 0x0308, FOC_EKPL TIM1_DBR1L = AD6_DRL. 0x0308, FOC_EKIH TIM1_DBR2H = AD7_DRH. 0x0308, FOC_EKIL ="
+    },
+    {
+      "name": "AD7_DRH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "OC_EKPL TIM1_DBR1L = AD6_DRL. 0x0308, FOC_EKIH TIM1_DBR2H = AD7_DRH. 0x0308, FOC_EKIL = AD7_DRL. 0x0300, TIM1_BCORH = AD0_DRH."
+    },
+    {
+      "name": "AD7_DRL",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": ". 0x0308, FOC_EKIH TIM1_DBR2H = AD7_DRH. 0x0308, FOC_EKIL = AD7_DRL. 0x0300, TIM1_BCORH = AD0_DRH. 0x0300, TIM1_BCORL = AD0_DRL"
+    },
+    {
+      "name": "AD8_DRH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "IH TIM1_DBR2H = . 0x0318, FOC_EKIL = . 0x0310, TIM1_BCORH = AD8_DRH. 0x0310, TIM1_BCORL = AD8_DRL. 0x0310, = AD9_DRH. 0x0310,"
+    },
+    {
+      "name": "AD8_DRL",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "EKIL = . 0x0310, TIM1_BCORH = AD8_DRH. 0x0310, TIM1_BCORL = AD8_DRL. 0x0310, = AD9_DRH. 0x0310, = AD9_DRL. 0x0310, FOC_EKPH T"
+    },
+    {
+      "name": "AD9_DRH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "1_BCORH = AD8_DRH. 0x0310, TIM1_BCORL = AD8_DRL. 0x0310, = AD9_DRH. 0x0310, = AD9_DRL. 0x0310, FOC_EKPH TIM1_DBR1H = AD10_DRH"
+    },
+    {
+      "name": "AD9_DRL",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "x0310, TIM1_BCORL = AD8_DRL. 0x0310, = AD9_DRH. 0x0310, = AD9_DRL. 0x0310, FOC_EKPH TIM1_DBR1H = AD10_DRH. 0x0310, FOC_EKPL T"
+    },
+    {
+      "name": "ADC0_DR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0014",
+      "first_page": 15,
+      "context": ".........................................., 1 = 240. 23.4.4 ADC0_DR (0x0300, 0x0301) .........................................."
+    },
+    {
+      "name": "ADC10_DR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": "........................................., 1 = 244. 23.4.14 ADC10_DR (0x0314, 0x0315) .........................................."
+    },
+    {
+      "name": "ADC11_DR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": "........................................., 1 = 245. 23.4.15 ADC11_DR (0x0316, 0x0317) .........................................."
+    },
+    {
+      "name": "ADC12_DR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": "........................................., 1 = 245. 23.4.16 ADC12_DR (0x0318, 0x0319) .........................................."
+    },
+    {
+      "name": "ADC13_DR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": "........................................., 1 = 245. 23.4.17 ADC13_DR (0x031A, 0x031B) .........................................."
+    },
+    {
+      "name": "ADC14_DR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": "........................................., 1 = 246. 23.4.18 ADC14_DR (0x031C, 0x031D) .........................................."
+    },
+    {
+      "name": "ADC1_DR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": "23.4.5 ADC1_DR (0x0302, 0x0303) .........................................."
+    },
+    {
+      "name": "ADC2_DR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": ".........................................., 1 = 241. 23.4.6 ADC2_DR (0x0304, 0x0305) .........................................."
+    },
+    {
+      "name": "ADC3_DR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": ".........................................., 1 = 242. 23.4.7 ADC3_DR (0x0306, 0x0307) .........................................."
+    },
+    {
+      "name": "ADC4_DR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": ".........................................., 1 = 242. 23.4.8 ADC4_DR (0x0308, 0x0309) .........................................."
+    },
+    {
+      "name": "ADC5_DR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": ".........................................., 1 = 242. 23.4.9 ADC5_DR (0x030A, 0x030B) .........................................."
+    },
+    {
+      "name": "ADC6_DR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": "........................................., 1 = 243. 23.4.10 ADC6_DR (0x030C, 0x030D) .........................................."
+    },
+    {
+      "name": "ADC7_DR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": "........................................., 1 = 243. 23.4.11 ADC7_DR (0x030E, 0x030F) .........................................."
+    },
+    {
+      "name": "ADC8_DR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": "........................................., 1 = 243. 23.4.12 ADC8_DR (0x0310, 0x0311) .........................................."
+    },
+    {
+      "name": "ADC9_DR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": "........................................., 1 = 244. 23.4.13 ADC9_DR (0x0312, 0x0313) .........................................."
+    },
+    {
+      "name": "ADC_MASK",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0014",
+      "first_page": 15,
+      "context": ".........................................., 1 = 239. 23.4.2 ADC_MASK (0x4036, 0x4037) .........................................."
+    },
+    {
+      "name": "ADC_MASK_SYSCH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "FOC_EKPL TIM1_DBR1L = DAC_CR. 0x4030, FOC_EKIH TIM1_DBR2H = ADC_MASK_SYSCH. 0x4030, FOC_EKIL = ADC_MASK_SYSCL. 0x4028, TIM1_BCORH = I2"
+    },
+    {
+      "name": "ADC_MASK_SYSCL",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "0, FOC_EKIH TIM1_DBR2H = ADC_MASK_SYSCH. 0x4030, FOC_EKIL = ADC_MASK_SYSCL. 0x4028, TIM1_BCORH = I2C_CR. 0x4028, TIM1_BCORL = I2C_ID."
+    },
+    {
+      "name": "AMP_CR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "OC_EKPL TIM1_DBR1L = PH_SEL1. 0x4048, FOC_EKIH TIM1_DBR2H = AMP_CR. 0x4048, FOC_EKIL = VREF_VHALF_CR. 0x4040, TIM1_BCORH = DMA"
+    },
+    {
+      "name": "AMP_CR0",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0017",
+      "first_page": 17,
+      "context": ".........................................., 1 = 260. 28.3.1 AMP_CR0 (0x404E) .................................................."
+    },
+    {
+      "name": "DAC0_DR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": ".........................................., 1 = 249. 24.4.2 DAC0_DR (0x404B) .................................................."
+    },
+    {
+      "name": "DAC_DR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "H = . 0x4048, TIM1_BCORL = . 0x4048, = DAC1_DR. 0x4048, = DAC_DR. 0x4048, FOC_EKPH TIM1_DBR1H = PH_SEL. 0x4048, FOC_EKPL TIM"
+    },
+    {
+      "name": "DMA0_BA",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": ".........................................., 1 = 252. 25.2.4 DMA0_BA (0x403E, 0x403F) .........................................."
+    },
+    {
+      "name": "DMA0_BAH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "C_EKPL TIM1_DBR1L = DMA1_LEN. 0x4038, FOC_EKIH TIM1_DBR2H = DMA0_BAH. 0x4038, FOC_EKIL = DMA1_BAL. 0x4030, TIM1_BCORH = SPI_CR0."
+    },
+    {
+      "name": "DMA1_BA",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0015",
+      "first_page": 16,
+      "context": ".........................................., 1 = 253. 25.2.6 DMA1_BA (0x4040, 0x4041)..........................................."
+    },
+    {
+      "name": "DMA1_BAH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "_CR. 0x4048, FOC_EKIL = VREF_VHALF_CR. 0x4040, TIM1_BCORH = DMA1_BAH. 0x4040, TIM1_BCORL = DMA1_BAL. 0x4040, = UT2_BAUDL. 0x404"
+    },
+    {
+      "name": "DRV_ARR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0013",
+      "first_page": 14,
+      "context": ".........................................., 1 = 218. 19.2.5 DRV_ARR (0x405E, 0x405F) .........................................."
+    },
+    {
+      "name": "DRV_ARRH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "C_EKPL TIM1_DBR1L = DRV_CMRL. 0x4058, FOC_EKIH TIM1_DBR2H = DRV_ARRH. 0x4058, FOC_EKIL = DRV_ARRL. 0x4050, TIM1_BCORH = P1_AN. 0"
+    },
+    {
+      "name": "DRV_ARRL",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "0x4058, FOC_EKIH TIM1_DBR2H = DRV_ARRH. 0x4058, FOC_EKIL = DRV_ARRL. 0x4050, TIM1_BCORH = P1_AN. 0x4050, TIM1_BCORL = P2_AN. 0x"
+    },
+    {
+      "name": "DRV_CMR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0013",
+      "first_page": 14,
+      "context": ".........................................., 1 = 218. 19.2.4 DRV_CMR (0x405C, 0x405D) .........................................."
+    },
+    {
+      "name": "DRV_CMRH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "_COMRH. 0x4058, = DRV_COMRL. 0x4058, FOC_EKPH TIM1_DBR1H = DRV_CMRH. 0x4058, FOC_EKPL TIM1_DBR1L = DRV_CMRL. 0x4058, FOC_EKIH T"
+    },
+    {
+      "name": "DRV_CMRL",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "C_EKPH TIM1_DBR1H = DRV_CMRH. 0x4058, FOC_EKPL TIM1_DBR1L = DRV_CMRL. 0x4058, FOC_EKIH TIM1_DBR2H = DRV_ARRH. 0x4058, FOC_EKIL ="
+    },
+    {
+      "name": "DRV_COMR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0013",
+      "first_page": 14,
+      "context": ".........................................., 1 = 219. 19.2.6 DRV_COMR (0x405A, 0x405B) .........................................."
+    },
+    {
+      "name": "DRV_COMRH",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "1_BCORH = DRV_DRH. 0x4058, TIM1_BCORL = DRV_DRL. 0x4058, = DRV_COMRH. 0x4058, = DRV_COMRL. 0x4058, FOC_EKPH TIM1_DBR1H = DRV_CM"
+    },
+    {
+      "name": "DRV_COMRL",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0049",
+      "first_page": 32,
+      "context": "058, TIM1_BCORL = DRV_DRL. 0x4058, = DRV_COMRH. 0x4058, = DRV_COMRL. 0x4058, FOC_EKPH TIM1_DBR1H = DRV_CMRH. 0x4058, FOC_EKPL T"
+    },
+    {
+      "name": "DRV_DR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "fu6832-datasheet#c0013",
+      "first_page": 14,
+      "context": ".........................................., 1 = 220. 19.2.7 DRV_DR (0x4058, 0x4059) .........................................."
+    }
+  ],
+  "registers": [
+    {
+      "name": "TIM3_CR0",
+      "count": 1,
+      "first_chunk": "fu6832-datasheet#c0020",
+      "first_page": 20,
+      "context": "[XY] 表示 ABCD 寄存器中的 XY 位 -  寄存器名中的 x 表示类似寄存器。例: TIMx_CR0 表示 TIM3_CR0 和 TIM4_CR0 -  [m : n] 表示位范围。例: [3 : 0] 表示从 bit3 到 bit0 - "
+    },
+    {
+      "name": "TIM4_CR0",
+      "count": 1,
+      "first_chunk": "fu6832-datasheet#c0020",
+      "first_page": 20,
+      "context": "D 寄存器中的 XY 位 -  寄存器名中的 x 表示类似寄存器。例: TIMx_CR0 表示 TIM3_CR0 和 TIM4_CR0 -  [m : n] 表示位范围。例: [3 : 0] 表示从 bit3 到 bit0 -  Pm.n 表示 Po"
+    }
+  ],
+  "thresholds": [],
+  "units": [
+    {
+      "unit": "V",
+      "count": 117
+    },
+    {
+      "unit": "MHz",
+      "count": 2
+    },
+    {
+      "unit": "μs",
+      "count": 1
+    },
+    {
+      "unit": "kHz",
+      "count": 1
+    }
+  ],
+  "procedure_steps": [],
+  "method": "regex+heuristic, no LLM; 参数名=全大写下划线标识符, 寄存器=标识符±40字符内出现『寄存器/register』, 阈值=数值+单位且±40字符内含阈值语境词, 规程步骤=编号行且含操作动词"
+}

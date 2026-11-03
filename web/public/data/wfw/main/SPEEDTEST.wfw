@@ -1,0 +1,621 @@
+{
+  "formatVersion": "1.0.0",
+  "metadata": {
+    "name": "新工作流",
+    "createdAt": "2026-06-01T02:11:41.199Z",
+    "updatedAt": "2026-06-01T02:52:14.236Z",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0
+    },
+    "tags": [
+      "direction:COOLING_FAN"
+    ],
+    "isTemplate": false
+  },
+  "definition": {
+    "nodes": [
+      {
+        "id": "78dfe9da-a8cd-4717-b211-b786cd8cf223",
+        "type": "start",
+        "position": {
+          "x": -64,
+          "y": 0
+        },
+        "data": {
+          "label": "开始"
+        }
+      },
+      {
+        "id": "af3e0694-8a92-469a-9db3-2dfc5f0496cb",
+        "type": "end",
+        "position": {
+          "x": 432,
+          "y": 528
+        },
+        "data": {
+          "label": "结束",
+          "status": "success",
+          "rotation": 90
+        }
+      },
+      {
+        "id": "5f4d4da2-1453-46b0-a3e1-6edf92eeaeda",
+        "type": "hid_preset_voltage_set",
+        "position": {
+          "x": 189,
+          "y": 0
+        },
+        "data": {
+          "label": "设置电压",
+          "presetFunction": "VOLTAGE_SET",
+          "paramValues": {
+            "voltage": 12.5
+          }
+        }
+      },
+      {
+        "id": "4cbc7d2b-92cd-4152-a676-bf1d0c9838ed",
+        "type": "hid_query_speed",
+        "position": {
+          "x": 768,
+          "y": 192
+        },
+        "data": {
+          "label": "查询速度",
+          "presetFunction": "SPEED_QUERY",
+          "rotation": 90,
+          "lastQueryResult": {
+            "success": true,
+            "value": 15393,
+            "unit": "RPM",
+            "displayText": "15393RPM",
+            "timestamp": 1780281836984
+          }
+        }
+      },
+      {
+        "id": "2e7f29ec-a4be-4e3b-a983-0fedf95be817",
+        "type": "hid_preset_speed_test",
+        "position": {
+          "x": 544,
+          "y": -32
+        },
+        "data": {
+          "label": "转速测试",
+          "targetRpm": 3000,
+          "durationMs": 5000,
+          "intervalMs": 50,
+          "toleranceMode": "absolute",
+          "toleranceValue": 50,
+          "dutyCyclePercent": 50,
+          "presetFunction": "SPEED_TEST",
+          "paramValues": {
+            "dutyCycle": 90,
+            "time": 60,
+            "speed": 18000
+          },
+          "lastQueryResult": {
+            "success": true,
+            "value": 8,
+            "unit": "s",
+            "displayText": "通过 8s",
+            "timestamp": 1780281836802
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "1c06ae30-7b72-40bf-9200-5ce1878bb5af",
+        "source": "78dfe9da-a8cd-4717-b211-b786cd8cf223",
+        "target": "5f4d4da2-1453-46b0-a3e1-6edf92eeaeda",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      },
+      {
+        "id": "7852b958-d72e-4698-a8e6-a3cc35a367e4",
+        "source": "5f4d4da2-1453-46b0-a3e1-6edf92eeaeda",
+        "target": "af3e0694-8a92-469a-9db3-2dfc5f0496cb",
+        "sourceHandle": "error",
+        "targetHandle": "input"
+      },
+      {
+        "id": "d9af1c2d-65a3-4526-a0d9-68ce5a48250c",
+        "source": "4cbc7d2b-92cd-4152-a676-bf1d0c9838ed",
+        "target": "af3e0694-8a92-469a-9db3-2dfc5f0496cb",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      },
+      {
+        "id": "7d4f1135-6649-46c2-8043-c4dd02d8a992",
+        "source": "4cbc7d2b-92cd-4152-a676-bf1d0c9838ed",
+        "target": "af3e0694-8a92-469a-9db3-2dfc5f0496cb",
+        "sourceHandle": "error",
+        "targetHandle": "input"
+      },
+      {
+        "id": "fbd72933-9719-4f09-9756-d596427cd9ca",
+        "source": "5f4d4da2-1453-46b0-a3e1-6edf92eeaeda",
+        "target": "2e7f29ec-a4be-4e3b-a983-0fedf95be817",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      },
+      {
+        "id": "c8682987-64b6-4b92-934a-68d6bd43a27d",
+        "source": "2e7f29ec-a4be-4e3b-a983-0fedf95be817",
+        "target": "4cbc7d2b-92cd-4152-a676-bf1d0c9838ed",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      },
+      {
+        "id": "6070842b-e90e-4067-8f40-6a996daa3ec4",
+        "source": "2e7f29ec-a4be-4e3b-a983-0fedf95be817",
+        "target": "af3e0694-8a92-469a-9db3-2dfc5f0496cb",
+        "sourceHandle": "error",
+        "targetHandle": "input"
+      }
+    ],
+    "variables": [],
+    "curveGroups": [
+      {
+        "id": "speed-pwm",
+        "name": "PWM-速度映射",
+        "description": "PWM占空比到电机速度的映射关系（可自定义公式）",
+        "curves": [
+          {
+            "id": "speed-pwm-line",
+            "name": "线性映射",
+            "data": [
+              {
+                "x": 0,
+                "y": 0
+              },
+              {
+                "x": 5.26,
+                "y": 5263.158
+              },
+              {
+                "x": 10.53,
+                "y": 10526.316
+              },
+              {
+                "x": 15.79,
+                "y": 15789.474
+              },
+              {
+                "x": 21.05,
+                "y": 21052.632
+              },
+              {
+                "x": 26.32,
+                "y": 26315.789
+              },
+              {
+                "x": 31.58,
+                "y": 31578.947
+              },
+              {
+                "x": 36.84,
+                "y": 36842.105
+              },
+              {
+                "x": 42.11,
+                "y": 42105.263
+              },
+              {
+                "x": 47.37,
+                "y": 47368.421
+              },
+              {
+                "x": 52.63,
+                "y": 52631.579
+              },
+              {
+                "x": 57.89,
+                "y": 57894.737
+              },
+              {
+                "x": 63.16,
+                "y": 63157.895
+              },
+              {
+                "x": 68.42,
+                "y": 68421.053
+              },
+              {
+                "x": 73.68,
+                "y": 73684.211
+              },
+              {
+                "x": 78.95,
+                "y": 78947.368
+              },
+              {
+                "x": 84.21,
+                "y": 84210.526
+              },
+              {
+                "x": 89.47,
+                "y": 89473.684
+              },
+              {
+                "x": 94.74,
+                "y": 94736.842
+              },
+              {
+                "x": 100,
+                "y": 100000
+              }
+            ],
+            "color": "#60a5fa",
+            "unit": "RPM",
+            "xLabel": "占空比 (%)",
+            "yLabel": "速度 (RPM)",
+            "formulaConfig": {
+              "formula": "1000 * x",
+              "xMin": 0,
+              "xMax": 100,
+              "pointCount": 20,
+              "yMin": 0,
+              "yMax": 100000
+            }
+          },
+          {
+            "id": "speed-pwm-line-2",
+            "name": "非线性映射",
+            "data": [
+              {
+                "x": 0,
+                "y": 0
+              },
+              {
+                "x": 5.26,
+                "y": 94.841
+              },
+              {
+                "x": 10.53,
+                "y": 165.128
+              },
+              {
+                "x": 15.79,
+                "y": 228.399
+              },
+              {
+                "x": 21.05,
+                "y": 287.505
+              },
+              {
+                "x": 26.32,
+                "y": 343.695
+              },
+              {
+                "x": 31.58,
+                "y": 397.666
+              },
+              {
+                "x": 36.84,
+                "y": 449.858
+              },
+              {
+                "x": 42.11,
+                "y": 500.575
+              },
+              {
+                "x": 47.37,
+                "y": 550.036
+              },
+              {
+                "x": 52.63,
+                "y": 598.408
+              },
+              {
+                "x": 57.89,
+                "y": 645.82
+              },
+              {
+                "x": 63.16,
+                "y": 692.376
+              },
+              {
+                "x": 68.42,
+                "y": 738.162
+              },
+              {
+                "x": 73.68,
+                "y": 783.248
+              },
+              {
+                "x": 78.95,
+                "y": 827.695
+              },
+              {
+                "x": 84.21,
+                "y": 871.552
+              },
+              {
+                "x": 89.47,
+                "y": 914.863
+              },
+              {
+                "x": 94.74,
+                "y": 957.668
+              },
+              {
+                "x": 100,
+                "y": 1000
+              }
+            ],
+            "color": "#4ade80",
+            "unit": "RPM",
+            "xLabel": "占空比 (%)",
+            "yLabel": "速度 (RPM)",
+            "formulaConfig": {
+              "formula": "1000 * (x / 100)^0.8",
+              "xMin": 0,
+              "xMax": 100,
+              "pointCount": 20,
+              "yMin": 0,
+              "yMax": 100000
+            }
+          }
+        ]
+      },
+      {
+        "id": "pid-response",
+        "name": "PID 响应曲线",
+        "description": "PID 控制器阶跃响应",
+        "curves": [
+          {
+            "id": "pid-step-response",
+            "name": "阶跃响应",
+            "data": [],
+            "color": "#f97316",
+            "unit": "RPM",
+            "xLabel": "时间 (ms)",
+            "yLabel": "转速 (RPM)"
+          },
+          {
+            "id": "pid-setpoint",
+            "name": "设定值",
+            "data": [
+              {
+                "x": 0,
+                "y": 100
+              },
+              {
+                "x": 11.11,
+                "y": 100
+              },
+              {
+                "x": 22.22,
+                "y": 100
+              },
+              {
+                "x": 33.33,
+                "y": 100
+              },
+              {
+                "x": 44.44,
+                "y": 100
+              },
+              {
+                "x": 55.56,
+                "y": 100
+              },
+              {
+                "x": 66.67,
+                "y": 100
+              },
+              {
+                "x": 77.78,
+                "y": 100
+              },
+              {
+                "x": 88.89,
+                "y": 100
+              },
+              {
+                "x": 100,
+                "y": 100
+              }
+            ],
+            "color": "#3b82f6",
+            "unit": "RPM",
+            "xLabel": "时间 (ms)",
+            "yLabel": "转速 (RPM)"
+          }
+        ]
+      },
+      {
+        "id": "current-amplitude",
+        "name": "电流环幅值曲线",
+        "description": "速度环PID幅值上下限",
+        "curves": [
+          {
+            "id": "current-upper",
+            "name": "幅值上限",
+            "data": [
+              {
+                "x": 0,
+                "y": 10
+              },
+              {
+                "x": 1684.21,
+                "y": 14.733
+              },
+              {
+                "x": 3368.42,
+                "y": 19.465
+              },
+              {
+                "x": 5052.63,
+                "y": 24.198
+              },
+              {
+                "x": 6736.84,
+                "y": 28.931
+              },
+              {
+                "x": 8421.05,
+                "y": 33.663
+              },
+              {
+                "x": 10105.26,
+                "y": 38.396
+              },
+              {
+                "x": 11789.47,
+                "y": 43.128
+              },
+              {
+                "x": 13473.68,
+                "y": 47.861
+              },
+              {
+                "x": 15157.89,
+                "y": 52.594
+              },
+              {
+                "x": 16842.11,
+                "y": 57.326
+              },
+              {
+                "x": 18526.32,
+                "y": 62.059
+              },
+              {
+                "x": 20210.53,
+                "y": 66.792
+              },
+              {
+                "x": 21894.74,
+                "y": 71.524
+              },
+              {
+                "x": 23578.95,
+                "y": 76.257
+              },
+              {
+                "x": 25263.16,
+                "y": 80.989
+              },
+              {
+                "x": 26947.37,
+                "y": 85.722
+              },
+              {
+                "x": 28631.58,
+                "y": 90.455
+              },
+              {
+                "x": 30315.79,
+                "y": 95.187
+              },
+              {
+                "x": 32000,
+                "y": 99.92
+              }
+            ],
+            "color": "#f87171",
+            "unit": "%",
+            "xLabel": "速度 (RPM)",
+            "yLabel": "幅值 (%)"
+          },
+          {
+            "id": "current-lower",
+            "name": "幅值下限",
+            "data": [
+              {
+                "x": 0,
+                "y": 10
+              },
+              {
+                "x": 1684.21,
+                "y": 10.522
+              },
+              {
+                "x": 3368.42,
+                "y": 11.044
+              },
+              {
+                "x": 5052.63,
+                "y": 11.566
+              },
+              {
+                "x": 6736.84,
+                "y": 12.088
+              },
+              {
+                "x": 8421.05,
+                "y": 12.611
+              },
+              {
+                "x": 10105.26,
+                "y": 13.133
+              },
+              {
+                "x": 11789.47,
+                "y": 13.655
+              },
+              {
+                "x": 13473.68,
+                "y": 14.177
+              },
+              {
+                "x": 15157.89,
+                "y": 14.699
+              },
+              {
+                "x": 16842.11,
+                "y": 15.221
+              },
+              {
+                "x": 18526.32,
+                "y": 15.743
+              },
+              {
+                "x": 20210.53,
+                "y": 16.265
+              },
+              {
+                "x": 21894.74,
+                "y": 16.787
+              },
+              {
+                "x": 23578.95,
+                "y": 17.309
+              },
+              {
+                "x": 25263.16,
+                "y": 17.832
+              },
+              {
+                "x": 26947.37,
+                "y": 18.354
+              },
+              {
+                "x": 28631.58,
+                "y": 18.876
+              },
+              {
+                "x": 30315.79,
+                "y": 19.398
+              },
+              {
+                "x": 32000,
+                "y": 19.92
+              }
+            ],
+            "color": "#22d3ee",
+            "unit": "%",
+            "xLabel": "速度 (RPM)",
+            "yLabel": "幅值 (%)"
+          }
+        ]
+      }
+    ],
+    "curveBindings": []
+  }
+}

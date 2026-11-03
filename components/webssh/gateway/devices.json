@@ -1,0 +1,45 @@
+{
+  "bench": {
+    "id": "bench",
+    "name": "峰岹台架工控机",
+    "model": "SK-20251218QPBB / Windows 11",
+    "host": "172.25.5.166",
+    "port": 5011,
+    "user": "administrator",
+    "keyRef": "FORTIOR_WIN_KEY",
+    "kind": "host",
+    "presets": [
+      { "label": "列设备", "cmd": "powershell -NoProfile -Command \"Get-PnpDevice -Status OK | Select-Object -First 25 Class,FriendlyName | Format-Table -AutoSize\"" },
+      { "label": "查看进程", "cmd": "tasklist | findstr /i motordebug" },
+      { "label": "示波器工具目录", "cmd": "dir C:\\fc_pull" },
+      { "label": "主机名", "cmd": "hostname" }
+    ]
+  },
+  "scope": {
+    "id": "scope",
+    "name": "RIGOL 示波器",
+    "model": "DS/MSO 系列 · VISA over LAN",
+    "host": "172.25.5.166",
+    "port": 5011,
+    "user": "administrator",
+    "keyRef": "FORTIOR_WIN_KEY",
+    "kind": "instrument",
+    "via": "bench",
+    "presets": [
+      { "label": "ScopeCtl 截图", "cmd": "dir C:\\fc_pull\\*.bmp" },
+      { "label": "DeepCapture 列表", "cmd": "dir C:\\fc_pull" }
+    ]
+  },
+  "psu": {
+    "id": "psu",
+    "name": "程控电源",
+    "model": "SCPI over LAN（占位）",
+    "host": "172.25.5.166",
+    "port": 5011,
+    "user": "administrator",
+    "keyRef": "FORTIOR_WIN_KEY",
+    "kind": "instrument",
+    "via": "bench",
+    "presets": [{ "label": "占位：查询", "cmd": "echo psu-placeholder" }]
+  }
+}

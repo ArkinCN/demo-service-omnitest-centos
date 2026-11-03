@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="720" viewBox="0 0 1600 720">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#39725f"/></marker></defs>
+<rect width="1600" height="720" fill="#f5f8f5"/>
+<g font-family="Microsoft YaHei,Noto Sans CJK SC,Arial,sans-serif">
+<text x="62" y="68" font-size="36" font-weight="700" fill="#143d31">一台风扇，从准备资料到拿到测试报告</text>
+<text x="62" y="110" font-size="21" fill="#607169">系统要实现的业务流程 · 绿框对应页面，箭头说明先后关系；调优后要重新测试</text>
+<rect x="55" y="178" width="270" height="245" rx="16" fill="#fff" stroke="#c9dcd1" stroke-width="2"/>
+<text x="75" y="220" font-size="26" font-weight="700" fill="#203e32">1  初始化配置</text>
+<text x="75" y="275" font-size="23" font-weight="400" fill="#203e32">确认测哪台样机</text>
+<text x="75" y="320" font-size="19" font-weight="400" fill="#203e32">核对固件、接线、保护</text>
+<text x="75" y="387" font-size="19" font-weight="400" fill="#2c7656">留下：配置记录</text>
+<path d="M 330 293 L 353 293" fill="none" stroke="#39725f" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="360" y="178" width="270" height="245" rx="16" fill="#fff" stroke="#c9dcd1" stroke-width="2"/>
+<text x="380" y="220" font-size="26" font-weight="700" fill="#203e32">2  测试需求</text>
+<text x="380" y="275" font-size="23" font-weight="400" fill="#203e32">确定怎样算合格</text>
+<text x="380" y="320" font-size="19" font-weight="400" fill="#203e32">核对标准、阈值、步骤</text>
+<text x="380" y="387" font-size="19" font-weight="400" fill="#2c7656">留下：确认后的要求</text>
+<path d="M 635 293 L 658 293" fill="none" stroke="#39725f" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="665" y="178" width="270" height="245" rx="16" fill="#fff" stroke="#c9dcd1" stroke-width="2"/>
+<text x="685" y="220" font-size="26" font-weight="700" fill="#203e32">3  启动测试</text>
+<text x="685" y="275" font-size="23" font-weight="400" fill="#203e32">采数据，逐项看结果</text>
+<text x="685" y="320" font-size="19" font-weight="400" fill="#203e32">先自检，再由人启动</text>
+<text x="685" y="387" font-size="19" font-weight="400" fill="#2c7656">留下：数据与未达标项</text>
+<path d="M 940 293 L 963 293" fill="none" stroke="#39725f" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="970" y="178" width="270" height="245" rx="16" fill="#fff" stroke="#c9dcd1" stroke-width="2"/>
+<text x="990" y="220" font-size="26" font-weight="700" fill="#203e32">4  调优并复测</text>
+<text x="990" y="275" font-size="23" font-weight="400" fill="#203e32">处理没有达标的项目</text>
+<text x="990" y="320" font-size="19" font-weight="400" fill="#203e32">选建议 → 批准 → 改参数</text>
+<text x="990" y="387" font-size="19" font-weight="400" fill="#2c7656">留下：改动与复测结果</text>
+
+<rect x="1275" y="178" width="270" height="245" rx="16" fill="#fff" stroke="#c9dcd1" stroke-width="2"/>
+<text x="1295" y="220" font-size="26" font-weight="700" fill="#203e32">5  测试报告</text>
+<text x="1295" y="275" font-size="23" font-weight="400" fill="#203e32">把这次测试交付出去</text>
+<text x="1295" y="320" font-size="19" font-weight="400" fill="#203e32">复核内容，导出并归档</text>
+<text x="1295" y="387" font-size="19" font-weight="400" fill="#2c7656">留下：可打开的报告</text>
+<path d="M 1100 429 L 1100 475 L 800 475 L 800 431" fill="none" stroke="#39725f" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="836" y="508" font-size="21" font-weight="400" fill="#203e32">修改以后，回到第 3 步重新测</text>
+<rect x="55" y="550" width="1490" height="105" rx="16" fill="#e5f1e9" stroke="#c9dcd1" stroke-width="2"/>
+<text x="80" y="589" font-size="25" font-weight="700" fill="#203e32">知识库贯穿全程</text>
+<text x="80" y="629" font-size="24" font-weight="400" fill="#203e32">事前查说明书与标准 → 测试中找依据与经验 → 结束后保存报告和调参经验</text>
+<path d="M 800 175 L 800 150 L 1390 150 L 1390 175" fill="none" stroke="#39725f" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrow)"/><text x="995" y="140" font-size="18" fill="#39725f">已达标：直接出报告</text></g></svg>

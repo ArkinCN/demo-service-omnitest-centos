@@ -1,0 +1,2002 @@
+{
+  "schema": "documents/v1",
+  "scene_id": "automotive.body-motor.window-regulator",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-19",
+  "belongs_to_flow": "F1 知识库管理（文档性质那一类：分类、呈现、增删改查、转化）",
+  "total": 83,
+  "local_copy_count": 29,
+  "count_by_type": {
+    "产品标准": 1,
+    "产品标准（征求意见稿）": 1,
+    "法规": 4,
+    "法规立法背景": 1,
+    "沿革参照": 1,
+    "环境试验标准": 7,
+    "通用底座标准": 1,
+    "防护等级标准": 3,
+    "腐蚀试验标准": 1,
+    "电机试验方法标准": 1,
+    "旋转电机标准": 2,
+    "电磁兼容标准": 7,
+    "换版预警": 1,
+    "OEM 规范": 5,
+    "车规元器件标准": 5,
+    "功能安全标准": 2,
+    "台架安全标准": 5,
+    "实验室设备安全标准": 1,
+    "实验室能力标准": 1,
+    "报告合规依据": 1,
+    "报告样例": 4,
+    "测试程序": 1,
+    "报告检索入口": 1,
+    "参考设计": 7,
+    "调参文档": 6,
+    "算法文献": 4,
+    "仿真工具": 3,
+    "数据集与脚本": 1,
+    "开发套件": 2,
+    "备选产品标准": 1,
+    "我方文档": 2
+  },
+  "evidence_root": "[源] 10_外部资料/汽车场景素材-20260919",
+  "conversion_status_legend": {
+    "Markdown 原生": "本身就是 Markdown，可直接进知识库",
+    "已抽取纯文本": "PDF 已提取为 .txt，可直接做条款抽取",
+    "已解析为 …": "本场景包已把它解析成结构化 JSON",
+    "PDF 可直接渲染": "PDF 在本地，可按页渲图给前端",
+    "未转化": "链接与标题已登记，正文在本地没有",
+    "未取得": "正文需采购或抓取失败，只有编号与元数据",
+    "本场景包自产": "本包自己写的脚本或产物"
+  },
+  "difference_from_scene1": "场景一的 61 份文档里绝大多数是**客户私有文档**（25 份调试规程、8 份调试手册、Keil 工程、原理图），走「上传 → 解析 → 入库」链路。本场景的文档**全部是公开标准、法规、参考设计与论文**，走「标准编号 → 条款抽取 → 判据结构化」链路。两条链路的差别正是知识库要同时支持的两种入库方式。",
+  "non_authorized_copies": {
+    "note": "以下四份 OEM 规范的本地副本均为公网流传的非授权版本。内容可信但不具备引用资格，正式报告引用前须经采购渠道取得授权原本复核。",
+    "ids": [
+      "DOC-OEM-001",
+      "DOC-OEM-002",
+      "DOC-OEM-003",
+      "DOC-OEM-004"
+    ],
+    "_source": {
+      "file": "[源] _调研/B-汽车场景测试案例素材.md",
+      "locator": "第 464 行：OEM 规范通道：内容可信但均为公网流传的非授权副本"
+    }
+  },
+  "version_change_alerts": [
+    {
+      "standard": "GB 34660-2026《道路车辆 电磁兼容性要求和试验方法》",
+      "change": "将代替 GB 34660-2017",
+      "effective": "2027-07-01 实施"
+    },
+    {
+      "standard": "GB/T 30038-2026《道路车辆 电气电子设备防护等级（IP代码）》",
+      "change": "将代替 GB/T 30038-2013",
+      "effective": "2027-02-01 实施"
+    },
+    {
+      "standard": "GB/T 33012.5-2026《整车混响室法》",
+      "change": "新增",
+      "effective": "2027-03-01 实施"
+    },
+    {
+      "standard": "GB/T 18655-2025",
+      "change": "已代替 GB/T 18655-2018",
+      "effective": "2025-02-28 已生效"
+    },
+    {
+      "standard": "GB/T 755-2025《旋转电机 定额与性能》",
+      "change": "已代替 GB/T 755-2019",
+      "effective": "2026-02-01 实施"
+    },
+    {
+      "standard": "QC/T 627-2025《汽车电动门锁装置》、QC/T 777-2025《汽车冷却系统电磁离合器》",
+      "change": "均已发布待实施",
+      "effective": "2026-07-01 实施"
+    },
+    {
+      "standard": "GB/T 10125-2021《人造气氛腐蚀试验 盐雾试验》",
+      "change": "全部代替 GB/T 10125-2012（QC/T 626 征求意见稿引的是 2012 版）",
+      "effective": "2022-03-01 已实施"
+    }
+  ],
+  "version_change_alerts_source": [
+    {
+      "file": "[源] _调研/B-汽车场景测试案例素材.md",
+      "locator": "第 105-110 行：换版预警表"
+    },
+    {
+      "file": "[源] _调研/B-汽车场景测试案例素材.md",
+      "locator": "第 85 行：GB/T 10125-2021"
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC-STD-001",
+      "type": "产品标准",
+      "title": "QC/T 626-2019《汽车玻璃升降器》（中华人民共和国工业和信息化部发布，全国汽车标准化技术委员会 SAC/TC 114 归口，起草单位重庆海德世拉索系统（集团）有限公司、汉阳专用汽车研究所；2019-11-11 发布 / 2020-04-01 实施，现行，同时代替 QC/T 626-2008 与 QC/T 636-2014）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://hbba.sacinfo.org.cn/stdDetail/9ca3b738497da0d0d84ae02e3b7e1815c9dd070e4233e5d3a3ba126dad340b73",
+      "note": "行业标准信息服务平台以「潜在版权问题」不公开全文，需采购。本包所有标注「待核实（QC/T 626-2019 正式版可能调整）」的数值，等的就是这份正文。",
+      "_status": "编号与代替关系已核实；正文未取得",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 64 行：QC/T 626-2019 全名、机构、日期与代替关系"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-STD-002",
+      "type": "产品标准（征求意见稿）",
+      "title": "《汽车玻璃升降器》行业标准征求意见稿（拟代替 QC/T 626-2008、QC/T 636-2014；中国汽车技术研究中心有限公司 CATARC 官网公开挂载，16 页 PDF）",
+      "path": "[源] 汽车场景素材-20260919/qc636.txt",
+      "size_bytes": 25623,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置",
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "已抽取纯文本",
+      "url": "https://www.catarc.org.cn/upload/201807/13/201807131600519972.pdf",
+      "note": "**本场景包的主要数值来源。** PDF 全文已下载并逐条提取为纯文本，含第 5 章要求与第 6 章试验方法全部条款。文件本身已核实（本次下载并逐条提取），但其数值相对正式版可能调整，由它来的判据一律标待核实。",
+      "_status": "文件已核实；数值待核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 65 行：征求意见稿全名、来源、可用形态与可信度"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-STD-003",
+      "type": "法规",
+      "title": "GB 11552-2009《乘用车内部凸出物》（英文名 The interior fittings of passenger car；国家质量监督检验检疫总局与国家标准化管理委员会联合发布，工业和信息化部归口；2009-09-30 发布 / 2012-01-01 实施，现行，代替 GB 11552-1999）",
+      "path": "[源] 汽车场景素材-20260919/gb11552.txt",
+      "size_bytes": 58021,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认",
+        "F6 测试报告及产出"
+      ],
+      "conversion_status": "已抽取纯文本",
+      "url": "https://law.resource.org/pub/cn/ibr/gb.11552.c.2009.pdf",
+      "note": "**防夹判据的第一来源。** 报批稿全文 32 页已提取，第 4.8 条「车窗、天窗及隔断系统的电操作」原文逐字可引，含 4.8.2 无防夹时的替代要求、4.8.3 自动回缩要求、4.8.5 保护装置、4.8.6 用户手册指南。",
+      "_status": "已核实（第 4.8 条本次直接从 PDF 文本层提取）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 67 行：GB 11552-2009 全名、机构、日期与可用形态"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-STD-004",
+      "type": "法规",
+      "title": "49 CFR § 571.118 — Standard No. 118; Power-operated window, partition, and roof panel systems（美国联邦机动车安全标准第 118 号：电动车窗、隔板与顶板系统；美国国家公路交通安全管理局 NHTSA）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "未转化",
+      "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-V/part-571/subpart-B/section-571.118",
+      "note": "网页全文，含试验方法与判据。100 N 与 4–200 mm 已核实；条款编号 S4/S7/S8 待核实。",
+      "_status": "100 N 与 4–200 mm 已核实；条款编号待核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 69 行：49 CFR § 571.118 全名、机构与 URL"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-STD-005",
+      "type": "法规",
+      "title": "UN ECE R21 — Uniform Provisions Concerning the Approval of Vehicles with Regard to Their Interior Fittings（联合国欧洲经济委员会第 21 号法规：车辆内饰认证统一规定；联合国欧洲经济委员会 UNECE），第 5.8 条系列",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "未转化",
+      "url": "https://unece.org/DAM/trans/main/wp29/wp29wgs/wp29grsp/grspinf/28/28-inf01.pdf",
+      "_status": "待核实（未打开原文逐字确认）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 70 行：UN ECE R21 全名、机构与 URL"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-STD-006",
+      "type": "法规立法背景",
+      "title": "Federal Motor Vehicle Safety Standards; Power-Operated Window, Partition, and Roof Panel Systems（FMVSS 118 规则制定文件；美国联邦公报 Federal Register，文件号 E9-21042，2009-09-01）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "未转化",
+      "url": "https://www.federalregister.gov/documents/2009/09/01/E9-21042/federal-motor-vehicle-safety-standards-power-operated-window-partition-and-roof-panel",
+      "note": "给出试验棒尺寸区间的立法理由：4 mm 对应幼儿手指，200 mm 对应第 95 百分位成年男性头部最大宽度。这是把「4 至 200 mm」这个数字讲清楚的唯一公开出处。",
+      "_status": "已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 71 行：Federal Register 文件号 E9-21042 与立法理由"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-STD-007",
+      "type": "法规",
+      "title": "GB 7258-2017《机动车运行安全技术条件》（国家标准化管理委员会，强制性国家标准）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "未转化",
+      "note": "整车级要求：车窗与天窗在移动中能在任意位置可靠停住，或遇障碍可自动下降回缩。",
+      "_status": "待核实（未取得标准原文条款号，经第三方解读页转述）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 68 行：GB 7258-2017 整车级要求，经解读页转述"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-STD-008",
+      "type": "沿革参照",
+      "title": "QC/T 636-2014《汽车电动玻璃升降器》（工业和信息化部，2014-05-06 发布 / 2014-10-01 实施，**已废止**，被 QC/T 626-2019 代替）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "未转化",
+      "url": "https://hbba.sacinfo.org.cn/stdDetail/479072c1dba6d1cf28a8c5a281020203",
+      "_status": "已核实（已废止，仅作沿革参照）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 66 行：QC/T 636-2014 全名、日期与废止状态"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-ENV-001",
+      "type": "环境试验标准",
+      "title": "ISO 16750-1:2023 Road vehicles — Environmental conditions and testing for electrical and electronic equipment — Part 1: General（道路车辆 电气电子设备的环境条件与试验 第 1 部分：一般规定；国际标准化组织 ISO，技术委员会 ISO/TC 22/SC 32）",
+      "path": "[源] 汽车场景素材-20260919/p167501.pdf",
+      "size_bytes": 871470,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "url": "https://www.iso.org/standard/77578.html",
+      "note": "正式预览件，含完整目录与部分开放正文页。功能状态分级 class A/B/C/D 出自此部分。",
+      "_status": "编号、版次、页数、条款清单已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 79 行：ISO 16750 系列第 1 至 5 部分，均为 2023 版"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-ENV-002",
+      "type": "环境试验标准",
+      "title": "ISO 16750-2:2023 — Part 2: Electrical loads（第 2 部分：电气负荷）",
+      "path": "[源] 汽车场景素材-20260919/ls16750_2.pdf",
+      "size_bytes": 1939258,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "url": "https://www.iso.org/standard/76119.html",
+      "note": "**本场景引用最密的一本。** 供电电压代码表（12 V 系统代码 C = 9 至 16 V）、§4.3.1.1.2 长时过电压 18 V / 60 min、§4.3.1.2.2 表 5 跨接启动 26 V / 60 ± 6 s、§4.3.2.2 表 6 瞬态过电压 18 V / 400 ms 五次，全部已核实。",
+      "_status": "已核实（开放正文页）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 79 行：ISO 16750 系列"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 229-236 行：供电电压代码表"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 157-159 行：长时过电压、跨接启动、瞬态过电压三条"
+        }
+      ],
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-ENV-003",
+      "type": "环境试验标准",
+      "title": "ISO 16750-3 — Part 3: Mechanical loads（第 3 部分：机械负荷）",
+      "path": "[源] 汽车场景素材-20260919/p167503.pdf",
+      "size_bytes": 1108610,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "url": "https://www.iso.org/standard/77579.html",
+      "_status": "编号与条款清单已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 79 行：ISO 16750 系列第 3 部分"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-ENV-004",
+      "type": "环境试验标准",
+      "title": "ISO 16750-4:2023 — Part 4: Climatic loads（第 4 部分：气候负荷）",
+      "path": "[源] 汽车场景素材-20260919/iso16750-4.pdf",
+      "size_bytes": 1109559,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "url": "https://www.iso.org/standard/77580.html",
+      "note": "工作温度代码表：A 为 −20/65 ℃、B 为 −30/65 ℃、C 为 −40/65 ℃，D 至 J 上限依次 70 至 100 ℃。低温贮存 −40 ℃ / 24 h（class C）；高温贮存 85 ℃ / 48 h（class C）；高温工作 Tmax / 96 h（class A）；温度阶梯步长 5 ℃；温度循环 30 个、单循环 480 min。已核实。",
+      "_status": "已核实",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 79 行：ISO 16750 系列第 4 部分"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 238 行：工作温度代码与试验条件"
+        }
+      ],
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-ENV-005",
+      "type": "环境试验标准",
+      "title": "ISO 16750-5 — Part 5: Chemical loads（第 5 部分：化学负荷）",
+      "path": "[源] 汽车场景素材-20260919/iso16750-5.pdf",
+      "size_bytes": 751778,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "url": "https://www.iso.org/standard/77581.html",
+      "_status": "编号与条款清单已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 79 行：ISO 16750 系列第 5 部分"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-ENV-006",
+      "type": "环境试验标准",
+      "title": "GB/T 28046 系列《道路车辆 电气及电子设备的环境条件和试验》第 1 至 5 部分（工业和信息化部提出，全国汽车标准化技术委员会归口；第 1 部分 GB/T 28046.1-2011、第 2 部分 GB/T 28046.2-2019、第 3 部分 GB/T 28046.3-2011、第 4 部分 GB/T 28046.4-2011、第 5 部分 GB/T 28046.5-2013）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://openstd.samr.gov.cn/bzgk/gb/std_list?p.p2=28046",
+      "note": "ISO 16750 系列的中国对应。全系列共五部分，无第 6 部分。型式检验的项目顺序按其第 1 部分附录 A.1。",
+      "_status": "编号与状态已核实；谱表与温度点未取得",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 78 行：GB/T 28046 系列第 1 至 5 部分编号与状态"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-ENV-007",
+      "type": "通用底座标准",
+      "title": "QC/T 413-2002《汽车电气设备基本技术条件》（国家经济贸易委员会，2002-12-31 发布 / 2003-03-01 实施，现行，代替 QC/T 413-1999）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://hbba.sacinfo.org.cn/stdDetail/4e925606f256d82d41af1bb0f8859f7d",
+      "note": "所有车用电机标准的公共底座。QC/T 626 的耐振动条款（5.7 / 6.7）直接引它的扫频振动条件。",
+      "_status": "已核实；正文未取得",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 77 行：QC/T 413-2002 全名、日期与引用关系"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-ENV-008",
+      "type": "防护等级标准",
+      "title": "GB/T 4208-2017《外壳防护等级（IP代码）》（国家标准化管理委员会，2017-07-31 发布 / 2018-02-01 实施，现行）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=09CCED55688D4116ED89659C1E7526F8",
+      "_status": "部分核实（扫描件机器读取）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 83 行：GB/T 4208-2017 全名与日期"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-ENV-009",
+      "type": "防护等级标准",
+      "title": "GB/T 30038-2013《道路车辆 电气电子设备防护等级（IP代码）》；换版为 GB/T 30038-2026（修改采用 ISO 20653:2023），2027-02-01 实施",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://openstd.samr.gov.cn/bzgk/gb/std_list?p.p2=30038",
+      "note": "车用版 IP 代码，相对 GB/T 4208 增设 IPX9K。**换版预警条目。**",
+      "_status": "编号与日期已核实；IPX9K 参数未取得",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 84 行：GB/T 30038 车用版 IP 代码与换版"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 106 行：换版预警表"
+        }
+      ],
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-ENV-010",
+      "type": "防护等级标准",
+      "title": "ISO 20653 Road vehicles — Degrees of protection (IP code) — Protection of electrical equipment against foreign objects, water and access",
+      "path": "[源] 汽车场景素材-20260919/p20653.pdf",
+      "size_bytes": 916883,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "_status": "预览件，编号与目录已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 84 行：GB/T 30038-2026 修改采用 ISO 20653:2023"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-ENV-011",
+      "type": "腐蚀试验标准",
+      "title": "GB/T 10125-2021《人造气氛腐蚀试验 盐雾试验》（国家标准化管理委员会，2021-08-20 发布 / 2022-03-01 实施，现行，全部代替 GB/T 10125-2012）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "未取得",
+      "note": "**换版预警条目。** QC/T 626 征求意见稿引的是 2012 版，已被 2021 版全部代替。",
+      "_status": "已核实",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 85 行：GB/T 10125-2021 全名、日期与代替关系"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 195 行：耐腐蚀性条款"
+        }
+      ],
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-ENV-012",
+      "type": "电机试验方法标准",
+      "title": "GB/T 5171.22-2017《小功率电动机 第22部分：永磁无刷直流电动机试验方法》；配套 GB/T 5171.1-2014 通用技术条件、GB/T 5171.21-2016 通用试验方法",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "未取得",
+      "note": "对汽车小电机的适用性高于三相异步机试验标准。注意第 22 部分是无刷直流，本场景是有刷直流，适用的是 .1 与 .21 两部分。",
+      "_status": "已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 86 行：GB/T 5171 系列编号与适用性"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-ENV-013",
+      "type": "旋转电机标准",
+      "title": "IEC 60034-1 Rotating electrical machines — Part 1: Rating and performance，Edition 15.0 2026-03（国际电工委员会 IEC）",
+      "path": "[源] 汽车场景素材-20260919/iec60034_1.pdf",
+      "size_bytes": 373102,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "_status": "预览件，编号与版次已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 462 行：IEC 与 CISPR 检索通道：取得 IEC 60034-1:2026 完整目录"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-ENV-014",
+      "type": "旋转电机标准",
+      "title": "IEC 60034-5:2020 Rotating electrical machines — Part 5: Degrees of protection provided by the integral design of rotating electrical machines (IP code)",
+      "path": "[源] 汽车场景素材-20260919/iec60034_5.pdf",
+      "size_bytes": 960474,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "_status": "预览件，编号与版次已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 462 行：取得 IEC 60034-5:2020 完整目录"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-EMC-001",
+      "type": "电磁兼容标准",
+      "title": "CISPR 25:2021 Vehicles, boats and internal combustion engines — Radio disturbance characteristics — Limits and methods of measurement for the protection of on-board receivers，第 5.0 版，372 页（国际电工委员会国际无线电干扰特别委员会 IEC/CISPR，分技术委员会 CIS/D，2021-12-16）",
+      "path": "[源] 汽车场景素材-20260919/cispr25p.pdf",
+      "size_bytes": 571323,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "url": "https://webstore.iec.ch/publication/64645",
+      "note": "频率范围 150 kHz 至 5 925 MHz。GB/T 18655 的国际对应。",
+      "_status": "编号、版次、频率范围已核实；Class 1–5 限值数值未取得",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 82 行：CISPR 25:2021 全名、机构、版次与频率范围"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-EMC-002",
+      "type": "电磁兼容标准",
+      "title": "GB/T 18655-2025《车辆、船和内燃机 无线电骚扰特性 用于保护车载接收机的限值和测量方法》（全国无线电干扰标准化技术委员会，2025-02-28 发布并实施，现行，代替 GB/T 18655-2018）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://openstd.samr.gov.cn/bzgk/gb/std_list?p.p2=18655",
+      "note": "**换版预警条目。** QC/T 626 征求意见稿引的是 GB/T 18655-2010，已两代过期。",
+      "_status": "已核实",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 81 行：GB/T 18655-2025 全名、日期与代替关系"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 206 行：EMC 条款引用过期"
+        }
+      ],
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-EMC-003",
+      "type": "电磁兼容标准",
+      "title": "GB/T 21437 系列《道路车辆 电气/电子部件对传导和耦合引起的电骚扰试验方法》第 1 至 3 部分（均为 2021 版）；第 4 部分为 GB/Z 21437.4-2025（全国汽车标准化技术委员会电子电磁兼容分技术委员会）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://openstd.samr.gov.cn/bzgk/gb/std_list?p.p2=21437",
+      "note": "第 2 部分为沿电源线的电瞬态传导发射与抗扰性，是升降器 EMC 条款的引用对象。征求意见稿引的是 2008 版，须改引 2021 版。",
+      "_status": "编号与状态已核实；脉冲幅值表待核实",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 80 行：GB/T 21437 系列编号与状态"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 206 行：EMC 条款引用过期"
+        }
+      ],
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-EMC-004",
+      "type": "电磁兼容标准",
+      "title": "ISO 7637-2:2011 Road vehicles — Electrical disturbances from conduction and coupling — Part 2: Electrical transient conduction along supply lines only，Third edition",
+      "path": "[源] 汽车场景素材-20260919/p76372.pdf",
+      "size_bytes": 687548,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "note": "GB/T 21437.2 的国际对应。",
+      "_status": "预览件，编号与版次已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 461 行：ISO 检索通道：ICS 43.040.10 全目录逐条解析"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-EMC-005",
+      "type": "电磁兼容标准",
+      "title": "ISO 10605 Road vehicles — Test methods for electrical disturbances from electrostatic discharge（道路车辆 静电放电电骚扰试验方法）",
+      "path": "[源] 汽车场景素材-20260919/p10605.pdf",
+      "size_bytes": 1261484,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "_status": "预览件，编号与目录已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 461 行：ISO 检索通道"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-EMC-006",
+      "type": "电磁兼容标准",
+      "title": "ISO 11452-1:2015 Road vehicles — Component test methods for electrical disturbances from narrowband radiated electromagnetic energy — Part 1: General",
+      "path": "[源] 汽车场景素材-20260919/p114522.pdf",
+      "size_bytes": 467638,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "_status": "预览件，编号与版次已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 461 行：ISO 检索通道"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-EMC-007",
+      "type": "电磁兼容标准",
+      "title": "CISPR 12 Edition 7.0 2025-07 Vehicles, boats and devices with internal combustion engines — Radio disturbance characteristics — Limits and methods of measurement for the protection of off-board receivers",
+      "path": "[源] 汽车场景素材-20260919/cispr12.pdf",
+      "size_bytes": 328980,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "note": "保护车外接收机，与 CISPR 25（保护车载接收机）是一对。",
+      "_status": "编号与版次已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 462 行：IEC 与 CISPR 检索通道：取得 CISPR 12:2025 完整目录"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-EMC-008",
+      "type": "换版预警",
+      "title": "GB 34660-2026《道路车辆 电磁兼容性要求和试验方法》（将代替 GB 34660-2017，2027-07-01 实施）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "未取得",
+      "_status": "已核实（换版预警）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 105 行：换版预警表 GB 34660-2026 行"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-OEM-001",
+      "type": "OEM 规范",
+      "title": "LV 124 — Elektrische und elektronische Komponenten in Kraftfahrzeugen bis 3,5 t: Allgemeine Anforderungen, Prüfbedingungen und Prüfungen（3.5 t 以下机动车电气电子部件：通用要求、试验条件与试验；由奥迪 AUDI AG、宝马 BMW AG、戴姆勒 Daimler AG、保时捷 Porsche AG、大众 Volkswagen AG 五家在工作组 AK 4.9 内共同制定，基础版 Edition 2013-02-28，文档版本 2.2）。本地副本为梅赛德斯-奔驰企业标准 MBN LV 124-1: 2013-03",
+      "path": "[源] 汽车场景素材-20260919/lv124.pdf",
+      "size_bytes": 625035,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "url": "https://www.etest-emc.com/uploads/soft/250506/LV124-12013.pdf",
+      "note": "**含 E-01 至 E-22 电气试验全部参数。** 本场景直接用到的有：E-15 反极性（原文点名电动车窗、天窗、起动机）、E-17 短路、E-18 绝缘电阻。**该 PDF 为公网流传的非授权副本，正式引用须经采购渠道取得授权原本复核。**",
+      "_status": "制定方、工作组、版本日期已核实；**非授权副本，不具引用资格**",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 94 行：LV 124 全名、制定方与副本状态"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 160,164,165 行：E-15 反极性 / E-18 绝缘电阻 / E-17 短路"
+        }
+      ],
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-OEM-002",
+      "type": "OEM 规范",
+      "title": "VW 80000 — Electrical and Electronic Components in Motor Vehicles up to 3,5 t: General Requirements, Test Conditions, and Tests（大众汽车股份公司 Volkswagen AG，分类号 8MA00，Issue 2022-12）",
+      "path": "[源] 汽车场景素材-20260919/vw80000.pdf",
+      "size_bytes": 5089739,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "url": "https://www.etest-emc.com/uploads/soft/250707/VW80000_2022大众汽车零部件电性能标准.pdf",
+      "note": "含 E-01 至 E-24、M-01 至 M-09、K-01 至 K-19、C-01、L-01 至 L-03 全部试验目录与参数。本场景直接用到的有：M-04 谱型 D（簧上质量挂装件的宽带随机振动，车门上的玻璃升降器正属这一类）、M-06 连续机械冲击（驾驶员车门 100 000 次、前排乘客门与后门 50 000 次）。**同为非授权副本。**",
+      "_status": "已核实；**非授权副本，不具引用资格**",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 95 行：VW 80000 全名、机构与副本状态"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 240 行：M-04 谱型 D"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 242 行：M-06 连续机械冲击"
+        }
+      ],
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-OEM-003",
+      "type": "OEM 规范",
+      "title": "MBN LV 148: 2013-11 — Electric and Electronic Components in Motor Vehicles: 48 V On-Board Electrical System, Requirements and Test Conditions（戴姆勒 Daimler AG 采标版，基础版 LV 148 Edition 2013-07）",
+      "path": "[源] 汽车场景素材-20260919/lv148.pdf",
+      "size_bytes": 1140409,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "url": "https://www.etest-emc.com/uploads/soft/250709/LV148MBN2013-11.pdf",
+      "note": "48 V 电网电压定义与 E48-01 至 E48-21 试验清单。本场景是 12 V 系统，这本只在做 48 V 衍生机型时才用。**非授权副本。**",
+      "_status": "已核实；**非授权副本**",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 96 行：MBN LV 148 全名、机构与副本状态"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-OEM-004",
+      "type": "OEM 规范",
+      "title": "BMW Group Standard GS 95024-3-1: 2010-01 — Elektrische und elektronische Komponenten in Kraftfahrzeugen: Umweltanforderungen und Prüfungen（宝马集团标准：机动车电气电子部件 环境要求与试验；作者 Robert Maier；代替 GS 95003-1: 2008-11 等四份）",
+      "path": "[源] 汽车场景素材-20260919/bmw.pdf",
+      "size_bytes": 816580,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "note": "以 LV 124 为基础的宝马采标版，正文内含 LV 124 全 83 页。**非授权副本。**",
+      "_status": "编号、版次与作者已核实；**非授权副本**",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 464 行：OEM 规范通道：szilassy.eu 托管的 BMW GS 95024-3-1: 2010-01"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-OEM-005",
+      "type": "OEM 规范",
+      "title": "GMW3172 — General Specification for Electrical/Electronic Component Analytical/Development/Validation (A/D/V) Procedures for Conformance to Vehicle Environmental, Reliability, and Performance Requirements（通用汽车全球工程标准 General Motors Global Engineering Standards）。可取得原文级内容的是 The GMW3172 Users Guide, Revision 19, 2008-02-13，作者 Larry Edson",
+      "path": "[源] 汽车场景素材-20260919/gmwhb.pdf",
+      "size_bytes": 15988272,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "url": "https://www.atecorp.com/compliance-standards/gm/gmw3172-standard",
+      "note": "五位代码字母串定义部件试验等级（电气/机械/气候/温度/防护）。",
+      "_status": "2008 版内容已核实；**当前现行版次待核实**，距今 18 年",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 97 行：GMW3172 全名、机构、版本与作者"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-AEC-001",
+      "type": "车规元器件标准",
+      "title": "AEC-Q100 Failure Mechanism Based Stress Test Qualification for Integrated Circuits in Automotive Applications，Rev J1，2026-03-24（汽车电子委员会 Automotive Electronics Council, AEC）",
+      "path": "[源] 汽车场景素材-20260919/q100.pdf",
+      "size_bytes": 1367388,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "url": "http://www.aecouncil.com/AECDocuments.html",
+      "note": "温度等级表：Grade 0 为 −40 至 +150 ℃、Grade 1 为 −40 至 +125 ℃、Grade 2 为 −40 至 +105 ℃、Grade 3 为 −40 至 +85 ℃。静电放电目标：人体模型 2 kV（AEC-Q100-002）；充电器件模型角引脚 750 V、其余引脚 500 V（AEC-Q100-011）。官网 HTTPS 证书握手失败，须走 HTTP。",
+      "_status": "已核实（官方免费 PDF）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 92 行：AEC-Q100 Rev J1 全名、机构与获取方式"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 246-253 行：温度等级表与静电放电目标"
+        }
+      ],
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-AEC-002",
+      "type": "车规元器件标准",
+      "title": "AEC-Q101 Rev E（2021-03-01，分立半导体）",
+      "path": "[源] 汽车场景素材-20260919/q101.pdf",
+      "size_bytes": 1299626,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "_status": "已核实（官方免费 PDF）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 93 行：AEC-Q101 Rev E"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-AEC-003",
+      "type": "车规元器件标准",
+      "title": "AEC-Q102 Rev A（2020-04-06，光电半导体）",
+      "path": "[源] 汽车场景素材-20260919/q102.pdf",
+      "size_bytes": 1880352,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "_status": "已核实（官方免费 PDF）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 93 行：AEC-Q102 Rev A"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-AEC-004",
+      "type": "车规元器件标准",
+      "title": "AEC-Q104 Rev A（2025-11-28，多芯片模块）",
+      "path": "[源] 汽车场景素材-20260919/q104.pdf",
+      "size_bytes": 1026918,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "_status": "已核实（官方免费 PDF）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 93 行：AEC-Q104 Rev A"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-AEC-005",
+      "type": "车规元器件标准",
+      "title": "AEC-Q200 Rev E（2023-03-20，被动元件）",
+      "path": "[源] 汽车场景素材-20260919/q200.pdf",
+      "size_bytes": 1661566,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "note": "**注意 Rev E 已取消 Grade 0–4 温度分级表**，改为供应商自行声明且最低覆盖 −40 至 +85 ℃。",
+      "_status": "已核实（官方免费 PDF）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 93 行：AEC-Q200 Rev E 与分级表取消"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-FS-001",
+      "type": "功能安全标准",
+      "title": "ISO 26262 系列 Road vehicles — Functional safety，第 1 至 12 部分，均为 2018-12 第 2 版（Part 11、12 为第 1 版）；全部 12 个部分当前均有 ISO/DIS 修订在研",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.iso.org/standard/68383.html",
+      "_status": "已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 98 行：ISO 26262 系列版本与修订状态"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-FS-002",
+      "type": "功能安全标准",
+      "title": "GB/T 34590 系列《道路车辆 功能安全》第 1 至 12 部分，均为 2022 版（国家标准化管理委员会，2022-12-30 发布 / 2023-07-01 实施，现行；2017 版第 1 至 10 部分已全部废止）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://openstd.samr.gov.cn/bzgk/gb/std_list?p.p2=GB%2FT%2034590",
+      "_status": "已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 99 行：GB/T 34590 系列版本与废止关系"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-ENV-015",
+      "type": "环境试验标准",
+      "title": "ISO 19453 Road vehicles — Environmental conditions and testing for electrical and electronic equipment for drive system of electric propulsion vehicles",
+      "path": "[源] 汽车场景素材-20260919/iso19453.pdf",
+      "size_bytes": 390842,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "PDF 可直接渲染",
+      "_status": "预览件，编号与目录已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 461 行：ISO 检索通道"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-SAFE-001",
+      "type": "台架安全标准",
+      "title": "GB/T 5226.1-2019《机械电气安全 机械电气设备 第1部分：通用技术条件》（国家市场监督管理总局与国家标准化管理委员会，2019-06-04 发布 / 2020-01-01 实施，现行，代替 GB 5226.1-2008，等同采用 IEC 60204-1:2016）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.ndls.org.cn/standard/detail/eb10a2db1aab4da873d16f763009371a",
+      "note": "适用于额定电压不超过交流 1000 V 或直流 1500 V 的机械电气设备。注意前缀由 GB 改为 GB/T，即由强制性改为推荐性。",
+      "_status": "已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 172 行：GB/T 5226.1-2019 全名、机构与采标关系"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-SAFE-002",
+      "type": "台架安全标准",
+      "title": "GB/T 15706-2012《机械安全 设计通则 风险评估与风险减小》（国家标准化管理委员会，2012，现行，以翻译法等同采用 ISO 12100:2010）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=7E2903B0D76C5A63E05397BE0A0AF660",
+      "note": "A 类基础安全标准。Agent 自动施加过压、堵转、短路前的风险评估依据。",
+      "_status": "已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 173 行：GB/T 15706-2012 全名与采标关系"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-SAFE-003",
+      "type": "台架安全标准",
+      "title": "ISO 13849-1:2023 Safety of machinery — Safety-related parts of control systems — Part 1: General principles for design（机械安全 控制系统安全相关部件 第1部分：设计通则；国际标准化组织 ISO，2023，代替 2015 版）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.iso.org/standard/73481.html",
+      "note": "性能等级 PL 分 a 至 e 五档，每档对应一个每小时危险失效平均概率区间。",
+      "_status": "已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 174 行：ISO 13849-1:2023 全名与 PL 分档"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-SAFE-004",
+      "type": "台架安全标准",
+      "title": "IEC 62061:2021 Safety of machinery — Functional safety of safety-related control systems（机械安全 安全相关控制系统的功能安全），第 2.0 版（国际电工委员会 IEC，2021，取代 2005 第 1 版及其两个修订案）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://webstore.iec.ch/en/publication/59927",
+      "note": "2021 版不再限于电气系统，可用于液压、气动等所有技术类型；新增功能安全计划与周期性测试要求。",
+      "_status": "已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 175 行：IEC 62061:2021 全名、版次与适用范围变化"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-SAFE-005",
+      "type": "台架安全标准",
+      "title": "ISO 14119:2024 Safety of machinery — Interlocking devices associated with guards — Principles for design and selection（机械安全 与防护装置相关的联锁装置 设计与选择原则；ISO，2024，代替 2013 版）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.iso.org/standard/75942.html",
+      "note": "2024 版在原四类基础上新增第 5 类钥匙转移式联锁装置，适合「必须先切断动力才能开门」的工位——本场景的 550 V 绝缘工位正是这种。",
+      "_status": "已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 176 行：ISO 14119:2024 全名与第 5 类新增"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-SAFE-006",
+      "type": "实验室设备安全标准",
+      "title": "IEC 61010-1 Safety requirements for electrical equipment for measurement, control, and laboratory use — Part 1: General requirements（IEC，第 3 版 2010；合订版 Ed. 3.1 b:2017）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://webstore.iec.ch/en/publication/4279",
+      "note": "适用于标称供电电压不超过交流 1000 V 或直流 1500 V 的设备。中国对应的 GB 4793.1-2007 等同于 IEC 61010-1:2001，**落后两代**。",
+      "_status": "已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 177 行：IEC 61010-1 版次与中国对应标准落后情况"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-SAFE-007",
+      "type": "实验室能力标准",
+      "title": "ISO/IEC 17025:2017 General requirements for the competence of testing and calibration laboratories（检测和校准实验室能力的通用要求），第 3 版（ISO 与 IEC 联合，2017）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F6 测试报告及产出"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.iso.org/standard/66912.html",
+      "note": "第 7.8 条规定报告必含要素，是 report-template.json 字段清单的合规依据。",
+      "_status": "标准编号与版次已核实；7.8.2 字段清单经 PJLA 培训讲义转述，待核实",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 178 行：ISO/IEC 17025:2017 全名与第 7.8 条"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 411 行：7.8.2 必含要素清单"
+        }
+      ],
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-SAFE-008",
+      "type": "报告合规依据",
+      "title": "CNAS-EL-13《检测报告和校准证书相关要求的认可说明》（中国合格评定国家认可委员会 China National Accreditation Service for Conformity Assessment, CNAS，发布日期 2019-12-25）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F6 测试报告及产出"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.cnas.org.cn/cms_files/filemanager/328304128/attach/202412/7AF84C12378754996D4B69CB95C50127.pdf",
+      "note": "国内报告字段合规性的主依据。",
+      "_status": "待核实（PDF 文本层抽取失败，文件号与标题来自搜索结果标题行）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 412 行：CNAS-EL-13 全名、机构与日期"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-REP-001",
+      "type": "报告样例",
+      "title": "REPORT NUMBER 118-GTL-11-002, SAFETY COMPLIANCE TESTING FOR FMVSS NO. 118, POWER-OPERATED WINDOW, PARTITION AND ROOF PANEL SYSTEMS — 2011 NISSAN JUKE S MPV, NHTSA NO. CB5201（检测方 General Testing Laboratories, Inc.，1623 Leedstown Road, Colonial Beach, Virginia 22443；委托方 美国交通部国家公路交通安全管理局车辆安全合规办公室 U.S. DOT / NHTSA, Office of Vehicle Safety Compliance, NVS-220；项目工程师 Grant Farrand，项目经理 Debbie Messick；最终报告日期 2011-03-17，试验日期 2011-03-15，合同号 DTNH22-06-C-00032）",
+      "path": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+      "size_bytes": 6574642,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F6 测试报告及产出"
+      ],
+      "conversion_status": "已解析为 report-template.json + PDF 可直接渲染",
+      "url": "https://www.carsandracingstuff.com/library/reports/5683.pdf",
+      "note": "**本场景报告模板的骨架来源，36 页全文在手。** 本包已从中提取六节结构与 13 字段技术著录页，并把第 19 页（FIGURE 5.1）渲染成 assets/product-photo-nhtsa-fig5-1.png。",
+      "_status": "已核实（本次下载并提取文本）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 387 行：报告全名、检测方、委托方、人员与日期"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 397-405 行：章节结构与字段清单"
+        }
+      ],
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-REP-002",
+      "type": "报告样例",
+      "title": "REPORT NUMBER 118-GTL-20-003（2020 Ford Explorer XLT MPV）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F6 测试报告及产出"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://static.nhtsa.gov/odi/ctr/9999/TRTR-646394-2020-001.pdf",
+      "note": "同类报告，可做版式互校。",
+      "_status": "已核实（链接与标题）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 388 行：同类报告 PDF 清单"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-REP-003",
+      "type": "报告样例",
+      "title": "REPORT NUMBER 118-GTL-18-004（2018 BMW 530i 轿车）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F6 测试报告及产出"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://static.nhtsa.gov/odi/ctr/9999/TRTR-645269-2018-001.pdf",
+      "_status": "已核实（链接与标题）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 388 行：同类报告 PDF 清单"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-REP-004",
+      "type": "报告样例",
+      "title": "REPORT NUMBER 118-GTL-08-004（2008 BMW 328i 轿车）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F6 测试报告及产出"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.carsandracingstuff.com/library/reports/5109.pdf",
+      "_status": "已核实（链接与标题）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 389 行：同类报告 PDF"
+      },
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-REP-005",
+      "type": "测试程序",
+      "title": "OVSC Laboratory Test Procedure TP-118-06（FMVSS 118 实验室测试程序），2006-04-12（美国交通部 NHTSA 车辆安全合规办公室）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认",
+        "F6 测试报告及产出"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.nhtsa.gov/sites/nhtsa.gov/files/documents/tp-118-06_tag.pdf",
+      "note": "与报告配套的测试程序文件。报告正文明确声明「所有试验按 TP-118-06 与 GTL 内部程序 TP-118-03A 执行」。",
+      "_status": "链接与标题已核实；正文本次抓取失败（Socket closed），待核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 391 行：TP-118-06 全名、机构与日期"
+      },
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律",
+      "usage_review": "待人工复核"
+    },
+    {
+      "id": "DOC-REP-006",
+      "type": "报告检索入口",
+      "title": "NHTSA Compliance Test Report Search（合规测试报告检索数据库；美国国家公路交通安全管理局）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "未转化",
+      "url": "https://www.nhtsa.gov/compliance/",
+      "note": "可按标准号检索历年公开报告。官方声明：报告公开是为信息交流，其意见、发现与结论不应被视为产品是否合规的最终判定。",
+      "_status": "已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 390 行：NHTSA 合规测试报告检索数据库"
+      },
+      "usage": "测试需求",
+      "usage_class": "C4 报告模板与字段映射",
+      "usage_review": "待人工复核"
+    },
+    {
+      "id": "DOC-REF-001",
+      "type": "参考设计",
+      "title": "Small-Footprint Sunroof Motor Module Reference Design（小尺寸天窗电机模块参考设计，含防夹检测；德州仪器 Texas Instruments Incorporated；设计编号 TIDA-01389；设计指南 TIDUCQ9 Rev. A，2017-07-21）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.ti.com/tool/TIDA-01389",
+      "note": "可提参数：有刷直流电机、驱动能力 15 A、栅极驱动器 DRV8703-Q1 耐压 47 V、两颗 DRV5013-Q1 锁存霍尔构成位置编码（带宽 30 kHz）、支持防夹检测与反接保护。配套资料：原理图 TIDRQE4 / BOM TIDRQE5 / PCB TIDRQE7 / Gerber TIDCDA8。",
+      "_status": "已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 140 行：TIDA-01389 全名、编号与可提参数"
+      },
+      "usage": "产品说明书",
+      "usage_class": "A2 应用方案与用户手册"
+    },
+    {
+      "id": "DOC-REF-002",
+      "type": "参考设计",
+      "title": "Anti-Pinch Window Lift Reference Design（防夹车窗升降参考设计，与同济大学合作开发；恩智浦半导体 NXP Semiconductors N.V.；方案编号 RDS12VR；资料单文件 RDS12VRFS.pdf）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.nxp.com/docs/en/fact-sheet/RDS12VRFS.pdf",
+      "note": "特征：S12 MagniV S12VR 混合信号微控制器、霍尔与电流采样双判据防夹、**防夹区间与防夹力可调**、防夹区外做堵转检测。这是四家参考设计里唯一明示「哪两个参数可调」的。",
+      "_status": "待核实（PDF 超 10 MB 抓取失败，特征来自社区条目转述）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 141 行：RDS12VR 全名、编号与特征"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 343 行：官方明示可调项"
+        }
+      ],
+      "usage": "产品说明书",
+      "usage_class": "A2 应用方案与用户手册"
+    },
+    {
+      "id": "DOC-REF-003",
+      "type": "参考设计",
+      "title": "S12VR Window Lift StarterTRAK Reference Design（车窗升降与继电器式直流电机控制入门套件；恩智浦半导体；套件编号 TRK-S12VR-WLFT-1）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.nxp.com/design/design-center/development-boards-and-designs/s12vr-window-lift-startertrak-reference-design:TRK-S12VR-WLFT-1",
+      "_status": "待核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 142 行：TRK-S12VR-WLFT-1 全名与编号"
+      },
+      "usage": "产品说明书",
+      "usage_class": "A2 应用方案与用户手册"
+    },
+    {
+      "id": "DOC-REF-004",
+      "type": "参考设计",
+      "title": "Window Lift with Anti-Pinch Reference Design（带防夹的车窗升降参考设计；微芯科技 Microchip Technology Inc.；开发工具编号 APGRD002）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.microchip.com/en-us/development-tool/apgrd002",
+      "_status": "待核实（该页对自动抓取返回 HTTP 403，仅由搜索结果确认存在）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 143 行：APGRD002 全名与编号"
+      },
+      "usage": "产品说明书",
+      "usage_class": "A2 应用方案与用户手册"
+    },
+    {
+      "id": "DOC-REF-005",
+      "type": "参考设计",
+      "title": "TLE9855QX Window Lift Reference Design Guide，v01_01（英飞凌科技 Infineon Technologies AG，经贸泽电子 Mouser Electronics 镜像发布）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.mouser.com/pdfDocs/Infineon-TLE9855QX_Window_Lift_Reference_Design_Guide_Preview-UserManual-v01_01-EN.pdf",
+      "_status": "待核实（infineon.com 本域在本次环境中被网络策略拦截）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 144 行：TLE9855QX 设计指南全名与版本"
+      },
+      "usage": "产品说明书",
+      "usage_class": "A2 应用方案与用户手册"
+    },
+    {
+      "id": "DOC-REF-006",
+      "type": "参考设计",
+      "title": "Smart window lift module（智能车窗升降模块应用页，MOTIX™ TLE985x 系列 H 桥 MOSFET 驱动片上系统；英飞凌科技）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.infineon.com/cms/en/applications/automotive/body-electronics-and-lighting/comfort-convenience-electronics/smart-window-lift-module/",
+      "note": "特征：12 V 电机控制片上系统、Arm Cortex-M0 内核、片上电池电压与温度测量、自适应栅极电流控制。",
+      "_status": "待核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 145 行：TLE985x 应用页与特征"
+      },
+      "usage": "产品说明书",
+      "usage_class": "A2 应用方案与用户手册"
+    },
+    {
+      "id": "DOC-REF-007",
+      "type": "参考设计",
+      "title": "Automotive Brushed-Motor Ripple Counter Reference Design（车规有刷电机纹波计数参考设计；德州仪器；设计指南文档号 TIDUD30A；关联设计 TIDA-01421）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.ti.com/lit/ug/tidud30a/tidud30a.pdf",
+      "note": "原理：电机电流交流分量中的纹波与换向器极经过电刷一一对应，纹波频率正比于实际转速，可转成数字口可计的脉冲；纹波数为 2N（N 为绕组对数）。可提参数：高通/带通滤波参数、比较器迟滞、脉冲整形门限。",
+      "_status": "待核实",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 146 行：TIDUD30A 全名、编号与原理"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 342 行：可提炼的滤波与迟滞参数"
+        }
+      ],
+      "usage": "产品说明书",
+      "usage_class": "A2 应用方案与用户手册"
+    },
+    {
+      "id": "DOC-TUNE-001",
+      "type": "调参文档",
+      "title": "Motor Control Application Framework (MCAF) 文档 5.1.6 节 Current loop tuning（电流环整定；微芯科技 Microchip Technology Inc.，MCAF R7 RC37 文档，版本 7.0.2）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "已解析为 control-parameters.json + experience.json",
+      "url": "https://microchiptech.github.io/mcaf-doc/7.0.2/algorithms/foc/tuning.html",
+      "note": "**本次调研中唯一给出「参数名 + 默认值 + 推荐区间 + 增减后果」完整闭环的公开文档。** 相位裕度默认 80°、推荐 50° 至 70°；PI 相位滞后默认 45°、推荐 8° 至 20°、低于 5° 不建议；电流环带宽取 PWM 频率的 5 % 至 15 %。另明确规定整定顺序：先在开环换相下整定电流环，再调开闭环切换。",
+      "_status": "已核实",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 360 行：MCAF 文档全名、版本与评价"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 371-375 行：五个参数的默认值与推荐区间"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 377 行：整定顺序"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "B2 调试手册与原理说明"
+    },
+    {
+      "id": "DOC-TUNE-002",
+      "type": "调参文档",
+      "title": "UM3259 — STM32 motor control SDK: 6-step firmware sensorless parameter optimization（意法半导体 STMicroelectronics N.V.）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.st.com/resource/en/user_manual/um3259-stm32-motor-control-sdk--6step-firmware-sensorless-parameter-optimization-stmicroelectronics.pdf",
+      "note": "对齐与启动、单段或多段加速斜坡；大惯量电机先缓斜坡后陡斜坡。",
+      "_status": "待核实（抓取超时）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 361 行：UM3259 全名与可提炼参数"
+      },
+      "usage": "工艺",
+      "usage_class": "B2 调试手册与原理说明"
+    },
+    {
+      "id": "DOC-TUNE-003",
+      "type": "调参文档",
+      "title": "STM32 Motor Control Frequently Asked Questions（意法半导体 STM32 微控制器 Wiki）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://wiki.stmicroelectronics.cn/stm32mcu/wiki/STM32MotorControl:Frequently_Asked_Questions",
+      "note": "启动调参口径：将 Speed ramp final value 提高到最大应用转速的 40 %，将 Minimum startup output speed 降到 10 %。",
+      "_status": "待核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 362 行：STM32 FAQ 启动调参口径"
+      },
+      "usage": "工艺",
+      "usage_class": "B2 调试手册与原理说明"
+    },
+    {
+      "id": "DOC-TUNE-004",
+      "type": "调参文档",
+      "title": "iMOTION™ Motion Control Engine Software Reference Manual（含 MCEWizard 全部可配参数），V 1.34，2021-09-17，203 页（英飞凌科技，社区镜像）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://community.infineon.com/gfawx74859/attachments/gfawx74859/jpmotixmcu/693/1/Infineon-MCESW-RM-UserManual-v01_03-EN.pdf",
+      "note": "IS_Pulses、IS_Duty、IS_IqInit（由 MCEWizard 自动计算）；初始角检测按六个角度注入电流脉冲；过压/欠压保护、过流检测、堵转防护。注意这是无刷方案的参数体系，有刷直流用不上初始角检测那一段。",
+      "_status": "待核实（infineon.com 本域被拦截，走社区镜像）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 363 行：iMOTION 参考手册全名、版本与可提炼参数"
+      },
+      "usage": "工艺",
+      "usage_class": "B2 调试手册与原理说明"
+    },
+    {
+      "id": "DOC-TUNE-005",
+      "type": "调参文档",
+      "title": "How to Reduce Motor Noise with Code-Free, Sensorless FOC（用免代码无感磁场定向控制降低电机噪声；德州仪器，文献号 SLLA567）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.ti.com/lit/an/slla567/slla567.pdf",
+      "note": "自动死区补偿、PWM 调制方式对声学表现的影响。",
+      "_status": "待核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 364 行：SLLA567 全名与文献号"
+      },
+      "usage": "工艺",
+      "usage_class": "B2 调试手册与原理说明"
+    },
+    {
+      "id": "DOC-TUNE-006",
+      "type": "调参文档",
+      "title": "Driving Brushed DC Motors Using PWM Output: Losses and Points to be Noted（用 PWM 驱动有刷直流电机：损耗与注意事项；罗姆半导体 ROHM Co., Ltd. TechWeb 技术专栏，条目 346）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://techweb.rohm.com/product/motor/motor-types/346/",
+      "note": "死区的必要性与死区导致的损耗；开关损耗与效率折中。**这是六份调参文档里唯一直接针对有刷直流的。**",
+      "_status": "待核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 365 行：ROHM TechWeb 条目 346 全名与内容"
+      },
+      "usage": "工艺",
+      "usage_class": "B2 调试手册与原理说明"
+    },
+    {
+      "id": "DOC-PAP-001",
+      "type": "算法文献",
+      "title": "Automatic Threshold on Current based Anti-pinch Mechanism for Power Windows（基于电流的电动车窗防夹机构自动阈值方法），刊于 International Journal of Electrical and Computer Engineering (IJECE)，2018",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://ijece.iaescore.com/index.php/IJECE/article/view/7702",
+      "note": "电流突变门限的自适应设定方法；阈值随工况自整定。",
+      "_status": "待核实（未打开正文逐字确认）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 338 行：IJECE 2018 论文全名、期刊与 URL"
+      },
+      "usage": "工艺",
+      "usage_class": "B2 调试手册与原理说明"
+    },
+    {
+      "id": "DOC-PAP-002",
+      "type": "算法文献",
+      "title": "Practical pinch detection algorithm for low-cost anti-pinch window control system（低成本防夹车窗控制系统的实用夹持检测算法），IEEE 会议论文",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://ieeexplore.ieee.org/document/1600781",
+      "note": "基于转矩变化率（torque rate）的检测判据；文中指出转矩变化率对电机参数不确定性的敏感度低于转矩或角速度本身。",
+      "_status": "待核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 339 行：IEEE 会议论文全名与判据"
+      },
+      "usage": "工艺",
+      "usage_class": "B2 调试手册与原理说明"
+    },
+    {
+      "id": "DOC-PAP-003",
+      "type": "算法文献",
+      "title": "Power Window Anti-Pinch Control Based on Hall Pulse Signal and Mechanical Power（基于霍尔脉冲信号与机械功率的车窗防夹控制），收录于 Atlantis Press，ICMSE 2018 会议论文集",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.atlantis-press.com/proceedings/icmse-18/25895047",
+      "note": "霍尔脉冲计数与机械功率联合判据。",
+      "_status": "待核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 340 行：ICMSE 2018 论文全名与判据"
+      },
+      "usage": "工艺",
+      "usage_class": "B2 调试手册与原理说明"
+    },
+    {
+      "id": "DOC-PAP-004",
+      "type": "算法文献",
+      "title": "Research on Anti-pinch Control Strategy of Window Start-up Phase based on Ripple Motor（基于纹波电机的车窗启动阶段防夹控制策略研究），ResearchGate 条目，2021",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.researchgate.net/publication/349300884",
+      "note": "**启动阶段**的防夹策略——启动瞬间的浪涌电流会掩盖夹持特征，是防夹算法最难的一段，也是调参重点。",
+      "_status": "待核实（未确认期刊/会议全名与作者）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 341 行：ResearchGate 2021 条目与内容"
+      },
+      "usage": "工艺",
+      "usage_class": "B2 调试手册与原理说明"
+    },
+    {
+      "id": "DOC-SIM-001",
+      "type": "仿真工具",
+      "title": "gym-electric-motor（GEM），电机控制强化学习仿真环境（德国帕德博恩大学电驱动系统教研室 Universität Paderborn, Lehrstuhl für Elektrische Antriebssysteme, LEA）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://github.com/upb-lea/gym-electric-motor",
+      "note": "可生成 abc 与 dq 三相电流、转速、转矩、端电压、直流母线电压；内置逆变器与负载模型；支持多种直流电机；时间步长可配（微秒至毫秒级）。定子电阻、电感、极对数、额定电压与电流全部开放为参数，可直接配到 12 V 车用量级。**本包的合成波形与它用的直流电机模型同型，但没有引入该依赖**，而是在 _build/gen_waveforms.py 里直接用显式欧拉积分实现，便于逐行审阅。",
+      "_status": "已核实（仓库活跃，427 星 / 1157 次提交）；许可证 MIT",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 314 行：gym-electric-motor 全名、机构、能力与许可证"
+      },
+      "usage": "工艺",
+      "usage_class": "（仿真工具，06a 总表未收录）",
+      "usage_review": "待人工复核"
+    },
+    {
+      "id": "DOC-SIM-002",
+      "type": "仿真工具",
+      "title": "Simscape Electrical — Electric Power Assisted Steering（电动助力转向示例；MathWorks）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.mathworks.com/help/sps/ug/electric-power-assisted-steering.html",
+      "note": "**唯一开箱即为车规场景的模型。** 若项目已有 MATLAB 授权，优先级高于开源方案。但被测对象是转向不是车窗，需改建。",
+      "_status": "已核实；需 MATLAB + Simscape Electrical 商业授权",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 315 行：Simscape Electrical EPAS 示例全名与评价"
+      },
+      "usage": "工艺",
+      "usage_class": "（仿真工具，06a 总表未收录）",
+      "usage_review": "待人工复核"
+    },
+    {
+      "id": "DOC-SIM-003",
+      "type": "仿真工具",
+      "title": "PyLEECAN（PYthon Library for Electrical Engineering Computational ANalysis；法国 EOMYS ENGINEERING 发起，现由 Green Forge Coop 支持）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://github.com/Eomys/pyleecan",
+      "note": "耦合有限元求解器 FEMM 做电磁仿真，输出磁场、转矩、损耗。偏电机本体设计，要产出传感器级时序需自建电路外壳。",
+      "_status": "已核实；许可证 Apache 2.0",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 316 行：PyLEECAN 全名、机构与能力"
+      },
+      "usage": "工艺",
+      "usage_class": "（仿真工具，06a 总表未收录）",
+      "usage_review": "待人工复核"
+    },
+    {
+      "id": "DOC-SIM-004",
+      "type": "数据集与脚本",
+      "title": "ITSC — 三相感应电机匝间短路故障电流数据集（含读取脚本；GitHub 账号 ibarram；被测件 Baldor CM3542，0.75 hp）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://github.com/ibarram/ITSC",
+      "note": "三相电流实测；健康 + 12 种故障；1 kHz 采样，每次 5 秒，60 Hz 空载稳态，每工况重复 5 次；附 Python/MATLAB/R/C 读取脚本。被测件是感应电机，与本场景的有刷直流不同型，只能借读取脚本的工程做法。",
+      "_status": "已核实（全部字段）；许可证 MIT",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 317 行：ITSC 全名、被测件与参数"
+      },
+      "usage": "工艺",
+      "usage_class": "（数据集与脚本，06a 总表未收录）",
+      "usage_review": "待人工复核"
+    },
+    {
+      "id": "DOC-SIM-005",
+      "type": "开发套件",
+      "title": "C2000Ware MotorControl SDK（含 InstaSPIN-FOC 有感与无感磁场定向控制方案；德州仪器）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.ti.com/tool/C2000WARE-MOTORCONTROL-SDK",
+      "_status": "已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 318 行：C2000Ware MotorControl SDK 全名与能力"
+      },
+      "usage": "产品说明书",
+      "usage_class": "A4 驱动与参数配置源码"
+    },
+    {
+      "id": "DOC-SIM-006",
+      "type": "开发套件",
+      "title": "X-CUBE-MCSDK（STM32 电机控制软件开发包）+ ST Motor Pilot（意法半导体）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://www.st.com/en/embedded-software/x-cube-mcsdk.html",
+      "note": "Motor Pilot 支持实时绘图，右键选寄存器变量生成标准图与 XY 图，可记录电流、转速等控制量。",
+      "_status": "已核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 319 行：X-CUBE-MCSDK 与 Motor Pilot 全名与能力"
+      },
+      "usage": "产品说明书",
+      "usage_class": "A4 驱动与参数配置源码"
+    },
+    {
+      "id": "DOC-ALT-001",
+      "type": "备选产品标准",
+      "title": "QC/T 29090-2023《汽车用刮水电动机》（工业和信息化部发布，SAC/TC 114 归口，2023-04-21 发布 / 2023-11-01 实施，代替 QC/T 29090-1992）",
+      "path": null,
+      "size_bytes": null,
+      "exists": false,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "未取得",
+      "url": "https://hbba.sacinfo.org.cn/stdDetail/fa7c67530404b45b4a1d5352bd5af5016d98d799798d2fd0b4edd58ab79d4f22",
+      "note": "**决赛候选 A 的标准全文，20 项判据全量化、全部已核实。** 本场景没选它，但它是「切三级分类」的现成下一个产品：同属汽车车身电机、同为有刷直流，判据体系可直接接上本包的骨架。本包从它借了一条：堵转 4.18/5.18 的「连续通电 30 s 堵转」，用作台架堵转持续时间的通用上限（已在 safety-interlocks.json SI-HW-03 标明出处）。",
+      "_status": "已核实（标准全文 PDF，20 项判据）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 257 行：QC/T 29090-2023 全名、机构、日期与代替关系"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 259-281 行：20 项判据表"
+        }
+      ],
+      "usage": "测试需求",
+      "usage_class": "C1 标准与法规 / C2 客户与 OEM 规范 / C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-OURS-001",
+      "type": "我方文档",
+      "title": "B-汽车场景测试案例素材（20260919 通用 Agent 测试系统 v2.0 调研文档）",
+      "path": "[源] _调研/B-汽车场景测试案例素材.md",
+      "size_bytes": 90457,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置",
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析",
+        "F5 调优确认及运行",
+        "F6 测试报告及产出"
+      ],
+      "conversion_status": "Markdown 原生",
+      "note": "**本场景包绝大多数条目的一级来源。** 含选题论证、六流程素材表、判据表、三地法规对照表、与峰岹案例的对照表、搜索范围与零命中。本包的 _source 大量指向它的行号。",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "全文"
+      },
+      "usage": "工艺",
+      "usage_class": "（本项目调研件与构建脚本，06a 总表未收录）",
+      "usage_review": "待人工复核"
+    },
+    {
+      "id": "DOC-OURS-002",
+      "type": "我方文档",
+      "title": "场景包生成脚本 _build/（common.py 常量与工具、gen_a.py 产品与判据、gen_b.py 工作流与文档、gen_waveforms.py 合成波形、render_assets.py 图片资产、build_scene_pack.py 入口）",
+      "path": "[源] automotive.body-motor.window-regulator/_build",
+      "size_bytes": 4096,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "本场景包自产",
+      "note": "只读源材料，不写回源材料。重新生成命令见 README 末节。",
+      "_source": {
+        "file": "[源] _build/build_scene_pack.py",
+        "locator": "ORDER 列表"
+      },
+      "usage": "工艺",
+      "usage_class": "（本项目调研件与构建脚本，06a 总表未收录）",
+      "usage_review": "待人工复核"
+    }
+  ]
+}

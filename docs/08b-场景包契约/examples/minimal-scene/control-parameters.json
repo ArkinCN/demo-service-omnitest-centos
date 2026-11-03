@@ -1,0 +1,68 @@
+{
+  "schema": "control-parameters/v1",
+  "scene_id": "example.minimal.skeleton",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-20",
+  "belongs_to_flow": "F5 调优确认及运行",
+  "groups": [
+    "示例参数组"
+  ],
+  "group_tiers": [
+    {
+      "id": "ctl",
+      "title": "控制整定",
+      "groups": [
+        {
+          "id": "ctl-example",
+          "title": "示例参数组",
+          "members": [
+            "示例参数组"
+          ],
+          "subgroups": [
+            {
+              "id": "ctl-example-items",
+              "title": "示例参数组",
+              "items": [
+                "example_parameter"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "adjustable_in_flows 标这个参数在哪条流程里允许改；同一参数在不同流程里含义不同。"
+  ],
+  "demo_profile": {
+    "note": "演示主线只亮这一条。",
+    "groups": [
+      "示例参数组"
+    ],
+    "parameters": [
+      "example_parameter"
+    ]
+  },
+  "parameters": [
+    {
+      "key": "example_parameter",
+      "name": "示例参数",
+      "value": 100,
+      "default": 100,
+      "unit": "rpm",
+      "min": 0,
+      "max": 1000,
+      "step": 10,
+      "group": "示例参数组",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] 08b-场景包契约/README-场景包契约-v1.1.md",
+        "locator": "第 10 节 新建第三个场景包的步骤"
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "format_version": "1.0.0",
+  "name": "示例工作流",
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "start",
+      "name": "开始"
+    },
+    {
+      "id": "n2",
+      "type": "end",
+      "name": "结束"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "n1",
+      "target": "n2"
+    }
+  ]
+}

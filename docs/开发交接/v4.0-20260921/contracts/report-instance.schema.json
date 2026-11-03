@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "report-instance/v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "report_id",
+    "template_file",
+    "snapshot_id",
+    "baseline_id",
+    "run_ids",
+    "field_values",
+    "sections",
+    "export",
+    "review"
+  ],
+  "properties": {
+    "schema": {
+      "const": "report-instance/v1"
+    },
+    "report_id": {
+      "type": "string"
+    },
+    "report_no": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "template_file": {
+      "type": "string",
+      "description": "完整路径。峰岹场景为 archive-POC/40_工程/ClientSoftware/Fortior_Motor_Checklist_公用模板_7(1).xlsm"
+    },
+    "snapshot_id": {
+      "type": "string"
+    },
+    "baseline_id": {
+      "type": "string"
+    },
+    "run_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "本报告涵盖哪几轮"
+    },
+    "field_values": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "key",
+          "cell",
+          "value",
+          "provenance"
+        ],
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "sheet": {
+            "type": "string"
+          },
+          "cell": {
+            "type": "string",
+            "description": "如 B3"
+          },
+          "value": {},
+          "provenance": {
+            "type": "object",
+            "required": [
+              "kind"
+            ],
+            "description": "硬约束：报告里出现的每个数值都必须能点回来源，所以这个字段必填",
+            "properties": {
+              "kind": {
+                "enum": [
+                  "config-snapshot",
+                  "requirement-baseline",
+                  "verdict-table",
+                  "run-artifact",
+                  "manual"
+                ]
+              },
+              "run_id": {
+                "type": "string"
+              },
+              "criterion_id": {
+                "type": "string"
+              },
+              "raw_data_id": {
+                "type": "string"
+              },
+              "filled_by": {
+                "type": "string",
+                "description": "kind 为 manual 时必填"
+              }
+            }
+          }
+        }
+      }
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "file_path",
+          "sheet",
+          "anchor"
+        ],
+        "properties": {
+          "file_path": {
+            "type": "string"
+          },
+          "sheet": {
+            "type": "string"
+          },
+          "anchor": {
+            "type": "string"
+          },
+          "caption": {
+            "type": "string"
+          },
+          "run_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "key",
+          "included"
+        ],
+        "properties": {
+          "key": {
+            "enum": [
+              "overview",
+              "config",
+              "criteria",
+              "process",
+              "result",
+              "anomaly",
+              "conclusion",
+              "appendix"
+            ]
+          },
+          "included": {
+            "type": "boolean"
+          },
+          "authored_by": {
+            "enum": [
+              "template",
+              "copilot",
+              "human"
+            ]
+          },
+          "text": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "required": [
+        "conclusion_reviewed"
+      ],
+      "properties": {
+        "conclusion_reviewed": {
+          "type": "boolean",
+          "description": "副驾撰写的结论段必须为 true 才允许导出，不可配置关闭"
+        },
+        "reviewed_by": {
+          "type": "string"
+        },
+        "reviewed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "self_consistency_passed": {
+          "type": "boolean",
+          "description": "结论文字里出现的每个数值都在 field_values 里找得到"
+        }
+      }
+    },
+    "export": {
+      "type": "object",
+      "required": [
+        "formats",
+        "status"
+      ],
+      "properties": {
+        "formats": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "output_path": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "exported",
+            "archived"
+          ]
+        },
+        "archived_to": {
+          "type": "string",
+          "description": "知识库分类路径"
+        },
+        "exported_by": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

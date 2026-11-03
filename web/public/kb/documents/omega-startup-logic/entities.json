@@ -1,0 +1,39 @@
+{
+  "doc_id": "omega-startup-logic",
+  "summary": {
+    "parameters": 1,
+    "parameters_matching_customer_h": 0,
+    "registers": 0,
+    "thresholds": 1,
+    "units": 1,
+    "procedure_steps": 0
+  },
+  "parameters": [
+    {
+      "name": "FOC_EFREQACC",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "omega-startup-logic#c0000",
+      "first_page": 1,
+      "context": "- 每个载波，电机转速增量：FOC_EFREQACC（5），我们 可以通过 观测相电流波形，看出该值的取值对电机 强拖阶段的影响。 判断该值的取值是否符合需求：如果 设置的"
+    }
+  ],
+  "registers": [],
+  "thresholds": [
+    {
+      "value": 60.0,
+      "unit": "rpm",
+      "chunk_id": "omega-startup-logic#c0000",
+      "page": 1,
+      "context": "误报堵转保护。如果设置的太大，启动相电流会增 的很快，可能会导致失步。 1. - 估算转速大于FOC_EFREQMIN（60rpm）会开始切估算 器，可以观测电机实际转速在60rpm-120rpm之间是否成 功切换到估算器，切换成功标志位为： 2."
+    }
+  ],
+  "units": [
+    {
+      "unit": "rpm",
+      "count": 1
+    }
+  ],
+  "procedure_steps": [],
+  "method": "regex+heuristic, no LLM; 参数名=全大写下划线标识符, 寄存器=标识符±40字符内出现『寄存器/register』, 阈值=数值+单位且±40字符内含阈值语境词, 规程步骤=编号行且含操作动词"
+}

@@ -1,0 +1,15 @@
+{
+    "confirm_token": "ct_g7G7Wx8fkFo9hDgLrLD8M4xE",
+    "tool": "start",
+    "state": "approved",
+    "prompt": "启动被测电机：台架会真的转起来",
+    "args_preview": {
+        "duty_percent": 60.0,
+        "duration_s": 30.0
+    },
+    "created_at": 1789831809.417886,
+    "expires_at": 1789831989.417886,
+    "seconds_left": 180.0,
+    "approved_by": "张工（spike 取证）",
+    "rejected_reason": null
+}

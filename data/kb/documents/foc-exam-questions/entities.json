@@ -1,0 +1,42 @@
+{
+  "doc_id": "foc-exam-questions",
+  "summary": {
+    "parameters": 3,
+    "parameters_matching_customer_h": 1,
+    "registers": 0,
+    "thresholds": 0,
+    "units": 0,
+    "procedure_steps": 0
+  },
+  "parameters": [
+    {
+      "name": "FOC_CR1",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "foc-exam-questions#c0001",
+      "first_page": null,
+      "context": "**程序中启动方式配置为的OPEN_OMEGA_START时，FOC_CR1[RFAE] = 1，FOC_CR1[ANGM] = 1，FOC_CR1[EFAE] = 1，请画出电机启动升速过程中角"
+    },
+    {
+      "name": "FOC_TRGDLY",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "foc-exam-questions#c0017",
+      "first_page": null,
+      "context": "FOC_TRGDLY = -5或FOC_TRGDLY = 0x85或FOC_TRGDLY = 0xFB"
+    },
+    {
+      "name": "SPD_BW",
+      "count": 1,
+      "in_customer_h": true,
+      "first_chunk": "foc-exam-questions#c0005",
+      "first_page": null,
+      "context": "反电动势、估算电角速度以及估算角度的过程进行了一阶低通滤波处理，请分别说明MOTOR_SPEED_SMOMIN_RPM、SPD_BW、ATO_BW三个值的大小设置对电机控制效果的影响。**"
+    }
+  ],
+  "registers": [],
+  "thresholds": [],
+  "units": [],
+  "procedure_steps": [],
+  "method": "regex+heuristic, no LLM; 参数名=全大写下划线标识符, 寄存器=标识符±40字符内出现『寄存器/register』, 阈值=数值+单位且±40字符内含阈值语境词, 规程步骤=编号行且含操作动词"
+}

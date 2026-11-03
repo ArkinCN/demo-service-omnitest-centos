@@ -1,0 +1,87 @@
+{
+  "schema": "scene/v1",
+  "id": "example.minimal.skeleton",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-20",
+  "taxonomy": {
+    "level1_scene": {
+      "key": "example",
+      "name": "示例场景"
+    },
+    "level2_category": {
+      "key": "minimal",
+      "name": "最小子类"
+    },
+    "level3_product_type": {
+      "key": "skeleton",
+      "name": "骨架产品"
+    },
+    "_source": {
+      "file": "[源] 08b-场景包契约/README-场景包契约-v1.1.md",
+      "locator": "第 10 节 新建第三个场景包的步骤"
+    }
+  },
+  "product": {
+    "name": "最小骨架示例产品（本文件不对应任何真实产品）",
+    "chip": "不锁定主控。本包只演示字段形状，不登记任何真实器件。",
+    "control_scheme": "不适用。新建场景包时把这三个字段换成真实产品的全名、主控与控制方案。",
+    "_source": {
+      "file": "[源] 08b-场景包契约/README-场景包契约-v1.1.md",
+      "locator": "第 10 节 新建第三个场景包的步骤"
+    }
+  },
+  "summary": "最小骨架场景包：十一份 JSON 只保留必填字段，各内容数组各放一条示例，用来给新场景包当起手模板，也给 validate.py 当回归样本。",
+  "default_view": {
+    "_note": "C 区默认视图：canvas 统一画板 / grid 卡片网格。五个键与前端 FLOW_IDS 一一对应。",
+    "init": "canvas",
+    "req": "canvas",
+    "run": "grid",
+    "tune": "grid",
+    "report": "grid"
+  },
+  "images": [
+    {
+      "id": "placeholder-figure",
+      "title": "占位示意图",
+      "path": "assets/placeholder.png",
+      "width": 1,
+      "height": 1,
+      "render": "1×1 灰色占位 PNG，由本契约目录的建包脚本生成。新建包时换成真实图片并填实际像素尺寸。",
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] 08b-场景包契约/README-场景包契约-v1.1.md",
+        "locator": "第 10 节 新建第三个场景包的步骤"
+      }
+    }
+  ],
+  "flows": [
+    {
+      "id": "F1",
+      "name": "知识库管理"
+    },
+    {
+      "id": "F2",
+      "name": "初始化配置"
+    },
+    {
+      "id": "F3",
+      "name": "测试需求确认"
+    },
+    {
+      "id": "F4",
+      "name": "启动测试及结果分析"
+    },
+    {
+      "id": "F5",
+      "name": "调优确认及运行"
+    },
+    {
+      "id": "F6",
+      "name": "测试报告及产出"
+    }
+  ],
+  "_source": {
+    "file": "[源] 08b-场景包契约/README-场景包契约-v1.1.md",
+    "locator": "第 10 节 新建第三个场景包的步骤"
+  }
+}

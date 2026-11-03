@@ -1,0 +1,446 @@
+{
+  "engine": "rank_bm25.BM25Okapi",
+  "tokenizer": "ASCII 词元（含下划线拆分）+ 中文 unigram/bigram，无分词模型，离线",
+  "corpus": {
+    "documents": 13,
+    "units": 577,
+    "chunks": 374,
+    "params": 203
+  },
+  "vector_search": "接口预留未实现（scripts/04_search.py 的 VectorIndex）",
+  "samples": [
+    {
+      "query": "启动电流怎么选",
+      "k": 5,
+      "hits": 5,
+      "hit_docs": [
+        "foc-debug-manual",
+        "foc-exec-logic"
+      ],
+      "pages_cited": [
+        3,
+        39,
+        40,
+        41,
+        42
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "score": 19.6978,
+          "kind": "chunk",
+          "doc_id": "foc-debug-manual",
+          "doc_title": "FU-AM-FOC 方案调试手册",
+          "chunk_id": "foc-debug-manual#c0083",
+          "heading_path": [
+            "7.2.2 参数说明"
+          ],
+          "page": 41,
+          "source_path": "[源] manuals/FU-AM-FOC方案调试手册-.pdf",
+          "snippet": "7.2.2 参数说明 启动电流, 参数调试.参数范围 = 小于运行 最大电流. 启动电流, 参数调试.具体作用 1. 启动电流的大小由实际负载来决定，风机 = 调试时，可在安全条件下用手抓住负载，感觉 到有稳定力矩输出即可； 2. 启动电流增大，启动力矩会增大，过大容 易启动过冲或者噪音；过小启动力矩不够，启 动容易失败或不能启动。 1. 启动增量与速度基准有关，影响启动频率. 启动增量 Motor_Omega_Ramp_ACC, 参数调试.参数范围 = 1-200. 启动增量 Motor_Omega_Ramp_ACC, 参数调试.具体作用 1. 启动电流的大小由实际负载来决定，风机 = 增加的快慢。电机速度基准越高，其值就越 大； 2. 增量增大，启动输出频率增大。增量过 大，电机实际频率没法跟上给定的频率，容易 失步；增量过小，启动太慢，易出现停顿现 象。. 启动的最小切换速度 （rpm/min） MOTOR_OMEGA_A"
+        },
+        {
+          "rank": 2,
+          "score": 17.0483,
+          "kind": "chunk",
+          "doc_id": "foc-debug-manual",
+          "doc_title": "FU-AM-FOC 方案调试手册",
+          "chunk_id": "foc-debug-manual#c0075",
+          "heading_path": [
+            "7.1.1 原理"
+          ],
+          "page": 39,
+          "source_path": "[源] manuals/FU-AM-FOC方案调试手册-.pdf",
+          "snippet": "7.1.1 原理 其原理是给定启动电流 (IQREF 为非零 ) ，用爬坡方式将电机的电频率慢慢累加，坐标变换的角度信息由爬坡强制角 度提供，拖动电机转动。待拖动电机速度达到一定时启动完成，角度信息逐渐切入到由位置估算算法提供。"
+        },
+        {
+          "rank": 3,
+          "score": 16.3062,
+          "kind": "chunk",
+          "doc_id": "foc-debug-manual",
+          "doc_title": "FU-AM-FOC 方案调试手册",
+          "chunk_id": "foc-debug-manual#c0081",
+          "heading_path": [
+            "7.1.2 参数说明"
+          ],
+          "page": 40,
+          "source_path": "[源] manuals/FU-AM-FOC方案调试手册-.pdf",
+          "snippet": "7.1.2 参数说明 启动电流, 参数调试.参数范围 = 小于运行 最大电流. 启动电流, 参数调试.具体作用 = 1. 启动电流的大小由实际负载来决定，风机调 试时，可在安全条件下用手抓住负载，感觉到 有稳定力矩输出即可； 2. 启动电流增大，启动力矩会增大，过大容易 启动过冲；过小启动力矩不够，启动容易失败 或不能启动。. 爬坡启动增量 MOTOR_OPEN_ACC, 参数调试.参数范围 = 1-200. 爬坡启动增量 MOTOR_OPEN_ACC, 参数调试.具体作用 = 1. 爬坡启动增量与速度基准有关，影响启动频 率增加的快慢。电机速度基准越高，其值就越 大； 2. 增量增大，启动爬坡变快。增量过大，实际 频率没法跟上给定的频率，容易失步；增量过 小，启动太慢，易出现停顿现象。 1.. 爬坡启动 爬坡启动初始速度 MOTOR_OPEN_ACC_MIN, 参数调试.参数范围 = . 爬坡启动 爬坡启动初始速度 MOTOR"
+        },
+        {
+          "rank": 4,
+          "score": 16.1858,
+          "kind": "chunk",
+          "doc_id": "foc-debug-manual",
+          "doc_title": "FU-AM-FOC 方案调试手册",
+          "chunk_id": "foc-debug-manual#c0084",
+          "heading_path": [
+            "Application Manual Application Manual"
+          ],
+          "page": 42,
+          "source_path": "[源] manuals/FU-AM-FOC方案调试手册-.pdf",
+          "snippet": "Application Manual Application Manual 启动的限制速度（rpm/min） MOTOR_OMEGA_ACC_END, 动起来启动切换结束，易导致启动失败；过 大，容易导致启动无法切入闭环或速度超调。 = 1. 启动限制速度与速度基准有关，电机速度 基准越高，其值就越大； 2. 其值应小于电机运行最小速度，大于最小 切换转速； 3. 过小，估算器容易估算错误，电机还没拖 动起来启动切换结束，易导致启动失败；过 大，容易导致启动无法切入闭环或速度超调。. 启动死区电压补偿系数 (RV3_Start = (0.5-2.0)*RV3_Actual) 0.5-2.0, 动起来启动切换结束，易导致启动失败；过 大，容易导致启动无法切入闭环或速度超调。 = 1. 启动死区电压补偿系数影响启动时的输 出，与母线分压倍数、启动电流有关； 2. 建议从1.0往两边调试，主要范围在0.8- 1.75。当启动电流改变时"
+        },
+        {
+          "rank": 5,
+          "score": 15.2672,
+          "kind": "chunk",
+          "doc_id": "foc-exec-logic",
+          "doc_title": "FOC 执行逻辑",
+          "chunk_id": "foc-exec-logic#c0007",
+          "heading_path": [
+            "将程序中的变量对应到框图上，可以得到："
+          ],
+          "page": 3,
+          "source_path": "[源] manuals/FOC执行逻辑.pdf",
+          "snippet": "将程序中的变量对应到框图上，可以得到： 电机运行时转速递增，如果没有启动时间的限制，最终达到的 转速是给定启动电流IQ_Start_CURRENT对应的转速值，并维 持这个转速值稳定运行。"
+        }
+      ]
+    },
+    {
+      "query": "FG 输出配置",
+      "k": 5,
+      "hits": 5,
+      "hit_docs": [
+        "customer-h-fu6832"
+      ],
+      "pages_cited": [],
+      "results": [
+        {
+          "rank": 1,
+          "score": 17.8109,
+          "kind": "param",
+          "doc_id": "customer-h-fu6832",
+          "doc_title": "Customer.h 工程参数配置文件（FU6832 散热风扇）",
+          "chunk_id": "customer-h-fu6832#m0138",
+          "heading_path": [
+            "電機可選功能配置項目",
+            "電機轉速信號輸出配置"
+          ],
+          "page": null,
+          "source_path": "[源] code/Customer.h",
+          "snippet": "ROTATE_SIGNAL_TYPE = (FG_TYPE) 轉速信號輸出類型 @see NO_TYPE 無信號 @see RD_TYPE RD信號 @see FG_TYPE FG信號 電機可選功能配置項目 電機轉速信號輸出配置"
+        },
+        {
+          "rank": 2,
+          "score": 17.246,
+          "kind": "param",
+          "doc_id": "customer-h-fu6832",
+          "doc_title": "Customer.h 工程参数配置文件（FU6832 散热风扇）",
+          "chunk_id": "customer-h-fu6832#m0141",
+          "heading_path": [
+            "電機可選功能配置項目",
+            "電機轉速信號輸出配置"
+          ],
+          "page": null,
+          "source_path": "[源] code/Customer.h",
+          "snippet": "FG_PULSE_PERIOD = (2) FG 每轉脈波數量 ( @ref ROTATE_SIGNAL_TYPE 為 RD_TYPE 時有效) 電機可選功能配置項目 電機轉速信號輸出配置"
+        },
+        {
+          "rank": 3,
+          "score": 16.9666,
+          "kind": "param",
+          "doc_id": "customer-h-fu6832",
+          "doc_title": "Customer.h 工程参数配置文件（FU6832 散热风扇）",
+          "chunk_id": "customer-h-fu6832#m0140",
+          "heading_path": [
+            "電機可選功能配置項目",
+            "電機轉速信號輸出配置"
+          ],
+          "page": null,
+          "source_path": "[源] code/Customer.h",
+          "snippet": "FG_INITIAL_DELAY_TIMES = (1500) (單位: mS) FG 輸出時機 (注意: FG輸出時機是以預定位結束後開始計數，設置時須注意堵轉參數合理性) [範圍: 1000 ~ 6000] 電機可選功能配置項目 電機轉速信號輸出配置"
+        },
+        {
+          "rank": 4,
+          "score": 16.7521,
+          "kind": "param",
+          "doc_id": "customer-h-fu6832",
+          "doc_title": "Customer.h 工程参数配置文件（FU6832 散热风扇）",
+          "chunk_id": "customer-h-fu6832#m0142",
+          "heading_path": [
+            "電機可選功能配置項目",
+            "電機轉速信號輸出配置"
+          ],
+          "page": null,
+          "source_path": "[源] code/Customer.h",
+          "snippet": "FG_ALARM_LOGIC = (LOGIC_HIGH) FG 信號警報狀態 @see LOGIC_HIGH 高態信號 @see LOGIC_LOW 低態信號 電機可選功能配置項目 電機轉速信號輸出配置"
+        },
+        {
+          "rank": 5,
+          "score": 14.7678,
+          "kind": "param",
+          "doc_id": "customer-h-fu6832",
+          "doc_title": "Customer.h 工程参数配置文件（FU6832 散热风扇）",
+          "chunk_id": "customer-h-fu6832#m0143",
+          "heading_path": [
+            "電機可選功能配置項目",
+            "電機轉速信號輸出配置"
+          ],
+          "page": null,
+          "source_path": "[源] code/Customer.h",
+          "snippet": "FG_FAKE_ENABLED = (0) 啟用假轉速輸出功能 (注意: PWM_FULLCONTROL_ENABLED 與本功能衝突，不得同時啟用) @param (0) 禁用 @param (1) 啟用 電機可選功能配置項目 電機轉速信號輸出配置"
+        }
+      ]
+    },
+    {
+      "query": "过压保护阈值",
+      "k": 5,
+      "hits": 5,
+      "hit_docs": [
+        "coolingfan-single-hall-appnote",
+        "foc-debug-manual"
+      ],
+      "pages_cited": [
+        24,
+        48,
+        52
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "score": 39.5242,
+          "kind": "chunk",
+          "doc_id": "coolingfan-single-hall-appnote",
+          "doc_title": "散热风扇单霍尔方案应用手册",
+          "chunk_id": "coolingfan-single-hall-appnote#c0035",
+          "heading_path": [
+            "4.1.2 电压保护"
+          ],
+          "page": 24,
+          "source_path": "[源] manuals/散热风扇单霍尔方案应用手册.pdf",
+          "snippet": "4.1.2 电压保护 程序通过 AD2 口检测电压，当检测到的电压超过设定值时，则报过压保护；此时当电压重新低于过压恢复值 时，清除过压保护故障。当电压低于设定的欠压值时，则报欠压保护。此时当电压重新高于欠压恢复值时，清除 欠压保护故障。"
+        },
+        {
+          "rank": 2,
+          "score": 38.3378,
+          "kind": "chunk",
+          "doc_id": "foc-debug-manual",
+          "doc_title": "FU-AM-FOC 方案调试手册",
+          "chunk_id": "foc-debug-manual#c0121",
+          "heading_path": [
+            "9.6.1 原理"
+          ],
+          "page": 52,
+          "source_path": "[源] manuals/FU-AM-FOC方案调试手册-.pdf",
+          "snippet": "9.6.1 原理 程序通过 AD2 口检测电压，当检测到的电压超过设定值时，则报过压保护；此时当电压重新低于过压恢复值时，清 除过压保护故障。 当电压低于设定的欠压值时， 则报欠压保护。 此时当电压重新高于欠压恢复值时， 清除欠压保护故障。"
+        },
+        {
+          "rank": 3,
+          "score": 37.0668,
+          "kind": "chunk",
+          "doc_id": "foc-debug-manual",
+          "doc_title": "FU-AM-FOC 方案调试手册",
+          "chunk_id": "foc-debug-manual#c0107",
+          "heading_path": [
+            "9.1.2 代码"
+          ],
+          "page": 48,
+          "source_path": "[源] manuals/FU-AM-FOC方案调试手册-.pdf",
+          "snippet": "9.1.2 代码 -  配置硬件过流保护方式为比较器 -  配置硬件过流保护阈值来源于内部 DAC -  配置硬件过流保护值"
+        },
+        {
+          "rank": 4,
+          "score": 31.4486,
+          "kind": "chunk",
+          "doc_id": "foc-debug-manual",
+          "doc_title": "FU-AM-FOC 方案调试手册",
+          "chunk_id": "foc-debug-manual#c0106",
+          "heading_path": [
+            "9.1.1 原理"
+          ],
+          "page": 48,
+          "source_path": "[源] manuals/FU-AM-FOC方案调试手册-.pdf",
+          "snippet": "9.1.1 原理 下图是比较器 3 的端口图，硬件过流保护阈值可以用 P23 口输入，也可通过内部的 9 位 DAC 配置输出设置阈值， 硬件保护电流值不能大于最大采样电流值和功率器件手册标明的电流 Peak 值， 一般设置最大相电流峰值的 1.5 倍以上。"
+        },
+        {
+          "rank": 5,
+          "score": 29.5808,
+          "kind": "chunk",
+          "doc_id": "foc-debug-manual",
+          "doc_title": "FU-AM-FOC 方案调试手册",
+          "chunk_id": "foc-debug-manual#c0105",
+          "heading_path": [
+            "9.1.1 原理"
+          ],
+          "page": 48,
+          "source_path": "[源] manuals/FU-AM-FOC方案调试手册-.pdf",
+          "snippet": "9.1.1 原理 硬件过流保护 一般通过 CMP3 中断和外部中断 INT0 触发保护，触发阈值到保护完成时间低于 2μs ，能快速保护 硬件。"
+        }
+      ]
+    },
+    {
+      "query": "极对数",
+      "k": 5,
+      "hits": 5,
+      "hit_docs": [
+        "foc-debug-manual",
+        "foc-exec-logic",
+        "smo-angle-register-note"
+      ],
+      "pages_cited": [
+        12,
+        43,
+        44
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "score": 23.4926,
+          "kind": "chunk",
+          "doc_id": "foc-debug-manual",
+          "doc_title": "FU-AM-FOC 方案调试手册",
+          "chunk_id": "foc-debug-manual#c0089",
+          "heading_path": [
+            "Application Manual Application Manual"
+          ],
+          "page": 44,
+          "source_path": "[源] manuals/FU-AM-FOC方案调试手册-.pdf",
+          "snippet": "Application Manual Application Manual 如上图，测量峰峰值 Vpp 为 33.2V ，频率 f 为 7.042Hz ，极对数为 4 ，则"
+        },
+        {
+          "rank": 2,
+          "score": 19.0048,
+          "kind": "chunk",
+          "doc_id": "foc-debug-manual",
+          "doc_title": "FU-AM-FOC 方案调试手册",
+          "chunk_id": "foc-debug-manual#c0087",
+          "heading_path": [
+            "8.1.1 测量方法"
+          ],
+          "page": 43,
+          "source_path": "[源] manuals/FU-AM-FOC方案调试手册-.pdf",
+          "snippet": "8.1.1 测量方法 不同电机的极对数、电阻、电感、反电动势都不同，因 FOC 计算受这些参数影响很大，调试时需写入调试电机的 参数。电机参数测量方法如下 :"
+        },
+        {
+          "rank": 3,
+          "score": 13.2753,
+          "kind": "chunk",
+          "doc_id": "foc-debug-manual",
+          "doc_title": "FU-AM-FOC 方案调试手册",
+          "chunk_id": "foc-debug-manual#c0088",
+          "heading_path": [
+            "8.1.1 测量方法"
+          ],
+          "page": 43,
+          "source_path": "[源] manuals/FU-AM-FOC方案调试手册-.pdf",
+          "snippet": "8.1.1 测量方法 1. 极对数 P: 电机设计时需给出的参数； 2. 相电阻 Rs: 万用表测量电机两相线电阻 RL ，相电阻 Rs = RL/2 ； 3. 相电感 Ls: 电桥测 1KHz 频率下的两相线电感 LL ，相电感 Ls = LL/2 ； 4. 反电动势常数 Ke: 示波器的探头接电机的一相，地接电机另外两相中的某一相，转动负载，测出反 电动势波形。取中间的一个正弦波，测量其峰峰值 Vpp 和频率 f 。计算公式如下 :"
+        },
+        {
+          "rank": 4,
+          "score": 9.713,
+          "kind": "chunk",
+          "doc_id": "smo-angle-register-note",
+          "doc_title": "SMO 角度估算的原理介绍和部分寄存器说明",
+          "chunk_id": "smo-angle-register-note#c0025",
+          "heading_path": [
+            "4 反电动势估算"
+          ],
+          "page": null,
+          "source_path": "[源] manuals/SMO角度估算的原理介绍和部分寄存器说明.docx",
+          "snippet": "4 反电动势估算 对数字化模型进行补偿后，电机模型的输入电压（V s ）和电流（i s *）与数字化模型中的值相同。一旦对数字化模型补偿完后，下一步就要通过对校正因子（Z）滤波来估算反电动势（e s *）,如图2所示。随后反电动势的估算值（e s *）反馈给数字化电机模型，以在每个控制周期之后对变量e s *进行更新。的值用于估算。"
+        },
+        {
+          "rank": 5,
+          "score": 8.7503,
+          "kind": "chunk",
+          "doc_id": "foc-exec-logic",
+          "doc_title": "FOC 执行逻辑",
+          "chunk_id": "foc-exec-logic#c0027",
+          "heading_path": [
+            "1. SMO估算器"
+          ],
+          "page": 12,
+          "source_path": "[源] manuals/FOC执行逻辑.pdf",
+          "snippet": "1. SMO估算器 使用模型中的估算电流（is*）来匹配测量电流（is），我们假 设数字化模型的反电动势（es*）与电机的反电动势（es）相 同。 对数字化模型进行补偿之后，电机模型的输入电压（Vs） 和电流（is*）与数字化电机模型中的值相同。一旦对数字化模 型补偿完后，下一步就要通过对校正因子（Z） 滤波来估算反 电动势（es*），如图所示。随后反电动势的估算值（es*）反 馈给数字化电机模型，以在每个控制周期之后对变量es* 进行更 新。eα 和eβ 值（es 的矢量分量）用于估算θ*。"
+        }
+      ]
+    },
+    {
+      "query": "SMO 估算器",
+      "k": 5,
+      "hits": 5,
+      "hit_docs": [
+        "customer-h-fu6832",
+        "foc-exam-questions",
+        "foc-exec-logic",
+        "smo-angle-register-note"
+      ],
+      "pages_cited": [
+        6
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "score": 21.9098,
+          "kind": "param",
+          "doc_id": "customer-h-fu6832",
+          "doc_title": "Customer.h 工程参数配置文件（FU6832 散热风扇）",
+          "chunk_id": "customer-h-fu6832#m0015",
+          "heading_path": [
+            "基礎與採樣配置",
+            "SMO 估算器角度補償相關配置"
+          ],
+          "page": null,
+          "source_path": "[源] code/Customer.h",
+          "snippet": "SMOTHECOMP_ENABLED = (0) 啟用 SMO 估算器角度補償 @param (0) 禁用 @param (1) 啟用 基礎與採樣配置 SMO 估算器角度補償相關配置"
+        },
+        {
+          "rank": 2,
+          "score": 21.8578,
+          "kind": "param",
+          "doc_id": "customer-h-fu6832",
+          "doc_title": "Customer.h 工程参数配置文件（FU6832 散热风扇）",
+          "chunk_id": "customer-h-fu6832#m0016",
+          "heading_path": [
+            "基礎與採樣配置",
+            "SMO 估算器角度補償相關配置"
+          ],
+          "page": null,
+          "source_path": "[源] code/Customer.h",
+          "snippet": "SMOTHECOMP_DEGREES = (5.0) (單位: 度) SMO 估算器角度補償量 [範圍: -30.0 ~ 30.0] 基礎與採樣配置 SMO 估算器角度補償相關配置"
+        },
+        {
+          "rank": 3,
+          "score": 16.1613,
+          "kind": "chunk",
+          "doc_id": "smo-angle-register-note",
+          "doc_title": "SMO 角度估算的原理介绍和部分寄存器说明",
+          "chunk_id": "smo-angle-register-note#c0000",
+          "heading_path": [
+            "1 概述"
+          ],
+          "page": null,
+          "source_path": "[源] manuals/SMO角度估算的原理介绍和部分寄存器说明.docx",
+          "snippet": "1 概述 PMSM的无传感器FOC算法中最为重要的一部分就是如何计算FOC需要的换相角度。本应用笔记将说明使用SMO和PLL两种估算方式来估算换相角度（）和电机转速（）的过程，并详细说明FU68XX系列中跟估算器相关的寄存器表示的含义并推导出计算公式。"
+        },
+        {
+          "rank": 4,
+          "score": 16.0763,
+          "kind": "chunk",
+          "doc_id": "foc-exec-logic",
+          "doc_title": "FOC 执行逻辑",
+          "chunk_id": "foc-exec-logic#c0014",
+          "heading_path": [
+            "程序相关配置："
+          ],
+          "page": 6,
+          "source_path": "[源] manuals/FOC执行逻辑.pdf",
+          "snippet": "程序相关配置： FOC_EFREQHOLD：估算器强制速度最大值，当估算器估算速 度小于FOC_EFREQMIN（ 估算不准确 ），强制速度增加到等于 该值时，不再增加。"
+        },
+        {
+          "rank": 5,
+          "score": 15.9983,
+          "kind": "chunk",
+          "doc_id": "foc-exam-questions",
+          "doc_title": "FOC 方案考核题",
+          "chunk_id": "foc-exam-questions#c0000",
+          "heading_path": [],
+          "page": null,
+          "source_path": "[源] manuals/考试题.docx",
+          "snippet": "**角度模块包含角度估算模块，爬坡模块，估算角度平滑切换模块。角度的来源分四种情况: 爬坡强制角度、强拉角度、估算器估算角度、估算器强制角度。**"
+        }
+      ]
+    }
+  ]
+}

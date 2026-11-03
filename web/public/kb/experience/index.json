@@ -1,0 +1,2378 @@
+{
+  "taxonomy": {
+    "l1": "motor",
+    "l2": "cooling-fan",
+    "l3": "fortior-fu6832"
+  },
+  "summary": {
+    "total": 38,
+    "by_capture_mode": {
+      "实验沉淀": 30,
+      "规程沉淀": 8,
+      "对话沉淀": 0
+    },
+    "by_fault_type": {
+      "保护误触发": 1,
+      "波形异常": 2,
+      "设备连接": 1,
+      "起动失败": 32,
+      "转速不达": 2
+    }
+  },
+  "caveats": [
+    "30 条实验沉淀全部来自同一个注入故障（align_weak，预定位强度过弱），本数据包正常样本 0 条；条目之间的差异在实测波形特征，不在根因。",
+    "实验沉淀的 result.status 一律为『未验证』：数据包只采了故障态，未回灌修复值复测。",
+    "8 条规程沉淀是客户软件随装规程的约定动作，不是我方实测结论。",
+    "对话沉淀为 0：本轮没有可引用的真实对话记录，字段模板见 taxonomy.json。"
+  ],
+  "entries": [
+    {
+      "id": "EXP-RUN-CF-L-0001",
+      "title": "CF-L-0001：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.1397,
+          "align_mean_a": 0.199945,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.043478,
+          "v_absmax_a": 0.4916,
+          "fs_hz": 10000.0,
+          "window_coverage": "PARTIAL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0002",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0002/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0001/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0002",
+      "title": "CF-L-0002：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": null,
+          "align_mean_a": null,
+          "align_n_stage": null,
+          "start_env_decay_ratio": null,
+          "v_absmax_a": 0.5557,
+          "fs_hz": 10000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0007",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0007/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0002/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0003",
+      "title": "CF-L-0003：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.1395,
+          "align_mean_a": 0.198164,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.041509,
+          "v_absmax_a": 0.5664,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0010",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0010/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0003/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0004",
+      "title": "CF-L-0004：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.1405,
+          "align_mean_a": 0.203918,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.04,
+          "v_absmax_a": 0.5344,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0011",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0011/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0004/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0005",
+      "title": "CF-L-0005：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.1405,
+          "align_mean_a": 0.202207,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.037736,
+          "v_absmax_a": 0.5664,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0012",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0012/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0005/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0006",
+      "title": "CF-L-0006：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.1395,
+          "align_mean_a": 0.1995,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.042553,
+          "v_absmax_a": 0.5023,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0015",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0015/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0006/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0007",
+      "title": "CF-L-0007：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.139,
+          "align_mean_a": 0.200391,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.037037,
+          "v_absmax_a": 0.5771,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0021",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0021/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0007/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0008",
+      "title": "CF-L-0008：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.1405,
+          "align_mean_a": 0.202207,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.038462,
+          "v_absmax_a": 0.5557,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0022",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0022/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0008/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0009",
+      "title": "CF-L-0009：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.1365,
+          "align_mean_a": 0.201727,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.043478,
+          "v_absmax_a": 0.4916,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0026",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0026/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0009/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0010",
+      "title": "CF-L-0010：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.139,
+          "align_mean_a": 0.195047,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.041667,
+          "v_absmax_a": 0.513,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0031",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0031/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0010/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0011",
+      "title": "CF-L-0011：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.140333,
+          "align_mean_a": 0.197933,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.038462,
+          "v_absmax_a": 0.5557,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0035",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0035/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0011/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0012",
+      "title": "CF-L-0012：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.139,
+          "align_mean_a": 0.19282,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.040816,
+          "v_absmax_a": 0.5237,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0037",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0037/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0012/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0013",
+      "title": "CF-L-0013：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.14,
+          "align_mean_a": 0.204345,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.060606,
+          "v_absmax_a": 0.3527,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0038",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0038/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0013/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0014",
+      "title": "CF-L-0014：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.1385,
+          "align_mean_a": 0.202617,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.058824,
+          "v_absmax_a": 0.3634,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0041",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0041/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0014/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0015",
+      "title": "CF-L-0015：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.1395,
+          "align_mean_a": 0.198164,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.038462,
+          "v_absmax_a": 0.5557,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0049",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0049/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0015/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0016",
+      "title": "CF-L-0016：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.14125,
+          "align_mean_a": 0.204345,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.058824,
+          "v_absmax_a": 0.3634,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0056",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0056/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0016/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0017",
+      "title": "CF-L-0017：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.1395,
+          "align_mean_a": 0.201727,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.058824,
+          "v_absmax_a": 0.3634,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0064",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0064/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0017/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0018",
+      "title": "CF-L-0018：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.1405,
+          "align_mean_a": 0.195795,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.037736,
+          "v_absmax_a": 0.5664,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0070",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0070/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0018/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0019",
+      "title": "CF-L-0019：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.1405,
+          "align_mean_a": 0.2052,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.060606,
+          "v_absmax_a": 0.3527,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0072",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0072/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0019/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0020",
+      "title": "CF-L-0020：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.137,
+          "align_mean_a": 0.203508,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.042308,
+          "v_absmax_a": 0.5557,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0075",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0075/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0020/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0021",
+      "title": "CF-L-0021：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.1395,
+          "align_mean_a": 0.200391,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.037037,
+          "v_absmax_a": 0.5771,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0077",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0077/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0021/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0022",
+      "title": "CF-L-0022：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.1405,
+          "align_mean_a": 0.204772,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.057143,
+          "v_absmax_a": 0.3741,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0078",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0078/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0022/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0023",
+      "title": "CF-L-0023：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.1405,
+          "align_mean_a": 0.206483,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.058824,
+          "v_absmax_a": 0.3634,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0085",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0085/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0023/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0024",
+      "title": "CF-L-0024：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.139,
+          "align_mean_a": 0.199055,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.037736,
+          "v_absmax_a": 0.5664,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0089",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0089/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0024/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0025",
+      "title": "CF-L-0025：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.14075,
+          "align_mean_a": 0.206483,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.038462,
+          "v_absmax_a": 0.5557,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0090",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0090/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0025/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0026",
+      "title": "CF-L-0026：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.14125,
+          "align_mean_a": 0.202207,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.060606,
+          "v_absmax_a": 0.3527,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0094",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0094/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0026/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0027",
+      "title": "CF-L-0027：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.1405,
+          "align_mean_a": 0.203062,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.057143,
+          "v_absmax_a": 0.3741,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0096",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0096/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0027/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0028",
+      "title": "CF-L-0028：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.606,
+          "align_mean_a": 0.000453,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.038462,
+          "v_absmax_a": 0.5557,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0097",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0097/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0028/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0029",
+      "title": "CF-L-0029：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.14075,
+          "align_mean_a": 0.20178,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.037736,
+          "v_absmax_a": 0.5664,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0099",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0099/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0029/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-RUN-CF-L-0030",
+      "title": "CF-L-0030：静止启动未起转，预定位强度过弱",
+      "capture_mode": "实验沉淀",
+      "phenomenon": {
+        "text": "现场人员确认未进入持续稳定旋转；示波器 CH1 相电流上可见预定位段，但末端仍有较强动态、未观察到充分稳定。",
+        "measured": {
+          "align_duration_s": 0.1405,
+          "align_mean_a": 0.203063,
+          "align_n_stage": 2.0,
+          "start_env_decay_ratio": 0.058824,
+          "v_absmax_a": 0.3634,
+          "fs_hz": 2000.0,
+          "window_coverage": "FULL"
+        },
+        "failed_detectors": [
+          "预定位强度",
+          "预定位末端稳定性",
+          "预定位振荡"
+        ]
+      },
+      "root_cause": {
+        "fault_id": "ALIGN_DOUT_LOW",
+        "label": "预定位强度过弱",
+        "stage": "mcAlign",
+        "rationale": "DOUT显著偏低会降低静止定向力矩。",
+        "independent_sources": [
+          "motor_profile",
+          "operator_observation",
+          "parameter"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_ALIGNMENT_DOUT",
+        "direction": "increase",
+        "current_value": 0.01,
+        "target_baseline": 0.1,
+        "step": "按 0.01 量级小步增加；接近振荡边界时减半步长",
+        "verified_range": {
+          "minimum": 0.08,
+          "maximum": 0.12
+        }
+      },
+      "result": {
+        "status": "未验证",
+        "note": "本数据包只采集了故障态，没有把修复值回灌重测；修复方向来自型号健康基线对比，不是实测闭环结果。"
+      },
+      "confidence": 0.85,
+      "source": {
+        "attempt_path": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0101",
+        "waveform": "01_实验原始数据/batch_20260811_113726_010/attempts/TRY-0101/capture/CH1_原始波形.csv",
+        "diagnosis_report": "02_30例工具增强结果/cases/CF-L-0030/tool_output/diagnosis_report.md",
+        "package": "[源] 数据/20260811_启动故障98次实验与30例对照数据包"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "启动测试",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-08-11"
+    },
+    {
+      "id": "EXP-SOP-01",
+      "title": "开环→闭环调试分诊：fault=1/2（过流）",
+      "capture_mode": "规程沉淀",
+      "phenomenon": {
+        "text": "fault=1/2（过流）",
+        "measured": null,
+        "failed_detectors": []
+      },
+      "root_cause": {
+        "fault_id": null,
+        "label": "起转电流偏大",
+        "stage": "open-loop 闭环调试",
+        "rationale": "起转电流偏大",
+        "independent_sources": [
+          "SOP"
+        ]
+      },
+      "action": {
+        "parameter": "启动电流",
+        "direction": "decrease",
+        "current_value": null,
+        "target_baseline": null,
+        "step": "−20%",
+        "verified_range": null
+      },
+      "result": {
+        "status": "规程约定",
+        "note": "来自客户软件随装规程，最多 3 轮迭代；3 轮仍 NG 则用 .bak 还原并重烧原版固件。"
+      },
+      "confidence": 0.6,
+      "source": {
+        "attempt_path": null,
+        "waveform": null,
+        "diagnosis_report": null,
+        "sop_file": "[源] coolingfan-openloop-debug/SKILL.md",
+        "sop_section": "## 5. 失败分诊迭代（最多 3 轮）· 现象分诊表",
+        "cross_reference": "[源] _调研/A-DebugCopilot场景与知识库取证.md（二、规程层第 7 类：散热风扇 1 份 coolingfan-openloop-debug，带 8 现象分诊表）"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "调优",
+        "parameters": [
+          "启动电流"
+        ],
+        "fault_type": "保护误触发"
+      },
+      "time": "2026-09-17"
+    },
+    {
+      "id": "EXP-SOP-02",
+      "title": "开环→闭环调试分诊：fault=6（堵转）或起转即停",
+      "capture_mode": "规程沉淀",
+      "phenomenon": {
+        "text": "fault=6（堵转）或起转即停",
+        "measured": null,
+        "failed_detectors": []
+      },
+      "root_cause": {
+        "fault_id": null,
+        "label": "起转力矩不足或负载偏重",
+        "stage": "open-loop 闭环调试",
+        "rationale": "起转力矩不足或负载偏重",
+        "independent_sources": [
+          "SOP"
+        ]
+      },
+      "action": {
+        "parameter": "启动电流",
+        "direction": "increase",
+        "current_value": null,
+        "target_baseline": null,
+        "step": "反问用户确认负载后 +0.1~0.2 A",
+        "verified_range": null
+      },
+      "result": {
+        "status": "规程约定",
+        "note": "来自客户软件随装规程，最多 3 轮迭代；3 轮仍 NG 则用 .bak 还原并重烧原版固件。"
+      },
+      "confidence": 0.6,
+      "source": {
+        "attempt_path": null,
+        "waveform": null,
+        "diagnosis_report": null,
+        "sop_file": "[源] coolingfan-openloop-debug/SKILL.md",
+        "sop_section": "## 5. 失败分诊迭代（最多 3 轮）· 现象分诊表",
+        "cross_reference": "[源] _调研/A-DebugCopilot场景与知识库取证.md（二、规程层第 7 类：散热风扇 1 份 coolingfan-openloop-debug，带 8 现象分诊表）"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "调优",
+        "parameters": [
+          "启动电流"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-09-17"
+    },
+    {
+      "id": "EXP-SOP-03",
+      "title": "开环→闭环调试分诊：fault=5（缺相）",
+      "capture_mode": "规程沉淀",
+      "phenomenon": {
+        "text": "fault=5（缺相）",
+        "measured": null,
+        "failed_detectors": []
+      },
+      "root_cause": {
+        "fault_id": null,
+        "label": "接线问题",
+        "stage": "open-loop 闭环调试",
+        "rationale": "接线问题",
+        "independent_sources": [
+          "SOP"
+        ]
+      },
+      "action": {
+        "parameter": null,
+        "direction": null,
+        "current_value": null,
+        "target_baseline": null,
+        "step": "停止迭代，反问用户检查接线",
+        "verified_range": null
+      },
+      "result": {
+        "status": "规程约定",
+        "note": "来自客户软件随装规程，最多 3 轮迭代；3 轮仍 NG 则用 .bak 还原并重烧原版固件。"
+      },
+      "confidence": 0.6,
+      "source": {
+        "attempt_path": null,
+        "waveform": null,
+        "diagnosis_report": null,
+        "sop_file": "[源] coolingfan-openloop-debug/SKILL.md",
+        "sop_section": "## 5. 失败分诊迭代（最多 3 轮）· 现象分诊表",
+        "cross_reference": "[源] _调研/A-DebugCopilot场景与知识库取证.md（二、规程层第 7 类：散热风扇 1 份 coolingfan-openloop-debug，带 8 现象分诊表）"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "调优",
+        "parameters": [],
+        "fault_type": "设备连接"
+      },
+      "time": "2026-09-17"
+    },
+    {
+      "id": "EXP-SOP-04",
+      "title": "开环→闭环调试分诊：无 fault 但 FREQ≈0 / 电机不转",
+      "capture_mode": "规程沉淀",
+      "phenomenon": {
+        "text": "无 fault 但 FREQ≈0 / 电机不转",
+        "measured": null,
+        "failed_detectors": []
+      },
+      "root_cause": {
+        "fault_id": null,
+        "label": "起转电流不足",
+        "stage": "open-loop 闭环调试",
+        "rationale": "起转电流不足",
+        "independent_sources": [
+          "SOP"
+        ]
+      },
+      "action": {
+        "parameter": "启动电流",
+        "direction": "increase",
+        "current_value": null,
+        "target_baseline": null,
+        "step": "+0.1~0.2 A",
+        "verified_range": null
+      },
+      "result": {
+        "status": "规程约定",
+        "note": "来自客户软件随装规程，最多 3 轮迭代；3 轮仍 NG 则用 .bak 还原并重烧原版固件。"
+      },
+      "confidence": 0.6,
+      "source": {
+        "attempt_path": null,
+        "waveform": null,
+        "diagnosis_report": null,
+        "sop_file": "[源] coolingfan-openloop-debug/SKILL.md",
+        "sop_section": "## 5. 失败分诊迭代（最多 3 轮）· 现象分诊表",
+        "cross_reference": "[源] _调研/A-DebugCopilot场景与知识库取证.md（二、规程层第 7 类：散热风扇 1 份 coolingfan-openloop-debug，带 8 现象分诊表）"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "调优",
+        "parameters": [
+          "启动电流"
+        ],
+        "fault_type": "起动失败"
+      },
+      "time": "2026-09-17"
+    },
+    {
+      "id": "EXP-SOP-05",
+      "title": "开环→闭环调试分诊：起转起来但切闭环瞬间掉速/失步",
+      "capture_mode": "规程沉淀",
+      "phenomenon": {
+        "text": "起转起来但切闭环瞬间掉速/失步",
+        "measured": null,
+        "failed_detectors": []
+      },
+      "root_cause": {
+        "fault_id": null,
+        "label": "闭环切换点不合适",
+        "stage": "open-loop 闭环调试",
+        "rationale": "闭环切换点不合适",
+        "independent_sources": [
+          "SOP"
+        ]
+      },
+      "action": {
+        "parameter": "MOTOR_LOOP_RPM 类切换转速",
+        "direction": "both",
+        "current_value": null,
+        "target_baseline": null,
+        "step": "±20%，并复核起转电流",
+        "verified_range": null
+      },
+      "result": {
+        "status": "规程约定",
+        "note": "来自客户软件随装规程，最多 3 轮迭代；3 轮仍 NG 则用 .bak 还原并重烧原版固件。"
+      },
+      "confidence": 0.6,
+      "source": {
+        "attempt_path": null,
+        "waveform": null,
+        "diagnosis_report": null,
+        "sop_file": "[源] coolingfan-openloop-debug/SKILL.md",
+        "sop_section": "## 5. 失败分诊迭代（最多 3 轮）· 现象分诊表",
+        "cross_reference": "[源] _调研/A-DebugCopilot场景与知识库取证.md（二、规程层第 7 类：散热风扇 1 份 coolingfan-openloop-debug，带 8 现象分诊表）"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "调优",
+        "parameters": [
+          "MOTOR_LOOP_RPM 类切换转速"
+        ],
+        "fault_type": "波形异常"
+      },
+      "time": "2026-09-17"
+    },
+    {
+      "id": "EXP-SOP-06",
+      "title": "开环→闭环调试分诊：mcState 停在开环态、转速上不到目标",
+      "capture_mode": "规程沉淀",
+      "phenomenon": {
+        "text": "mcState 停在开环态、转速上不到目标",
+        "measured": null,
+        "failed_detectors": []
+      },
+      "root_cause": {
+        "fault_id": null,
+        "label": "未进闭环或目标转速超能力",
+        "stage": "open-loop 闭环调试",
+        "rationale": "未进闭环或目标转速超能力",
+        "independent_sources": [
+          "SOP"
+        ]
+      },
+      "action": {
+        "parameter": "OPENLOOP_ENABLED / SPEED_MODE",
+        "direction": "set",
+        "current_value": null,
+        "target_baseline": null,
+        "step": "先确认 OPENLOOP_ENABLED=0、SPEED_MODE=NONEMODE 已生效；仍不行则反问目标转速是否超能力",
+        "verified_range": null
+      },
+      "result": {
+        "status": "规程约定",
+        "note": "来自客户软件随装规程，最多 3 轮迭代；3 轮仍 NG 则用 .bak 还原并重烧原版固件。"
+      },
+      "confidence": 0.6,
+      "source": {
+        "attempt_path": null,
+        "waveform": null,
+        "diagnosis_report": null,
+        "sop_file": "[源] coolingfan-openloop-debug/SKILL.md",
+        "sop_section": "## 5. 失败分诊迭代（最多 3 轮）· 现象分诊表",
+        "cross_reference": "[源] _调研/A-DebugCopilot场景与知识库取证.md（二、规程层第 7 类：散热风扇 1 份 coolingfan-openloop-debug，带 8 现象分诊表）"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "调优",
+        "parameters": [
+          "OPENLOOP_ENABLED / SPEED_MODE"
+        ],
+        "fault_type": "转速不达"
+      },
+      "time": "2026-09-17"
+    },
+    {
+      "id": "EXP-SOP-07",
+      "title": "开环→闭环调试分诊：稳态转速偏差 > 容限但稳定",
+      "capture_mode": "规程沉淀",
+      "phenomenon": {
+        "text": "稳态转速偏差 > 容限但稳定",
+        "measured": null,
+        "failed_detectors": []
+      },
+      "root_cause": {
+        "fault_id": null,
+        "label": "外环增益或目标换算问题",
+        "stage": "open-loop 闭环调试",
+        "rationale": "外环增益或目标换算问题",
+        "independent_sources": [
+          "SOP"
+        ]
+      },
+      "action": {
+        "parameter": "SPD_KI / SKI",
+        "direction": "increase",
+        "current_value": null,
+        "target_baseline": null,
+        "step": "先复核目标转速宏外壳与极对数换算，确认无误后经用户同意 +20%",
+        "verified_range": null
+      },
+      "result": {
+        "status": "规程约定",
+        "note": "来自客户软件随装规程，最多 3 轮迭代；3 轮仍 NG 则用 .bak 还原并重烧原版固件。"
+      },
+      "confidence": 0.6,
+      "source": {
+        "attempt_path": null,
+        "waveform": null,
+        "diagnosis_report": null,
+        "sop_file": "[源] coolingfan-openloop-debug/SKILL.md",
+        "sop_section": "## 5. 失败分诊迭代（最多 3 轮）· 现象分诊表",
+        "cross_reference": "[源] _调研/A-DebugCopilot场景与知识库取证.md（二、规程层第 7 类：散热风扇 1 份 coolingfan-openloop-debug，带 8 现象分诊表）"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "调优",
+        "parameters": [
+          "SPD_KI / SKI"
+        ],
+        "fault_type": "转速不达"
+      },
+      "time": "2026-09-17"
+    },
+    {
+      "id": "EXP-SOP-08",
+      "title": "开环→闭环调试分诊：稳态转速振荡（3 次 FREQ 极差 > 3%）",
+      "capture_mode": "规程沉淀",
+      "phenomenon": {
+        "text": "稳态转速振荡（3 次 FREQ 极差 > 3%）",
+        "measured": null,
+        "failed_detectors": []
+      },
+      "root_cause": {
+        "fault_id": null,
+        "label": "外环增益偏高",
+        "stage": "open-loop 闭环调试",
+        "rationale": "外环增益偏高",
+        "independent_sources": [
+          "SOP"
+        ]
+      },
+      "action": {
+        "parameter": "SPD_KP / SKP",
+        "direction": "decrease",
+        "current_value": null,
+        "target_baseline": null,
+        "step": "−20%，一次只动一项",
+        "verified_range": null
+      },
+      "result": {
+        "status": "规程约定",
+        "note": "来自客户软件随装规程，最多 3 轮迭代；3 轮仍 NG 则用 .bak 还原并重烧原版固件。"
+      },
+      "confidence": 0.6,
+      "source": {
+        "attempt_path": null,
+        "waveform": null,
+        "diagnosis_report": null,
+        "sop_file": "[源] coolingfan-openloop-debug/SKILL.md",
+        "sop_section": "## 5. 失败分诊迭代（最多 3 轮）· 现象分诊表",
+        "cross_reference": "[源] _调研/A-DebugCopilot场景与知识库取证.md（二、规程层第 7 类：散热风扇 1 份 coolingfan-openloop-debug，带 8 现象分诊表）"
+      },
+      "tags": {
+        "scenario": "motor",
+        "product": "fortior-fu6832",
+        "process": "调优",
+        "parameters": [
+          "SPD_KP / SKP"
+        ],
+        "fault_type": "波形异常"
+      },
+      "time": "2026-09-17"
+    }
+  ]
+}

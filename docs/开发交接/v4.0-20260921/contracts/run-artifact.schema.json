@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "run-artifact/v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "run_id",
+    "snapshot_id",
+    "baseline_id",
+    "started_at",
+    "ended_at",
+    "status",
+    "control_parameters",
+    "artifacts"
+  ],
+  "properties": {
+    "schema": {
+      "const": "run-artifact/v1"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "snapshot_id": {
+      "type": "string",
+      "description": "指回 15.1 的配置快照"
+    },
+    "baseline_id": {
+      "type": "string",
+      "description": "指回 15.2 的需求基线"
+    },
+    "param_change_id": {
+      "type": "string",
+      "description": "本轮用的参数改动版本，首轮为空"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ended_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "aborted",
+        "estopped",
+        "invalid"
+      ]
+    },
+    "abort_reason": {
+      "type": "string"
+    },
+    "control_parameters": {
+      "type": "array",
+      "description": "本轮实际生效的控制参数快照，形状与场景包 control-parameters.json 的 parameters 对齐",
+      "items": {
+        "type": "object",
+        "required": [
+          "key",
+          "value"
+        ],
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {},
+          "unit": {
+            "type": "string"
+          },
+          "value_shell": {
+            "type": "string",
+            "description": "源文件的数值外壳，如 I_Value / _Q12 / _Q15；回写时必须沿用"
+          },
+          "group": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "iterations": {
+      "type": "array",
+      "description": "重复类工作流的逐次记录，如一百次启停",
+      "items": {
+        "type": "object",
+        "required": [
+          "index",
+          "result"
+        ],
+        "properties": {
+          "index": {
+            "type": "integer"
+          },
+          "result": {
+            "enum": [
+              "pass",
+              "fail",
+              "invalid"
+            ]
+          },
+          "duration_ms": {
+            "type": "number"
+          },
+          "fault_code": {
+            "type": "string",
+            "description": "故障位图取值，如 0x0010 缺相保护；位定义在场景包 safety-interlocks.json 的 fault_bitmap"
+          }
+        }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "required": [
+        "raw_data"
+      ],
+      "properties": {
+        "raw_data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "file_path",
+              "columns"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "file_path": {
+                "type": "string"
+              },
+              "columns": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "sample_rate_hz": {
+                "type": "number"
+              },
+              "mode": {
+                "enum": [
+                  "registered_only",
+                  "copied_into_pack"
+                ],
+                "description": "沿用场景包 datasets.json 的两态：只登记路径，或已拷进包内"
+              }
+            }
+          }
+        },
+        "screenshots": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "logs": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "anomaly_segments": {
+      "type": "array",
+      "description": "异常段标注，时间轴上判据不满足的区间",
+      "items": {
+        "type": "object",
+        "required": [
+          "criterion_id",
+          "t_start_ms",
+          "t_end_ms"
+        ],
+        "properties": {
+          "criterion_id": {
+            "type": "string"
+          },
+          "t_start_ms": {
+            "type": "number"
+          },
+          "t_end_ms": {
+            "type": "number"
+          },
+          "channels_at_start": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

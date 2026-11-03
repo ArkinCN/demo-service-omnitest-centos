@@ -1,0 +1,66 @@
+{
+  "schema": "agent-test-web/scenes-index@1",
+  "note": "产品三级级联目录。第三级挂 sceneId 的节点才有场景包；没有 sceneId 的是占位节点，切过去只换标题不换数据。新增场景包时在这里加一行，前端不用改代码。",
+  "generated_at": "2026-09-19",
+  "default": "motor.cooling-fan.fortior-fu6832",
+  "catalog": [
+    {
+      "id": "motor",
+      "label": "电机",
+      "children": [
+        {
+          "id": "cooling-fan",
+          "label": "散热风扇",
+          "children": [
+            {
+              "id": "fortior-fu6832",
+              "label": "FU6832 散热风扇驱动板",
+              "sceneId": "motor.cooling-fan.fortior-fu6832"
+            }
+          ]
+        },
+        {
+          "id": "home",
+          "label": "家电电机",
+          "children": [
+            { "id": "vacuum", "label": "吸尘器" },
+            { "id": "dryer", "label": "吹风筒" }
+          ]
+        },
+        {
+          "id": "auto-motor",
+          "label": "车用电机",
+          "children": [{ "id": "pump-24v", "label": "水泵" }]
+        }
+      ]
+    },
+    {
+      "id": "automotive",
+      "label": "汽车",
+      "children": [
+        {
+          "id": "body-motor",
+          "label": "车身电机",
+          "children": [
+            {
+              "id": "window-regulator",
+              "label": "电动玻璃升降器（含防夹）",
+              "sceneId": "automotive.body-motor.window-regulator"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "common",
+      "label": "通用",
+      "children": [
+        {
+          "id": "common-spec",
+          "label": "通用规范",
+          "children": [{ "id": "safety", "label": "安全与电气通用" }]
+        }
+      ]
+    }
+  ]
+}

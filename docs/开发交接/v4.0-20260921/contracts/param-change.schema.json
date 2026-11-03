@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "param-change/v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "param_change_id",
+    "parent_change_id",
+    "created_at",
+    "adopted_by",
+    "target_gaps",
+    "changes",
+    "write_back",
+    "impact_check"
+  ],
+  "properties": {
+    "schema": {
+      "const": "param-change/v1"
+    },
+    "param_change_id": {
+      "type": "string"
+    },
+    "parent_change_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "上一版本，为 null 表示直接基于初始基线；回滚即切回父版本"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "adopted_by": {
+      "type": "string",
+      "description": "采纳人。副驾不可填在这里"
+    },
+    "target_gaps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "本次改动想解决哪几条未达标项"
+    },
+    "candidate_source": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "experience",
+            "procedure",
+            "model-inference"
+          ]
+        },
+        "rank": {
+          "type": "integer"
+        },
+        "similar_case_count": {
+          "type": "integer"
+        },
+        "adopted_case_count": {
+          "type": "integer"
+        },
+        "procedure_name": {
+          "type": "string"
+        },
+        "reasoning": {
+          "type": "string",
+          "description": "kind 为 model-inference 时必填"
+        }
+      }
+    },
+    "changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "key",
+          "from",
+          "to"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "场景包 control-parameters.json 的参数 key"
+          },
+          "macro": {
+            "type": "string",
+            "description": "对应源文件里的宏名"
+          },
+          "from": {},
+          "to": {},
+          "unit": {
+            "type": "string"
+          },
+          "value_shell": {
+            "type": "string",
+            "description": "沿用源文件外壳，只改括号内数字"
+          }
+        }
+      }
+    },
+    "write_back": {
+      "type": "object",
+      "required": [
+        "target",
+        "status"
+      ],
+      "properties": {
+        "target": {
+          "enum": [
+            "param-file",
+            "register",
+            "runtime-config"
+          ]
+        },
+        "file_path": {
+          "type": "string"
+        },
+        "needs_rebuild": {
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "written",
+            "built",
+            "flashed",
+            "verified",
+            "failed"
+          ]
+        },
+        "version_verified": {
+          "type": "boolean",
+          "description": "烧录后的版本一致性校验结果"
+        },
+        "line_edits_only": {
+          "const": true,
+          "description": "硬约束：只许逐行定位 #define 改，不许整段重写、不许改文件编码"
+        }
+      }
+    },
+    "impact_check": {
+      "type": "array",
+      "description": "这次改动还会影响哪些已通过的判据",
+      "items": {
+        "type": "object",
+        "required": [
+          "criterion_id",
+          "risk"
+        ],
+        "properties": {
+          "criterion_id": {
+            "type": "string"
+          },
+          "risk": {
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "rollback": {
+      "type": "object",
+      "properties": {
+        "param_rollback_to": {
+          "type": "string"
+        },
+        "baseline_snapshot_id": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

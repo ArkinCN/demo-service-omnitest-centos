@@ -1,0 +1,126 @@
+# OmniTest 单机部署编排（2026-11-03 重写）
+#
+# 【为什么只有一个常驻服务】
+#   omnitest-web:latest 由**根目录 Dockerfile** 构建，是一体化镜像：
+#     node 构建前端 dist → python 运行 gunicorn（容器内监听 5100）
+#     同时内置 backend 代码、密钥(SECRET_KEY/JWT/DATABASE_URL)、hardware 采集脚本
+#   原 compose 的 backend 服务是历史遗留：
+#     · env_file 指向根 .env（只有 TZ/OPENAI_*，缺 SECRET_KEY 等 7 个必填项）→ 反复重启
+#     · web 的 depends_on: backend 反而会拖住启动
+#   故删除 backend，硬件挂载全部并入本服务。
+#
+# 【注意】Dockerfile.web（nginx:80）已废弃，不参与构建，勿再引用。
+#
+# 用法：
+#   docker compose -p omnitest up -d
+#   门户「纳管」：容器名 omnitest，健康地址 http://omnitest:5100/health
+
+services:
+  omnitest:
+    image: omnitest-web:latest
+    container_name: omnitest
+    restart: unless-stopped
+    ports:
+      # 容器内 gunicorn 监听 5100（不是 nginx 的 80）
+      - "5100:5100"
+    volumes:
+      # ---- 持久化数据（容器重建不丢）----
+      - ./backend/.deploy:/srv/omnitest/c/backend/.deploy
+      - ./backend/uploads:/srv/omnitest/c/backend/uploads
+      - /var/log/demo:/var/log/demo
+      # ---- 静态资源与知识库 ----
+      # ⚠️ 只挂 public/，**不能挂整个 web/**：
+      #    镜像内 /srv/omnitest/c/web/dist 是构建好的前端（gunicorn 直接托管它），
+      #    宿主 web/ 只有源码没有 dist。挂整个 web 会把镜像里的 dist 盖掉 →
+      #    访问根路径只返回 {"status":"ok"}，页面全白。
+      #    public/ 是运行时静态资源根（场景包 / 知识库 / 前端 data），必须挂。
+      - ./web/public:/srv/omnitest/c/web/public:ro
+      - ./data:/srv/omnitest/c/data:ro
+      # ---- 硬件采集脚本 + 采集结果 runs/ ----
+      - ./hardware:/srv/omnitest/c/hardware
+      # ---- libusb 原始 USB 节点 ----
+      - /dev/bus/usb:/dev/bus/usb
+      # ---- NI-VISA runtime ----
+      - /usr/lib/x86_64-linux-gnu/libvisa.so.21.0.0:/usr/lib/x86_64-linux-gnu/libvisa.so.21.0.0:ro
+      - /usr/lib/x86_64-linux-gnu/libvisa.so.21.0.0:/usr/lib/x86_64-linux-gnu/libvisa.so:ro
+      - /usr/lib/x86_64-linux-gnu/ni-visa:/usr/lib/x86_64-linux-gnu/ni-visa:ro
+      - /etc/ni-visa:/etc/ni-visa:ro
+      # /sys 只读：libusb hotplug 需要读 uevent
+      - /sys:/sys:ro
+    devices:
+      - /dev/ttyUSB0
+    device_cgroup_rules:
+      - "c 189:* rwm"
+    group_add:
+      - dialout
+      - plugdev
+    environment:
+      TZ: "Asia/Shanghai"
+      # ---- NI-VISA ----
+      # 关键：让 pyvisa 用「库文件全路径」而不是 '@ivi'。
+      # 容器内 @ivi 按名字查找会失败（ld.so.cache 无 ni-visa 路径，报错列表为空），
+      # 但直接用全路径可 100% 枚举到示波器（实测 IDN 正常）。
+      # 代码 scope_visa.py 支持 SCOPE_VISA_BACKEND 直接传库路径，无需改代码。
+      SCOPE_VISA_BACKEND: "/usr/lib/x86_64-linux-gnu/libvisa.so"
+      # 配置 overlay：不设则 serial.port 为空、scope.resource 为空，采集起不来
+      FAN_CONFIG_PATH: "/srv/omnitest/c/hardware/v0.6/config/acceptance.linux.json"
+      VISA_LIBRARY_PATH: "/usr/lib/x86_64-linux-gnu/libvisa.so"
+      NIVISA_NO_CACHE: "1"
+      LD_LIBRARY_PATH: "/usr/lib/x86_64-linux-gnu/ni-visa"
+      # ---- LLM 网关 ----
+      # 代码读的是 MOTORDEBUG_LLM_*，而门户注入的是 OPENAI_*，必须显式映射，
+      # 否则【AI 助手会连到镜像内置的 openrouter.ai】而不是本地网关。
+      # 模型名取 qwen/qwen-plus：非推理版，实测 finish=stop 且正常返回中文正文
+      # （qwen3.7-max 等推理模型在 max_tokens 下 content 为空）。
+      MOTORDEBUG_LLM_BASE_URL: "${OPENAI_BASE_URL}"
+      MOTORDEBUG_LLM_API_KEY: "${OPENAI_API_KEY}"
+      MOTORDEBUG_LLM_MODEL: "qwen/qwen-plus"
+    mem_limit: 1g
+    cpus: "1.0"
+    healthcheck:
+      # 走 5100/health，不是 nginx 时代的 80/healthz
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:5100/health', timeout=5).status==200 else 1)"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      - omnitest
+      - aicube-net
+
+  # 一次性初始化容器：补齐宿主 .deploy 挂载遮住的种子数据
+  # （知识库 187 条 + 网关模型行 + 本地管理员）。跑完即退出。
+  post_init:
+    image: omnitest-web:latest
+    container_name: omnitest-post-init
+    restart: "no"
+    entrypoint: ["/bin/sh", "/srv/omnitest/c/deploy/post-init.sh"]
+    volumes:
+      - ./deploy:/srv/omnitest/c/deploy:ro
+      - ./backend/.deploy:/srv/omnitest/c/backend/.deploy
+      - ./data:/srv/omnitest/c/data:ro
+      - ./web/public:/srv/omnitest/c/web/public:ro
+    depends_on:
+      - omnitest
+    # ⚠️ 必须继承 LLM 三件套：seed_local_admin 依赖 MOTORDEBUG_LLM_API_KEY 判定
+    #    「内置渠道」是否要建；缺了就跳过 seed → 网关模型行 chat_enabled=True 不生效、
+    #    /api/agent/models 返回空数组（首页对话模型下拉为空）。
+    environment:
+      TZ: "Asia/Shanghai"
+      MOTORDEBUG_LLM_BASE_URL: "${OPENAI_BASE_URL}"
+      MOTORDEBUG_LLM_API_KEY: "${OPENAI_API_KEY}"
+      MOTORDEBUG_LLM_MODEL: "qwen/qwen-plus"
+    networks:
+      - aicube-net
+
+networks:
+  omnitest:
+    driver: bridge
+  aicube-net:
+    external: true
+    name: demo-platform-core_aicube-net

@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fortior.local/scene-pack/v1/safety-interlocks.schema.json",
+  "title": "safety-interlocks.json",
+  "description": "安全联锁条目与 FAULT 位图。F2 逐条确认、F4 的启动按钮只查它。",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "safety-interlocks/v1",
+      "description": "文件契约标识，换包不得改。"
+    },
+    "scene_id": {
+      "$ref": "common.schema.json#/$defs/sceneId"
+    },
+    "generated_by": {
+      "type": "string",
+      "description": "产出这份文件的脚本相对路径，例如 _build/build_scene_pack.py。"
+    },
+    "generated_at": {
+      "$ref": "common.schema.json#/$defs/genDate"
+    },
+    "belongs_to_flow": {
+      "$ref": "common.schema.json#/$defs/flowMention",
+      "description": "这份文件主要服务哪条业务流程。人读为主，但句中必须至少出现一个合法的 F1~F6 标签，防止写进不存在的流程号。"
+    },
+    "types": {
+      "type": "object",
+      "properties": {
+        "硬件": {
+          "type": "string"
+        },
+        "流程": {
+          "type": "string"
+        },
+        "人员": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "人员",
+        "流程",
+        "硬件"
+      ],
+      "description": "三类联锁的释义。三类固定，不加第四类。",
+      "additionalProperties": false
+    },
+    "demo_profile": {
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "interlocks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "演示逐条放行的联锁 id 列表。"
+        }
+      },
+      "required": [
+        "interlocks",
+        "note"
+      ]
+    },
+    "group_tiers": {
+      "$ref": "common.schema.json#/$defs/itemTier"
+    },
+    "fault_bitmap": {
+      "type": "object",
+      "properties": {
+        "bits": {
+          "type": "object",
+          "description": "位定义表。键是十六进制字面量，值是「宏名 + 中文释义」。",
+          "patternProperties": {
+            "^0x[0-9A-Fa-f]{1,4}$": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "minProperties": 1
+        },
+        "masks": {
+          "type": "object",
+          "patternProperties": {
+            "^0x[0-9A-Fa-f]{1,4}$": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "description": "复合掩码，供判据表达式引用。"
+        },
+        "composite_values": {
+          "type": "object",
+          "patternProperties": {
+            "^0x[0-9A-Fa-f]{1,4}$": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "matching_rule": {
+          "type": "string"
+        },
+        "value_range": {
+          "type": "string"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "note": {
+          "type": "string"
+        },
+        "_placeholder": {
+          "$ref": "common.schema.json#/$defs/placeholderFlag"
+        },
+        "_source": {
+          "$ref": "common.schema.json#/$defs/sourceRefs"
+        }
+      },
+      "required": [
+        "_source",
+        "bits"
+      ]
+    },
+    "interlocks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "联锁标识，形如 SI-HW-01 / SI-PR-05。"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "common.schema.json#/$defs/interlockType"
+          },
+          "threshold": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "阈值载荷。键随联锁而变，由界面与判定工具按 id 解释，不设固定键集；纯流程/人员类联锁没有可写的阈值时为 null。"
+          },
+          "action": {
+            "type": "string",
+            "description": "越限或未满足时做什么。"
+          },
+          "blocking": {
+            "type": "boolean",
+            "description": "为 true 时未满足就不许启动。"
+          },
+          "quote": {
+            "type": "string",
+            "description": "标准或规程原文引述。"
+          },
+          "note": {
+            "type": "string"
+          },
+          "source_product_line": {
+            "type": "string",
+            "description": "这条是从哪条产品线借来的，借用时必填。"
+          },
+          "applies_to_cooling_fan_note": {
+            "type": "string"
+          },
+          "_placeholder": {
+            "$ref": "common.schema.json#/$defs/placeholderFlag"
+          },
+          "_status": {
+            "$ref": "common.schema.json#/$defs/statusText"
+          },
+          "_source": {
+            "$ref": "common.schema.json#/$defs/sourceRefs"
+          }
+        },
+        "required": [
+          "_source",
+          "action",
+          "blocking",
+          "id",
+          "name",
+          "threshold",
+          "type"
+        ]
+      }
+    }
+  },
+  "required": [
+    "belongs_to_flow",
+    "demo_profile",
+    "fault_bitmap",
+    "generated_at",
+    "generated_by",
+    "group_tiers",
+    "interlocks",
+    "scene_id",
+    "schema",
+    "types"
+  ]
+}

@@ -1,0 +1,217 @@
+{
+  "schema": "scene/v1",
+  "id": "automotive.body-motor.window-regulator",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-19",
+  "taxonomy": {
+    "level1_scene": {
+      "key": "automotive",
+      "name": "汽车"
+    },
+    "level2_category": {
+      "key": "body-motor",
+      "name": "车身电机"
+    },
+    "level3_product_type": {
+      "key": "window-regulator",
+      "name": "电动玻璃升降器（含防夹）"
+    },
+    "_source": {
+      "file": "[源] 20260919-通用Agent测试系统v2.0/00-用户需求原话-20260919.md",
+      "locator": "「体系三级：一级场景（汽车/芯片/电机/…），二级，三级=产品类型」段"
+    }
+  },
+  "product": {
+    "name": "汽车电动玻璃升降器总成（含防夹功能）",
+    "chip": "本场景不锁定具体主控。公开可查的同类方案有四家：德州仪器 TIDA-01389（DRV8703-Q1 栅极驱动 + 两颗 DRV5013-Q1 锁存霍尔）、恩智浦 RDS12VR（S12VR 混合信号微控制器）、微芯 APGRD002、英飞凌 TLE9855QX（MOTIX TLE985x 系列 H 桥驱动片上系统）",
+    "control_scheme": "12 V 有刷直流电机 + H 桥 PWM 调速，机械换向；位置反馈走霍尔锁存脉冲计数或电流纹波计数；防夹判据取电流突变斜率或霍尔脉冲周期变化，在 4 mm 至 200 mm 开口区间内于夹紧力超过 100 N 前回缩",
+    "_source": [
+      {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 140-146 行：四家参考设计的编号、器件与特征"
+      },
+      {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 166 行：防夹力判据 GB 11552-2009 §4.8.3.1.1"
+      },
+      {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 437-443 行：与峰岹案例的技术差异表：有刷直流 / 机械换向 / 直线往复 / 纹波计数"
+      }
+    ]
+  },
+  "summary": "汽车车身电机场景的电动玻璃升降器参考案例：12 V 有刷直流电机经蜗杆减速与绳轮（或剪式）传动驱动玻璃托架直线往复，带防夹回缩功能。与场景一（峰岹散热风扇）的关键差异在于电机类型（有刷 vs 无刷）、运动形式（直线有限行程 vs 单向连续旋转）、主判据量纲（mm/s 与 N 与 dB(A) vs rpm 与 A 与 K）、以及安全属性（人身安全，受中美欧三地法规约束 vs 设备安全）。本场景包把该产品的本体属性、控制参数、安全联锁、测试判据、示例工作流、合成时序数据、经验条目、标准文档清单与报告模板字段整理成前端可直接加载的 JSON。",
+  "default_view": {
+    "_note": "C 区默认视图：canvas 统一画板 / grid 卡片网格。依据《第三轮需求变更方案 v0.1》第 2.5 节那张表——初始化与需求确认要讲接线与拓扑，走画板；启动测试、调优、报告要并排盯多样东西，走网格。前端读这一段，不写死在代码里。",
+    "init": "canvas",
+    "req": "canvas",
+    "run": "grid",
+    "tune": "grid",
+    "report": "grid"
+  },
+  "images": [
+    {
+      "id": "window-regulator-structure",
+      "title": "电动玻璃升降器结构示意（本包手绘线稿）",
+      "path": "assets/window-regulator-structure.svg",
+      "width": 1200,
+      "height": 750,
+      "render": "手排 SVG 线稿，墨绿单色（描边 #2E5E45 / 次级 #A8C5B5 / 浅底 #EAF2EC）",
+      "_placeholder": true,
+      "kind": "结构示意",
+      "note": "结构示意，非任何厂商的真实产品结构，也不是实物照片。画的是本包判据涉及的四个部位：导轨、玻璃与托架、电机总成（有刷直流电机 + 蜗杆减速 + 绳轮）、开口顶部的防夹传感区。整图 16:10，卡内按中间横带裁切显示，四个部位与标注都落在裁切带内。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 437-443 行：有刷直流 / 机械换向 / 直线往复 / 纹波计数，本图的传动链按此画"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 166 行：防夹力判据 GB 11552-2009 §4.8.3.1.1，防夹传感区的位置依此标"
+        }
+      ]
+    },
+    {
+      "id": "regulator-schematic",
+      "title": "玻璃升降器台架结构简图（本包手绘）",
+      "path": "assets/regulator-schematic.png",
+      "width": 1200,
+      "height": 760,
+      "render": "_build/render_assets.py 手排 SVG → cairosvg 转 PNG",
+      "_placeholder": true,
+      "note": "示意图，非任何厂商的真实产品结构。画的是本包判据涉及的量测点位：有刷直流电机、蜗杆减速、绳轮/剪式传动、玻璃托架、上下止点、力传感器与试验棒、位移传感器、噪音测点 300 mm。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 126 行：堵转力 ≥212 N，力传感器量程选型依据"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 326-328 行：噪音测点：升降器电机出力轴正上方 300 mm"
+        },
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:326-328 工作噪音试验测点描述"
+        }
+      ],
+      "kind": "结构示意"
+    }
+  ],
+  "regulation_matrix": [
+    {
+      "region": "中国",
+      "regulation": "GB 11552-2009《乘用车内部凸出物》第 4.8 条",
+      "force_limit_n": 100,
+      "opening_range_mm": [
+        4,
+        200
+      ],
+      "rod_stiffness_n_per_mm": 10.0,
+      "rod_stiffness_tolerance_n_per_mm": 0.5,
+      "retract_options": [
+        "允许穿过开口放置直径 200 mm 的半刚性柱状试验棒的位置",
+        "关闭之前的最初位置",
+        "比开始回缩时的位置至少多开 50 mm 的位置",
+        "天窗倾斜运动时的最大角度开启位置"
+      ],
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/gb11552.txt",
+          "locator": "gb11552.txt:440 「开口从200mm 到4mm 范围内，在夹紧力大于100N 之前，该装置应回缩车窗/天窗/隔断系统。」；:449 「测量工具的刚度应为(10±0.5)N/mm」"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 215 行：三地防夹对照表 GB 11552-2009 行"
+        }
+      ]
+    },
+    {
+      "region": "美国",
+      "regulation": "FMVSS 118（49 CFR § 571.118）Standard No. 118; Power-operated window, partition, and roof panel systems",
+      "force_limit_n": 100,
+      "opening_range_mm": [
+        4,
+        200
+      ],
+      "rod_stiffness_n_per_mm": 20.0,
+      "rod_stiffness_status": "待核实（25–200 mm 试棒取 20 N/mm，来自素材综述转述，未从法条逐字确认）",
+      "retract_options": [
+        "至少开到关闭开始时的位置",
+        "比反向时的位置至少多开 125 mm"
+      ],
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 216 行：三地防夹对照表 FMVSS 118 行"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 69 行：49 CFR § 571.118 全名、机构与 URL"
+        }
+      ]
+    },
+    {
+      "region": "欧洲",
+      "regulation": "UN ECE R21 §5.8 — Uniform Provisions Concerning the Approval of Vehicles with Regard to Their Interior Fittings",
+      "force_limit_n": 100,
+      "opening_range_mm": [
+        4,
+        200
+      ],
+      "rod_stiffness_n_per_mm": 10.0,
+      "rod_stiffness_status": "待核实",
+      "retract_options": [
+        "三种可选位置之一（原文未逐字确认）"
+      ],
+      "_status": "待核实（未打开 UNECE 原文逐字确认）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 217 行：三地防夹对照表 UN ECE R21 行"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 70 行：UN ECE R21 全名、机构与 URL"
+        }
+      ]
+    }
+  ],
+  "regulation_note": {
+    "text": "中国、美国、欧洲三地现行法规都不强制要求配备防夹功能，只在配备时才对其性能作规定。因此「是否测防夹」本身就是流程 3 测试需求确认要由 Agent 与用户确认的分支条件。",
+    "_status": "待核实（来源为智能汽车资源网法规解读页，非标准原文）",
+    "_source": {
+      "file": "[源] _调研/B-汽车场景测试案例素材.md",
+      "locator": "第 221 行：一条对项目定位有影响的事实"
+    }
+  },
+  "flows": [
+    {
+      "id": "F1",
+      "name": "知识库管理"
+    },
+    {
+      "id": "F2",
+      "name": "初始化配置"
+    },
+    {
+      "id": "F3",
+      "name": "测试需求确认"
+    },
+    {
+      "id": "F4",
+      "name": "启动测试及结果分析"
+    },
+    {
+      "id": "F5",
+      "name": "调优确认及运行"
+    },
+    {
+      "id": "F6",
+      "name": "测试报告及产出"
+    }
+  ],
+  "_source": {
+    "file": "[源] 20260919-通用Agent测试系统v2.0/00-用户需求原话-20260919.md",
+    "locator": "全文（六个流程与三级知识库体系）"
+  }
+}

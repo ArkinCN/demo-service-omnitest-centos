@@ -1,0 +1,51 @@
+{
+  "schema": "product-attributes/v1",
+  "scene_id": "example.minimal.skeleton",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-20",
+  "belongs_to_flow": "F2 初始化配置",
+  "groups": [
+    "本体规格"
+  ],
+  "group_tiers": [
+    {
+      "id": "obj",
+      "title": "被测对象",
+      "groups": [
+        {
+          "id": "obj-spec",
+          "title": "本体规格",
+          "members": [
+            "本体规格"
+          ],
+          "subgroups": [
+            {
+              "id": "obj-spec-items",
+              "title": "本体规格",
+              "items": [
+                "example_attribute"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "attributes": [
+    {
+      "key": "example_attribute",
+      "name": "示例属性",
+      "value": 1,
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "editable": true,
+      "group": "本体规格",
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] 08b-场景包契约/README-场景包契约-v1.1.md",
+        "locator": "第 10 节 新建第三个场景包的步骤"
+      }
+    }
+  ]
+}

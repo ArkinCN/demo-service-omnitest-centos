@@ -1,0 +1,467 @@
+/* ===========================================================================
+   D 区 · 助手。外层 Panel 已有白底圆角柔阴影，这里把 agent-chat 组件的
+   自带皮肤换成 v2 设计系统：留白更大、气泡更圆、工具调用压成紧凑行、
+   人工放行条改用主色（放行是常规动作，不是危险动作，不占暗红名额）。
+   =========================================================================== */
+
+.copilot-slot > .ac-root {
+  --ac-primary: var(--p-700);
+  --ac-primary-deep: var(--p-800);
+  --ac-secondary: var(--p-300);
+  --ac-tint: var(--p-50);
+  --ac-accent: var(--tp-alert);
+  --ac-accent-tint: var(--tp-alert-wash);
+  --ac-text: var(--tp-text);
+  --ac-text-weak: var(--tp-text-2);
+  --ac-text-faint: var(--tp-text-3);
+  --ac-rule: var(--tp-line-soft);
+  --ac-radius: 0;
+  border: 0;
+  border-radius: 0;
+  font-family: var(--tp-font-sans);
+  font-size: 13px;
+}
+
+/* ---------- 顶栏：头像 + 名称 + 状态 ---------- */
+.copilot-slot .ac-header {
+  padding: 0 20px;
+  height: 44px;
+  gap: 10px;
+  border-bottom: 1px solid var(--tp-line-soft);
+}
+.copilot-slot .ac-header__avatar {
+  width: 28px;
+  height: 28px;
+  background: var(--tp-grad);
+  box-shadow: var(--tp-shadow-ink);
+  font-size: 12px;
+  font-weight: 600;
+}
+.copilot-slot .ac-header__title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.copilot-slot .ac-header__sub {
+  font-size: 12px;
+  color: var(--tp-text-3);
+}
+.copilot-slot .ac-header__state {
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 999px;
+  border-color: var(--p-200);
+  background: var(--p-50);
+  padding: 3px 10px;
+}
+.copilot-slot .ac-header__state[data-busy='true'] {
+  /* 「执行中」是进行态不是异常态，走中性灰；状态色只留给待放行、离线、判不通过 */
+  color: var(--tp-text-2);
+  border-color: var(--tp-line);
+  background: var(--tp-surface);
+}
+.copilot-slot .ac-iconbtn {
+  border-color: transparent;
+  border-radius: 8px;
+  height: 28px;
+  color: var(--tp-text-3);
+  font-size: 12px;
+}
+.copilot-slot .ac-iconbtn:hover {
+  background: var(--p-50);
+  color: var(--p-700);
+  border-color: transparent;
+}
+
+/* ---------- 消息流 ---------- */
+.copilot-slot .ac-stream {
+  padding: 14px 20px;
+  gap: 10px;
+}
+.copilot-slot .ac-bubble {
+  border-radius: 14px;
+  padding: 9px 14px;
+  font-size: 13px;
+  line-height: 1.7;
+  max-width: 78%;
+}
+.copilot-slot .ac-bubble--assistant {
+  background: #fff;
+  border: 1px solid var(--tp-line);
+  border-bottom-left-radius: 5px;
+  box-shadow: 0 1px 2px rgba(31, 42, 36, 0.04);
+}
+.copilot-slot .ac-bubble--user {
+  background: var(--p-50);
+  border: 1px solid var(--p-200);
+  color: var(--tp-text);
+  border-bottom-right-radius: 5px;
+}
+
+/* ---------- 工具调用 / 判定：压成紧凑行 ---------- */
+.copilot-slot .ac-card {
+  border-radius: 10px;
+  border-color: var(--tp-line);
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(31, 42, 36, 0.04);
+  overflow: hidden;
+}
+.copilot-slot .ac-tool__head {
+  padding: 7px 12px;
+  gap: 8px;
+}
+.copilot-slot .ac-tool__name {
+  font-family: var(--tp-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+}
+.copilot-slot .ac-tool__title,
+.copilot-slot .ac-tool__dur {
+  font-size: 12px;
+}
+.copilot-slot .ac-tool__body {
+  padding: 0 12px 9px;
+  gap: 3px;
+}
+.copilot-slot .ac-kv {
+  grid-template-columns: 44px 1fr;
+  font-size: 12px;
+}
+.copilot-slot .ac-json {
+  border-radius: 8px;
+  font-size: 11.5px;
+}
+.copilot-slot .ac-tool__toggle {
+  font-size: 12px;
+  color: var(--tp-text-3);
+}
+
+/* 人工放行：主色，不是危险色 */
+.copilot-slot .ac-card[data-status='pending_confirm'] {
+  border-color: var(--p-300);
+  background: var(--p-50);
+}
+.copilot-slot .ac-tool__dot[data-status='pending_confirm'] {
+  background: var(--p-600);
+}
+.copilot-slot .ac-tool__confirm {
+  background: transparent;
+  border-top: 1px solid var(--p-200);
+  padding-top: 8px;
+  margin-top: 4px;
+  gap: 8px;
+}
+.copilot-slot .ac-tool__confirm-text {
+  color: var(--p-800);
+  font-size: 12px;
+}
+
+/* ---------- 徽标与按钮 ---------- */
+.copilot-slot .ac-badge {
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 9px;
+}
+.copilot-slot .ac-btn {
+  border-radius: 8px;
+  height: 28px;
+  font-size: 12px;
+  font-weight: 500;
+  border-color: var(--tp-line);
+}
+.copilot-slot .ac-btn--solid {
+  background: var(--tp-grad);
+  border-color: transparent;
+  box-shadow: var(--tp-shadow-ink);
+}
+.copilot-slot .ac-btn--ghost {
+  border-color: transparent;
+  color: var(--tp-text-2);
+}
+.copilot-slot .ac-btn--ghost:hover {
+  background: var(--p-50);
+  color: var(--p-700);
+}
+
+/* ---------- 输入区 ---------- */
+.copilot-slot .ac-composer {
+  padding: 10px 20px 14px;
+  border-top: 1px solid var(--tp-line-soft);
+  gap: 8px;
+}
+.copilot-slot .ac-composer__box {
+  border-radius: 12px;
+  border-color: var(--tp-line);
+  background: #fff;
+  padding: 4px 6px 4px 12px;
+}
+.copilot-slot .ac-composer__box:focus-within {
+  border-color: var(--p-500);
+  box-shadow: 0 0 0 3px var(--p-50);
+}
+.copilot-slot .ac-textarea {
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 7px 0;
+}
+.copilot-slot .ac-send {
+  border-radius: 10px;
+  background: var(--tp-grad);
+  box-shadow: var(--tp-shadow-ink);
+  border: 0;
+  width: 34px;
+  height: 34px;
+}
+.copilot-slot .ac-mic {
+  border-radius: 10px;
+  border-color: transparent;
+  width: 34px;
+  height: 34px;
+  color: var(--tp-text-3);
+}
+.copilot-slot .ac-mic:hover {
+  background: var(--p-50);
+  color: var(--p-700);
+}
+.copilot-slot .ac-controls {
+  gap: 10px;
+  font-size: 12px;
+}
+.copilot-slot .ac-field {
+  font-size: 12px;
+  color: var(--tp-text-3);
+}
+.copilot-slot .ac-select {
+  border-radius: 8px;
+  border-color: var(--tp-line);
+  height: 26px;
+  font-size: 12px;
+  background: #fff;
+}
+.copilot-slot .ac-hint {
+  font-size: 12px;
+  color: var(--tp-text-3);
+}
+.copilot-slot .ac-empty {
+  color: var(--tp-text-3);
+  font-size: 12px;
+}
+
+/* 发送 / 停止：药丸主按钮，宽度随字走 */
+.copilot-slot .ac-send {
+  width: auto;
+  min-width: 64px;
+  height: 32px;
+  padding: 0 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.copilot-slot .ac-send:disabled {
+  background: var(--p-200);
+  box-shadow: none;
+}
+.copilot-slot .ac-mic {
+  width: 32px;
+  height: 32px;
+  font-size: 11px;
+}
+
+/* 底部控制行：标签短、控件小，整句说明收进 title 提示 */
+.copilot-slot .ac-controls {
+  margin-top: 6px;
+  gap: 12px;
+  font-size: 12px;
+}
+.copilot-slot .ac-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.copilot-slot .ac-field label {
+  color: var(--tp-text-3);
+}
+.copilot-slot .ac-select {
+  height: 26px;
+  padding: 0 6px;
+  border-radius: 8px;
+  border: 1px solid var(--tp-line);
+  background: #fff;
+  color: var(--tp-text);
+  font-size: 12px;
+}
+.copilot-slot .ac-switch {
+  font-size: 12px;
+  color: var(--tp-text-2);
+}
+/* 权限与写入约束的整句说明已挂在开关的 title 上，这里不再平铺一行长句 */
+.copilot-slot .ac-hint {
+  display: none;
+}
+.copilot-slot .ac-hint[data-warn='true'] {
+  display: block;
+  color: var(--tp-warn);
+  font-size: 12px;
+}
+
+/* 权限档位分段控件 */
+.copilot-slot .ac-seg {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 8px;
+  background: var(--p-50);
+}
+.copilot-slot .ac-seg button {
+  border: 0;
+  background: transparent;
+  color: var(--tp-text-2);
+  font-size: 12px;
+  font-weight: 500;
+  height: 22px;
+  padding: 0 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.copilot-slot .ac-seg button[data-on='true'] {
+  background: #fff;
+  color: var(--p-700);
+  box-shadow: 0 1px 2px rgba(31, 42, 36, 0.1);
+}
+
+/* 消息流上沿渐隐：滚动时不把气泡硬切在顶栏下方 */
+.copilot-slot .ac-stream {
+  mask-image: linear-gradient(to bottom, transparent 0, #000 16px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 16px);
+}
+
+/* 工具卡上的「待确认 / 未执行」是等人放行，不是判不通过：给琥珀，不占暗红名额。
+   判定卡（.ac-verdict）里的 data-pass=false 才是真不通过，保持暗红。 */
+.copilot-slot .ac-tool .ac-badge[data-pass='false'] {
+  background: var(--tp-warn-wash);
+  color: var(--tp-warn);
+  border-color: color-mix(in srgb, var(--tp-warn) 30%, white);
+}
+
+/* ---------- 消息流铺满助手宽度 ----------
+   agent-chat 默认 .ac-card 宽 82%、气泡 78%，在 1920 下助手右侧空出一大片。
+   这里把工具卡 / 判定卡撑满，气泡放宽到 88%（仍留出左右气泡的错位感），
+   输入框本来就是满宽，三者的右边缘现在对齐。 */
+.copilot-slot .ac-card {
+  width: 100%;
+}
+.copilot-slot .ac-bubble {
+  max-width: 88%;
+}
+
+/* 矮视口下消息区会被输入栏与页脚挤扁。外壳是定高的，写死 min-height 会把输入栏
+   顶出视口，所以下限交给右列行比（index.css 的 .right-rows 断点）去争取高度，
+   这里只保证消息区自己能滚、不被内容撑破。 */
+.copilot-slot .ac-stream {
+  min-height: 0;
+}
+
+/* ===========================================================================
+   预置动作按钮条（W5）。
+
+   收尾轮起走 AgentChat 的正经插槽 `actionSlot`：组件把它渲染在 .ac-stream 与
+   .ac-composer 之间的 .ac-slot 里，所以它是 flex 纵向容器的一员，自然落在输入区
+   正上方、与输入框同宽。高度按 8pt 栅格：上下内边距 8，按钮高 24。
+   选择器挂在 .ac-slot 上而不是 .copilot-slot 上，是为了让 /knowledge 这种不套
+   FlowCopilot 的页面也能直接用。
+   =========================================================================== */
+
+.ac-slot .cp-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px 0;
+  overflow: visible;
+}
+.ac-slot .cp-act {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 24px;
+  padding: 0 9px;
+  border: 1px solid var(--tp-line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--tp-text-2);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.ac-slot .cp-act:hover:not(:disabled) {
+  border-color: var(--p-700);
+  background: var(--p-50);
+  color: var(--p-700);
+}
+.ac-slot .cp-act:disabled {
+  border-color: var(--tp-line-soft);
+  color: var(--tp-text-3);
+  background: transparent;
+  cursor: not-allowed;
+}
+/* 碰到六个红线动作的按钮：只做「备好等人点」，用左侧一道细标记提示，
+   不占暗红名额（暗红留给判不通过） */
+.ac-slot .cp-act[data-redline='true']:not(:disabled) {
+  border-left-width: 3px;
+  border-left-color: var(--p-300);
+}
+.ac-slot .cp-act--more {
+  color: var(--tp-text-3);
+}
+
+.ac-slot .cp-more {
+  position: relative;
+  margin-left: auto;
+}
+.ac-slot .cp-more__menu {
+  position: absolute;
+  right: 0;
+  bottom: 30px;
+  z-index: 20;
+  min-width: 168px;
+  padding: 4px;
+  border: 1px solid var(--tp-line);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(31, 42, 36, 0.14);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.ac-slot .cp-more__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--tp-text-2);
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+.ac-slot .cp-more__item:hover:not(:disabled) {
+  background: var(--p-50);
+  color: var(--p-700);
+}
+.ac-slot .cp-more__item:disabled {
+  color: var(--tp-text-3);
+  cursor: not-allowed;
+}
+.ac-slot .cp-more__type {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--tp-text-3);
+}

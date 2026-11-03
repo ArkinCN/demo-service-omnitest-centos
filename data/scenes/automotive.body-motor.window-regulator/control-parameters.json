@@ -1,0 +1,1794 @@
+{
+  "schema": "control-parameters/v1",
+  "scene_id": "automotive.body-motor.window-regulator",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-19",
+  "belongs_to_flow": "主放 F5 调优确认及运行 / F4 启动测试及结果分析；使能类开关与台架设定在 F2 初始化配置确认",
+  "groups": [
+    "防夹算法",
+    "位置与行程",
+    "驱动与调制",
+    "保护与热管理",
+    "电流环整定",
+    "台架与工装",
+    "数据采集"
+  ],
+  "demo_profile": {
+    "note": "对照场景取 12 项：防夹算法与台架工装各半，用来证明同一套左栏骨架能装别的行业。",
+    "groups": [
+      "防夹算法",
+      "位置与行程",
+      "保护与热管理",
+      "台架与工装",
+      "数据采集"
+    ],
+    "parameters": [
+      "antipinch_enable",
+      "antipinch_force_threshold",
+      "antipinch_detect_method",
+      "antipinch_retract_mode",
+      "soft_stop_position",
+      "position_reset_at_top",
+      "stall_current_threshold",
+      "stall_hold_time",
+      "pwm_duty",
+      "bench_supply_voltage",
+      "chamber_temperature",
+      "sample_rate"
+    ]
+  },
+  "group_tiers": [
+    {
+      "id": "ctl-start",
+      "title": "防夹与行程",
+      "groups": [
+        {
+          "id": "ctl-pinch",
+          "title": "防夹算法",
+          "members": [
+            "防夹算法"
+          ],
+          "subgroups": [
+            {
+              "id": "ctl-pinch-win",
+              "title": "生效区间",
+              "items": [
+                "antipinch_enable",
+                "antipinch_window_lower",
+                "antipinch_window_upper",
+                "startup_blanking_time"
+              ]
+            },
+            {
+              "id": "ctl-pinch-det",
+              "title": "检测判据",
+              "items": [
+                "antipinch_detect_method",
+                "antipinch_force_threshold",
+                "current_slope_window",
+                "current_slope_threshold",
+                "antipinch_confirm_count"
+              ]
+            },
+            {
+              "id": "ctl-pinch-act",
+              "title": "回缩动作",
+              "items": [
+                "antipinch_retract_mode",
+                "antipinch_retract_distance"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ctl-pos",
+          "title": "位置与行程",
+          "members": [
+            "位置与行程"
+          ],
+          "subgroups": [
+            {
+              "id": "ctl-pos-stop",
+              "title": "软停",
+              "items": [
+                "soft_stop_position",
+                "soft_stop_speed_ratio"
+              ]
+            },
+            {
+              "id": "ctl-pos-ripple",
+              "title": "纹波与霍尔",
+              "items": [
+                "ripple_filter_bandwidth",
+                "ripple_comparator_hysteresis",
+                "ripple_pulses_per_rev",
+                "hall_pulses_per_mm",
+                "position_reset_at_top"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ctl-loop",
+      "title": "驱动与整定",
+      "groups": [
+        {
+          "id": "ctl-drive",
+          "title": "驱动与调制",
+          "members": [
+            "驱动与调制"
+          ]
+        },
+        {
+          "id": "ctl-pi-i",
+          "title": "电流环整定",
+          "members": [
+            "电流环整定"
+          ],
+          "subgroups": [
+            {
+              "id": "ctl-pi-i-gain",
+              "title": "增益",
+              "items": [
+                "current_loop_kp",
+                "current_loop_ki"
+              ]
+            },
+            {
+              "id": "ctl-pi-i-bw",
+              "title": "带宽与裕度",
+              "items": [
+                "phase_margin",
+                "pi_phase_lag",
+                "current_loop_bandwidth",
+                "tuning_order"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ctl-run",
+      "title": "保护与台架",
+      "groups": [
+        {
+          "id": "ctl-prot",
+          "title": "保护与热管理",
+          "members": [
+            "保护与热管理"
+          ],
+          "subgroups": [
+            {
+              "id": "ctl-prot-stall",
+              "title": "堵转判定",
+              "items": [
+                "stall_current_threshold",
+                "stall_debounce_time",
+                "stall_hold_time"
+              ]
+            },
+            {
+              "id": "ctl-prot-v",
+              "title": "电压与电流阈值",
+              "items": [
+                "ovp_threshold",
+                "uvp_threshold",
+                "ocp_threshold",
+                "reverse_polarity_voltage"
+              ]
+            },
+            {
+              "id": "ctl-prot-t",
+              "title": "热跳闸与恢复",
+              "items": [
+                "thermal_trip_temp",
+                "thermal_recovery_time_normal",
+                "thermal_recovery_time_80c"
+              ]
+            },
+            {
+              "id": "ctl-prot-c",
+              "title": "热保护启动循环",
+              "items": [
+                "thermal_first_start_cycles_normal",
+                "thermal_first_start_cycles_80c",
+                "thermal_restart_cycles"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ctl-bench",
+          "title": "台架与工装",
+          "members": [
+            "台架与工装"
+          ],
+          "subgroups": [
+            {
+              "id": "ctl-bench-src",
+              "title": "电源与回路",
+              "items": [
+                "bench_supply_voltage",
+                "bench_harness_resistance",
+                "supply_ripple_max"
+              ]
+            },
+            {
+              "id": "ctl-bench-fix",
+              "title": "试验工装",
+              "items": [
+                "test_rod_stiffness",
+                "test_rod_diameter",
+                "chamber_temperature"
+              ]
+            },
+            {
+              "id": "ctl-bench-dur",
+              "title": "耐久与环境",
+              "items": [
+                "durability_cycle_target",
+                "durability_dwell_time",
+                "durability_stall_time",
+                "mud_water_dust_ratio",
+                "water_spray_pressure"
+              ]
+            },
+            {
+              "id": "ctl-bench-die",
+              "title": "绝缘试验",
+              "items": [
+                "dielectric_test_voltage",
+                "dielectric_test_duration"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ctl-daq",
+          "title": "数据采集",
+          "members": [
+            "数据采集"
+          ]
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "adjustable_in_flows 标这个参数在哪个流程里允许改。同一个参数可能在多个流程出现，但含义不同：F2 是确认初值，F5 是未达标后回调。",
+    "options 非空表示这是枚举参数，前端应出下拉框而不是加减号；此时 min/max/step 为 null。",
+    "range_estimated: true 表示 min/max 区间是本包按物理约束推定的，源材料没给区间，前端不应把它当成标准规定的可调范围。",
+    "防夹组的六个参数（力阈值、生效区间上下沿、启动屏蔽时间、纹波滤波、堵转门限、回缩行程）是本场景相对场景一全新的一组，场景一没有任何对应物；电流环整定那五个参数则是两个场景共用的通用层。"
+  ],
+  "parameters": [
+    {
+      "key": "antipinch_enable",
+      "name": "防夹功能使能",
+      "value": true,
+      "default": true,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "group": "防夹算法",
+      "adjustable_in_flows": [
+        "F2 初始化配置",
+        "F3 测试需求确认"
+      ],
+      "editable": true,
+      "options": [
+        {
+          "value": true,
+          "label": "启用"
+        },
+        {
+          "value": false,
+          "label": "关闭"
+        }
+      ],
+      "note": "三地法规都不强制配备防夹，只在配备时规定性能。因此这个开关本身就是流程 3 要与用户确认的分支条件：关掉则整条防夹判据链不执行，改走 GB 11552-2009 §4.8.2 的无防夹替代要求（开口 ≤4 mm 才允许关闭、遥控作用距离 ≤6 m 或可直接看见时 ≤11 m、一键关闭仅限驾驶员侧与天窗）。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 221 行：三地法规都不强制要求配备防夹功能"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 219 行：无防夹功能时的替代要求 GB 11552-2009 §4.8.2"
+        }
+      ]
+    },
+    {
+      "key": "antipinch_force_threshold",
+      "name": "防夹力阈值",
+      "value": 80.0,
+      "default": 80.0,
+      "unit": "N",
+      "min": 20.0,
+      "max": 100.0,
+      "step": 1.0,
+      "group": "防夹算法",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "法规上限 100 N 是硬顶，不是目标值：实测必须在超过 100 N 之前回缩，所以固件门限要留裕量。调大逼近或超出 100 N 判不合格；调小则误触发率升高，正常密封阻力被误判为夹持。默认 80 N 是本包给的裕量示例值。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 349 行：防夹调参清单「防夹力阈值」行"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 166 行：防夹力 GB 11552-2009 §4.8.3.1.1 已核实"
+        },
+        {
+          "file": "[源] 汽车场景素材-20260919/gb11552.txt",
+          "locator": "gb11552.txt:440 「在夹紧力大于100N 之前，该装置应回缩」"
+        }
+      ]
+    },
+    {
+      "key": "antipinch_window_lower",
+      "name": "防夹生效区间下沿",
+      "value": 4.0,
+      "default": 4.0,
+      "unit": "mm",
+      "min": 0.0,
+      "max": 20.0,
+      "step": 0.5,
+      "group": "防夹算法",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "法规下沿 4 mm，对应幼儿手指宽度。下沿高于 4 mm 即不合规。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 350 行：防夹生效区间（行程窗口）行"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 71 行：Federal Register E9-21042：4 mm 对应幼儿手指"
+        },
+        {
+          "file": "[源] 汽车场景素材-20260919/gb11552.txt",
+          "locator": "gb11552.txt:440 「开口从200mm 到4mm 范围内」"
+        }
+      ]
+    },
+    {
+      "key": "antipinch_window_upper",
+      "name": "防夹生效区间上沿",
+      "value": 200.0,
+      "default": 200.0,
+      "unit": "mm",
+      "min": 100.0,
+      "max": 300.0,
+      "step": 1.0,
+      "group": "防夹算法",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "法规上沿 200 mm，对应第 95 百分位成年男性头部最大宽度。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 350 行：防夹生效区间行"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 71 行：Federal Register E9-21042：200 mm 对应第 95 百分位成年男性头部最大宽度"
+        }
+      ]
+    },
+    {
+      "key": "antipinch_retract_mode",
+      "name": "回缩后位置策略",
+      "value": "PLUS_50MM",
+      "default": "PLUS_50MM",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "group": "防夹算法",
+      "adjustable_in_flows": [
+        "F3 测试需求确认",
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "options": [
+        {
+          "value": "ROD_200MM_PASS",
+          "label": "开到可穿过直径 200 mm 试验棒的位置"
+        },
+        {
+          "value": "INITIAL_POSITION",
+          "label": "关闭之前的最初位置"
+        },
+        {
+          "value": "PLUS_50MM",
+          "label": "比触发位置多开 50 mm（中国四选一之一）"
+        },
+        {
+          "value": "PLUS_125MM",
+          "label": "比触发位置多开 125 mm（美国二选一之一）"
+        },
+        {
+          "value": "TILT_MAX_ANGLE",
+          "label": "天窗倾斜的最大角度开启位置"
+        }
+      ],
+      "note": "按目标市场选：PLUS_50MM 与 ROD_200MM_PASS 与 INITIAL_POSITION 与 TILT_MAX_ANGLE 是 GB 11552-2009 §4.8.3.1.2 的四选一；PLUS_125MM 与 INITIAL_POSITION 是 FMVSS 118 的二选一。选 PLUS_50MM 则同时满足中欧、不满足美国。",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/gb11552.txt",
+          "locator": "gb11552.txt:445-452 §4.8.3.1.2.1 至 4.8.3.1.2.4 四选一"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 215 行：GB 11552-2009 回缩后要求四选一"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 216 行：FMVSS 118 回缩后要求二选一"
+        }
+      ]
+    },
+    {
+      "key": "antipinch_retract_distance",
+      "name": "回缩行程量",
+      "value": 60.0,
+      "default": 60.0,
+      "unit": "mm",
+      "min": 30.0,
+      "max": 200.0,
+      "step": 1.0,
+      "group": "防夹算法",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "默认 60 mm 是本包给的裕量示例值（法规底线 50 mm）。调大无合规风险但用户体验差；低于 50 mm 或未达法规要求的位置之一即不合规。目标美国市场时该值需 ≥125 mm。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 354 行：防夹调参清单「回缩行程量」行"
+        },
+        {
+          "file": "[源] 汽车场景素材-20260919/gb11552.txt",
+          "locator": "gb11552.txt:448 「比开始回缩时的位置至少多开50mm 的位置」"
+        }
+      ]
+    },
+    {
+      "key": "antipinch_detect_method",
+      "name": "防夹检测判据",
+      "value": "CURRENT_SLOPE",
+      "default": "CURRENT_SLOPE",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "group": "防夹算法",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "options": [
+        {
+          "value": "CURRENT_SLOPE",
+          "label": "电流突变斜率"
+        },
+        {
+          "value": "HALL_PULSE_PERIOD",
+          "label": "霍尔脉冲周期变化"
+        },
+        {
+          "value": "TORQUE_RATE",
+          "label": "转矩变化率"
+        },
+        {
+          "value": "MECHANICAL_POWER",
+          "label": "机械功率"
+        },
+        {
+          "value": "CURRENT_HALL_FUSION",
+          "label": "电流与霍尔双判据"
+        }
+      ],
+      "note": "四种公开判据各有出处：电流突变门限自整定（IJECE 2018）、转矩变化率（IEEE 会议论文 1600781，文中指出转矩变化率对电机参数不确定性的敏感度低于转矩或角速度本身）、霍尔脉冲与机械功率联合（ICMSE 2018）、霍尔与电流采样双判据（恩智浦 RDS12VR）。",
+      "_status": "待核实（各判据的出处论文本次未打开正文逐字确认）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 338 行：Automatic Threshold on Current based Anti-pinch Mechanism for Power Windows"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 339 行：Practical pinch detection algorithm：基于转矩变化率"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 340 行：Power Window Anti-Pinch Control Based on Hall Pulse Signal and Mechanical Power"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 343 行：恩智浦 RDS12VR：霍尔与电流采样双判据"
+        }
+      ]
+    },
+    {
+      "key": "current_slope_window",
+      "name": "电流斜率检测窗口",
+      "value": 20.0,
+      "default": 20.0,
+      "unit": "ms",
+      "min": 5.0,
+      "max": 100.0,
+      "step": 1.0,
+      "group": "防夹算法",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "示例值。窗口太短则纹波与换向噪声进入斜率计算，太长则夹持响应滞后、力峰值可能已越过 100 N。源材料只给出「电流突变门限的自适应设定方法」这一定性描述，没有给窗口长度的数值，本包按 2 kHz 采样下 40 个点取 20 ms 作起点。range_estimated 表示 5 至 100 ms 这个区间是本包推定的，不是源材料给的。",
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 338 行：电流突变门限的自适应设定方法；阈值随工况自整定"
+      }
+    },
+    {
+      "key": "current_slope_threshold",
+      "name": "电流斜率门限",
+      "value": 150.0,
+      "default": 150.0,
+      "unit": "A/s",
+      "min": 20.0,
+      "max": 800.0,
+      "step": 5.0,
+      "group": "防夹算法",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "示例值，与本包合成波形 assets/waveforms/antipinch-trigger.csv 的注入幅度配套。真实值必须在实物台架上按 100 N 反推标定。",
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 338 行：电流突变门限的自适应设定方法"
+      }
+    },
+    {
+      "key": "startup_blanking_time",
+      "name": "启动段屏蔽时间",
+      "value": 150.0,
+      "default": 150.0,
+      "unit": "ms",
+      "min": 0.0,
+      "max": 500.0,
+      "step": 10.0,
+      "group": "防夹算法",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "示例值。启动瞬间的浪涌电流会掩盖夹持特征，是防夹算法最难的一段。调大则启动瞬间夹持漏检，调小则浪涌被误判为夹持。源材料确认了这个参数的存在与两侧后果，但没给数值。",
+      "_placeholder": true,
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 351 行：防夹调参清单「启动段屏蔽时间」行"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 341 行：基于纹波电机的车窗启动阶段防夹控制策略研究"
+        }
+      ]
+    },
+    {
+      "key": "antipinch_confirm_count",
+      "name": "夹持连续确认次数",
+      "value": 3,
+      "default": 3,
+      "unit": "次",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "group": "防夹算法",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "示例值。去抖用，与 current_slope_window 一起决定最坏响应延迟。",
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 349-354 行：防夹调参清单（本文档的综合，非任一来源原文）"
+      }
+    },
+    {
+      "key": "soft_stop_position",
+      "name": "软停位置（距上止点）",
+      "value": 15.0,
+      "default": 15.0,
+      "unit": "mm",
+      "min": 0.0,
+      "max": 60.0,
+      "step": 1.0,
+      "group": "位置与行程",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "示例值。进入密封压紧段前降速，避免把密封阻力的电流上翘误判成夹持。这个位置必须高于防夹生效区间下沿 4 mm，否则法规要求的最后 4 mm 内无防夹保护。",
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 350 行：防夹生效区间：进入密封压紧段仍生效则无法正常关窗"
+      }
+    },
+    {
+      "key": "soft_stop_speed_ratio",
+      "name": "软停段降速比例",
+      "value": 50,
+      "default": 50,
+      "unit": "%",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "group": "位置与行程",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "示例值。降速后仍须满足上升速度 80 至 160 mm/s 的全程判据，或在判据里显式排除软停段——这一点标准没写，是台架口径要与客户确认的事。",
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 127 行：上升运行速度 80 至 160 mm/s"
+      }
+    },
+    {
+      "key": "ripple_filter_bandwidth",
+      "name": "纹波提取滤波带宽",
+      "value": 2000.0,
+      "default": 2000.0,
+      "unit": "Hz",
+      "min": 200.0,
+      "max": 20000.0,
+      "step": 100.0,
+      "group": "位置与行程",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "示例值。从电流交流分量提取转速脉冲的带通带宽。调大引入噪声计数、位置漂移；调小则低速段丢脉冲、位置累计误差。",
+      "_placeholder": true,
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 352 行：纹波计数滤波带宽与迟滞行"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 342 行：TI TIDUD30A：纹波提取的高通/带通滤波参数、比较器迟滞、脉冲整形门限"
+        }
+      ]
+    },
+    {
+      "key": "ripple_comparator_hysteresis",
+      "name": "纹波比较器迟滞",
+      "value": 20.0,
+      "default": 20.0,
+      "unit": "mV",
+      "min": 2.0,
+      "max": 200.0,
+      "step": 1.0,
+      "group": "位置与行程",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "示例值。同上，出处只给了参数名与作用，没给数值。",
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 342 行：TI TIDUD30A 比较器迟滞"
+      }
+    },
+    {
+      "key": "ripple_pulses_per_rev",
+      "name": "每转纹波数",
+      "value": 8,
+      "default": 8,
+      "unit": "个/转",
+      "min": 2,
+      "max": 24,
+      "step": 2,
+      "group": "位置与行程",
+      "adjustable_in_flows": [
+        "F2 初始化配置"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "示例值。等于 2N，N 为绕组对数。有刷直流电机用这个量代替无刷电机的极对数。",
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 146 行：纹波频率对应换向器极数，为 2N（N 为绕组对数）"
+      }
+    },
+    {
+      "key": "hall_pulses_per_mm",
+      "name": "霍尔脉冲密度",
+      "value": 4.0,
+      "default": 4.0,
+      "unit": "脉冲/mm",
+      "min": 0.5,
+      "max": 20.0,
+      "step": 0.5,
+      "group": "位置与行程",
+      "adjustable_in_flows": [
+        "F2 初始化配置"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "示例值。两颗锁存霍尔正交输出，可辨向。TIDA-01389 用的 DRV5013-Q1 带宽 30 kHz。",
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 140 行：TIDA-01389：两颗 DRV5013-Q1 锁存霍尔构成位置编码，带宽 30 kHz"
+      }
+    },
+    {
+      "key": "position_reset_at_top",
+      "name": "上止点位置归零",
+      "value": true,
+      "default": true,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "group": "位置与行程",
+      "adjustable_in_flows": [
+        "F2 初始化配置"
+      ],
+      "editable": true,
+      "options": [
+        {
+          "value": true,
+          "label": "启用"
+        },
+        {
+          "value": false,
+          "label": "关闭"
+        }
+      ],
+      "note": "每次上止点堵转后把累计位置清零，抵消纹波计数的长期漂移。耐久试验的单循环波形本身就包含上止点堵转 1 s，正好提供归零时机。",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 200 行：耐久单循环波形 6.9.1 注 3：起始位置 → 上止点堵转 1 s 停 4 s → …"
+      }
+    },
+    {
+      "key": "pwm_duty",
+      "name": "PWM 占空比",
+      "value": 100,
+      "default": 100,
+      "unit": "%",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "group": "驱动与调制",
+      "adjustable_in_flows": [
+        "F4 启动测试及结果分析",
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "升降器正常工作是全占空比直驱，PWM 主要用在软启动斜坡与软停降速两段。台架做速度一致性复现时可用它把上升速度压进 80 至 160 mm/s 区间。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 145 行：英飞凌 MOTIX TLE985x：12 V 电机控制片上系统，自适应栅极电流控制"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 127 行：上升运行速度判据区间"
+        }
+      ]
+    },
+    {
+      "key": "pwm_frequency",
+      "name": "PWM 载波频率",
+      "value": 20000,
+      "default": 20000,
+      "unit": "Hz",
+      "min": 1000,
+      "max": 25000,
+      "step": 500,
+      "group": "驱动与调制",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "示例值。20 kHz 在人耳听阈之上，对 60 dB(A) 噪音判据友好；载波也直接决定电流环带宽的可取范围（典型取载波的 5 % 至 15 %）。",
+      "_placeholder": true,
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 375 行：电流环带宽典型取 PWM 频率的 5 % 至 15 %（20 kHz PWM 对应 1 至 3 kHz）"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 129 行：工作噪音 <60 dB(A)"
+        }
+      ]
+    },
+    {
+      "key": "deadtime",
+      "name": "H 桥死区",
+      "value": 500,
+      "default": 500,
+      "unit": "ns",
+      "min": 100,
+      "max": 3000,
+      "step": 50,
+      "group": "驱动与调制",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "示例值。死区的必要性与死区导致的损耗见罗姆 TechWeb 条目 346；TI SLLA567 讲自动死区补偿与 PWM 调制方式对声学表现的影响。",
+      "_placeholder": true,
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 365 行：罗姆 TechWeb 条目 346：死区的必要性与死区导致的损耗"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 364 行：TI SLLA567：自动死区补偿、PWM 调制方式对声学表现的影响"
+        }
+      ]
+    },
+    {
+      "key": "soft_start_ramp",
+      "name": "软启动斜坡时长",
+      "value": 120.0,
+      "default": 120.0,
+      "unit": "ms",
+      "min": 0.0,
+      "max": 1000.0,
+      "step": 10.0,
+      "group": "驱动与调制",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "示例值。斜坡越长浪涌越小、启动段屏蔽时间可以越短，两个参数要一起调。",
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 361 行：UM3259：对齐与启动、单段或多段加速斜坡；大惯量电机先缓斜坡后陡斜坡"
+      }
+    },
+    {
+      "key": "hbridge_mode",
+      "name": "H 桥调制方式",
+      "value": "SIGN_MAGNITUDE",
+      "default": "SIGN_MAGNITUDE",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "group": "驱动与调制",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "options": [
+        {
+          "value": "SIGN_MAGNITUDE",
+          "label": "符号-幅值调制"
+        },
+        {
+          "value": "LOCKED_ANTIPHASE",
+          "label": "锁定反相调制"
+        }
+      ],
+      "note": "示例值。两种方式对电流纹波形态影响很大，会直接改变纹波计数的可用性——换调制方式后纹波滤波带宽与迟滞必须重标。本包没有材料指明实际方案取哪种。",
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 140 行：TIDA-01389：DRV8703-Q1 栅极驱动器，驱动能力 15 A，耐压 47 V"
+      }
+    },
+    {
+      "key": "stall_current_threshold",
+      "name": "堵转判定电流门限",
+      "value": 24.0,
+      "default": 24.0,
+      "unit": "A",
+      "min": 10.0,
+      "max": 30.0,
+      "step": 0.5,
+      "group": "保护与热管理",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "必须低于堵转电流上限 28 A 才能在越限前动作。调大则遇障后仍继续加力、力峰值超标；调小则到达上止点被误判为夹持、无法关到位。默认 24 N 留 4 A 裕量是本包给的示例。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 353 行：堵转判定电流门限与去抖时间行"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 125 行：堵转电流上限 ≤28 A"
+        }
+      ]
+    },
+    {
+      "key": "stall_debounce_time",
+      "name": "堵转去抖时间",
+      "value": 60.0,
+      "default": 60.0,
+      "unit": "ms",
+      "min": 10.0,
+      "max": 500.0,
+      "step": 5.0,
+      "group": "保护与热管理",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "示例值。与防夹的 antipinch_confirm_count 是同一类去抖，但两者判定目标不同：防夹区内出夹持判定，防夹区外出堵转判定（恩智浦 RDS12VR 的分区做法）。",
+      "_placeholder": true,
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 353 行：堵转判定电流门限与去抖时间行"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 343 行：RDS12VR：防夹区外做堵转检测"
+        }
+      ]
+    },
+    {
+      "key": "stall_hold_time",
+      "name": "堵转允许持续时间",
+      "value": 30.0,
+      "default": 30.0,
+      "unit": "s",
+      "min": 1.0,
+      "max": 60.0,
+      "step": 1.0,
+      "group": "保护与热管理",
+      "adjustable_in_flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "editable": true,
+      "note": "台架侧的堵转施加时长上限。QC/T 626 征求意见稿里升降器自身只有「上止点堵转 1 s」（耐久预处理）与「堵转 1 s 停 4 s」（耐久单循环），30 s 连续堵转是刮水电动机标准的项目，本包把它作为台架保护的通用上限沿用，这是本包的推断，不是升降器标准的原文结论。",
+      "_status": "已核实但取自备选产品标准（QC/T 29090-2023 刮水电动机 4.18/5.18），玻璃升降器的对应条款是耐久预处理的上止点堵转 1 s，两者不是一回事",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 270 行：QC/T 29090-2023 堵转 4.18 / 5.18：试验电压下连续通电 30 s 堵转"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 198 行：耐久试验预处理：托架升至上止点堵转 1 s"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 200 行：耐久单循环波形：上止点堵转 1 s 停 4 s"
+        }
+      ]
+    },
+    {
+      "key": "ovp_threshold",
+      "name": "过压保护阈值",
+      "value": 16.5,
+      "default": 16.5,
+      "unit": "V",
+      "min": 14.0,
+      "max": 20.0,
+      "step": 0.1,
+      "group": "保护与热管理",
+      "adjustable_in_flows": [
+        "F2 初始化配置",
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "耐过负载操作强度试验就是在最大额定负载下施加 16.5 V 跑 10 个工作循环，所以固件的过压保护点不能低于 16.5 V，否则试验做不下去。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 202 行：耐过负载操作强度 5.11.1 / 6.11.1：施加 16.5 V，跑 10 个工作循环"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 156 行：过压保护判据 6.11.1"
+        }
+      ]
+    },
+    {
+      "key": "uvp_threshold",
+      "name": "欠压保护阈值",
+      "value": 8.5,
+      "default": 8.5,
+      "unit": "V",
+      "min": 5.0,
+      "max": 10.0,
+      "step": 0.1,
+      "group": "保护与热管理",
+      "adjustable_in_flows": [
+        "F2 初始化配置",
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "示例值。必须低于启动电压判据 9 V，否则 9 V 启动试验会被自家欠压保护挡掉。8.5 V 是按这个约束反推的，不是标准给的数。",
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 130 行：启动电压 5.4.1 f) ≤9 V"
+      }
+    },
+    {
+      "key": "ocp_threshold",
+      "name": "过流保护阈值",
+      "value": 30.0,
+      "default": 30.0,
+      "unit": "A",
+      "min": 15.0,
+      "max": 45.0,
+      "step": 0.5,
+      "group": "保护与热管理",
+      "adjustable_in_flows": [
+        "F2 初始化配置",
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "必须高于 −30 ℃ 堵转电流上限 30 A，否则低温堵转试验会被保护挡掉；同时要低于 H 桥驱动能力（TIDA-01389 为 15 A，该方案就需要另配功率级）。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 161 行：堵转电流 −30 ℃ 时 ≤30 A"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 140 行：TIDA-01389 驱动能力 15 A"
+        }
+      ]
+    },
+    {
+      "key": "thermal_trip_temp",
+      "name": "热保护跳闸温度",
+      "value": 140.0,
+      "default": 140.0,
+      "unit": "℃",
+      "min": 80.0,
+      "max": 180.0,
+      "step": 1.0,
+      "group": "保护与热管理",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "示例值。征求意见稿只规定热保护的行为时序（首次启动循环数、恢复时间、再启动循环数），不规定跳闸温度，实际由 PTC 或热敏开关的选型决定。",
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 162 行：热保护（首次启动 / 恢复 / 再启动）表 5"
+      }
+    },
+    {
+      "key": "thermal_first_start_cycles_normal",
+      "name": "热保护前首次启动循环数（常温与 −40 ℃）",
+      "value": 30,
+      "default": 30,
+      "unit": "循环",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "group": "保护与热管理",
+      "adjustable_in_flows": [
+        "F3 测试需求确认"
+      ],
+      "editable": true,
+      "note": "判据是「不少于」：热保护必须撑过 30 个循环才允许动作。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 162 行：热保护表 5：−40 ℃ 与常温首次启动 ≥30 循环"
+      }
+    },
+    {
+      "key": "thermal_first_start_cycles_80c",
+      "name": "热保护前首次启动循环数（80 ℃）",
+      "value": 15,
+      "default": 15,
+      "unit": "循环",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "group": "保护与热管理",
+      "adjustable_in_flows": [
+        "F3 测试需求确认"
+      ],
+      "editable": true,
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 162 行：热保护表 5：80 ℃ 首次启动 ≥15 循环"
+      }
+    },
+    {
+      "key": "thermal_recovery_time_normal",
+      "name": "热保护恢复时间上限（常温与 −40 ℃）",
+      "value": 60.0,
+      "default": 60.0,
+      "unit": "s",
+      "min": 10.0,
+      "max": 300.0,
+      "step": 5.0,
+      "group": "保护与热管理",
+      "adjustable_in_flows": [
+        "F3 测试需求确认"
+      ],
+      "editable": true,
+      "note": "判据是「不大于」：60 s 内必须能恢复。与首次启动循环数方向相反，一个要「够久才跳」、一个要「够快才回」，两头夹住热保护元件的选型窗口。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 162 行：热保护表 5：恢复 ≤60 s"
+      }
+    },
+    {
+      "key": "thermal_recovery_time_80c",
+      "name": "热保护恢复时间上限（80 ℃）",
+      "value": 100.0,
+      "default": 100.0,
+      "unit": "s",
+      "min": 10.0,
+      "max": 300.0,
+      "step": 5.0,
+      "group": "保护与热管理",
+      "adjustable_in_flows": [
+        "F3 测试需求确认"
+      ],
+      "editable": true,
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 162 行：热保护表 5：80 ℃ 恢复 ≤100 s"
+      }
+    },
+    {
+      "key": "thermal_restart_cycles",
+      "name": "热保护恢复后再启动循环数",
+      "value": 2,
+      "default": 2,
+      "unit": "循环",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "group": "保护与热管理",
+      "adjustable_in_flows": [
+        "F3 测试需求确认"
+      ],
+      "editable": true,
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 162 行：热保护表 5：再启动 ≥2 循环"
+      }
+    },
+    {
+      "key": "reverse_polarity_voltage",
+      "name": "反极性试验电压",
+      "value": -4.0,
+      "default": -4.0,
+      "unit": "V",
+      "min": -14.0,
+      "max": 0.0,
+      "step": 0.5,
+      "group": "保护与热管理",
+      "adjustable_in_flows": [
+        "F3 测试需求确认"
+      ],
+      "editable": true,
+      "note": "10.8 V 到 −4.0 V，持续 60 s（若继电器在极性反接时切断供电则改为 8 ms），3 个循环。LV 124 / VW 80000 试验 E-15 原文明确要求反极性期间不得触发任何安全相关功能，并点名电动车窗、天窗、起动机——这是本场景直接对号入座的条款。已核实。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 160 行：反极性 LV 124 / VW 80000 试验 E-15"
+        },
+        {
+          "file": "[源] 汽车场景素材-20260919/lv124.pdf",
+          "locator": "MBN LV 124-1: 2013-03 试验 E-15 反极性"
+        }
+      ]
+    },
+    {
+      "key": "current_loop_kp",
+      "name": "电流环比例增益 Kp",
+      "value": null,
+      "default": null,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "group": "电流环整定",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "由相位裕度与 PI 相位滞后两项设计指标反算，不直接给数。MCAF 文档里的变量名是 motor.idCtrl.kp / motor.iqCtrl.kp。有刷直流单环电流控制没有 d/q 分解，只保留一路，但整定方法论可直接套用。",
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 371 行：Microchip MCAF 7.0.2 电流环整定参数表「电流环比例增益 Kp」行"
+      }
+    },
+    {
+      "key": "current_loop_ki",
+      "name": "电流环积分增益 Ki",
+      "value": null,
+      "default": null,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "group": "电流环整定",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "同上。变量名 motor.idCtrl.ki / motor.iqCtrl.ki。决定向给定值收敛的速度。",
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 372 行：Microchip MCAF 7.0.2 电流环整定参数表「电流环积分增益 Ki」行"
+      }
+    },
+    {
+      "key": "phase_margin",
+      "name": "相位裕度 φm",
+      "value": 60.0,
+      "default": 80.0,
+      "unit": "°",
+      "min": 40.0,
+      "max": 90.0,
+      "step": 1.0,
+      "group": "电流环整定",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "MCAF 默认 80°，实测后推荐 50° 至 70°，本包取中值 60°。调小则 Kp 与 Ki 同时变大，响应更快但超调风险升高；调大则增益下降、稳定性提高、带宽降低。已核实。",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 373 行：Microchip MCAF 7.0.2「相位裕度 φm」行"
+      }
+    },
+    {
+      "key": "pi_phase_lag",
+      "name": "PI 在穿越频率处的相位滞后 φz",
+      "value": 14.0,
+      "default": 45.0,
+      "unit": "°",
+      "min": 5.0,
+      "max": 45.0,
+      "step": 1.0,
+      "group": "电流环整定",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "MCAF 默认 45°，实测后推荐 8° 至 20°，低于 5° 不建议，本包取 14°。调小则 Kp 变大、Ki 变小，短期响应改善。已核实。",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 374 行：Microchip MCAF 7.0.2「PI 在穿越频率处的相位滞后 φz」行"
+      }
+    },
+    {
+      "key": "current_loop_bandwidth",
+      "name": "电流环带宽",
+      "value": 2000.0,
+      "default": 2000.0,
+      "unit": "Hz",
+      "min": 200.0,
+      "max": 3750.0,
+      "step": 50.0,
+      "group": "电流环整定",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "典型取 PWM 频率的 5 % 至 15 %（20 kHz PWM 对应 1 至 3 kHz）；良好整定目标约为采样率的 1/10。约束条件：机械时间常数 × 带宽须大于 1。已核实。",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 375 行：Microchip MCAF 7.0.2「电流环带宽」行"
+      }
+    },
+    {
+      "key": "tuning_order",
+      "name": "整定顺序",
+      "value": "CURRENT_LOOP_FIRST",
+      "default": "CURRENT_LOOP_FIRST",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "group": "电流环整定",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "options": [
+        {
+          "value": "CURRENT_LOOP_FIRST",
+          "label": "先整定电流环，再调开闭环切换"
+        },
+        {
+          "value": "SPEED_LOOP_FIRST",
+          "label": "先整定速度环"
+        }
+      ],
+      "note": "MCAF 文档明确：若正常启动时序跑不通或无法正确切入闭环换相，电流环整定需在开环换相下进行。这条直接规定了「先整定电流环、再调开闭环切换」。已核实。",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 377 行：同一文档另外明确：先整定电流环、再调开闭环切换"
+      }
+    },
+    {
+      "key": "bench_supply_voltage",
+      "name": "台架程控电源设定电压",
+      "value": 13.5,
+      "default": 13.5,
+      "unit": "V",
+      "min": 9.0,
+      "max": 18.0,
+      "step": 0.1,
+      "group": "台架与工装",
+      "adjustable_in_flows": [
+        "F2 初始化配置",
+        "F4 启动测试及结果分析"
+      ],
+      "editable": true,
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 123 行：试验电压 6.1 b) 13.5 ± 0.3 V"
+      }
+    },
+    {
+      "key": "bench_harness_resistance",
+      "name": "台架回路串入电阻",
+      "value": 0.15,
+      "default": 0.15,
+      "unit": "Ω",
+      "min": 0.13,
+      "max": 0.17,
+      "step": 0.01,
+      "group": "台架与工装",
+      "adjustable_in_flows": [
+        "F2 初始化配置"
+      ],
+      "editable": true,
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 123 行：接线电阻 0.15 ± 0.02 Ω"
+      }
+    },
+    {
+      "key": "supply_ripple_max",
+      "name": "电源纹波峰峰值上限",
+      "value": 100.0,
+      "default": 100.0,
+      "unit": "mV",
+      "min": 10.0,
+      "max": 500.0,
+      "step": 10.0,
+      "group": "台架与工装",
+      "adjustable_in_flows": [
+        "F2 初始化配置"
+      ],
+      "editable": true,
+      "note": "仪器选型门槛，不是被测件判据。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 134 行：仪器精度 6.1 a)：电源纹波峰峰值 ≤100 mV"
+      }
+    },
+    {
+      "key": "test_rod_stiffness",
+      "name": "防夹试验棒刚度",
+      "value": 10.0,
+      "default": 10.0,
+      "unit": "N/mm",
+      "min": null,
+      "max": null,
+      "step": null,
+      "group": "台架与工装",
+      "adjustable_in_flows": [
+        "F2 初始化配置",
+        "F3 测试需求确认"
+      ],
+      "editable": true,
+      "options": [
+        {
+          "value": 10.0,
+          "label": "10 N/mm（GB 11552-2009 与 UN ECE R21）"
+        },
+        {
+          "value": 20.0,
+          "label": "20 N/mm（FMVSS 118，待核实）"
+        }
+      ],
+      "note": "GB 11552-2009 与 UN ECE R21 取 (10 ± 0.5) N/mm；FMVSS 118 的 25 至 200 mm 试棒取 20 N/mm（该值待核实）。刚度直接改变力-位移关系，换市场必须换棒，否则 100 N 的判定点会偏。",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/gb11552.txt",
+          "locator": "gb11552.txt:449 「测量工具的刚度应为(10±0.5)N/mm」"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 215 行：GB 11552-2009 试验棒刚度 (10 ± 0.5) N/mm"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 216 行：FMVSS 118 试验棒刚度 20 N/mm（待核实）"
+        }
+      ]
+    },
+    {
+      "key": "test_rod_diameter",
+      "name": "回缩验证试验棒直径",
+      "value": 200.0,
+      "default": 200.0,
+      "unit": "mm",
+      "min": 4.0,
+      "max": 200.0,
+      "step": 1.0,
+      "group": "台架与工装",
+      "adjustable_in_flows": [
+        "F3 测试需求确认"
+      ],
+      "editable": true,
+      "note": "用于验证 ROD_200MM_PASS 这一档回缩后位置：回缩后开口须能让直径 200 mm 的半刚性柱状试验棒穿过。已核实。",
+      "_source": {
+        "file": "[源] 汽车场景素材-20260919/gb11552.txt",
+        "locator": "gb11552.txt:445-446 §4.8.3.1.2.1 「允许穿过开口放置直径200mm 的半刚性柱状试验棒的位置」"
+      }
+    },
+    {
+      "key": "chamber_temperature",
+      "name": "环境箱温度设定",
+      "value": 23.0,
+      "default": 23.0,
+      "unit": "℃",
+      "min": -40.0,
+      "max": 90.0,
+      "step": 1.0,
+      "group": "台架与工装",
+      "adjustable_in_flows": [
+        "F2 初始化配置",
+        "F4 启动测试及结果分析"
+      ],
+      "editable": true,
+      "note": "耐久试验的 13 道工序要在这个参数上按表 7 走位：常温 3000 次 → 80 ℃ 1500 → 60 ℃/90 %RH 2500 → 10 ℃/95 %RH 1000 → −30 ℃ 1000 → 常温 1000。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 196 行：耐久性（电动，前门）5.9.1 / 6.9.1 表 7 的 13 道工序"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 132 行：常温定义 23 ± 2 ℃"
+        }
+      ]
+    },
+    {
+      "key": "durability_cycle_target",
+      "name": "耐久目标循环数",
+      "value": 10000,
+      "default": 10000,
+      "unit": "循环",
+      "min": 1000,
+      "max": 20000,
+      "step": 500,
+      "group": "台架与工装",
+      "adjustable_in_flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "editable": true,
+      "note": "前门 10 000、后门 5 000（各段次数减半）。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 196 行：前门累计 10 000 个循环周期"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 197 行：后门累计 5 000 个循环周期"
+        }
+      ]
+    },
+    {
+      "key": "durability_dwell_time",
+      "name": "耐久单循环止点停留时间",
+      "value": 4.0,
+      "default": 4.0,
+      "unit": "s",
+      "min": 1.0,
+      "max": 60.0,
+      "step": 1.0,
+      "group": "台架与工装",
+      "adjustable_in_flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "editable": true,
+      "note": "单循环波形：起始位置 → 上止点堵转 1 s 停 4 s → 1/3 位置 → 下止点堵转 1 s 停 4 s，末次停 60 s。试验中允许对电机风冷或水冷。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 200 行：耐久单循环波形 6.9.1 注 3"
+      }
+    },
+    {
+      "key": "durability_stall_time",
+      "name": "耐久单循环止点堵转时间",
+      "value": 1.0,
+      "default": 1.0,
+      "unit": "s",
+      "min": 0.5,
+      "max": 5.0,
+      "step": 0.5,
+      "group": "台架与工装",
+      "adjustable_in_flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "editable": true,
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 200 行：耐久单循环波形 6.9.1 注 3"
+      }
+    },
+    {
+      "key": "mud_water_dust_ratio",
+      "name": "耐久泥水粉尘配比",
+      "value": 7.5,
+      "default": 7.5,
+      "unit": "%",
+      "min": 0.0,
+      "max": 20.0,
+      "step": 0.5,
+      "group": "台架与工装",
+      "adjustable_in_flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "editable": true,
+      "note": "92.5 % 蒸馏水或去离子水 + 7.5 % 粉尘；粉尘按 ISO 12103-1 取 50 % A2 + 50 % A4。各温度段之间喷洒。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 199 行：耐久泥水配比 6.9.1 注"
+      }
+    },
+    {
+      "key": "water_spray_pressure",
+      "name": "防水试验喷水压力",
+      "value": 0.1,
+      "default": 0.1,
+      "unit": "MPa",
+      "min": 0.05,
+      "max": 0.5,
+      "step": 0.01,
+      "group": "台架与工装",
+      "adjustable_in_flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "editable": true,
+      "note": "孔径 φ1.2 mm、孔数 40、喷水量 20 L/min、时间 30 min。判据是拆机后电机内部不应进水。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 203 行：防水性 5.12.1 / 6.12.1 表 9"
+      }
+    },
+    {
+      "key": "dielectric_test_voltage",
+      "name": "绝缘介电强度试验电压",
+      "value": 550.0,
+      "default": 550.0,
+      "unit": "V",
+      "min": null,
+      "max": null,
+      "step": null,
+      "group": "台架与工装",
+      "adjustable_in_flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "editable": true,
+      "options": [
+        {
+          "value": 550.0,
+          "label": "550 V 交流，历时 1 min"
+        },
+        {
+          "value": 660.0,
+          "label": "660 V 交流，历时 1 s（批量生产替代方案）"
+        }
+      ],
+      "note": "550 V、50 Hz 正弦交流历时 1 min；批量生产可用 660 V / 1 s 替代。选 660 V 时 dielectric_test_duration 必须同步改成 1 s，两者绑定。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 204 行：绝缘介电强度 5.12.2 / 6.12.2"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 163 行：绝缘介电强度判据"
+        }
+      ]
+    },
+    {
+      "key": "dielectric_test_duration",
+      "name": "绝缘介电强度试验时长",
+      "value": 60.0,
+      "default": 60.0,
+      "unit": "s",
+      "min": null,
+      "max": null,
+      "step": null,
+      "group": "台架与工装",
+      "adjustable_in_flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "editable": true,
+      "options": [
+        {
+          "value": 60.0,
+          "label": "60 s（配 550 V）"
+        },
+        {
+          "value": 1.0,
+          "label": "1 s（配 660 V）"
+        }
+      ],
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 204 行：绝缘介电强度 5.12.2 / 6.12.2"
+      }
+    },
+    {
+      "key": "sample_rate",
+      "name": "电流与位移采样率",
+      "value": 2000,
+      "default": 2000,
+      "unit": "Sa/s",
+      "min": 100,
+      "max": 100000,
+      "step": 100,
+      "group": "数据采集",
+      "adjustable_in_flows": [
+        "F2 初始化配置",
+        "F4 启动测试及结果分析"
+      ],
+      "editable": true,
+      "note": "本包合成波形用的就是 2000 Sa/s × 12 s = 24000 行，与场景一的示波器深存储导出口径（2000 Sa/s、24000 行）刻意对齐，好让前端的时序组件不用改。真实台架若要做纹波计数，采样率须远高于纹波频率，2 kHz 只够看包络不够数纹波。",
+      "_source": [
+        {
+          "file": "./assets/waveforms",
+          "locator": "本包三条合成 CSV 的生成参数，见 _build/gen_waveforms.py"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 146 行：纹波频率正比于实际转速"
+        }
+      ]
+    },
+    {
+      "key": "force_sensor_range",
+      "name": "力传感器量程",
+      "value": 500.0,
+      "default": 500.0,
+      "unit": "N",
+      "min": 250.0,
+      "max": 2000.0,
+      "step": 50.0,
+      "group": "数据采集",
+      "adjustable_in_flows": [
+        "F2 初始化配置"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "示例值。须同时覆盖堵转力 ≥212 N 与自锁加载 600 N 两个量级，还要在 100 N 处有足够分辨率。500 N 覆盖不了 600 N 的自锁工位，这两个工位实际上要分开选型——这正是前端该暴露给用户确认的冲突。",
+      "_placeholder": true,
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 126 行：堵转力 ≥212 N，力传感器量程选型依据"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 131 行：自锁能力：600 N 保持 5 s"
+        }
+      ]
+    },
+    {
+      "key": "displacement_resolution",
+      "name": "长度器具最小刻度",
+      "value": 0.05,
+      "default": 0.05,
+      "unit": "mm",
+      "min": 0.01,
+      "max": 0.5,
+      "step": 0.01,
+      "group": "数据采集",
+      "adjustable_in_flows": [
+        "F2 初始化配置"
+      ],
+      "editable": true,
+      "note": "仪器选型门槛。自锁判据的 5 mm 下降量要靠它测。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 134 行：仪器精度 6.1 a)：长度器具最小刻度 ≤0.05 mm"
+      }
+    },
+    {
+      "key": "torque_meter_resolution",
+      "name": "扭矩仪最小刻度",
+      "value": 0.01,
+      "default": 0.01,
+      "unit": "N·m",
+      "min": 0.001,
+      "max": 0.1,
+      "step": 0.001,
+      "group": "数据采集",
+      "adjustable_in_flows": [
+        "F2 初始化配置"
+      ],
+      "editable": true,
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 134 行：仪器精度 6.1 a)：扭矩仪最小刻度 ≤0.01 N·m"
+      }
+    }
+  ]
+}

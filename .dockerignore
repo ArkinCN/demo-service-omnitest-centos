@@ -1,0 +1,56 @@
+# OmniTest 部署包 .dockerignore
+# 构建上下文 = 项目根。排除大体积、无关或含凭据的内容。
+#
+# ⚠️ 注意：不要排除 web/，前端构建需要它。
+# 也不要排除 web/public/（场景包与知识库静态数据，构建产物依赖）。
+
+# 依赖与构建产物
+**/node_modules/
+**/.venv/
+**/venv/
+**/__pycache__/
+web/dist/
+**/dist/
+**/build/
+
+# 环境与凭据
+**/.env
+**/.env.*
+!**/.env.example
+# ⚠️ 例外：web/.env 必须进构建上下文（2026-10-12 修「权限档位不生效」）。
+#   前端读 import.meta.env.VITE_AGENT_BACKEND 决定走真后端还是 mock：
+#   Vite 在**构建期**把它静态替换成字面量，拿不到 .env 就退化成 mock，
+#   dshAdapter 会被 tree-shaking 摇掉 → 权限档位/写工具确认/对话持久化全部失效。
+#   安全性：Vite 只注入 VITE_ 前缀变量，且本就随 JS 下发到浏览器，无额外暴露风险。
+!web/.env
+*.pem
+*.key
+id_rsa*
+
+# 运行期数据（由 compose 卷挂载）
+backend/.deploy/
+backend/uploads/
+**/logs/
+*.log
+
+# 版本控制与编辑器
+.git/
+.gitignore
+.idea/
+.vscode/
+**/.DS_Store
+**/Thumbs.db
+
+# 截图与排障残留（不影响运行）
+web/shots/
+web/shots2/
+web/scripts/_diag_*.mjs
+**/_dump*.txt
+**/_probe_out*.txt
+backend/_pip_before.txt
+backend/_run.json
+backend/_uv.log
+backend/uvicorn_*.log
+backend/backend_start.log
+kb-pipeline/
+docs/

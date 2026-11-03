@@ -1,0 +1,12 @@
+{"id": "ao-estimator#c0000", "doc_id": "ao-estimator", "heading_path": ["Stella 孙彤"], "text": "本次探讨基本以SPMSM为例进行A0估算器的探讨 一、无模型电流控制 我们对一阶系统做如下表示：", "page": 1, "pages": [1], "tokens": 39}
+{"id": "ao-estimator#c0001", "doc_id": "ao-estimator", "heading_path": ["Stella 孙彤"], "text": "其中u和y分别代表了系统的输入和输出，α为使得系统输入输出为同一数量级的比例因子；F中包 含了系统的已知部分，也包含了未知的部分，也就是需要进行估算的整体。 在α-β坐标系下，电机的状态方程有：", "page": 1, "pages": [1], "tokens": 85}
+{"id": "ao-estimator#c0002", "doc_id": "ao-estimator", "heading_path": ["Stella 孙彤"], "text": "其中Fα和Fβ代表系统的已知部分和未知部分，在较短得采样间隔内可以认为是一个常数。对比公 式(1)和公式(2)可以知道，Fα和Fβ中包含反电动势、电阻压降、多种不确定性与扰动(此处暂时 不考虑）。", "page": 1, "pages": [1], "tokens": 80}
+{"id": "ao-estimator#c0003", "doc_id": "ao-estimator", "heading_path": ["Stella 孙彤"], "text": "从计算过程中可以看出F中包含了Rs上的分量，我们最终的目标时要估算α和β上的反电动势的 值，于是可以把电阻上的电压分量放在系统输入上，则可以得到", "page": 1, "pages": [1], "tokens": 65}
+{"id": "ao-estimator#c0004", "doc_id": "ao-estimator", "heading_path": ["二、对参数F的进行估计"], "text": "y0是系统的初始状态，为了消除y0的影响，可以对左右两边同时对s进行微分，可以得到", "page": 2, "pages": [2], "tokens": 35}
+{"id": "ao-estimator#c0005", "doc_id": "ao-estimator", "heading_path": ["二、对参数F的进行估计"], "text": "为了避免测量噪声微分带来的噪声放大的效果，将(2-2)等式两边同时乘以s-2 可以得到：", "page": 2, "pages": [2], "tokens": 35}
+{"id": "ao-estimator#c0006", "doc_id": "ao-estimator", "heading_path": ["二、对参数F的进行估计"], "text": "d/ds等效于-t，假设采样间隔为[0，Tf]，则可以将式(2-3)进行逆变换，可以得到：", "page": 2, "pages": [2], "tokens": 29}
+{"id": "ao-estimator#c0007", "doc_id": "ao-estimator", "heading_path": ["二、对参数F的进行估计"], "text": "Ê = 3! d1J F((TF − 2δ)y(δ) + αδ(TF − δ)u(δ)) dδ J0 (2-5) Stella_孙彤 使用复化梯形公式求解(2-5)中定积分的数值解，则F的估计值实时表达式为：", "page": 2, "pages": [2], "tokens": 49}
+{"id": "ao-estimator#c0008", "doc_id": "ao-estimator", "heading_path": ["二、对参数F的进行估计"], "text": "其中，m表示第k个控制周期的采样点：TF=nFT，nF表示时间窗口长度，T表示控制周期；在每一个 控制周期采样获得的系统输入与输出分别表示为u[0]……u[nF]与y[0]……y[nF]；", "page": 2, "pages": [2], "tokens": 64}
+{"id": "ao-estimator#c0009", "doc_id": "ao-estimator", "heading_path": ["三、与程序对应"], "text": "```\n#define OBS_K1T #define OBS K2T define OBS_K3T\n```", "page": 3, "pages": [3], "tokens": 13}
+{"id": "ao-estimator#c0010", "doc_id": "ao-estimator", "heading_path": ["三、与程序对应"], "text": "```\n( B  /    ( _Q11 (RS*HW_BOARD_CURR_BASE/HW_BOARD_VOLTAGE_BASE) _Q8(2.5)\n```", "page": 3, "pages": [3], "tokens": 19}
+{"id": "ao-estimator#c0011", "doc_id": "ao-estimator", "heading_path": ["三、与程序对应"], "text": "其中0BS_K1T为上面公式中的α参数；OBS_K2T为Rs相关的参数；即用于计算Rs上的分量；OBS_K3T 为补偿的周期数，现在芯片中是以前5个周期的数据进行角度估算，可以近似地认为存在2.5个周期 Stella孙彤 地角度滞后，因此补偿2.5个周期。", "page": 3, "pages": [3], "tokens": 91}

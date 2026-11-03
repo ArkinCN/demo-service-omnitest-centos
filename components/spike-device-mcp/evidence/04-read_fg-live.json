@@ -1,0 +1,34 @@
+{
+    "mode": "live",
+    "ts": 1789831807.0397806,
+    "device_id": "bench",
+    "status": "ok",
+    "samples": [
+        {
+            "i": 0,
+            "fg1_hz": null,
+            "fg2_hz": null,
+            "raw": "FG2=9.9E37 FG1=9.9E37",
+            "elapsed_ms": 177,
+            "note": "示波器返回 9.9E37（VISA 无有效测量哨兵值）：电机未转或探头未接，不是通信故障"
+        },
+        {
+            "i": 1,
+            "fg1_hz": null,
+            "fg2_hz": null,
+            "raw": "FG2=9.9E37 FG1=9.9E37",
+            "elapsed_ms": 181,
+            "note": "示波器返回 9.9E37（VISA 无有效测量哨兵值）：电机未转或探头未接，不是通信故障"
+        },
+        {
+            "i": 2,
+            "fg1_hz": null,
+            "fg2_hz": null,
+            "raw": "FG2=9.9E37 FG1=9.9E37",
+            "elapsed_ms": 166,
+            "note": "示波器返回 9.9E37（VISA 无有效测量哨兵值）：电机未转或探头未接，不是通信故障"
+        }
+    ],
+    "rpm_mean": null,
+    "motor_spinning": false
+}

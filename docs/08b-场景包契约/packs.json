@@ -1,0 +1,20 @@
+{
+  "_note": "validate.py --all 的目录登记表。v1.0 把绝对路径写死在脚本里，换机器即失效（审稿次-8），v1.1 挪到这里。",
+  "scene_pack_root": "[源] agent-test-web-data/scenes",
+  "_env_override": "环境变量 SCENE_PACK_ROOT 覆盖上面这一行；${HERE} 展开为本契约目录。",
+  "packs": [
+    {
+      "name": "散热风扇包（峰岹 FU6832 散热风扇驱动板）",
+      "path": "${SCENE_PACK_ROOT}/motor.cooling-fan.fortior-fu6832"
+    },
+    {
+      "name": "玻璃升降器包（汽车电动玻璃升降器总成含防夹）",
+      "path": "${SCENE_PACK_ROOT}/automotive.body-motor.window-regulator"
+    },
+    {
+      "name": "最小骨架包（新建场景包的起手模板）",
+      "path": "${HERE}/examples/minimal-scene",
+      "template": true
+    }
+  ]
+}

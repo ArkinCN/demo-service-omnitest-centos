@@ -1,0 +1,25 @@
+{
+  "simulation": true,
+  "run_id": "demo-001",
+  "samples": [
+    {
+      "sequence": 3,
+      "t_s": 2.8,
+      "measurement_started_t_s": 2.6999999999999997,
+      "measurement_finished_t_s": 2.9,
+      "commanded_pwm_pct": 30,
+      "voltage_v": null,
+      "current_probe_v": null,
+      "current_a": null,
+      "measured_pwm_duty_pct": null,
+      "pwm_frequency_hz": null,
+      "rpm": null,
+      "quality": {
+        "voltage": "measurement_timeout",
+        "current": "measurement_timeout",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    }
+  ]
+}

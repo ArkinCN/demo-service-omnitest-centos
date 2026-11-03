@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+<rect width="1200" height="760" fill="#FFFFFF"/>
+<text x="40" y="48" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="26" fill="#2C2C2C">玻璃升降器台架结构简图</text>
+<text x="40" y="76" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="15" fill="#555555">示意图，非真实产品结构。标出的是本场景判据涉及的量测点位。</text>
+<line x1="40" y1="94" x2="1160" y2="94" stroke="#C8C5BD" stroke-width="1"/>
+
+<!-- 车门框 / 玻璃行程通道 -->
+<rect x="80" y="130" width="330" height="560" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="90" y="152" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="15" fill="#2E5E45">车门与玻璃导轨</text>
+
+<!-- 上止点 -->
+<line x1="80" y1="185" x2="410" y2="185" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="418" y="181" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="15" fill="#2E5E45">上止点</text>
+<text x="418" y="201" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="13" fill="#555555">开口 0 mm，位置归零点</text>
+
+<!-- 法规防夹区间 4~200 mm -->
+<rect x="80" y="185" width="330" height="200" fill="#EAF2EC" stroke="none"/>
+<line x1="80" y1="189" x2="410" y2="189" stroke="#A6353A" stroke-width="1"
+      stroke-dasharray="6 4"/>
+<line x1="80" y1="385" x2="410" y2="385" stroke="#A6353A" stroke-width="1"
+      stroke-dasharray="6 4"/>
+<text x="418" y="300" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="16" fill="#A6353A">法规防夹区间</text>
+<text x="418" y="322" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="14" fill="#A6353A">开口 4 mm 至 200 mm</text>
+<text x="418" y="344" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="13" fill="#555555">夹持力超过 100 N 前必须回缩</text>
+
+<!-- 玻璃托架 -->
+<rect x="120" y="420" width="250" height="34" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="132" y="443" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="15" fill="#2E5E45">玻璃托架</text>
+<text x="132" y="484" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="13" fill="#555555">自锁试验在此垂直加载 600 N，保持 5 s</text>
+<text x="132" y="506" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="13" fill="#555555">下降量须不大于 5 mm</text>
+
+<!-- 下止点 -->
+<line x1="80" y1="655" x2="410" y2="655" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="418" y="660" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="15" fill="#2E5E45">下止点</text>
+
+<!-- 行程标注 -->
+<line x1="100" y1="185" x2="100" y2="655" stroke="#A8C5B5" stroke-width="1"/>
+<text x="106" y="560" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="13" fill="#555555">总行程</text>
+
+<!-- 传动链：绳轮 → 蜗杆减速 → 电机 -->
+<circle cx="560" cy="437" r="46" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="524" y="432" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="15" fill="#2E5E45">绳轮</text>
+<text x="518" y="452" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="13" fill="#555555">或剪式传动</text>
+<line x1="370" y1="437" x2="514" y2="437" stroke="#2E5E45" stroke-width="1.5"/>
+
+<rect x="630" y="405" width="130" height="64" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="648" y="432" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="15" fill="#2E5E45">蜗杆减速</text>
+<text x="648" y="453" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="13" fill="#555555">自锁来源</text>
+<line x1="606" y1="437" x2="630" y2="437" stroke="#2E5E45" stroke-width="1.5"/>
+
+<rect x="810" y="398" width="150" height="78" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="828" y="426" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="15" fill="#2E5E45">有刷直流电机</text>
+<text x="828" y="447" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="13" fill="#555555">12 V，机械换向</text>
+<text x="828" y="466" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="13" fill="#555555">电流带换向纹波</text>
+<line x1="760" y1="437" x2="810" y2="437" stroke="#2E5E45" stroke-width="1.5"/>
+
+<!-- H 桥与控制器 -->
+<rect x="1010" y="398" width="150" height="78" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="1028" y="426" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="15" fill="#2E5E45">H 桥与控制器</text>
+<text x="1028" y="447" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="13" fill="#555555">PWM 调速</text>
+<text x="1028" y="466" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="13" fill="#555555">防夹判据在此运行</text>
+<line x1="960" y1="437" x2="1010" y2="437" stroke="#2E5E45" stroke-width="1.5"/>
+
+<!-- 试验棒（强调色第 2 处） -->
+<rect x="150" y="270" width="190" height="26" fill="none" stroke="#A6353A" stroke-width="1.5"/>
+<text x="162" y="288" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="14" fill="#A6353A">半刚性试验棒 10 N/mm</text>
+
+<!-- 量测点位一览 -->
+<line x1="560" y1="540" x2="1160" y2="540" stroke="#C8C5BD" stroke-width="1"/>
+<text x="560" y="572" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="16" fill="#2E5E45">台架量测点位</text>
+<text x="560" y="600" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="14" fill="#2C2C2C">力传感器　装在试验棒与托架两处，量夹持力与堵转力</text>
+<text x="560" y="624" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="14" fill="#2C2C2C">位移传感器　量开口、行程与回缩量，分辨率 0.05 mm</text>
+<text x="560" y="648" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="14" fill="#2C2C2C">电流传感器　量工作电流与堵转电流，兼作纹波计数源</text>
+<text x="560" y="672" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="14" fill="#2C2C2C">声级计　置于电机出力轴正上方 300 mm</text>
+<text x="560" y="696" font-family="Noto Sans CJK SC, DejaVu Sans, sans-serif"
+      font-size="14" fill="#2C2C2C">程控电源　13.5 ± 0.3 V，回路串 0.15 ± 0.02 Ω</text>
+</svg>

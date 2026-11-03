@@ -1,0 +1,583 @@
+{
+  "schema": "product-attributes/v1",
+  "scene_id": "motor.cooling-fan.fortior-fu6832",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-19",
+  "belongs_to_flow": "F2 初始化配置（产品本体属性，读取文档→呈现→左右加减号调整）",
+  "groups": [
+    "电机本体",
+    "转速规格",
+    "电压规格",
+    "电流规格",
+    "芯片规格",
+    "采样链路",
+    "转速信号",
+    "机械"
+  ],
+  "group_tiers": [
+    {
+      "id": "obj",
+      "title": "被测对象",
+      "groups": [
+        {
+          "id": "obj-em",
+          "title": "电磁参数",
+          "members": [
+            "电机本体"
+          ],
+          "subgroups": [
+            {
+              "id": "obj-em-model",
+              "title": "等效模型",
+              "items": [
+                "pole_pairs",
+                "rs",
+                "ld",
+                "lq",
+                "ke"
+              ]
+            },
+            {
+              "id": "obj-em-base",
+              "title": "基准与旋向",
+              "items": [
+                "motor_speed_base",
+                "motor_direction"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "obj-rated",
+          "title": "额定工况",
+          "members": [
+            "转速规格",
+            "电压规格",
+            "电流规格"
+          ]
+        },
+        {
+          "id": "obj-chip",
+          "title": "主控规格",
+          "members": [
+            "芯片规格"
+          ],
+          "subgroups": [
+            {
+              "id": "obj-chip-v",
+              "title": "供电与电流",
+              "items": [
+                "vcc_operating_min",
+                "vcc_operating_max",
+                "vcc_abs_max",
+                "ivcc_typ",
+                "ivcc_max"
+              ]
+            },
+            {
+              "id": "obj-chip-t",
+              "title": "温度限值",
+              "items": [
+                "ambient_temp_range",
+                "junction_temp_max"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "obj-sense",
+          "title": "采样与反馈",
+          "members": [
+            "采样链路",
+            "转速信号"
+          ],
+          "subgroups": [
+            {
+              "id": "obj-sense-i",
+              "title": "相电流采样",
+              "items": [
+                "hw_shunt_mode",
+                "hw_rshunt",
+                "hw_ampgain"
+              ]
+            },
+            {
+              "id": "obj-sense-v",
+              "title": "母线电压量测",
+              "items": [
+                "hw_rv_mode",
+                "rv1",
+                "rv2"
+              ]
+            },
+            {
+              "id": "obj-sense-fg",
+              "title": "转速反馈",
+              "items": [
+                "rotate_signal_type",
+                "fg_pulse_period"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "obj-mech",
+          "title": "机械外形",
+          "members": [
+            "机械"
+          ]
+        }
+      ]
+    }
+  ],
+  "attributes": [
+    {
+      "key": "pole_pairs",
+      "name": "极对数",
+      "value": 2,
+      "unit": "对",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "editable": true,
+      "group": "电机本体",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:56 (#define Pole_Pairs)"
+      }
+    },
+    {
+      "key": "rs",
+      "name": "相电阻 Rs",
+      "value": 0.098667,
+      "unit": "Ω",
+      "min": 0.001,
+      "max": 10.0,
+      "step": 0.001,
+      "editable": true,
+      "group": "电机本体",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:57 (#define RS)"
+      }
+    },
+    {
+      "key": "ld",
+      "name": "d 轴电感 Ld",
+      "value": 4.4e-05,
+      "unit": "H",
+      "min": 1e-06,
+      "max": 0.01,
+      "step": 1e-06,
+      "editable": true,
+      "group": "电机本体",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:58 (#define LD)"
+      }
+    },
+    {
+      "key": "lq",
+      "name": "q 轴电感 Lq",
+      "value": 4.4e-05,
+      "unit": "H",
+      "min": 1e-06,
+      "max": 0.01,
+      "step": 1e-06,
+      "editable": true,
+      "group": "电机本体",
+      "note": "源文件写作 #define LQ (LD)，取值跟随 LD",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:59 (#define LQ)"
+      }
+    },
+    {
+      "key": "ke",
+      "name": "反电动势常数 Ke",
+      "value": 0.288201,
+      "unit": "V/kRPM",
+      "min": 0.001,
+      "max": 10.0,
+      "step": 0.001,
+      "editable": true,
+      "group": "电机本体",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:60 (#define Ke)"
+      }
+    },
+    {
+      "key": "motor_speed_base",
+      "name": "速度基准值",
+      "value": 50000,
+      "unit": "RPM",
+      "min": 1000,
+      "max": 100000,
+      "step": 1000,
+      "editable": true,
+      "group": "电机本体",
+      "note": "典型值 = 电机最高转速 × 2",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:65 (#define MOTOR_SPEED_BASE)"
+      }
+    },
+    {
+      "key": "motor_direction",
+      "name": "电机旋向",
+      "value": "FORWARD",
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": true,
+      "group": "电机本体",
+      "note": "枚举 FORWARD 正转 / BACKWARD 反转",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:98 (#define MOTOR_DIRECTION)"
+      }
+    },
+    {
+      "key": "motor_min_speed",
+      "name": "最低工作转速",
+      "value": 18000,
+      "unit": "RPM",
+      "min": 1000,
+      "max": 40000,
+      "step": 100,
+      "editable": true,
+      "group": "转速规格",
+      "note": "SPEED_MODE 为 PWMMODE 时有效",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:243 (#define MOTOR_MIN_SPEED)"
+      }
+    },
+    {
+      "key": "motor_max_speed",
+      "name": "最高工作转速",
+      "value": 28000,
+      "unit": "RPM",
+      "min": 1000,
+      "max": 40000,
+      "step": 100,
+      "editable": true,
+      "group": "转速规格",
+      "note": "SPEED_MODE 为 PWMMODE 时有效",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:244 (#define MOTOR_MAX_SPEED)"
+      }
+    },
+    {
+      "key": "rated_speed",
+      "name": "额定转速",
+      "value": 28000,
+      "unit": "RPM",
+      "min": 1000,
+      "max": 40000,
+      "step": 100,
+      "editable": true,
+      "group": "转速规格",
+      "note": "源材料未单独给「额定转速」，此处按 MOTOR_MAX_SPEED 暂取，待客户确认",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:244 (#define MOTOR_MAX_SPEED)"
+      },
+      "_placeholder": true
+    },
+    {
+      "key": "rated_voltage",
+      "name": "额定母线电压",
+      "value": 12.0,
+      "unit": "V",
+      "min": 5.0,
+      "max": 28.0,
+      "step": 0.1,
+      "editable": true,
+      "group": "电压规格",
+      "note": "源材料无「额定电压」明文。依据：归档工作流把母线设到 12.5 V；Protect.h 过压 18.0 V / 欠压 7.0 V 的窗口也指向 12 V 级母线。数值待客户确认",
+      "_source": {
+        "file": "[源] WORKINGflow/SPEEDTEST.wfw",
+        "locator": "definition.nodes[hid_preset_voltage_set].data.paramValues.voltage = 12.5"
+      },
+      "_placeholder": true
+    },
+    {
+      "key": "vcc_operating_min",
+      "name": "芯片 VCC 工作电压下限",
+      "value": 5,
+      "unit": "V",
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": false,
+      "group": "芯片规格",
+      "_source": {
+        "file": "[源] Document/MCU-DS-14_FU6832_V2.1_20230621.pdf",
+        "locator": "PDF 第 56 页 表5-2 全局电气特性「VCC 工作电压 单电源高压模式」"
+      }
+    },
+    {
+      "key": "vcc_operating_max",
+      "name": "芯片 VCC 工作电压上限",
+      "value": 28,
+      "unit": "V",
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": false,
+      "group": "芯片规格",
+      "_source": {
+        "file": "[源] Document/MCU-DS-14_FU6832_V2.1_20230621.pdf",
+        "locator": "PDF 第 56 页 表5-2 全局电气特性「VCC 工作电压 单电源高压模式」"
+      }
+    },
+    {
+      "key": "vcc_abs_max",
+      "name": "芯片 VCC 绝对最大额定值",
+      "value": 36,
+      "unit": "V",
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": false,
+      "group": "芯片规格",
+      "_source": {
+        "file": "[源] Document/MCU-DS-14_FU6832_V2.1_20230621.pdf",
+        "locator": "PDF 第 56 页 表5-1 绝对最大额定值「VCC 相对VSS 的电压」"
+      }
+    },
+    {
+      "key": "ambient_temp_range",
+      "name": "工作环境温度 TA",
+      "value": "-40 ~ 85",
+      "unit": "℃",
+      "min": -40,
+      "max": 85,
+      "step": null,
+      "editable": false,
+      "group": "芯片规格",
+      "_source": {
+        "file": "[源] Document/MCU-DS-14_FU6832_V2.1_20230621.pdf",
+        "locator": "PDF 第 56 页 表5-1 绝对最大额定值「工作时环境温度TA」（PyMuPDF 抽文实测该行与「工作时结温TJ」「储存温度」「VCC 相对VSS 的电压」同属表5-1，旧 locator 写作表5-2 有误）"
+      }
+    },
+    {
+      "key": "junction_temp_max",
+      "name": "工作结温 TJ 上限",
+      "value": 150,
+      "unit": "℃",
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": false,
+      "group": "芯片规格",
+      "_source": {
+        "file": "[源] Document/MCU-DS-14_FU6832_V2.1_20230621.pdf",
+        "locator": "PDF 第 56 页 表5-1「工作时结温TJ」"
+      }
+    },
+    {
+      "key": "ivcc_typ",
+      "name": "芯片 IVCC 工作电流（典型）",
+      "value": 20,
+      "unit": "mA",
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": false,
+      "group": "芯片规格",
+      "_source": {
+        "file": "[源] Document/MCU-DS-14_FU6832_V2.1_20230621.pdf",
+        "locator": "PDF 第 56 页 表5-2「IVCC工作电流」典型值"
+      }
+    },
+    {
+      "key": "ivcc_max",
+      "name": "芯片 IVCC 工作电流（最大）",
+      "value": 40,
+      "unit": "mA",
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": false,
+      "group": "芯片规格",
+      "_source": {
+        "file": "[源] Document/MCU-DS-14_FU6832_V2.1_20230621.pdf",
+        "locator": "PDF 第 56 页 表5-2「IVCC工作电流」最大值"
+      }
+    },
+    {
+      "key": "rated_current",
+      "name": "整机额定相电流",
+      "value": 0.6,
+      "unit": "A",
+      "min": 0.1,
+      "max": 10.0,
+      "step": 0.1,
+      "editable": true,
+      "group": "电流规格",
+      "note": "源材料无「额定电流」明文。此处按运行阶段 Q 轴初始电流 I_Value(0.6) 暂取，待客户确认",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:157 (#define MOTOR_RUN_IQ_CURRENT)"
+      },
+      "_placeholder": true
+    },
+    {
+      "key": "hw_shunt_mode",
+      "name": "采样电阻模式",
+      "value": "SINGLE_SHUNT",
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": false,
+      "group": "采样链路",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:83 (#define HW_SHUNT_MODE)"
+      }
+    },
+    {
+      "key": "hw_rshunt",
+      "name": "采样电阻阻值",
+      "value": 0.01,
+      "unit": "Ω",
+      "min": 0.002,
+      "max": 0.05,
+      "step": 0.001,
+      "editable": true,
+      "group": "采样链路",
+      "note": "源注释建议值 0.02 ~ 0.005。与原理图交叉核对一致：标准方案原理图上 RS1、RS2 各 0.02R/1206/1%，两只并联得 0.01 Ω",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:85 (#define HW_RSHUNT)"
+      }
+    },
+    {
+      "key": "hw_ampgain",
+      "name": "内部运放放大倍率",
+      "value": "GAIN_16",
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": true,
+      "group": "采样链路",
+      "note": "枚举 GAIN_2 / GAIN_4 / GAIN_8 / GAIN_16 / GAIN_32",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:86 (#define HW_AMPGAIN)"
+      }
+    },
+    {
+      "key": "hw_rv_mode",
+      "name": "母线电压量测来源",
+      "value": "RVEXT",
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": false,
+      "group": "采样链路",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:92 (#define HW_RV_MODE)"
+      }
+    },
+    {
+      "key": "rv1",
+      "name": "母线分压电阻 RV1",
+      "value": 100.0,
+      "unit": "kΩ",
+      "min": 1.0,
+      "max": 1000.0,
+      "step": 1.0,
+      "editable": true,
+      "group": "采样链路",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:93 (#define RV1)"
+      }
+    },
+    {
+      "key": "rv2",
+      "name": "母线分压电阻 RV2",
+      "value": 30.0,
+      "unit": "kΩ",
+      "min": 1.0,
+      "max": 1000.0,
+      "step": 1.0,
+      "editable": true,
+      "group": "采样链路",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:94 (#define RV2)"
+      }
+    },
+    {
+      "key": "rotate_signal_type",
+      "name": "转速信号输出类型",
+      "value": "FG_TYPE",
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": true,
+      "group": "转速信号",
+      "note": "枚举 NO_TYPE / RD_TYPE / FG_TYPE",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:329 (#define ROTATE_SIGNAL_TYPE)"
+      }
+    },
+    {
+      "key": "fg_pulse_period",
+      "name": "FG 每转脉波数",
+      "value": 2,
+      "unit": "pulse/rev",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "editable": true,
+      "group": "转速信号",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:334 (#define FG_PULSE_PERIOD)"
+      }
+    },
+    {
+      "key": "fan_outer_size",
+      "name": "风扇外形尺寸",
+      "value": "未知",
+      "unit": "mm",
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": true,
+      "group": "机械",
+      "note": "缺口：本地源材料（Customer.h、数据手册、原理图、调研文档 A/B）均无风扇机械尺寸，需向客户索取",
+      "_source": {
+        "file": "[源] _调研/A-DebugCopilot场景与知识库取证.md",
+        "locator": "第六节「跑通散热风扇一条流程的输入」——界面只填 5 项，不含机械尺寸"
+      },
+      "_placeholder": true
+    },
+    {
+      "key": "fan_thickness",
+      "name": "风扇厚度",
+      "value": "未知",
+      "unit": "mm",
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": true,
+      "group": "机械",
+      "note": "缺口：同上",
+      "_source": {
+        "file": "[源] _调研/A-DebugCopilot场景与知识库取证.md",
+        "locator": "第六节「跑通散热风扇一条流程的输入」——界面只填 5 项，不含机械尺寸"
+      },
+      "_placeholder": true
+    }
+  ]
+}

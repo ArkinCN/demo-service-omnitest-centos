@@ -1,0 +1,24 @@
+{
+  "doc_id": "ao-estimator",
+  "title": "AO 估算器",
+  "doc_type": "原理文档",
+  "taxonomy": {
+    "l1": "motor",
+    "l2": "cooling-fan",
+    "l3": "fortior-fu6832"
+  },
+  "process_tags": [
+    "调优"
+  ],
+  "format": "pdf",
+  "pages": 3,
+  "page_limit": null,
+  "tables": 0,
+  "source_path": "[源] manuals/AO估算器.pdf",
+  "staged_input": "[源] manuals/AO估算器.pdf",
+  "sha256": "640f766be2b3b021c22a2507455a84296937d2d22a1d8916193844317bcbdef8",
+  "bytes": 1082113,
+  "converter": "docling",
+  "ocr": true,
+  "note": null
+}

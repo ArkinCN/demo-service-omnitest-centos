@@ -1,0 +1,25 @@
+{
+  "doc_id": "smo-angle-register-note",
+  "title": "SMO 角度估算的原理介绍和部分寄存器说明",
+  "doc_type": "原理与寄存器说明",
+  "taxonomy": {
+    "l1": "motor",
+    "l2": "cooling-fan",
+    "l3": "fortior-fu6832"
+  },
+  "process_tags": [
+    "初始化配置",
+    "调优"
+  ],
+  "format": "docx",
+  "pages": null,
+  "page_limit": null,
+  "tables": 1,
+  "source_path": "[源] manuals/SMO角度估算的原理介绍和部分寄存器说明.docx",
+  "staged_input": "[源] manuals/SMO角度估算的原理介绍和部分寄存器说明.docx",
+  "sha256": "84679c09e0f06b1636d38a4a0273889a917b230634f3123535cf44388008dfcc",
+  "bytes": 508663,
+  "converter": "docling",
+  "ocr": false,
+  "note": "转化失败：docling 2.129.0 的 msword 后端在这份 docx 的 VML 旧式图形上陷入死循环（卡在 msword_backend.py 的 _handle_vml_pictures），已由子进程超时兜底；换 docling 版本或先用 Word 另存为新式 docx 可再试。"
+}

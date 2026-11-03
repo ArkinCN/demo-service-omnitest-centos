@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "gap-list/v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "run_id",
+    "gaps"
+  ],
+  "properties": {
+    "schema": {
+      "const": "gap-list/v1"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "criterion_id",
+          "level",
+          "target",
+          "measured",
+          "gap"
+        ],
+        "properties": {
+          "criterion_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "level": {
+            "enum": [
+              "fatal",
+              "major",
+              "minor"
+            ]
+          },
+          "target": {},
+          "measured": {},
+          "gap": {
+            "description": "差距，数值型给差值或百分比，枚举型给两端取值"
+          },
+          "occurred_in_iterations": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "causes": {
+            "type": "array",
+            "description": "副驾给的可能原因，每条必须带依据与置信度，不许只给结论",
+            "items": {
+              "type": "object",
+              "required": [
+                "text",
+                "confidence",
+                "evidence_refs"
+              ],
+              "properties": {
+                "text": {
+                  "type": "string"
+                },
+                "confidence": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "evidence_refs": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "enum": [
+                          "experience",
+                          "document",
+                          "procedure",
+                          "history-run"
+                        ]
+                      },
+                      "id": {
+                        "type": "string",
+                        "description": "如经验条目 EXP-007"
+                      },
+                      "_source": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

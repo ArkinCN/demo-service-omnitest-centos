@@ -1,0 +1,355 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fortior.local/scene-pack/v1/datasets.schema.json",
+  "title": "datasets.json",
+  "description": "可回放时序数据登记。F4 的曲线回放与判定取它。",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "datasets/v1",
+      "description": "文件契约标识，换包不得改。"
+    },
+    "scene_id": {
+      "$ref": "common.schema.json#/$defs/sceneId"
+    },
+    "generated_by": {
+      "type": "string",
+      "description": "产出这份文件的脚本相对路径，例如 _build/build_scene_pack.py。"
+    },
+    "generated_at": {
+      "$ref": "common.schema.json#/$defs/genDate"
+    },
+    "belongs_to_flow": {
+      "$ref": "common.schema.json#/$defs/flowMention",
+      "description": "这份文件主要服务哪条业务流程。人读为主，但句中必须至少出现一个合法的 F1~F6 标签，防止写进不存在的流程号。"
+    },
+    "all_synthetic": {
+      "type": "boolean",
+      "description": "整包时序全部为合成数据。为 true 时界面必须常驻合成横幅。"
+    },
+    "synthetic_banner": {
+      "type": "string",
+      "description": "合成数据的界面提示原文。"
+    },
+    "why_synthetic": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "platforms_searched": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "检索过哪些数据平台。"
+        },
+        "_source": {
+          "$ref": "common.schema.json#/$defs/sourceRefs"
+        }
+      },
+      "required": []
+    },
+    "package_root": {
+      "type": "string",
+      "description": "实测数据包的根目录绝对路径。"
+    },
+    "package_stats": {
+      "type": "object",
+      "description": "实测数据包的批次统计。包二没有批次概念。"
+    },
+    "real_data_alternatives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "数据集全称，不得只给缩写。"
+          },
+          "publisher": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "doi": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "format": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "mode": {
+            "$ref": "common.schema.json#/$defs/dsMode"
+          },
+          "note": {
+            "type": "string"
+          },
+          "_source": {
+            "$ref": "common.schema.json#/$defs/sourceRefs"
+          }
+        },
+        "required": [
+          "id",
+          "mode",
+          "name"
+        ]
+      },
+      "description": "只登记未下载的真实数据集候选。"
+    },
+    "excluded_datasets": {
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "suspect_items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "_source": {
+          "$ref": "common.schema.json#/$defs/sourceRefs"
+        }
+      },
+      "required": [],
+      "description": "已明确排除的数据集，避免后续重复捞。"
+    },
+    "demo_profile": {
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "datasets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "datasets",
+        "note"
+      ]
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "mode": {
+            "$ref": "common.schema.json#/$defs/dsMode"
+          },
+          "file_path": {
+            "type": "string",
+            "description": "绝对路径。"
+          },
+          "file_size_bytes": {
+            "type": "integer"
+          },
+          "row_count": {
+            "type": "integer"
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "name"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "sample_rate_sa_per_s": {
+            "type": "number"
+          },
+          "duration_s": {
+            "type": "number"
+          },
+          "synthetic": {
+            "type": "boolean",
+            "description": "这一条是合成的。为 true 时界面必须标「合成，非实测」，且不得进入合规报告。"
+          },
+          "generator": {
+            "type": "string",
+            "description": "合成脚本路径。"
+          },
+          "synthesis_model": {
+            "type": "string",
+            "description": "合成用的物理模型与参数。"
+          },
+          "calibration": {
+            "type": "string",
+            "description": "合成参数标定到哪个标准的哪一条量级上。"
+          },
+          "measured_range": {
+            "type": "object",
+            "description": "各通道的实际取值范围。"
+          },
+          "phases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "时间轴分段标签。"
+          },
+          "source_file_path": {
+            "type": "string",
+            "description": "实测原始文件路径。"
+          },
+          "scope": {
+            "type": "string",
+            "description": "采集仪器。"
+          },
+          "memory_depth": {
+            "type": "string"
+          },
+          "y_increment_v": {
+            "type": "number"
+          },
+          "probe_ratio_confirmed": {
+            "type": "boolean",
+            "description": "探头变比是否已确认。为 false 时电流绝对量级不得对外引用。"
+          },
+          "probe_ratio_note": {
+            "type": "string"
+          },
+          "label": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "这条数据的标注。只登记未取得本体（mode 为 registered_only）时可为 null。",
+            "properties": {
+              "expected_result": {
+                "type": "string",
+                "description": "期望判定，例如 PASS / FAIL；带条件时照实写清条件。"
+              },
+              "meaning": {
+                "type": "string",
+                "description": "这条数据说明什么。"
+              },
+              "case_id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "对应的案例编号。"
+              },
+              "injected_fault": {
+                "type": "string",
+                "description": "注入的故障。"
+              },
+              "operator_result": {
+                "type": "string",
+                "description": "操作者当时给的结论。"
+              }
+            },
+            "required": [
+              "meaning"
+            ]
+          },
+          "note": {
+            "type": "string"
+          },
+          "_placeholder": {
+            "$ref": "common.schema.json#/$defs/placeholderFlag"
+          },
+          "_source": {
+            "$ref": "common.schema.json#/$defs/sourceRefs"
+          }
+        },
+        "required": [
+          "_source",
+          "columns",
+          "file_path",
+          "file_size_bytes",
+          "id",
+          "label",
+          "mode",
+          "name",
+          "note"
+        ]
+      }
+    }
+  },
+  "required": [
+    "belongs_to_flow",
+    "datasets",
+    "demo_profile",
+    "generated_at",
+    "generated_by",
+    "scene_id",
+    "schema"
+  ],
+  "allOf": [
+    {
+      "$comment": "红线三（README 第 5.2 节）前半段：整包时序全是合成的，必须把 all_synthetic 与 why_synthetic 一起写出来，让界面挂得起合成横幅、让读者看得到为什么没有真实数据。后半段「合成数据不得进合规字段」是跨文件业务约束，由 validate.py 第二阶段的 X8 检查。",
+      "if": {
+        "properties": {
+          "datasets": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "properties": {
+                "synthetic": {
+                  "const": true
+                }
+              },
+              "required": [
+                "synthetic"
+              ]
+            }
+          }
+        },
+        "required": [
+          "datasets"
+        ]
+      },
+      "then": {
+        "required": [
+          "all_synthetic",
+          "synthetic_banner",
+          "why_synthetic"
+        ],
+        "properties": {
+          "all_synthetic": {
+            "const": true
+          }
+        }
+      }
+    }
+  ]
+}

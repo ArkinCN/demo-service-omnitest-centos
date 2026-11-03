@@ -1,0 +1,13 @@
+/* 本地打包字体（离线可用，不依赖 CDN） */
+
+/* 拉丁与数字：Inter Variable */
+@import '@fontsource-variable/inter/index.css';
+
+/* 等宽（终端、日志、代码）：IBM Plex Mono */
+@import '@fontsource/ibm-plex-mono/latin-400.css';
+@import '@fontsource/ibm-plex-mono/latin-500.css';
+
+/* 中文正文：思源黑体 Noto Sans SC */
+@import '@fontsource/noto-sans-sc/chinese-simplified-400.css';
+@import '@fontsource/noto-sans-sc/chinese-simplified-500.css';
+@import '@fontsource/noto-sans-sc/chinese-simplified-700.css';

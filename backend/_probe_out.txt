@@ -1,0 +1,19 @@
+kind=config-snapshot
+  product_attributes 条数 = 109
+  前 40 个 key: ['pole_pairs', 'rs', 'ld', 'lq', 'ke', 'motor_speed_base', 'motor_direction', 'motor_min_speed', 'motor_max_speed', 'rated_speed', 'rated_voltage', 'vcc_operating_min', 'vcc_operating_max', 'vcc_abs_max', 'ambient_temp_range', 'junction_temp_max', 'ivcc_typ', 'ivcc_max', 'rated_current', 'hw_shunt_mode', 'hw_rshunt', 'hw_ampgain', 'hw_rv_mode', 'rv1', 'rv2', 'rotate_signal_type', 'fg_pulse_period', 'fan_outer_size', 'fan_thickness', 'motor_start_mode', 'motor_start_iq_current', 'motor_loop_rpm', 'motor_min_smo_speed', 'motor_start_dqkp', 'motor_start_dqki', 'motor_start_times', 'motor_open_acc', 'motor_open_acc_cnt', 'motor_omega_ramp_acc', 'motor_omega_acc_min']
+  含 _class 的: [('motor_start_mode', 'control'), ('motor_start_iq_current', 'control'), ('motor_loop_rpm', 'control'), ('motor_min_smo_speed', 'control'), ('motor_start_dqkp', 'control'), ('motor_start_dqki', 'control'), ('motor_start_times', 'control'), ('motor_open_acc', 'control'), ('motor_open_acc_cnt', 'control'), ('motor_omega_ramp_acc', 'control'), ('motor_omega_acc_min', 'control'), ('motor_omega_acc_end', 'control'), ('motor_align_enabled', 'control'), ('motor_alignment_dout', 'control'), ('motor_alignment_degrees', 'control'), ('motor_alignment_times', 'control'), ('ato_bw', 'control'), ('ato_bw_run', 'control'), ('ato_bw_run1', 'control'), ('ato_bw_run2', 'control')]
+  表头 key 命中情况: [('model', True), ('project_name', True), ('firmware_version', True), ('inlet_start_addr', True), ('bootloader', True), ('outlet_start_addr', True)]
+  content 顶层键: ['schema', 'snapshot_id', 'scene_id', 'locked_at', 'locked_by', 'locked', 'product_attributes', '_counts', 'firmware', 'interlock_instances', 'channel_map', '_incomplete']
+kind=param-change
+
+report-template.json header_fields 条数 = 10
+  customer_name | 客戶名稱 | from_flow=F6 测试报告及产出
+  model | Model 机型 | from_flow=F2 初始化配置
+  customer_engineer | 客戶工程師 | from_flow=F6 测试报告及产出
+  email | Email | from_flow=F6 测试报告及产出
+  project_name | 項目名稱 | from_flow=F2 初始化配置
+  phone | 聯繫電話 | from_flow=F6 测试报告及产出
+  firmware_version | 韌體版本 | from_flow=F2 初始化配置
+  inlet_start_addr | Inlet 起始位址 | from_flow=F2 初始化配置
+  bootloader | Bootloader | from_flow=F2 初始化配置
+  outlet_start_addr | Outlet 起始位址 | from_flow=F2 初始化配置

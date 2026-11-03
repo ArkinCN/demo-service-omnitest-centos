@@ -1,0 +1,91 @@
+{
+  "_comment": "样例/回退配置：主链路权威配置是 acceptance.json（+ overlay）。本文件仅供手工对照与历史回退，非后端默认。",
+  "schemaVersion": "1.0",
+  "serial": {
+    "port": "COM3",
+    "baud": 115200,
+    "expectedIdentity": "READY UNO_FAN_V2 25000",
+    "wiringConfirmed": true
+  },
+  "experiment": {
+    "dutiesPercent": [
+      30,
+      50,
+      70,
+      100
+    ],
+    "holdSeconds": 10,
+    "cycles": 0,
+    "settleSeconds": 2,
+    "capturesPerStep": 5,
+    "captureIntervalSeconds": 0.5
+  },
+  "output": {
+    "root": "../runs"
+  },
+  "scope": {
+    "enabled": true,
+    "resource": "USB0::6833::1230::DS1ZC271600575::0::INSTR",
+    "expectedIdentity": "RIGOL TECHNOLOGIES,DS1104Z Plus,DS1ZC271600575,00.04.05.SP2",
+    "inputImpedanceOhm": 1000000,
+    "pwmTimebaseSecondsPerDiv": 2E-05,
+    "triggerLevelV": 2.5,
+    "channels": {
+      "current": {
+        "channel": 1,
+        "probeRatio": 1,
+        "coupling": "DC",
+        "scaleVoltsPerDiv": 0.02,
+        "offsetV": 0,
+        "physicalProbeRatioConfirmed": true
+      },
+      "voltage": {
+        "channel": 2,
+        "probeRatio": 10,
+        "coupling": "DC",
+        "scaleVoltsPerDiv": 2,
+        "offsetV": 0,
+        "physicalProbeRatioConfirmed": false
+      },
+      "pwm": {
+        "channel": 3,
+        "probeRatio": 10,
+        "coupling": "DC",
+        "scaleVoltsPerDiv": 1,
+        "offsetV": -2.5,
+        "physicalProbeRatioConfirmed": false
+      }
+    },
+    "currentConversion": {
+      "enabled": false,
+      "gainAmpsPerVolt": 10,
+      "turns": 1,
+      "lowRangeConfirmed": true,
+      "zeroConfirmed": true,
+      "singleConductorConfirmed": false,
+      "probeModel": "CYBERTEK CPL8100A",
+      "range": "L 0.1 V/A",
+      "minimumSpecifiedCurrentA": 0.05
+    },
+    "tach": {
+      "enabled": false,
+      "channel": 4,
+      "sensorModel": "JINGJIAKE LZ-MK10 NPN",
+      "supplyVoltageV": null,
+      "signalWire": "BK black OUT; BU blue 0V; BN brown supply",
+      "outputVoltageV": null,
+      "outputType": "NPN; internal output circuit and pull-up conditions require verification",
+      "wiringConfirmed": false,
+      "probeRatio": null,
+      "physicalProbeRatioConfirmed": false,
+      "pulsesPerRevolution": null,
+      "timebaseSecondsPerDiv": 0.02,
+      "scaleVoltsPerDiv": null,
+      "triggerLevelV": null,
+      "supplyVoltageRangeV": [
+        12,
+        24
+      ]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "ath-dsh-plugins",
+  "version": "1.0.0",
+  "description": "ATH - Agentic Test Harness plugin set for DeepSeek Harness (Fortior line)",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@deepseek-ai/dsh": "0.1.5-rc.2"
+  },
+  "private": true
+}

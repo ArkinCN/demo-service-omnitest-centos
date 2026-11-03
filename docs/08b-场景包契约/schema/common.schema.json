@@ -1,0 +1,616 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fortior.local/scene-pack/v1/common.schema.json",
+  "title": "场景包公共定义",
+  "description": "十一份场景包 JSON 共用的片段定义。",
+  "$defs": {
+    "sourceRef": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "被引材料的绝对路径，必须以 / 开头。禁止写相对路径或只写文件名。pattern 是这条红线的机读落实，v1.1 起由 schema 直接拦。",
+          "pattern": "^/"
+        },
+        "locator": {
+          "type": "string",
+          "description": "在该材料内的定位：行号、单元格地址、PDF 页码、JSON 字段路径或小节标题。"
+        }
+      },
+      "required": [
+        "file"
+      ],
+      "description": "一条来源引用。凡是从外部材料抄来的数值，都要能靠它独立定位回原文。",
+      "additionalProperties": false
+    },
+    "sourceRefs": {
+      "description": "来源引用。单一来源写对象，多份材料互证写数组。",
+      "oneOf": [
+        {
+          "$ref": "common.schema.json#/$defs/sourceRef"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/sourceRef"
+          },
+          "minItems": 1
+        }
+      ]
+    },
+    "sceneId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+      "description": "场景三级标识 <一级场景>.<二级子类>.<三级产品类型>，与场景包目录名逐字相同。"
+    },
+    "genDate": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "description": "生成日期，ISO 8601 的 YYYY-MM-DD。"
+    },
+    "flowLabel": {
+      "type": "string",
+      "pattern": "^F[1-6] ",
+      "description": "六流程之一的标签，形如「F4 启动测试及结果分析」。前缀 F1~F6 固定，中文名照 scene.json 的 flows 段。"
+    },
+    "statusText": {
+      "type": "string",
+      "minLength": 1,
+      "description": "状态红线字段 _status：这条数据为什么还不算已核实。非空即表示界面必须挂「待核实」角标。换包时只能重写理由，不得因为想让界面干净就删掉它。"
+    },
+    "placeholderFlag": {
+      "const": true,
+      "description": "状态红线字段 _placeholder：这个数值是编的或借来的，源材料里没有。只允许取 true；不再是占位就整条删掉这个键，不允许写成 false 来把占位值洗成确定值。"
+    },
+    "scalar": {
+      "type": [
+        "string",
+        "number",
+        "integer",
+        "boolean",
+        "null"
+      ],
+      "description": "参数取值。数值型给数字，枚举型给 options 里的 value，开关型给布尔，缺口未知给 null。"
+    },
+    "numberOrNull": {
+      "type": [
+        "number",
+        "integer",
+        "null"
+      ],
+      "description": "数值或 null。null 表示源材料没给这个界，前端不得按 0 处理。"
+    },
+    "option": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "common.schema.json#/$defs/scalar"
+        },
+        "label": {
+          "type": "string",
+          "description": "中文显示名。"
+        }
+      },
+      "required": [
+        "label",
+        "value"
+      ],
+      "description": "枚举型取值的一个候选项。",
+      "additionalProperties": false
+    },
+    "memberTier": {
+      "type": "array",
+      "description": "左栏三级骨架（一级 tier → 二级 group → 三级 subgroup）。两层点名语义不同：groups[].members 点的是本文件的分组名（product-attributes 与 control-parameters 的 groups 清单、test-requirements 的 categories）；subgroups[].items 点的才是条目 key / id。两处都不放条目本体。v1.1 改正 v1.0 把两者混为一谈的说法。",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "一级分区标识。"
+          },
+          "title": {
+            "type": "string",
+            "description": "一级分区中文名。"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "二级分组标识。"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "二级分组中文名。"
+                },
+                "members": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "本组覆盖的分组名列表，取值须落在本文件的 groups / categories 清单里。"
+                },
+                "subgroups": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "三级子组下的条目 key / id 列表。"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "items",
+                      "title"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "三级子组，可缺省。"
+                }
+              },
+              "required": [
+                "id",
+                "members",
+                "title"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "groups",
+          "id",
+          "title"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "itemTier": {
+      "type": "array",
+      "description": "左栏两级骨架（一级 tier → 二级 group → items）。安全联锁与报告模板用这一种，items 直接点条目 id（报告模板点的是模板字段 key）。",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "本组下的条目 id 列表。"
+                }
+              },
+              "required": [
+                "id",
+                "items",
+                "title"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "groups",
+          "id",
+          "title"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "usageAxis": {
+      "enum": [
+        "产品说明书",
+        "测试需求",
+        "工艺"
+      ],
+      "description": "知识三轴的用途轴，固定三类不加第四类，与前端 KnowledgeUsage 的 spec/requirement/process 一一对应。"
+    },
+    "viewMode": {
+      "enum": [
+        "canvas",
+        "grid"
+      ],
+      "description": "canvas 统一画板 / grid 卡片网格。两包实测只出现这两个值。"
+    },
+    "interlockType": {
+      "enum": [
+        "硬件",
+        "流程",
+        "人员"
+      ],
+      "description": "两包实测只出现这三个值，与顶层 types 的三个键一致。"
+    },
+    "varSource": {
+      "enum": [
+        "runtime.measure",
+        "threshold",
+        "control-parameters",
+        "constant"
+      ],
+      "description": "变量的四类取值来源。两包实测只出现这四个值，求值器 src/features/flow-run/evaluate.ts 也只认这四类。"
+    },
+    "dsMode": {
+      "enum": [
+        "copied_into_pack",
+        "generated_into_pack",
+        "registered_only"
+      ],
+      "description": "数据落位方式。copied_into_pack 实测原件已复制进 assets/；generated_into_pack 由本包脚本合成并写进 assets/；registered_only 只登记元信息未取得本体。两包实测只出现这三个值。"
+    },
+    "templateField": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "name_zh": {
+          "type": "string"
+        },
+        "name_en": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "字段控件类型。两包实测出现 text / date / textarea 三种，不封闭。"
+        },
+        "label_cell": {
+          "type": "string",
+          "description": "标签所在单元格地址（表格口径）。"
+        },
+        "value_cell": {
+          "type": "string",
+          "description": "取值所在单元格地址（表格口径）。"
+        },
+        "label_section": {
+          "type": "string",
+          "description": "标签所在节（PDF 口径）。"
+        },
+        "label_slot": {
+          "type": "string"
+        },
+        "value_slot": {
+          "type": "string"
+        },
+        "label_text_in_template": {
+          "type": "string"
+        },
+        "sample_value": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "filled_in_sample": {
+          "type": "boolean"
+        },
+        "field_no": {
+          "type": "integer"
+        },
+        "from_flow": {
+          "$ref": "common.schema.json#/$defs/flowLabel",
+          "description": "这个字段由哪条流程填。"
+        },
+        "required_by": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "被哪条合规条款要求。"
+        },
+        "note": {
+          "type": "string"
+        },
+        "_source": {
+          "$ref": "common.schema.json#/$defs/sourceRefs"
+        }
+      },
+      "required": [
+        "from_flow",
+        "key"
+      ]
+    },
+    "redlineAction": {
+      "enum": [
+        "start",
+        "stop",
+        "estop",
+        "write_back",
+        "export",
+        "archive"
+      ],
+      "description": "启动、停止、急停、写回参数、导出、归档。"
+    },
+    "buttonTypeDef": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "rule": {
+          "type": "string"
+        },
+        "confirm_required": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "confirm_required",
+        "label",
+        "rule"
+      ],
+      "additionalProperties": false
+    },
+    "flowButtons": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "流程中文名。"
+        },
+        "buttons": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/button"
+          }
+        }
+      },
+      "required": [
+        "buttons",
+        "label"
+      ],
+      "additionalProperties": false
+    },
+    "button": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z]+\\.[a-z0-9_-]+$",
+          "description": "按钮唯一标识，形如 <flowKey>.<slug>。前端按它做埋点与折叠记忆，换场景包不得改名。"
+        },
+        "label": {
+          "type": "string",
+          "maxLength": 6,
+          "description": "按钮面上的中文名，不超过 6 个字。"
+        },
+        "icon": {
+          "$ref": "common.schema.json#/$defs/iconName"
+        },
+        "icon_draft": {
+          "type": "string",
+          "description": "草案里写的 lucide-react 组件名，仅作追溯，前端不读。v1.1 起从 required 移出，新建包可以不写；要写就照草案原样写。"
+        },
+        "type": {
+          "enum": [
+            "explain",
+            "prepare",
+            "execute"
+          ],
+          "description": "解释类 / 准备类 / 执行类，与 button_types 三个键一致。"
+        },
+        "source": {
+          "enum": [
+            "customer",
+            "ours"
+          ],
+          "description": "customer 直接复用客户规程；ours 我方新写。"
+        },
+        "skill_ref": {
+          "type": "string",
+          "description": "客户规程名或我方规程名。"
+        },
+        "skill_verify": {
+          "enum": [
+            "verified",
+            "unverified"
+          ],
+          "description": "规程名是否已在客户架构盘点中核到。unverified 表示待打开正文确认入参与步骤。"
+        },
+        "prompt": {
+          "type": "string",
+          "description": "预置 prompt 全文。{{ }} 包裹的占位符由前端按 JSON 指针从上下文包取值后替换。"
+        },
+        "operation": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "点击后实际执行的动作序列，逐条对应一次 tool_call。"
+        },
+        "touches_redline": {
+          "type": "boolean",
+          "description": "是否触碰六个红线动作。"
+        },
+        "redline_action": {
+          "oneOf": [
+            {
+              "$ref": "common.schema.json#/$defs/redlineAction"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "触碰的是哪一个；不触碰时为 null。"
+        },
+        "degraded_to": {
+          "oneOf": [
+            {
+              "const": "prepare_and_wait"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "触碰红线时的降级形态，固定 prepare_and_wait：助手只把东西准备好并点亮人工按钮，自己不执行。"
+        },
+        "confirm_required": {
+          "type": "boolean",
+          "description": "执行前是否弹人工确认。execute 类一律为 true。"
+        },
+        "echo": {
+          "type": "string",
+          "description": "点击后先回显的一句话。"
+        },
+        "success_feedback": {
+          "type": "string",
+          "description": "成功后的反馈形态与落点。"
+        },
+        "context_requires": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "必须拿到的上下文字段，用 JSON 指针写。缺字段时按钮置灰。"
+        },
+        "available": {
+          "type": "boolean",
+          "description": "本场景是否开放，缺省视为 true。"
+        },
+        "unavailable_reason": {
+          "type": "string",
+          "description": "available 为 false 时的说明文字。"
+        }
+      },
+      "required": [
+        "confirm_required",
+        "context_requires",
+        "degraded_to",
+        "echo",
+        "icon",
+        "id",
+        "label",
+        "operation",
+        "prompt",
+        "redline_action",
+        "skill_ref",
+        "skill_verify",
+        "source",
+        "success_feedback",
+        "touches_redline",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$comment": "红线降级规则（README 第 8.2 节）：触碰红线的按钮必须写明触碰的是哪一个，且降级形态固定 prepare_and_wait。",
+          "if": {
+            "properties": {
+              "touches_redline": {
+                "const": true
+              }
+            },
+            "required": [
+              "touches_redline"
+            ]
+          },
+          "then": {
+            "properties": {
+              "redline_action": {
+                "$ref": "common.schema.json#/$defs/redlineAction"
+              },
+              "degraded_to": {
+                "const": "prepare_and_wait"
+              }
+            },
+            "required": [
+              "degraded_to",
+              "redline_action"
+            ]
+          }
+        },
+        {
+          "$comment": "不触碰红线的按钮不得挂降级形态，否则「降级」二字失去含义。",
+          "if": {
+            "properties": {
+              "touches_redline": {
+                "const": false
+              }
+            },
+            "required": [
+              "touches_redline"
+            ]
+          },
+          "then": {
+            "properties": {
+              "degraded_to": {
+                "type": "null"
+              },
+              "redline_action": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "iconName": {
+      "enum": [
+        "search",
+        "explain",
+        "wand",
+        "check",
+        "shield",
+        "play",
+        "list",
+        "chart",
+        "report",
+        "upload",
+        "download",
+        "compare",
+        "params",
+        "alert",
+        "refresh",
+        "idea",
+        "sparkles",
+        "library",
+        "folder-tree",
+        "scale",
+        "link",
+        "workflow",
+        "lock",
+        "stethoscope",
+        "network",
+        "file-diff",
+        "note-pen",
+        "package"
+      ],
+      "description": "图标名。二十八个取值取自前端 [源] app/icons.ts 的 COPILOT_ACTION_ICON_NAMES（前 17 个为 W1 冻结，后 11 个为收尾轮补齐）。用表外的名字前端会静默回落到 sparkles。"
+    },
+    "flowMention": {
+      "type": "string",
+      "pattern": "F[1-6]",
+      "description": "整句式的流程归属说明，句中必须至少出现一个 F1~F6 标签，例如「F2 初始化配置（呈现与确认）+ F4 启动测试及结果分析」。与 flowLabel 的区别：flowLabel 要求整串以「F<n> 」开头，用于流程标签数组；flowMention 只要求句中出现合法流程号，用于 belongs_to_flow 这类自由行文字段。"
+    }
+  }
+}

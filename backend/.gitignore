@@ -1,0 +1,31 @@
+# MotorDebug 后端 — 版本控制忽略清单
+
+# 环境变量与凭据
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# 本地部署产物
+.deploy/
+uploads/
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+
+# 编辑器与系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

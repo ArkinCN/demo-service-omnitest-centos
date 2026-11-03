@@ -1,0 +1,1337 @@
+{
+  "schema": "product-attributes/v1",
+  "scene_id": "automotive.body-motor.window-regulator",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-19",
+  "belongs_to_flow": "F2 初始化配置（产品本体属性，读取文档→呈现→左右加减号调整）",
+  "groups": [
+    "电机本体",
+    "电气额定",
+    "工作电流",
+    "机械性能",
+    "运行速度",
+    "声学",
+    "结构与行程",
+    "环境与等级"
+  ],
+  "group_tiers": [
+    {
+      "id": "obj",
+      "title": "被测对象",
+      "groups": [
+        {
+          "id": "obj-em",
+          "title": "电机与传动",
+          "members": [
+            "电机本体"
+          ]
+        },
+        {
+          "id": "obj-rated",
+          "title": "额定工况",
+          "members": [
+            "电气额定",
+            "工作电流"
+          ],
+          "subgroups": [
+            {
+              "id": "obj-rated-v",
+              "title": "电压范围",
+              "items": [
+                "system_voltage",
+                "operating_voltage_min",
+                "operating_voltage_max",
+                "start_voltage_max",
+                "voltage_code_iso16750"
+              ]
+            },
+            {
+              "id": "obj-rated-loop",
+              "title": "试验回路",
+              "items": [
+                "test_voltage",
+                "test_voltage_tolerance",
+                "harness_resistance"
+              ]
+            },
+            {
+              "id": "obj-rated-i-run",
+              "title": "工作电流限值",
+              "items": [
+                "working_current_max",
+                "working_current_up_max_80c",
+                "working_current_down_max_80c",
+                "working_current_up_max_m30c",
+                "working_current_down_max_m30c"
+              ]
+            },
+            {
+              "id": "obj-rated-i-stall",
+              "title": "堵转电流限值",
+              "items": [
+                "stall_current_max",
+                "stall_current_max_80c",
+                "stall_current_max_m30c"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "obj-perf",
+          "title": "力与速度",
+          "members": [
+            "机械性能",
+            "运行速度"
+          ],
+          "subgroups": [
+            {
+              "id": "obj-perf-f",
+              "title": "堵转力",
+              "items": [
+                "stall_force_min",
+                "stall_force_min_80c",
+                "stall_force_min_m30c"
+              ]
+            },
+            {
+              "id": "obj-perf-l",
+              "title": "自锁",
+              "items": [
+                "self_lock_load",
+                "self_lock_hold_time",
+                "self_lock_drop_max"
+              ]
+            },
+            {
+              "id": "obj-perf-v",
+              "title": "运行速度",
+              "items": [
+                "rise_speed_min",
+                "rise_speed_max",
+                "down_speed_max",
+                "rise_speed_min_m30c",
+                "down_speed_min_m30c"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "obj-sense",
+          "title": "行程与噪音",
+          "members": [
+            "结构与行程",
+            "声学"
+          ],
+          "subgroups": [
+            {
+              "id": "obj-sense-geo",
+              "title": "行程与负载",
+              "items": [
+                "glass_travel",
+                "rated_load_up",
+                "rated_load_down",
+                "door_position"
+              ]
+            },
+            {
+              "id": "obj-sense-noise",
+              "title": "噪音",
+              "items": [
+                "noise_max",
+                "noise_mic_distance",
+                "noise_background_margin"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "obj-env",
+          "title": "环境与等级",
+          "members": [
+            "环境与等级"
+          ],
+          "subgroups": [
+            {
+              "id": "obj-env-t",
+              "title": "温度与等级",
+              "items": [
+                "ambient_normal",
+                "temp_code_iso16750",
+                "high_temp_soak",
+                "low_temp_soak",
+                "aec_q100_grade"
+              ]
+            },
+            {
+              "id": "obj-env-m",
+              "title": "机械与防护",
+              "items": [
+                "vibration_profile",
+                "shock_count",
+                "ip_rating"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "value_source_note": "本文件的数值来自三处：QC/T 626-2019 征求意见稿（整体标待核实）、ISO 16750 与 VW 80000 与 AEC-Q100 的已核实条款、以及本包为让前端有刻度而编的示例值（标 _placeholder）。带 _status 的条目不得直接作为出厂判定阈值。",
+  "attributes": [
+    {
+      "key": "motor_type",
+      "name": "电机类型",
+      "value": "BRUSHED_DC",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": false,
+      "group": "电机本体",
+      "options": [
+        {
+          "value": "BRUSHED_DC",
+          "label": "有刷直流"
+        },
+        {
+          "value": "BLDC",
+          "label": "无刷直流"
+        },
+        {
+          "value": "PMSM",
+          "label": "永磁同步"
+        }
+      ],
+      "note": "有刷直流，机械换向。这是与场景一（无刷直流 / 永磁同步，电子换向）最根本的差异。",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 437 行：与峰岹案例的技术差异表「电机类型」行"
+      }
+    },
+    {
+      "key": "commutation",
+      "name": "换向方式",
+      "value": "MECHANICAL_COMMUTATOR",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": false,
+      "group": "电机本体",
+      "options": [
+        {
+          "value": "MECHANICAL_COMMUTATOR",
+          "label": "机械换向（电刷 + 换向器）"
+        },
+        {
+          "value": "ELECTRONIC_SIX_STEP",
+          "label": "电子换向（六步方波）"
+        },
+        {
+          "value": "ELECTRONIC_FOC",
+          "label": "电子换向（磁场定向控制）"
+        }
+      ],
+      "note": "电刷与换向器机械换向，因此电流里天然带换向纹波，纹波频率正比于转速——这正是纹波计数测速的物理基础。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 437 行：技术差异表「电机类型」行"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 146 行：TI 纹波计数参考设计 TIDA-01421：纹波与换向器极一一对应"
+        }
+      ]
+    },
+    {
+      "key": "pole_pairs",
+      "name": "极对数",
+      "value": null,
+      "unit": "对",
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": false,
+      "group": "电机本体",
+      "not_applicable": true,
+      "note": "有刷直流电机不做无刷意义上的极对数配置，控制器不需要该参数，故标 not_applicable。与之对应的可配量是换向器极数（每转纹波数 = 2N，N 为绕组对数），见 control-parameters.json 的 ripple_pulses_per_rev。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 439 行：技术差异表「位置反馈」行：霍尔锁存脉冲计数，或电流纹波计数"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 146 行：纹波频率对应换向器极数，为 2N"
+        }
+      ]
+    },
+    {
+      "key": "position_feedback",
+      "name": "位置反馈方式",
+      "value": "HALL_LATCH_PULSE",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": true,
+      "group": "电机本体",
+      "options": [
+        {
+          "value": "HALL_LATCH_PULSE",
+          "label": "霍尔锁存脉冲计数"
+        },
+        {
+          "value": "CURRENT_RIPPLE_COUNT",
+          "label": "电流纹波计数"
+        },
+        {
+          "value": "HALL_AND_RIPPLE_FUSION",
+          "label": "霍尔与纹波融合"
+        }
+      ],
+      "note": "TIDA-01389 用两颗 DRV5013-Q1 锁存霍尔构成位置编码（带宽 30 kHz）；无霍尔方案走电流纹波计数。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 140 行：TIDA-01389 两颗 DRV5013-Q1 锁存霍尔，带宽 30 kHz"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 146 行：TI 车规有刷电机纹波计数参考设计"
+        }
+      ]
+    },
+    {
+      "key": "reduction_type",
+      "name": "减速与传动形式",
+      "value": "WORM_GEAR_PLUS_CABLE_DRUM",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": true,
+      "group": "电机本体",
+      "options": [
+        {
+          "value": "WORM_GEAR_PLUS_CABLE_DRUM",
+          "label": "蜗杆减速 + 绳轮"
+        },
+        {
+          "value": "WORM_GEAR_PLUS_SCISSOR",
+          "label": "蜗杆减速 + 剪式"
+        },
+        {
+          "value": "OTHER",
+          "label": "其他"
+        }
+      ],
+      "note": "示例值。征求意见稿只规定性能不规定结构，具体机型由产品图样定。蜗杆减速是升降器实现自锁（5.5 条 600 N / 5 mm）的常见做法，但本包没有任何一份材料明文写这一点，不得当结论用。",
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 131 行：自锁能力 5.5 条：托架中心垂直施加 600 N 保持 5 s，下降量 ≤5 mm"
+      }
+    },
+    {
+      "key": "system_voltage",
+      "name": "系统标称电压",
+      "value": 12,
+      "unit": "V",
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": false,
+      "group": "电气额定",
+      "options": [
+        {
+          "value": 12,
+          "label": "12 V 系统"
+        },
+        {
+          "value": 24,
+          "label": "24 V 系统"
+        }
+      ],
+      "note": "本场景固定 12 V 系统。24 V 档留给商用车衍生机型，判据需整套换表。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 122 行：工作电压范围 5.4.1 a) 9 V 至 16 V"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 231 行：ISO 16750-2:2023 电压代码 C：12 V 系统 9 至 16 V"
+        }
+      ]
+    },
+    {
+      "key": "operating_voltage_min",
+      "name": "工作电压下限",
+      "value": 9.0,
+      "unit": "V",
+      "min": 6.0,
+      "max": 12.0,
+      "step": 0.1,
+      "editable": true,
+      "group": "电气额定",
+      "note": "9 至 16 V 正好落在 ISO 16750-2:2023 供电电压代码 C（已核实）上，两处互证。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:117-118 5.4.1 a) 「升降器在9V～16V 电压下应运行平稳」"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 122 行：工作电压范围 5.4.1 a)"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 231 行：ISO 16750-2:2023 代码 C = 9 至 16 V（已核实）"
+        }
+      ]
+    },
+    {
+      "key": "operating_voltage_max",
+      "name": "工作电压上限",
+      "value": 16.0,
+      "unit": "V",
+      "min": 12.0,
+      "max": 18.0,
+      "step": 0.1,
+      "editable": true,
+      "group": "电气额定",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:117-118 5.4.1 a)"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 122 行：工作电压范围"
+        }
+      ]
+    },
+    {
+      "key": "test_voltage",
+      "name": "试验电压",
+      "value": 13.5,
+      "unit": "V",
+      "min": 13.2,
+      "max": 13.8,
+      "step": 0.1,
+      "editable": true,
+      "group": "电气额定",
+      "note": "允差 ±0.3 V。台架程控电源的设定值。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:284 6.1 b) 「试验电压：（13.5±0.3）V」"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 123 行：试验电压 6.1 b)"
+        }
+      ]
+    },
+    {
+      "key": "test_voltage_tolerance",
+      "name": "试验电压允差",
+      "value": 0.3,
+      "unit": "V",
+      "min": 0.1,
+      "max": 0.5,
+      "step": 0.05,
+      "editable": true,
+      "group": "电气额定",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] 汽车场景素材-20260919/qc636.txt",
+        "locator": "qc636.txt:284 6.1 b)"
+      }
+    },
+    {
+      "key": "harness_resistance",
+      "name": "试验回路接线电阻",
+      "value": 0.15,
+      "unit": "Ω",
+      "min": 0.13,
+      "max": 0.17,
+      "step": 0.01,
+      "editable": true,
+      "group": "电气额定",
+      "note": "允差 ±0.02 Ω。接线电阻直接影响堵转电流实测值，是复现性的关键项。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:284 6.1 b) 「接线电阻为：（0.15±0.02）Ω」"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 123 行：接线电阻 0.15 ± 0.02 Ω"
+        }
+      ]
+    },
+    {
+      "key": "start_voltage_max",
+      "name": "启动电压上限",
+      "value": 9.0,
+      "unit": "V",
+      "min": 6.0,
+      "max": 12.0,
+      "step": 0.1,
+      "editable": true,
+      "group": "电气额定",
+      "note": "低压启动能力判据。−30 ℃ 下放宽到 10 V。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:127-128 5.4.1 f) 「升降器的启动电压应不大于9V」"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 130 行：启动电压 5.4.1 f)"
+        }
+      ]
+    },
+    {
+      "key": "voltage_code_iso16750",
+      "name": "ISO 16750-2 供电电压代码",
+      "value": "C",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": true,
+      "group": "电气额定",
+      "options": [
+        {
+          "value": "A",
+          "label": "代码 A"
+        },
+        {
+          "value": "B",
+          "label": "代码 B"
+        },
+        {
+          "value": "C",
+          "label": "代码 C"
+        },
+        {
+          "value": "D",
+          "label": "代码 D"
+        },
+        {
+          "value": "E",
+          "label": "代码 E"
+        },
+        {
+          "value": "F",
+          "label": "代码 F"
+        },
+        {
+          "value": "G",
+          "label": "代码 G"
+        },
+        {
+          "value": "H",
+          "label": "代码 H"
+        }
+      ],
+      "note": "代码 C = 12 V 系统 9 至 16 V。玻璃升降器与刮水电动机均落在此档。已核实。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 231 行：ISO 16750-2:2023 供电电压代码表 C 行"
+        },
+        {
+          "file": "[源] 汽车场景素材-20260919/ls16750_2.pdf",
+          "locator": "ISO 16750-2:2023 正式预览件开放正文页 供电电压代码表"
+        }
+      ]
+    },
+    {
+      "key": "working_current_max",
+      "name": "工作电流上限（常温）",
+      "value": 12.0,
+      "unit": "A",
+      "min": 5.0,
+      "max": 20.0,
+      "step": 0.5,
+      "editable": true,
+      "group": "工作电流",
+      "note": "过流保护阈值的基准。5.4.1 b) 只给一个上限，不分升降方向；分方向的数值出现在耐高温（上升 ≤12 A、下降 ≤7 A）与耐低温（上升 ≤20 A、下降 ≤16 A）两张表里。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:119-120 5.4.1 b) 「工作电流不大于12A」"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 124 行：工作电流上限 5.4.1 b)"
+        }
+      ]
+    },
+    {
+      "key": "working_current_up_max_80c",
+      "name": "上升工作电流上限（80 ℃）",
+      "value": 12.0,
+      "unit": "A",
+      "min": 5.0,
+      "max": 20.0,
+      "step": 0.5,
+      "editable": true,
+      "group": "工作电流",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 192 行：耐高温特性 5.6.1 / 6.6.1 判据行"
+      }
+    },
+    {
+      "key": "working_current_down_max_80c",
+      "name": "下降工作电流上限（80 ℃）",
+      "value": 7.0,
+      "unit": "A",
+      "min": 3.0,
+      "max": 15.0,
+      "step": 0.5,
+      "editable": true,
+      "group": "工作电流",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 192 行：耐高温特性 5.6.1 / 6.6.1 判据行"
+      }
+    },
+    {
+      "key": "working_current_up_max_m30c",
+      "name": "上升工作电流上限（−30 ℃）",
+      "value": 20.0,
+      "unit": "A",
+      "min": 10.0,
+      "max": 30.0,
+      "step": 0.5,
+      "editable": true,
+      "group": "工作电流",
+      "note": "低温下润滑脂黏度上升、阻力增大，电流上限随之从 12 A 放宽到 20 A。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 193 行：耐低温特性 5.6.2 / 6.6.2 判据行"
+      }
+    },
+    {
+      "key": "working_current_down_max_m30c",
+      "name": "下降工作电流上限（−30 ℃）",
+      "value": 16.0,
+      "unit": "A",
+      "min": 8.0,
+      "max": 25.0,
+      "step": 0.5,
+      "editable": true,
+      "group": "工作电流",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 193 行：耐低温特性 5.6.2 / 6.6.2 判据行"
+      }
+    },
+    {
+      "key": "stall_current_max",
+      "name": "堵转电流上限（常温）",
+      "value": 28.0,
+      "unit": "A",
+      "min": 15.0,
+      "max": 40.0,
+      "step": 0.5,
+      "editable": true,
+      "group": "工作电流",
+      "note": "堵转判据与过流保护阈值的共同基准。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:119-120 5.4.1 b) 「堵转电流不大于28A」"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 125 行：堵转电流上限 5.4.1 b)"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 161 行：堵转电流 ≤28 A（常温）；80 ℃ ≤29 A；−30 ℃ ≤30 A"
+        }
+      ]
+    },
+    {
+      "key": "stall_current_max_80c",
+      "name": "堵转电流上限（80 ℃）",
+      "value": 29.0,
+      "unit": "A",
+      "min": 15.0,
+      "max": 40.0,
+      "step": 0.5,
+      "editable": true,
+      "group": "工作电流",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 161 行：堵转电流温度分档"
+      }
+    },
+    {
+      "key": "stall_current_max_m30c",
+      "name": "堵转电流上限（−30 ℃）",
+      "value": 30.0,
+      "unit": "A",
+      "min": 15.0,
+      "max": 40.0,
+      "step": 0.5,
+      "editable": true,
+      "group": "工作电流",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 161 行：堵转电流温度分档"
+      }
+    },
+    {
+      "key": "stall_force_min",
+      "name": "堵转力下限（常温）",
+      "value": 212.0,
+      "unit": "N",
+      "min": 100.0,
+      "max": 400.0,
+      "step": 1.0,
+      "editable": true,
+      "group": "机械性能",
+      "note": "力传感器量程选型依据：量程需覆盖 212 N 以上，同时在 100 N 附近有足够分辨率（防夹判据用的是同一支传感器）。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:121-122 5.4.1 c) 「升降器堵转力应不小于212N」"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 126 行：堵转力 5.4.1 c)"
+        }
+      ]
+    },
+    {
+      "key": "stall_force_min_80c",
+      "name": "堵转力下限（80 ℃）",
+      "value": 164.0,
+      "unit": "N",
+      "min": 80.0,
+      "max": 400.0,
+      "step": 1.0,
+      "editable": true,
+      "group": "机械性能",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 192 行：耐高温特性判据行「堵转力 ≥164 N」"
+      }
+    },
+    {
+      "key": "stall_force_min_m30c",
+      "name": "堵转力下限（−30 ℃）",
+      "value": 190.0,
+      "unit": "N",
+      "min": 80.0,
+      "max": 400.0,
+      "step": 1.0,
+      "editable": true,
+      "group": "机械性能",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 193 行：耐低温特性判据行「堵转力 ≥190 N」"
+      }
+    },
+    {
+      "key": "self_lock_load",
+      "name": "自锁试验加载力",
+      "value": 600.0,
+      "unit": "N",
+      "min": 300.0,
+      "max": 900.0,
+      "step": 10.0,
+      "editable": true,
+      "group": "机械性能",
+      "note": "在玻璃托架上垂直向下施加，上止点与半行程两处各做一次。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:142-144 5.5 「施加600N负载时，不应损坏，玻璃托架下降量不大于5mm」"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 131 行：自锁能力 5.5"
+        }
+      ]
+    },
+    {
+      "key": "self_lock_hold_time",
+      "name": "自锁保持时间",
+      "value": 5.0,
+      "unit": "s",
+      "min": 1.0,
+      "max": 30.0,
+      "step": 1.0,
+      "editable": true,
+      "group": "机械性能",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 191 行：自锁性 5.5 / 6.5「垂直向下 600 N 保持 5 s」"
+      }
+    },
+    {
+      "key": "self_lock_drop_max",
+      "name": "自锁允许下降量",
+      "value": 5.0,
+      "unit": "mm",
+      "min": 0.5,
+      "max": 20.0,
+      "step": 0.5,
+      "editable": true,
+      "group": "机械性能",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:142-144 5.5"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 131 行：自锁能力 5.5"
+        }
+      ]
+    },
+    {
+      "key": "rise_speed_min",
+      "name": "上升运行速度下限",
+      "value": 80.0,
+      "unit": "mm/s",
+      "min": 40.0,
+      "max": 160.0,
+      "step": 1.0,
+      "editable": true,
+      "group": "运行速度",
+      "note": "速度是本场景的主判据量纲之一，与场景一的 rpm 不同量纲——证明判据模型必须是「量纲 + 条件 + 阈值」三元组而不是写死转速。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:123-124 5.4.1 d) 「上升运行速度应在80mm/s～160mm/s 之间」"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 127 行：上升运行速度 5.4.1 d)"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 440 行：技术差异表「主判据量纲」行"
+        }
+      ]
+    },
+    {
+      "key": "rise_speed_max",
+      "name": "上升运行速度上限",
+      "value": 160.0,
+      "unit": "mm/s",
+      "min": 80.0,
+      "max": 300.0,
+      "step": 1.0,
+      "editable": true,
+      "group": "运行速度",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:123-124 5.4.1 d)"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 127 行：上升运行速度"
+        }
+      ]
+    },
+    {
+      "key": "down_speed_max",
+      "name": "下降运行速度上限",
+      "value": 200.0,
+      "unit": "mm/s",
+      "min": 100.0,
+      "max": 300.0,
+      "step": 1.0,
+      "editable": true,
+      "group": "运行速度",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:123-124 5.4.1 d) 「下降运行速度应不大于200mm/s」"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 128 行：下降运行速度 5.4.1 d)"
+        }
+      ]
+    },
+    {
+      "key": "rise_speed_min_m30c",
+      "name": "上升运行速度下限（−30 ℃）",
+      "value": 60.0,
+      "unit": "mm/s",
+      "min": 30.0,
+      "max": 160.0,
+      "step": 1.0,
+      "editable": true,
+      "group": "运行速度",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 193 行：耐低温特性判据行「上升速度 ≥60 mm/s」"
+      }
+    },
+    {
+      "key": "down_speed_min_m30c",
+      "name": "下降运行速度下限（−30 ℃）",
+      "value": 70.0,
+      "unit": "mm/s",
+      "min": 30.0,
+      "max": 200.0,
+      "step": 1.0,
+      "editable": true,
+      "group": "运行速度",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 193 行：耐低温特性判据行「下降速度 ≥70 mm/s」"
+      }
+    },
+    {
+      "key": "noise_max",
+      "name": "工作噪音上限",
+      "value": 60.0,
+      "unit": "dB(A)",
+      "min": 40.0,
+      "max": 80.0,
+      "step": 0.5,
+      "editable": true,
+      "group": "声学",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:125-126 5.4.1 e) 「工作噪音应小于60dB（A）」"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 129 行：工作噪音 5.4.1 e)"
+        }
+      ]
+    },
+    {
+      "key": "noise_mic_distance",
+      "name": "噪音测点距离",
+      "value": 300.0,
+      "unit": "mm",
+      "min": 100.0,
+      "max": 1000.0,
+      "step": 10.0,
+      "editable": true,
+      "group": "声学",
+      "note": "传声器置于升降器电机出力轴正上方。背景噪音须低于测试噪音 10 dB(A)。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:326-328 6.4.1 e) 工作噪音试验测点"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 129 行：声学测点：电机出力轴正上方 300 mm"
+        }
+      ]
+    },
+    {
+      "key": "noise_background_margin",
+      "name": "背景噪音要求裕量",
+      "value": 10.0,
+      "unit": "dB(A)",
+      "min": 5.0,
+      "max": 20.0,
+      "step": 1.0,
+      "editable": true,
+      "group": "声学",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] 汽车场景素材-20260919/qc636.txt",
+        "locator": "qc636.txt:325-326 「在背景噪音低于测试噪音10dB（A）的环境中进行测试」"
+      }
+    },
+    {
+      "key": "glass_travel",
+      "name": "玻璃托架总行程",
+      "value": 420.0,
+      "unit": "mm",
+      "min": 200.0,
+      "max": 700.0,
+      "step": 1.0,
+      "editable": true,
+      "group": "结构与行程",
+      "note": "示例值。征求意见稿只按「下止点到上止点」定义行程、不给具体数字，实际值由产品图样定。这个数只用来让前端的位移轴有刻度，不得当判据。",
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] 汽车场景素材-20260919/qc636.txt",
+        "locator": "qc636.txt:312-314 6.4.1 d) 「测量玻璃托架从下止点到上止点的运行时间和行程」"
+      }
+    },
+    {
+      "key": "rated_load_up",
+      "name": "上升额定负载定义",
+      "value": "玻璃重量 + 胶条滑动阻力",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": false,
+      "group": "结构与行程",
+      "note": "模拟工装配重的设定依据。具体数值随车型玻璃与密封条变，本包不给数。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 133 行：额定负载计算式 6.1 d)"
+      }
+    },
+    {
+      "key": "rated_load_down",
+      "name": "下降额定负载定义",
+      "value": "玻璃重量 − 胶条滑动阻力",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": false,
+      "group": "结构与行程",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 133 行：额定负载计算式 6.1 d)"
+      }
+    },
+    {
+      "key": "door_position",
+      "name": "安装位置",
+      "value": "FRONT_DOOR",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": true,
+      "group": "结构与行程",
+      "options": [
+        {
+          "value": "FRONT_DOOR",
+          "label": "前门（耐久 10 000 循环）"
+        },
+        {
+          "value": "REAR_DOOR",
+          "label": "后门（耐久 5 000 循环）"
+        }
+      ],
+      "note": "前门与后门的耐久循环数不同（前门 10 000、后门 5 000），VW 80000 M-06 的机械冲击次数也按门位分档（驾驶员门 100 000 次、前排乘客门与后门 50 000 次）。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 196 行：耐久性（电动，前门）累计 10 000 个循环周期"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 197 行：耐久性（电动，后门）累计 5 000 个循环周期"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 242 行：VW 80000 M-06 冲击次数按安装位置分档"
+        }
+      ]
+    },
+    {
+      "key": "ambient_normal",
+      "name": "常温定义",
+      "value": 23.0,
+      "unit": "℃",
+      "min": 21.0,
+      "max": 25.0,
+      "step": 0.5,
+      "editable": true,
+      "group": "环境与等级",
+      "note": "允差 ±2 ℃。环境基线。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt 6.1 c) 常温定义"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 132 行：常温定义 6.1 c)"
+        }
+      ]
+    },
+    {
+      "key": "temp_code_iso16750",
+      "name": "ISO 16750-4 工作温度代码",
+      "value": "C",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": true,
+      "group": "环境与等级",
+      "options": [
+        {
+          "value": "A",
+          "label": "代码 A"
+        },
+        {
+          "value": "B",
+          "label": "代码 B"
+        },
+        {
+          "value": "C",
+          "label": "代码 C"
+        },
+        {
+          "value": "D",
+          "label": "代码 D"
+        },
+        {
+          "value": "E",
+          "label": "代码 E"
+        },
+        {
+          "value": "F",
+          "label": "代码 F"
+        },
+        {
+          "value": "G",
+          "label": "代码 G"
+        },
+        {
+          "value": "H",
+          "label": "代码 H"
+        },
+        {
+          "value": "I",
+          "label": "代码 I"
+        },
+        {
+          "value": "J",
+          "label": "代码 J"
+        }
+      ],
+      "note": "代码 C = −40 / 65 ℃。已核实。注意与 QC/T 626 征求意见稿的 −30 / 80 ℃ 档不重合，两套温度口径并存时必须显式选一套，不能混用。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 238 行：ISO 16750-4:2023 工作温度代码 A 至 J"
+        },
+        {
+          "file": "[源] 汽车场景素材-20260919/iso16750-4.pdf",
+          "locator": "ISO 16750-4:2023 正式预览件 工作温度代码表"
+        }
+      ]
+    },
+    {
+      "key": "high_temp_soak",
+      "name": "耐高温试验温度",
+      "value": 80.0,
+      "unit": "℃",
+      "min": 60.0,
+      "max": 100.0,
+      "step": 1.0,
+      "editable": true,
+      "group": "环境与等级",
+      "note": "放置 2 h 后在该温度下空载不堵转运行 5 个工作循环。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 192 行：耐高温特性 5.6.1 / 6.6.1 条件列"
+      }
+    },
+    {
+      "key": "low_temp_soak",
+      "name": "耐低温试验温度",
+      "value": -30.0,
+      "unit": "℃",
+      "min": -40.0,
+      "max": -10.0,
+      "step": 1.0,
+      "editable": true,
+      "group": "环境与等级",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 193 行：耐低温特性 5.6.2 / 6.6.2 条件列"
+      }
+    },
+    {
+      "key": "vibration_profile",
+      "name": "振动谱型",
+      "value": "VW80000_M04_PROFILE_D",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": true,
+      "group": "环境与等级",
+      "options": [
+        {
+          "value": "QCT413_SWEEP",
+          "label": "QC/T 413-2002 扫频振动"
+        },
+        {
+          "value": "VW80000_M04_PROFILE_D",
+          "label": "VW 80000 M-04 谱型 D（簧上质量挂装件）"
+        },
+        {
+          "value": "GB28046_3",
+          "label": "GB/T 28046.3 机械负荷"
+        }
+      ],
+      "note": "车门上的玻璃升降器属 VW 80000 M-04 谱型 D（簧上质量挂装件）：宽带随机振动，每轴 8 h，加速度均方根 30.8 m/s²。已核实。QC/T 626 征求意见稿自己引的是 QC/T 413-2002 的扫频振动条件。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 240 行：VW 80000 机械试验 M-04 谱型 D"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 194 行：耐振动性 5.7 / 6.7 按 QC/T 413-2002"
+        },
+        {
+          "file": "[源] 汽车场景素材-20260919/vw80000.pdf",
+          "locator": "VW 80000 Issue 2022-12 机械试验 M-04 章节"
+        }
+      ]
+    },
+    {
+      "key": "shock_count",
+      "name": "连续机械冲击次数",
+      "value": 100000,
+      "unit": "次",
+      "min": 3000,
+      "max": 100000,
+      "step": 1000,
+      "editable": true,
+      "group": "环境与等级",
+      "note": "峰值 300 m/s²、6 ms 半正弦。驾驶员车门 100 000 次、前排乘客门与后门 50 000 次。已核实。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 242 行：VW 80000 机械试验 M-06 连续机械冲击"
+        },
+        {
+          "file": "[源] 汽车场景素材-20260919/vw80000.pdf",
+          "locator": "VW 80000 Issue 2022-12 机械试验 M-06 章节"
+        }
+      ]
+    },
+    {
+      "key": "aec_q100_grade",
+      "name": "主控芯片 AEC-Q100 温度等级",
+      "value": "Grade 1",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": true,
+      "group": "环境与等级",
+      "options": [
+        {
+          "value": "Grade 0",
+          "label": "Grade 0（−40 至 +150 ℃）"
+        },
+        {
+          "value": "Grade 1",
+          "label": "Grade 1（−40 至 +125 ℃）"
+        },
+        {
+          "value": "Grade 2",
+          "label": "Grade 2（−40 至 +105 ℃）"
+        },
+        {
+          "value": "Grade 3",
+          "label": "Grade 3（−40 至 +85 ℃）"
+        }
+      ],
+      "note": "示例值。车门内属客舱外但非机舱环境，业界常见取 Grade 1（−40 至 +125 ℃）或 Grade 2（−40 至 +105 ℃），本包没有任何材料指明该产品实取哪一档。等级表本身（Grade 0 至 3 的温度范围与应力条件）已核实。",
+      "_placeholder": true,
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 246-251 行：AEC-Q100 Rev J1 温度等级与关键应力条件表"
+        },
+        {
+          "file": "[源] 汽车场景素材-20260919/q100.pdf",
+          "locator": "AEC-Q100 Rev J1（2026-03-24）温度等级表"
+        }
+      ]
+    },
+    {
+      "key": "ip_rating",
+      "name": "防护等级",
+      "value": "IPX4",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "editable": true,
+      "group": "环境与等级",
+      "options": [
+        {
+          "value": "IPX4",
+          "label": "IPX4 防溅水"
+        },
+        {
+          "value": "IP5K4K",
+          "label": "IP5K4K 车用防尘防溅"
+        },
+        {
+          "value": "IPX9K",
+          "label": "IPX9K 高温高压水喷射"
+        }
+      ],
+      "note": "示例值。QC/T 626 征求意见稿走的是自定义喷水试验（0.1 MPa、φ1.2 mm 孔 40 个、20 L/min、30 min），不直接引 IP 代码。这里给 IPX4 只是为了让前端的等级下拉框有内容。",
+      "_placeholder": true,
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 203 行：防水性 5.12.1 / 6.12.1 表 9 喷水条件"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 83 行：GB/T 4208-2017 外壳防护等级（IP 代码）"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 84 行：GB/T 30038 车用版 IP 代码，增设 IPX9K"
+        }
+      ]
+    }
+  ]
+}

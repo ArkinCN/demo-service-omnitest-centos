@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fortior.local/scene-pack/v1/control-parameters.schema.json",
+  "title": "control-parameters.json",
+  "description": "控制与整定参数，F5 调优与 F4 启动测试的左栏数据源。描述被测件「怎么整定」。",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "control-parameters/v1",
+      "description": "文件契约标识，换包不得改。"
+    },
+    "scene_id": {
+      "$ref": "common.schema.json#/$defs/sceneId"
+    },
+    "generated_by": {
+      "type": "string",
+      "description": "产出这份文件的脚本相对路径，例如 _build/build_scene_pack.py。"
+    },
+    "generated_at": {
+      "$ref": "common.schema.json#/$defs/genDate"
+    },
+    "belongs_to_flow": {
+      "$ref": "common.schema.json#/$defs/flowMention",
+      "description": "这份文件主要服务哪条业务流程。人读为主，但句中必须至少出现一个合法的 F1~F6 标签，防止写进不存在的流程号。"
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "group_tiers": {
+      "$ref": "common.schema.json#/$defs/memberTier"
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "本文件的字段口径说明，逐条一句话。"
+    },
+    "demo_profile": {
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string",
+          "description": "演示裁剪口径说明。"
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "演示主线只展开这几个分组。"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "演示主线只展示这几个参数 key。"
+        }
+      },
+      "required": [
+        "groups",
+        "note",
+        "parameters"
+      ],
+      "description": "演示裁剪段：全量数据照登，演示时只亮其中一小撮。"
+    },
+    "parameters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "$ref": "common.schema.json#/$defs/scalar"
+          },
+          "default": {
+            "$ref": "common.schema.json#/$defs/scalar"
+          },
+          "unit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "min": {
+            "$ref": "common.schema.json#/$defs/numberOrNull"
+          },
+          "max": {
+            "$ref": "common.schema.json#/$defs/numberOrNull"
+          },
+          "step": {
+            "$ref": "common.schema.json#/$defs/numberOrNull"
+          },
+          "group": {
+            "type": "string"
+          },
+          "adjustable_in_flows": {
+            "type": "array",
+            "items": {
+              "$ref": "common.schema.json#/$defs/flowLabel"
+            },
+            "description": "这个参数在哪几条流程里允许改。同一参数在 F2 是确认初值，在 F5 是回调。"
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "common.schema.json#/$defs/option"
+            }
+          },
+          "note": {
+            "type": "string"
+          },
+          "range_estimated": {
+            "type": "boolean",
+            "description": "区间是本包推定的，不是源材料给的。前端应按参考值而非硬约束渲染。"
+          },
+          "value_below_min": {
+            "type": "boolean",
+            "description": "实配值低于源材料自己写的下限，属源材料自身不一致，按原样登记。界面必须显式标出。"
+          },
+          "value_shell": {
+            "type": "string",
+            "description": "源文件的数值外壳，例如 I_Value(x) / _Q12(x)。回写固件时必须沿用原外壳只改括号内数字。"
+          },
+          "_placeholder": {
+            "$ref": "common.schema.json#/$defs/placeholderFlag"
+          },
+          "_status": {
+            "$ref": "common.schema.json#/$defs/statusText"
+          },
+          "_source": {
+            "$ref": "common.schema.json#/$defs/sourceRefs"
+          }
+        },
+        "required": [
+          "_source",
+          "adjustable_in_flows",
+          "default",
+          "editable",
+          "group",
+          "key",
+          "max",
+          "min",
+          "name",
+          "step",
+          "unit",
+          "value"
+        ]
+      }
+    }
+  },
+  "required": [
+    "belongs_to_flow",
+    "demo_profile",
+    "generated_at",
+    "generated_by",
+    "group_tiers",
+    "groups",
+    "notes",
+    "parameters",
+    "scene_id",
+    "schema"
+  ]
+}

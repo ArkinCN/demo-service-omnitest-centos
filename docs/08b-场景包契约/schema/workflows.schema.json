@@ -1,0 +1,252 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fortior.local/scene-pack/v1/workflows.schema.json",
+  "title": "workflows.json",
+  "description": "工作流索引。条目本体在 assets/workflows/*.json 或客户 .wfw 里，这份只登记。",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "workflows/v1",
+      "description": "文件契约标识，换包不得改。"
+    },
+    "scene_id": {
+      "$ref": "common.schema.json#/$defs/sceneId"
+    },
+    "generated_by": {
+      "type": "string",
+      "description": "产出这份文件的脚本相对路径，例如 _build/build_scene_pack.py。"
+    },
+    "generated_at": {
+      "$ref": "common.schema.json#/$defs/genDate"
+    },
+    "belongs_to_flow": {
+      "$ref": "common.schema.json#/$defs/flowMention",
+      "description": "这份文件主要服务哪条业务流程。人读为主，但句中必须至少出现一个合法的 F1~F6 标签，防止写进不存在的流程号。"
+    },
+    "source_roots": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "工作流本体所在目录的绝对路径。"
+    },
+    "total": {
+      "type": "integer"
+    },
+    "all_placeholder": {
+      "type": "boolean",
+      "description": "整份索引都是本包自建示例，不是客户已有工作流。"
+    },
+    "count_by_group": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "description": "按分组计数。分组键随场景而变，不设固定枚举。"
+    },
+    "node_groups": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "节点大类释义。包一沿用客户端分组，包二自定义六类中文分组。"
+    },
+    "node_type_legend": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "节点类型释义表。两包只共有 start / end / delay / loop / loop_break 五个，其余随台架而变。"
+    },
+    "model_format": {
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "shape": {
+          "type": "string",
+          "description": "画布内部模型的结构速写。"
+        },
+        "source_handles": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "_source": {
+          "$ref": "common.schema.json#/$defs/sourceRefs"
+        }
+      },
+      "required": [],
+      "description": "有这一段表示 assets/workflows/*.json 已经是画布内部模型，前端不用经 parseWfw 解析。"
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "workflows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "metadata_name": {
+            "type": "string",
+            "description": "工作流文件内部自带的名字，与 name 可能不同。"
+          },
+          "group": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "key",
+              "name"
+            ],
+            "additionalProperties": false
+          },
+          "voltage_level": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "电压等级键，例如 LV / SV / HV / 12V。取值随台架而变；未标等级时为 null。"
+          },
+          "voltage_level_name": {
+            "type": "string"
+          },
+          "is_subworkflow": {
+            "type": "boolean"
+          },
+          "file_path": {
+            "type": "string",
+            "description": "绝对路径。"
+          },
+          "file_size_bytes": {
+            "type": "integer"
+          },
+          "gzip": {
+            "type": "boolean",
+            "description": "本体是否 gzip 压缩。"
+          },
+          "format_version": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "工作流本体的更新时间。包一照抄客户文件里的 ISO 8601 时间戳，包二写日期，两种都合法。"
+          },
+          "node_count": {
+            "type": "integer"
+          },
+          "edge_count": {
+            "type": "integer"
+          },
+          "node_types": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "count": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "count",
+                "name",
+                "type"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "node_group_counts": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer"
+            }
+          },
+          "purpose": {
+            "type": "string",
+            "description": "这条工作流干什么。"
+          },
+          "purpose_derived": {
+            "type": "boolean",
+            "description": "purpose 是本包从节点序列推出来的，不是原文件写的。"
+          },
+          "covers_requirements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "覆盖哪几条 test-requirements 的判据 id。"
+          },
+          "_placeholder": {
+            "$ref": "common.schema.json#/$defs/placeholderFlag"
+          },
+          "_source": {
+            "$ref": "common.schema.json#/$defs/sourceRefs"
+          }
+        },
+        "required": [
+          "_source",
+          "edge_count",
+          "file_path",
+          "file_size_bytes",
+          "format_version",
+          "group",
+          "gzip",
+          "id",
+          "is_subworkflow",
+          "metadata_name",
+          "name",
+          "node_count",
+          "node_types",
+          "purpose",
+          "purpose_derived",
+          "tags",
+          "updated_at",
+          "voltage_level",
+          "voltage_level_name"
+        ]
+      }
+    }
+  },
+  "required": [
+    "belongs_to_flow",
+    "count_by_group",
+    "generated_at",
+    "generated_by",
+    "node_type_legend",
+    "notes",
+    "scene_id",
+    "schema",
+    "source_roots",
+    "total",
+    "workflows"
+  ]
+}

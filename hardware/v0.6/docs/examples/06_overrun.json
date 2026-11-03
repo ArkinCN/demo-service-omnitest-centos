@@ -1,0 +1,9 @@
+{
+  "simulation": true,
+  "run_id": "demo-001",
+  "status": "running",
+  "planned_duration_s": 40,
+  "actual_elapsed_s": 45,
+  "overrun": true,
+  "axis_end_s": 45
+}

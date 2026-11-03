@@ -1,0 +1,303 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fortior.local/scene-pack/v1/scene.schema.json",
+  "title": "scene.json",
+  "description": "场景身份：三级分类、产品本体一句话、默认视图、图片与六流程清单。换包必改。",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "scene/v1"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/sceneId"
+    },
+    "generated_by": {
+      "type": "string"
+    },
+    "generated_at": {
+      "$ref": "common.schema.json#/$defs/genDate"
+    },
+    "taxonomy": {
+      "type": "object",
+      "properties": {
+        "level1_scene": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "一级场景英文键，与 scene id 第一段相同。"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "key",
+            "name"
+          ],
+          "additionalProperties": false
+        },
+        "level2_category": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "key",
+            "name"
+          ],
+          "additionalProperties": false
+        },
+        "level3_product_type": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "key",
+            "name"
+          ],
+          "additionalProperties": false
+        },
+        "_source": {
+          "$ref": "common.schema.json#/$defs/sourceRefs"
+        }
+      },
+      "required": [
+        "_source",
+        "level1_scene",
+        "level2_category",
+        "level3_product_type"
+      ],
+      "description": "三级分类，与 public/scenes/index.json 的 catalog 三层一一对应。"
+    },
+    "product": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "产品全名，可独立定位，不用内部代号。"
+        },
+        "chip": {
+          "type": "string",
+          "description": "主控芯片或方案说明；本场景不锁定主控时写清楚不锁定与候选方案。"
+        },
+        "control_scheme": {
+          "type": "string",
+          "description": "控制方案一句话。"
+        },
+        "_source": {
+          "$ref": "common.schema.json#/$defs/sourceRefs"
+        }
+      },
+      "required": [
+        "_source",
+        "chip",
+        "control_scheme",
+        "name"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "description": "场景一段话综述，给顶栏与场景切换预览用。"
+    },
+    "default_view": {
+      "type": "object",
+      "properties": {
+        "_note": {
+          "type": "string",
+          "description": "这段口径的出处说明。元字段，不参与计算，v1.1 起不再必填。"
+        },
+        "init": {
+          "$ref": "common.schema.json#/$defs/viewMode"
+        },
+        "req": {
+          "$ref": "common.schema.json#/$defs/viewMode"
+        },
+        "run": {
+          "$ref": "common.schema.json#/$defs/viewMode"
+        },
+        "tune": {
+          "$ref": "common.schema.json#/$defs/viewMode"
+        },
+        "report": {
+          "$ref": "common.schema.json#/$defs/viewMode"
+        }
+      },
+      "required": [
+        "init",
+        "report",
+        "req",
+        "run",
+        "tune"
+      ],
+      "description": "C 区默认视图下发段。五个键与前端 FLOW_IDS（init/req/run/tune/report）一一对应，知识库是模块不在此列。画布拓扑本身不在场景包内，见 README 第 8.1 节。"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "图片标识，被卡片按 id 引用。"
+          },
+          "title": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string",
+            "description": "相对场景包根目录的路径，形如 assets/xxx.png。"
+          },
+          "width": {
+            "type": "integer"
+          },
+          "height": {
+            "type": "integer"
+          },
+          "render": {
+            "type": "string",
+            "description": "这张图是怎么来的：渲染工具与参数，或手排说明。"
+          },
+          "kind": {
+            "type": "string",
+            "description": "图的性质，例如「结构示意」「原理图」。缺省时前端按标题关键词猜。"
+          },
+          "note": {
+            "type": "string"
+          },
+          "_placeholder": {
+            "$ref": "common.schema.json#/$defs/placeholderFlag"
+          },
+          "_source": {
+            "$ref": "common.schema.json#/$defs/sourceRefs"
+          }
+        },
+        "required": [
+          "_source",
+          "height",
+          "id",
+          "path",
+          "render",
+          "title",
+          "width"
+        ]
+      }
+    },
+    "flows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^F[1-6]$"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "description": "六流程清单，F1~F6 固定六条，不许增删。条数由 minItems / maxItems 锁死，uniqueItems 防止同一条写两遍。",
+      "minItems": 6,
+      "maxItems": 6,
+      "uniqueItems": true
+    },
+    "_source": {
+      "$ref": "common.schema.json#/$defs/sourceRefs"
+    },
+    "schematic_variants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string",
+            "description": "绝对路径。"
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "file",
+          "name"
+        ]
+      },
+      "description": "原理图变体登记。包二没有这一段，前端 normalize() 会用 images 派生。"
+    },
+    "regulation_matrix": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "region": {
+            "type": "string"
+          },
+          "regulation": {
+            "type": "string"
+          },
+          "_source": {
+            "$ref": "common.schema.json#/$defs/sourceRefs"
+          },
+          "_status": {
+            "$ref": "common.schema.json#/$defs/statusText"
+          }
+        },
+        "required": [
+          "region",
+          "regulation"
+        ]
+      },
+      "description": "法规对照矩阵。只有受强制法规约束的场景才有，字段随场景而变。"
+    },
+    "regulation_note": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "_status": {
+          "$ref": "common.schema.json#/$defs/statusText"
+        },
+        "_source": {
+          "$ref": "common.schema.json#/$defs/sourceRefs"
+        }
+      },
+      "required": [
+        "text"
+      ]
+    }
+  },
+  "required": [
+    "_source",
+    "default_view",
+    "flows",
+    "generated_at",
+    "generated_by",
+    "id",
+    "images",
+    "product",
+    "schema",
+    "summary",
+    "taxonomy"
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "doc_id": "smo-angle-register-note",
+  "summary": {
+    "parameters": 8,
+    "parameters_matching_customer_h": 3,
+    "registers": 4,
+    "thresholds": 0,
+    "units": 0,
+    "procedure_steps": 0
+  },
+  "parameters": [
+    {
+      "name": "OBS_K2T",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "smo-angle-register-note#c0012",
+      "first_page": null,
+      "context": "程序中宏定义常量OBS_K1T、OBS_K2T、OBS_K3T、OBS_K4T用于在FOC初始化时分别给寄存器FOC_EK1、FOC_EK2、FOC_EK3、FOC_"
+    },
+    {
+      "name": "OBS_K3T",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "smo-angle-register-note#c0012",
+      "first_page": null,
+      "context": "程序中宏定义常量OBS_K1T、OBS_K2T、OBS_K3T、OBS_K4T用于在FOC初始化时分别给寄存器FOC_EK1、FOC_EK2、FOC_EK3、FOC_EK4进行初始化"
+    },
+    {
+      "name": "BASE_FREQ",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "smo-angle-register-note#c0011",
+      "first_page": null,
+      "context": "角速度基准，单位为rad/s；对应头文件Parameter.h里的宏定义MAX_OMEG_RAD_SEC，其值为2PI*BASE_FREQ，基准频率BASE_FREQ在头文件Customer.h里宏定义为MOTOR_SPEED_BASE/60*Pole_Pa"
+    },
+    {
+      "name": "FOC_EK2",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "smo-angle-register-note#c0012",
+      "first_page": null,
+      "context": "宏定义常量OBS_K1T、OBS_K2T、OBS_K3T、OBS_K4T用于在FOC初始化时分别给寄存器FOC_EK1、FOC_EK2、FOC_EK3、FOC_EK4进行初始化，宏定义常量OBS_K1T、OBS_K2T、OBS_K3T、OBS_K4T值的"
+    },
+    {
+      "name": "FOC_EK3",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "smo-angle-register-note#c0012",
+      "first_page": null,
+      "context": "_K1T、OBS_K2T、OBS_K3T、OBS_K4T用于在FOC初始化时分别给寄存器FOC_EK1、FOC_EK2、FOC_EK3、FOC_EK4进行初始化，宏定义常量OBS_K1T、OBS_K2T、OBS_K3T、OBS_K4T值的计算公式分别为公"
+    },
+    {
+      "name": "HW_AMPGAIN",
+      "count": 1,
+      "in_customer_h": true,
+      "first_chunk": "smo-angle-register-note#c0011",
+      "first_page": null,
+      "context": "两倍，最大采样电流HW_BOARD_CURR_MAX在头文件Parameter.h里的宏定义为HW_ADC_REF/2/HW_AMPGAIN/HW_RSHUNT，其中HW_ADC_REF在头文件Customer.h里宏定义为ADC的参考电压，除2是因为在电流为"
+    },
+    {
+      "name": "HW_RSHUNT",
+      "count": 1,
+      "in_customer_h": true,
+      "first_chunk": "smo-angle-register-note#c0011",
+      "first_page": null,
+      "context": "_BOARD_CURR_MAX在头文件Parameter.h里的宏定义为HW_ADC_REF/2/HW_AMPGAIN/HW_RSHUNT，其中HW_ADC_REF在头文件Customer.h里宏定义为ADC的参考电压，除2是因为在电流为0时运放的输出电压为"
+    },
+    {
+      "name": "MOTOR_SPEED_BASE",
+      "count": 1,
+      "in_customer_h": true,
+      "first_chunk": "smo-angle-register-note#c0011",
+      "first_page": null,
+      "context": "- 9、 ：反电动势基准，单位为V；对应头文件Parameter.h里的宏定义MAX_BEMF_VOLTAGE，其值为(MOTOR_SPEED_BASE*KE)/1000，基准转速MOTOR_SPEED_BASE在头文件Customer.h里宏定义为电机最大转速的两倍，K"
+    }
+  ],
+  "registers": [
+    {
+      "name": "FOC_EK2",
+      "count": 1,
+      "first_chunk": "smo-angle-register-note#c0012",
+      "first_page": null,
+      "context": "宏定义常量OBS_K1T、OBS_K2T、OBS_K3T、OBS_K4T用于在FOC初始化时分别给寄存器FOC_EK1、FOC_EK2、FOC_EK3、FOC_EK4进行初始化，宏定义常量OBS_K1T、OBS_K2T、OBS_K3T、OBS_K4T值的"
+    },
+    {
+      "name": "FOC_EK3",
+      "count": 1,
+      "first_chunk": "smo-angle-register-note#c0012",
+      "first_page": null,
+      "context": "_K1T、OBS_K2T、OBS_K3T、OBS_K4T用于在FOC初始化时分别给寄存器FOC_EK1、FOC_EK2、FOC_EK3、FOC_EK4进行初始化，宏定义常量OBS_K1T、OBS_K2T、OBS_K3T、OBS_K4T值的计算公式分别为公"
+    },
+    {
+      "name": "OBS_K2T",
+      "count": 1,
+      "first_chunk": "smo-angle-register-note#c0012",
+      "first_page": null,
+      "context": "程序中宏定义常量OBS_K1T、OBS_K2T、OBS_K3T、OBS_K4T用于在FOC初始化时分别给寄存器FOC_EK1、FOC_EK2、FOC_EK3、FOC_"
+    },
+    {
+      "name": "OBS_K3T",
+      "count": 1,
+      "first_chunk": "smo-angle-register-note#c0012",
+      "first_page": null,
+      "context": "程序中宏定义常量OBS_K1T、OBS_K2T、OBS_K3T、OBS_K4T用于在FOC初始化时分别给寄存器FOC_EK1、FOC_EK2、FOC_EK3、FOC_EK4进行初始化"
+    }
+  ],
+  "thresholds": [],
+  "units": [],
+  "procedure_steps": [],
+  "method": "regex+heuristic, no LLM; 参数名=全大写下划线标识符, 寄存器=标识符±40字符内出现『寄存器/register』, 阈值=数值+单位且±40字符内含阈值语境词, 规程步骤=编号行且含操作动词"
+}

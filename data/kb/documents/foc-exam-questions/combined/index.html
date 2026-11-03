@@ -1,0 +1,191 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>FOC 方案考核题（合成图文稿）</title><style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 20px 22px 40px; background: #fff; color: #1f2a24;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 13px; line-height: 1.75;
+}
+h1 { font-size: 19px; margin: 4px 0 14px; }
+h2 { font-size: 16px; margin: 22px 0 10px; padding-bottom: 4px; border-bottom: 1px solid #e3e8e4; }
+h3 { font-size: 14px; margin: 18px 0 8px; }
+h4, h5, h6 { font-size: 13px; margin: 14px 0 6px; color: #2e5e45; }
+p { margin: 8px 0; }
+ul, ol { margin: 8px 0; padding-left: 22px; }
+li { margin: 3px 0; }
+code { background: #f4f7f4; border: 1px solid #e3e8e4; border-radius: 3px; padding: 0 4px; font-size: 12px; }
+pre { background: #f7f9f7; border: 1px solid #e3e8e4; border-radius: 4px; padding: 10px; overflow-x: auto; }
+pre code { background: none; border: none; padding: 0; }
+table { border-collapse: collapse; margin: 10px 0; width: 100%; font-size: 12px; }
+th, td { border: 1px solid #e3e8e4; padding: 5px 8px; text-align: left; vertical-align: top; }
+th { background: #f0f5f1; font-weight: 600; }
+hr { border: none; border-top: 1px solid #e3e8e4; margin: 16px 0; }
+.kb-fig { margin: 14px 0; text-align: center; }
+.kb-fig img { max-width: 100%; height: auto; border: 1px solid #e3e8e4; border-radius: 4px; }
+/* 代码块：整体成块，保留原始换行与缩进 */
+.kb-code {
+  background: #f7f9f7; border: 1px solid #e3e8e4; border-left: 3px solid #9bb8a8;
+  border-radius: 4px; padding: 10px 12px; margin: 12px 0; overflow-x: auto;
+  white-space: pre; font-size: 12px; line-height: 1.65;
+}
+.kb-code code { background: none; border: none; padding: 0; font-size: 12px; }
+/* 公式块：居中、衬线、留白（干净文本样式，不引排版引擎） */
+.kb-formula {
+  margin: 12px auto; padding: 8px 12px; max-width: 100%; text-align: center;
+  font-family: "Cambria Math", "Times New Roman", "Georgia", serif;
+  font-size: 14px; line-height: 2; color: #22302a;
+  background: #fbfcfb; border-radius: 4px; white-space: pre-wrap; word-break: break-word;
+}
+</style></head><body><h1>FOC 方案考核题</h1><div style="margin:0 0 14px;padding:8px 10px;border:1px solid #e3e8e4;border-radius:4px;background:#f7faf8;color:#5b6b62;font-size:12px;">系统合成图文稿（由抽取产物重建，非客户原件 PDF）。</div><div class="kb-formula">**Q1:**</div>
+
+<p><strong>(1）请指出图中存在的错误并修改。</strong></p>
+
+<p><strong>(2)假设需求是功率环控制，在(1)的基础上把外环补充完整。</strong></p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exam-questions/figure?name=image1.jpeg" alt="插图 1" loading="lazy"></figure>
+
+<p><strong>答案：</strong></p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exam-questions/figure?name=image10.png" alt="插图 2" loading="lazy"></figure>
+
+<p>（1）</p>
+
+<p>（2）</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exam-questions/figure?name=image11.png" alt="插图 3" loading="lazy"></figure>
+
+<div class="kb-formula">**Q2：**</div>
+
+<p><strong>角度模块包含角度估算模块，爬坡模块，估算角度平滑切换模块。角度的来源分四种情况: 爬坡强制角度、强拉角度、估算器估算角度、估算器强制角度。</strong></p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exam-questions/figure?name=image12.png" alt="插图 4" loading="lazy"></figure>
+
+<p><strong>程序中启动方式配置为的OPEN_OMEGA_START时，FOC_CR1[RFAE] = 1，FOC_CR1[ANGM] = 1，FOC_CR1[EFAE] = 1，请画出电机启动升速过程中角度模式切换曲线并进行说明。</strong></p>
+
+<p><strong>答案：</strong></p>
+
+<p>爬坡强制角度的优先级最高，配置FOC_CR1[RFAE] = 1，使能爬坡功能。爬坡结束后，切换到估算器强制角度模式，此时根据瞬时估算速度与FOC_EFREQMIN的大小判断是切换为估算器强制角度还是估算器估算角度。所以角度模式切换曲分为两种情况：</p>
+
+<p>（1）瞬时估算速度 &gt; FOC_EFREQMIN时，直接由爬坡强制角度模式切换为估算器估算角度模式。切换曲线如下图所示：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exam-questions/figure?name=image2.png" alt="插图 5" loading="lazy"></figure>
+
+<p>（2）瞬时估算速度&lt;FOC_EFREQMIN时，由爬坡强制角度模式切换到估算器强制角度模式；当瞬时估算速度&gt;FOC_EFREQMIN时,切换为估算器估算角度模式。切换曲线如下图所示：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exam-questions/figure?name=image3.png" alt="插图 6" loading="lazy"></figure>
+
+<p><strong>Q3：如图3-1所示为基于PLL的滑模速度估算器：</strong></p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exam-questions/figure?name=image4.png" alt="插图 7" loading="lazy"></figure>
+
+<p>图3-1 基于PLL的滑模速度估算器</p>
+
+<p><strong>其中，基于PLL的SMO角度估算处理如图3-2所示：</strong></p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exam-questions/figure?name=image5.png" alt="插图 8" loading="lazy"></figure>
+
+<p>图3-2 基于PLL的SMO角度估算</p>
+
+<p><strong>估算器中对估算反电动势、估算电角速度以及估算角度的过程进行了一阶低通滤波处理，请分别说明MOTOR_SPEED_SMOMIN_RPM、SPD_BW、ATO_BW三个值的大小设置对电机控制效果的影响。</strong></p>
+
+<p><strong>答案：</strong></p>
+
+<div class="kb-formula">MOTOR_SPEED_SMOMIN_RPM：</div>
+
+<p>表示SMO的最小运行转速，决定反电动势自适应一阶低通滤波器的最小系数FOC_EKLPFMIN。当估算器算出的低通滤波系数小于FOC_EKLPFMIN时，强制等于最小值。</p>
+
+<p>如果MOTOR_SPEED_SMOMIN_RPM设置的过小，滤波效果虽然比较好，但是响应会变慢，估算出来的角度无法跟随实际的电机角度，电机一直会运行在MOTOR_SPEED_SMOMIN_RPM这个转速值或者比较低的转速，无法达到目标给定值。</p>
+
+<p>如果MOTOR_SPEED_SMOMIN_RPM设置的过大，滤波效果变差，导致估算反电动势的很多高频噪声没有被滤掉，估算得到的角度会不平稳，电机出现失步的情况。</p>
+
+<div class="kb-formula">SPD_BW：</div>
+
+<p>SPD_BW设置的越小，对电角速度的滤波效果越好，最后计算得到的机械速度越平稳，控制也越平稳。但是设置的过小可能会导致转速调节过程变慢。</p>
+
+<p>SPD_BW设置的越大，系统得到反馈转速的响应越快，转速调节过程会变快，但是系统可能会存在不稳定的风险。</p>
+
+<div class="kb-formula">ATO_BW：</div>
+
+<p>ATO_BW越大，角度估算响应越快，估算角度跟随越快，但是设置得过大会出现估算角度不平滑从而电机抖动的情况。</p>
+
+<p>ATO_BW越小，角度估算响应越慢，系统越平稳，但是设置的过小会估算角度无法跟随实际角度，电机转速上不去的情况。</p>
+
+<div class="kb-formula">**Q4：**</div>
+
+<p><strong>图4-1为FU6832芯片Pre-driver模块框图：</strong></p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exam-questions/figure?name=image9.png" alt="插图 9" loading="lazy"></figure>
+
+<p>图4-1 FU6832芯片Pre-driver模块框图</p>
+
+<p><strong>图4-2为驱动输出控制模块前级框图：</strong></p>
+
+
+<p>图4-2 驱动输出控制模块前级框图</p>
+
+<p><strong>请结合FU6832芯片手册推导，当外接驱动电路上下桥均为NMOS时，程序中对DRIVER初始化时，DRV_CMR以及DRV_OUT应如何配置？</strong></p>
+
+<p><strong>答案：</strong></p>
+
+<ul>
+<li>（1） 上下桥均为NMOS，所以可得预驱输出信号：</li>
+</ul>
+
+<div class="kb-formula">H_PU、H_PV、H_PW：000
+L_U、L_V、L_W：000</div>
+
+<ul>
+<li>（2） 经过预驱以后，高电平取反，低电平不变，所以可得预驱输入信号：</li>
+</ul>
+
+<p>UH，VH，WH :111</p>
+
+<p>UL，VL，WL :000</p>
+
+<div class="kb-formula">(3) DRV_CMR:</div>
+
+<p>UHP,VHP:WHP:111高电平有效</p>
+
+<p>ULP,VLP:WLP:000低电平有效</p>
+
+<p>UHE,VHE,WHE,ULE,VLE,WLE:000000，初始化不使能</p>
+
+<p>所以DRV_CMR初始化配置为：DRV_CMR=0A80。</p>
+
+<p>DRV_OUT:</p>
+
+<p>UH,VH,WH输出空闲电平为：000;</p>
+
+<p>UL,VL,WL输出空闲电平为：111</p>
+
+<p>不使能的情况下:MOE=0。</p>
+
+<p>所以DRV_OUT初始化配置为：DRV_OUT = 0x2A。</p>
+
+<p><strong>Q5：如图5-1所示，为单电阻采样时序图：</strong></p>
+
+
+<p>图5-1 单电阻采样时序图</p>
+
+<p><strong>图5-2为双/三电阻电流顺序采样模式图：</strong></p>
+
+
+<p>图5-2 双/三电阻电流顺序采样模式图</p>
+
+<p><strong>请说明两种采样模式采样时刻的区别？如果想要提前5个芯片主频周期采样，两种采样模式应该怎样配置寄存器？</strong></p>
+
+<p><strong>答案：</strong></p>
+
+<ul>
+<li>（1） 区别：</li>
+</ul>
+
+<p>单电阻电流采样模式：FOC模块在Driver计数器向上计数的区间对母线电流itrip(通道4)进行两次采样。</p>
+
+<p>双/三电阻电流顺序采样模式: 电流采样时机的设置应该使ia/ib/ic采样点均在矢量000区间，同时在FOC计数器向下计数，在下溢事件前对电流采样。</p>
+
+<ul>
+<li>（2） 配置：</li>
+</ul>
+
+<div class="kb-formula">FOC_TRGDLY = -5或FOC_TRGDLY = 0x85或FOC_TRGDLY = 0xFB</div></body></html>

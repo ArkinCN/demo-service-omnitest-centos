@@ -1,0 +1,12 @@
+{
+    "mode": "mock",
+    "ts": 1789831810.2208173,
+    "device_id": "bench",
+    "mock_warning": "合成数据，非台架实测，不得作为测试结论的证据",
+    "status": "ok",
+    "channel": 4,
+    "signal": "PWM1",
+    "duty_percent": 66.19,
+    "raw": "66.19",
+    "note": null
+}

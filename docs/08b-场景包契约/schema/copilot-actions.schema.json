@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fortior.local/scene-pack/v1/copilot-actions.schema.json",
+  "title": "copilot-actions.json",
+  "description": "副驾（D 区助手）预置按钮定义。结构层与编排层跨场景不变，换场景只换内容层的 source / skill_ref / prompt / operation 四个字段。",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "copilot-actions/v1"
+    },
+    "version": {
+      "type": "string",
+      "description": "本文件自身的版本号，形如 1.0。"
+    },
+    "generated_at": {
+      "$ref": "common.schema.json#/$defs/genDate"
+    },
+    "title": {
+      "type": "string"
+    },
+    "applies_to": {
+      "type": "object",
+      "properties": {
+        "scene_id": {
+          "$ref": "common.schema.json#/$defs/sceneId"
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "note",
+        "scene_id"
+      ],
+      "additionalProperties": false
+    },
+    "_field_docs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "逐字段释义，给读文件的人看，前端不读。字段名与 buttons 的键一一对应。"
+    },
+    "redline_actions": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/redlineAction"
+      },
+      "description": "六个只能人点的红线动作。固定六条，不得增删。"
+    },
+    "button_types": {
+      "type": "object",
+      "properties": {
+        "explain": {
+          "$ref": "common.schema.json#/$defs/buttonTypeDef"
+        },
+        "prepare": {
+          "$ref": "common.schema.json#/$defs/buttonTypeDef"
+        },
+        "execute": {
+          "$ref": "common.schema.json#/$defs/buttonTypeDef"
+        }
+      },
+      "required": [
+        "execute",
+        "explain",
+        "prepare"
+      ],
+      "description": "三类按钮的判定规则。三类固定。",
+      "additionalProperties": false
+    },
+    "ui": {
+      "type": "object",
+      "properties": {
+        "placement": {
+          "type": "string"
+        },
+        "max_visible": {
+          "type": "integer",
+          "description": "一行最多显示几枚，超出收进 overflow。"
+        },
+        "overflow": {
+          "type": "string"
+        },
+        "overflow_label": {
+          "type": "string"
+        },
+        "switch_on_flow_change": {
+          "type": "boolean",
+          "description": "切流程时整排按钮跟着换。"
+        },
+        "echo_before_execute": {
+          "type": "boolean",
+          "description": "执行前先在气泡里回显将要做什么。"
+        },
+        "disabled_when_context_missing": {
+          "type": "boolean",
+          "description": "上下文字段缺失时按钮置灰。"
+        }
+      },
+      "required": [
+        "disabled_when_context_missing",
+        "echo_before_execute",
+        "max_visible",
+        "overflow",
+        "overflow_label",
+        "placement",
+        "switch_on_flow_change"
+      ],
+      "additionalProperties": false
+    },
+    "_derived_from": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "草案文件绝对路径。"
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "file",
+        "note"
+      ],
+      "additionalProperties": false
+    },
+    "flows": {
+      "type": "object",
+      "properties": {
+        "init": {
+          "$ref": "common.schema.json#/$defs/flowButtons"
+        },
+        "req": {
+          "$ref": "common.schema.json#/$defs/flowButtons"
+        },
+        "run": {
+          "$ref": "common.schema.json#/$defs/flowButtons"
+        },
+        "tune": {
+          "$ref": "common.schema.json#/$defs/flowButtons"
+        },
+        "report": {
+          "$ref": "common.schema.json#/$defs/flowButtons"
+        },
+        "knowledge": {
+          "$ref": "common.schema.json#/$defs/flowButtons"
+        }
+      },
+      "required": [
+        "init",
+        "knowledge",
+        "report",
+        "req",
+        "run",
+        "tune"
+      ],
+      "description": "五条流程加知识库模块，六个键固定。键名与前端 FLOW_IDS + MODULE_IDS 对齐；草案里的 kb 键已改名为 knowledge。",
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "_derived_from",
+    "_field_docs",
+    "applies_to",
+    "button_types",
+    "flows",
+    "generated_at",
+    "redline_actions",
+    "schema",
+    "title",
+    "ui",
+    "version"
+  ]
+}

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="860" viewBox="0 0 1600 860">
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3z" fill="#39725f"/></marker></defs>
+<rect width="1600" height="860" fill="#f5f8f5"/>
+<g font-family="Noto Sans CJK SC,Microsoft YaHei,Arial,sans-serif">
+<text x="50" y="62" font-size="35" font-weight="700" fill="#203e32">整个项目怎么开工：先并行准备，再共同验收</text>
+<text x="50" y="105" font-size="23" font-weight="400" fill="#607169">适用所有同事 · 后端复用客户代码，前端接真实功能，设备与部署准备同步推进</text>
+<text x="50" y="153" font-size="26" font-weight="700" fill="#203e32">第 1 阶段：三路同时开工</text>
+<rect x="50" y="180" width="460" height="160" rx="16" fill="#ffffff" stroke="#c9dcd1" stroke-width="2"/>
+<text x="70" y="220" font-size="25" font-weight="700" fill="#203e32">前端</text>
+<text x="70" y="267" font-size="23" font-weight="400" fill="#203e32">跑现有网页，认页面和按钮</text>
+<text x="70" y="308" font-size="23" font-weight="400" fill="#203e32">准备字段、请求和错误状态</text>
+<rect x="570" y="180" width="460" height="160" rx="16" fill="#ffffff" stroke="#c9dcd1" stroke-width="2"/>
+<text x="590" y="220" font-size="25" font-weight="700" fill="#203e32">后端</text>
+<text x="590" y="267" font-size="23" font-weight="400" fill="#203e32">隔离跑通客户 API 与数据库</text>
+<text x="590" y="308" font-size="23" font-weight="400" fill="#203e32">复用原能力，新增测试任务</text>
+<rect x="1090" y="180" width="460" height="160" rx="16" fill="#ffffff" stroke="#c9dcd1" stroke-width="2"/>
+<text x="1110" y="220" font-size="25" font-weight="700" fill="#203e32">负责人＋设备／测试／部署</text>
+<text x="1110" y="267" font-size="23" font-weight="400" fill="#203e32">补源码、资料、模板和账号</text>
+<text x="1110" y="308" font-size="23" font-weight="400" fill="#203e32">确认现场条件与目标环境</text>
+<path d="M 280 343 L 280 370 L 800 370 L 800 398" fill="none" stroke="#39725f" stroke-width="3" marker-end="url(#a)"/>
+<path d="M 800 343 L 800 398" fill="none" stroke="#39725f" stroke-width="3" marker-end="url(#a)"/>
+<path d="M 1320 343 L 1320 370 L 800 370" fill="none" stroke="#39725f" stroke-width="3" marker-end="url(#a)"/>
+<rect x="50" y="408" width="1500" height="105" rx="16" fill="#e5f1e9" stroke="#c9dcd1" stroke-width="2"/>
+<text x="75" y="448" font-size="28" font-weight="700" fill="#203e32">第 2 阶段：前后端汇合——页面保存一次，重启后仍能读回</text>
+<text x="75" y="488" font-size="23" font-weight="400" fill="#203e32">共同验收：新建任务 → 修改字段 → 保存 → 刷新／重启 → 读回；无权限用户不能访问</text>
+<path d="M 800 516 L 800 542 L 180 542 L 180 568" fill="none" stroke="#39725f" stroke-width="3" marker-end="url(#a)"/>
+<rect x="50" y="578" width="280" height="160" rx="16" fill="#ffffff" stroke="#c9dcd1" stroke-width="2"/>
+<text x="68" y="620" font-size="24" font-weight="700" fill="#203e32">3 资料和助手</text>
+<text x="68" y="667" font-size="22" font-weight="400" fill="#203e32">上传 → 检索 → 预填</text>
+<text x="68" y="708" font-size="21" font-weight="400" fill="#2c7656">人采纳后能保存</text>
+<path d="M333 658 L350 658" fill="none" stroke="#39725f" stroke-width="3" marker-end="url(#a)"/>
+<rect x="355" y="578" width="280" height="160" rx="16" fill="#ffffff" stroke="#c9dcd1" stroke-width="2"/>
+<text x="373" y="620" font-size="24" font-weight="700" fill="#203e32">4 模拟完整流程</text>
+<text x="373" y="667" font-size="22" font-weight="400" fill="#203e32">测试 → 调优 → 复测</text>
+<text x="373" y="708" font-size="21" font-weight="400" fill="#2c7656">生成能打开的报告</text>
+<path d="M638 658 L655 658" fill="none" stroke="#39725f" stroke-width="3" marker-end="url(#a)"/>
+<rect x="660" y="578" width="280" height="160" rx="16" fill="#ffffff" stroke="#c9dcd1" stroke-width="2"/>
+<text x="678" y="620" font-size="24" font-weight="700" fill="#203e32">5 真实设备</text>
+<text x="678" y="667" font-size="22" font-weight="400" fill="#203e32">先读状态，再受控动作</text>
+<text x="678" y="708" font-size="21" font-weight="400" fill="#2c7656">取得回执和实际数据</text>
+<path d="M943 658 L960 658" fill="none" stroke="#39725f" stroke-width="3" marker-end="url(#a)"/>
+<rect x="965" y="578" width="280" height="160" rx="16" fill="#ffffff" stroke="#c9dcd1" stroke-width="2"/>
+<text x="983" y="620" font-size="24" font-weight="700" fill="#203e32">6 补齐范围并验收</text>
+<text x="983" y="667" font-size="22" font-weight="400" fill="#203e32">两场景、全部按钮</text>
+<text x="983" y="708" font-size="21" font-weight="400" fill="#2c7656">页面与异常逐项通过</text>
+<path d="M1248 658 L1265 658" fill="none" stroke="#39725f" stroke-width="3" marker-end="url(#a)"/>
+<rect x="1270" y="578" width="280" height="160" rx="16" fill="#ffffff" stroke="#c9dcd1" stroke-width="2"/>
+<text x="1288" y="620" font-size="24" font-weight="700" fill="#203e32">7 新机器部署</text>
+<text x="1288" y="667" font-size="22" font-weight="400" fill="#203e32">安装、恢复、回退</text>
+<text x="1288" y="708" font-size="21" font-weight="400" fill="#2c7656">别人照说明能启动</text>
+<text x="50" y="798" font-size="24" font-weight="400" fill="#607169">第一条主线跑风扇；完整范围继续按任务清单补齐。模拟通过不替代实机验收。</text>
+</g></svg>

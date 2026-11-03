@@ -1,0 +1,74 @@
+{
+  "doc_id": "smo-pll-estimator",
+  "summary": {
+    "parameters": 7,
+    "parameters_matching_customer_h": 2,
+    "registers": 0,
+    "thresholds": 0,
+    "units": 0,
+    "procedure_steps": 0
+  },
+  "parameters": [
+    {
+      "name": "TPWM_VALUE",
+      "count": 6,
+      "in_customer_h": false,
+      "first_chunk": "smo-pll-estimator#c0007",
+      "first_page": 4,
+      "context": "为了对 Z 滤波以获得e*，用 TPWM_VALUE 替换公式中的 T，可得到："
+    },
+    {
+      "name": "BASE_FREQ",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "smo-pll-estimator#c0009",
+      "first_page": 5,
+      "context": "_Q15((2*MOTOR_SPEED_SMOMIN_RPM*_2PI*BASE_FREQ*TPWM_VALUE)/MOTOR_SPEED_BASE)"
+    },
+    {
+      "name": "ATO_BW",
+      "count": 2,
+      "in_customer_h": true,
+      "first_chunk": "smo-pll-estimator#c0012",
+      "first_page": 7,
+      "context": "_Q15(_2PI*ATO_BW*ATO_BW*TPWM_VALUE/BASE_FREQ)"
+    },
+    {
+      "name": "FOC_FBASE",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "smo-pll-estimator#c0008",
+      "first_page": 5,
+      "context": "FOC_FBASE = OBS_FBASE = fBASE · TPWM_VALUE * 32767"
+    },
+    {
+      "name": "MOTOR_SPEED_BASE",
+      "count": 2,
+      "in_customer_h": true,
+      "first_chunk": "smo-pll-estimator#c0009",
+      "first_page": 5,
+      "context": "_Q15((2*MOTOR_SPEED_SMOMIN_RPM*_2PI*BASE_FREQ*TPWM_VALUE)/MOTOR_SPEED_BASE)"
+    },
+    {
+      "name": "MOTOR_SPEED_SMOMIN_RPM",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "smo-pll-estimator#c0009",
+      "first_page": 5,
+      "context": "_Q15((2*MOTOR_SPEED_SMOMIN_RPM*_2PI*BASE_FREQ*TPWM_VALUE)/MOTOR_SPEED_BASE)"
+    },
+    {
+      "name": "OBS_FBASE",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "smo-pll-estimator#c0008",
+      "first_page": 5,
+      "context": "FOC_FBASE = OBS_FBASE = fBASE · TPWM_VALUE * 32767"
+    }
+  ],
+  "registers": [],
+  "thresholds": [],
+  "units": [],
+  "procedure_steps": [],
+  "method": "regex+heuristic, no LLM; 参数名=全大写下划线标识符, 寄存器=标识符±40字符内出现『寄存器/register』, 阈值=数值+单位且±40字符内含阈值语境词, 规程步骤=编号行且含操作动词"
+}

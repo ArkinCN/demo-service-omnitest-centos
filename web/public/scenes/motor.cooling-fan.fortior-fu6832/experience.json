@@ -1,0 +1,804 @@
+{
+  "schema": "experience/v1",
+  "scene_id": "motor.cooling-fan.fortior-fu6832",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-19",
+  "belongs_to_flow": "F1 知识库管理（经验性质那一类的样例数据）；被 F4 / F5 在调参时检索命中",
+  "count": 25,
+  "evidence_levels": {
+    "台架实测数据": "来自 98 次启动故障实验数据包与其分析报告，有实测数字",
+    "判定工具输出": "来自判定工具 diagnosis.json / diagnosis_report.md 的结构化结论",
+    "规程条款": "来自客户机 25 份 dc-skills 与 5 份 dc-rules 的成文规则",
+    "台架经验": "来自本项目台架硬件记忆，未成文进规程"
+  },
+  "schema_note": "每条 = 问题现象 symptom / 原因 cause / 调整动作 action / 结果 result / 来源 _source / 标签 tags（场景、流程、参数名、主题）",
+  "experiences": [
+    {
+      "id": "EXP-001",
+      "symptom": "读到 fault = 1 或 2（硬过流 / 软过流），电机起转即报保护",
+      "cause": "起转电流偏大，超过过流阈值",
+      "action": "把启动电流（MOTOR_START_IQ_CURRENT）下调 20%，重编重烧后复测",
+      "result": "过流消失则继续判定闭环稳态；仍过流则按分诊表继续下一轮，最多 3 轮",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F5 调优确认及运行",
+        "parameters": [
+          "MOTOR_START_IQ_CURRENT"
+        ],
+        "topic": [
+          "过流",
+          "启动"
+        ]
+      },
+      "evidence_level": "规程条款",
+      "parameters_resolved": true,
+      "_source": {
+        "file": "[源] coolingfan-openloop-debug/SKILL.md",
+        "locator": "第 5 节 失败分诊迭代 表 第 1 行"
+      },
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-002",
+      "symptom": "读到 fault = 6（堵转），或起转即停",
+      "cause": "起转力矩不足，或负载偏重",
+      "action": "先反问用户确认负载状况，再把启动电流上调 0.1~0.2 A",
+      "result": "力矩足够后可正常起转；负载确实偏重时应先解决机械问题",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F5 调优确认及运行",
+        "parameters": [
+          "MOTOR_START_IQ_CURRENT"
+        ],
+        "topic": [
+          "堵转",
+          "启动"
+        ]
+      },
+      "evidence_level": "规程条款",
+      "parameters_resolved": true,
+      "_source": {
+        "file": "[源] coolingfan-openloop-debug/SKILL.md",
+        "locator": "第 5 节 失败分诊迭代 表 第 2 行"
+      },
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-003",
+      "symptom": "读到 fault = 5（缺相）",
+      "cause": "三相接线问题，不是参数问题",
+      "action": "立即停止参数迭代，反问用户检查接线",
+      "result": "参数侧无解；继续盲调只会浪费烧录轮次",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F4 启动测试及结果分析",
+        "parameters": [],
+        "topic": [
+          "缺相",
+          "接线"
+        ]
+      },
+      "evidence_level": "规程条款",
+      "parameters_resolved": true,
+      "_source": {
+        "file": "[源] coolingfan-openloop-debug/SKILL.md",
+        "locator": "第 5 节 失败分诊迭代 表 第 3 行"
+      },
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-004",
+      "symptom": "无 fault，但示波器读到相电流频率约等于 0，电机不转",
+      "cause": "起转电流不足，转子没被拖起来",
+      "action": "把启动电流上调 0.1~0.2 A 后重试",
+      "result": "电流够了即可起转；配合观察起转包络确认是否切到闭环",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F5 调优确认及运行",
+        "parameters": [
+          "MOTOR_START_IQ_CURRENT"
+        ],
+        "topic": [
+          "不转",
+          "启动"
+        ]
+      },
+      "evidence_level": "规程条款",
+      "parameters_resolved": true,
+      "_source": {
+        "file": "[源] coolingfan-openloop-debug/SKILL.md",
+        "locator": "第 5 节 失败分诊迭代 表 第 4 行"
+      },
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-005",
+      "symptom": "起转起来了，但切闭环瞬间掉速或失步",
+      "cause": "开环切闭环的切换点不合适",
+      "action": "调整闭环切换转速（MOTOR_LOOP_RPM）±20%，并复核起转电流",
+      "result": "切换点匹配后可平滑过渡；Customer.h 注释给的 Open-Omega 操作范围是 500~2000 RPM",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F5 调优确认及运行",
+        "parameters": [
+          "MOTOR_LOOP_RPM",
+          "MOTOR_START_IQ_CURRENT"
+        ],
+        "topic": [
+          "切闭环",
+          "失步"
+        ]
+      },
+      "evidence_level": "规程条款",
+      "parameters_resolved": true,
+      "_source": [
+        {
+          "file": "[源] coolingfan-openloop-debug/SKILL.md",
+          "locator": "第 5 节 失败分诊迭代 表 第 5 行"
+        },
+        {
+          "file": "[源] include/Customer.h",
+          "locator": "Customer.h:113 注释「MOTOR_LOOP_RPM 操作範圍: 500~2000」"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-006",
+      "symptom": "mcState 一直停在开环态，转速上不到目标",
+      "cause": "没真正进闭环，或目标转速超出电机/供电能力",
+      "action": "先确认 OPENLOOP_ENABLED=0、SPEED_MODE=NONEMODE 已生效；仍不行则反问用户目标转速是否超能力",
+      "result": "配置没生效是常见原因；确认生效后再谈能力边界",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F4 启动测试及结果分析",
+        "parameters": [
+          "OPENLOOP_ENABLED",
+          "SPEED_MODE"
+        ],
+        "topic": [
+          "闭环",
+          "配置未生效"
+        ]
+      },
+      "evidence_level": "规程条款",
+      "parameters_resolved": false,
+      "note": "tags.parameters 的两个宏里只有 SPEED_MODE 能解析到本包的 control-parameters.json（key = speed_mode）。OPENLOOP_ENABLED 宏在本工程 Customer.h:220 确实存在（当前值 0，开环调速禁用），但它不在本包登记的 70 个控制参数里——本包登记的 outloop_enabled 对应的是 OUTLOOP_ENABLED（速度外环使能），与 OPENLOOP_ENABLED（开环调速使能）是两个宏，名字只差一个字母，不可混用。前端按参数检索时 OPENLOOP_ENABLED 这一维检索不到，需先补登记该宏",
+      "_source": {
+        "file": "[源] coolingfan-openloop-debug/SKILL.md",
+        "locator": "第 5 节 失败分诊迭代 表 第 6 行"
+      },
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-007",
+      "symptom": "稳态转速偏差超过容限（缺省 5%），但转速本身是稳定的",
+      "cause": "外环增益不足，或目标转速换算口径错了",
+      "action": "先复核目标转速宏的数值外壳与换算（极对数、S_Value 单位），确认无误后经用户同意把速度环 Ki（SPEED_KI / SKI）上调 20%",
+      "result": "换算错是更常见的原因，先查换算再动 PI",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F5 调优确认及运行",
+        "parameters": [
+          "SPEED_KI",
+          "Pole_Pairs"
+        ],
+        "topic": [
+          "稳态偏差",
+          "外环 PI"
+        ]
+      },
+      "evidence_level": "规程条款",
+      "parameters_resolved": false,
+      "_status": "待核实：Pole_Pairs 宏在客户头文件 Customer.h:56（#define Pole_Pairs (2)）确实存在，本包也已登记，但登记位置是 product-attributes.json 的电机本体属性（key = pole_pairs，极对数），不在 control-parameters.json 的 70 个可调控制参数里。SPEED_KI 能解析到 control-parameters.json 的 key = speed_ki。极对数是否应补登记为可调参数，待客户确认，确认前本条按未解析处理。",
+      "_source": {
+        "file": "[源] coolingfan-openloop-debug/SKILL.md",
+        "locator": "第 5 节 失败分诊迭代 表 第 7 行"
+      },
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-008",
+      "symptom": "稳态转速振荡，3 次频率测量的极差 / 均值超过 3%",
+      "cause": "外环增益偏高",
+      "action": "经用户同意把速度环 Kp（SPEED_KP / SKP）下调 20%，一次只动一项",
+      "result": "一次只动一个 PI 项，否则无法归因",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F5 调优确认及运行",
+        "parameters": [
+          "SPEED_KP"
+        ],
+        "topic": [
+          "振荡",
+          "外环 PI"
+        ]
+      },
+      "evidence_level": "规程条款",
+      "parameters_resolved": true,
+      "_source": {
+        "file": "[源] coolingfan-openloop-debug/SKILL.md",
+        "locator": "第 5 节 失败分诊迭代 表 第 8 行"
+      },
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-009",
+      "symptom": "98 次台架复现里，启动失败样本的相电流绝对峰值明显高于启动成功样本",
+      "cause": "预定位太弱（align_weak）：预定位强度不足，转子初始位置没锁住，起转阶段要靠更大的电流去纠正",
+      "action": "把预定位 D 轴输出强度（MOTOR_ALIGNMENT_DOUT）加大，或延长预定位时间（MOTOR_ALIGNMENT_TIMES）",
+      "result": "实测：启动成功组峰值 0.2886~0.4916 A（中位 0.3847），启动失败组 0.3527~0.5771 A（中位 0.5291）",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F5 调优确认及运行",
+        "parameters": [
+          "MOTOR_ALIGNMENT_DOUT",
+          "MOTOR_ALIGNMENT_TIMES"
+        ],
+        "topic": [
+          "预定位",
+          "启动故障"
+        ]
+      },
+      "evidence_level": "台架实测数据",
+      "parameters_resolved": true,
+      "_source": [
+        {
+          "file": "[源] 20260811_启动故障98次实验与30例对照数据包/分析报告-预定位太弱判定-20260812.md",
+          "locator": "第 1.2 节 表「电流绝对峰值」行"
+        },
+        {
+          "file": "[源] 20260811_启动故障98次实验与30例对照数据包/分析报告-预定位太弱判定-20260812.md",
+          "locator": "第 0.1 节第 2 条：客户证实全部 98 条都是「预定位太弱」的复现"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-010",
+      "symptom": "预定位诊断报告里 A03 预定位末端稳定性、A04 预定位振荡两项判失败，但 A01 时间、A02 强度、A05 观测器三项都与型号健康基线一致",
+      "cause": "参数逐项比对不出问题，波形末端却仍有较强动态——单通道 CH1 证据不足以把电流波动等同于机械振荡",
+      "action": "结论只能下到 NO_CONFIRMED_MCALIGN_FAULT（未确认 mcAlign 首要故障），置信度 0.40，继续往下检查 mcStart 阶段",
+      "result": "不硬下结论；缺的证据要写进「缺失」栏（无连续 mcState、缺转子位置/FG/现场同步视频）",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F4 启动测试及结果分析",
+        "parameters": [
+          "MOTOR_ALIGNMENT_TIMES",
+          "MOTOR_ALIGNMENT_DOUT",
+          "ATO_BW"
+        ],
+        "topic": [
+          "预定位",
+          "证据不足"
+        ]
+      },
+      "evidence_level": "判定工具输出",
+      "parameters_resolved": true,
+      "_source": [
+        {
+          "file": "[源] tool_output/diagnosis_report.md",
+          "locator": "一、诊断结论 与 二、逐项检查 表"
+        },
+        {
+          "file": "[源] tool_output/diagnosis.json",
+          "locator": "verdict / atomic_detectors[]"
+        }
+      ],
+      "usage": "测试需求",
+      "usage_class": "D2 规程沉淀 · 判据修正"
+    },
+    {
+      "id": "EXP-011",
+      "symptom": "想用上电前那一段静止波形评估底噪或零漂",
+      "cause": "一个 ADC 量化步是 0.0106875，而上电前那段包络均值只有约 0.0017，整段没跨过一个量化码——测到的是量化残差，不是底噪",
+      "action": "放弃用本批数据评底噪；要评底噪必须换更小的垂直档位重采",
+      "result": "知识库判据里以底噪为主判据的那一条，在本批数据上直接评不了",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F4 启动测试及结果分析",
+        "parameters": [],
+        "topic": [
+          "示波器档位",
+          "量化分辨率",
+          "判据失效"
+        ]
+      },
+      "evidence_level": "台架实测数据",
+      "parameters_resolved": true,
+      "_source": {
+        "file": "[源] 20260811_启动故障98次实验与30例对照数据包/分析报告-预定位太弱判定-20260812.md",
+        "locator": "第 1.2 节「量化分辨率的问题与单位无关」段"
+      },
+      "usage": "测试需求",
+      "usage_class": "D1 实验沉淀 · 判据修正",
+      "usage_review": "待人工复核"
+    },
+    {
+      "id": "EXP-012",
+      "symptom": "按启动成败重新标定出来的规则表 v0.2，判出的 FAULT 数反而比预注册的 v0.1 少很多",
+      "cause": "v0.2 那条 start_env_decay_ratio 判别的是「这次启动成没成」，不是「为什么不行」——把结果当成因去标定，判据就退化了",
+      "action": "成因判据回退到预注册的 v0.1；v0.2 只当启动成败的辅助特征",
+      "result": "v0.1 原样跑，97 条可用样本判出 94 条 FAULT、3 条 UNCERTAIN、0 条 OK，对金标准检出率 96.9%；v0.2 只判出 39 条 FAULT，作为成因判据是倒退",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F5 调优确认及运行",
+        "parameters": [],
+        "topic": [
+          "判据标定",
+          "成因 vs 结果"
+        ]
+      },
+      "evidence_level": "台架实测数据",
+      "parameters_resolved": true,
+      "_source": {
+        "file": "[源] 20260811_启动故障98次实验与30例对照数据包/分析报告-预定位太弱判定-20260812.md",
+        "locator": "第 0.2 节 一句话结论 与 第 5.4 节"
+      },
+      "usage": "测试需求",
+      "usage_class": "D1 实验沉淀 · 判据修正"
+    },
+    {
+      "id": "EXP-013",
+      "symptom": "本批 98 条数据想用来算成因误报率",
+      "cause": "全部 98 条的成因金标准都是 align_weak，正常样本 0 条——能测的只有检出率，测不了误报率",
+      "action": "要评误报率必须另外采一批正常样本；现阶段报告只写检出率",
+      "result": "67 条 PASS 也是太弱注入下的样本，只是侥幸启动成功，按失效样本计",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F3 测试需求确认",
+        "parameters": [],
+        "topic": [
+          "数据集口径",
+          "误报率"
+        ]
+      },
+      "evidence_level": "台架实测数据",
+      "parameters_resolved": true,
+      "_source": {
+        "file": "[源] 20260811_启动故障98次实验与30例对照数据包/分析报告-预定位太弱判定-20260812.md",
+        "locator": "第 0.1 节第 3 条 与 第 0.2 节"
+      },
+      "usage": "测试需求",
+      "usage_class": "D1 实验沉淀 · 判据修正"
+    },
+    {
+      "id": "EXP-014",
+      "symptom": "两个电机都不转，不知道从哪查起",
+      "cause": "先分清信号方向：PWM1/PWM2 是板子的输出，FG1/FG2 是输入到板子的反馈",
+      "action": "先测 PWM1（板子输出给被测风扇的占空比），确认板子有没有成功输出",
+      "result": "板子没输出就不必往电机侧查；这是台架排查的第一刀",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F4 启动测试及结果分析",
+        "parameters": [],
+        "topic": [
+          "台架",
+          "排查顺序"
+        ]
+      },
+      "evidence_level": "台架经验",
+      "parameters_resolved": true,
+      "_source": {
+        "file": "[源] memory/fortior-test-bench-hardware.md",
+        "locator": "「信号定义(方向是关键,易混)」段"
+      },
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-015",
+      "symptom": "示波器接到 FG 通道却看不到方波",
+      "cause": "FG 输出多为开漏结构",
+      "action": "在 FG 线上加上拉电阻再测",
+      "result": "上拉后方波可见；转速 RPM = FG 频率 × 60 / 每转脉冲数",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F4 启动测试及结果分析",
+        "parameters": [
+          "FG_PULSE_PERIOD"
+        ],
+        "topic": [
+          "台架",
+          "开漏",
+          "接线"
+        ]
+      },
+      "evidence_level": "台架经验",
+      "parameters_resolved": false,
+      "_status": "待核实：FG_PULSE_PERIOD 宏在客户头文件 Customer.h:334（#define FG_PULSE_PERIOD (2)，注释「FG 每轉脈波數量」）确实存在，本包也已登记，但登记位置是 product-attributes.json 的转速信号属性（key = fg_pulse_period，FG 每转脉波数），不在 control-parameters.json 的 70 个可调控制参数里。每转脉冲数是否应补登记为可调参数，待客户确认，确认前本条按未解析处理。",
+      "_source": {
+        "file": "[源] memory/fortior-test-bench-hardware.md",
+        "locator": "「示波器接线」段"
+      },
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-016",
+      "symptom": "运行稳定性逐档扫描（sweep）跑出来的工作点全不对",
+      "cause": "功率标定（Power_k）还没做就先跑了运行稳定",
+      "action": "把功率标定排到运行稳定之前：识别 → 灌默认基线 →（验板 → 验采样）→ 启动 → 顺风 → 功率标定 → 运行稳定 → 保护 → 启停测试",
+      "result": "顺序纠正后 sweep 才落在真实工作点上。已知缺口：power-calibration 场景在客户 manifest 里仍是 planned，流程链有断点",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F5 调优确认及运行",
+        "parameters": [],
+        "topic": [
+          "阶段顺序",
+          "功率标定"
+        ]
+      },
+      "evidence_level": "规程条款",
+      "parameters_resolved": true,
+      "_source": [
+        {
+          "file": "[源] dc-rules/vacuum-flow-discipline.md",
+          "locator": "第 9 条铁律"
+        },
+        {
+          "file": "[源] _调研/A-DebugCopilot场景与知识库取证.md",
+          "locator": "第三节 纪律层 与 第七节 四个缺口"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-017",
+      "symptom": "改宏时把 I_Value(2.0) 直接改成了纯数字 2.0",
+      "cause": "数值宏的外壳（I_Value / S_Value / _Q15 / _Q12）承载单位换算，换掉外壳等于换了量纲",
+      "action": "只改括号内数字，不换外壳、不动行尾注释；枚举型宏写 token 名不写数字，且 token 必须是工程内已有的枚举名",
+      "result": "外壳错会让参数量级整体偏掉，且编译未必报错，属静默故障",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F5 调优确认及运行",
+        "parameters": [],
+        "topic": [
+          "改宏纪律",
+          "量纲"
+        ]
+      },
+      "evidence_level": "规程条款",
+      "parameters_resolved": true,
+      "_source": {
+        "file": "[源] coolingfan-openloop-debug/SKILL.md",
+        "locator": "第 1 节 闭环配置定位 与 第 2 节 备份 + 改宏 纪律"
+      },
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-018",
+      "symptom": "宏名在本工程里找不到（跨程序宏名不一致）",
+      "cause": "不同程序的宏名和文件不同，散热风扇线与吸尘器线的命名就有差异",
+      "action": "按宏族分组 grep 候选；全部候选未命中时列出语义相近的宏名反问用户，严禁假设宏名、严禁新增 #define、严禁自建 #if 块",
+      "result": "用户给不出就进中断保护判 NG，不要硬猜",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F2 初始化配置",
+        "parameters": [],
+        "topic": [
+          "跨程序移植",
+          "宏族探测"
+        ]
+      },
+      "evidence_level": "规程条款",
+      "parameters_resolved": true,
+      "_source": {
+        "file": "[源] coolingfan-openloop-debug/SKILL.md",
+        "locator": "第 1 节 闭环配置定位（宏族探测，跨程序差异核心节）"
+      },
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-019",
+      "symptom": "没有物理示波器，流程要不要停",
+      "cause": "散热风扇线支持降级，示波器不是硬前提；吸尘器的四份规程才强制要示波器",
+      "action": "选「无示波器」直接进降级模式：请用户等转速稳定后用转速表或 FG 读实际转速回报，按同样的 5% 容限判",
+      "result": "结论里必须注明「无示波器证据」；启动调参要更保守，因为识不破假转",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F4 启动测试及结果分析",
+        "parameters": [],
+        "topic": [
+          "降级模式",
+          "示波器"
+        ]
+      },
+      "evidence_level": "规程条款",
+      "parameters_resolved": true,
+      "_source": [
+        {
+          "file": "[源] coolingfan-openloop-debug/SKILL.md",
+          "locator": "第 0 节 前置检查 与 第 4 节 降级模式"
+        },
+        {
+          "file": "[源] dc-rules/vacuum-flow-discipline.md",
+          "locator": "第 10 条铁律"
+        },
+        {
+          "file": "[源] _调研/A-DebugCopilot场景与知识库取证.md",
+          "locator": "第六节「示波器非硬前提（散热风扇可降级；吸尘器四份规程强制）」"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-020",
+      "symptom": "rigol_waveform_analyze 调多了，设备被抢、流程变慢",
+      "cause": "该工具走 RAW 全内存深度读取，耗时数秒，且与波形流抢设备",
+      "action": "只在判定窗口里调用一次，不要轮询",
+      "result": "把它当一次性取证，不当监控手段",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F4 启动测试及结果分析",
+        "parameters": [],
+        "topic": [
+          "示波器",
+          "工具调用纪律"
+        ]
+      },
+      "evidence_level": "规程条款",
+      "parameters_resolved": true,
+      "_source": {
+        "file": "[源] coolingfan-openloop-debug/SKILL.md",
+        "locator": "第 4 节 证据二 第 3 步"
+      },
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-021",
+      "symptom": "烧录完成后直接发 debug 让电机转起来",
+      "cause": "烧录完 MCU 停在 reset vector，此时自动启动等于在无人确认下上电跑电机",
+      "action": "不要自动发 debug；提示用户上电或给使能，明确回复后再发",
+      "result": "这一条与「人员离场确认」同源：让电机转起来之前必须有人工闸口",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F4 启动测试及结果分析",
+        "parameters": [],
+        "topic": [
+          "人工闸口",
+          "烧录"
+        ]
+      },
+      "evidence_level": "规程条款",
+      "parameters_resolved": true,
+      "_source": [
+        {
+          "file": "[源] coolingfan-openloop-debug/SKILL.md",
+          "locator": "第 3 节 编译 + 烧录 第 3 步"
+        },
+        {
+          "file": "[源] 20260919-通用Agent测试系统v2.0/00-用户需求原话-20260919.md",
+          "locator": "典型流程 2 测试保护原则"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-022",
+      "symptom": "自动启动盲试把 10 个候选跑完了还是不行",
+      "cause": "固定候选是有边界的盲试空间，每个候选只偏离 baseline 一个轴",
+      "action": "判 need_human 转人工，不得创建第 11 个候选、不得自行扩大搜索区间",
+      "result": "盲试的价值在可复现，扩区间就失去了可复现性",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F5 调优确认及运行",
+        "parameters": [
+          "SquStartCurrent",
+          "StartCurrentAddThreshold",
+          "RealFOCSwitchSpeed"
+        ],
+        "topic": [
+          "盲试",
+          "边界"
+        ]
+      },
+      "evidence_level": "规程条款",
+      "parameters_resolved": false,
+      "note": "tags.parameters 的三个宏名 SquStartCurrent / StartCurrentAddThreshold / RealFOCSwitchSpeed 来自 auto-startup-tune 规程的固定候选表，属吸尘器产品线；本散热风扇工程的 Customer.h / Protect.h / Motor_Protection.h 全量 grep 三者均零命中，本包 70 个控制参数里也没有对应项。语义上最接近的散热风扇宏是MOTOR_START_IQ_CURRENT（启动电流）与 MOTOR_LOOP_RPM（进入闭环转速），但对应关系未经客户确认，本包不做映射。这条经验的方法论（盲试候选有边界、耗尽即 need_human）可迁移，具体宏名不可迁移",
+      "_source": {
+        "file": "[源] auto-startup-tune/SKILL.md",
+        "locator": "「## 固定候选」与候选推进小节（第 106 行「need_human 不得继续创建第 11 个候选」）"
+      },
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-023",
+      "symptom": "保护验证做完，下一张卡片的结果跟着跑偏",
+      "cause": "上一张卡片把电源调到过压/欠压后没调回来",
+      "action": "强制走调回流程：提示用户调回原母线电压，等用户明确回「已调回」，再读母线 ADC 复检，偏差 > 5% 判定降级",
+      "result": "不能由模型脑补「应该已经调回了」",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F4 启动测试及结果分析",
+        "parameters": [],
+        "topic": [
+          "保护验证",
+          "复检"
+        ]
+      },
+      "evidence_level": "规程条款",
+      "parameters_resolved": true,
+      "_source": {
+        "file": "[源] protect-verify-ovp/SKILL.md",
+        "locator": "第 2 节 Vbus 复检(强约束)"
+      },
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-024",
+      "symptom": "想通过 writemem 直接改保护阈值来让保护触发",
+      "cause": "在线改阈值是违规操作，改完读到的 fault 不能证明真实保护链路",
+      "action": "只读 RAM 观测，触发条件由用户手动调电源产生；确需改阈值的（超速、启动失败）走 protect-verify/* 临时分支，跑完 git reset + 重编重烧还原",
+      "result": "保证用户不会停在改坏的固件上",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F4 启动测试及结果分析",
+        "parameters": [],
+        "topic": [
+          "保护验证",
+          "还原纪律"
+        ]
+      },
+      "evidence_level": "规程条款",
+      "parameters_resolved": true,
+      "_source": [
+        {
+          "file": "[源] protect-verify-ovp/SKILL.md",
+          "locator": "设计约束段"
+        },
+        {
+          "file": "[源] protect-verify-overspeed/SKILL.md",
+          "locator": "设计前提与「## 中断保护」小节"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-025",
+      "symptom": "台架按 30/50/70/100% 四档跑，满档指令下发后实测占空比上不去，与命令不符",
+      "cause": "最大输出占空比上限（MOTOR_MAX_DUTY）配置为 0.9，低于满档所需 1.0，固件对超过上限的占空比指令做了钳位",
+      "action": "把最大输出占空比（MOTOR_MAX_DUTY）上调 20%，使配置上限覆盖满档需求，重编重烧后复测",
+      "result": "配置上限覆盖运行档位后，各档实测占空比与命令一致；未覆盖时满档会被钳位，实测必然低于命令值",
+      "tags": {
+        "scene": [
+          "motor",
+          "cooling-fan",
+          "fortior-fu6832"
+        ],
+        "flow": "F5 调优确认及运行",
+        "parameters": [
+          "MOTOR_MAX_DUTY"
+        ],
+        "topic": [
+          "占空比",
+          "输出上限",
+          "调速"
+        ]
+      },
+      "evidence_level": "台架经验",
+      "parameters_resolved": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:242 (#define MOTOR_MAX_DUTY)，经台架四档实测比对（命令 30/50/70/100%）"
+      },
+      "note": "本条为台架实测派生经验（2026-10-08 补），用于承载 F5「配置上限未覆盖运行档位」的调优闭环：判据 TR-BENCH-05 判不通过时命中本条的候选。",
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    }
+  ]
+}

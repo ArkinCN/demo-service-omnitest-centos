@@ -1,0 +1,11 @@
+{
+    "mode": "live",
+    "ts": 1789831807.2272944,
+    "device_id": "bench",
+    "status": "unavailable",
+    "channel": 4,
+    "signal": "PWM1",
+    "duty_percent": null,
+    "raw": "OPEN_FAIL",
+    "note": "未取到占空比。已知成因两类：一是 C:\\fc_pull 下的 .exe 会变坏档（ScopeCtl 返回 OPEN_FAIL），需在台架机用 csc /platform:x64 当场重编；二是示波器被 MotorDebug 或遗留 powershell 独占。"
+}

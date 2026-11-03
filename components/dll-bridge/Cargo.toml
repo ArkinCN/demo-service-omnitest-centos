@@ -1,0 +1,42 @@
+[package]
+# crate 名称
+name = "dll-bridge"
+# 版本号
+version = "0.1.0"
+# Rust 版本
+edition = "2021"
+# 描述：32 位子进程，用于加载 32 位 DLL 并通过 stdin/stdout JSON 协议与主进程通信
+description = "32-bit subprocess bridge for loading 32-bit DLLs via stdin/stdout JSON protocol"
+
+[[bin]]
+name = "dll-bridge"
+path = "src/main.rs"
+
+# 依赖项
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+libloading = "0.8"
+
+log = "0.4"
+env_logger = "0.11"
+thiserror = "1"
+
+# IPC 消息 ID 用于请求-响应匹配。
+uuid = { version = "1.0", features = ["v4", "serde"] }
+
+# Windows API 绑定（MIT 协议），用于隐藏窗口创建和消息泵。
+windows-sys = { version = "0.59", features = [
+    "Win32_Foundation",
+    "Win32_Graphics_Gdi",
+    "Win32_System_Com",
+    "Win32_System_LibraryLoader",
+    "Win32_System_Threading",
+    "Win32_UI_WindowsAndMessaging",
+] }
+
+# DLL 可能返回 GBK/GB2312 字节，需要转换为 UTF-8。
+encoding_rs = "0.8"
+
+# CLI 参数解析（MIT/Apache-2.0 协议）
+clap = { version = "4", features = ["derive"] }

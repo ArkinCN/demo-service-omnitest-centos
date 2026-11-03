@@ -1,0 +1,103 @@
+{
+  "schema": "test-requirements/v1",
+  "scene_id": "example.minimal.skeleton",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-20",
+  "belongs_to_flow": "F3 测试需求确认 → F4 启动测试及结果分析",
+  "categories": [
+    "基本性能"
+  ],
+  "demo_profile": {
+    "note": "演示主线只判这一条。",
+    "requirements": [
+      "TR-BASIC-01"
+    ]
+  },
+  "group_tiers": [
+    {
+      "id": "req-perf",
+      "title": "性能",
+      "groups": [
+        {
+          "id": "req-perf-basic",
+          "title": "基本性能",
+          "members": [
+            "基本性能"
+          ],
+          "subgroups": [
+            {
+              "id": "req-perf-basic-items",
+              "title": "基本性能",
+              "items": [
+                "TR-BASIC-01"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "criterion_syntax": "JavaScript 表达式（ECMAScript），求值结果为布尔",
+  "criterion_expression_note": "每条判据带四个配套字段：evaluable 说明能不能真的求值；criterion 是 JS 语法的判据表达式，散文式条目为 null；variables 把表达式里每个自由变量映射到确定的取值来源；criterion_text 是人读版本。",
+  "criterion_globals": [
+    "Math",
+    "true",
+    "false",
+    "null"
+  ],
+  "runtime_measures": {
+    "example_measure": {
+      "name": "示例测量量",
+      "unit": "rpm",
+      "obtained_by": "示例仪器回读，取稳态段均值"
+    }
+  },
+  "evaluable_count": 1,
+  "not_evaluable_count": 0,
+  "requirements": [
+    {
+      "id": "TR-BASIC-01",
+      "name": "示例判据",
+      "category": "基本性能",
+      "evaluable": true,
+      "criterion": "example_measure >= min_value && example_measure <= max_value",
+      "criterion_text": "示例测量量落在下限与上限之间。",
+      "variables": {
+        "example_measure": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.example_measure",
+          "desc": "示例测量量",
+          "unit": "rpm"
+        },
+        "min_value": {
+          "source": "threshold",
+          "ref": "threshold.min_value",
+          "desc": "下限",
+          "unit": "rpm"
+        },
+        "max_value": {
+          "source": "threshold",
+          "ref": "threshold.max_value",
+          "desc": "上限",
+          "unit": "rpm"
+        }
+      },
+      "threshold": {
+        "min_value": 90,
+        "max_value": 110
+      },
+      "evidence": [
+        "示例仪器读数"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] 08b-场景包契约/README-场景包契约-v1.1.md",
+        "locator": "第 10 节 新建第三个场景包的步骤"
+      }
+    }
+  ]
+}

@@ -1,0 +1,2677 @@
+{
+  "schema": "test-requirements/v1",
+  "scene_id": "automotive.body-motor.window-regulator",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-19",
+  "belongs_to_flow": "F3 测试需求确认（标准与判据来源）→ F4 启动测试及结果分析（执行与判定）",
+  "categories": [
+    "基本性能",
+    "自锁",
+    "防夹",
+    "环境与耐久",
+    "电气与防护",
+    "检验规则"
+  ],
+  "demo_profile": {
+    "note": "对照场景不走演示主线；这 6 条是三个一级类各取代表，用来证明骨架换包不换界面。",
+    "requirements": [
+      "TR-BASIC-02",
+      "TR-BASIC-04",
+      "TR-LOCK-01",
+      "TR-PINCH-01",
+      "TR-ENV-01",
+      "TR-ELEC-02"
+    ]
+  },
+  "group_tiers": [
+    {
+      "id": "req-perf",
+      "title": "性能",
+      "groups": [
+        {
+          "id": "req-basic",
+          "title": "基本性能",
+          "members": [
+            "基本性能"
+          ],
+          "subgroups": [
+            {
+              "id": "req-basic-v",
+              "title": "电压",
+              "items": [
+                "TR-BASIC-01",
+                "TR-BASIC-08"
+              ]
+            },
+            {
+              "id": "req-basic-i",
+              "title": "电流与力",
+              "items": [
+                "TR-BASIC-02",
+                "TR-BASIC-03",
+                "TR-BASIC-04"
+              ]
+            },
+            {
+              "id": "req-basic-s",
+              "title": "速度与噪音",
+              "items": [
+                "TR-BASIC-05",
+                "TR-BASIC-06",
+                "TR-BASIC-07"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "req-lock",
+          "title": "自锁",
+          "members": [
+            "自锁"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "req-cond",
+      "title": "工况",
+      "groups": [
+        {
+          "id": "req-pinch",
+          "title": "防夹",
+          "members": [
+            "防夹"
+          ],
+          "subgroups": [
+            {
+              "id": "req-pinch-law",
+              "title": "法规限值",
+              "items": [
+                "TR-PINCH-01",
+                "TR-PINCH-03",
+                "TR-PINCH-04"
+              ]
+            },
+            {
+              "id": "req-pinch-act",
+              "title": "行为与复位",
+              "items": [
+                "TR-PINCH-02",
+                "TR-PINCH-05",
+                "TR-PINCH-06",
+                "TR-PINCH-07"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "req-env",
+          "title": "环境与耐久",
+          "members": [
+            "环境与耐久"
+          ],
+          "subgroups": [
+            {
+              "id": "req-env-e",
+              "title": "环境",
+              "items": [
+                "TR-ENV-01",
+                "TR-ENV-02",
+                "TR-ENV-03",
+                "TR-ENV-04"
+              ]
+            },
+            {
+              "id": "req-env-d",
+              "title": "耐久",
+              "items": [
+                "TR-DUR-01",
+                "TR-DUR-02",
+                "TR-DUR-03"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "req-safe",
+      "title": "安全与自检",
+      "groups": [
+        {
+          "id": "req-elec",
+          "title": "电气与防护",
+          "members": [
+            "电气与防护"
+          ],
+          "subgroups": [
+            {
+              "id": "req-elec-ip",
+              "title": "防护与绝缘",
+              "items": [
+                "TR-ELEC-01",
+                "TR-ELEC-02",
+                "TR-ELEC-03"
+              ]
+            },
+            {
+              "id": "req-elec-emc",
+              "title": "电磁与材料",
+              "items": [
+                "TR-ELEC-04",
+                "TR-ELEC-05"
+              ]
+            },
+            {
+              "id": "req-elec-v",
+              "title": "电源工况",
+              "items": [
+                "TR-ELEC-06",
+                "TR-ELEC-07",
+                "TR-ELEC-08"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "req-rule",
+          "title": "检验规则",
+          "members": [
+            "检验规则"
+          ]
+        }
+      ]
+    }
+  ],
+  "criterion_syntax": "JavaScript 表达式（ECMAScript），求值结果为布尔",
+  "criterion_expression_note": "每条判据带四个配套字段：evaluable 说明这条能不能真的求值；criterion 是 JS 语法的判据表达式，散文式、无可测量量可取的条目为 null；variables 把表达式里每个自由变量映射到确定的取值来源；criterion_text 是人读版本。variables[].source 四种取值：runtime.measure 指向 runtime_measures 登记表里的运行时测量量；threshold 指向本条自己的 threshold 字段；control-parameters 指向 control-parameters.json 的 parameters[].key；constant 是编译期常量，derived_from 指向 safety-interlocks.json 的 fault_bitmap。evaluable 为 false 时 not_evaluable_reason 写明卡在哪。位运算一律加括号：C/JS 里 & 的优先级低于比较运算符。",
+  "criterion_globals": [
+    "Math",
+    "true",
+    "false",
+    "null"
+  ],
+  "runtime_measures": {
+    "voltage_min_v": {
+      "name": "试验实际施加的最低电压",
+      "unit": "V",
+      "obtained_by": "程控电源回读"
+    },
+    "voltage_max_v": {
+      "name": "试验实际施加的最高电压",
+      "unit": "V",
+      "obtained_by": "程控电源回读"
+    },
+    "abnormal_noise": {
+      "name": "是否出现异音",
+      "unit": null,
+      "obtained_by": "声学录音的频谱异常检出，布尔"
+    },
+    "jam_detected": {
+      "name": "是否出现卡滞",
+      "unit": null,
+      "obtained_by": "电流突变与位移停滞联合判定，布尔"
+    },
+    "working_current_up_a": {
+      "name": "上升过程工作电流",
+      "unit": "A",
+      "obtained_by": "电流传感器，取稳态段均值"
+    },
+    "working_current_down_a": {
+      "name": "下降过程工作电流",
+      "unit": "A",
+      "obtained_by": "电流传感器，取稳态段均值"
+    },
+    "stall_current_a": {
+      "name": "堵转电流",
+      "unit": "A",
+      "obtained_by": "电流传感器，取堵转平台段均值"
+    },
+    "stall_force_n": {
+      "name": "堵转力",
+      "unit": "N",
+      "obtained_by": "力传感器，取堵转段峰值"
+    },
+    "rise_speed_mm_s": {
+      "name": "上升运行速度",
+      "unit": "mm/s",
+      "obtained_by": "位移传感器测行程 ÷ 计时得运行时间"
+    },
+    "down_speed_mm_s": {
+      "name": "下降运行速度",
+      "unit": "mm/s",
+      "obtained_by": "位移传感器测行程 ÷ 计时得运行时间"
+    },
+    "noise_dba": {
+      "name": "工作噪音",
+      "unit": "dB(A)",
+      "obtained_by": "声级计置于电机出力轴正上方 300 mm，取升降全过程最大值"
+    },
+    "background_noise_dba": {
+      "name": "背景噪音",
+      "unit": "dB(A)",
+      "obtained_by": "同一测点空场测量"
+    },
+    "start_voltage_v": {
+      "name": "启动电压",
+      "unit": "V",
+      "obtained_by": "程控电源缓升，记录托架开始移动时的电压"
+    },
+    "drop_mm": {
+      "name": "自锁加载下托架下降量",
+      "unit": "mm",
+      "obtained_by": "位移传感器，取加载 5 s 末与加载前之差"
+    },
+    "damaged": {
+      "name": "试验后是否损坏",
+      "unit": null,
+      "obtained_by": "目视检查裂纹、变形、跳齿，布尔"
+    },
+    "peak_pinch_force_n": {
+      "name": "夹持力峰值",
+      "unit": "N",
+      "obtained_by": "力传感器，取整个夹持过程最大值"
+    },
+    "retract_triggered": {
+      "name": "是否触发回缩（停止并反向）",
+      "unit": null,
+      "obtained_by": "位移曲线出现反向，布尔"
+    },
+    "opening_at_trigger_mm": {
+      "name": "触发回缩时的开口量",
+      "unit": "mm",
+      "obtained_by": "位移传感器换算"
+    },
+    "opening_after_mm": {
+      "name": "回缩完成后的开口量",
+      "unit": "mm",
+      "obtained_by": "位移传感器换算"
+    },
+    "opening_before_close_mm": {
+      "name": "本次关闭动作开始时的开口量",
+      "unit": "mm",
+      "obtained_by": "位移传感器换算"
+    },
+    "tilt_at_max_angle": {
+      "name": "天窗是否停在最大角度开启位置",
+      "unit": null,
+      "obtained_by": "角度传感器，布尔"
+    },
+    "detect_latency_ms": {
+      "name": "从夹持开始到回缩动作的延迟",
+      "unit": "ms",
+      "obtained_by": "力曲线起点与位移反向点的时间差"
+    },
+    "pinch_detected_in_startup": {
+      "name": "启动屏蔽窗内的夹持是否被检出",
+      "unit": null,
+      "obtained_by": "回缩动作是否发生，布尔"
+    },
+    "close_start_opening_mm": {
+      "name": "允许开始关闭时的开口量",
+      "unit": "mm",
+      "obtained_by": "位移传感器"
+    },
+    "remote_range_m": {
+      "name": "遥控器可触发关闭的最大作用距离",
+      "unit": "m",
+      "obtained_by": "卷尺定距 + 遥控触发验证"
+    },
+    "one_touch_limited_to_driver_and_roof": {
+      "name": "一键关闭是否仅限驾驶员侧车窗与天窗",
+      "unit": null,
+      "obtained_by": "逐个开关功能核对，布尔"
+    },
+    "protection_auto_reset": {
+      "name": "保护装置是否自动复位",
+      "unit": null,
+      "obtained_by": "复位后再次下发指令能否正常动作，布尔"
+    },
+    "motion_resumed_without_switch": {
+      "name": "复位后是否未经操作开关即自行继续关闭",
+      "unit": null,
+      "obtained_by": "复位后静置观察位移曲线，布尔"
+    },
+    "post_vibration_basic_pass": {
+      "name": "振动试验后基本性能是否全项合格",
+      "unit": null,
+      "obtained_by": "复跑 TR-BASIC-01 至 TR-BASIC-08 取合取，布尔"
+    },
+    "post_test_basic_pass": {
+      "name": "本试验后基本性能是否全项合格",
+      "unit": null,
+      "obtained_by": "复跑 TR-BASIC-01 至 TR-BASIC-08 取合取，布尔"
+    },
+    "voltage_item_pass": {
+      "name": "工作电压项是否合格",
+      "unit": null,
+      "obtained_by": "复跑 TR-BASIC-01，布尔"
+    },
+    "current_before_a": {
+      "name": "试验前工作电流基线",
+      "unit": "A",
+      "obtained_by": "盐雾/耐久前的同件基线测量"
+    },
+    "current_after_a": {
+      "name": "试验后工作电流",
+      "unit": "A",
+      "obtained_by": "试验后复测"
+    },
+    "force_before_n": {
+      "name": "试验前堵转力基线",
+      "unit": "N",
+      "obtained_by": "试验前的同件基线测量"
+    },
+    "force_after_n": {
+      "name": "试验后堵转力",
+      "unit": "N",
+      "obtained_by": "试验后复测"
+    },
+    "speed_before_mm_s": {
+      "name": "试验前上升速度基线",
+      "unit": "mm/s",
+      "obtained_by": "试验前的同件基线测量"
+    },
+    "speed_after_mm_s": {
+      "name": "试验后上升速度",
+      "unit": "mm/s",
+      "obtained_by": "试验后复测"
+    },
+    "noise_before_dba": {
+      "name": "试验前工作噪音基线",
+      "unit": "dB(A)",
+      "obtained_by": "试验前的同件基线测量"
+    },
+    "noise_after_dba": {
+      "name": "试验后工作噪音",
+      "unit": "dB(A)",
+      "obtained_by": "试验后复测"
+    },
+    "ferrous_surface_corrosion": {
+      "name": "黑色金属零件主要表面是否有基体腐蚀物",
+      "unit": null,
+      "obtained_by": "目视检查，布尔"
+    },
+    "total_cycles": {
+      "name": "累计完成的开闭循环数",
+      "unit": "循环",
+      "obtained_by": "台架循环计数器"
+    },
+    "function_normal": {
+      "name": "试验后功能是否正常",
+      "unit": null,
+      "obtained_by": "复跑基本性能，布尔"
+    },
+    "gear_slip": {
+      "name": "是否出现跳齿打滑",
+      "unit": null,
+      "obtained_by": "位移与电流联合判定，布尔"
+    },
+    "plastic_crack": {
+      "name": "塑料件是否开裂",
+      "unit": null,
+      "obtained_by": "拆机目视检查，布尔"
+    },
+    "max_perf_deviation": {
+      "name": "各性能项相对试验前基线的最大偏差",
+      "unit": "比例",
+      "obtained_by": "逐项复测后按 |后−前| / 前 取最大"
+    },
+    "no_crack_or_melt": {
+      "name": "零部件是否无裂纹无融解",
+      "unit": null,
+      "obtained_by": "拆机目视检查，布尔"
+    },
+    "water_ingress_in_motor": {
+      "name": "电机内部是否进水",
+      "unit": null,
+      "obtained_by": "拆机目视检查，布尔"
+    },
+    "dielectric_breakdown": {
+      "name": "绝缘是否被击穿",
+      "unit": null,
+      "obtained_by": "耐压仪判定，布尔"
+    },
+    "ambient_c": {
+      "name": "试验环境温度",
+      "unit": "℃",
+      "obtained_by": "环境箱温度回读"
+    },
+    "first_start_cycles": {
+      "name": "热保护动作前完成的首次启动循环数",
+      "unit": "循环",
+      "obtained_by": "台架循环计数器"
+    },
+    "recovery_s": {
+      "name": "热保护从跳闸到可再启动的恢复时间",
+      "unit": "s",
+      "obtained_by": "计时"
+    },
+    "restart_cycles": {
+      "name": "热保护恢复后完成的再启动循环数",
+      "unit": "循环",
+      "obtained_by": "台架循环计数器"
+    },
+    "radiated_emission_level": {
+      "name": "辐射发射等级",
+      "unit": "级",
+      "obtained_by": "EMC 暗室测量后按限值表判级"
+    },
+    "conducted_emission_level": {
+      "name": "传导发射等级",
+      "unit": "级",
+      "obtained_by": "EMC 测量后按限值表判级"
+    },
+    "transient_conducted_level_roman": {
+      "name": "沿电源线瞬态传导发射等级（罗马数字转整数）",
+      "unit": "级",
+      "obtained_by": "按 GB/T 21437.2 附录判级后转整数，III → 3"
+    },
+    "hazardous_substances_pass": {
+      "name": "六项有害物质是否全部合格",
+      "unit": null,
+      "obtained_by": "第三方检测报告，布尔"
+    },
+    "function_class": {
+      "name": "试验期间与试验后的功能状态等级",
+      "unit": null,
+      "obtained_by": "按 ISO 16750-1 的功能状态分级 A/B/C/D 判定"
+    },
+    "fault_flags": {
+      "name": "被测件故障字回读整值",
+      "unit": null,
+      "obtained_by": "台架读取被测件故障寄存器；位定义见 safety-interlocks.json fault_bitmap（示例）"
+    },
+    "window_motion_detected": {
+      "name": "反极性期间车窗是否发生移动",
+      "unit": null,
+      "obtained_by": "位移传感器，布尔"
+    }
+  },
+  "runtime_measures_note": "本表登记 59 个运行时测量量，判据实际用到 59 个。与第一个包的差别：那边的测量量大半由示波器与 HID 指令取（rigol_measure FREQ、breakrun + readmem 等），这边全部由台架传感器取（力、位移、电流、声级计、环境箱），还有一部分是人工检查的布尔量（拆机目视、遥控距离验证）。",
+  "evaluable_count": 31,
+  "not_evaluable_count": 3,
+  "regulation_switch_note": "TR-PINCH-01 / TR-PINCH-03 / TR-PINCH-04 是同一个物理试验在中、美、欧三地的三套判据，由目标市场选中其一。三地在 100 N 与 4 至 200 mm 上完全一致，差异只在试验棒刚度与回缩后位置。这是本场景包最有演示价值的一屏：同一被测件、同一次采集，换目标市场即换判据表。报告聚合时不参与的两条标 N/A 而不是 PASS。",
+  "requirements": [
+    {
+      "id": "TR-BASIC-01",
+      "name": "工作电压范围内运行平稳",
+      "category": "基本性能",
+      "evaluable": true,
+      "criterion": "voltage_min_v >= v_min && voltage_max_v <= v_max && abnormal_noise === false && jam_detected === false",
+      "criterion_text": "在 9 V 至 16 V 全区间内运行平稳，不允许有异音和卡滞现象",
+      "variables": {
+        "voltage_min_v": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.voltage_min_v",
+          "desc": "试验实际施加的最低电压",
+          "unit": "V"
+        },
+        "voltage_max_v": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.voltage_max_v",
+          "desc": "试验实际施加的最高电压",
+          "unit": "V"
+        },
+        "v_min": {
+          "source": "threshold",
+          "ref": "threshold.v_min",
+          "desc": "工作电压下限",
+          "unit": "V"
+        },
+        "v_max": {
+          "source": "threshold",
+          "ref": "threshold.v_max",
+          "desc": "工作电压上限",
+          "unit": "V"
+        },
+        "abnormal_noise": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.abnormal_noise",
+          "desc": "是否出现异音"
+        },
+        "jam_detected": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.jam_detected",
+          "desc": "是否出现卡滞"
+        }
+      },
+      "threshold": {
+        "v_min": 9.0,
+        "v_max": 16.0
+      },
+      "evidence": [
+        "程控电源电压回读",
+        "声学录音",
+        "电流波形",
+        "位移曲线"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "note": "abnormal_noise 与 jam_detected 在标准原文里是主观描述，本包把它们定义成布尔运行时量以便表达式可求值；怎么从波形算出这两个布尔值是判定工具的事，不是判据本身的事。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:117-118 5.4.1 a)"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 122 行：工作电压范围 5.4.1 a)"
+        }
+      ]
+    },
+    {
+      "id": "TR-BASIC-02",
+      "name": "上升工作电流上限",
+      "category": "基本性能",
+      "evaluable": true,
+      "criterion": "working_current_up_a <= max_a",
+      "criterion_text": "上升工作电流不大于 12 A（常温，试验电压 13.5 ± 0.3 V）",
+      "variables": {
+        "working_current_up_a": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.working_current_up_a",
+          "desc": "上升过程工作电流",
+          "unit": "A"
+        },
+        "max_a": {
+          "source": "threshold",
+          "ref": "threshold.max_a",
+          "desc": "工作电流上限",
+          "unit": "A"
+        }
+      },
+      "threshold": {
+        "max_a": 12.0,
+        "test_voltage_v": 13.5,
+        "ambient_c": 23.0
+      },
+      "evidence": [
+        "电流波形",
+        "程控电源电压回读"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:119-120 5.4.1 b)"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 124 行：工作电流上限 5.4.1 b)"
+        }
+      ]
+    },
+    {
+      "id": "TR-BASIC-03",
+      "name": "堵转电流上限",
+      "category": "基本性能",
+      "evaluable": true,
+      "criterion": "stall_current_a <= max_a",
+      "criterion_text": "堵转电流不大于 28 A（常温）。托架上升到上止点使电机堵转时测量",
+      "variables": {
+        "stall_current_a": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.stall_current_a",
+          "desc": "堵转电流",
+          "unit": "A"
+        },
+        "max_a": {
+          "source": "threshold",
+          "ref": "threshold.max_a",
+          "desc": "常温堵转电流上限",
+          "unit": "A"
+        }
+      },
+      "threshold": {
+        "max_a": 28.0,
+        "max_a_80c": 29.0,
+        "max_a_minus30c": 30.0
+      },
+      "evidence": [
+        "电流波形",
+        "位移曲线（确认已到止点）"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "note": "换温度档时把 threshold.max_a 换成 max_a_80c 或 max_a_minus30c，表达式不变。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:304-306 6.4.1 b) 堵转电流测量方法"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 125 行：堵转电流上限"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 161 行：堵转电流温度分档"
+        }
+      ]
+    },
+    {
+      "id": "TR-BASIC-04",
+      "name": "堵转力下限",
+      "category": "基本性能",
+      "evaluable": true,
+      "criterion": "stall_force_n >= min_n",
+      "criterion_text": "堵转力不小于 212 N。无负载条件下托架上升到上止点时在运行反方向施加力使电机堵转，用力传感器测量",
+      "variables": {
+        "stall_force_n": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.stall_force_n",
+          "desc": "堵转力",
+          "unit": "N"
+        },
+        "min_n": {
+          "source": "threshold",
+          "ref": "threshold.min_n",
+          "desc": "常温堵转力下限",
+          "unit": "N"
+        }
+      },
+      "threshold": {
+        "min_n": 212.0,
+        "min_n_80c": 164.0,
+        "min_n_minus30c": 190.0
+      },
+      "evidence": [
+        "力传感器曲线",
+        "电流波形"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "note": "注意方向：堵转力是「越大越好」的下限判据，而防夹力是「越小越好」的上限判据（100 N）。同一支力传感器上两个方向相反的判据同时成立，因为它们发生在行程的不同区段——这是本场景判据模型比第一个包复杂的地方。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:307-310 6.4.1 c) 堵转力测量"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 126 行：堵转力 5.4.1 c)"
+        }
+      ]
+    },
+    {
+      "id": "TR-BASIC-05",
+      "name": "上升运行速度区间",
+      "category": "基本性能",
+      "evaluable": true,
+      "criterion": "rise_speed_mm_s >= min_mm_s && rise_speed_mm_s <= max_mm_s",
+      "criterion_text": "上升运行速度应在 80 mm/s 至 160 mm/s 之间。测量托架从下止点到上止点的运行时间和行程后按公式换算",
+      "variables": {
+        "rise_speed_mm_s": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.rise_speed_mm_s",
+          "desc": "上升运行速度",
+          "unit": "mm/s"
+        },
+        "min_mm_s": {
+          "source": "threshold",
+          "ref": "threshold.min_mm_s",
+          "desc": "上升速度下限",
+          "unit": "mm/s"
+        },
+        "max_mm_s": {
+          "source": "threshold",
+          "ref": "threshold.max_mm_s",
+          "desc": "上升速度上限",
+          "unit": "mm/s"
+        }
+      },
+      "threshold": {
+        "min_mm_s": 80.0,
+        "max_mm_s": 160.0,
+        "min_mm_s_minus30c": 60.0
+      },
+      "evidence": [
+        "位移曲线",
+        "计时"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:312-315 6.4.1 d) 运行速度测量"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 127 行：上升运行速度 5.4.1 d)"
+        }
+      ]
+    },
+    {
+      "id": "TR-BASIC-06",
+      "name": "下降运行速度上限",
+      "category": "基本性能",
+      "evaluable": true,
+      "criterion": "down_speed_mm_s <= max_mm_s",
+      "criterion_text": "下降运行速度不大于 200 mm/s。改变电源极性使托架下降后同法测量",
+      "variables": {
+        "down_speed_mm_s": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.down_speed_mm_s",
+          "desc": "下降运行速度",
+          "unit": "mm/s"
+        },
+        "max_mm_s": {
+          "source": "threshold",
+          "ref": "threshold.max_mm_s",
+          "desc": "下降速度上限",
+          "unit": "mm/s"
+        }
+      },
+      "threshold": {
+        "max_mm_s": 200.0,
+        "min_mm_s_minus30c": 70.0
+      },
+      "evidence": [
+        "位移曲线",
+        "计时"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:312-315 6.4.1 d)"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 128 行：下降运行速度 5.4.1 d)"
+        }
+      ]
+    },
+    {
+      "id": "TR-BASIC-07",
+      "name": "工作噪音上限",
+      "category": "基本性能",
+      "evaluable": true,
+      "criterion": "noise_dba < max_dba && background_noise_dba <= noise_dba - background_margin_dba",
+      "criterion_text": "工作噪音小于 60 dB(A)。传声器置于电机出力轴正上方 300 mm，背景噪音须低于测试噪音 10 dB(A)，上升与下降过程均测",
+      "variables": {
+        "noise_dba": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.noise_dba",
+          "desc": "工作噪音",
+          "unit": "dB(A)"
+        },
+        "background_noise_dba": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.background_noise_dba",
+          "desc": "背景噪音",
+          "unit": "dB(A)"
+        },
+        "max_dba": {
+          "source": "threshold",
+          "ref": "threshold.max_dba",
+          "desc": "工作噪音上限",
+          "unit": "dB(A)"
+        },
+        "background_margin_dba": {
+          "source": "threshold",
+          "ref": "threshold.background_margin_dba",
+          "desc": "背景噪音须低于测试噪音的裕量",
+          "unit": "dB(A)"
+        }
+      },
+      "threshold": {
+        "max_dba": 60.0,
+        "mic_distance_mm": 300.0,
+        "background_margin_dba": 10.0
+      },
+      "evidence": [
+        "声级计读数",
+        "背景噪音基线"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "note": "把背景噪音条件也写进表达式，是因为背景噪音不达标时噪音读数本身无效——不能先判 PASS 再补一句「环境不合格」。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:324-328 6.4.1 e) 工作噪音试验"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 129 行：工作噪音 5.4.1 e)"
+        }
+      ]
+    },
+    {
+      "id": "TR-BASIC-08",
+      "name": "启动电压上限",
+      "category": "基本性能",
+      "evaluable": true,
+      "criterion": "start_voltage_v <= max_v",
+      "criterion_text": "启动电压不大于 9 V。无负载条件下运行升降器使托架上升，记录托架上升时的启动电压值",
+      "variables": {
+        "start_voltage_v": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.start_voltage_v",
+          "desc": "启动电压",
+          "unit": "V"
+        },
+        "max_v": {
+          "source": "threshold",
+          "ref": "threshold.max_v",
+          "desc": "启动电压上限",
+          "unit": "V"
+        }
+      },
+      "threshold": {
+        "max_v": 9.0,
+        "max_v_minus30c": 10.0
+      },
+      "evidence": [
+        "程控电源电压回读",
+        "位移曲线（判定起动时刻）"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:332-334 6.4.1 f) 启动电压"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 130 行：启动电压 5.4.1 f)"
+        }
+      ]
+    },
+    {
+      "id": "TR-LOCK-01",
+      "name": "自锁性（上止点与半行程）",
+      "category": "自锁",
+      "evaluable": true,
+      "criterion": "drop_mm <= max_drop_mm && damaged === false",
+      "criterion_text": "上止点与一半行程两处，在玻璃托架上垂直向下施加 600 N 保持 5 s，托架下降量不大于 5 mm 且不应损坏",
+      "variables": {
+        "drop_mm": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.drop_mm",
+          "desc": "自锁加载下托架下降量",
+          "unit": "mm"
+        },
+        "damaged": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.damaged",
+          "desc": "试验后是否损坏"
+        },
+        "max_drop_mm": {
+          "source": "threshold",
+          "ref": "threshold.max_drop_mm",
+          "desc": "允许下降量上限",
+          "unit": "mm"
+        }
+      },
+      "threshold": {
+        "load_n": 600.0,
+        "hold_s": 5.0,
+        "max_drop_mm": 5.0,
+        "positions": [
+          "上止点",
+          "一半玻璃托架行程处"
+        ]
+      },
+      "evidence": [
+        "位移传感器",
+        "加载力曲线",
+        "试验后目视检查"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:142-144 5.5；:372-374 6.5 自锁性试验"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 131 行：自锁能力 5.5"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 191 行：自锁性 5.5 / 6.5"
+        }
+      ]
+    },
+    {
+      "id": "TR-PINCH-01",
+      "name": "防夹力上限（中国 GB 11552-2009）",
+      "category": "防夹",
+      "evaluable": true,
+      "criterion": "peak_pinch_force_n < max_force_n && retract_triggered === true && opening_at_trigger_mm >= opening_min_mm && opening_at_trigger_mm <= opening_max_mm",
+      "criterion_text": "开口从 200 mm 到 4 mm 范围内，夹紧力大于 100 N 之前必须回缩。试验棒刚度 (10 ± 0.5) N/mm，从车内穿过开口伸出车外，其圆柱面与构成车窗边界的车辆结构部分接触，整个试验期间位置保持不变",
+      "variables": {
+        "peak_pinch_force_n": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.peak_pinch_force_n",
+          "desc": "夹持力峰值",
+          "unit": "N"
+        },
+        "retract_triggered": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.retract_triggered",
+          "desc": "是否触发回缩（停止并反向）"
+        },
+        "opening_at_trigger_mm": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.opening_at_trigger_mm",
+          "desc": "触发回缩时的开口量",
+          "unit": "mm"
+        },
+        "max_force_n": {
+          "source": "threshold",
+          "ref": "threshold.max_force_n",
+          "desc": "法规夹持力上限",
+          "unit": "N"
+        },
+        "opening_min_mm": {
+          "source": "threshold",
+          "ref": "threshold.opening_min_mm",
+          "desc": "防夹生效区间下沿",
+          "unit": "mm"
+        },
+        "opening_max_mm": {
+          "source": "threshold",
+          "ref": "threshold.opening_max_mm",
+          "desc": "防夹生效区间上沿",
+          "unit": "mm"
+        }
+      },
+      "threshold": {
+        "max_force_n": 100.0,
+        "opening_min_mm": 4.0,
+        "opening_max_mm": 200.0,
+        "rod_stiffness_n_per_mm": 10.0,
+        "rod_stiffness_tol_n_per_mm": 0.5
+      },
+      "evidence": [
+        "力传感器曲线",
+        "位移曲线",
+        "电流波形"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "note": "这是全包唯一一条直接关乎人身安全的判据，也是本场景相对第一个包（全部为设备安全判据）最有演示价值的一条。",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/gb11552.txt",
+          "locator": "gb11552.txt:440 §4.8.3.1.1；:446-452 §4.8.3.1.3 试验棒与刚度"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 215 行：三地防夹对照表 GB 11552-2009 行"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 166 行：防夹力判据（已核实）"
+        }
+      ]
+    },
+    {
+      "id": "TR-PINCH-02",
+      "name": "回缩后位置（中国四选一）",
+      "category": "防夹",
+      "evaluable": true,
+      "criterion": "(retract_mode === 'ROD_200MM_PASS' && opening_after_mm >= rod_diameter_mm) || (retract_mode === 'INITIAL_POSITION' && opening_after_mm >= opening_before_close_mm) || (retract_mode === 'PLUS_50MM' && opening_after_mm >= opening_at_trigger_mm + plus_mm) || (retract_mode === 'TILT_MAX_ANGLE' && tilt_at_max_angle === true)",
+      "criterion_text": "自动回缩之后应开启到四个位置之一：允许穿过开口放置直径 200 mm 半刚性柱状试验棒的位置；关闭之前的最初位置；比开始回缩时的位置至少多开 50 mm 的位置；天窗倾斜运动时的最大角度开启位置",
+      "variables": {
+        "retract_mode": {
+          "source": "control-parameters",
+          "ref": "control-parameters.antipinch_retract_mode",
+          "desc": "选定的回缩后位置策略"
+        },
+        "opening_after_mm": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.opening_after_mm",
+          "desc": "回缩完成后的开口量",
+          "unit": "mm"
+        },
+        "opening_before_close_mm": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.opening_before_close_mm",
+          "desc": "本次关闭动作开始时的开口量",
+          "unit": "mm"
+        },
+        "opening_at_trigger_mm": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.opening_at_trigger_mm",
+          "desc": "触发回缩时的开口量",
+          "unit": "mm"
+        },
+        "tilt_at_max_angle": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.tilt_at_max_angle",
+          "desc": "天窗是否停在最大角度开启位置"
+        },
+        "rod_diameter_mm": {
+          "source": "threshold",
+          "ref": "threshold.rod_diameter_mm",
+          "desc": "验证用试验棒直径",
+          "unit": "mm"
+        },
+        "plus_mm": {
+          "source": "threshold",
+          "ref": "threshold.plus_mm",
+          "desc": "相对触发位置的额外开启量",
+          "unit": "mm"
+        }
+      },
+      "threshold": {
+        "options": [
+          "ROD_200MM_PASS",
+          "INITIAL_POSITION",
+          "PLUS_50MM",
+          "TILT_MAX_ANGLE"
+        ],
+        "plus_mm": 50.0,
+        "rod_diameter_mm": 200.0
+      },
+      "evidence": [
+        "位移曲线",
+        "试验棒穿过验证",
+        "角度传感器（天窗机型）"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "note": "表达式用 || 把四档并起来，由 retract_mode 选中其中一支。每个分支的括号都是必需的：|| 的优先级低于 &&，不加括号会把条件串错。",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/gb11552.txt",
+          "locator": "gb11552.txt:445-452 §4.8.3.1.2.1 至 4.8.3.1.2.4"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 215 行：GB 11552-2009 回缩后要求四选一"
+        }
+      ]
+    },
+    {
+      "id": "TR-PINCH-03",
+      "name": "防夹力上限（美国 FMVSS 118）",
+      "category": "防夹",
+      "evaluable": true,
+      "criterion": "peak_pinch_force_n < max_force_n && retract_triggered === true && opening_at_trigger_mm >= opening_min_mm && opening_at_trigger_mm <= opening_max_mm && ((retract_mode === 'INITIAL_POSITION' && opening_after_mm >= opening_before_close_mm) || (retract_mode === 'PLUS_125MM' && opening_after_mm >= opening_at_trigger_mm + plus_mm))",
+      "criterion_text": "在接触试验棒之前，或在对半刚性圆柱试验棒施加 100 N 及以上挤压力之前，须停止并反向。回缩后制造商二选一：至少开到关闭开始时的位置；或比反向时的位置至少多开 125 mm",
+      "variables": {
+        "peak_pinch_force_n": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.peak_pinch_force_n",
+          "desc": "夹持力峰值",
+          "unit": "N"
+        },
+        "retract_triggered": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.retract_triggered",
+          "desc": "是否停止并反向"
+        },
+        "opening_at_trigger_mm": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.opening_at_trigger_mm",
+          "desc": "反向时的开口量",
+          "unit": "mm"
+        },
+        "opening_after_mm": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.opening_after_mm",
+          "desc": "回缩完成后的开口量",
+          "unit": "mm"
+        },
+        "opening_before_close_mm": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.opening_before_close_mm",
+          "desc": "本次关闭动作开始时的开口量",
+          "unit": "mm"
+        },
+        "retract_mode": {
+          "source": "control-parameters",
+          "ref": "control-parameters.antipinch_retract_mode",
+          "desc": "制造商选定的回缩后位置策略"
+        },
+        "max_force_n": {
+          "source": "threshold",
+          "ref": "threshold.max_force_n",
+          "desc": "法规夹持力上限",
+          "unit": "N"
+        },
+        "opening_min_mm": {
+          "source": "threshold",
+          "ref": "threshold.opening_min_mm",
+          "desc": "防夹生效区间下沿",
+          "unit": "mm"
+        },
+        "opening_max_mm": {
+          "source": "threshold",
+          "ref": "threshold.opening_max_mm",
+          "desc": "防夹生效区间上沿",
+          "unit": "mm"
+        },
+        "plus_mm": {
+          "source": "threshold",
+          "ref": "threshold.plus_mm",
+          "desc": "相对反向位置的额外开启量",
+          "unit": "mm"
+        }
+      },
+      "threshold": {
+        "max_force_n": 100.0,
+        "opening_min_mm": 4.0,
+        "opening_max_mm": 200.0,
+        "plus_mm": 125.0,
+        "rod_stiffness_n_per_mm": 20.0
+      },
+      "evidence": [
+        "力传感器曲线",
+        "位移曲线"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "note": "与 TR-PINCH-01 / TR-PINCH-02 的差别只在回缩后位置（125 mm vs 50 mm）与试验棒刚度（20 vs 10 N/mm）。选 PLUS_50MM 的产品过不了美国这一条——这就是「同一被测件、不同目标市场、判据自动换表」的演示点。",
+      "_status": "100 N 与 4–200 mm 已核实；试验棒刚度 20 N/mm 与条款编号 S4/S7/S8 待核实",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 216 行：三地防夹对照表 FMVSS 118 行"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 69 行：49 CFR § 571.118 全名与 URL"
+        }
+      ]
+    },
+    {
+      "id": "TR-PINCH-04",
+      "name": "防夹力上限（欧洲 UN ECE R21 §5.8）",
+      "category": "防夹",
+      "evaluable": true,
+      "criterion": "peak_pinch_force_n <= max_force_n && retract_triggered === true && opening_at_trigger_mm >= opening_min_mm && opening_at_trigger_mm <= opening_max_mm",
+      "criterion_text": "夹紧力不超过 100 N；作用区间为上边缘上方 200 mm 至 4 mm；回缩后开到三种可选位置之一",
+      "variables": {
+        "peak_pinch_force_n": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.peak_pinch_force_n",
+          "desc": "夹持力峰值",
+          "unit": "N"
+        },
+        "retract_triggered": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.retract_triggered",
+          "desc": "是否触发回缩（停止并反向）"
+        },
+        "opening_at_trigger_mm": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.opening_at_trigger_mm",
+          "desc": "触发回缩时的开口量",
+          "unit": "mm"
+        },
+        "max_force_n": {
+          "source": "threshold",
+          "ref": "threshold.max_force_n",
+          "desc": "法规夹持力上限",
+          "unit": "N"
+        },
+        "opening_min_mm": {
+          "source": "threshold",
+          "ref": "threshold.opening_min_mm",
+          "desc": "防夹生效区间下沿",
+          "unit": "mm"
+        },
+        "opening_max_mm": {
+          "source": "threshold",
+          "ref": "threshold.opening_max_mm",
+          "desc": "防夹生效区间上沿",
+          "unit": "mm"
+        }
+      },
+      "threshold": {
+        "max_force_n": 100.0,
+        "opening_min_mm": 4.0,
+        "opening_max_mm": 200.0,
+        "rod_stiffness_n_per_mm": 10.0
+      },
+      "evidence": [
+        "力传感器曲线",
+        "位移曲线"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "note": "回缩后位置这一半因为原文没取到，本条只把已知的力与区间写进表达式，没有像 TR-PINCH-02 那样展开位置分支。",
+      "_status": "待核实（未打开 UNECE 原文逐字确认，回缩后的三种位置未取得具体表述）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 217 行：三地防夹对照表 UN ECE R21 行"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 70 行：UN ECE R21 全名与 URL"
+        }
+      ]
+    },
+    {
+      "id": "TR-PINCH-05",
+      "name": "启动段夹持不漏检",
+      "category": "防夹",
+      "evaluable": true,
+      "criterion": "pinch_detected_in_startup === true && peak_pinch_force_n < max_force_n && detect_latency_ms <= startup_blanking_time_ms + latency_margin_ms",
+      "criterion_text": "在启动屏蔽时间窗内制造夹持，仍须在 100 N 之前回缩。启动瞬间的浪涌电流会掩盖夹持特征，这是防夹算法最难的一段",
+      "variables": {
+        "pinch_detected_in_startup": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.pinch_detected_in_startup",
+          "desc": "启动屏蔽窗内的夹持是否被检出"
+        },
+        "peak_pinch_force_n": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.peak_pinch_force_n",
+          "desc": "夹持力峰值",
+          "unit": "N"
+        },
+        "detect_latency_ms": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.detect_latency_ms",
+          "desc": "从夹持开始到回缩动作的延迟",
+          "unit": "ms"
+        },
+        "startup_blanking_time_ms": {
+          "source": "control-parameters",
+          "ref": "control-parameters.startup_blanking_time",
+          "desc": "启动段屏蔽时间设定值",
+          "unit": "ms"
+        },
+        "max_force_n": {
+          "source": "threshold",
+          "ref": "threshold.max_force_n",
+          "desc": "法规夹持力上限",
+          "unit": "N"
+        },
+        "latency_margin_ms": {
+          "source": "threshold",
+          "ref": "threshold.latency_margin_ms",
+          "desc": "允许的检出延迟裕量",
+          "unit": "ms"
+        }
+      },
+      "threshold": {
+        "max_force_n": 100.0,
+        "latency_margin_ms": 100.0
+      },
+      "evidence": [
+        "力传感器曲线",
+        "位移曲线",
+        "电流波形（浪涌段）"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "note": "latency_margin_ms 这个 100 ms 裕量是本包编的，任何标准都没有规定「检出延迟」这个量——法规只管力峰值。把它列成独立判据是为了让调参闭环有一个可优化的中间指标。",
+      "_status": "待核实（该文献未确认期刊/会议全名与作者）",
+      "_placeholder": true,
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 341 行：基于纹波电机的车窗启动阶段防夹控制策略研究"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 351 行：防夹调参清单「启动段屏蔽时间」行"
+        }
+      ]
+    },
+    {
+      "id": "TR-PINCH-06",
+      "name": "无防夹功能时的替代要求",
+      "category": "防夹",
+      "evaluable": true,
+      "criterion": "antipinch_enable === false && close_start_opening_mm <= max_opening_mm && remote_range_m <= remote_range_limit_m && one_touch_limited_to_driver_and_roof === true",
+      "criterion_text": "未装自动回缩装置时改判 GB 11552-2009 §4.8.2：电动车窗从开口不超过 4 mm 处开始关闭时才允许关闭；遥控关闭作用距离不超过 6 m（车辆可直接看见时不超过 11 m）；一键关闭仅限驾驶员侧车门电动车窗与天窗，且仅在点火钥匙处于发动机运转位置期间",
+      "variables": {
+        "antipinch_enable": {
+          "source": "control-parameters",
+          "ref": "control-parameters.antipinch_enable",
+          "desc": "防夹功能是否配备"
+        },
+        "close_start_opening_mm": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.close_start_opening_mm",
+          "desc": "允许开始关闭时的开口量",
+          "unit": "mm"
+        },
+        "remote_range_m": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.remote_range_m",
+          "desc": "遥控器可触发关闭的最大作用距离",
+          "unit": "m"
+        },
+        "one_touch_limited_to_driver_and_roof": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.one_touch_limited_to_driver_and_roof",
+          "desc": "一键关闭是否仅限驾驶员侧车窗与天窗"
+        },
+        "max_opening_mm": {
+          "source": "threshold",
+          "ref": "threshold.max_opening_mm",
+          "desc": "允许开始关闭的最大开口量",
+          "unit": "mm"
+        },
+        "remote_range_limit_m": {
+          "source": "threshold",
+          "ref": "threshold.remote_range_limit_m",
+          "desc": "遥控作用距离上限",
+          "unit": "m"
+        }
+      },
+      "threshold": {
+        "max_opening_mm": 4.0,
+        "remote_range_limit_m": 6.0,
+        "remote_range_visible_m": 11.0
+      },
+      "evidence": [
+        "位移传感器",
+        "遥控距离验证记录",
+        "开关功能核对表"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "note": "这条与 TR-PINCH-01 互斥：antipinch_enable 决定走哪一支。把互斥关系写进判据本身而不是留给流程，是为了让 Agent 在 F3 的分支决策有据可依。",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/gb11552.txt",
+          "locator": "gb11552.txt:425-437 §4.8.2.6 至 §4.8.2.9"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 219 行：无防夹功能时的替代要求 GB 11552-2009 §4.8.2（已核实）"
+        }
+      ]
+    },
+    {
+      "id": "TR-PINCH-07",
+      "name": "保护装置自动复位",
+      "category": "防夹",
+      "evaluable": true,
+      "criterion": "protection_auto_reset === true && motion_resumed_without_switch === false",
+      "criterion_text": "过载或自动关闭之后，所有用来防止超载或停止时动力源损坏的保护装置都应自动复位。保护装置复位后，除非有意去操纵控制开关，关闭方向的运动不应再继续",
+      "variables": {
+        "protection_auto_reset": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.protection_auto_reset",
+          "desc": "保护装置是否自动复位"
+        },
+        "motion_resumed_without_switch": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.motion_resumed_without_switch",
+          "desc": "复位后是否未经操作开关即自行继续关闭"
+        }
+      },
+      "threshold": {},
+      "evidence": [
+        "位移曲线",
+        "故障字回读",
+        "静置观察记录"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "note": "第二个变量是反向判据，期望值为 false。写成 === false 而不是取反，是为了让前端展示时两个变量的取值方向一致可读。",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/gb11552.txt",
+          "locator": "gb11552.txt:453-455 §4.8.5 保护装置"
+        }
+      ]
+    },
+    {
+      "id": "TR-ENV-01",
+      "name": "耐高温特性（80 ℃）",
+      "category": "环境与耐久",
+      "evaluable": true,
+      "criterion": "working_current_up_a <= max_up_a && working_current_down_a <= max_down_a && stall_current_a <= max_stall_a && stall_force_n >= min_force_n && rise_speed_mm_s >= min_rise_mm_s && rise_speed_mm_s <= max_rise_mm_s && down_speed_mm_s <= max_down_mm_s && start_voltage_v <= max_start_v",
+      "criterion_text": "80 ℃ 放置 2 h 后，在该温度下空载不堵转运行 5 个工作循环，八项性能同时满足",
+      "variables": {
+        "working_current_up_a": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.working_current_up_a",
+          "desc": "上升过程工作电流",
+          "unit": "A"
+        },
+        "working_current_down_a": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.working_current_down_a",
+          "desc": "下降过程工作电流",
+          "unit": "A"
+        },
+        "stall_current_a": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.stall_current_a",
+          "desc": "堵转电流",
+          "unit": "A"
+        },
+        "stall_force_n": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.stall_force_n",
+          "desc": "堵转力",
+          "unit": "N"
+        },
+        "rise_speed_mm_s": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.rise_speed_mm_s",
+          "desc": "上升运行速度",
+          "unit": "mm/s"
+        },
+        "down_speed_mm_s": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.down_speed_mm_s",
+          "desc": "下降运行速度",
+          "unit": "mm/s"
+        },
+        "start_voltage_v": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.start_voltage_v",
+          "desc": "启动电压",
+          "unit": "V"
+        },
+        "max_up_a": {
+          "source": "threshold",
+          "ref": "threshold.max_up_a",
+          "desc": "80 ℃ 上升工作电流上限",
+          "unit": "A"
+        },
+        "max_down_a": {
+          "source": "threshold",
+          "ref": "threshold.max_down_a",
+          "desc": "80 ℃ 下降工作电流上限",
+          "unit": "A"
+        },
+        "max_stall_a": {
+          "source": "threshold",
+          "ref": "threshold.max_stall_a",
+          "desc": "80 ℃ 堵转电流上限",
+          "unit": "A"
+        },
+        "min_force_n": {
+          "source": "threshold",
+          "ref": "threshold.min_force_n",
+          "desc": "80 ℃ 堵转力下限",
+          "unit": "N"
+        },
+        "min_rise_mm_s": {
+          "source": "threshold",
+          "ref": "threshold.min_rise_mm_s",
+          "desc": "上升速度下限",
+          "unit": "mm/s"
+        },
+        "max_rise_mm_s": {
+          "source": "threshold",
+          "ref": "threshold.max_rise_mm_s",
+          "desc": "上升速度上限",
+          "unit": "mm/s"
+        },
+        "max_down_mm_s": {
+          "source": "threshold",
+          "ref": "threshold.max_down_mm_s",
+          "desc": "下降速度上限",
+          "unit": "mm/s"
+        },
+        "max_start_v": {
+          "source": "threshold",
+          "ref": "threshold.max_start_v",
+          "desc": "启动电压上限",
+          "unit": "V"
+        }
+      },
+      "threshold": {
+        "soak_temp_c": 80.0,
+        "soak_hours": 2.0,
+        "cycles": 5,
+        "max_up_a": 12.0,
+        "max_down_a": 7.0,
+        "max_stall_a": 29.0,
+        "min_force_n": 164.0,
+        "min_rise_mm_s": 80.0,
+        "max_rise_mm_s": 160.0,
+        "max_down_mm_s": 200.0,
+        "max_start_v": 9.0
+      },
+      "evidence": [
+        "电流波形",
+        "力传感器曲线",
+        "位移曲线",
+        "环境箱温度记录"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 192 行：耐高温特性 5.6.1 / 6.6.1"
+        }
+      ]
+    },
+    {
+      "id": "TR-ENV-02",
+      "name": "耐低温特性（−30 ℃）",
+      "category": "环境与耐久",
+      "evaluable": true,
+      "criterion": "working_current_up_a <= max_up_a && working_current_down_a <= max_down_a && stall_current_a <= max_stall_a && stall_force_n >= min_force_n && rise_speed_mm_s >= min_rise_mm_s && down_speed_mm_s >= min_down_mm_s && start_voltage_v <= max_start_v",
+      "criterion_text": "−30 ℃ 放置 2 h 后同法运行 5 个工作循环，七项性能同时满足。注意低温下速度判据方向变了：变成「不低于」而不是区间",
+      "variables": {
+        "working_current_up_a": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.working_current_up_a",
+          "desc": "上升过程工作电流",
+          "unit": "A"
+        },
+        "working_current_down_a": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.working_current_down_a",
+          "desc": "下降过程工作电流",
+          "unit": "A"
+        },
+        "stall_current_a": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.stall_current_a",
+          "desc": "堵转电流",
+          "unit": "A"
+        },
+        "stall_force_n": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.stall_force_n",
+          "desc": "堵转力",
+          "unit": "N"
+        },
+        "rise_speed_mm_s": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.rise_speed_mm_s",
+          "desc": "上升运行速度",
+          "unit": "mm/s"
+        },
+        "down_speed_mm_s": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.down_speed_mm_s",
+          "desc": "下降运行速度",
+          "unit": "mm/s"
+        },
+        "start_voltage_v": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.start_voltage_v",
+          "desc": "启动电压",
+          "unit": "V"
+        },
+        "max_up_a": {
+          "source": "threshold",
+          "ref": "threshold.max_up_a",
+          "desc": "−30 ℃ 上升工作电流上限",
+          "unit": "A"
+        },
+        "max_down_a": {
+          "source": "threshold",
+          "ref": "threshold.max_down_a",
+          "desc": "−30 ℃ 下降工作电流上限",
+          "unit": "A"
+        },
+        "max_stall_a": {
+          "source": "threshold",
+          "ref": "threshold.max_stall_a",
+          "desc": "−30 ℃ 堵转电流上限",
+          "unit": "A"
+        },
+        "min_force_n": {
+          "source": "threshold",
+          "ref": "threshold.min_force_n",
+          "desc": "−30 ℃ 堵转力下限",
+          "unit": "N"
+        },
+        "min_rise_mm_s": {
+          "source": "threshold",
+          "ref": "threshold.min_rise_mm_s",
+          "desc": "−30 ℃ 上升速度下限",
+          "unit": "mm/s"
+        },
+        "min_down_mm_s": {
+          "source": "threshold",
+          "ref": "threshold.min_down_mm_s",
+          "desc": "−30 ℃ 下降速度下限",
+          "unit": "mm/s"
+        },
+        "max_start_v": {
+          "source": "threshold",
+          "ref": "threshold.max_start_v",
+          "desc": "−30 ℃ 启动电压上限",
+          "unit": "V"
+        }
+      },
+      "threshold": {
+        "soak_temp_c": -30.0,
+        "soak_hours": 2.0,
+        "cycles": 5,
+        "max_up_a": 20.0,
+        "max_down_a": 16.0,
+        "max_stall_a": 30.0,
+        "min_force_n": 190.0,
+        "min_rise_mm_s": 60.0,
+        "min_down_mm_s": 70.0,
+        "max_start_v": 10.0
+      },
+      "evidence": [
+        "电流波形",
+        "力传感器曲线",
+        "位移曲线",
+        "环境箱温度记录"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 193 行：耐低温特性 5.6.2 / 6.6.2"
+        }
+      ]
+    },
+    {
+      "id": "TR-ENV-03",
+      "name": "耐振动性",
+      "category": "环境与耐久",
+      "evaluable": true,
+      "criterion": "post_vibration_basic_pass === true",
+      "criterion_text": "按 QC/T 413-2002 的扫频振动条件试验后，仍符合 5.4 条基本性能。若改按 VW 80000 M-04 谱型 D，则为宽带随机振动、每轴 8 h、加速度均方根 30.8 m/s²",
+      "variables": {
+        "post_vibration_basic_pass": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.post_vibration_basic_pass",
+          "desc": "振动试验后基本性能是否全项合格"
+        }
+      },
+      "threshold": {
+        "profile_qct413": "QC/T 413-2002 扫频振动条件",
+        "profile_vw80000_m04_d": {
+          "hours_per_axis": 8,
+          "grms_m_s2": 30.8,
+          "psd_breakpoints": [
+            [
+              5,
+              0.884
+            ],
+            [
+              10,
+              20
+            ],
+            [
+              55,
+              6.5
+            ],
+            [
+              180,
+              0.25
+            ],
+            [
+              300,
+              0.25
+            ],
+            [
+              360,
+              0.14
+            ],
+            [
+              1000,
+              0.14
+            ],
+            [
+              2000,
+              0.14
+            ]
+          ]
+        }
+      },
+      "evidence": [
+        "振动台控制记录",
+        "试验后基本性能复测"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "note": "criterion 里只有一个布尔量，是因为「符合 5.4 条」本身是另外八条判据的合取。判定工具应把它展开成 TR-BASIC-01 至 TR-BASIC-08 的复跑，而不是让人去打勾。",
+      "_status": "QC/T 413-2002 的扫频条件正文未取得；VW 80000 M-04 谱型 D 数值已核实",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 194 行：耐振动性 5.7 / 6.7"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 240 行：VW 80000 M-04 谱型 D（已核实）"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 77 行：QC/T 413-2002 是所有车用电机标准的公共底座"
+        }
+      ]
+    },
+    {
+      "id": "TR-ENV-04",
+      "name": "耐腐蚀性（中性盐雾 120 h）",
+      "category": "环境与耐久",
+      "evaluable": true,
+      "criterion": "voltage_item_pass === true && Math.abs(current_after_a - current_before_a) / current_before_a <= allowed_deviation && Math.abs(force_after_n - force_before_n) / force_before_n <= allowed_deviation && Math.abs(speed_after_mm_s - speed_before_mm_s) / speed_before_mm_s <= allowed_deviation && Math.abs(noise_after_dba - noise_before_dba) / noise_before_dba <= allowed_deviation && ferrous_surface_corrosion === false",
+      "criterion_text": "中性盐雾试验 120 h 后：工作电压项须合格；电流、堵转力、速度、噪音四项允许与试验前偏差 20 %；黑色金属零件主要表面无基体腐蚀物",
+      "variables": {
+        "voltage_item_pass": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.voltage_item_pass",
+          "desc": "工作电压项是否合格"
+        },
+        "current_before_a": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.current_before_a",
+          "desc": "试验前工作电流基线",
+          "unit": "A"
+        },
+        "current_after_a": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.current_after_a",
+          "desc": "试验后工作电流",
+          "unit": "A"
+        },
+        "force_before_n": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.force_before_n",
+          "desc": "试验前堵转力基线",
+          "unit": "N"
+        },
+        "force_after_n": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.force_after_n",
+          "desc": "试验后堵转力",
+          "unit": "N"
+        },
+        "speed_before_mm_s": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.speed_before_mm_s",
+          "desc": "试验前上升速度基线",
+          "unit": "mm/s"
+        },
+        "speed_after_mm_s": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.speed_after_mm_s",
+          "desc": "试验后上升速度",
+          "unit": "mm/s"
+        },
+        "noise_before_dba": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.noise_before_dba",
+          "desc": "试验前工作噪音基线",
+          "unit": "dB(A)"
+        },
+        "noise_after_dba": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.noise_after_dba",
+          "desc": "试验后工作噪音",
+          "unit": "dB(A)"
+        },
+        "ferrous_surface_corrosion": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.ferrous_surface_corrosion",
+          "desc": "黑色金属零件主要表面是否有基体腐蚀物"
+        },
+        "allowed_deviation": {
+          "source": "threshold",
+          "ref": "threshold.allowed_deviation",
+          "desc": "允许的性能偏差比例"
+        }
+      },
+      "threshold": {
+        "salt_spray_hours": 120,
+        "allowed_deviation": 0.2
+      },
+      "evidence": [
+        "盐雾箱记录",
+        "试验前基线数据",
+        "试验后复测数据",
+        "目视检查照片"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "note": "这条判据必须有试验前基线才能求值，所以 evidence 里显式列了「试验前基线数据」。Agent 排程时若先做盐雾再想起要基线，这条就永远判不了。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）；且征求意见稿引的 GB/T 10125-2012 已被 2021 版全部代替",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 195 行：耐腐蚀性 5.8 / 6.8"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 85 行：GB/T 10125-2021 已代替 2012 版"
+        }
+      ]
+    },
+    {
+      "id": "TR-DUR-01",
+      "name": "耐久性（电动前门，10 000 循环）",
+      "category": "环境与耐久",
+      "evaluable": true,
+      "criterion": "total_cycles >= target_cycles && function_normal === true && abnormal_noise === false && gear_slip === false && jam_detected === false && plastic_crack === false && max_perf_deviation <= allowed_deviation",
+      "criterion_text": "最大额定负载下按表 7 的 13 道工序累计 10 000 个循环：常温 3000 次 → 80 ℃ 1500 → 60 ℃/90 %RH 2500 → 10 ℃/95 %RH 1000 → −30 ℃ 1000 → 常温 1000，各段之间喷洒泥水。试验后功能正常、无异响跳齿打滑卡滞，塑料件无裂纹，性能允许偏差 20 %",
+      "variables": {
+        "total_cycles": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.total_cycles",
+          "desc": "累计完成的开闭循环数",
+          "unit": "循环"
+        },
+        "function_normal": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.function_normal",
+          "desc": "试验后功能是否正常"
+        },
+        "abnormal_noise": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.abnormal_noise",
+          "desc": "试验后是否有异响"
+        },
+        "gear_slip": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.gear_slip",
+          "desc": "是否出现跳齿打滑"
+        },
+        "jam_detected": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.jam_detected",
+          "desc": "试验后是否卡滞"
+        },
+        "plastic_crack": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.plastic_crack",
+          "desc": "塑料件是否开裂"
+        },
+        "max_perf_deviation": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.max_perf_deviation",
+          "desc": "各性能项相对试验前基线的最大偏差",
+          "unit": "比例"
+        },
+        "target_cycles": {
+          "source": "threshold",
+          "ref": "threshold.target_cycles",
+          "desc": "目标循环数",
+          "unit": "循环"
+        },
+        "allowed_deviation": {
+          "source": "threshold",
+          "ref": "threshold.allowed_deviation",
+          "desc": "允许的性能偏差比例"
+        }
+      },
+      "threshold": {
+        "target_cycles": 10000,
+        "rear_door_cycles": 5000,
+        "stages": [
+          [
+            "常温",
+            3000
+          ],
+          [
+            "80 ℃",
+            1500
+          ],
+          [
+            "60 ℃/90 %RH",
+            2500
+          ],
+          [
+            "10 ℃/95 %RH",
+            1000
+          ],
+          [
+            "−30 ℃",
+            1000
+          ],
+          [
+            "常温",
+            1000
+          ]
+        ],
+        "allowed_deviation": 0.2,
+        "mud_water": {
+          "water_pct": 92.5,
+          "dust_pct": 7.5,
+          "dust_spec": "ISO 12103-1，50 % A2 + 50 % A4"
+        }
+      },
+      "evidence": [
+        "循环计数器",
+        "环境箱温湿度记录",
+        "声学录音",
+        "位移与电流波形",
+        "拆机检查照片"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "note": "耐久是本场景与第一个包在「口径」上差得最远的一项：第一个包按连续运行小时数算，本场景按开闭循环次数算，而且循环本身还嵌在 13 道温湿度工序里。同一套工作流引擎要能表达这两种完全不同的时间轴。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 196 行：耐久性（电动，前门）5.9.1 / 6.9.1 表 7"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 199 行：耐久泥水配比 6.9.1 注"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 200 行：耐久单循环波形 6.9.1 注 3"
+        }
+      ]
+    },
+    {
+      "id": "TR-DUR-02",
+      "name": "耐高温高湿放置（480 h）",
+      "category": "环境与耐久",
+      "evaluable": true,
+      "criterion": "no_crack_or_melt === true && max_perf_deviation <= allowed_deviation",
+      "criterion_text": "上止点堵转 1 s 关电源后，80 ℃ / 90 %RH 放置 480 h，取出后常温加最大额定负载跑 100 个工作循环；零部件无裂纹融解，性能允许偏差 20 %",
+      "variables": {
+        "no_crack_or_melt": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.no_crack_or_melt",
+          "desc": "零部件是否无裂纹无融解"
+        },
+        "max_perf_deviation": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.max_perf_deviation",
+          "desc": "各性能项相对试验前基线的最大偏差",
+          "unit": "比例"
+        },
+        "allowed_deviation": {
+          "source": "threshold",
+          "ref": "threshold.allowed_deviation",
+          "desc": "允许的性能偏差比例"
+        }
+      },
+      "threshold": {
+        "soak_temp_c": 80.0,
+        "soak_rh_pct": 90,
+        "soak_hours": 480,
+        "post_cycles": 100,
+        "allowed_deviation": 0.2
+      },
+      "evidence": [
+        "恒温恒湿箱记录",
+        "试验前基线数据",
+        "试验后复测数据",
+        "拆机检查照片"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 201 行：耐高温高湿放置 5.10 / 6.10"
+        }
+      ]
+    },
+    {
+      "id": "TR-DUR-03",
+      "name": "耐过负载操作强度",
+      "category": "环境与耐久",
+      "evaluable": true,
+      "criterion": "post_test_basic_pass === true",
+      "criterion_text": "最大额定负载下施加 16.5 V，跑 10 个工作循环，试验后基本性能合格",
+      "variables": {
+        "post_test_basic_pass": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.post_test_basic_pass",
+          "desc": "本试验后基本性能是否全项合格"
+        }
+      },
+      "threshold": {
+        "voltage_v": 16.5,
+        "cycles": 10
+      },
+      "evidence": [
+        "程控电源电压回读",
+        "循环计数",
+        "试验后基本性能复测"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 202 行：耐过负载操作强度 5.11.1 / 6.11.1"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 156 行：过压保护判据"
+        }
+      ]
+    },
+    {
+      "id": "TR-ELEC-01",
+      "name": "防水性",
+      "category": "电气与防护",
+      "evaluable": true,
+      "criterion": "water_ingress_in_motor === false",
+      "criterion_text": "喷水压力 0.1 MPa、孔径 φ1.2 mm、孔数 40、喷水量 20 L/min、时间 30 min，拆机后电机内部不应进水",
+      "variables": {
+        "water_ingress_in_motor": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.water_ingress_in_motor",
+          "desc": "电机内部是否进水"
+        }
+      },
+      "threshold": {
+        "pressure_mpa": 0.1,
+        "nozzle_diameter_mm": 1.2,
+        "nozzle_count": 40,
+        "flow_l_per_min": 20,
+        "duration_min": 30
+      },
+      "evidence": [
+        "喷淋台参数记录",
+        "拆机检查照片"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 203 行：防水性 5.12.1 / 6.12.1 表 9"
+        }
+      ]
+    },
+    {
+      "id": "TR-ELEC-02",
+      "name": "绝缘介电强度",
+      "category": "电气与防护",
+      "evaluable": true,
+      "criterion": "dielectric_breakdown === false",
+      "criterion_text": "550 V、50 Hz 正弦交流历时 1 min，绝缘不被击穿；批量生产可用 660 V / 1 s 替代",
+      "variables": {
+        "dielectric_breakdown": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.dielectric_breakdown",
+          "desc": "绝缘是否被击穿"
+        }
+      },
+      "threshold": {
+        "voltage_v": 550,
+        "frequency_hz": 50,
+        "duration_s": 60,
+        "alt_voltage_v": 660,
+        "alt_duration_s": 1
+      },
+      "evidence": [
+        "耐压仪记录"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 204 行：绝缘介电强度 5.12.2 / 6.12.2"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 163 行：绝缘介电强度判据"
+        }
+      ]
+    },
+    {
+      "id": "TR-ELEC-03",
+      "name": "热保护性",
+      "category": "电气与防护",
+      "evaluable": true,
+      "criterion": "((ambient_c <= hot_boundary_c && first_start_cycles >= cold_first_cycles && recovery_s <= cold_recovery_s) || (ambient_c > hot_boundary_c && first_start_cycles >= hot_first_cycles && recovery_s <= hot_recovery_s)) && restart_cycles >= min_restart_cycles",
+      "criterion_text": "最大额定负载下分 −40 ℃、常温、80 ℃ 三档：−40 ℃ 与常温要求首次启动 ≥30 循环、恢复 ≤60 s、再启动 ≥2 循环；80 ℃ 要求首次启动 ≥15 循环、恢复 ≤100 s、再启动 ≥2 循环",
+      "variables": {
+        "ambient_c": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.ambient_c",
+          "desc": "试验环境温度",
+          "unit": "℃"
+        },
+        "first_start_cycles": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.first_start_cycles",
+          "desc": "热保护动作前完成的首次启动循环数",
+          "unit": "循环"
+        },
+        "recovery_s": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.recovery_s",
+          "desc": "热保护从跳闸到可再启动的恢复时间",
+          "unit": "s"
+        },
+        "restart_cycles": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.restart_cycles",
+          "desc": "热保护恢复后完成的再启动循环数",
+          "unit": "循环"
+        },
+        "hot_boundary_c": {
+          "source": "threshold",
+          "ref": "threshold.hot_boundary_c",
+          "desc": "常温档与高温档的分界温度",
+          "unit": "℃"
+        },
+        "cold_first_cycles": {
+          "source": "threshold",
+          "ref": "threshold.cold_first_cycles",
+          "desc": "常温与 −40 ℃ 档首次启动循环数下限",
+          "unit": "循环"
+        },
+        "cold_recovery_s": {
+          "source": "threshold",
+          "ref": "threshold.cold_recovery_s",
+          "desc": "常温与 −40 ℃ 档恢复时间上限",
+          "unit": "s"
+        },
+        "hot_first_cycles": {
+          "source": "threshold",
+          "ref": "threshold.hot_first_cycles",
+          "desc": "80 ℃ 档首次启动循环数下限",
+          "unit": "循环"
+        },
+        "hot_recovery_s": {
+          "source": "threshold",
+          "ref": "threshold.hot_recovery_s",
+          "desc": "80 ℃ 档恢复时间上限",
+          "unit": "s"
+        },
+        "min_restart_cycles": {
+          "source": "threshold",
+          "ref": "threshold.min_restart_cycles",
+          "desc": "恢复后再启动循环数下限",
+          "unit": "循环"
+        }
+      },
+      "threshold": {
+        "hot_boundary_c": 30.0,
+        "cold_first_cycles": 30,
+        "cold_recovery_s": 60.0,
+        "hot_first_cycles": 15,
+        "hot_recovery_s": 100.0,
+        "min_restart_cycles": 2,
+        "test_temps_c": [
+          -40.0,
+          23.0,
+          80.0
+        ]
+      },
+      "evidence": [
+        "循环计数器",
+        "环境箱温度记录",
+        "恢复计时"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "note": "hot_boundary_c = 30 ℃ 这个分界是本包为了让表达式可求值而设的：标准给的是 −40 ℃ / 常温 / 80 ℃ 三个离散点，不是连续区间。实际执行时应按试验项显式选档，而不是靠温度回读去猜。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 205 行：热保护性 5.12.3 / 6.12.3 表 5"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 162 行：热保护三档判据"
+        }
+      ]
+    },
+    {
+      "id": "TR-ELEC-04",
+      "name": "电磁兼容性",
+      "category": "电气与防护",
+      "evaluable": true,
+      "criterion": "radiated_emission_level <= radiated_level && conducted_emission_level <= conducted_level && transient_conducted_level_roman <= transient_level",
+      "criterion_text": "辐射发射与传导发射满足等级 3；沿电源线的瞬态传导发射满足等级 III。征求意见稿引的是 GB/T 18655-2010 与 GB/T 21437.2-2008，两本均已换版，落地时须改引 GB/T 18655-2025 与 GB/T 21437.2-2021",
+      "variables": {
+        "radiated_emission_level": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.radiated_emission_level",
+          "desc": "辐射发射等级",
+          "unit": "级"
+        },
+        "conducted_emission_level": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.conducted_emission_level",
+          "desc": "传导发射等级",
+          "unit": "级"
+        },
+        "transient_conducted_level_roman": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.transient_conducted_level_roman",
+          "desc": "沿电源线瞬态传导发射等级（罗马数字转整数）",
+          "unit": "级"
+        },
+        "radiated_level": {
+          "source": "threshold",
+          "ref": "threshold.radiated_level",
+          "desc": "辐射发射允许等级",
+          "unit": "级"
+        },
+        "conducted_level": {
+          "source": "threshold",
+          "ref": "threshold.conducted_level",
+          "desc": "传导发射允许等级",
+          "unit": "级"
+        },
+        "transient_level": {
+          "source": "threshold",
+          "ref": "threshold.transient_level",
+          "desc": "瞬态传导发射允许等级（罗马数字 III 转整数 3）",
+          "unit": "级"
+        }
+      },
+      "threshold": {
+        "radiated_level": 3,
+        "conducted_level": 3,
+        "transient_level": 3,
+        "transient_level_roman": "III",
+        "current_refs": [
+          "GB/T 18655-2025",
+          "GB/T 21437.2-2021"
+        ],
+        "cited_refs": [
+          "GB/T 18655-2010",
+          "GB/T 21437.2-2008"
+        ]
+      },
+      "evidence": [
+        "EMC 暗室测试报告"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "note": "罗马数字 III 在表达式里必须转成整数 3 才能比较，threshold 里同时保留 transient_level_roman 给前端回显，避免与阿拉伯数字等级混淆。",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）；且两本引用标准均已换版",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 206 行：电磁兼容性 5.12.4 / 6.12.4"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 81 行：GB/T 18655-2025 已代替 2018 版"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 80 行：GB/T 21437 系列第 1 至 3 部分均为 2021 版"
+        }
+      ]
+    },
+    {
+      "id": "TR-ELEC-05",
+      "name": "有害物质限量",
+      "category": "电气与防护",
+      "evaluable": true,
+      "criterion": "hazardous_substances_pass === true",
+      "criterion_text": "铅、汞、镉、六价铬、多溴联苯（PBBs）、多溴二苯醚（PBDEs）含量符合 GB/T 30512-2014",
+      "variables": {
+        "hazardous_substances_pass": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.hazardous_substances_pass",
+          "desc": "六项有害物质是否全部合格"
+        }
+      },
+      "threshold": {
+        "substances": [
+          "Pb",
+          "Hg",
+          "Cd",
+          "Cr(VI)",
+          "PBBs",
+          "PBDEs"
+        ],
+        "standard": "GB/T 30512-2014"
+      },
+      "evidence": [
+        "第三方有害物质检测报告"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:112-114 5.3 有害物质"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 207 行：有害物质 5.3 / 6.3"
+        }
+      ]
+    },
+    {
+      "id": "TR-ELEC-06",
+      "name": "长时过电压（ISO 16750-2）",
+      "category": "电气与防护",
+      "evaluable": true,
+      "criterion": "allowed_classes.includes(function_class)",
+      "criterion_text": "12 V 系统施加 18 V 持续 60 min，环境温度为 Tmax 减 20 K，要求最低功能状态 class C",
+      "variables": {
+        "function_class": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.function_class",
+          "desc": "试验期间与试验后的功能状态等级"
+        },
+        "allowed_classes": {
+          "source": "threshold",
+          "ref": "threshold.allowed_classes",
+          "desc": "允许的功能状态等级集合"
+        }
+      },
+      "threshold": {
+        "voltage_v": 18.0,
+        "duration_min": 60,
+        "temp": "Tmax − 20 K",
+        "min_class": "C",
+        "allowed_classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "evidence": [
+        "程控电源记录",
+        "功能状态观察记录"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 157 行：ISO 16750-2:2023 §4.3.1.1.2 长时过电压（已核实）"
+        },
+        {
+          "file": "[源] 汽车场景素材-20260919/ls16750_2.pdf",
+          "locator": "ISO 16750-2:2023 §4.3.1.1.2"
+        }
+      ]
+    },
+    {
+      "id": "TR-ELEC-07",
+      "name": "跨接启动（ISO 16750-2）",
+      "category": "电气与防护",
+      "evaluable": true,
+      "criterion": "allowed_classes.includes(function_class)",
+      "criterion_text": "12 V 系统施加 26 V 持续 60 ± 6 s，最低功能状态 class C",
+      "variables": {
+        "function_class": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.function_class",
+          "desc": "试验期间与试验后的功能状态等级"
+        },
+        "allowed_classes": {
+          "source": "threshold",
+          "ref": "threshold.allowed_classes",
+          "desc": "允许的功能状态等级集合"
+        }
+      },
+      "threshold": {
+        "voltage_v": 26.0,
+        "duration_s": 60,
+        "duration_tol_s": 6,
+        "min_class": "C",
+        "allowed_classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "evidence": [
+        "程控电源记录",
+        "功能状态观察记录"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 158 行：ISO 16750-2:2023 §4.3.1.2.2 表 5 跨接启动（已核实）"
+        },
+        {
+          "file": "[源] 汽车场景素材-20260919/ls16750_2.pdf",
+          "locator": "ISO 16750-2:2023 §4.3.1.2.2 表 5"
+        }
+      ]
+    },
+    {
+      "id": "TR-ELEC-08",
+      "name": "反极性期间不得触发安全相关功能",
+      "category": "电气与防护",
+      "evaluable": true,
+      "criterion": "(fault_flags & FAULT_REVERSE_POLARITY) !== 0 && window_motion_detected === false && post_test_basic_pass === true",
+      "criterion_text": "10.8 V 到 −4.0 V 持续 60 s（继电器切断供电时改为 8 ms），3 个循环。标准原文明确要求反极性期间不得触发任何安全相关功能，并点名电动车窗、天窗、起动机",
+      "variables": {
+        "fault_flags": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.fault_flags",
+          "desc": "被测件故障字回读整值"
+        },
+        "FAULT_REVERSE_POLARITY": {
+          "source": "constant",
+          "value": 128,
+          "derived_from": [
+            "safety-interlocks.fault_bitmap.0x0080"
+          ],
+          "desc": "反极性检出位掩码（0x0080）"
+        },
+        "window_motion_detected": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.window_motion_detected",
+          "desc": "反极性期间车窗是否发生移动"
+        },
+        "post_test_basic_pass": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.post_test_basic_pass",
+          "desc": "本试验后基本性能是否全项合格"
+        }
+      },
+      "threshold": {
+        "from_v": 10.8,
+        "to_v": -4.0,
+        "duration_s": 60,
+        "duration_if_relay_cutoff_ms": 8,
+        "cycles": 3,
+        "fault_bit": "0x0080 FAULT_REVERSE_POLARITY"
+      },
+      "evidence": [
+        "程控电源记录",
+        "位移曲线",
+        "故障字回读",
+        "试验后基本性能复测"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "note": "位运算必须加括号：JS 与 C 里 & 的优先级都低于 !==，写成 fault_flags & FAULT_REVERSE_POLARITY !== 0 会被解析成 fault_flags & (FAULT_REVERSE_POLARITY !== 0)，结果全错。",
+      "_status": "试验条件已核实；fault_flags 的位定义是本包编的示例（见 safety-interlocks.json fault_bitmap）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 160 行：反极性 LV 124 / VW 80000 试验 E-15（已核实）"
+        },
+        {
+          "file": "[源] 汽车场景素材-20260919/lv124.pdf",
+          "locator": "MBN LV 124-1: 2013-03 试验 E-15"
+        }
+      ]
+    },
+    {
+      "id": "TR-RULE-01",
+      "name": "型式检验分组与抽样规则",
+      "category": "检验规则",
+      "evaluable": false,
+      "criterion": null,
+      "not_evaluable_reason": "这是排程与抽样的规则，不是对单次测量结果的判定，写不出布尔表达式。登记它是为了让 F3 的排程器有约束可读。",
+      "criterion_text": "型式检验项目按组执行、每组不少于 2 套样件、顺序按 GB/T 28046.1-2011 附录 A.1；出厂检验按 GB/T 2828.1-2012 一般检查水平 II、接收质量限 0.4 至 4.0、一次正常检查抽样方案",
+      "variables": {},
+      "threshold": {
+        "groups": 6,
+        "min_samples_per_group": 2,
+        "sampling_standard": "GB/T 2828.1-2012",
+        "inspection_level": "II",
+        "aql_range": [
+          0.4,
+          4.0
+        ]
+      },
+      "evidence": [
+        "抽样记录",
+        "样件流转台账"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F6 测试报告及产出"
+      ],
+      "_status": "分组数与抽样方案取自备选产品标准 QC/T 29090-2023；QC/T 626 征求意见稿第 7 章的具体分组本次未逐条提取",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 414 行：QC/T 626 征求意见稿第 7 章检验规则"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 415 行：QC/T 29090-2023 第 6 章检验规则（已核实）"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 279 行：型式检验 6.3：20 个项目分 6 组"
+        }
+      ]
+    },
+    {
+      "id": "TR-RULE-02",
+      "name": "外观与涂镀层",
+      "category": "检验规则",
+      "evaluable": false,
+      "criterion": null,
+      "not_evaluable_reason": "「明显缺陷」「影响使用的变形」是人工目视判定，标准没有给可测量的量，不硬凑成布尔表达式。与 TR-BASIC-01 里的 abnormal_noise 不同：那个至少能从频谱算，这个不能。",
+      "criterion_text": "金属零件涂镀层和化学处理层应均匀、不得有明显缺陷；塑料零件表面应平整、无气泡、无龟裂、无影响使用的变形",
+      "variables": {},
+      "threshold": {},
+      "evidence": [
+        "目视检查照片"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/qc636.txt",
+          "locator": "qc636.txt:110-111 5.2.1、5.2.2"
+        }
+      ]
+    },
+    {
+      "id": "TR-RULE-03",
+      "name": "用户手册须含防夹相关说明",
+      "category": "检验规则",
+      "evaluable": false,
+      "criterion": null,
+      "not_evaluable_reason": "文档合规性由人工核对，没有运行时测量量。登记它是因为 NHTSA 合规报告的第 6 节就是这一项，报告模板里必须给它留位置。",
+      "criterion_text": "车辆用户手册应包含电动车窗/天窗/隔断系统的明晰使用说明，包括：被夹住的可能的说明；驾驶员控制开关的使用方法；指明危险的「警告」信息，尤其针对儿童错误使用/操作的情况",
+      "variables": {},
+      "threshold": {},
+      "evidence": [
+        "用户手册相关页扫描件"
+      ],
+      "flows": [
+        "F6 测试报告及产出"
+      ],
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/gb11552.txt",
+          "locator": "gb11552.txt:456-462 §4.8.6 用户手册指南"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 405 行：NHTSA 报告第 6 节 Owner's Manual Information"
+        }
+      ]
+    }
+  ]
+}

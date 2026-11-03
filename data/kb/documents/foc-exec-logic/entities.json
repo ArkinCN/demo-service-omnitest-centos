@@ -1,0 +1,66 @@
+{
+  "doc_id": "foc-exec-logic",
+  "summary": {
+    "parameters": 6,
+    "parameters_matching_customer_h": 0,
+    "registers": 0,
+    "thresholds": 0,
+    "units": 0,
+    "procedure_steps": 0
+  },
+  "parameters": [
+    {
+      "name": "FOC_CR1",
+      "count": 6,
+      "in_customer_h": false,
+      "first_chunk": "foc-exec-logic#c0015",
+      "first_page": 6,
+      "context": "0, FOC_CR1 [ANGM] = 1. 0, FOC_CR1 [EFAE] = 1. 0, 角度来源 = omega > FOC_EF"
+    },
+    {
+      "name": "FOC_EFREQMI",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "foc-exec-logic#c0015",
+      "first_page": 6,
+      "context": "OC_CR1 [ANGM] = 1. 0, FOC_CR1 [EFAE] = 1. 0, 角度来源 = omega > FOC_EFREQMI 器估算角度 omega< FOC_EFREQMIN 强制角度"
+    },
+    {
+      "name": "FOC_EFREQMIN",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "foc-exec-logic#c0015",
+      "first_page": 6,
+      "context": "_CR1 [EFAE] = 1. 0, 角度来源 = omega > FOC_EFREQMI 器估算角度 omega< FOC_EFREQMIN 强制角度"
+    },
+    {
+      "name": "DEBUG_FREE_START",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "foc-exec-logic#c0012",
+      "first_page": 5,
+      "context": "Omega_Start、Open_Start、Open_Omega_Start、 PLL_Start、DEBUG_FREE_START。"
+    },
+    {
+      "name": "FOC_EFREQACC",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "foc-exec-logic#c0013",
+      "first_page": 5,
+      "context": "FOC_EFREQACC：估算器强制角度模式的速度增量，每个载波 速度递增一次。"
+    },
+    {
+      "name": "FOC_EFREQHOLD",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "foc-exec-logic#c0014",
+      "first_page": 6,
+      "context": "FOC_EFREQHOLD：估算器强制速度最大值，当估算器估算速 度小于FOC_EFREQMIN（ 估算不准确 ），强制速度增加到等于 该值时，不"
+    }
+  ],
+  "registers": [],
+  "thresholds": [],
+  "units": [],
+  "procedure_steps": [],
+  "method": "regex+heuristic, no LLM; 参数名=全大写下划线标识符, 寄存器=标识符±40字符内出现『寄存器/register』, 阈值=数值+单位且±40字符内含阈值语境词, 规程步骤=编号行且含操作动词"
+}

@@ -1,0 +1,27 @@
+{
+  "simulation": true,
+  "run_id": "demo-001",
+  "capture_id": "mock-capture-1",
+  "time_axis": "capture_relative_seconds",
+  "time_s": [
+    0,
+    1e-05,
+    2e-05,
+    3e-05,
+    4e-05
+  ],
+  "channels": [
+    {
+      "name": "PWM",
+      "unit": "V",
+      "values": [
+        5,
+        5,
+        0,
+        0,
+        5
+      ]
+    }
+  ],
+  "artifacts": []
+}

@@ -1,0 +1,14 @@
+{
+    "mode": "live",
+    "ts": 1789831809.4795458,
+    "device_id": "bench",
+    "status": "ok",
+    "executed": true,
+    "tool": "start",
+    "args": {
+        "duty_percent": 60.0,
+        "duration_s": 30.0
+    },
+    "dispatch": "spike 阶段不真发控制命令；落地时这里下发 hid_preset_speed_test 工作流",
+    "approved_token": "ct_g7G7Wx8fkFo9hDgLrLD8M4xE"
+}

@@ -1,0 +1,90 @@
+/* 远程设备面板样式 —— 色板与项目统一：主色墨绿、强调暗红、浅底、白背景 */
+.remote-root {
+  --c-primary: #2E5E45;
+  --c-primary-weak: #A8C5B5;
+  --c-primary-deep: #1F4232;
+  --c-accent: #A6353A;
+  --c-tint: #EAF2EC;
+  --c-bg: #FFFFFF;
+  --c-text: #2C2C2C;
+  --c-text-2: #555555;
+  --c-text-3: #9A9A9A;
+  --c-rule: #C8C5BD;
+  --r: 6px;
+
+  color: var(--c-text);
+  background: var(--c-bg);
+  font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans SC", sans-serif;
+}
+
+/* ---- 状态徽章 ---- */
+.rt-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 2px 10px; border-radius: 999px;
+  border: 1px solid var(--c-primary-weak);
+  font-size: 12px; line-height: 20px; color: var(--c-text-2); white-space: nowrap;
+  background: none;
+}
+.rt-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--c-text-3); }
+.rt-badge[data-state="connected"] { border-color: var(--c-primary); color: var(--c-primary); }
+.rt-badge[data-state="connected"] .dot { background: var(--c-primary); }
+.rt-badge[data-state="connecting"] .dot { background: var(--c-primary-weak); animation: rt-pulse 1s infinite; }
+.rt-badge[data-state="error"] { border-color: var(--c-accent); color: var(--c-accent); }
+.rt-badge[data-state="error"] .dot { background: var(--c-accent); }
+@keyframes rt-pulse { 50% { opacity: .3; } }
+
+/* ---- 终端 ---- */
+.rt-terminal { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.rt-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.rt-title { font-size: 14px; font-weight: 600; color: var(--c-primary); }
+.rt-sub { font-size: 12px; color: var(--c-text-3); font-family: ui-monospace, Menlo, Consolas, monospace; }
+.rt-spacer { flex: 1; }
+
+.rt-bar { display: flex; gap: 8px; flex-wrap: wrap; }
+.rt-btn {
+  padding: 5px 12px; font-size: 12px; cursor: pointer;
+  border: 1px solid var(--c-primary); border-radius: var(--r);
+  background: none; color: var(--c-primary);
+}
+.rt-btn:hover:not(:disabled) { background: var(--c-tint); }
+.rt-btn:disabled { border-color: var(--c-rule); color: var(--c-text-3); cursor: not-allowed; }
+.rt-btn[data-variant="accent"] { border-color: var(--c-accent); color: var(--c-accent); }
+.rt-btn[data-variant="accent"]:hover:not(:disabled) { background: none; text-decoration: underline; }
+.rt-btn[data-variant="solid"] { background: var(--c-primary-deep); border-color: var(--c-primary-deep); color: #fff; }
+
+.rt-screen {
+  border: 1px solid var(--c-rule); border-radius: var(--r);
+  background: #101613; padding: 8px;
+  /* 高度用视口单位钉死：若写 flex:1，FitAddon 调整行数会撑高容器、再触发 ResizeObserver，
+     形成"拟合→变高→再拟合"的振荡，元素永远不稳定。 */
+  height: clamp(320px, 52vh, 620px);
+}
+.rt-screen .xterm { height: 100%; }
+.rt-note { font-size: 11px; color: var(--c-text-3); }
+.rt-note b { color: var(--c-accent); font-weight: 600; }
+
+/* ---- 设备卡 ---- */
+.rd-card {
+  border: 1px solid var(--c-rule); border-radius: var(--r);
+  background: none; padding: 12px; display: flex; flex-direction: column; gap: 10px;
+}
+.rd-card[data-selected="true"] { border-color: var(--c-primary); background: var(--c-tint); }
+.rd-top { display: flex; align-items: flex-start; gap: 8px; }
+.rd-name { font-size: 13px; font-weight: 600; }
+.rd-model { font-size: 11px; color: var(--c-text-3); }
+.rd-addr { font-size: 11px; color: var(--c-text-2); font-family: ui-monospace, Menlo, Consolas, monospace; }
+.rd-thumb {
+  border: 1px solid var(--c-rule); border-radius: 4px; aspect-ratio: 16 / 9;
+  display: grid; place-items: center; overflow: hidden; cursor: zoom-in; background: none;
+}
+.rd-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rd-thumb .ph { font-size: 11px; color: var(--c-text-3); }
+.rd-actions { display: flex; gap: 8px; }
+.rd-meta { font-size: 11px; color: var(--c-text-3); word-break: break-all; }
+
+/* ---- 放大遮罩 ---- */
+.rd-modal {
+  position: fixed; inset: 0; background: rgba(31, 66, 50, .75);
+  display: grid; place-items: center; padding: 32px; z-index: 50;
+}
+.rd-modal img { max-width: 100%; max-height: 100%; border: 2px solid #fff; }

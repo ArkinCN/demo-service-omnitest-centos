@@ -1,0 +1,216 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fortior.local/scene-pack/v1/documents.schema.json",
+  "title": "documents.json",
+  "description": "文档登记。F1 知识库的文档一路。",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "documents/v1",
+      "description": "文件契约标识，换包不得改。"
+    },
+    "scene_id": {
+      "$ref": "common.schema.json#/$defs/sceneId"
+    },
+    "generated_by": {
+      "type": "string",
+      "description": "产出这份文件的脚本相对路径，例如 _build/build_scene_pack.py。"
+    },
+    "generated_at": {
+      "$ref": "common.schema.json#/$defs/genDate"
+    },
+    "belongs_to_flow": {
+      "$ref": "common.schema.json#/$defs/flowMention",
+      "description": "这份文件主要服务哪条业务流程。人读为主，但句中必须至少出现一个合法的 F1~F6 标签，防止写进不存在的流程号。"
+    },
+    "total": {
+      "type": "integer"
+    },
+    "local_copy_count": {
+      "type": "integer"
+    },
+    "evidence_root": {
+      "type": "string",
+      "description": "本地材料根目录绝对路径。"
+    },
+    "count_by_type": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "description": "按文档类型计数。类型随场景的材料构成而变，不设固定枚举。"
+    },
+    "conversion_status_legend": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "转化状态释义表。每份文档的 conversion_status 必须是这张表里的键。包一用英文键、包二用中文键，两套都合法。"
+    },
+    "conversion_status_note": {
+      "type": "string"
+    },
+    "difference_from_scene1": {
+      "type": "string"
+    },
+    "non_authorized_copies": {
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "_source": {
+          "$ref": "common.schema.json#/$defs/sourceRefs"
+        }
+      },
+      "required": [],
+      "description": "非授权副本登记：内容可信但不具备引用资格，正式报告引用前须取得授权原本复核。"
+    },
+    "version_change_alerts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "standard": {
+            "type": "string"
+          },
+          "change": {
+            "type": "string"
+          },
+          "effective": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    },
+    "version_change_alerts_source": {
+      "$ref": "common.schema.json#/$defs/sourceRefs"
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "文档标识，形如 DOC-STD-001。"
+          },
+          "type": {
+            "type": "string",
+            "description": "文档类型，取值须落在 count_by_type 的键里。"
+          },
+          "title": {
+            "type": "string",
+            "description": "文档全名：标题 + 发布机构 + 版次 + 日期，能独立定位。"
+          },
+          "path": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "本地绝对路径；没有本地正本时为 null。"
+          },
+          "size_bytes": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "exists": {
+            "type": "boolean",
+            "description": "本地正本是否存在。"
+          },
+          "used_in_flows": {
+            "type": "array",
+            "items": {
+              "$ref": "common.schema.json#/$defs/flowLabel"
+            }
+          },
+          "conversion_status": {
+            "type": "string",
+            "description": "转化状态，须是 conversion_status_legend 的键之一。"
+          },
+          "conversion_status_label": {
+            "type": "string",
+            "description": "转化状态的中文展示文案；包二缺省时前端取 conversion_status 本身。"
+          },
+          "converted_into": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "被解析进了本包的哪几份 JSON。"
+          },
+          "url": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "source_product_line": {
+            "type": "string",
+            "description": "借自哪条产品线。"
+          },
+          "applies_to_cooling_fan": {
+            "type": "boolean"
+          },
+          "altium_schdoc_path": {
+            "type": "string"
+          },
+          "altium_schdoc_size_bytes": {
+            "type": "integer"
+          },
+          "usage": {
+            "$ref": "common.schema.json#/$defs/usageAxis"
+          },
+          "usage_class": {
+            "type": "string"
+          },
+          "usage_review": {
+            "type": "string"
+          },
+          "_status": {
+            "$ref": "common.schema.json#/$defs/statusText"
+          },
+          "_source": {
+            "$ref": "common.schema.json#/$defs/sourceRefs"
+          }
+        },
+        "required": [
+          "_source",
+          "conversion_status",
+          "exists",
+          "id",
+          "path",
+          "size_bytes",
+          "title",
+          "type",
+          "usage",
+          "usage_class",
+          "used_in_flows"
+        ]
+      }
+    }
+  },
+  "required": [
+    "belongs_to_flow",
+    "conversion_status_legend",
+    "count_by_type",
+    "documents",
+    "generated_at",
+    "generated_by",
+    "scene_id",
+    "schema",
+    "total"
+  ]
+}

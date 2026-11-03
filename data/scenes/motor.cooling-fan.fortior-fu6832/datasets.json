@@ -1,0 +1,309 @@
+{
+  "schema": "datasets/v1",
+  "scene_id": "motor.cooling-fan.fortior-fu6832",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-19",
+  "belongs_to_flow": "F4 启动测试及结果分析（时序曲线回放与判定）",
+  "package_root": "[源] 数据/20260811_启动故障98次实验与30例对照数据包",
+  "package_stats": {
+    "attempts_total": 101,
+    "labeled": 98,
+    "pass": 67,
+    "fail": 30,
+    "invalid": 1,
+    "usable_for_waveform_analysis": 97,
+    "_source": {
+      "file": "[源] 20260811_启动故障98次实验与30例对照数据包/分析报告-预定位太弱判定-20260812.md",
+      "locator": "第 1.1 节 交付包结构与登记口径 表"
+    }
+  },
+  "demo_profile": {
+    "note": "演示主线只回放两条：TRY-0010 启动失败与 TRY-0009 启动成功，一失败一成功并排对照。TRY-0021 是第二条失败样本，与 TRY-0010 讲的是同一件事，演示不回放，全量模式仍在。",
+    "datasets": [
+      "TRY-0010",
+      "TRY-0009"
+    ]
+  },
+  "datasets": [
+    {
+      "id": "faithful_norm1200",
+      "name": "faithful_norm1200 忠实降采样 1200 点时序",
+      "mode": "registered_only",
+      "file_path": "[源] 测试数据_20260701/faithful_norm1200.csv",
+      "file_size_bytes": 38959,
+      "columns": [
+        {
+          "key": "time_s",
+          "name": "时间（秒，0 为上电时刻）"
+        },
+        {
+          "key": "ch1_current_V",
+          "name": "CH1 相电流（列名沿用示波器通道命名，物理量是电流）"
+        },
+        {
+          "key": "ch2_fg1_V",
+          "name": "CH2 FG1 电气转速反馈"
+        },
+        {
+          "key": "ch3_fg2_V",
+          "name": "CH3 FG2 红外机械转速（1 脉冲/转）"
+        },
+        {
+          "key": "ch4_pwm1_V",
+          "name": "CH4 PWM1 驱动输出"
+        }
+      ],
+      "label": null,
+      "note": "1200 点降采样复现产物，用于核对客户软件的 1200 点显示口径。文件为百 MB 级，本场景包只登记路径不复制。",
+      "_source": [
+        {
+          "file": "[源] 测试数据_20260701/faithful_norm1200.csv",
+          "locator": "第 1 行表头：time_s,ch1_current_V,ch2_fg1_V,ch3_fg2_V,ch4_pwm1_V"
+        },
+        {
+          "file": "[源] memory/fortior-test-bench-hardware.md",
+          "locator": "通道定义与 FG1=2×FG2 判据"
+        }
+      ]
+    },
+    {
+      "id": "fullrun_v2b_20260627",
+      "name": "fullrun_v2b 六档变速全程深存储时序",
+      "mode": "registered_only",
+      "file_path": "[源] 测试数据_20260627/fullrun_v2b_20260627.csv",
+      "file_size_bytes": 101443059,
+      "columns": [
+        {
+          "key": "time_s",
+          "name": "时间（秒，0 为上电时刻）"
+        },
+        {
+          "key": "ch1_current_V",
+          "name": "CH1 相电流（列名沿用示波器通道命名，物理量是电流）"
+        },
+        {
+          "key": "ch2_fg1_V",
+          "name": "CH2 FG1 电气转速反馈"
+        },
+        {
+          "key": "ch3_fg2_V",
+          "name": "CH3 FG2 红外机械转速（1 脉冲/转）"
+        },
+        {
+          "key": "ch4_pwm1_V",
+          "name": "CH4 PWM1 驱动输出"
+        }
+      ],
+      "label": null,
+      "note": "六档变速全程采集，峰岹时序汇报的主用数据源。文件为百 MB 级，本场景包只登记路径不复制。",
+      "_source": [
+        {
+          "file": "[源] 测试数据_20260627/fullrun_v2b_20260627.csv",
+          "locator": "第 1 行表头：time_s,ch1_current_V,ch2_fg1_V,ch3_fg2_V,ch4_pwm1_V"
+        },
+        {
+          "file": "[源] memory/fortior-test-bench-hardware.md",
+          "locator": "通道定义与 FG1=2×FG2 判据"
+        }
+      ]
+    },
+    {
+      "id": "TRY-0009",
+      "name": "启动上电时刻归一化相电流波形（TRY-0009）",
+      "mode": "copied_into_pack",
+      "file_path": "./assets/waveforms/TRY-0009_CH1_powerup_normalized.csv",
+      "source_file_path": "[源] capture/CH1_上电时刻归一化.csv",
+      "file_size_bytes": 1043507,
+      "row_count": 24000,
+      "columns": [
+        {
+          "key": "time_s",
+          "name": "时间（秒，t=0 为人工点击上电时刻，存在最多 1 秒操作误差）"
+        },
+        {
+          "key": "voltage_v",
+          "name": "CH1 相电流（安培；列名沿用示波器通道命名）"
+        },
+        {
+          "key": "raw_byte",
+          "name": "示波器原始字节"
+        },
+        {
+          "key": "original_scope_time_s",
+          "name": "归一化前的示波器时间"
+        },
+        {
+          "key": "sample_source",
+          "name": "样本来源标记（SYNTHETIC_PRE_POWER 为上电前人工 0V 补线）"
+        }
+      ],
+      "sample_rate_sa_per_s": 2000.0,
+      "memory_depth": "12000",
+      "scope": "RIGOL TECHNOLOGIES,DS1104Z,DS1ZA162152310,00.04.00",
+      "y_increment_v": 0.0106875,
+      "probe_ratio_confirmed": false,
+      "probe_ratio_note": "探头变比未确认。客户已澄清 CH1 采的就是电流、voltage_v 列按安培读，但若探头不是 1 A/V，全部数值要按客户给的 mV/A 系数整体缩放一次。不阻断判定链路（形状类判据不受影响），但 align_mean_a 一类绝对量级阈值在变比确认前不得对外引用。",
+      "label": {
+        "operator_result": "PASS",
+        "case_id": null,
+        "injected_fault": "align_weak（预定位太弱）",
+        "meaning": "合格样本（本批次口径下为「太弱注入但侥幸启动成功」）"
+      },
+      "note": "本批次 98 条登记样本的成因金标准全部是 align_weak，没有一条正常样本；PASS 与 FAIL 的差别只是这一次启动成没成，不是固件参数正常还是故障。t<0 的上电前窗口是人工 0 V 补线，不是示波器实测，不得据此评价噪声或零漂。",
+      "_source": [
+        {
+          "file": "[源] capture/CH1_上电时刻归一化.csv",
+          "locator": "第 1 行表头：time_s,voltage_v,raw_byte,original_scope_time_s,sample_source"
+        },
+        {
+          "file": "[源] TRY-0009/operator_label.json",
+          "locator": "operator_result 字段"
+        },
+        {
+          "file": "[源] capture/采集信息.json",
+          "locator": "scope_settings / idn / waveforms[0]"
+        },
+        {
+          "file": "[源] 20260811_启动故障98次实验与30例对照数据包/分析报告-预定位太弱判定-20260812.md",
+          "locator": "第 0.1 节口径修订、第 1.2 节每文件格式与量级"
+        },
+        {
+          "file": "[源] 20260811_启动故障98次实验与30例对照数据包/分析报告-预定位太弱判定-20260812.md",
+          "locator": "分析报告-预定位太弱判定-20260812.md:450「| 探头变比 | 未确认 | 客户给出 mV/A 系数（或确认 1 A/V），整体缩放一次即可。不阻断判定链路，但影响所有绝对量级阈值能不能对外引用 |」，另见同文件第 470 行待客户确认第 1 项"
+        }
+      ]
+    },
+    {
+      "id": "TRY-0010",
+      "name": "启动上电时刻归一化相电流波形（TRY-0010）",
+      "mode": "copied_into_pack",
+      "file_path": "./assets/waveforms/TRY-0010_CH1_powerup_normalized.csv",
+      "source_file_path": "[源] capture/CH1_上电时刻归一化.csv",
+      "file_size_bytes": 1005511,
+      "row_count": 24000,
+      "columns": [
+        {
+          "key": "time_s",
+          "name": "时间（秒，t=0 为人工点击上电时刻，存在最多 1 秒操作误差）"
+        },
+        {
+          "key": "voltage_v",
+          "name": "CH1 相电流（安培；列名沿用示波器通道命名）"
+        },
+        {
+          "key": "raw_byte",
+          "name": "示波器原始字节"
+        },
+        {
+          "key": "original_scope_time_s",
+          "name": "归一化前的示波器时间"
+        },
+        {
+          "key": "sample_source",
+          "name": "样本来源标记（SYNTHETIC_PRE_POWER 为上电前人工 0V 补线）"
+        }
+      ],
+      "sample_rate_sa_per_s": 2000.0,
+      "memory_depth": "12000",
+      "scope": "RIGOL TECHNOLOGIES,DS1104Z,DS1ZA162152310,00.04.00",
+      "y_increment_v": 0.0106875,
+      "probe_ratio_confirmed": false,
+      "probe_ratio_note": "探头变比未确认。客户已澄清 CH1 采的就是电流、voltage_v 列按安培读，但若探头不是 1 A/V，全部数值要按客户给的 mV/A 系数整体缩放一次。不阻断判定链路（形状类判据不受影响），但 align_mean_a 一类绝对量级阈值在变比确认前不得对外引用。",
+      "label": {
+        "operator_result": "FAIL",
+        "case_id": "CF-L-0003",
+        "injected_fault": "align_weak（预定位太弱）",
+        "meaning": "不合格样本 1（启动失败）"
+      },
+      "note": "本批次 98 条登记样本的成因金标准全部是 align_weak，没有一条正常样本；PASS 与 FAIL 的差别只是这一次启动成没成，不是固件参数正常还是故障。t<0 的上电前窗口是人工 0 V 补线，不是示波器实测，不得据此评价噪声或零漂。",
+      "_source": [
+        {
+          "file": "[源] capture/CH1_上电时刻归一化.csv",
+          "locator": "第 1 行表头：time_s,voltage_v,raw_byte,original_scope_time_s,sample_source"
+        },
+        {
+          "file": "[源] TRY-0010/operator_label.json",
+          "locator": "operator_result 字段"
+        },
+        {
+          "file": "[源] capture/采集信息.json",
+          "locator": "scope_settings / idn / waveforms[0]"
+        },
+        {
+          "file": "[源] 20260811_启动故障98次实验与30例对照数据包/分析报告-预定位太弱判定-20260812.md",
+          "locator": "第 0.1 节口径修订、第 1.2 节每文件格式与量级"
+        },
+        {
+          "file": "[源] 20260811_启动故障98次实验与30例对照数据包/分析报告-预定位太弱判定-20260812.md",
+          "locator": "分析报告-预定位太弱判定-20260812.md:450「| 探头变比 | 未确认 | 客户给出 mV/A 系数（或确认 1 A/V），整体缩放一次即可。不阻断判定链路，但影响所有绝对量级阈值能不能对外引用 |」，另见同文件第 470 行待客户确认第 1 项"
+        }
+      ]
+    },
+    {
+      "id": "TRY-0021",
+      "name": "启动上电时刻归一化相电流波形（TRY-0021）",
+      "mode": "copied_into_pack",
+      "file_path": "./assets/waveforms/TRY-0021_CH1_powerup_normalized.csv",
+      "source_file_path": "[源] capture/CH1_上电时刻归一化.csv",
+      "file_size_bytes": 1011657,
+      "row_count": 24000,
+      "columns": [
+        {
+          "key": "time_s",
+          "name": "时间（秒，t=0 为人工点击上电时刻，存在最多 1 秒操作误差）"
+        },
+        {
+          "key": "voltage_v",
+          "name": "CH1 相电流（安培；列名沿用示波器通道命名）"
+        },
+        {
+          "key": "raw_byte",
+          "name": "示波器原始字节"
+        },
+        {
+          "key": "original_scope_time_s",
+          "name": "归一化前的示波器时间"
+        },
+        {
+          "key": "sample_source",
+          "name": "样本来源标记（SYNTHETIC_PRE_POWER 为上电前人工 0V 补线）"
+        }
+      ],
+      "sample_rate_sa_per_s": 2000.0,
+      "memory_depth": "12000",
+      "scope": "RIGOL TECHNOLOGIES,DS1104Z,DS1ZA162152310,00.04.00",
+      "y_increment_v": 0.0106875,
+      "probe_ratio_confirmed": false,
+      "probe_ratio_note": "探头变比未确认。客户已澄清 CH1 采的就是电流、voltage_v 列按安培读，但若探头不是 1 A/V，全部数值要按客户给的 mV/A 系数整体缩放一次。不阻断判定链路（形状类判据不受影响），但 align_mean_a 一类绝对量级阈值在变比确认前不得对外引用。",
+      "label": {
+        "operator_result": "FAIL",
+        "case_id": "CF-L-0007",
+        "injected_fault": "align_weak（预定位太弱）",
+        "meaning": "不合格样本 2（启动失败）"
+      },
+      "note": "本批次 98 条登记样本的成因金标准全部是 align_weak，没有一条正常样本；PASS 与 FAIL 的差别只是这一次启动成没成，不是固件参数正常还是故障。t<0 的上电前窗口是人工 0 V 补线，不是示波器实测，不得据此评价噪声或零漂。",
+      "_source": [
+        {
+          "file": "[源] capture/CH1_上电时刻归一化.csv",
+          "locator": "第 1 行表头：time_s,voltage_v,raw_byte,original_scope_time_s,sample_source"
+        },
+        {
+          "file": "[源] TRY-0021/operator_label.json",
+          "locator": "operator_result 字段"
+        },
+        {
+          "file": "[源] capture/采集信息.json",
+          "locator": "scope_settings / idn / waveforms[0]"
+        },
+        {
+          "file": "[源] 20260811_启动故障98次实验与30例对照数据包/分析报告-预定位太弱判定-20260812.md",
+          "locator": "第 0.1 节口径修订、第 1.2 节每文件格式与量级"
+        },
+        {
+          "file": "[源] 20260811_启动故障98次实验与30例对照数据包/分析报告-预定位太弱判定-20260812.md",
+          "locator": "分析报告-预定位太弱判定-20260812.md:450「| 探头变比 | 未确认 | 客户给出 mV/A 系数（或确认 1 A/V），整体缩放一次即可。不阻断判定链路，但影响所有绝对量级阈值能不能对外引用 |」，另见同文件第 470 行待客户确认第 1 项"
+        }
+      ]
+    }
+  ]
+}

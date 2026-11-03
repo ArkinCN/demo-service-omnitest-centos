@@ -1,0 +1,1147 @@
+﻿{
+    "run":  {
+                "run_id":  "d5c08959241847798ab15884d0ae141a",
+                "user_id":  1,
+                "scene_id":  "motor.cooling-fan.fortior-fu6832",
+                "status":  "draft",
+                "mode":  "mock",
+                "created_at":  "2026-09-28T11:16:14.750429",
+                "finished_at":  null
+            },
+    "artifacts":  [
+                      {
+                          "run_id":  "d5c08959241847798ab15884d0ae141a",
+                          "artifact_kind":  "config-snapshot",
+                          "schema":  "config-snapshot/v1",
+                          "content":  {
+                                          "schema":  "config-snapshot/v1",
+                                          "snapshot_id":  "cs-motor.cooling-fan.fortior-fu6832-mul5jfo8",
+                                          "scene_id":  "motor.cooling-fan.fortior-fu6832",
+                                          "locked_at":  "2026-09-28T11:16:14.744Z",
+                                          "locked_by":  "å¼ å·¥",
+                                          "locked":  true,
+                                          "product_attributes":  [
+                                                                     {
+                                                                         "key":  "pole_pairs",
+                                                                         "value":  2,
+                                                                         "unit":  "å¯¹",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:56 (#define Pole_Pairs)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "rs",
+                                                                         "value":  0.098667,
+                                                                         "unit":  "Î©",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:57 (#define RS)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "ld",
+                                                                         "value":  4.4E-05,
+                                                                         "unit":  "H",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:58 (#define LD)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "lq",
+                                                                         "value":  4.4E-05,
+                                                                         "unit":  "H",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:59 (#define LQ)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "ke",
+                                                                         "value":  0.288201,
+                                                                         "unit":  "V/kRPM",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:60 (#define Ke)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "motor_speed_base",
+                                                                         "value":  50000,
+                                                                         "unit":  "RPM",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:65 (#define MOTOR_SPEED_BASE)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "motor_direction",
+                                                                         "value":  "FORWARD",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:98 (#define MOTOR_DIRECTION)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "motor_min_speed",
+                                                                         "value":  17500,
+                                                                         "unit":  "RPM",
+                                                                         "origin":  "manual",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:243 (#define MOTOR_MIN_SPEED)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "motor_max_speed",
+                                                                         "value":  27500,
+                                                                         "unit":  "RPM",
+                                                                         "origin":  "manual",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:244 (#define MOTOR_MAX_SPEED)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "rated_speed",
+                                                                         "value":  27000,
+                                                                         "unit":  "RPM",
+                                                                         "origin":  "manual",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:244 (#define MOTOR_MAX_SPEED)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "rated_voltage",
+                                                                         "value":  10,
+                                                                         "unit":  "V",
+                                                                         "origin":  "manual",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] WORKINGflow/SPEEDTEST.wfw",
+                                                                                         "locator":  "definition.nodes[hid_preset_voltage_set].data.paramValues.voltage = 12.5"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "vcc_operating_min",
+                                                                         "value":  5,
+                                                                         "unit":  "V",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] Document/MCU-DS-14_FU6832_V2.1_20230621.pdf",
+                                                                                         "locator":  "PDF ç¬¬ 56 é¡µ è¡¨5-2 å\u0085¨å±çµæ°ç¹æ§ãVCC å·¥ä½çµå åçµæºé«åæ¨¡å¼ã"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "vcc_operating_max",
+                                                                         "value":  28,
+                                                                         "unit":  "V",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] Document/MCU-DS-14_FU6832_V2.1_20230621.pdf",
+                                                                                         "locator":  "PDF ç¬¬ 56 é¡µ è¡¨5-2 å\u0085¨å±çµæ°ç¹æ§ãVCC å·¥ä½çµå åçµæºé«åæ¨¡å¼ã"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "vcc_abs_max",
+                                                                         "value":  36,
+                                                                         "unit":  "V",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] Document/MCU-DS-14_FU6832_V2.1_20230621.pdf",
+                                                                                         "locator":  "PDF ç¬¬ 56 é¡µ è¡¨5-1 ç»å¯¹æå¤§é¢å®å¼ãVCC ç¸å¯¹VSS ççµåã"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "ambient_temp_range",
+                                                                         "value":  "-40 ~ 85",
+                                                                         "unit":  "â",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] Document/MCU-DS-14_FU6832_V2.1_20230621.pdf",
+                                                                                         "locator":  "PDF ç¬¬ 56 é¡µ è¡¨5-1 ç»å¯¹æå¤§é¢å®å¼ãå·¥ä½æ¶ç¯å¢æ¸©åº¦TAãï¼PyMuPDF æ½æå®æµè¯¥è¡ä¸ãå·¥ä½æ¶ç»æ¸©TJããå¨å­æ¸©åº¦ããVCC ç¸å¯¹VSS ççµåãåå±è¡¨5-1ï¼æ§ locator åä½è¡¨5-2 æè¯¯ï¼"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "junction_temp_max",
+                                                                         "value":  150,
+                                                                         "unit":  "â",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] Document/MCU-DS-14_FU6832_V2.1_20230621.pdf",
+                                                                                         "locator":  "PDF ç¬¬ 56 é¡µ è¡¨5-1ãå·¥ä½æ¶ç»æ¸©TJã"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "ivcc_typ",
+                                                                         "value":  20,
+                                                                         "unit":  "mA",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] Document/MCU-DS-14_FU6832_V2.1_20230621.pdf",
+                                                                                         "locator":  "PDF ç¬¬ 56 é¡µ è¡¨5-2ãIVCCå·¥ä½çµæµãå\u0085¸åå¼"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "ivcc_max",
+                                                                         "value":  40,
+                                                                         "unit":  "mA",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] Document/MCU-DS-14_FU6832_V2.1_20230621.pdf",
+                                                                                         "locator":  "PDF ç¬¬ 56 é¡µ è¡¨5-2ãIVCCå·¥ä½çµæµãæå¤§å¼"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "rated_current",
+                                                                         "value":  0.1,
+                                                                         "unit":  "A",
+                                                                         "origin":  "manual",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:157 (#define MOTOR_RUN_IQ_CURRENT)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "hw_shunt_mode",
+                                                                         "value":  "SINGLE_SHUNT",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:83 (#define HW_SHUNT_MODE)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "hw_rshunt",
+                                                                         "value":  0.01,
+                                                                         "unit":  "Î©",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:85 (#define HW_RSHUNT)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "hw_ampgain",
+                                                                         "value":  "GAIN_16",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:86 (#define HW_AMPGAIN)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "hw_rv_mode",
+                                                                         "value":  "RVEXT",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:92 (#define HW_RV_MODE)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "rv1",
+                                                                         "value":  100,
+                                                                         "unit":  "kÎ©",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:93 (#define RV1)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "rv2",
+                                                                         "value":  30,
+                                                                         "unit":  "kÎ©",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:94 (#define RV2)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "rotate_signal_type",
+                                                                         "value":  "FG_TYPE",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:329 (#define ROTATE_SIGNAL_TYPE)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "fg_pulse_period",
+                                                                         "value":  2,
+                                                                         "unit":  "pulse/rev",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:334 (#define FG_PULSE_PERIOD)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "fan_outer_size",
+                                                                         "value":  5,
+                                                                         "unit":  "mm",
+                                                                         "origin":  "manual",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] _è°ç /A-DebugCopilotåºæ¯ä¸ç¥è¯åºåè¯.md",
+                                                                                         "locator":  "ç¬¬å\u0085­èãè·éæ£ç­é£æä¸æ¡æµç¨çè¾å\u0085¥ãââçé¢åªå¡« 5 é¡¹ï¼ä¸å«æºæ¢°å°ºå¯¸"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "key":  "fan_thickness",
+                                                                         "value":  12,
+                                                                         "unit":  "mm",
+                                                                         "origin":  "manual",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] _è°ç /A-DebugCopilotåºæ¯ä¸ç¥è¯åºåè¯.md",
+                                                                                         "locator":  "ç¬¬å\u0085­èãè·éæ£ç­é£æä¸æ¡æµç¨çè¾å\u0085¥ãââçé¢åªå¡« 5 é¡¹ï¼ä¸å«æºæ¢°å°ºå¯¸"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_start_mode",
+                                                                         "value":  "OPEN_OMEGA_START",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:119 (#define MOTOR_START_MODE)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_start_iq_current",
+                                                                         "value":  1.3,
+                                                                         "unit":  "A",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:143 (#define MOTOR_START_IQ_CURRENT)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_loop_rpm",
+                                                                         "value":  900,
+                                                                         "unit":  "RPM",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:139 (#define MOTOR_LOOP_RPM)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_min_smo_speed",
+                                                                         "value":  900,
+                                                                         "unit":  "RPM",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:153 (#define MOTOR_MIN_SMO_SPEED)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_start_dqkp",
+                                                                         "value":  1,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:141 (#define MOTOR_START_DQKP)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_start_dqki",
+                                                                         "value":  0.01,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:142 (#define MOTOR_START_DQKI)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_start_times",
+                                                                         "value":  700,
+                                                                         "unit":  "ms",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:145 (#define MOTOR_START_TIMES)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_open_acc",
+                                                                         "value":  0.009,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:132 (#define MOTOR_OPEN_ACC)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_open_acc_cnt",
+                                                                         "value":  65,
+                                                                         "unit":  "æ¬¡",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:134 (#define MOTOR_OPEN_ACC_CNT)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_omega_ramp_acc",
+                                                                         "value":  2,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:135 (#define MOTOR_OMEGA_RAMP_ACC)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_omega_acc_min",
+                                                                         "value":  0.015,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:136 (#define MOTOR_OMEGA_ACC_MIN)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_omega_acc_end",
+                                                                         "value":  0.035,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:137 (#define MOTOR_OMEGA_ACC_END)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_align_enabled",
+                                                                         "value":  1,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:102 (#define MOTOR_ALIGN_ENABLED)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_alignment_dout",
+                                                                         "value":  0.06,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:104 (#define MOTOR_ALIGNMENT_DOUT)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_alignment_degrees",
+                                                                         "value":  50,
+                                                                         "unit":  "åº¦",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:105 (#define MOTOR_ALIGNMENT_DEGREES)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_alignment_times",
+                                                                         "value":  450,
+                                                                         "unit":  "ms",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:106 (#define MOTOR_ALIGNMENT_TIMES)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "ato_bw",
+                                                                         "value":  20,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:147 (#define ATO_BW)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "ato_bw_run",
+                                                                         "value":  20,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:148 (#define ATO_BW_RUN)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "ato_bw_run1",
+                                                                         "value":  30,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:149 (#define ATO_BW_RUN1)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "ato_bw_run2",
+                                                                         "value":  53,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:150 (#define ATO_BW_RUN2)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "ato_bw_run3",
+                                                                         "value":  65,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:151 (#define ATO_BW_RUN3)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "ato_bw_run4",
+                                                                         "value":  65,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:152 (#define ATO_BW_RUN4)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "spd_bw",
+                                                                         "value":  20,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:146 (#define SPD_BW)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "smothecomp_degrees",
+                                                                         "value":  5,
+                                                                         "unit":  "åº¦",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:79 (#define SMOTHECOMP_DEGREES)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_run_dqkp",
+                                                                         "value":  0.8,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:155 (#define MOTOR_RUN_DQKP)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_run_dqki",
+                                                                         "value":  0.01,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:156 (#define MOTOR_RUN_DQKI)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_run_iq_current",
+                                                                         "value":  0.6,
+                                                                         "unit":  "A",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:157 (#define MOTOR_RUN_IQ_CURRENT)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "dout_max",
+                                                                         "value":  0.98,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:159 (#define DOUT_MAX)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "qout_max",
+                                                                         "value":  0.98,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:160 (#define QOUT_MAX)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "outloop_enabled",
+                                                                         "value":  1,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:175 (#define OUTLOOP_ENABLED)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "speed_kp",
+                                                                         "value":  0.8,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:188 (#define SPEED_KP)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "speed_ki",
+                                                                         "value":  0.015,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:189 (#define SPEED_KI)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "speed_kd",
+                                                                         "value":  0.004,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:190 (#define SPEED_KD)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "sout_min",
+                                                                         "value":  0.1,
+                                                                         "unit":  "A",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:193 (#define SOUT_MIN)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "sout_max",
+                                                                         "value":  10,
+                                                                         "unit":  "A",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:194 (#define SOUT_MAX)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "speed_refresh_times",
+                                                                         "value":  15,
+                                                                         "unit":  "ms",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:176 (#define SPEED_REFRESH_TIMES)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "speed_jerk_times",
+                                                                         "value":  400,
+                                                                         "unit":  "ms",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:177 (#define SPEED_JERK_TIMES)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "speed_jerk_max_value",
+                                                                         "value":  80,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:178 (#define SPEED_JERK_MAX_VALUE)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "speed_dec",
+                                                                         "value":  20,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:179 (#define SPEED_DEC)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "pwm_frequency",
+                                                                         "value":  25,
+                                                                         "unit":  "kHz",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:69 (#define PWM_FREQUENCY)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "pwm_deadtime",
+                                                                         "value":  0.6,
+                                                                         "unit":  "us",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:70 (#define PWM_DEADTIME)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "pwm_dt_offset",
+                                                                         "value":  0.4,
+                                                                         "unit":  "us",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:72 (#define PWM_DT_OFFSET)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "pwm_min_width",
+                                                                         "value":  1.3,
+                                                                         "unit":  "us",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:73 (#define PWM_MIN_WIDTH)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "trgdly_position",
+                                                                         "value":  8,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:88 (#define TRGDLY_POSITION)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "svpwm_mode",
+                                                                         "value":  "SEG7_SVPWM_MODE",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:74 (#define SVPWM_MODE)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "speed_mode",
+                                                                         "value":  "PWMMODE",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:198 (#define SPEED_MODE)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "nonemode_speed",
+                                                                         "value":  4000,
+                                                                         "unit":  "RPM",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:200 (#define NONEMODE_SPEED)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_min_duty",
+                                                                         "value":  0.1,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:241 (#define MOTOR_MIN_DUTY)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_max_duty",
+                                                                         "value":  0.9,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:242 (#define MOTOR_MAX_DUTY)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_tailwind_enabled",
+                                                                         "value":  1,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:281 (#define MOTOR_TAILWIND_ENABLED)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_tailwind_detect_min_speed",
+                                                                         "value":  900,
+                                                                         "unit":  "RPM",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:282 (#define MOTOR_TAILWIND_DETECT_MIN_SPEED)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "motor_tailwind_detect_times",
+                                                                         "value":  150,
+                                                                         "unit":  "ms",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:284 (#define MOTOR_TAILWIND_DETECT_TIMES)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "tailwind_dqkp",
+                                                                         "value":  3.5,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:288 (#define TAILWIND_DQKP)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "tailwind_dqki",
+                                                                         "value":  0.4,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:289 (#define TAILWIND_DQKI)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "tailwind_start_uq",
+                                                                         "value":  8000,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:290 (#define TAILWIND_START_UQ)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "tailwind_start_iq_current",
+                                                                         "value":  0.8,
+                                                                         "unit":  "A",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:291 (#define TAILWIND_START_IQ_CURRENT)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "tailwind_start_angle",
+                                                                         "value":  0,
+                                                                         "unit":  "åº¦",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:287 (#define TAILWIND_START_ANGLE)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "headwind_lowspeed_threshold",
+                                                                         "value":  4000,
+                                                                         "unit":  "RPM",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:294 (#define HEADWIND_LOWSPEED_THRESHOLD)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "headwind_brake_time_base",
+                                                                         "value":  1000,
+                                                                         "unit":  "ms",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:295 (#define HEADWIND_BRAKE_TIME_BASE)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "headwind_alignment_times",
+                                                                         "value":  1000,
+                                                                         "unit":  "ms",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:296 (#define HEADWIND_ALIGNMENT_TIMES)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "headwind_alignment_dout",
+                                                                         "value":  0.1,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:297 (#define HEADWIND_ALIGNMENT_DOUT)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "headwind_start_iq_current",
+                                                                         "value":  2.5,
+                                                                         "unit":  "A",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:298 (#define HEADWIND_START_IQ_CURRENT)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "iq_brake_start_speed",
+                                                                         "value":  4000,
+                                                                         "unit":  "RPM",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:302 (#define IQ_BRAKE_START_SPEED)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "iq_brake_dqkp",
+                                                                         "value":  2.8,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:303 (#define IQ_BRAKE_DQKP)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "iq_brake_dqki",
+                                                                         "value":  0.1,
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:304 (#define IQ_BRAKE_DQKI)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "iq_brake_start_degrees",
+                                                                         "value":  135,
+                                                                         "unit":  "åº¦",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:314 (#define IQ_BRAKE_START_DEGREES)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "current_limiter_mode",
+                                                                         "value":  "NONE",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:422 (#define CURRENT_LIMITER_MODE)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "current_limiter_threshold",
+                                                                         "value":  0.6,
+                                                                         "unit":  "A",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:423 (#define CURRENT_LIMITER_THRESHOLD)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "power_limiter_mode",
+                                                                         "value":  "NONE",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:439 (#define POWER_LIMITER_MODE)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "control",
+                                                                         "key":  "power_limiter_threshold",
+                                                                         "value":  3,
+                                                                         "unit":  "W",
+                                                                         "origin":  "document",
+                                                                         "_source":  {
+                                                                                         "file":  "[æº] include/Customer.h",
+                                                                                         "locator":  "Customer.h:440 (#define POWER_LIMITER_THRESHOLD)"
+                                                                                     }
+                                                                     },
+                                                                     {
+                                                                         "_class":  "header",
+                                                                         "key":  "customer_name",
+                                                                         "value":  "",
+                                                                         "origin":  "suggested"
+                                                                     },
+                                                                     {
+                                                                         "_class":  "header",
+                                                                         "key":  "model",
+                                                                         "value":  "",
+                                                                         "origin":  "suggested"
+                                                                     },
+                                                                     {
+                                                                         "_class":  "header",
+                                                                         "key":  "customer_engineer",
+                                                                         "value":  "",
+                                                                         "origin":  "suggested"
+                                                                     },
+                                                                     {
+                                                                         "_class":  "header",
+                                                                         "key":  "email",
+                                                                         "value":  "",
+                                                                         "origin":  "suggested"
+                                                                     },
+                                                                     {
+                                                                         "_class":  "header",
+                                                                         "key":  "project_name",
+                                                                         "value":  "",
+                                                                         "origin":  "suggested"
+                                                                     },
+                                                                     {
+                                                                         "_class":  "header",
+                                                                         "key":  "phone",
+                                                                         "value":  "",
+                                                                         "origin":  "suggested"
+                                                                     },
+                                                                     {
+                                                                         "_class":  "header",
+                                                                         "key":  "firmware_version",
+                                                                         "value":  "",
+                                                                         "origin":  "suggested"
+                                                                     },
+                                                                     {
+                                                                         "_class":  "header",
+                                                                         "key":  "inlet_start_addr",
+                                                                         "value":  "",
+                                                                         "origin":  "suggested"
+                                                                     },
+                                                                     {
+                                                                         "_class":  "header",
+                                                                         "key":  "bootloader",
+                                                                         "value":  "",
+                                                                         "origin":  "suggested"
+                                                                     },
+                                                                     {
+                                                                         "_class":  "header",
+                                                                         "key":  "outlet_start_addr",
+                                                                         "value":  "",
+                                                                         "origin":  "suggested"
+                                                                     }
+                                                                 ],
+                                          "_counts":  {
+                                                          "attributes":  29,
+                                                          "control":  70,
+                                                          "header":  10
+                                                      },
+                                          "firmware":  {
+                                                           "project_path":  "",
+                                                           "param_header_path":  ""
+                                                       },
+                                          "interlock_instances":  [
+
+                                                                  ],
+                                          "channel_map":  [
+
+                                                          ],
+                                          "_incomplete":  [
+                                                              "firmware.project_path å¾\u0085è¡¥ï¼å®¢æ·å·¥ç¨çå®è·¯å¾å¨å®¢æ·æºå¨ä¸ï¼æªéäº¤ä»å\u0085æä¾",
+                                                              "firmware.param_header_path å¾\u0085è¡¥ï¼åä¸",
+                                                              "interlock_instances å¾\u0085è¡¥ï¼èéå®ä¾ç¶æå¨æµç¨ 4 é¸é¨ä¸è®¾å¤æ¡¥é£è¾¹",
+                                                              "channel_map å¾\u0085è¡¥ï¼ééæ å°å¨æµç¨ 2 çééé\u0085ç½®é"
+                                                          ]
+                                      },
+                          "created_at":  "2026-09-28T11:16:14.765434",
+                          "updated_at":  "2026-09-28T11:16:14.765434"
+                      },
+                      {
+                          "run_id":  "d5c08959241847798ab15884d0ae141a",
+                          "artifact_kind":  "param-change",
+                          "schema":  "param-change/v1",
+                          "content":  {
+                                          "items":  [
+                                                        {
+                                                            "key":  "motor_alignment_dout",
+                                                            "name":  "é¢å®ä½ D è½´è¾åºå¼ºåº¦",
+                                                            "from":  "0.06",
+                                                            "to":  "0.072"
+                                                        }
+                                                    ],
+                                          "count":  1,
+                                          "operator":  "å¼ å·¥",
+                                          "adopted_at":  "2026-09-28T11:20:02.814Z",
+                                          "note":  "éçº³è®°å½ï¼äººå¾éçå»ºè®®å¼ãè¿éåªè®°ãéçº³äºä»ä¹ãï¼ä¸å«ååè®¾å¤çå¨ä½ââååæ¯çº¢çº¿å¨ä½ï¼å¦èµ°ç¡®è®¤å¡ã"
+                                      },
+                          "created_at":  "2026-09-28T11:20:02.856110",
+                          "updated_at":  "2026-09-28T11:20:02.856110"
+                      }
+                  ]
+}

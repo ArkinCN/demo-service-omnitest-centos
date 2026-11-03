@@ -1,0 +1,743 @@
+{
+  "schema": "report-template/v1",
+  "group_tiers": [
+    {
+      "id": "rpt-id",
+      "title": "被测件身份",
+      "groups": [
+        {
+          "id": "rpt-id-all",
+          "title": "机型与固件",
+          "items": [
+            "model",
+            "project_name",
+            "firmware_version"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rpt-addr",
+      "title": "固件位址基线",
+      "groups": [
+        {
+          "id": "rpt-addr-all",
+          "title": "位址与引导",
+          "items": [
+            "inlet_start_addr",
+            "outlet_start_addr",
+            "bootloader"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rpt-to",
+      "title": "交付对象",
+      "groups": [
+        {
+          "id": "rpt-to-org",
+          "title": "客户方",
+          "items": [
+            "customer_name",
+            "customer_engineer"
+          ]
+        },
+        {
+          "id": "rpt-to-contact",
+          "title": "联系方式",
+          "items": [
+            "email",
+            "phone"
+          ]
+        }
+      ]
+    }
+  ],
+  "scene_id": "motor.cooling-fan.fortior-fu6832",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-19",
+  "belongs_to_flow": "F6 测试报告及产出（模板确认、信息确认）",
+  "template_file": "[源] ClientSoftware/Fortior_Motor_Checklist_公用模板_7(1).xlsm",
+  "filled_sample_file": "[源] 测试数据_20260622/report.xlsm",
+  "filler_tool": {
+    "name": "writeFile_rust（Fortior Motor Checklist 自动化填充工具）",
+    "path": "[源] 平台代码/writeFile_rust",
+    "purpose": "用 Rust 替代 VBA 宏，把示波器截图按文件名规则插进模板对应单元格，并从 CSV 读转速数据写进 PWM·VSP 性能测试表，同时保留模板里的 VBA 宏",
+    "cli": "write-file-rust --template <xlsm> --images <dir> [--csv <csv>] --output <xlsm>",
+    "_source": {
+      "file": "[源] writeFile_rust/README.md",
+      "locator": "功能特性 / CLI 参数 / 图片文件名规则 / CSV 格式说明"
+    }
+  },
+  "sheets": [
+    {
+      "name": "測試程式規格表",
+      "max_row": 116,
+      "max_column": 6,
+      "image_count": 0,
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet「測試程式規格表」"
+      }
+    },
+    {
+      "name": "PWM·VSP 性能測試",
+      "max_row": 65,
+      "max_column": 12,
+      "image_count": 0,
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet「PWM·VSP 性能測試」"
+      }
+    },
+    {
+      "name": "LV 測試波型",
+      "max_row": 171,
+      "max_column": 38,
+      "image_count": 35,
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet「LV 測試波型」"
+      }
+    },
+    {
+      "name": "SV 測試波型",
+      "max_row": 171,
+      "max_column": 38,
+      "image_count": 36,
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet「SV 測試波型」"
+      }
+    },
+    {
+      "name": "HV 測試波型",
+      "max_row": 171,
+      "max_column": 38,
+      "image_count": 35,
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet「HV 測試波型」"
+      }
+    },
+    {
+      "name": "HP FCOL 波型",
+      "max_row": 82,
+      "max_column": 38,
+      "image_count": 0,
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet「HP FCOL 波型」"
+      }
+    },
+    {
+      "name": "Dell 電流波型",
+      "max_row": 82,
+      "max_column": 38,
+      "image_count": 0,
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet「Dell 電流波型」"
+      }
+    },
+    {
+      "name": "ON-OFF LV",
+      "max_row": 20,
+      "max_column": 12,
+      "image_count": 0,
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet「ON-OFF LV」"
+      }
+    },
+    {
+      "name": "ON-OFF SV",
+      "max_row": 20,
+      "max_column": 12,
+      "image_count": 0,
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet「ON-OFF SV」"
+      }
+    },
+    {
+      "name": "ON-OFF HV",
+      "max_row": 20,
+      "max_column": 12,
+      "image_count": 0,
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet「ON-OFF HV」"
+      }
+    },
+    {
+      "name": "特殊功能測試項庫",
+      "max_row": 93,
+      "max_column": 5,
+      "image_count": 0,
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet「特殊功能測試項庫」"
+      }
+    }
+  ],
+  "header_fields": [
+    {
+      "key": "customer_name",
+      "name": "客戶名稱",
+      "type": "text",
+      "label_cell": "B4",
+      "value_cell": "C4",
+      "label_text_in_template": "客戶名稱",
+      "filled_in_sample": false,
+      "from_flow": "F6 测试报告及产出",
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet 測試程式規格表 标签格 B4（实测内容 '客戶名稱'）→ 取值格 C4"
+      }
+    },
+    {
+      "key": "model",
+      "name": "Model 机型",
+      "type": "text",
+      "label_cell": "D4",
+      "value_cell": "E4",
+      "label_text_in_template": "Model",
+      "filled_in_sample": false,
+      "from_flow": "F2 初始化配置",
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet 測試程式規格表 标签格 D4（实测内容 'Model'）→ 取值格 E4"
+      }
+    },
+    {
+      "key": "customer_engineer",
+      "name": "客戶工程師",
+      "type": "text",
+      "label_cell": "B5",
+      "value_cell": "C5",
+      "label_text_in_template": "客戶工程師",
+      "filled_in_sample": false,
+      "from_flow": "F6 测试报告及产出",
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet 測試程式規格表 标签格 B5（实测内容 '客戶工程師'）→ 取值格 C5"
+      }
+    },
+    {
+      "key": "email",
+      "name": "Email",
+      "type": "text",
+      "label_cell": "D5",
+      "value_cell": "E5",
+      "label_text_in_template": "Email",
+      "filled_in_sample": false,
+      "from_flow": "F6 测试报告及产出",
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet 測試程式規格表 标签格 D5（实测内容 'Email'）→ 取值格 E5"
+      }
+    },
+    {
+      "key": "project_name",
+      "name": "項目名稱",
+      "type": "text",
+      "label_cell": "B6",
+      "value_cell": "C6",
+      "label_text_in_template": "項目名稱",
+      "filled_in_sample": false,
+      "from_flow": "F2 初始化配置",
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet 測試程式規格表 标签格 B6（实测内容 '項目名稱'）→ 取值格 C6"
+      }
+    },
+    {
+      "key": "phone",
+      "name": "聯繫電話",
+      "type": "text",
+      "label_cell": "D6",
+      "value_cell": "E6",
+      "label_text_in_template": "聯繫電話",
+      "filled_in_sample": false,
+      "from_flow": "F6 测试报告及产出",
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet 測試程式規格表 标签格 D6（实测内容 '聯繫電話'）→ 取值格 E6"
+      }
+    },
+    {
+      "key": "firmware_version",
+      "name": "韌體版本",
+      "type": "text",
+      "label_cell": "B7",
+      "value_cell": "C7",
+      "label_text_in_template": "韌體版本",
+      "filled_in_sample": false,
+      "from_flow": "F2 初始化配置",
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet 測試程式規格表 标签格 B7（实测内容 '韌體版本'）→ 取值格 C7"
+      },
+      "note": "对应 Customer.h 的 PROJECT_VERSION 宏（当前值 24805_Beta_STDCODE）"
+    },
+    {
+      "key": "inlet_start_addr",
+      "name": "Inlet 起始位址",
+      "type": "text",
+      "label_cell": "D7",
+      "value_cell": "E7",
+      "label_text_in_template": "Inlet 起始位址",
+      "filled_in_sample": false,
+      "from_flow": "F2 初始化配置",
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet 測試程式規格表 标签格 D7（实测内容 'Inlet 起始位址'）→ 取值格 E7"
+      }
+    },
+    {
+      "key": "bootloader",
+      "name": "Bootloader",
+      "type": "text",
+      "label_cell": "B8",
+      "value_cell": "C8",
+      "label_text_in_template": "Bootloader",
+      "filled_in_sample": false,
+      "from_flow": "F2 初始化配置",
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet 測試程式規格表 标签格 B8（实测内容 'Bootloader'）→ 取值格 C8"
+      }
+    },
+    {
+      "key": "outlet_start_addr",
+      "name": "Outlet 起始位址",
+      "type": "text",
+      "label_cell": "D8",
+      "value_cell": "E8",
+      "label_text_in_template": "Outlet 起始位址",
+      "filled_in_sample": false,
+      "from_flow": "F2 初始化配置",
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet 測試程式規格表 标签格 D8（实测内容 'Outlet 起始位址'）→ 取值格 E8"
+      }
+    }
+  ],
+  "header_fields_note": "label_cell 是模板里写标签文字的格（B/D 列，灰底 FFE7E6E6），value_cell 才是该填内容的格（C/E 列，黄底 FFFFF2CC）。旧版本的 cell 字段指的是 label_cell，会让前端把值写进标签格，已拆开。filled_in_sample 是 openpyxl 实测已填充样例 report.xlsm 的取值格是否有内容。",
+  "header_filled_count": 0,
+  "spec_sections": [
+    {
+      "section": "一、產品電機參數 Motor Parameters",
+      "rows": "A11:E15",
+      "fields": [
+        "相電阻 Rs (Ω)",
+        "相電感 Ld, Lq",
+        "極對數 (對)",
+        "感應電動勢常數 Ke"
+      ],
+      "from_flow": "F2 初始化配置",
+      "maps_to": "product-attributes.json"
+    },
+    {
+      "section": "二、控制設計 Control Design",
+      "rows": "A16:E26",
+      "fields": [
+        "有無 HALL 感測器",
+        "HALL 個數",
+        "HALL 與 B-EMF 關係",
+        "HALL 類型",
+        "控制方式（方波120°/150°/正弦波/FOC）",
+        "啟動方式（Omega/強拖/混合）",
+        "正/反轉（反轉等待時間）",
+        "控制環方式（Open Loop/Close Loop）",
+        "電路採樣電阻大小 (mΩ)",
+        "電路採樣運放電路倍數"
+      ],
+      "from_flow": "F2 初始化配置",
+      "maps_to": "product-attributes.json / control-parameters.json"
+    },
+    {
+      "section": "三、轉速 Speed",
+      "rows": "A27:E33",
+      "fields": [
+        "風扇轉速規格需求（Inlet/Outlet）",
+        "最大轉速範圍 ±5%",
+        "最低轉速範圍 ±5%",
+        "啟動到全速穩定時間 < 10 s",
+        "高轉到低轉 < 10 s 且不停轉",
+        "低轉到高轉 < 10 s"
+      ],
+      "from_flow": "F3 测试需求确认",
+      "maps_to": "test-requirements.json"
+    },
+    {
+      "section": "四、電壓 Voltage",
+      "rows": "A34:E40",
+      "fields": [
+        "正常啟動電壓值",
+        "最低啟動電壓值",
+        "最高啟動電壓值",
+        "額定/最低/最高運行電壓的 ON/OFF 測試次數要求"
+      ],
+      "from_flow": "F3 测试需求确认",
+      "maps_to": "test-requirements.json"
+    },
+    {
+      "section": "五、調速方式 Speed Control（PWM 或 VSP 择一）",
+      "rows": "A41:E61",
+      "fields": [
+        "PWM 訊號規格 (kHz / Vpp)",
+        "調速 PWM 曲線各點轉速",
+        "最大/最小轉速對應 PWM 百分比",
+        "風扇啟動/關閉 PWM 百分比",
+        "程式 PWM 讀取參數與實際輸入落差",
+        "程式頻寬限制",
+        "99.99%/0.01% 上電功能",
+        "VSP 電壓範圍",
+        "VSP 輸入阻抗",
+        "VSP ADC 取樣精度",
+        "VSP 上下邊界電壓功能"
+      ],
+      "from_flow": "F3 测试需求确认 / F4 启动测试及结果分析",
+      "maps_to": "control-parameters.json / test-requirements.json"
+    },
+    {
+      "section": "六、FG / RD 訊號（择一）",
+      "rows": "A62:E74",
+      "fields": [
+        "FG 訊號規格（電氣 Level、脈波數）",
+        "FG 與實際轉速誤差 < 50 RPM",
+        "FG 停轉時輸出狀態",
+        "上電到 FG 輸出時間",
+        "RD 訊號類型與翻轉等待時間",
+        "Recovery 訊號類型與翻轉等待時間",
+        "RD/Recovery 邏輯配對"
+      ],
+      "from_flow": "F3 测试需求确认",
+      "maps_to": "test-requirements.json"
+    },
+    {
+      "section": "七、保護 Protection",
+      "rows": "A75:E83",
+      "fields": [
+        "啟動保護（秒內重啟）",
+        "堵轉保護（秒內重啟）",
+        "過壓保護 (V)",
+        "欠壓保護 (V)",
+        "過壓 Recover (V)",
+        "欠壓 Recover (V)",
+        "斷電偵測功能",
+        "過流保護（硬過流/軟過流）"
+      ],
+      "from_flow": "F4 启动测试及结果分析",
+      "maps_to": "safety-interlocks.json"
+    },
+    {
+      "section": "八、順逆風功能 Windmilling",
+      "rows": "A84:E91",
+      "fields": [
+        "順風最高轉速",
+        "逆風最高轉速",
+        "順風其他轉速確認",
+        "逆風其他轉速確認",
+        "順風相電壓電流過衝",
+        "逆風相電壓電流過衝",
+        "順逆風強制退出確認"
+      ],
+      "from_flow": "F4 启动测试及结果分析",
+      "maps_to": "test-requirements.json"
+    },
+    {
+      "section": "九、其他必須測試功能",
+      "rows": "A92:E96",
+      "fields": [
+        "啟動到穩態母線 Peak 電流 ≤ 穩態電流 1.1 倍",
+        "每 10% PWM 轉速跳變時間",
+        "PWM 100%→最低運行 Duty 不停轉",
+        "速度外環最小值非負，最大工作電壓下最低速運行 5 分鐘"
+      ],
+      "from_flow": "F4 启动测试及结果分析",
+      "maps_to": "test-requirements.json"
+    },
+    {
+      "section": "十、其他特殊需求（參考「特殊功能測試項庫」分頁）",
+      "rows": "A97:E116",
+      "fields": [
+        "假轉速 (FG 虛擬輸出) 及對應曲線",
+        "預定位時 PWM/VSP 為 0",
+        "煞車功能等"
+      ],
+      "from_flow": "F3 测试需求确认",
+      "maps_to": "control-parameters.json"
+    }
+  ],
+  "performance_table": {
+    "sheet": "PWM·VSP 性能測試",
+    "pass_condition": [
+      {
+        "key": "rpm_error",
+        "text": "RPM 誤差 ≤ ±5%",
+        "maps_to": "test-requirements.json#TR-PWM-01.threshold.rpm_error_pct_max"
+      },
+      {
+        "key": "overshoot",
+        "text": "過衝 (%) ≤ 10%",
+        "maps_to": "test-requirements.json#TR-PWM-01.threshold.overshoot_pct_max"
+      },
+      {
+        "key": "steady_current",
+        "text": "穩態電流 ≤ 穩態上限（F 列 ≤ H 列，逐档比较）",
+        "maps_to": "test-requirements.json#TR-PWM-01.criterion 的 steady_current_over_limit_count === 0"
+      }
+    ],
+    "pass_condition_source_text": "※ 通過條件：RPM 誤差 ≤ ±5%  |  過衝 (%) ≤ 10%  |  穩態電流 ≤ 穩態上限",
+    "unit_conversion_note": "E / F / H / I 四列的 CSV 单位与 Excel 表头单位不一致：电流列 CSV 给安培、表头写毫安（×1000），加速时间 CSV 给毫秒、表头写秒（÷1000）。writeFile_rust 把 CSV 数值原样写入，没有做这一步换算——这是上游工具与模板之间的矛盾，本包如实登记 csv_unit / sheet_unit / scale_factor，不替上游决定谁对。README 第七节已把它列为上游缺口。",
+    "auto_fill_note": "auto_filled_by_tool 为 true 的只有 C / E / F / H / I 五列，来自 excel_writer.rs:160-163 的列映射注释与其后五次 set_value_number；D、G 是表内公式列；A、B、J 工具不写。另有 K 列「虛擬 FG 讀取（FG 實測 RPM）」存在于 report.xlsm 的 K8，既不在 writeFile_rust 的写入集合里，也不在本 columns 数组里，属未登记列。",
+    "duty_rows": {
+      "start_row": 9,
+      "step_pct": 10,
+      "points": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80,
+        90,
+        100
+      ]
+    },
+    "regions": [
+      "Inlet",
+      "Outlet"
+    ],
+    "columns": [
+      {
+        "col": "A",
+        "cell": "A8",
+        "key": "duty_or_vsp",
+        "name": "PWM% / VSP V",
+        "csv_index": 0,
+        "csv_name": "PWM%",
+        "csv_unit": "%",
+        "sheet_unit": "% 或 V",
+        "scale_factor": 1.0,
+        "auto_filled_by_tool": false,
+        "note": "档位列，模板里已预置 0~100 十一档，工具不写"
+      },
+      {
+        "col": "B",
+        "cell": "B8",
+        "key": "target_rpm",
+        "name": "Target RPM",
+        "csv_index": 1,
+        "csv_name": "Target RPM",
+        "csv_unit": "RPM",
+        "sheet_unit": "RPM",
+        "scale_factor": 1.0,
+        "auto_filled_by_tool": false,
+        "note": "CSV 里有这一列，但 excel_writer.rs 不写 B 列，需人工或另行填入"
+      },
+      {
+        "col": "C",
+        "cell": "C8",
+        "key": "real_rpm",
+        "name": "Real RPM",
+        "csv_index": 2,
+        "csv_name": "Real RPM",
+        "csv_unit": "RPM",
+        "sheet_unit": "RPM",
+        "scale_factor": 1.0,
+        "auto_filled_by_tool": true
+      },
+      {
+        "col": "D",
+        "cell": "D8",
+        "key": "rpm_error_pct",
+        "name": "RPM 誤差 (%)",
+        "csv_index": null,
+        "csv_name": null,
+        "csv_unit": null,
+        "sheet_unit": "%",
+        "scale_factor": 1.0,
+        "auto_filled_by_tool": false,
+        "note": "表内公式列，工具不写"
+      },
+      {
+        "col": "E",
+        "cell": "E8",
+        "key": "max_current_ma",
+        "name": "Max 電流 (mA)",
+        "csv_index": 3,
+        "csv_name": "Max Current",
+        "csv_unit": "A",
+        "sheet_unit": "mA",
+        "scale_factor": 1000.0,
+        "auto_filled_by_tool": true,
+        "note": "上游矛盾：writeFile_rust 把 CSV 数值原样 set_value_number 进单元格，没有做这一步换算，填出来的数比表头单位小 / 大 1000 倍"
+      },
+      {
+        "col": "F",
+        "cell": "F8",
+        "key": "steady_current_ma",
+        "name": "穩態電流 (mA)",
+        "csv_index": 4,
+        "csv_name": "Steady Current",
+        "csv_unit": "A",
+        "sheet_unit": "mA",
+        "scale_factor": 1000.0,
+        "auto_filled_by_tool": true,
+        "note": "上游矛盾：writeFile_rust 把 CSV 数值原样 set_value_number 进单元格，没有做这一步换算，填出来的数比表头单位小 / 大 1000 倍"
+      },
+      {
+        "col": "G",
+        "cell": "G8",
+        "key": "overshoot_pct",
+        "name": "過衝 (%)",
+        "csv_index": 5,
+        "csv_name": "Overshoot%",
+        "csv_unit": "%",
+        "sheet_unit": "%",
+        "scale_factor": 1.0,
+        "auto_filled_by_tool": false,
+        "note": "表内公式列，工具不写；CSV 第 5 列虽有过冲数值也不会被写入"
+      },
+      {
+        "col": "H",
+        "cell": "H8",
+        "key": "steady_limit_ma",
+        "name": "穩態上限 (mA)",
+        "csv_index": 6,
+        "csv_name": "Steady Limit",
+        "csv_unit": "A",
+        "sheet_unit": "mA",
+        "scale_factor": 1000.0,
+        "auto_filled_by_tool": true,
+        "note": "上游矛盾：writeFile_rust 把 CSV 数值原样 set_value_number 进单元格，没有做这一步换算，填出来的数比表头单位小 / 大 1000 倍"
+      },
+      {
+        "col": "I",
+        "cell": "I8",
+        "key": "accel_time_s",
+        "name": "加速時間 (s)",
+        "csv_index": 7,
+        "csv_name": "Accel Time",
+        "csv_unit": "ms",
+        "sheet_unit": "s",
+        "scale_factor": 0.001,
+        "auto_filled_by_tool": true,
+        "note": "上游矛盾：writeFile_rust 把 CSV 数值原样 set_value_number 进单元格，没有做这一步换算，填出来的数比表头单位小 / 大 1000 倍"
+      },
+      {
+        "col": "J",
+        "cell": "J8",
+        "key": "fake_fg_target_rpm",
+        "name": "虛擬 FG 目標（假轉速設計 RPM）",
+        "csv_index": null,
+        "csv_name": null,
+        "csv_unit": null,
+        "sheet_unit": "RPM",
+        "scale_factor": 1.0,
+        "auto_filled_by_tool": false,
+        "note": "人工填写，工具不写"
+      }
+    ],
+    "_source": [
+      {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet PWM·VSP 性能測試 A3 通過條件、A8:J8 表头、A9 起档位行"
+      },
+      {
+        "file": "[源] writeFile_rust/README.md",
+        "locator": "「CSV 格式说明 · 列定义」8 列表（README.md:143-152）"
+      },
+      {
+        "file": "[源] src/excel_writer.rs",
+        "locator": "excel_writer.rs:160-163 列映射注释与其后的 set_value_number 调用，实测只写 C/E/F/H/I 五列（第 170 行起）"
+      }
+    ]
+  },
+  "waveform_image_slots": {
+    "sheets_by_voltage": {
+      "LV": "LV 測試波型",
+      "SV": "SV 測試波型",
+      "HV": "HV 測試波型"
+    },
+    "filename_rules": [
+      {
+        "pattern": "Duty_{PWM}_Start_{Voltage}.{ext}",
+        "meaning": "静止启动测试",
+        "example": "Duty_50_Start_SV.png"
+      },
+      {
+        "pattern": "Duty_{From}t{To}_{Voltage}.{ext}",
+        "meaning": "加速/减速测试（To > From 为加速，To < From 为减速）",
+        "example": "Duty_0t10_SV.png"
+      },
+      {
+        "pattern": "Lock_{Voltage}.{ext}",
+        "meaning": "堵转测试"
+      },
+      {
+        "pattern": "HSPtLSP_{Voltage}.{ext}",
+        "meaning": "高速切低速（100% 降至 0%）"
+      },
+      {
+        "pattern": "HSP_BLow_{Voltage}.{ext}",
+        "meaning": "高速制动（快速关开）"
+      },
+      {
+        "pattern": "LSPtHSP_{Voltage}.{ext}",
+        "meaning": "低速切高速（0% 升至 100%）"
+      }
+    ],
+    "supported_formats": [
+      "BMP",
+      "PNG",
+      "JPG",
+      "JPEG"
+    ],
+    "counted_images": {
+      "LV 測試波型": 35,
+      "SV 測試波型": 36,
+      "HV 測試波型": 35
+    },
+    "_source": [
+      {
+        "file": "[源] writeFile_rust/README.md",
+        "locator": "「图片文件名规则」与「电压等级」两节"
+      },
+      {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "各波型分页的内嵌图片计数（openpyxl ws._images）"
+      }
+    ]
+  },
+  "other_sheets": [
+    {
+      "name": "HP FCOL 波型",
+      "from_flow": "F4 启动测试及结果分析",
+      "note": "HP-FCOL 专用功能波形，对应 Customer.h 的 HPFCOL_* 宏族（当前 HPFCOL_ENABLED=0）"
+    },
+    {
+      "name": "Dell 電流波型",
+      "from_flow": "F4 启动测试及结果分析",
+      "note": "Dell-CoastMode 专用波形，对应 DELL_COASTMODE_* 宏族（当前禁用）"
+    },
+    {
+      "name": "ON-OFF LV / ON-OFF SV / ON-OFF HV",
+      "from_flow": "F4 启动测试及结果分析",
+      "note": "三档电压的 ON/OFF 次数回归结果，次数要求在模板里仍是待确认项"
+    },
+    {
+      "name": "特殊功能測試項庫",
+      "from_flow": "F3 测试需求确认",
+      "note": "第十节「其他特殊需求」的选项库"
+    }
+  ]
+}

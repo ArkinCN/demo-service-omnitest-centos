@@ -1,0 +1,8 @@
+model: value='' type=str _class='header' unit=None
+project_name: value='' type=str _class='header' unit=None
+firmware_version: value='' type=str _class='header' unit=None
+inlet_start_addr: value='' type=str _class='header' unit=None
+bootloader: value='' type=str _class='header' unit=None
+outlet_start_addr: value='' type=str _class='header' unit=None
+
+Counts: {'attributes': 29, 'control': 70, 'header': 10}

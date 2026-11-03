@@ -1,0 +1,48 @@
+# 行尾与差异口径统一（2026-10-29 加）
+#
+# 背景：本仓库同时存在 Windows 与 Linux 两条线，且 Windows 侧 core.autocrlf=true。
+# 两侧对同一批 CSV/代码的行尾（CRLF vs LF）不一致，导致 `git diff` 出现
+# "39 万行改动"的假象（单个波形 CSV 就有 24001 行），真实业务改动被淹没，
+# 逐文件三方合并时也会整文件冲突。本文件是这类噪声的结构性修复。
+#
+# 口径：
+#   1. 文本类一律 `text=auto`——仓库内统一存 LF，检出时按各机器 core.autocrlf 决定
+#      工作区行尾（Windows 得 CRLF、Linux 得 LF），因此不会出现"检出即显示已修改"。
+#   2. 波形/采数 CSV 标记 `-diff`：纯数值序列，体积大、无评审价值，
+#      diff 时不再展开成几万行（改为「二进制不同」），真实业务 diff 才看得见。
+#      注意：这**不影响提交内容**，只是不再逐行展示。
+#   3. 二进制资产显式声明，避免被当成文本做行尾转换而损坏。
+
+* text=auto
+
+# ── 数据导出（波形/采数/清单）：不参与逐行 diff ──
+# 本仓库 24 个 CSV 全部是数值序列或数据导出（web/public、data/scenes、
+# components/timeseries、dsh-plugins/data、docs 下的清单），没有手写源码型 CSV。
+# -diff 只影响 diff 展示（显示为「二进制不同」），提交内容与文件本人都照旧可查。
+*.csv -diff
+
+# ── 二进制资产 ──
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.xlsm binary
+*.xlsx binary
+*.pdf binary
+*.zip binary
+
+# ── 文本类（显式声明，避免被上级规则误判）──
+*.ts text
+*.tsx text
+*.js text
+*.mjs text
+*.py text
+*.json text
+*.md text
+*.css text
+*.yml text
+*.yaml text
+*.sh text

@@ -1,0 +1,1734 @@
+{
+  "schema": "control-parameters/v1",
+  "scene_id": "motor.cooling-fan.fortior-fu6832",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-19",
+  "belongs_to_flow": "主放 F4 启动测试及结果分析 / F5 调优确认及运行；使能类开关在 F2 初始化配置确认",
+  "groups": [
+    "启动",
+    "预定位",
+    "观测器",
+    "电流环 PI",
+    "速度外环 PI",
+    "限幅",
+    "载波与死区",
+    "调速",
+    "顺逆风",
+    "限流限功率"
+  ],
+  "demo_profile": {
+    "note": "演示模式暴露 12 项控制参数，集中在启动与预定位两组——主线要动的是预定位 D 轴输出强度。全量模式下 70 项照旧。",
+    "groups": [
+      "启动",
+      "预定位",
+      "调速",
+      "顺逆风",
+      "载波与死区"
+    ],
+    "parameters": [
+      "motor_start_mode",
+      "motor_start_iq_current",
+      "motor_loop_rpm",
+      "motor_start_times",
+      "motor_open_acc",
+      "motor_align_enabled",
+      "motor_alignment_dout",
+      "motor_alignment_times",
+      "motor_alignment_degrees",
+      "speed_mode",
+      "nonemode_speed",
+      "motor_tailwind_enabled"
+    ]
+  },
+  "group_tiers": [
+    {
+      "id": "ctl-start",
+      "title": "启动与预定位",
+      "groups": [
+        {
+          "id": "ctl-start-main",
+          "title": "启动",
+          "members": [
+            "启动"
+          ],
+          "subgroups": [
+            {
+              "id": "ctl-start-seq",
+              "title": "模式与时序",
+              "items": [
+                "motor_start_mode",
+                "motor_start_times",
+                "motor_open_acc_cnt",
+                "motor_loop_rpm",
+                "motor_min_smo_speed"
+              ]
+            },
+            {
+              "id": "ctl-start-i",
+              "title": "电流与增益",
+              "items": [
+                "motor_start_iq_current",
+                "motor_open_acc",
+                "motor_omega_ramp_acc",
+                "motor_omega_acc_min",
+                "motor_omega_acc_end"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ctl-align",
+          "title": "预定位",
+          "members": [
+            "预定位"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ctl-loop",
+      "title": "闭环与整定",
+      "groups": [
+        {
+          "id": "ctl-obs",
+          "title": "观测器",
+          "members": [
+            "观测器"
+          ],
+          "subgroups": [
+            {
+              "id": "ctl-obs-run",
+              "title": "运行段带宽",
+              "items": [
+                "ato_bw_run",
+                "ato_bw_run1",
+                "ato_bw_run2",
+                "ato_bw_run3",
+                "ato_bw_run4"
+              ]
+            },
+            {
+              "id": "ctl-obs-fix",
+              "title": "启动段与滤波",
+              "items": [
+                "ato_bw",
+                "spd_bw",
+                "smothecomp_degrees"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ctl-pi-i",
+          "title": "电流环 PI",
+          "members": [
+            "电流环 PI"
+          ]
+        },
+        {
+          "id": "ctl-pi-s",
+          "title": "速度外环 PI",
+          "members": [
+            "速度外环 PI"
+          ],
+          "subgroups": [
+            {
+              "id": "ctl-pi-s-gain",
+              "title": "PID 增益",
+              "items": [
+                "speed_kp",
+                "speed_ki",
+                "speed_kd"
+              ]
+            },
+            {
+              "id": "ctl-pi-s-clamp",
+              "title": "使能与幅值",
+              "items": [
+                "outloop_enabled",
+                "sout_min",
+                "sout_max"
+              ]
+            },
+            {
+              "id": "ctl-pi-s-ramp",
+              "title": "刷新与加加速",
+              "items": [
+                "speed_refresh_times",
+                "speed_jerk_times",
+                "speed_jerk_max_value",
+                "speed_dec"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ctl-clamp",
+          "title": "限幅",
+          "members": [
+            "限幅"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ctl-run",
+      "title": "运行与保护",
+      "groups": [
+        {
+          "id": "ctl-pwm",
+          "title": "载波与死区",
+          "members": [
+            "载波与死区"
+          ],
+          "subgroups": [
+            {
+              "id": "ctl-pwm-t",
+              "title": "载波与死区时间",
+              "items": [
+                "pwm_frequency",
+                "pwm_deadtime",
+                "pwm_dt_offset",
+                "pwm_min_width"
+              ]
+            },
+            {
+              "id": "ctl-pwm-m",
+              "title": "采样与调制",
+              "items": [
+                "trgdly_position",
+                "svpwm_mode"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ctl-speed",
+          "title": "调速",
+          "members": [
+            "调速"
+          ]
+        },
+        {
+          "id": "ctl-wind",
+          "title": "顺逆风",
+          "members": [
+            "顺逆风"
+          ],
+          "subgroups": [
+            {
+              "id": "ctl-wind-det",
+              "title": "检测与使能",
+              "items": [
+                "motor_tailwind_enabled",
+                "motor_tailwind_detect_min_speed",
+                "motor_tailwind_detect_times",
+                "headwind_lowspeed_threshold"
+              ]
+            },
+            {
+              "id": "ctl-wind-tail",
+              "title": "顺风启动",
+              "items": [
+                "tailwind_dqkp",
+                "tailwind_dqki",
+                "tailwind_start_uq",
+                "tailwind_start_iq_current",
+                "tailwind_start_angle"
+              ]
+            },
+            {
+              "id": "ctl-wind-head",
+              "title": "逆风制动",
+              "items": [
+                "headwind_brake_time_base",
+                "headwind_alignment_times",
+                "headwind_alignment_dout",
+                "headwind_start_iq_current"
+              ]
+            },
+            {
+              "id": "ctl-wind-rev",
+              "title": "逆转启动",
+              "items": [
+                "iq_brake_start_speed",
+                "iq_brake_dqkp",
+                "iq_brake_dqki",
+                "iq_brake_start_degrees"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ctl-limit",
+          "title": "限流限功率",
+          "members": [
+            "限流限功率"
+          ]
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "全部取值与范围来自本地可达的 Customer.h（41 KB，202 条 #define）与 25 份 dc-skills 规程，不来自记忆。min/max/step 优先用源文件行尾 [範圍: a ~ b] 注释；源文件没给范围的，note 字段写明是推定区间。",
+    "value_shell 字段保留源文件的数值外壳（I_Value / _Q12 / _Q15），回写 Customer.h 时必须沿用原外壳，只改括号内数字。",
+    "枚举型参数（带 options 数组）与缺口型参数不适用 min/max/step，这三个字段一律为 null，前端应渲染成下拉选择而不是加减号。",
+    "range_estimated: true 表示该项的 min/max 是本包推定的，Customer.h 行尾没有 [範圍: a ~ b] 注释。",
+    "value_below_min: true 表示实配值低于源注释自己写的下限，属源材料自身不一致，本包按原样登记未做修正，前端要显式标出。"
+  ],
+  "parameters": [
+    {
+      "key": "motor_start_mode",
+      "name": "启动模式",
+      "value": "OPEN_OMEGA_START",
+      "default": "OPEN_OMEGA_START",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "group": "启动",
+      "adjustable_in_flows": [
+        "F2 初始化配置",
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "options": [
+        {
+          "value": "OPEN_OMEGA_START",
+          "label": "Omega 强拖启动"
+        },
+        {
+          "value": "SQUARE_START",
+          "label": "方波启动（实验性功能）"
+        }
+      ],
+      "note": "枚举型参数，取值集合见 options；min/max/step 不适用",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:119 (#define MOTOR_START_MODE)"
+      }
+    },
+    {
+      "key": "motor_start_iq_current",
+      "name": "启动电流（启动阶段 Q 轴电流）",
+      "value": 1.3,
+      "default": 1.3,
+      "unit": "A",
+      "min": 0.1,
+      "max": 20.0,
+      "step": 0.1,
+      "group": "启动",
+      "adjustable_in_flows": [
+        "F4 启动测试及结果分析",
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "I_Value(x)",
+      "note": "范围 0.1~20 A 取自 coolingfan-openloop-debug 规程 inputs 映射表；分诊动作：过流 −20%，起不来 +0.1~0.2 A",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:143 (#define MOTOR_START_IQ_CURRENT)"
+      }
+    },
+    {
+      "key": "motor_loop_rpm",
+      "name": "进入闭环转速（FOC 切换转速）",
+      "value": 900,
+      "default": 900,
+      "unit": "RPM",
+      "min": 500,
+      "max": 2000,
+      "step": 10,
+      "group": "启动",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "Customer.h 注释：Open-Omega 启动操作范围 500~2000；方波启动为 100~800。规程口径为「只读记录，仅切闭环失败分诊命中时才动，幅度 ±20%」",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:139 (#define MOTOR_LOOP_RPM)"
+      }
+    },
+    {
+      "key": "motor_min_smo_speed",
+      "name": "SMO 最小估算转速",
+      "value": 900,
+      "default": 900,
+      "unit": "RPM",
+      "min": 100,
+      "max": 5000,
+      "step": 10,
+      "group": "启动",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:153 (#define MOTOR_MIN_SMO_SPEED)"
+      }
+    },
+    {
+      "key": "motor_start_dqkp",
+      "name": "启动阶段 DQ 轴 PID Kp（DKP）",
+      "value": 1.0,
+      "default": 1.0,
+      "unit": null,
+      "min": 0.0,
+      "max": 7.0,
+      "step": 0.1,
+      "group": "电流环 PI",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q12(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:141 (#define MOTOR_START_DQKP)"
+      }
+    },
+    {
+      "key": "motor_start_dqki",
+      "name": "启动阶段 DQ 轴 PID Ki（DKI）",
+      "value": 0.01,
+      "default": 0.01,
+      "unit": null,
+      "min": 0.0,
+      "max": 0.999,
+      "step": 0.005,
+      "group": "电流环 PI",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q15(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:142 (#define MOTOR_START_DQKI)"
+      }
+    },
+    {
+      "key": "motor_start_times",
+      "name": "启动 ATO 运行时间",
+      "value": 700,
+      "default": 700,
+      "unit": "ms",
+      "min": 700,
+      "max": 2500,
+      "step": 50,
+      "group": "启动",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:145 (#define MOTOR_START_TIMES)"
+      }
+    },
+    {
+      "key": "motor_open_acc",
+      "name": "强拖启动增量",
+      "value": 0.009,
+      "default": 0.009,
+      "unit": null,
+      "min": 0.0,
+      "max": 0.1,
+      "step": 0.001,
+      "group": "启动",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q15(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:132 (#define MOTOR_OPEN_ACC)"
+      }
+    },
+    {
+      "key": "motor_open_acc_cnt",
+      "name": "强拖启动执行次数",
+      "value": 65,
+      "default": 65,
+      "unit": "次",
+      "min": 1,
+      "max": 500,
+      "step": 1,
+      "group": "启动",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:134 (#define MOTOR_OPEN_ACC_CNT)"
+      }
+    },
+    {
+      "key": "motor_omega_ramp_acc",
+      "name": "Omega 启动增量",
+      "value": 2,
+      "default": 2,
+      "unit": null,
+      "min": 1,
+      "max": 50,
+      "step": 1,
+      "group": "启动",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:135 (#define MOTOR_OMEGA_RAMP_ACC)"
+      }
+    },
+    {
+      "key": "motor_omega_acc_min",
+      "name": "Omega 启动最低数值",
+      "value": 0.015,
+      "default": 0.015,
+      "unit": null,
+      "min": 0.0,
+      "max": 0.5,
+      "step": 0.001,
+      "group": "启动",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q15(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:136 (#define MOTOR_OMEGA_ACC_MIN)"
+      }
+    },
+    {
+      "key": "motor_omega_acc_end",
+      "name": "Omega 启动限制数值",
+      "value": 0.035,
+      "default": 0.035,
+      "unit": null,
+      "min": 0.0,
+      "max": 0.5,
+      "step": 0.001,
+      "group": "启动",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q15(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:137 (#define MOTOR_OMEGA_ACC_END)"
+      }
+    },
+    {
+      "key": "motor_align_enabled",
+      "name": "预定位使能",
+      "value": 1,
+      "default": 1,
+      "unit": null,
+      "min": 0,
+      "max": 1,
+      "step": 1,
+      "group": "预定位",
+      "adjustable_in_flows": [
+        "F2 初始化配置",
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:102 (#define MOTOR_ALIGN_ENABLED)"
+      }
+    },
+    {
+      "key": "motor_alignment_dout",
+      "name": "预定位 D 轴输出强度",
+      "value": 0.06,
+      "default": 0.06,
+      "unit": null,
+      "min": 0.01,
+      "max": 0.4,
+      "step": 0.01,
+      "group": "预定位",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q15(x)",
+      "note": "98 次启动故障实验注入的就是本参数偏弱（align_weak）",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:104 (#define MOTOR_ALIGNMENT_DOUT)"
+      }
+    },
+    {
+      "key": "motor_alignment_degrees",
+      "name": "预定位角度",
+      "value": 50.0,
+      "default": 50.0,
+      "unit": "度",
+      "min": -60.0,
+      "max": 60.0,
+      "step": 1.0,
+      "group": "预定位",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:105 (#define MOTOR_ALIGNMENT_DEGREES)"
+      }
+    },
+    {
+      "key": "motor_alignment_times",
+      "name": "预定位时间",
+      "value": 450,
+      "default": 450,
+      "unit": "ms",
+      "min": 300,
+      "max": 2000,
+      "step": 10,
+      "group": "预定位",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:106 (#define MOTOR_ALIGNMENT_TIMES)"
+      }
+    },
+    {
+      "key": "ato_bw",
+      "name": "角度观测器带宽 ATO_BW",
+      "value": 20.0,
+      "default": 20.0,
+      "unit": null,
+      "min": 5.0,
+      "max": 100.0,
+      "step": 1.0,
+      "group": "观测器",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "Customer.h 未给 ATO_BW 的范围注释；min/max 借 SPD_BW 的 [5 ~ 40] 并放宽到 100 覆盖 ATO_BW_RUN1~4 的实配值（30/53/65/65），属推定区间",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:147 (#define ATO_BW)"
+      }
+    },
+    {
+      "key": "ato_bw_run",
+      "name": "运行段观测器带宽 ATO_BW_RUN",
+      "value": 20.0,
+      "default": 20.0,
+      "unit": null,
+      "min": 5.0,
+      "max": 100.0,
+      "step": 1.0,
+      "group": "观测器",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:148 (#define ATO_BW_RUN)"
+      }
+    },
+    {
+      "key": "ato_bw_run1",
+      "name": "运行段观测器带宽 1",
+      "value": 30.0,
+      "default": 30.0,
+      "unit": null,
+      "min": 5.0,
+      "max": 100.0,
+      "step": 1.0,
+      "group": "观测器",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:149 (#define ATO_BW_RUN1)"
+      }
+    },
+    {
+      "key": "ato_bw_run2",
+      "name": "运行段观测器带宽 2",
+      "value": 53.0,
+      "default": 53.0,
+      "unit": null,
+      "min": 5.0,
+      "max": 100.0,
+      "step": 1.0,
+      "group": "观测器",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:150 (#define ATO_BW_RUN2)"
+      }
+    },
+    {
+      "key": "ato_bw_run3",
+      "name": "运行段观测器带宽 3",
+      "value": 65.0,
+      "default": 65.0,
+      "unit": null,
+      "min": 5.0,
+      "max": 100.0,
+      "step": 1.0,
+      "group": "观测器",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:151 (#define ATO_BW_RUN3)"
+      }
+    },
+    {
+      "key": "ato_bw_run4",
+      "name": "运行段观测器带宽 4",
+      "value": 65.0,
+      "default": 65.0,
+      "unit": null,
+      "min": 5.0,
+      "max": 100.0,
+      "step": 1.0,
+      "group": "观测器",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:152 (#define ATO_BW_RUN4)"
+      }
+    },
+    {
+      "key": "spd_bw",
+      "name": "速度带宽滤波 SPD_BW",
+      "value": 20.0,
+      "default": 20.0,
+      "unit": null,
+      "min": 5.0,
+      "max": 40.0,
+      "step": 1.0,
+      "group": "观测器",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:146 (#define SPD_BW)"
+      }
+    },
+    {
+      "key": "smothecomp_degrees",
+      "name": "SMO 估算器角度补偿量",
+      "value": 5.0,
+      "default": 5.0,
+      "unit": "度",
+      "min": -30.0,
+      "max": 30.0,
+      "step": 0.5,
+      "group": "观测器",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "仅 SMOTHECOMP_ENABLED = 1 时生效，当前为 0",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:79 (#define SMOTHECOMP_DEGREES)"
+      }
+    },
+    {
+      "key": "motor_run_dqkp",
+      "name": "运行阶段 DQ 轴 PID Kp（DKP）",
+      "value": 0.8,
+      "default": 0.8,
+      "unit": null,
+      "min": 0.0,
+      "max": 7.0,
+      "step": 0.1,
+      "group": "电流环 PI",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q12(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:155 (#define MOTOR_RUN_DQKP)"
+      }
+    },
+    {
+      "key": "motor_run_dqki",
+      "name": "运行阶段 DQ 轴 PID Ki（DKI）",
+      "value": 0.01,
+      "default": 0.01,
+      "unit": null,
+      "min": 0.0,
+      "max": 0.999,
+      "step": 0.005,
+      "group": "电流环 PI",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q15(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:156 (#define MOTOR_RUN_DQKI)"
+      }
+    },
+    {
+      "key": "motor_run_iq_current",
+      "name": "运行阶段 Q 轴初始电流",
+      "value": 0.6,
+      "default": 0.6,
+      "unit": "A",
+      "min": 0.1,
+      "max": 10.0,
+      "step": 0.1,
+      "group": "电流环 PI",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "I_Value(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:157 (#define MOTOR_RUN_IQ_CURRENT)"
+      }
+    },
+    {
+      "key": "dout_max",
+      "name": "运行 D 轴最大幅值",
+      "value": 0.98,
+      "default": 0.98,
+      "unit": null,
+      "min": 0.2,
+      "max": 0.999,
+      "step": 0.01,
+      "group": "限幅",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q15(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:159 (#define DOUT_MAX)"
+      }
+    },
+    {
+      "key": "qout_max",
+      "name": "运行 Q 轴最大幅值",
+      "value": 0.98,
+      "default": 0.98,
+      "unit": null,
+      "min": 0.2,
+      "max": 0.999,
+      "step": 0.01,
+      "group": "限幅",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q15(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:160 (#define QOUT_MAX)"
+      }
+    },
+    {
+      "key": "outloop_enabled",
+      "name": "外环控制使能",
+      "value": 1,
+      "default": 1,
+      "unit": null,
+      "min": 0,
+      "max": 1,
+      "step": 1,
+      "group": "速度外环 PI",
+      "adjustable_in_flows": [
+        "F2 初始化配置",
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:175 (#define OUTLOOP_ENABLED)"
+      }
+    },
+    {
+      "key": "speed_kp",
+      "name": "速度环 PID Kp（SKP）",
+      "value": 0.8,
+      "default": 0.8,
+      "unit": null,
+      "min": 0.0,
+      "max": 6.999,
+      "step": 0.1,
+      "group": "速度外环 PI",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q12(x)",
+      "note": "规程分诊：稳态转速振荡（3 次极差 > 3%）时 SKP −20%，一次只动一项",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:188 (#define SPEED_KP)"
+      }
+    },
+    {
+      "key": "speed_ki",
+      "name": "速度环 PID Ki（SKI）",
+      "value": 0.015,
+      "default": 0.015,
+      "unit": null,
+      "min": 0.0,
+      "max": 0.999,
+      "step": 0.005,
+      "group": "速度外环 PI",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q15(x)",
+      "note": "规程分诊：稳态转速偏差超容限但稳定时 SKI +20%",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:189 (#define SPEED_KI)"
+      }
+    },
+    {
+      "key": "speed_kd",
+      "name": "速度环 PID Kd",
+      "value": 0.004,
+      "default": 0.004,
+      "unit": null,
+      "min": 0.0,
+      "max": 0.999,
+      "step": 0.001,
+      "group": "速度外环 PI",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q15(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:190 (#define SPEED_KD)"
+      }
+    },
+    {
+      "key": "sout_min",
+      "name": "速度环 PID 幅值下限",
+      "value": 0.1,
+      "default": 0.1,
+      "unit": "A",
+      "min": 0.0,
+      "max": 10.0,
+      "step": 0.1,
+      "group": "速度外环 PI",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "I_Value(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:193 (#define SOUT_MIN)"
+      }
+    },
+    {
+      "key": "sout_max",
+      "name": "速度环 PID 幅值上限",
+      "value": 10.0,
+      "default": 10.0,
+      "unit": "A",
+      "min": 0.1,
+      "max": 20.0,
+      "step": 0.1,
+      "group": "速度外环 PI",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "I_Value(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:194 (#define SOUT_MAX)"
+      }
+    },
+    {
+      "key": "speed_refresh_times",
+      "name": "转速侦测刷新时间（外环周期 LOOP_TIME 对应项）",
+      "value": 15,
+      "default": 15,
+      "unit": "ms",
+      "min": 5,
+      "max": 200,
+      "step": 1,
+      "group": "速度外环 PI",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "吸尘器规程里的 LOOP_TIME 在本散热风扇工程对应 SPEED_REFRESH_TIMES；本工程无 LOOP_TIME 宏",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:176 (#define SPEED_REFRESH_TIMES)"
+      }
+    },
+    {
+      "key": "speed_jerk_times",
+      "name": "加加速执行时间",
+      "value": 400,
+      "default": 400,
+      "unit": "ms",
+      "min": 100,
+      "max": 1000,
+      "step": 10,
+      "group": "速度外环 PI",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:177 (#define SPEED_JERK_TIMES)"
+      }
+    },
+    {
+      "key": "speed_jerk_max_value",
+      "name": "加加速最大增量",
+      "value": 80,
+      "default": 80,
+      "unit": null,
+      "min": 10,
+      "max": 120,
+      "step": 1,
+      "group": "速度外环 PI",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:178 (#define SPEED_JERK_MAX_VALUE)"
+      }
+    },
+    {
+      "key": "speed_dec",
+      "name": "速度环递减量",
+      "value": 20,
+      "default": 20,
+      "unit": null,
+      "min": 1,
+      "max": 120,
+      "step": 1,
+      "group": "速度外环 PI",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:179 (#define SPEED_DEC)"
+      }
+    },
+    {
+      "key": "pwm_frequency",
+      "name": "PWM 载波频率",
+      "value": 25.0,
+      "default": 25.0,
+      "unit": "kHz",
+      "min": 10.0,
+      "max": 90.0,
+      "step": 0.5,
+      "group": "载波与死区",
+      "adjustable_in_flows": [
+        "F2 初始化配置",
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "min/max 取自 Customer.h「PWM 寬頻支援: 10hz ~ 90khz」注释中的 kHz 量级上下限",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:69 (#define PWM_FREQUENCY)"
+      }
+    },
+    {
+      "key": "pwm_deadtime",
+      "name": "PWM 死区时间",
+      "value": 0.6,
+      "default": 0.6,
+      "unit": "us",
+      "min": 0.1,
+      "max": 3.0,
+      "step": 0.1,
+      "group": "载波与死区",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "Customer.h 未给死区范围注释，min/max 为按 MIN_WIND_TIME/PWM_MIN_WIDTH 量级推定的可调区间",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:70 (#define PWM_DEADTIME)"
+      }
+    },
+    {
+      "key": "pwm_dt_offset",
+      "name": "死区时间补偿",
+      "value": 0.4,
+      "default": 0.4,
+      "unit": "us",
+      "min": 0.0,
+      "max": 2.0,
+      "step": 0.1,
+      "group": "载波与死区",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "仅 HW_SHUNT_MODE 为 DUAL_SHUNT / THREE_SHUNT 时有效；本工程为 SINGLE_SHUNT",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:72 (#define PWM_DT_OFFSET)"
+      }
+    },
+    {
+      "key": "pwm_min_width",
+      "name": "最小脉宽时间",
+      "value": 1.3,
+      "default": 1.3,
+      "unit": "us",
+      "min": 0.1,
+      "max": 5.0,
+      "step": 0.1,
+      "group": "载波与死区",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:73 (#define PWM_MIN_WIDTH)"
+      }
+    },
+    {
+      "key": "trgdly_position",
+      "name": "采样位置",
+      "value": 8,
+      "default": 8,
+      "unit": null,
+      "min": -127,
+      "max": 127,
+      "step": 1,
+      "group": "载波与死区",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "时间换算 41.67 ns × TRGDLY_POSITION，正数为延迟",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:88 (#define TRGDLY_POSITION)"
+      }
+    },
+    {
+      "key": "svpwm_mode",
+      "name": "SVPWM 输出模式",
+      "value": "SEG7_SVPWM_MODE",
+      "default": "SEG7_SVPWM_MODE",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "group": "载波与死区",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "options": [
+        {
+          "value": "SEG7_SVPWM_MODE",
+          "label": "七段式 SVPWM"
+        },
+        {
+          "value": "SEG5_SVPWM_MODE",
+          "label": "五段式 SVPWM"
+        }
+      ],
+      "note": "枚举型参数，取值集合见 options；min/max/step 不适用",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:74 (#define SVPWM_MODE)"
+      }
+    },
+    {
+      "key": "speed_mode",
+      "name": "调速控制模式",
+      "value": "PWMMODE",
+      "default": "PWMMODE",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "group": "调速",
+      "adjustable_in_flows": [
+        "F2 初始化配置",
+        "F4 启动测试及结果分析"
+      ],
+      "editable": true,
+      "options": [
+        {
+          "value": "NONEMODE",
+          "label": "无调速输入，按 NONEMODE_SPEED 定速"
+        },
+        {
+          "value": "PWMMODE",
+          "label": "PWM 占空比调速"
+        },
+        {
+          "value": "VSPMODE",
+          "label": "VSP 模拟电压调速"
+        }
+      ],
+      "note": "枚举型参数，取值集合见 options；min/max/step 不适用。coolingfan-openloop-debug 规程要求改成 NONEMODE 做速度闭环调试",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:198 (#define SPEED_MODE)"
+      }
+    },
+    {
+      "key": "nonemode_speed",
+      "name": "无调速模式目标转速",
+      "value": 4000,
+      "default": 4000,
+      "unit": "RPM",
+      "min": 1000,
+      "max": 40000,
+      "step": 100,
+      "group": "调速",
+      "adjustable_in_flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "editable": true,
+      "note": "coolingfan-openloop-debug 的「闭环目标转速」写入目标宏族之一",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:200 (#define NONEMODE_SPEED)"
+      }
+    },
+    {
+      "key": "motor_min_duty",
+      "name": "最小输出占空比",
+      "value": 0.1,
+      "default": 0.1,
+      "unit": null,
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.01,
+      "group": "调速",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q15(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:241 (#define MOTOR_MIN_DUTY)"
+      }
+    },
+    {
+      "key": "motor_max_duty",
+      "name": "最大输出占空比",
+      "value": 0.9,
+      "default": 0.9,
+      "unit": null,
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.01,
+      "group": "调速",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q15(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:242 (#define MOTOR_MAX_DUTY)"
+      }
+    },
+    {
+      "key": "motor_tailwind_enabled",
+      "name": "顺逆风启动使能",
+      "value": 1,
+      "default": 1,
+      "unit": null,
+      "min": 0,
+      "max": 1,
+      "step": 1,
+      "group": "顺逆风",
+      "adjustable_in_flows": [
+        "F2 初始化配置",
+        "F4 启动测试及结果分析"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:281 (#define MOTOR_TAILWIND_ENABLED)"
+      }
+    },
+    {
+      "key": "motor_tailwind_detect_min_speed",
+      "name": "最小顺逆风检测阈值",
+      "value": 900,
+      "default": 900,
+      "unit": "RPM",
+      "min": 100,
+      "max": 10000,
+      "step": 50,
+      "group": "顺逆风",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:282 (#define MOTOR_TAILWIND_DETECT_MIN_SPEED)"
+      }
+    },
+    {
+      "key": "motor_tailwind_detect_times",
+      "name": "顺逆风检测时间",
+      "value": 150,
+      "default": 150,
+      "unit": "ms",
+      "min": 100,
+      "max": 1000,
+      "step": 10,
+      "group": "顺逆风",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:284 (#define MOTOR_TAILWIND_DETECT_TIMES)"
+      }
+    },
+    {
+      "key": "tailwind_dqkp",
+      "name": "顺风启动 DQ 轴 Kp",
+      "value": 3.5,
+      "default": 3.5,
+      "unit": null,
+      "min": 0.0,
+      "max": 7.0,
+      "step": 0.1,
+      "group": "顺逆风",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q12(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:288 (#define TAILWIND_DQKP)"
+      }
+    },
+    {
+      "key": "tailwind_dqki",
+      "name": "顺风启动 DQ 轴 Ki",
+      "value": 0.4,
+      "default": 0.4,
+      "unit": null,
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.05,
+      "group": "顺逆风",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q15(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:289 (#define TAILWIND_DQKI)"
+      }
+    },
+    {
+      "key": "tailwind_start_uq",
+      "name": "顺风启动 UQ 初始值",
+      "value": 8000,
+      "default": 8000,
+      "unit": null,
+      "min": 0,
+      "max": 32767,
+      "step": 100,
+      "group": "顺逆风",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "range_estimated": true,
+      "note": "Customer.h 未给范围，min/max 按 Q15 全量程推定",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:290 (#define TAILWIND_START_UQ)"
+      }
+    },
+    {
+      "key": "tailwind_start_iq_current",
+      "name": "顺风启动 IQ 电流",
+      "value": 0.8,
+      "default": 0.8,
+      "unit": "A",
+      "min": 0.1,
+      "max": 10.0,
+      "step": 0.1,
+      "group": "顺逆风",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "I_Value(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:291 (#define TAILWIND_START_IQ_CURRENT)"
+      }
+    },
+    {
+      "key": "tailwind_start_angle",
+      "name": "顺风启动角度",
+      "value": 0,
+      "default": 0,
+      "unit": "度",
+      "min": -80,
+      "max": 80,
+      "step": 1,
+      "group": "顺逆风",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:287 (#define TAILWIND_START_ANGLE)"
+      }
+    },
+    {
+      "key": "headwind_lowspeed_threshold",
+      "name": "低速逆风检测阈值",
+      "value": 4000,
+      "default": 4000,
+      "unit": "RPM",
+      "min": 100,
+      "max": 20000,
+      "step": 100,
+      "group": "顺逆风",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "HEADWIND_IQ_BRAKE_ENABLED = 1 时不得高于 IQ_BRAKE_START_SPEED",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:294 (#define HEADWIND_LOWSPEED_THRESHOLD)"
+      }
+    },
+    {
+      "key": "headwind_brake_time_base",
+      "name": "逆风制动时间基础",
+      "value": 1000,
+      "default": 1000,
+      "unit": "ms",
+      "min": 800,
+      "max": 60000,
+      "step": 100,
+      "group": "顺逆风",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:295 (#define HEADWIND_BRAKE_TIME_BASE)"
+      }
+    },
+    {
+      "key": "headwind_alignment_times",
+      "name": "逆风预定位时间",
+      "value": 1000,
+      "default": 1000,
+      "unit": "ms",
+      "min": 800,
+      "max": 60000,
+      "step": 100,
+      "group": "顺逆风",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:296 (#define HEADWIND_ALIGNMENT_TIMES)"
+      }
+    },
+    {
+      "key": "headwind_alignment_dout",
+      "name": "逆风预定位 D 轴输出强度",
+      "value": 0.1,
+      "default": 0.1,
+      "unit": null,
+      "min": 0.01,
+      "max": 0.4,
+      "step": 0.01,
+      "group": "顺逆风",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q15(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:297 (#define HEADWIND_ALIGNMENT_DOUT)"
+      }
+    },
+    {
+      "key": "headwind_start_iq_current",
+      "name": "逆风启动电流",
+      "value": 2.5,
+      "default": 2.5,
+      "unit": "A",
+      "min": 0.1,
+      "max": 10.0,
+      "step": 0.1,
+      "group": "顺逆风",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "I_Value(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:298 (#define HEADWIND_START_IQ_CURRENT)"
+      }
+    },
+    {
+      "key": "iq_brake_start_speed",
+      "name": "逆转启动触发转速",
+      "value": 4000,
+      "default": 4000,
+      "unit": "RPM",
+      "min": 100,
+      "max": 20000,
+      "step": 100,
+      "group": "顺逆风",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:302 (#define IQ_BRAKE_START_SPEED)"
+      }
+    },
+    {
+      "key": "iq_brake_dqkp",
+      "name": "逆转启动 DQ 轴 Kp",
+      "value": 2.8,
+      "default": 2.8,
+      "unit": null,
+      "min": 0.0,
+      "max": 7.0,
+      "step": 0.1,
+      "group": "顺逆风",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q12(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:303 (#define IQ_BRAKE_DQKP)"
+      }
+    },
+    {
+      "key": "iq_brake_dqki",
+      "name": "逆转启动 DQ 轴 Ki",
+      "value": 0.1,
+      "default": 0.1,
+      "unit": null,
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.05,
+      "group": "顺逆风",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_shell": "_Q15(x)",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:304 (#define IQ_BRAKE_DQKI)"
+      }
+    },
+    {
+      "key": "iq_brake_start_degrees",
+      "name": "逆转启动初始角度",
+      "value": 135.0,
+      "default": 135.0,
+      "unit": "度",
+      "min": -180.0,
+      "max": 180.0,
+      "step": 1.0,
+      "group": "顺逆风",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:314 (#define IQ_BRAKE_START_DEGREES)"
+      }
+    },
+    {
+      "key": "current_limiter_mode",
+      "name": "电流限制器模式",
+      "value": "NONE",
+      "default": "NONE",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "group": "限流限功率",
+      "adjustable_in_flows": [
+        "F2 初始化配置",
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "options": [
+        {
+          "value": "NONE",
+          "label": "不启用电流限制器"
+        },
+        {
+          "value": "LEGACY",
+          "label": "传统单点限流"
+        },
+        {
+          "value": "MULTI",
+          "label": "多段限流"
+        }
+      ],
+      "note": "枚举型参数，取值集合见 options；min/max/step 不适用",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:422 (#define CURRENT_LIMITER_MODE)"
+      }
+    },
+    {
+      "key": "current_limiter_threshold",
+      "name": "电流限制阈值",
+      "value": 0.6,
+      "default": 0.6,
+      "unit": "A",
+      "min": 1.0,
+      "max": 15.625,
+      "step": 0.1,
+      "group": "限流限功率",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "value_below_min": true,
+      "note": "源注释范围写作 [1.0 ~ HW_BOARD_CURR_MAX]。上限 15.625 A 是按 Parameter.h:42 的公式 HW_BOARD_CURR_MAX = HW_ADC_REF / 2.0 / HW_AMPGAIN / HW_RSHUNT 实算得出：HW_ADC_REF = 5.0 V（Parameter.h:106，因 Customer.h:87 HW_ADC_REF_TYPE = REF_5V0）、HW_AMPGAIN = 16（Customer.h:86 GAIN_16）、HW_RSHUNT = 0.01 Ω（Customer.h:85），5.0 / 2 / 16 / 0.01 = 15.625。实配值 0.6 A 低于源注释自己写的下限 1.0 A，源材料自身不一致，按原样登记并置 value_below_min: true，前端不得把 0.6 当成落在合法区间内的值",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:423 (#define CURRENT_LIMITER_THRESHOLD)"
+      }
+    },
+    {
+      "key": "power_limiter_mode",
+      "name": "功率限制器模式",
+      "value": "NONE",
+      "default": "NONE",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "group": "限流限功率",
+      "adjustable_in_flows": [
+        "F2 初始化配置",
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "options": [
+        {
+          "value": "NONE",
+          "label": "不启用功率限制器"
+        },
+        {
+          "value": "LEGACY",
+          "label": "传统单点限功率"
+        },
+        {
+          "value": "MULTI",
+          "label": "多段限功率"
+        }
+      ],
+      "note": "枚举型参数，取值集合见 options；min/max/step 不适用",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:439 (#define POWER_LIMITER_MODE)"
+      }
+    },
+    {
+      "key": "power_limiter_threshold",
+      "name": "功率限制阈值",
+      "value": 3.0,
+      "default": 3.0,
+      "unit": "W",
+      "min": 1.0,
+      "max": null,
+      "step": 0.5,
+      "group": "限流限功率",
+      "adjustable_in_flows": [
+        "F5 调优确认及运行"
+      ],
+      "editable": true,
+      "note": "上限 MAX_PWOER（源注释原文拼写）在本工程头文件未定义",
+      "_source": {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:440 (#define POWER_LIMITER_THRESHOLD)"
+      }
+    }
+  ]
+}

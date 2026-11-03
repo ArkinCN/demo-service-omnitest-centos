@@ -1,0 +1,18 @@
+{
+    "status": "confirmation_required",
+    "executed": false,
+    "reason": "红线动作，未带 confirm_token，已拒绝执行",
+    "how_to_proceed": "把下面这张凭据交给人：前端在 C 区看板弹出确认条，人点确认后调桥的 POST /confirmations/{token}/approve，再带着同一个 confirm_token 和同一组参数重调本工具。",
+    "confirm_token": "ct_cQ3M4jQJn73oTyoj21Jgl2G6",
+    "tool": "estop",
+    "state": "pending",
+    "prompt": "急停：立即切断驱动输出",
+    "args_preview": {
+        "reason": "演示"
+    },
+    "created_at": 1789831809.562496,
+    "expires_at": 1789831989.562496,
+    "seconds_left": 180.0,
+    "approved_by": null,
+    "rejected_reason": null
+}

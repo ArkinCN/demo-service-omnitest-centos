@@ -1,0 +1,6 @@
+{
+    "status": "confirmation_invalid",
+    "executed": false,
+    "reason": "该 confirm_token 尚未经人工批准，拒绝执行",
+    "tool": "start"
+}

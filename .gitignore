@@ -1,0 +1,62 @@
+# 依赖与构建产物
+node_modules/
+dist/
+build/
+.venv/
+__pycache__/
+*.pyc
+
+# 环境与密钥
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_rsa*
+
+# 运行期产物（dsh-plugins/logs/e2e.md 为交付证据，显式保留）
+*.log
+components/*/logs/
+components/webssh/gateway/logs/
+.kb/
+.cache/
+.DS_Store
+
+# 原始客户资料（不入库）
+input/
+kb-pipeline/input/
+kb-pipeline/work/
+
+# 大文件（>50 MB 一律不入库，需要时走外部存储）
+*.zip
+*.7z
+*.mp4
+COMMIT_MSG_DRAFT.md
+
+# 真机采集帧数据（体量大，留在本地/外部存储）
+hardware/v0.6/runs/
+
+# Rust 构建产物
+components/dll-bridge/target/
+
+# 临时脚本与调试残留
+_tmp_*
+web/.playwright-cli/
+web/_tmp_*
+web/scripts/_tmp_*
+web/_verify_*
+web/verify-*.mjs
+web/src/features/agent-chat/components/__md_check__/
+*.pid
+kb-pipeline/sig_check.txt
+kb-pipeline/vd.txt
+kb-pipeline/venv_check.txt
+kb-pipeline/vt.txt
+
+# 自检/冒烟运行产物
+hardware/v0.6/verification/entry-test-runs/
+backend/.deploy/
+backend/uploads/
+*.bak-*
+docker-compose.yml.bak-*
+hardware/v0.6/runs/

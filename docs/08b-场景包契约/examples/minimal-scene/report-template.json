@@ -1,0 +1,45 @@
+{
+  "schema": "report-template/v1",
+  "scene_id": "example.minimal.skeleton",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-20",
+  "belongs_to_flow": "F6 测试报告及产出",
+  "template_file": "./assets/report-template/placeholder-report-template.xlsx",
+  "_placeholder": true,
+  "cell_model_note": "骨架包用表格模板口径占位：字段按单元格地址定位。新建包若模板是 PDF 报告样张，删掉 template_file 改写 template_source。",
+  "group_tiers": [
+    {
+      "id": "rpt-id",
+      "title": "报告标识",
+      "groups": [
+        {
+          "id": "rpt-id-basic",
+          "title": "基本信息",
+          "items": [
+            "report_no"
+          ]
+        }
+      ]
+    }
+  ],
+  "spec_sections": [
+    {
+      "section_no": "1",
+      "name_zh": "封面",
+      "name_en": "Cover",
+      "fields": [
+        {
+          "key": "report_no",
+          "name": "报告号",
+          "value_slot": "字段 1 取值"
+        }
+      ],
+      "from_flow": "F6 测试报告及产出",
+      "maps_to": null,
+      "_source": {
+        "file": "[源] 08b-场景包契约/README-场景包契约-v1.1.md",
+        "locator": "第 10 节 新建第三个场景包的步骤"
+      }
+    }
+  ]
+}

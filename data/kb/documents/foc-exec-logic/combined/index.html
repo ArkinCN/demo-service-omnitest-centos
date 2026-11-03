@@ -1,0 +1,286 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>FOC 执行逻辑（合成图文稿）</title><style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 20px 22px 40px; background: #fff; color: #1f2a24;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 13px; line-height: 1.75;
+}
+h1 { font-size: 19px; margin: 4px 0 14px; }
+h2 { font-size: 16px; margin: 22px 0 10px; padding-bottom: 4px; border-bottom: 1px solid #e3e8e4; }
+h3 { font-size: 14px; margin: 18px 0 8px; }
+h4, h5, h6 { font-size: 13px; margin: 14px 0 6px; color: #2e5e45; }
+p { margin: 8px 0; }
+ul, ol { margin: 8px 0; padding-left: 22px; }
+li { margin: 3px 0; }
+code { background: #f4f7f4; border: 1px solid #e3e8e4; border-radius: 3px; padding: 0 4px; font-size: 12px; }
+pre { background: #f7f9f7; border: 1px solid #e3e8e4; border-radius: 4px; padding: 10px; overflow-x: auto; }
+pre code { background: none; border: none; padding: 0; }
+table { border-collapse: collapse; margin: 10px 0; width: 100%; font-size: 12px; }
+th, td { border: 1px solid #e3e8e4; padding: 5px 8px; text-align: left; vertical-align: top; }
+th { background: #f0f5f1; font-weight: 600; }
+hr { border: none; border-top: 1px solid #e3e8e4; margin: 16px 0; }
+.kb-fig { margin: 14px 0; text-align: center; }
+.kb-fig img { max-width: 100%; height: auto; border: 1px solid #e3e8e4; border-radius: 4px; }
+/* 代码块：整体成块，保留原始换行与缩进 */
+.kb-code {
+  background: #f7f9f7; border: 1px solid #e3e8e4; border-left: 3px solid #9bb8a8;
+  border-radius: 4px; padding: 10px 12px; margin: 12px 0; overflow-x: auto;
+  white-space: pre; font-size: 12px; line-height: 1.65;
+}
+.kb-code code { background: none; border: none; padding: 0; font-size: 12px; }
+/* 公式块：居中、衬线、留白（干净文本样式，不引排版引擎） */
+.kb-formula {
+  margin: 12px auto; padding: 8px 12px; max-width: 100%; text-align: center;
+  font-family: "Cambria Math", "Times New Roman", "Georgia", serif;
+  font-size: 14px; line-height: 2; color: #22302a;
+  background: #fbfcfb; border-radius: 4px; white-space: pre-wrap; word-break: break-word;
+}
+</style></head><body><h1>FOC 执行逻辑</h1><div style="margin:0 0 14px;padding:8px 10px;border:1px solid #e3e8e4;border-radius:4px;background:#f7faf8;color:#5b6b62;font-size:12px;">系统合成图文稿（由抽取产物重建，非客户原件 PDF）。</div><h3>FOC 原理及程序执行逻辑</h3>
+
+<h3>一. FOC原理及程序执行逻辑</h3>
+
+<h3>FOC原理 1.</h3>
+
+<p>FOC原理框图如图1所示：</p>
+
+<p>图1 FOC原理框图</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p001_x7.png" alt="插图 1" loading="lazy"></figure>
+
+<p>原理：将三相定子电流iA，iB，iC通过Clark变换以及Park变换 转化为旋转坐标系上的id，iq分量，对id，iq进行控制。</p>
+
+<p>理解：三相定子通交流电产生旋转磁场，吸引永磁体转子旋 转。所以我们想要让电机根据我们的需求去转，就要对电机的 转子进行分析。这就是整个FOC系统对转子坐标系上的电流分 量进行分析和控制的原因。</p>
+
+<p>转子坐标系中，id分量表示电磁分量，是对磁场进行作用；iq分 量是转矩分量，决定电机出力的大小。控制时想让电机每时每 刻以最大的力往前走，所以我们会将id的参考值IDREF给0，这 样每时每刻的相电流就会全部用于出力。（原理：最大转矩电 流比控制）</p>
+
+<p>定子相电流幅值Is和id，iq的关系：</p>
+
+<p>程序中在启动时也是这样配置的：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p002_x11.png" alt="插图 2" loading="lazy"></figure>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p002_x12.png" alt="插图 3" loading="lazy"></figure>
+
+<p>目的就是为了启动时所有的电流用于出力把电机拉起来，如果 用示波器观测会发现相电流第一拍的峰值和我们设定的 IQ_Start_CURRENT是相同的，差异太大可能是采样或者其他 硬件参数设置的不合理。</p>
+
+<h3>如何查采样问题？</h3>
+
+<ul>
+<li>程序执行逻辑 2.</li>
+</ul>
+
+<p>电机是怎么被拖起来然后达到我们给定的目标值？</p>
+
+<pre><code>
+流程：mcStart（启动）-------- mcRun（运行阶段0） ------ -- mcRun（运行阶段1）
+</code></pre>
+
+<ul>
+<li>mcStart（启动）</li>
+</ul>
+
+<p>在主函数中经过软硬件初始化，偏置电压的采集以后进入到状 态机MC_Control（）中，经过一些准备工作执行到mcStart状 态机。</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p002_x13.png" alt="插图 4" loading="lazy"></figure>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p003_x13.png" alt="插图 5" loading="lazy"></figure>
+
+<h3>将程序中的变量对应到框图上，可以得到：</h3>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p003_x16.png" alt="插图 6" loading="lazy"></figure>
+
+<p>mcStart状态机：对电机 运行第一拍 电角度，启动电流以及电流 环PI进行赋值，系统得到UD，UQ以后进行IPARK变换，然后去 进行SVPWM调制，电机就会被拖起来。电机被拖动以后三相 定子上存在相电流，采样得到三相电流进行Clark，Park变换得 到ID,IQ反馈值，与给定值的误差经过PI以后得到 下一拍 的 UD,UQ，电机继续运行。</p>
+
+<p>电机运行时转速递增，如果没有启动时间的限制，最终达到的 转速是给定启动电流IQ_Start_CURRENT对应的转速值，并维 持这个转速值稳定运行。</p>
+
+<p>我们控制时是要针对转速/功率/电流、电压进行控制，而不是一 直启动，所以当电机在启动阶段运行到一定转速时，就要引入 外环。程序中在mcRun状态机进行外环引入的操作。</p>
+
+<h3>mcRun（运行）</h3>
+
+<p>如果控制目标值是电流值，那么跑目前的电流环就可以。但是 在应用中往往会对转速、功率等变量进行控制，这时就需要在 控制系统中加上外环，加上外环的作用是用控制变量的误差经 过PI得到IQREF。</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p004_x19.png" alt="插图 7" loading="lazy"></figure>
+
+<p>程序中对环路的处理在速度环响应函数Speed_response()中， mcFocCtrl.CtrlMode=0为切入到闭环之前的变量衔接，需要注 意电压环路的配置：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p004_x20.png" alt="插图 8" loading="lazy"></figure>
+
+<p>当转速大于切换转速时，切入到闭环控制，把外环PI加上。</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p004_x21.png" alt="插图 9" loading="lazy"></figure>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p005_x21.png" alt="插图 10" loading="lazy"></figure>
+
+<h3>针对电压环，这里单独给出对应程序配置的电压环路框图：</h3>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p005_x24.png" alt="插图 11" loading="lazy"></figure>
+
+<h3>二. 启动方式及角度来源</h3>
+
+<p>无感FOC和有感FOC启动流程不同：</p>
+
+<p>无感FOC启动流程：以6532T吊扇标准程序为例，对无感FOC 程序中目前包含五种启动方式进行说明，分别为：</p>
+
+<div class="kb-formula">Omega_Start、Open_Start、Open_Omega_Start、 PLL_Start、DEBUG_FREE_START。</div>
+
+<p>有感FOC启动流程：以有感散热风扇三霍尔方案和单霍尔方案 为例进行讲解。</p>
+
+<h3>无感FOC： 1.</h3>
+
+<h3>（1）Omega_Start</h3>
+
+<h3>程序相关配置：</h3>
+
+<p>FOC_EFREQACC：估算器强制角度模式的速度增量，每个载波 速度递增一次。</p>
+
+<p>FOC EFREQMIN：估算角度切换阈值，当估算速度小于该值</p>
+
+<p>FOC_EFREQMIN：估算角度切换阈值，当估算速度小于该值</p>
+
+<p>时，输出估算器强制角度；大于该值时，输出估算器估算角 度。</p>
+
+<p>FOC_EFREQHOLD：估算器强制速度最大值，当估算器估算速 度小于FOC_EFREQMIN（ 估算不准确 ），强制速度增加到等于 该值时，不再增加。</p>
+
+<h3>角度来源：</h3>
+
+<table><thead><tr><th>FOC_CR1 [RFAE]</th><th>FOC_CR1 [ANGM]</th><th>FOC_CR1 [EFAE]</th><th>角度来[源]</th></tr></thead><tbody>
+<tr><td>0</td><td>1</td><td>1</td><td>omega &gt; FOC_EFREQMI 器估算角度 omega&lt; FOC_EFREQMIN 强制角度</td></tr>
+</tbody></table>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p006_x28.png" alt="插图 12" loading="lazy"></figure>
+
+<p>具体工作原理可见芯片手册FOC---角度模式部分。</p>
+
+<p>注：OME--------经过FOC_OMEKLPF低通滤波--------估算器 估算速度FOC_EOME</p>
+
+<ul>
+<li>（2）Open_Start（爬坡强制角度）</li>
+</ul>
+
+<h3>程序相关配置：</h3>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p007_x32.png" alt="插图 13" loading="lazy"></figure>
+
+<p>FOC_RTHEACC：爬坡模块的加速度</p>
+
+<p>FOC__RTHESTEP：爬坡模块的速度</p>
+
+<p>FOC_RTHECNT：爬坡次数上限 = FOC_RTHECNT*256；爬坡</p>
+
+<p>功能使能后，每个载波周期进行一次爬坡运算，当爬坡次数达</p>
+
+<p>到 FOC_RTHECNT*256后，爬坡结束。</p>
+
+<h3>角度来源：</h3>
+
+<table><thead><tr><th>FOC_CR1 [RFAE]</th><th>FOC_CR1 [ANGM]</th><th>FOC_CR1 [EFAE]</th><th>角度来[源]</th></tr></thead><tbody>
+<tr><td>1</td><td>0</td><td>0</td><td>FOC_RTHECNT计数内，爬 角度模式直接计算角度； FOC_RTHECNT计数结束以 ANGM为0，变成强拉角度</td></tr>
+</tbody></table>
+
+<h3>FOC_RTHECNT计数内：</h3>
+
+<p>FOC_RTHECNT计数结束以后:</p>
+
+<h3>注：此时的FOC__RTHESTEP为爬坡强制角度模式结束时的 值。</h3>
+
+<p>（3）Open Omega Start</p>
+
+<h3>角度来源：</h3>
+
+<table><thead><tr><th>FOC_CR1 [RFAE]</th><th>FOC_CR1 [ANGM]</th><th>FOC_CR1 [EFAE]</th><th>角度来[源]</th></tr></thead><tbody>
+<tr><td>1</td><td>1</td><td>1</td><td>（1）FOC_RTHECNT计数 爬坡强制角度模式直接计算 （2）FOC_RTHECNT计数 ANGM和EFAE为1，此时： omega &gt; FOC_EFREQMI 器估算角度 omega&lt; FOC_EFREQMIN 强制角度</td></tr>
+</tbody></table>
+
+<h3>需要注意的问题：</h3>
+
+<p>爬坡结束后，角度从爬坡强制角度直接切换成估算角度时，会 由于角度的突变引起电机抖动。</p>
+
+<h3>（a）角度平滑切换</h3>
+
+<h3>以Open_Omega_Start为例，角度切换模式存在两种情况：</h3>
+
+<p>爬坡强制角度的优先级最高，配置FOC_CR1[RFAE] = 1，使能 爬坡功能。爬坡结束后，切换到估算器强制角度模式，此时根 据瞬时估算速度与FOC_EFREQMIN的大小判断是切换为估算器</p>
+
+<p>_</p>
+
+<p>强制角度还是估算器估算角度。所以角度模式切换曲分为两种 情况：</p>
+
+<ul>
+<li>（1）瞬时估算速度 &gt; FOC_EFREQMIN时，直接由爬坡强制角 度模式切换为估算器估算角度模式。切换曲线如下图所示：</li>
+<li>（2）瞬时估算速度&lt;FOC_EFREQMIN时，由爬坡强制角度模 式切换到估算器强制角度模式；当瞬时估算速度 &gt;FOC_EFREQMIN时,切换为估算器估算角度模式。切换曲线如 下图所示：</li>
+</ul>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p008_x36.png" alt="插图 14" loading="lazy"></figure>
+
+<p>解决：平滑切换模块可有效解决上述问题。</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p009_x39.png" alt="插图 15" loading="lazy"></figure>
+
+<p>爬坡结束时，当估算角度FOC__ETHETA和爬坡强制角度 THETA_OL的偏差小于等于FOC_THECOR，直接切 换 FOC__ETHETA作为角度输出。当偏差大于FOC_THECOR，则 每个载波周期以FOC THECOR作为步进值对 THETA OL 进行</p>
+
+<p>每个载波周期以</p>
+
+<p>_</p>
+
+<p>作为步进值</p>
+
+<p>_</p>
+
+<p>进行</p>
+
+<h3>修正，使其逐步向 FOC__ETHETA 的值逼近。当偏差小于 FOC_THECOR 时，直接切换 FOC__ETHETA作为角度输出。</h3>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p009_x40.png" alt="插图 16" loading="lazy"></figure>
+
+<h3>（b）角度补偿</h3>
+
+<p>补偿值FOC_THECOMP对估算角度FOC__ETHETA进行补偿并 输出。FOC_THECOMP为负值时，补偿的是滞 后角； FOC_THECOMP为正值时，补偿的是超前角。</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p010_x43.png" alt="插图 17" loading="lazy"></figure>
+
+<h3>（4）PLL_Start</h3>
+
+<h3>（5）DEBUG_FREE_START</h3>
+
+<p>没有估算器估算反电动势，没有αβ轴、dq轴的坐标变换，不去 估算连续的角度，只根据每一相的相电流判断是否换相以及正 反转方向。</p>
+
+<p>启动的驱动波形类似方波启动，区别在于，在不同扇区切换间 可以插入过渡角度进行平滑切换。并且根据相电流进行换相判</p>
+
+<p>断，而非关输出后检测反电动势，因此启动动态响应比方波更 好。</p>
+
+<p>缺点为角度的准确度相对较低，带载能力没有那么强。因为换 相之间有换相屏蔽时间，如果负载差的特别多 的话，也无法兼 容。</p>
+
+<ul>
+<li>有感FOC 2.</li>
+<li>（1）三霍尔方案</li>
+<li>（2）单霍尔方案</li>
+</ul>
+
+<h3>三.  角度估算器说明</h3>
+
+<h3>1. SMO估算器</h3>
+
+<p>使用模型中的估算电流（is*）来匹配测量电流（is），我们假 设数字化模型的反电动势（es*）与电机的反电动势（es）相 同。 对数字化模型进行补偿之后，电机模型的输入电压（Vs） 和电流（is*）与数字化电机模型中的值相同。一旦对数字化模 型补偿完后，下一步就要通过对校正因子（Z） 滤波来估算反 电动势（es*），如图所示。随后反电动势的估算值（es*）反 馈给数字化电机模型，以在每个控制周期之后对变量es* 进行更 新。eα 和eβ 值（es 的矢量分量）用于估算θ*。</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p010_x44.png" alt="插图 18" loading="lazy"></figure>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p011_x47.png" alt="插图 19" loading="lazy"></figure>
+
+<p>估算</p>
+
+<h3>PLL估算器 2.</h3>
+
+<figure class="kb-fig"><img src="/api/kb/documents/foc-exec-logic/figure?name=p012_x50.png" alt="插图 20" loading="lazy"></figure>
+
+<h3>3. AO估算器</h3>
+
+
+
+<h3>三种启动方式的优缺点：</h3>
+
+<p>PLL: 低速较稳定</p>
+
+<p>SMO：响应较快</p>
+
+<p>AO：相应可通过估算的周期，但是芯片内部已经固定，无法调 节</p></body></html>

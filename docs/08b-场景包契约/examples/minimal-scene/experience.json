@@ -1,0 +1,41 @@
+{
+  "schema": "experience/v1",
+  "scene_id": "example.minimal.skeleton",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-20",
+  "belongs_to_flow": "F1 知识库管理（经验一路）",
+  "count": 1,
+  "evidence_levels": {
+    "占位": "本骨架包的示例条目，不是任何真实经验。"
+  },
+  "schema_note": "每条 = 问题现象 symptom / 原因 cause / 调整动作 action / 结果 result / 标签 tags / 证据档位 evidence_level / 来源 _source。",
+  "experiences": [
+    {
+      "id": "EXP-001",
+      "symptom": "示例现象",
+      "cause": "示例原因",
+      "action": "示例调整动作",
+      "result": "示例结果，含什么情况说明不是调参能解决的",
+      "tags": {
+        "scene": [
+          "example.minimal.skeleton"
+        ],
+        "flow": "F5 调优确认及运行",
+        "parameters": [
+          "example_parameter"
+        ],
+        "topic": [
+          "示例"
+        ]
+      },
+      "evidence_level": "占位",
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀",
+      "_status": "待核实（本条是骨架示例，没有任何真实来源）",
+      "_source": {
+        "file": "[源] 08b-场景包契约/README-场景包契约-v1.1.md",
+        "locator": "第 10 节 新建第三个场景包的步骤"
+      }
+    }
+  ]
+}

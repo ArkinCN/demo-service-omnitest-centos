@@ -1,0 +1,17 @@
+{
+    "mode": "live",
+    "ts": 1789831805.4697545,
+    "device_id": "bench",
+    "status": "ok",
+    "name": "峰岹台架工控机",
+    "model": "SK-20251218QPBB / Windows 11",
+    "kind": "host",
+    "target": "administrator@172.25.5.166:5011",
+    "connected": true,
+    "hostname": "SK-20251218QPBB",
+    "connected_at": 1789831805.3624957,
+    "uptime_s": 0.1,
+    "last_error": null,
+    "key_env": "FORTIOR_WIN_KEY",
+    "key_present": true
+}

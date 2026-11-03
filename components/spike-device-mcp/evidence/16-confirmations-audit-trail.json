@@ -1,0 +1,48 @@
+{
+    "confirmations": [
+        {
+            "confirm_token": "ct_cQ3M4jQJn73oTyoj21Jgl2G6",
+            "tool": "estop",
+            "state": "pending",
+            "prompt": "急停：立即切断驱动输出",
+            "args_preview": {
+                "reason": "演示"
+            },
+            "created_at": 1789831809.562496,
+            "expires_at": 1789831989.562496,
+            "seconds_left": 180.0,
+            "approved_by": null,
+            "rejected_reason": null
+        },
+        {
+            "confirm_token": "ct_PVQKOnLrA-Quvo7u0xme_dDd",
+            "tool": "write_param",
+            "state": "approved",
+            "prompt": "把参数写回驱动板：改变被测对象的行为",
+            "args_preview": {
+                "key": "kp_speed",
+                "value": 1.25
+            },
+            "created_at": 1789831809.5130587,
+            "expires_at": 1789831989.5130587,
+            "seconds_left": 179.9,
+            "approved_by": "张工（spike 取证）",
+            "rejected_reason": null
+        },
+        {
+            "confirm_token": "ct_g7G7Wx8fkFo9hDgLrLD8M4xE",
+            "tool": "start",
+            "state": "consumed",
+            "prompt": "启动被测电机：台架会真的转起来",
+            "args_preview": {
+                "duty_percent": 60.0,
+                "duration_s": 30.0
+            },
+            "created_at": 1789831809.417886,
+            "expires_at": 1789831989.417886,
+            "seconds_left": 179.8,
+            "approved_by": "张工（spike 取证）",
+            "rejected_reason": null
+        }
+    ]
+}

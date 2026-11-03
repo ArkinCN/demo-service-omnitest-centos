@@ -1,0 +1,152 @@
+{
+  "transport": "stdio",
+  "tool_count": 13,
+  "tools": [
+    {
+      "name": "connect",
+      "group": "connection",
+      "guarded": false
+    },
+    {
+      "name": "status",
+      "group": "connection",
+      "guarded": false
+    },
+    {
+      "name": "disconnect",
+      "group": "connection",
+      "guarded": false
+    },
+    {
+      "name": "read_fg",
+      "group": "observation",
+      "guarded": false
+    },
+    {
+      "name": "read_pwm",
+      "group": "observation",
+      "guarded": false
+    },
+    {
+      "name": "capture_scope",
+      "group": "observation",
+      "guarded": false
+    },
+    {
+      "name": "tail_log",
+      "group": "observation",
+      "guarded": false
+    },
+    {
+      "name": "start",
+      "group": "action",
+      "guarded": true
+    },
+    {
+      "name": "stop",
+      "group": "action",
+      "guarded": true
+    },
+    {
+      "name": "estop",
+      "group": "action",
+      "guarded": true
+    },
+    {
+      "name": "write_param",
+      "group": "action",
+      "guarded": true
+    },
+    {
+      "name": "export",
+      "group": "action",
+      "guarded": true
+    },
+    {
+      "name": "archive",
+      "group": "action",
+      "guarded": true
+    }
+  ],
+  "connect": {
+    "mode": "live",
+    "ts": 1789831848.0741444,
+    "device_id": "bench",
+    "status": "ok",
+    "name": "峰岹台架工控机",
+    "model": "SK-20251218QPBB / Windows 11",
+    "kind": "host",
+    "target": "administrator@172.25.5.166:5011",
+    "connected": true,
+    "hostname": "SK-20251218QPBB",
+    "connected_at": 1789831847.969437,
+    "uptime_s": 0.1,
+    "last_error": null,
+    "key_env": "FORTIOR_WIN_KEY",
+    "key_present": true
+  },
+  "status": {
+    "mode": "live",
+    "ts": 1789831848.0760267,
+    "device_id": "bench",
+    "status": "ok",
+    "pending_confirmations": 0,
+    "pending_tokens": [],
+    "name": "峰岹台架工控机",
+    "model": "SK-20251218QPBB / Windows 11",
+    "kind": "host",
+    "target": "administrator@172.25.5.166:5011",
+    "connected": true,
+    "hostname": "SK-20251218QPBB",
+    "connected_at": 1789831847.969437,
+    "uptime_s": 0.1,
+    "last_error": null,
+    "key_env": "FORTIOR_WIN_KEY",
+    "key_present": true
+  },
+  "read_fg": {
+    "mode": "live",
+    "ts": 1789831849.4267254,
+    "device_id": "bench",
+    "status": "ok",
+    "samples": [
+      {
+        "i": 0,
+        "fg1_hz": null,
+        "fg2_hz": null,
+        "raw": "FG2=9.9E37 FG1=9.9E37",
+        "elapsed_ms": 169,
+        "note": "示波器返回 9.9E37（VISA 无有效测量哨兵值）：电机未转或探头未接，不是通信故障"
+      },
+      {
+        "i": 1,
+        "fg1_hz": null,
+        "fg2_hz": null,
+        "raw": "FG2=9.9E37 FG1=9.9E37",
+        "elapsed_ms": 179,
+        "note": "示波器返回 9.9E37（VISA 无有效测量哨兵值）：电机未转或探头未接，不是通信故障"
+      }
+    ],
+    "rpm_mean": null,
+    "motor_spinning": false
+  },
+  "start_without_token": {
+    "status": "confirmation_required",
+    "executed": false,
+    "reason": "红线动作，未带 confirm_token，已拒绝执行",
+    "how_to_proceed": "把下面这张凭据交给人：前端在 C 区看板弹出确认条，人点确认后调桥的 POST /confirmations/{token}/approve，再带着同一个 confirm_token 和同一组参数重调本工具。",
+    "confirm_token": "ct_HWKZrHzqC0u2hVoUcY-YUwm5",
+    "tool": "start",
+    "state": "pending",
+    "prompt": "启动被测电机：台架会真的转起来",
+    "args_preview": {
+      "duty_percent": 40.0,
+      "duration_s": 10.0
+    },
+    "created_at": 1789831849.42833,
+    "expires_at": 1789832029.42833,
+    "seconds_left": 180.0,
+    "approved_by": null,
+    "rejected_reason": null
+  }
+}

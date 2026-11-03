@@ -1,0 +1,61 @@
+{
+  "schema": "safety-interlocks/v1",
+  "scene_id": "example.minimal.skeleton",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-20",
+  "belongs_to_flow": "F2 初始化配置 + F4 启动测试及结果分析",
+  "types": {
+    "硬件": "由固件阈值或仪器状态判定",
+    "流程": "由规程纪律约束执行顺序与动作",
+    "人员": "需要操作者显式确认才能放行"
+  },
+  "demo_profile": {
+    "note": "演示逐条放行这一条。",
+    "interlocks": [
+      "SI-HW-01"
+    ]
+  },
+  "group_tiers": [
+    {
+      "id": "ilk-hw",
+      "title": "硬件电气红线",
+      "groups": [
+        {
+          "id": "ilk-hw-basic",
+          "title": "基本电气",
+          "items": [
+            "SI-HW-01"
+          ]
+        }
+      ]
+    }
+  ],
+  "fault_bitmap": {
+    "bits": {
+      "0x0000": "FAULT_NONE 无故障",
+      "0x0001": "FAULT_EXAMPLE 示例故障位"
+    },
+    "_placeholder": true,
+    "_source": {
+      "file": "[源] 08b-场景包契约/README-场景包契约-v1.1.md",
+      "locator": "第 10 节 新建第三个场景包的步骤"
+    }
+  },
+  "interlocks": [
+    {
+      "id": "SI-HW-01",
+      "name": "示例硬件联锁",
+      "type": "硬件",
+      "threshold": {
+        "max_example": 1
+      },
+      "action": "越限时切断被测件供电并置本轮为 FAIL。",
+      "blocking": true,
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] 08b-场景包契约/README-场景包契约-v1.1.md",
+        "locator": "第 10 节 新建第三个场景包的步骤"
+      }
+    }
+  ]
+}

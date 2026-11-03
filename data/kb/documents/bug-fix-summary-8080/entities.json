@@ -1,0 +1,34 @@
+{
+  "doc_id": "bug-fix-summary-8080",
+  "summary": {
+    "parameters": 1,
+    "parameters_matching_customer_h": 0,
+    "registers": 1,
+    "thresholds": 0,
+    "units": 0,
+    "procedure_steps": 0
+  },
+  "parameters": [
+    {
+      "name": "DRV_SR",
+      "count": 5,
+      "in_customer_h": false,
+      "first_chunk": "bug-fix-summary-8080#c0002",
+      "first_page": null,
+      "context": "DRV_SR寄存器中的DRV中断和SYSTIC中断：当DRV中断在清标志位操作的时候，ClrBit(DRV_SR, DCIF);读完寄存器的值之后，这个时候突然来了SYSTIC中断，ClrBit(DRV_SR, DCIF)会将SYS"
+    }
+  ],
+  "registers": [
+    {
+      "name": "DRV_SR",
+      "count": 2,
+      "first_chunk": "bug-fix-summary-8080#c0002",
+      "first_page": null,
+      "context": "DRV_SR寄存器中的DRV中断和SYSTIC中断：当DRV中断在清标志位操作的时候，ClrBit(DRV_SR, DCIF);读完寄存器的值之后，这个时候突然来了SYSTIC中断，ClrBit(DRV_SR, DCIF)会将SYS"
+    }
+  ],
+  "thresholds": [],
+  "units": [],
+  "procedure_steps": [],
+  "method": "regex+heuristic, no LLM; 参数名=全大写下划线标识符, 寄存器=标识符±40字符内出现『寄存器/register』, 阈值=数值+单位且±40字符内含阈值语境词, 规程步骤=编号行且含操作动词"
+}

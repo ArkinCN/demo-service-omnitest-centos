@@ -1,0 +1,7 @@
+#!/bin/sh
+# dsh-kb-rag spawns the bare name `python`; this machine only has `python3`.
+# A symlink to .venv/bin/python does NOT work: that file is itself a symlink to
+# the system interpreter, so Python looks for pyvenv.cfg next to THIS file and
+# falls back to sys.prefix=/usr, losing every package installed in the venv.
+# Exec the venv interpreter by its real path instead.
+exec /home/zzz/lab/dsh-plugins/.venv/bin/python "$@"

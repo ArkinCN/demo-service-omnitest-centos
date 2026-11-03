@@ -1,0 +1,412 @@
+{
+  "schema": "datasets/v1",
+  "scene_id": "automotive.body-motor.window-regulator",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-19",
+  "belongs_to_flow": "F4 启动测试及结果分析（时序曲线回放与判定）",
+  "all_synthetic": true,
+  "synthetic_banner": "本场景包的全部时序数据都是合成的，不是实测。前端展示时必须显式标注「合成，非实测」，并且不得进入任何合规报告（见 safety-interlocks.json SI-PR-05）。",
+  "why_synthetic": {
+    "text": "汽车低压执行器电机（雨刮、车窗、天窗、座椅、EPS、节气门）的专用公开波形数据集，在十三个数据平台上检索确认为空白。这是检索证实的结论，不是遗漏。本包因此走参数化仿真这一路。",
+    "platforms_searched": [
+      "Kaggle（含元数据 API）",
+      "IEEE DataPort",
+      "Zenodo（含 REST API）",
+      "Figshare",
+      "Mendeley Data",
+      "Hugging Face Datasets",
+      "UCI 机器学习仓库",
+      "GitHub",
+      "PHM Society 数据挑战",
+      "NASA 预测数据仓库",
+      "OpenML（含 REST API）",
+      "Papers with Code",
+      "科学数据银行 ScienceDB"
+    ],
+    "_source": [
+      {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 286 行：核心结论先说：十三个平台确认为空白"
+      },
+      {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 466 行：数据集平台（13 个）检索通道表"
+      }
+    ]
+  },
+  "real_data_alternatives": [
+    {
+      "id": "cartif-brushed-dc",
+      "name": "F.A.I.R. open dataset of brushed DC motor faults for testing of AI algorithms（有刷直流电机故障数据集）",
+      "publisher": "西班牙 CARTIF 技术中心（Fundación CARTIF，巴利亚多利德），2020",
+      "url": "https://zenodo.org/records/4314249",
+      "doi": "10.5281/zenodo.4314249",
+      "content": "振动（g）+ 电流（A）+ 电压（V）；小型有刷直流电机；故障从 30 分钟演化到 6 小时",
+      "format": "HDF5 + Excel，483 MB",
+      "license": "CC BY 4.0",
+      "mode": "registered_only",
+      "note": "本次调研中离「汽车低压执行器」结构最近的真实集——雨刮、车窗、座椅电机正是有刷直流。**本包只登记，未下载。**",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 297 行：第一层真实实测表 CARTIF 行（已核实）"
+      }
+    },
+    {
+      "id": "paderborn-motor-temperature",
+      "name": "Electric Motor Temperature（车用永磁同步电机台架温度与电气量数据集）",
+      "publisher": "德国帕德博恩大学电驱动系统教研室（Universität Paderborn, LEA）；Kaggle 账号 wkirgsn（Wilhelm Kirchgäßner）发布",
+      "url": "https://www.kaggle.com/datasets/wkirgsn/electric-motor-temperature",
+      "content": "12 通道，含 d/q 轴电流电压、转速、转矩、四处温度；采样率 2 Hz，总时长 185 小时",
+      "format": "CSV，约 286 MB",
+      "license": "CC BY-SA 4.0，可商用，需署名 + 相同方式共享",
+      "mode": "registered_only",
+      "note": "真实车用数据，但采样率只有 2 Hz，且被测件是永磁同步机不是有刷直流，只能做工况级慢速时序的参照，做不了本场景的电流波形判据。**本包只登记，未下载。**",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 294 行：第一层真实实测表 Electric Motor Temperature 行（已核实）"
+      }
+    },
+    {
+      "id": "paderborn-bearing",
+      "name": "帕德博恩大学轴承数据中心数据集（KAt-DataCenter Bearing Dataset）",
+      "publisher": "德国帕德博恩大学设计与传动技术教研室，Lessmeier 等，2016",
+      "url": "https://groups.uni-paderborn.de/kat/BearingDataCenter/",
+      "content": "电机相电流与振动加速度同步采集；32 种轴承状态 × 4 工况",
+      "license": "CC BY-NC 4.0，**禁止商用**，商用需联系作者",
+      "mode": "registered_only",
+      "note": "若本案例属商业交付，该许可证是硬约束，不能用。登记在此是为了让「许可证审查」这一步在知识库里有据可查。",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 299 行：第一层真实实测表 帕德博恩轴承数据中心 行"
+      }
+    }
+  ],
+  "excluded_datasets": {
+    "note": "已明确排除，避免后续重复捞。",
+    "items": [
+      "SiCWell Dataset（IEEE DataPort, DOI 10.21227/mnmw-8c42）：实为车规锂电池单体数据，不含电机量",
+      "ziya07/bldc-motor-dataset（Kaggle）：页面自认 synthetic，且为设计参数表",
+      "sabermalek/imfds（Kaggle）：链接 404",
+      "Three Phase Induction Motor Stator Fault Data（IEEE DataPort, DOI 10.21227/0kwj-g017）：平台标注数据文件尚未上传",
+      "Brushless DC Motor sound dataset for PdM（Mendeley, j4yr5fmhv4）：实为无人机 A2212 电机音频"
+    ],
+    "suspect_items": [
+      "KoNAMIC Electronic Throttle Body Experimental Dataset（Zenodo, DOI 10.5281/zenodo.22096081）：全网唯一命名匹配「电子节气门」的数据集，但记录页未给通道与采样率、文件仅 790 189 字节、其关联仓库实际内容是四旋翼与倒立摆的 Koopman 辨识。内容真实性存疑，使用前必须下载解包人工确认",
+      "Fault Diagnosis Dataset for New Energy Vehicles（Kaggle 账号 ziya07）：无台架、无车型、无机构说明；同一上传者的其他数据集自认为合成数据。高度怀疑为合成"
+    ],
+    "_source": [
+      {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 308 行：已明确排除清单"
+      },
+      {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 305-306 行：存疑条目表"
+      }
+    ]
+  },
+  "datasets": [
+    {
+      "id": "normal-up-down-cycle",
+      "name": "正常升降电流曲线（合成）",
+      "mode": "generated_into_pack",
+      "synthetic": true,
+      "_placeholder": true,
+      "file_path": "./assets/waveforms/normal-up-down-cycle.csv",
+      "file_size_bytes": 1368632,
+      "row_count": 24000,
+      "columns": [
+        {
+          "key": "time_s",
+          "name": "时间（秒，t=0 为控制器收到上升指令的时刻）"
+        },
+        {
+          "key": "current_a",
+          "name": "电枢电流（安培，正值为上升方向）"
+        },
+        {
+          "key": "bus_voltage_v",
+          "name": "母线电压（伏特）"
+        },
+        {
+          "key": "position_mm",
+          "name": "玻璃托架位置（毫米，0 为下止点，420 为上止点）"
+        },
+        {
+          "key": "opening_mm",
+          "name": "开口量（毫米，= 420 − position_mm，法规 4~200 mm 判据用的就是这个量）"
+        },
+        {
+          "key": "speed_mm_s",
+          "name": "托架线速度（毫米/秒，正值为上升）"
+        },
+        {
+          "key": "force_n",
+          "name": "电机输出力（牛顿，由电流与传动效率换算；回缩瞬间的制动涌流会让它短暂冲高）"
+        },
+        {
+          "key": "pinch_force_n",
+          "name": "夹持力（牛顿，= 试验棒刚度 10 N/mm × 侵入量；非防夹工况恒为 0）"
+        },
+        {
+          "key": "ripple_pulse",
+          "name": "换向纹波过零脉冲（0/1，2 kHz 下已严重欠采样，仅作示意）"
+        },
+        {
+          "key": "phase",
+          "name": "工况标记"
+        }
+      ],
+      "sample_rate_sa_per_s": 2000.0,
+      "duration_s": 12.0,
+      "generator": "_build/gen_waveforms.py",
+      "synthesis_model": "一阶有刷直流电机电气-机械耦合模型，显式欧拉积分：L·di/dt = U·duty − R·i − Ke·ω；J·dω/dt = Kt·i − B·ω − T_load；dx/dt = k_arm·ω；F_out = Kt·i·η / k_arm_m。参数：U=13.5 V、R=0.52 Ω、L=0.80 mH、Ke=Kt=0.020、J=2.0e−5 kg·m²、B=2.0e−6、k_arm=0.226 mm/rad、η=0.105、每转纹波 8 个、纹波深度 6 %。内部按 20 kHz 积分，箱式平均降采样到 2000 Sa/s 输出。",
+      "calibration": "参数是标定到让稳态量落在 QC/T 626-2019 征求意见稿给的量级上的：堵转电流 U/R ≈ 26 A（低于 5.4.1 b) 的 28 A 上限）、上升速度约 118 mm/s（落在 5.4.1 d) 的 80~160 mm/s 区间中部）、堵转力约 240 N（高于 5.4.1 c) 的 212 N 下限）。**这是「让示例数据看起来合理」的标定，不是任何真实产品的参数辨识结果。**",
+      "measured_range": {
+        "current_a": [
+          -23.25,
+          27.35
+        ],
+        "speed_mm_s": [
+          -142.7,
+          117.5
+        ],
+        "pinch_force_n_max": 0.0,
+        "position_mm_max": 420.0
+      },
+      "phases": [
+        "DOWN",
+        "DWELL_OFF_4S",
+        "IDLE",
+        "IDLE_END",
+        "STALL_TOP_1S",
+        "UP"
+      ],
+      "label": {
+        "expected_result": "PASS",
+        "meaning": "上升速度与工作电流均在判据内，上止点堵转电流低于 28 A 上限"
+      },
+      "note": "时间轴照 QC/T 626 征求意见稿 6.9.1 注 3 的耐久单循环波形排：上升 3.5 s → 上止点堵转 1 s → 断电停 4 s → 下降。可直接喂给 WR-WF-001 与 WR-WF-004 做回放。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 286 行：汽车低压执行器电机的专用公开波形数据集，在十三个平台上确认为空白"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 314 行：gym-electric-motor（帕德博恩大学，MIT）：直流电机模型与可配参数"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 325 行：参数锚点：工作电流 ≤12 A、堵转电流 ≤28 A、堵转力 ≥212 N、上升速度 80–160 mm/s、工作电压 9–16 V"
+        },
+        {
+          "file": "[源] _build/gen_waveforms.py",
+          "locator": "模块 docstring 与 PROFILES 里对应的 profile 函数"
+        }
+      ]
+    },
+    {
+      "id": "antipinch-trigger",
+      "name": "防夹触发电流突增（合成）",
+      "mode": "generated_into_pack",
+      "synthetic": true,
+      "_placeholder": true,
+      "file_path": "./assets/waveforms/antipinch-trigger.csv",
+      "file_size_bytes": 1437297,
+      "row_count": 24000,
+      "columns": [
+        {
+          "key": "time_s",
+          "name": "时间（秒，t=0 为控制器收到上升指令的时刻）"
+        },
+        {
+          "key": "current_a",
+          "name": "电枢电流（安培，正值为上升方向）"
+        },
+        {
+          "key": "bus_voltage_v",
+          "name": "母线电压（伏特）"
+        },
+        {
+          "key": "position_mm",
+          "name": "玻璃托架位置（毫米，0 为下止点，420 为上止点）"
+        },
+        {
+          "key": "opening_mm",
+          "name": "开口量（毫米，= 420 − position_mm，法规 4~200 mm 判据用的就是这个量）"
+        },
+        {
+          "key": "speed_mm_s",
+          "name": "托架线速度（毫米/秒，正值为上升）"
+        },
+        {
+          "key": "force_n",
+          "name": "电机输出力（牛顿，由电流与传动效率换算；回缩瞬间的制动涌流会让它短暂冲高）"
+        },
+        {
+          "key": "pinch_force_n",
+          "name": "夹持力（牛顿，= 试验棒刚度 10 N/mm × 侵入量；非防夹工况恒为 0）"
+        },
+        {
+          "key": "ripple_pulse",
+          "name": "换向纹波过零脉冲（0/1，2 kHz 下已严重欠采样，仅作示意）"
+        },
+        {
+          "key": "phase",
+          "name": "工况标记"
+        }
+      ],
+      "sample_rate_sa_per_s": 2000.0,
+      "duration_s": 12.0,
+      "generator": "_build/gen_waveforms.py",
+      "synthesis_model": "一阶有刷直流电机电气-机械耦合模型，显式欧拉积分：L·di/dt = U·duty − R·i − Ke·ω；J·dω/dt = Kt·i − B·ω − T_load；dx/dt = k_arm·ω；F_out = Kt·i·η / k_arm_m。参数：U=13.5 V、R=0.52 Ω、L=0.80 mH、Ke=Kt=0.020、J=2.0e−5 kg·m²、B=2.0e−6、k_arm=0.226 mm/rad、η=0.105、每转纹波 8 个、纹波深度 6 %。内部按 20 kHz 积分，箱式平均降采样到 2000 Sa/s 输出。",
+      "calibration": "参数是标定到让稳态量落在 QC/T 626-2019 征求意见稿给的量级上的：堵转电流 U/R ≈ 26 A（低于 5.4.1 b) 的 28 A 上限）、上升速度约 118 mm/s（落在 5.4.1 d) 的 80~160 mm/s 区间中部）、堵转力约 240 N（高于 5.4.1 c) 的 212 N 下限）。**这是「让示例数据看起来合理」的标定，不是任何真实产品的参数辨识结果。**",
+      "measured_range": {
+        "current_a": [
+          -41.6,
+          24.83
+        ],
+        "speed_mm_s": [
+          -142.7,
+          117.5
+        ],
+        "pinch_force_n_max": 41.9,
+        "position_mm_max": 254.2
+      },
+      "phases": [
+        "IDLE",
+        "PINCH_CONTACT",
+        "PINCH_DETECTED",
+        "RETRACT",
+        "RETRACT_DONE",
+        "UP"
+      ],
+      "label": {
+        "expected_result": "PASS",
+        "meaning": "在开口约 167 mm 处检出夹持，夹持力峰值约 42 N，远低于 100 N 硬顶，随后回缩 60 mm"
+      },
+      "note": "障碍物用刚度 10 N/mm 的半刚性试验棒建模（GB 11552-2009 §4.8.3.1.3 的测量工具刚度），夹持力 = 刚度 × 侵入量。pinch_force_n 列是给 TR-PINCH-01 判据直接取数用的。phase 列标出 UP → PINCH_CONTACT → PINCH_DETECTED → RETRACT → RETRACT_DONE 五相。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 286 行：汽车低压执行器电机的专用公开波形数据集，在十三个平台上确认为空白"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 314 行：gym-electric-motor（帕德博恩大学，MIT）：直流电机模型与可配参数"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 325 行：参数锚点：工作电流 ≤12 A、堵转电流 ≤28 A、堵转力 ≥212 N、上升速度 80–160 mm/s、工作电压 9–16 V"
+        },
+        {
+          "file": "[源] _build/gen_waveforms.py",
+          "locator": "模块 docstring 与 PROFILES 里对应的 profile 函数"
+        }
+      ]
+    },
+    {
+      "id": "stall-saturation",
+      "name": "堵转电流饱和平台（合成）",
+      "mode": "generated_into_pack",
+      "synthetic": true,
+      "_placeholder": true,
+      "file_path": "./assets/waveforms/stall-saturation.csv",
+      "file_size_bytes": 1387701,
+      "row_count": 24000,
+      "columns": [
+        {
+          "key": "time_s",
+          "name": "时间（秒，t=0 为控制器收到上升指令的时刻）"
+        },
+        {
+          "key": "current_a",
+          "name": "电枢电流（安培，正值为上升方向）"
+        },
+        {
+          "key": "bus_voltage_v",
+          "name": "母线电压（伏特）"
+        },
+        {
+          "key": "position_mm",
+          "name": "玻璃托架位置（毫米，0 为下止点，420 为上止点）"
+        },
+        {
+          "key": "opening_mm",
+          "name": "开口量（毫米，= 420 − position_mm，法规 4~200 mm 判据用的就是这个量）"
+        },
+        {
+          "key": "speed_mm_s",
+          "name": "托架线速度（毫米/秒，正值为上升）"
+        },
+        {
+          "key": "force_n",
+          "name": "电机输出力（牛顿，由电流与传动效率换算；回缩瞬间的制动涌流会让它短暂冲高）"
+        },
+        {
+          "key": "pinch_force_n",
+          "name": "夹持力（牛顿，= 试验棒刚度 10 N/mm × 侵入量；非防夹工况恒为 0）"
+        },
+        {
+          "key": "ripple_pulse",
+          "name": "换向纹波过零脉冲（0/1，2 kHz 下已严重欠采样，仅作示意）"
+        },
+        {
+          "key": "phase",
+          "name": "工况标记"
+        }
+      ],
+      "sample_rate_sa_per_s": 2000.0,
+      "duration_s": 12.0,
+      "generator": "_build/gen_waveforms.py",
+      "synthesis_model": "一阶有刷直流电机电气-机械耦合模型，显式欧拉积分：L·di/dt = U·duty − R·i − Ke·ω；J·dω/dt = Kt·i − B·ω − T_load；dx/dt = k_arm·ω；F_out = Kt·i·η / k_arm_m。参数：U=13.5 V、R=0.52 Ω、L=0.80 mH、Ke=Kt=0.020、J=2.0e−5 kg·m²、B=2.0e−6、k_arm=0.226 mm/rad、η=0.105、每转纹波 8 个、纹波深度 6 %。内部按 20 kHz 积分，箱式平均降采样到 2000 Sa/s 输出。",
+      "calibration": "参数是标定到让稳态量落在 QC/T 626-2019 征求意见稿给的量级上的：堵转电流 U/R ≈ 26 A（低于 5.4.1 b) 的 28 A 上限）、上升速度约 118 mm/s（落在 5.4.1 d) 的 80~160 mm/s 区间中部）、堵转力约 240 N（高于 5.4.1 c) 的 212 N 下限）。**这是「让示例数据看起来合理」的标定，不是任何真实产品的参数辨识结果。**",
+      "measured_range": {
+        "current_a": [
+          0.0,
+          27.35
+        ],
+        "speed_mm_s": [
+          0.0,
+          117.5
+        ],
+        "pinch_force_n_max": 0.0,
+        "position_mm_max": 420.0
+      },
+      "phases": [
+        "IDLE",
+        "POWER_CUT",
+        "STALL_SATURATED",
+        "UP"
+      ],
+      "label": {
+        "expected_result": "PASS（电流），但工况本身违反 SI-HW-03",
+        "meaning": "电流爬到 U/R 的饱和平台约 26 A 并持续 5.3 s；电流本身不越 28 A 上限，但堵转持续时间的台架保护另算"
+      },
+      "note": "**本条刻意不启用堵转保护**，目的是录出完整的饱和平台，用来标定 control-parameters.json 的 stall_current_threshold（默认 24 A）与stall_debounce_time。真实台架上这样跑会撞上 SI-HW-03（堵转持续时间上限 30 s），本条 5.3 s 的堵转在限内，但不得把这条数据当成「允许长时间堵转」的依据。",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 286 行：汽车低压执行器电机的专用公开波形数据集，在十三个平台上确认为空白"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 314 行：gym-electric-motor（帕德博恩大学，MIT）：直流电机模型与可配参数"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 325 行：参数锚点：工作电流 ≤12 A、堵转电流 ≤28 A、堵转力 ≥212 N、上升速度 80–160 mm/s、工作电压 9–16 V"
+        },
+        {
+          "file": "[源] _build/gen_waveforms.py",
+          "locator": "模块 docstring 与 PROFILES 里对应的 profile 函数"
+        }
+      ]
+    }
+  ],
+  "demo_profile": {
+    "note": "本包三条时序全部是合成数据，演示按登记顺序取前两条，合成标记照旧显示。",
+    "datasets": []
+  }
+}

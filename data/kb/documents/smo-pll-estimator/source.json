@@ -1,0 +1,24 @@
+{
+  "doc_id": "smo-pll-estimator",
+  "title": "SMO 和 PLL 估算器",
+  "doc_type": "原理文档",
+  "taxonomy": {
+    "l1": "motor",
+    "l2": "cooling-fan",
+    "l3": "fortior-fu6832"
+  },
+  "process_tags": [
+    "调优"
+  ],
+  "format": "pdf",
+  "pages": 9,
+  "page_limit": null,
+  "tables": 0,
+  "source_path": "[源] manuals/SMO和PLL估算器.pdf",
+  "staged_input": "[源] manuals/SMO和PLL估算器.pdf",
+  "sha256": "4cbaa2503c4c4b85c9f25196ad4116729eb01ce4353fc8d7ad473f33643a8f59",
+  "bytes": 4993898,
+  "converter": "docling",
+  "ocr": true,
+  "note": null
+}

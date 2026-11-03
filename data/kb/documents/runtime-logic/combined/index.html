@@ -1,0 +1,97 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>运行逻辑（合成图文稿）</title><style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 20px 22px 40px; background: #fff; color: #1f2a24;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 13px; line-height: 1.75;
+}
+h1 { font-size: 19px; margin: 4px 0 14px; }
+h2 { font-size: 16px; margin: 22px 0 10px; padding-bottom: 4px; border-bottom: 1px solid #e3e8e4; }
+h3 { font-size: 14px; margin: 18px 0 8px; }
+h4, h5, h6 { font-size: 13px; margin: 14px 0 6px; color: #2e5e45; }
+p { margin: 8px 0; }
+ul, ol { margin: 8px 0; padding-left: 22px; }
+li { margin: 3px 0; }
+code { background: #f4f7f4; border: 1px solid #e3e8e4; border-radius: 3px; padding: 0 4px; font-size: 12px; }
+pre { background: #f7f9f7; border: 1px solid #e3e8e4; border-radius: 4px; padding: 10px; overflow-x: auto; }
+pre code { background: none; border: none; padding: 0; }
+table { border-collapse: collapse; margin: 10px 0; width: 100%; font-size: 12px; }
+th, td { border: 1px solid #e3e8e4; padding: 5px 8px; text-align: left; vertical-align: top; }
+th { background: #f0f5f1; font-weight: 600; }
+hr { border: none; border-top: 1px solid #e3e8e4; margin: 16px 0; }
+.kb-fig { margin: 14px 0; text-align: center; }
+.kb-fig img { max-width: 100%; height: auto; border: 1px solid #e3e8e4; border-radius: 4px; }
+/* 代码块：整体成块，保留原始换行与缩进 */
+.kb-code {
+  background: #f7f9f7; border: 1px solid #e3e8e4; border-left: 3px solid #9bb8a8;
+  border-radius: 4px; padding: 10px 12px; margin: 12px 0; overflow-x: auto;
+  white-space: pre; font-size: 12px; line-height: 1.65;
+}
+.kb-code code { background: none; border: none; padding: 0; font-size: 12px; }
+/* 公式块：居中、衬线、留白（干净文本样式，不引排版引擎） */
+.kb-formula {
+  margin: 12px auto; padding: 8px 12px; max-width: 100%; text-align: center;
+  font-family: "Cambria Math", "Times New Roman", "Georgia", serif;
+  font-size: 14px; line-height: 2; color: #22302a;
+  background: #fbfcfb; border-radius: 4px; white-space: pre-wrap; word-break: break-word;
+}
+</style></head><body><h1>运行逻辑</h1><div style="margin:0 0 14px;padding:8px 10px;border:1px solid #e3e8e4;border-radius:4px;background:#f7faf8;color:#5b6b62;font-size:12px;">系统合成图文稿（由抽取产物重建，非客户原件 PDF）。</div><p>程序架构中，可以先不管其他的，把和FOC控制相关的变量和逻辑捋清楚，其他硬件模块或软件模块都是为了实现这个逻辑服务，或者在这个逻辑上为了控制电机添加的其他功能。</p>
+
+<ol>
+<li>首先，硬件电路会对三相电流进行采样，然后运放部分会进行一个放大信号的处理，同时对信号进行偏置的处理，从而使得采样回来的电流值都在16383附近，大家都观察截图过，这里不再列出图片。我们的程序中会对单双三电阻采样模式进行选择，这个模式一定要和硬件电路是匹配的，不然采样回来的值会出问题。Demo板的硬件原理图是双电阻采样的，所以以原理图为例。</li>
+</ol>
+<figure class="kb-fig"><img src="/api/kb/documents/runtime-logic/figure?name=image1.png" alt="插图 1" loading="lazy"></figure>
+
+<p>图1-1 宏定义文件</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/runtime-logic/figure?name=image2.png" alt="插图 2" loading="lazy"></figure>
+
+<p>图1-2 原理图双电阻配置</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/runtime-logic/figure?name=image3.png" alt="插图 3" loading="lazy"></figure>
+
+<p>图1-3 程序配置</p>
+
+<ol>
+<li>mcStart</li>
+</ol>
+
+<p>mcStart状态机的作用：  </p>
+<p>首先只关注FOC框图中ud，uq，Iqref，Idref和初始角度θ的初值给定，其他变量先不管。</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/runtime-logic/figure?name=image4.png" alt="插图 4" loading="lazy"></figure>
+
+<p>图2-1 FOC框图中变量位置</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/runtime-logic/figure?name=image5.png" alt="插图 5" loading="lazy"></figure>
+
+<p>图2-2启动函数程序配置</p>
+
+<p>而且值在给定时是先给ud，uq的初值，再给Iqref，Idref的初值。</p>
+
+<p>这是因为在FOC控制逻辑中，先给定ud，uq的初值，那么我们的FOC就可以直接去进行电压环内部的Park反变换，然后继续进行后面的控制流程。这时三相电流上会有采样值，经过Clark变换和Park变换得到Id和Iq的反馈值。与给定的Iqref，Idref做差经过PI得到下一拍的ud，uq，然后整个内环系统会开始运行，如果把程序断点达到mcRun状态，不让程序往下运行，那么系统最终会稳定运行在Iqref对应的转速。</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/runtime-logic/figure?name=image6.png" alt="插图 6" loading="lazy"></figure>
+
+<p>图2-3断点位置</p>
+
+<ol>
+<li>mcRun</li>
+</ol>
+
+<p>mcRun状态机的作用：</p>
+
+<p>当控制系统对转速，功率等变量进行控制时，就要在内环的基础上添加上外环。以转速外环为例，外环的作用就是将转速误差经过PI计算得到的值作为电流内环的Iqref给定。</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/runtime-logic/figure?name=image7.png" alt="插图 7" loading="lazy"></figure>
+
+<p>mcFocCtrl.CtrlMode=0时，为切入闭环做准备，给一些变量赋值。</p>
+
+<p>mcFocCtrl.CtrlMode=1时，切入闭环。</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/runtime-logic/figure?name=image8.png" alt="插图 8" loading="lazy"></figure>
+
+<p>转速给定相关理解：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/runtime-logic/figure?name=image9.jpeg" alt="插图 9" loading="lazy"></figure></body></html>

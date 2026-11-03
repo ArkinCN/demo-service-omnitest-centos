@@ -1,0 +1,11 @@
+node_modules/
+package-lock.json
+.venv/
+logs/*.log
+logs/*.out
+logs/*.stdout
+logs/*.stderr
+logs/*-ui-text.txt
+reports/
+__pycache__/
+.kb/

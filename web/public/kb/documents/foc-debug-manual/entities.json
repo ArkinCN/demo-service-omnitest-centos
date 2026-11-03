@@ -1,0 +1,493 @@
+{
+  "doc_id": "foc-debug-manual",
+  "summary": {
+    "parameters": 23,
+    "parameters_matching_customer_h": 9,
+    "registers": 2,
+    "thresholds": 16,
+    "units": 11,
+    "procedure_steps": 13
+  },
+  "parameters": [
+    {
+      "name": "FOC_TRGDLY",
+      "count": 8,
+      "in_customer_h": false,
+      "first_chunk": "foc-debug-manual#c0024",
+      "first_page": 12,
+      "context": "/11 和 FOC_CR2[DSS] = 0 ，选择双 / 三电阻电流顺序采样模式。在三电阻电流顺序采样 模式下，通过 FOC_TRGDLY 寄存器设置对三相电流的其中一相相电流 ( 根据扇区决定 ia/ib/ic) 的采样时机，当采样完毕 后迅速对另外一相进"
+    },
+    {
+      "name": "FOC_ESQU",
+      "count": 5,
+      "in_customer_h": false,
+      "first_chunk": "foc-debug-manual#c0111",
+      "first_page": 50,
+      "context": "方式一 : 通过检测估算器计算出来的 FOC_ESQU( 估算器计算的反电动势的平方 ) 判断，正常情况下，电机转速越 高， FOC_ESQU 会越大。在电机发生堵转时，电机"
+    },
+    {
+      "name": "FOC_TSMIN",
+      "count": 5,
+      "in_customer_h": false,
+      "first_chunk": "foc-debug-manual#c0034",
+      "first_page": 17,
+      "context": "阻采样在低调制度以及扇区切换时存在采样窗口不够宽的情况，此时需调整输出波形以保证采样需要的最小采 样窗口，用户通过设置 FOC_TSMIN (FOC_TSMIN = 最小采样窗口时间 + 死区时间 ) ， FOC 模块会对 PWM 波形自动 进行移相处理。"
+    },
+    {
+      "name": "FOC_CR1",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "foc-debug-manual#c0024",
+      "first_page": 12,
+      "context": "配置 FOC_CR1[CSM] = 10/11 和 FOC_CR2[DSS] = 0 ，选择双 / 三电阻电流顺序采样模式。在三电阻电流顺序"
+    },
+    {
+      "name": "ATO_BW",
+      "count": 2,
+      "in_customer_h": true,
+      "first_chunk": "foc-debug-manual#c0081",
+      "first_page": 40,
+      "context": "间变长。在一些应用 中，启动时间长，可设置计数器计数完后重新 赋值，赋值次数由实际应用决定。. 运行时观测器带宽滤波值 ATO_BW, 参数调试.参数范围 = . 运行时观测器带宽滤波值 ATO_BW, 参数调试.具体作用 = 1. 观测器带宽影响估算"
+    },
+    {
+      "name": "FOC_CR2",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "foc-debug-manual#c0024",
+      "first_page": 12,
+      "context": "配置 FOC_CR1[CSM] = 10/11 和 FOC_CR2[DSS] = 0 ，选择双 / 三电阻电流顺序采样模式。在三电阻电流顺序采样 模式下，通过 FOC_TRGDLY 寄存"
+    },
+    {
+      "name": "FOC_TBLO",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "foc-debug-manual#c0027",
+      "first_page": 14,
+      "context": "候，死 区补偿需要设置为 0 ，死区补偿可有效改善低速时的电流波形正弦度。 -  第 137 行代码设置下桥最小脉宽 FOC_TBLO ， 用于三电阻电流采样模式， 当下桥导通的时间小于 FOC_TBLO ， 则不采样该相的电流，采用特殊处理得到电流。"
+    },
+    {
+      "name": "MOTOR_OMEGA_ACC_MIN",
+      "count": 2,
+      "in_customer_h": true,
+      "first_chunk": "foc-debug-manual#c0083",
+      "first_page": 41,
+      "context": "际频率没法跟上给定的频率，容易 失步；增量过小，启动太慢，易出现停顿现 象。. 启动的最小切换速度 （rpm/min） MOTOR_OMEGA_ACC_MIN, 参数调试.参数范围 = . 启动的最小切换速度 （rpm/min） MOTOR_OMEGA_ACC_MIN, 参数调"
+    },
+    {
+      "name": "MOTOR_OPEN_ACC",
+      "count": 2,
+      "in_customer_h": true,
+      "first_chunk": "foc-debug-manual#c0081",
+      "first_page": 40,
+      "context": "2. 启动电流增大，启动力矩会增大，过大容易 启动过冲；过小启动力矩不够，启动容易失败 或不能启动。. 爬坡启动增量 MOTOR_OPEN_ACC, 参数调试.参数范围 = 1-200. 爬坡启动增量 MOTOR_OPEN_ACC, 参数调试.具体作用 = 1. 爬"
+    },
+    {
+      "name": "MOTOR_OPEN_ACC_CNT",
+      "count": 2,
+      "in_customer_h": true,
+      "first_chunk": "foc-debug-manual#c0081",
+      "first_page": 40,
+      "context": "动速度的快慢，默认初始速 度为 0 ； 2. 在要求启动响应非常快的场合，可设置初始 速度为非零速度。. 爬坡启动次数 MOTOR_OPEN_ACC_CNT, 参数调试.参数范围 = 1-255. 爬坡启动次数 MOTOR_OPEN_ACC_CNT, 参数调试.具体作用 ="
+    },
+    {
+      "name": "MOTOR_OPEN_ACC_MIN",
+      "count": 2,
+      "in_customer_h": true,
+      "first_chunk": "foc-debug-manual#c0081",
+      "first_page": 40,
+      "context": "大，实际 频率没法跟上给定的频率，容易失步；增量过 小，启动太慢，易出现停顿现象。 1.. 爬坡启动 爬坡启动初始速度 MOTOR_OPEN_ACC_MIN, 参数调试.参数范围 = . 爬坡启动 爬坡启动初始速度 MOTOR_OPEN_ACC_MIN, 参数调试.具体作用"
+    },
+    {
+      "name": "AMP0_VHALF",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "foc-debug-manual#c0093",
+      "first_page": 45,
+      "context": "1. 确认电流采样部分是否有 VHALF 偏置电压，硬件上建议加上偏置电压，当有偏置电压时，需要将 AMP0_VHALF 设置为 1 ； 2. 将上述确定的采样电阻、放大倍数、 ADC 参考电压填写到下面代码中。"
+    },
+    {
+      "name": "CMP_ISR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "foc-debug-manual#c0108",
+      "first_page": 48,
+      "context": "当发生硬件过流时，即程序进入 void CMP_ISR(void) interrupt 7 中断服务函数，关闭驱动输出 MOE = 0 ，并且跳 转状态机为错误状态 mcSt"
+    },
+    {
+      "name": "FOC_EKI",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "foc-debug-manual#c0056",
+      "first_page": 33,
+      "context": "，采用速度跟随，直接将状态切换到运 行状态。若风机中用 Omega 启动，可根据正转转速设置不同的 FOC_EKP 、 FOC_EKI 以提高切入闭环的可靠性。判断"
+    },
+    {
+      "name": "FOC_EKP",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "foc-debug-manual#c0056",
+      "first_page": 33,
+      "context": "机正转且大于一定值时，采用速度跟随，直接将状态切换到运 行状态。若风机中用 Omega 启动，可根据正转转速设置不同的 FOC_EKP 、 FOC_EKI 以提高切入闭环的可靠性。判断"
+    },
+    {
+      "name": "FOC_TGLI",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "foc-debug-manual#c0027",
+      "first_page": 14,
+      "context": " 高压应用时，由于高压 Pre-driver 的上桥有最小导通脉冲必须大于一定值的要求。设置上桥导通窄脉冲消除 止 FOC_TGLI ，导通脉冲小于设定值时不导通，对噪声有一定改善，由于此样例代码是低压应用故不需设 置。"
+    },
+    {
+      "name": "FOC_THECOR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "foc-debug-manual#c0080",
+      "first_page": 40,
+      "context": "也在估算角度，当爬坡结束后切换到估算模式，由于估算角度和爬坡角度存在偏差，因此需要平 滑切换。可通过调节角度切换修正值 FOC_THECOR 的值减小切换抖动，实现平滑切换。"
+    },
+    {
+      "name": "MIN_WIND_TIME",
+      "count": 1,
+      "in_customer_h": true,
+      "first_chunk": "foc-debug-manual#c0099",
+      "first_page": 46,
+      "context": "最小采样窗口值 , FOC_TSMIN < 载波周期 /16( 单位 us) ，例 : 载波频率设置为 30KHZ ， MIN_WIND_TIME < 30/16 = 1.875μs"
+    },
+    {
+      "name": "MOTOR_LOOP_RPM",
+      "count": 1,
+      "in_customer_h": true,
+      "first_chunk": "foc-debug-manual#c0114",
+      "first_page": 50,
+      "context": "方式三 : 电机启动的时候，程序会在判断估算转速大于 MOTOR_LOOP_RPM 后，将 Mode 状态从 0 置为 1 ，从固定 电流启动，进入正常的环路。此时可以通过该 Mode 去判断是否发生了"
+    },
+    {
+      "name": "MOTOR_OMEGA_ACC_END",
+      "count": 1,
+      "in_customer_h": true,
+      "first_chunk": "foc-debug-manual#c0084",
+      "first_page": 42,
+      "context": "启动的限制速度（rpm/min） MOTOR_OMEGA_ACC_END, 动起来启动切换结束，易导致启动失败；过 大，容易导致启动无法切入闭环或速度超调。 = 1. 启动限制速度与速度基准有"
+    },
+    {
+      "name": "MOTOR_SPEED_BASE",
+      "count": 1,
+      "in_customer_h": true,
+      "first_chunk": "foc-debug-manual#c0100",
+      "first_page": 46,
+      "context": "速度基准 MOTOR_SPEED_BASE 典型值一般为最大转速的 1.5 倍 ~ 2 倍。"
+    },
+    {
+      "name": "MOTOR_SPEED_STAL_MAX_RPM",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "foc-debug-manual#c0113",
+      "first_page": 50,
+      "context": "方式二 : 通过检测估算转速，当估算转速超过设定转速 MOTOR_SPEED_STAL_MAX_RPM ，或者低于设定转速 MOTOR_SPEED_STAL_MIN_RPM ，则认为发生了堵转"
+    },
+    {
+      "name": "MOTOR_SPEED_STAL_MIN_RPM",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "foc-debug-manual#c0113",
+      "first_page": 50,
+      "context": "二 : 通过检测估算转速，当估算转速超过设定转速 MOTOR_SPEED_STAL_MAX_RPM ，或者低于设定转速 MOTOR_SPEED_STAL_MIN_RPM ，则认为发生了堵转"
+    }
+  ],
+  "registers": [
+    {
+      "name": "FOC_TRGDLY",
+      "count": 3,
+      "first_chunk": "foc-debug-manual#c0024",
+      "first_page": 12,
+      "context": "/11 和 FOC_CR2[DSS] = 0 ，选择双 / 三电阻电流顺序采样模式。在三电阻电流顺序采样 模式下，通过 FOC_TRGDLY 寄存器设置对三相电流的其中一相相电流 ( 根据扇区决定 ia/ib/ic) 的采样时机，当采样完毕 后迅速对另外一相进"
+    },
+    {
+      "name": "MOTOR_OPEN_ACC_CNT",
+      "count": 1,
+      "first_chunk": "foc-debug-manual#c0081",
+      "first_page": 40,
+      "context": "非零速度。. 爬坡启动次数 MOTOR_OPEN_ACC_CNT, 参数调试.参数范围 = 1-255. 爬坡启动次数 MOTOR_OPEN_ACC_CNT, 参数调试.具体作用 = 1. 启动爬坡次数，寄存器最大值为 255 ； 2. 启动次数增大，启动时间变长。在一些应用"
+    }
+  ],
+  "thresholds": [
+    {
+      "value": 1.25,
+      "unit": "V",
+      "chunk_id": "foc-debug-manual#c0042",
+      "page": 24,
+      "context": "-DC 转换芯片，降压处理后给芯片 VCC 供电。 -  开关电源原理此手册不做详细说明，特别注意，输出电压范围为， 1.25V ~ 20V 可调节，由 R11 和 R12 的分 压比决定。"
+    },
+    {
+      "value": 20.0,
+      "unit": "V",
+      "chunk_id": "foc-debug-manual#c0042",
+      "page": 24,
+      "context": "，降压处理后给芯片 VCC 供电。 -  开关电源原理此手册不做详细说明，特别注意，输出电压范围为， 1.25V ~ 20V 可调节，由 R11 和 R12 的分 压比决定。"
+    },
+    {
+      "value": 18.0,
+      "unit": "V",
+      "chunk_id": "foc-debug-manual#c0043",
+      "page": 24,
+      "context": "-  J6 短接应用低电压的时候，注意最大电压不要超过 18V ，否则容易出现烧毁芯片的现象"
+    },
+    {
+      "value": 80.0,
+      "unit": "%",
+      "chunk_id": "foc-debug-manual#c0046",
+      "page": 27,
+      "context": "8 电容不可接到采样电阻的 I_shunt 端，会造成采样干扰； 2. 最大电流情况下，采样电阻功率不能超过额定功率的 80% ； 3. 吸尘器都是单电阻采样，故 RS1 、 RS2 直接短接。"
+    },
+    {
+      "value": 1.0,
+      "unit": "%",
+      "chunk_id": "foc-debug-manual#c0048",
+      "page": 28,
+      "context": "1. R14 、 C13 参数不可调整； 2. R13 、 R15 需要用 1% 精度电阻； 3. 最大采样电压 = (R13+R15)/(R15) ； 4. 最大采样电压一般选择为 2 倍的最大应用"
+    },
+    {
+      "value": 5.0,
+      "unit": "V",
+      "chunk_id": "foc-debug-manual#c0092",
+      "page": 44,
+      "context": "示例 : Rsample = 0.5Ω ， Amp = 4 ， Vs = 5.0V ，则 Ibase = 2.5A , Ismax = 1.25A , Ismin = -1.25A 。"
+    },
+    {
+      "value": 2.5,
+      "unit": "A",
+      "chunk_id": "foc-debug-manual#c0092",
+      "page": 44,
+      "context": "示例 : Rsample = 0.5Ω ， Amp = 4 ， Vs = 5.0V ，则 Ibase = 2.5A , Ismax = 1.25A , Ismin = -1.25A 。"
+    },
+    {
+      "value": 1.25,
+      "unit": "A",
+      "chunk_id": "foc-debug-manual#c0092",
+      "page": 44,
+      "context": "mple = 0.5Ω ， Amp = 4 ， Vs = 5.0V ，则 Ibase = 2.5A , Ismax = 1.25A , Ismin = -1.25A 。"
+    },
+    {
+      "value": -1.25,
+      "unit": "A",
+      "chunk_id": "foc-debug-manual#c0092",
+      "page": 44,
+      "context": "p = 4 ， Vs = 5.0V ，则 Ibase = 2.5A , Ismax = 1.25A , Ismin = -1.25A 。"
+    },
+    {
+      "value": 5.0,
+      "unit": "V",
+      "chunk_id": "foc-debug-manual#c0096",
+      "page": 45,
+      "context": "例 : RV1 = 330 KΩ ， RV2 = 300 KΩ ， RV3 = 6.8 KΩ ， Vs = 5.0V ，则最大采样电压为 Vsmax= ଷଷ଴ାଷ଴଴ା଺.଼ ଺.଼ ∗ 5.0 = 468V"
+    },
+    {
+      "value": 468.0,
+      "unit": "V",
+      "chunk_id": "foc-debug-manual#c0096",
+      "page": 45,
+      "context": "6.8 KΩ ， Vs = 5.0V ，则最大采样电压为 Vsmax= ଷଷ଴ାଷ଴଴ା଺.଼ ଺.଼ ∗ 5.0 = 468V"
+    },
+    {
+      "value": 1.875,
+      "unit": "μs",
+      "chunk_id": "foc-debug-manual#c0099",
+      "page": 46,
+      "context": "周期 /16( 单位 us) ，例 : 载波频率设置为 30KHZ ， MIN_WIND_TIME < 30/16 = 1.875μs"
+    },
+    {
+      "value": 2.0,
+      "unit": "μs",
+      "chunk_id": "foc-debug-manual#c0105",
+      "page": 48,
+      "context": "硬件过流保护 一般通过 CMP3 中断和外部中断 INT0 触发保护，触发阈值到保护完成时间低于 2μs ，能快速保护 硬件。"
+    },
+    {
+      "value": 1.0,
+      "unit": "ms",
+      "chunk_id": "foc-debug-manual#c0109",
+      "page": 49,
+      "context": "件过流阈值 OverSoftCurrentTime 次，程序报软件过流错误，进入错误状态停机保护。注意 软件过流保护在 1ms 中断中处理，响应时间较慢不可取代硬件过流保护。"
+    },
+    {
+      "value": 80.0,
+      "unit": "℃",
+      "chunk_id": "foc-debug-manual#c0116",
+      "page": 51,
+      "context": "其中， OVER_Temperature 为保护设定值， 1.0 为 NTC 电阻在 80 ℃ 下的阻值 1 Ω ， UNDER_Temperature 2.23 为 NTC 电阻在 70 ℃ 下的阻值 2.23"
+    },
+    {
+      "value": 1.0,
+      "unit": "Ω",
+      "chunk_id": "foc-debug-manual#c0116",
+      "page": 51,
+      "context": "其中， OVER_Temperature 为保护设定值， 1.0 为 NTC 电阻在 80 ℃ 下的阻值 1 Ω ， UNDER_Temperature 2.23 为 NTC 电阻在 70 ℃ 下的阻值 2.23 Ω 。"
+    }
+  ],
+  "units": [
+    {
+      "unit": "°",
+      "count": 15
+    },
+    {
+      "unit": "V",
+      "count": 10
+    },
+    {
+      "unit": "%",
+      "count": 8
+    },
+    {
+      "unit": "bit",
+      "count": 5
+    },
+    {
+      "unit": "μs",
+      "count": 4
+    },
+    {
+      "unit": "ns",
+      "count": 3
+    },
+    {
+      "unit": "Ω",
+      "count": 3
+    },
+    {
+      "unit": "A",
+      "count": 3
+    },
+    {
+      "unit": "℃",
+      "count": 2
+    },
+    {
+      "unit": "Hz",
+      "count": 1
+    },
+    {
+      "unit": "ms",
+      "count": 1
+    }
+  ],
+  "procedure_steps": [
+    {
+      "order": 1,
+      "text": "测量电机三相定子电流，可得到 a I 和 b I 。将三相电流通过 Clark 变换至两相电流 I  和 I  ，其是相互正交 的时变电流值；",
+      "chunk_id": "foc-debug-manual#c0008",
+      "page": 7,
+      "heading_path": [
+        "2 磁场定向控制 (FOC) 原理"
+      ]
+    },
+    {
+      "order": 1,
+      "text": "C33 参数不可调整，精度要求 10% ；",
+      "chunk_id": "foc-debug-manual#c0047",
+      "page": 28,
+      "heading_path": [
+        "5.7.1 注意事项"
+      ]
+    },
+    {
+      "order": 6,
+      "text": "最大采样电流一般设置为最大母线电流的 4 倍左右。",
+      "chunk_id": "foc-debug-manual#c0047",
+      "page": 28,
+      "heading_path": [
+        "5.7.1 注意事项"
+      ]
+    },
+    {
+      "order": 1,
+      "text": "R14 、 C13 参数不可调整；",
+      "chunk_id": "foc-debug-manual#c0048",
+      "page": 28,
+      "heading_path": [
+        "5.8.1 注意事项"
+      ]
+    },
+    {
+      "order": 4,
+      "text": "最大采样电压一般选择为 2 倍的最大应用电压， OVP 此处的电压需要低于 0.8*VREF 。",
+      "chunk_id": "foc-debug-manual#c0048",
+      "page": 28,
+      "heading_path": [
+        "5.8.1 注意事项"
+      ]
+    },
+    {
+      "order": 5,
+      "text": "当检测到电机为正转，且速度比较高时，直接切入闭环运行中。",
+      "chunk_id": "foc-debug-manual#c0060",
+      "page": 34,
+      "heading_path": [
+        "6.5.2 BEMF 模式"
+      ]
+    },
+    {
+      "order": 2,
+      "text": "相电阻 Rs: 万用表测量电机两相线电阻 RL ，相电阻 Rs = RL/2 ；",
+      "chunk_id": "foc-debug-manual#c0088",
+      "page": 43,
+      "heading_path": [
+        "8.1.1 测量方法"
+      ]
+    },
+    {
+      "order": 4,
+      "text": "反电动势常数 Ke: 示波器的探头接电机的一相，地接电机另外两相中的某一相，转动负载，测出反 电动势波形。取中间的一个正弦波，测量其峰峰值 Vpp 和频率 f 。计算公式如下 :",
+      "chunk_id": "foc-debug-manual#c0088",
+      "page": 43,
+      "heading_path": [
+        "8.1.1 测量方法"
+      ]
+    },
+    {
+      "order": 1,
+      "text": "确认电流采样部分是否有 VHALF 偏置电压，硬件上建议加上偏置电压，当有偏置电压时，需要将 AMP0_VHALF 设置为 1 ；",
+      "chunk_id": "foc-debug-manual#c0093",
+      "page": 45,
+      "heading_path": [
+        "8.2.1 对应代码"
+      ]
+    },
+    {
+      "order": 1,
+      "text": "关闭启动、堵转、缺相保护使能，避免测试模式下误报保护；",
+      "chunk_id": "foc-debug-manual#c0101",
+      "page": 46,
+      "heading_path": [
+        "8.6 确认硬件驱动正常"
+      ]
+    },
+    {
+      "order": 2,
+      "text": "设置硬件过流保护值，避免硬件短路烧毁功率器件；",
+      "chunk_id": "foc-debug-manual#c0101",
+      "page": 46,
+      "heading_path": [
+        "8.6 确认硬件驱动正常"
+      ]
+    },
+    {
+      "order": 3,
+      "text": "打开预定位测试模式 AlignTestMode = 1 ；",
+      "chunk_id": "foc-debug-manual#c0102",
+      "page": 47,
+      "heading_path": [
+        "Application Manual Application Manual"
+      ]
+    },
+    {
+      "order": 5,
+      "text": "用示波器测试确认，驱动板 U 、 V 、 W 是否都有正常的方波输出，如有说明板子驱动输出正常，正常波形参考 图 8-3 。",
+      "chunk_id": "foc-debug-manual#c0102",
+      "page": 47,
+      "heading_path": [
+        "Application Manual Application Manual"
+      ]
+    }
+  ],
+  "method": "regex+heuristic, no LLM; 参数名=全大写下划线标识符, 寄存器=标识符±40字符内出现『寄存器/register』, 阈值=数值+单位且±40字符内含阈值语境词, 规程步骤=编号行且含操作动词"
+}

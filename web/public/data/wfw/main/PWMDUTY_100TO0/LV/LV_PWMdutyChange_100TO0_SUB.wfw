@@ -1,0 +1,1208 @@
+{
+  "formatVersion": "1.0.0",
+  "metadata": {
+    "name": "新工作流",
+    "createdAt": "2026-05-14T10:12:34.570Z",
+    "updatedAt": "2026-05-25T08:01:28.337Z",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0
+    },
+    "tags": [
+      "direction:COOLING_FAN"
+    ],
+    "category": "direction:COOLING_FAN",
+    "isTemplate": false
+  },
+  "definition": {
+    "nodes": [
+      {
+        "id": "9c622d21-dc93-49e9-8071-ded52c58dd63",
+        "type": "start",
+        "position": {
+          "x": -1408,
+          "y": -672
+        },
+        "data": {
+          "label": "开始",
+          "rotation": 0
+        }
+      },
+      {
+        "id": "node-53972bda-823e-4404-8edb-f868bbba97f9",
+        "type": "subworkflow",
+        "position": {
+          "x": -1008,
+          "y": -704
+        },
+        "data": {
+          "label": "LV:PWMDUTY_100TO0",
+          "description": "子工作流：子工作流 15:59:36",
+          "subWorkflowId": "aac324e3-ab37-4000-baf2-c7da8937d068",
+          "referenceMode": "embedded",
+          "embeddedWorkflow": {
+            "id": "aac324e3-ab37-4000-baf2-c7da8937d068",
+            "name": "子工作流 15:59:36",
+            "description": "子工作流：子工作流 15:59:36",
+            "nodes": [
+              {
+                "id": "f888ee8c-af11-4395-8333-70323ec1f3b1",
+                "type": "subworkflow_input",
+                "position": {
+                  "x": -180,
+                  "y": 50
+                },
+                "data": {
+                  "label": "Input1",
+                  "portIndex": 0,
+                  "portName": "Input1",
+                  "portType": "input",
+                  "connectedNodeId": "0b9da6d5-a039-47f4-9063-5f87d050dab4",
+                  "connectedHandle": "input"
+                }
+              },
+              {
+                "id": "e0079808-81ee-4c41-8a2e-973f120d1d76",
+                "type": "end",
+                "position": {
+                  "x": 688,
+                  "y": 2096
+                },
+                "data": {
+                  "label": "结束",
+                  "status": "success",
+                  "rotation": 90
+                }
+              },
+              {
+                "id": "c6c087ba-d6df-468f-9fa9-51c20fb59d0f",
+                "type": "hid_preset_voltage_set",
+                "position": {
+                  "x": 496,
+                  "y": 576
+                },
+                "data": {
+                  "label": "设置电压",
+                  "presetFunction": "VOLTAGE_SET",
+                  "paramValues": {
+                    "voltage": 12.5
+                  },
+                  "rotation": 0
+                }
+              },
+              {
+                "id": "0b9da6d5-a039-47f4-9063-5f87d050dab4",
+                "type": "variable",
+                "position": {
+                  "x": 0,
+                  "y": 848
+                },
+                "data": {
+                  "label": "变量操作",
+                  "operation": "set",
+                  "variableName": "PWMDUTY",
+                  "value": "100",
+                  "initialValue": "",
+                  "minValue": "0",
+                  "maxValue": "100",
+                  "useVariableValue": false,
+                  "rotation": 0
+                }
+              },
+              {
+                "id": "85775d3b-3844-4bd5-90b2-100331315105",
+                "type": "rigol_oscilloscope",
+                "position": {
+                  "x": 240,
+                  "y": 848
+                },
+                "data": {
+                  "label": "RIGOL示波器",
+                  "operationMode": "parameter_setup",
+                  "devicePath": "",
+                  "autoDisconnect": true,
+                  "clearBeforeExecution": false,
+                  "channels": [
+                    {
+                      "channel": 1,
+                      "enabled": true,
+                      "scale_v_per_div": 5,
+                      "offset_v": 5,
+                      "coupling": "DC",
+                      "probe_ratio": "10",
+                      "bw_limit": "OFF"
+                    },
+                    {
+                      "channel": 2,
+                      "enabled": true,
+                      "scale_v_per_div": 5,
+                      "offset_v": 0,
+                      "coupling": "DC",
+                      "probe_ratio": "10",
+                      "bw_limit": "OFF"
+                    },
+                    {
+                      "channel": 3,
+                      "enabled": true,
+                      "scale_v_per_div": 5,
+                      "offset_v": -5,
+                      "coupling": "DC",
+                      "probe_ratio": "10",
+                      "bw_limit": "OFF"
+                    },
+                    {
+                      "channel": 4,
+                      "enabled": true,
+                      "scale_v_per_div": 1,
+                      "offset_v": -2,
+                      "coupling": "DC",
+                      "probe_ratio": "10",
+                      "bw_limit": "OFF"
+                    }
+                  ],
+                  "timeScale": 2,
+                  "timeOffset": 0,
+                  "trigger": {
+                    "mode": "EDGE",
+                    "source": "CHAN1",
+                    "level": 0,
+                    "slope": "POSitive",
+                    "coupling": "DC"
+                  },
+                  "screenshotEnabled": false,
+                  "autoscaleBeforeScreenshot": false,
+                  "screenshotSavePath": "./screenshots",
+                  "screenshotFilenameTemplate": "rigol_{timestamp}.bmp",
+                  "measurementItems": [],
+                  "scpiCommand": "",
+                  "scpiIsQuery": true,
+                  "scpiOutputVariable": "rigol_result",
+                  "dataAnalysisConfig": {
+                    "settlingTolerance": 0.02,
+                    "analysisItems": [
+                      {
+                        "id": "analysis_1778753473119_1",
+                        "enabled": true,
+                        "channel": 1,
+                        "metricType": "ramp_max_value",
+                        "outputVariable": "rigol_ch1_ramp_max"
+                      },
+                      {
+                        "id": "analysis_1778753473119_2",
+                        "enabled": true,
+                        "channel": 1,
+                        "metricType": "steady_state_max_value",
+                        "outputVariable": "rigol_ch1_steady_max"
+                      },
+                      {
+                        "id": "analysis_1778753473119_3",
+                        "enabled": true,
+                        "channel": 1,
+                        "metricType": "acceleration_time",
+                        "outputVariable": "rigol_ch1_accel_time"
+                      }
+                    ],
+                    "powerOffDetection": {
+                      "enabled": false,
+                      "dropChannel": 1,
+                      "constantChannel": 2,
+                      "dropThresholdPercent": 10,
+                      "steadyCalcRatio": 0.1,
+                      "constantToleranceV": 0.01,
+                      "minConstantSamples": 100,
+                      "detectionWindowSize": 50,
+                      "outputVariableDropTime": "poweroff_drop_time",
+                      "outputVariableConstantTime": "poweroff_constant_time",
+                      "outputVariableTimeDifference": "poweroff_time_diff",
+                      "voltageReachChannel": 0,
+                      "voltageReachTargetV": 0,
+                      "outputVariableReachTime": "poweroff_reach_time"
+                    },
+                    "powerOnDetection": {
+                      "enabled": false,
+                      "riseChannel": 1,
+                      "squareWaveChannel": 2,
+                      "riseThresholdPercent": 3,
+                      "steadyCalcRatio": 0.1,
+                      "squareWaveToleranceV": 0.05,
+                      "minSquareWaveSamples": 20,
+                      "detectionWindowSize": 50,
+                      "outputVariableRiseTime": "poweron_rise_time",
+                      "outputVariableSquareWaveTime": "poweron_square_wave_time",
+                      "outputVariableTimeDifference": "poweron_time_diff"
+                    }
+                  },
+                  "rotation": 0
+                }
+              },
+              {
+                "id": "2c68e53f-f8b1-4ea3-b3ff-2f98b5e6bd62",
+                "type": "curve_lookup",
+                "position": {
+                  "x": 784,
+                  "y": 352
+                },
+                "data": {
+                  "label": "曲线查找",
+                  "curveGroupId": "speed-pwm",
+                  "curveId": "xlsx-curve-1778754493521-2d9q",
+                  "inputMode": "variable",
+                  "fixedXValue": 0,
+                  "outputVariableName": "PWMRESULT",
+                  "inputVariableName": "PWMDUTY",
+                  "rotation": 0
+                }
+              },
+              {
+                "id": "6637069a-dc54-4310-be40-8131f3c786c0",
+                "type": "hid_preset_speed_test",
+                "position": {
+                  "x": 912,
+                  "y": 496
+                },
+                "data": {
+                  "label": "转速测试",
+                  "presetFunction": "SPEED_TEST",
+                  "paramValues": {
+                    "dutyCycle": {
+                      "mode": "variable",
+                      "variableName": "PWMDUTY"
+                    },
+                    "speed": {
+                      "mode": "variable",
+                      "variableName": "PWMRESULT"
+                    },
+                    "time": 30
+                  },
+                  "rotation": 90,
+                  "lastQueryResult": {
+                    "success": true,
+                    "value": 6,
+                    "unit": "s",
+                    "displayText": "通过 6s",
+                    "timestamp": 1778762606891
+                  },
+                  "lastSpeedTestResult": {
+                    "targetRpm": 15469,
+                    "durationMs": 30000,
+                    "intervalMs": 50,
+                    "toleranceMode": "absolute",
+                    "toleranceValue": 50,
+                    "lowerBound": 15419,
+                    "upperBound": 15519,
+                    "samples": [],
+                    "passed": true,
+                    "failureSampleIndex": -1,
+                    "failureSampleRpm": 0,
+                    "meanRpm": 15469,
+                    "minRpm": 15469,
+                    "maxRpm": 15469,
+                    "outOfRangeCount": 0,
+                    "startedAt": 1779259640675,
+                    "completedAt": 1779259647565,
+                    "aborted": false,
+                    "isSelfTest": true,
+                    "dutyCyclePercent": 100
+                  }
+                }
+              },
+              {
+                "id": "abd28d63-6695-4757-8bde-f8eea320ed3e",
+                "type": "delay",
+                "position": {
+                  "x": 1184,
+                  "y": 912
+                },
+                "data": {
+                  "label": "延时",
+                  "duration": 5000,
+                  "useVariable": false,
+                  "rotation": 0,
+                  "remainingTime": 0
+                }
+              },
+              {
+                "id": "a3412af4-9075-4807-a0af-835f9580df8d",
+                "type": "curve_lookup",
+                "position": {
+                  "x": 1936,
+                  "y": 880
+                },
+                "data": {
+                  "label": "曲线查找",
+                  "curveGroupId": "speed-pwm",
+                  "curveId": "xlsx-curve-1778754493521-2d9q",
+                  "inputMode": "variable",
+                  "fixedXValue": 0,
+                  "outputVariableName": "PWMRESULT1",
+                  "inputVariableName": "PWMDUTY1",
+                  "rotation": 270
+                }
+              },
+              {
+                "id": "78b0fd58-4b2d-4ba1-b5a9-1f828d18876b",
+                "type": "delay",
+                "position": {
+                  "x": 1920,
+                  "y": 112
+                },
+                "data": {
+                  "label": "延时",
+                  "duration": 5000,
+                  "useVariable": false,
+                  "rotation": 180,
+                  "remainingTime": 0
+                }
+              },
+              {
+                "id": "9067425b-f220-4a00-a2aa-766dd66b6b41",
+                "type": "hid_preset_relay_open",
+                "position": {
+                  "x": 1536,
+                  "y": 480
+                },
+                "data": {
+                  "label": "继电器断开",
+                  "presetFunction": "RELAY_OPEN",
+                  "rotation": 90
+                }
+              },
+              {
+                "id": "de005dcd-3933-466d-8541-095f7df06c14",
+                "type": "rigol_oscilloscope",
+                "position": {
+                  "x": 1680,
+                  "y": 112
+                },
+                "data": {
+                  "label": "RIGOL示波器",
+                  "operationMode": "screenshot",
+                  "devicePath": "USB0::0x1AB1::0x04CE::DS1ZC252503733::INSTR",
+                  "autoDisconnect": true,
+                  "clearBeforeExecution": false,
+                  "channels": [
+                    {
+                      "channel": 1,
+                      "enabled": true,
+                      "scale_v_per_div": 5,
+                      "offset_v": 5,
+                      "coupling": "DC",
+                      "probe_ratio": "10",
+                      "bw_limit": "OFF"
+                    },
+                    {
+                      "channel": 2,
+                      "enabled": true,
+                      "scale_v_per_div": 5,
+                      "offset_v": 0,
+                      "coupling": "DC",
+                      "probe_ratio": "10",
+                      "bw_limit": "OFF"
+                    },
+                    {
+                      "channel": 3,
+                      "enabled": true,
+                      "scale_v_per_div": 5,
+                      "offset_v": -5,
+                      "coupling": "DC",
+                      "probe_ratio": "10",
+                      "bw_limit": "OFF"
+                    },
+                    {
+                      "channel": 4,
+                      "enabled": true,
+                      "scale_v_per_div": 1,
+                      "offset_v": -2,
+                      "coupling": "DC",
+                      "probe_ratio": "10",
+                      "bw_limit": "OFF"
+                    }
+                  ],
+                  "timeScale": 2,
+                  "timeOffset": 0,
+                  "trigger": {
+                    "mode": "EDGE",
+                    "source": "CHAN1",
+                    "level": 0,
+                    "slope": "POSitive",
+                    "coupling": "DC"
+                  },
+                  "screenshotEnabled": true,
+                  "autoscaleBeforeScreenshot": false,
+                  "screenshotSavePath": "C:\\Users\\Lenovo\\Desktop\\26006_33618_AI相关\\26006_33618_AI相关\\Document\\STTEST\\WORKINGflow\\writingpaper_scope",
+                  "screenshotFilenameTemplate": "HSPtLSP_LV.bmp",
+                  "measurementItems": [],
+                  "scpiCommand": "",
+                  "scpiIsQuery": true,
+                  "scpiOutputVariable": "rigol_result",
+                  "dataAnalysisConfig": {
+                    "settlingTolerance": 0.02,
+                    "analysisItems": [
+                      {
+                        "id": "analysis_1778753473119_1",
+                        "enabled": true,
+                        "channel": 1,
+                        "metricType": "ramp_max_value",
+                        "outputVariable": "rigol_ch1_ramp_max"
+                      },
+                      {
+                        "id": "analysis_1778753473119_2",
+                        "enabled": true,
+                        "channel": 1,
+                        "metricType": "steady_state_max_value",
+                        "outputVariable": "rigol_ch1_steady_max"
+                      },
+                      {
+                        "id": "analysis_1778753473119_3",
+                        "enabled": true,
+                        "channel": 1,
+                        "metricType": "acceleration_time",
+                        "outputVariable": "rigol_ch1_accel_time"
+                      }
+                    ],
+                    "powerOffDetection": {
+                      "enabled": false,
+                      "dropChannel": 1,
+                      "constantChannel": 2,
+                      "dropThresholdPercent": 10,
+                      "steadyCalcRatio": 0.1,
+                      "constantToleranceV": 0.01,
+                      "minConstantSamples": 100,
+                      "detectionWindowSize": 50,
+                      "outputVariableDropTime": "poweroff_drop_time",
+                      "outputVariableConstantTime": "poweroff_constant_time",
+                      "outputVariableTimeDifference": "poweroff_time_diff",
+                      "voltageReachChannel": 0,
+                      "voltageReachTargetV": 0,
+                      "outputVariableReachTime": "poweroff_reach_time"
+                    },
+                    "powerOnDetection": {
+                      "enabled": false,
+                      "riseChannel": 1,
+                      "squareWaveChannel": 2,
+                      "riseThresholdPercent": 3,
+                      "steadyCalcRatio": 0.1,
+                      "squareWaveToleranceV": 0.05,
+                      "minSquareWaveSamples": 20,
+                      "detectionWindowSize": 50,
+                      "outputVariableRiseTime": "poweron_rise_time",
+                      "outputVariableSquareWaveTime": "poweron_square_wave_time",
+                      "outputVariableTimeDifference": "poweron_time_diff"
+                    }
+                  },
+                  "rotation": 180
+                }
+              },
+              {
+                "id": "94168482-cfab-4255-bde4-9571e65a1972",
+                "type": "delay",
+                "position": {
+                  "x": 1120,
+                  "y": 112
+                },
+                "data": {
+                  "label": "延时",
+                  "duration": 1000,
+                  "useVariable": false,
+                  "rotation": 90,
+                  "remainingTime": 0
+                }
+              },
+              {
+                "id": "c6396474-6321-4dd3-8023-355a4ce608e3",
+                "type": "report_generator",
+                "position": {
+                  "x": 1344,
+                  "y": 0
+                },
+                "data": {
+                  "label": "写入报告",
+                  "templatePath": "C:\\Users\\Lenovo\\Desktop\\26006_33618_AI相关\\26006_33618_AI相关\\Document\\STTEST\\WORKINGflow\\writingpaper_scope\\Fortior_Motor_Checklist_公用模板_7 .xlsm",
+                  "imageDir": "C:\\Users\\Lenovo\\Desktop\\26006_33618_AI相关\\26006_33618_AI相关\\Document\\STTEST\\WORKINGflow\\writingpaper_scope",
+                  "csvPath": "",
+                  "outputPath": "C:\\Users\\Lenovo\\Desktop\\26006_33618_AI相关\\26006_33618_AI相关\\Document\\STTEST\\WORKINGflow\\writingpaper_scope\\Fortior_Motor_Checklist_公用模板_7  - 副本.xlsm",
+                  "templateMode": "preset",
+                  "customMappings": [],
+                  "variableMappings": [],
+                  "enableImageDir": true,
+                  "enableVariableMappings": true,
+                  "rotation": 180
+                }
+              },
+              {
+                "id": "8646a385-cc30-46d7-8fd7-d60bed0352dd",
+                "type": "variable",
+                "position": {
+                  "x": 1696,
+                  "y": 960
+                },
+                "data": {
+                  "label": "变量操作",
+                  "operation": "set",
+                  "variableName": "PWMDUTY1",
+                  "value": "0",
+                  "initialValue": "",
+                  "minValue": "0",
+                  "maxValue": "100",
+                  "useVariableValue": false,
+                  "valueVariable": "10"
+                }
+              },
+              {
+                "id": "c4514fdd-3aff-4878-9cc5-63cc35ed4e6f",
+                "type": "hid_preset_speed_test",
+                "position": {
+                  "x": 2192,
+                  "y": 528
+                },
+                "data": {
+                  "label": "转速测试",
+                  "presetFunction": "SPEED_TEST",
+                  "paramValues": {
+                    "dutyCycle": {
+                      "mode": "variable",
+                      "variableName": "PWMDUTY1"
+                    },
+                    "speed": {
+                      "mode": "variable",
+                      "variableName": "PWMRESULT1"
+                    },
+                    "time": 30
+                  },
+                  "rotation": 270,
+                  "lastQueryResult": {
+                    "success": true,
+                    "value": 8,
+                    "unit": "s",
+                    "displayText": "通过 8s",
+                    "timestamp": 1778762475568
+                  },
+                  "lastSpeedTestResult": {
+                    "targetRpm": 0,
+                    "durationMs": 30000,
+                    "intervalMs": 50,
+                    "toleranceMode": "absolute",
+                    "toleranceValue": 50,
+                    "lowerBound": -50,
+                    "upperBound": 50,
+                    "samples": [],
+                    "passed": true,
+                    "failureSampleIndex": -1,
+                    "failureSampleRpm": 0,
+                    "meanRpm": 0,
+                    "minRpm": 0,
+                    "maxRpm": 0,
+                    "outOfRangeCount": 0,
+                    "startedAt": 1779259653095,
+                    "completedAt": 1779259654085,
+                    "aborted": false,
+                    "isSelfTest": true,
+                    "dutyCyclePercent": 0
+                  }
+                }
+              },
+              {
+                "id": "71585418-ce44-40e0-af15-c18fb0e08ab5",
+                "type": "subworkflow_output",
+                "position": {
+                  "x": 2372,
+                  "y": 50
+                },
+                "data": {
+                  "label": "Output1",
+                  "portIndex": 0,
+                  "portName": "Output1",
+                  "portType": "output",
+                  "connectedNodeId": "e0079808-81ee-4c41-8a2e-973f120d1d76",
+                  "connectedHandle": "output"
+                }
+              }
+            ],
+            "edges": [
+              {
+                "id": "d9bc5af7-dbd8-4016-8d6f-1b9ee27c18eb",
+                "source": "0b9da6d5-a039-47f4-9063-5f87d050dab4",
+                "target": "85775d3b-3844-4bd5-90b2-100331315105",
+                "sourceHandle": "output",
+                "targetHandle": "input"
+              },
+              {
+                "id": "a524919d-ea62-4165-85ef-516908060062",
+                "source": "85775d3b-3844-4bd5-90b2-100331315105",
+                "target": "e0079808-81ee-4c41-8a2e-973f120d1d76",
+                "sourceHandle": "error",
+                "targetHandle": "input"
+              },
+              {
+                "id": "e87a186f-ec84-420d-92b4-93dd56e5eeff",
+                "source": "85775d3b-3844-4bd5-90b2-100331315105",
+                "target": "c6c087ba-d6df-468f-9fa9-51c20fb59d0f",
+                "sourceHandle": "output",
+                "targetHandle": "input"
+              },
+              {
+                "id": "b1d3fdea-9609-4d5e-b8ad-e449c9dc4f8b",
+                "source": "c6c087ba-d6df-468f-9fa9-51c20fb59d0f",
+                "target": "e0079808-81ee-4c41-8a2e-973f120d1d76",
+                "sourceHandle": "error",
+                "targetHandle": "input"
+              },
+              {
+                "id": "c2e7670d-adea-4bd2-b07c-7ec3316bfe1c",
+                "source": "2c68e53f-f8b1-4ea3-b3ff-2f98b5e6bd62",
+                "target": "6637069a-dc54-4310-be40-8131f3c786c0",
+                "sourceHandle": "output",
+                "targetHandle": "input"
+              },
+              {
+                "id": "eaf3a833-f2ce-4a23-89b5-097754462932",
+                "source": "6637069a-dc54-4310-be40-8131f3c786c0",
+                "target": "abd28d63-6695-4757-8bde-f8eea320ed3e",
+                "sourceHandle": "output",
+                "targetHandle": "input"
+              },
+              {
+                "id": "47413c4e-59bf-43e3-92d5-0ea786857e20",
+                "source": "6637069a-dc54-4310-be40-8131f3c786c0",
+                "target": "e0079808-81ee-4c41-8a2e-973f120d1d76",
+                "sourceHandle": "error",
+                "targetHandle": "input"
+              },
+              {
+                "id": "6d659eb3-03c7-42c4-b6ca-fde75cbc78d6",
+                "source": "78b0fd58-4b2d-4ba1-b5a9-1f828d18876b",
+                "target": "de005dcd-3933-466d-8541-095f7df06c14",
+                "sourceHandle": "output",
+                "targetHandle": "input"
+              },
+              {
+                "id": "f5b271f2-ca25-4fab-96f6-387a700f0b97",
+                "source": "94168482-cfab-4255-bde4-9571e65a1972",
+                "target": "9067425b-f220-4a00-a2aa-766dd66b6b41",
+                "sourceHandle": "output",
+                "targetHandle": "input"
+              },
+              {
+                "id": "ee67956a-8e3a-4697-a7eb-9730eeffbdee",
+                "source": "9067425b-f220-4a00-a2aa-766dd66b6b41",
+                "target": "e0079808-81ee-4c41-8a2e-973f120d1d76",
+                "sourceHandle": "error",
+                "targetHandle": "input"
+              },
+              {
+                "id": "3b8a06f8-78cc-4205-8461-d2e5ff48d248",
+                "source": "de005dcd-3933-466d-8541-095f7df06c14",
+                "target": "e0079808-81ee-4c41-8a2e-973f120d1d76",
+                "sourceHandle": "error",
+                "targetHandle": "input"
+              },
+              {
+                "id": "6ca1f6ea-df94-4448-9fb4-e048dadc7a3c",
+                "source": "de005dcd-3933-466d-8541-095f7df06c14",
+                "target": "c6396474-6321-4dd3-8023-355a4ce608e3",
+                "sourceHandle": "output",
+                "targetHandle": "input"
+              },
+              {
+                "id": "90239656-e080-4246-9a9a-433c475bb221",
+                "source": "c6396474-6321-4dd3-8023-355a4ce608e3",
+                "target": "94168482-cfab-4255-bde4-9571e65a1972",
+                "sourceHandle": "output",
+                "targetHandle": "input"
+              },
+              {
+                "id": "b6ed9f95-8a95-4631-94d8-44966aafced6",
+                "source": "abd28d63-6695-4757-8bde-f8eea320ed3e",
+                "target": "8646a385-cc30-46d7-8fd7-d60bed0352dd",
+                "sourceHandle": "output",
+                "targetHandle": "input"
+              },
+              {
+                "id": "6ac6df41-9e23-44ad-afd9-8eaa709e376e",
+                "source": "8646a385-cc30-46d7-8fd7-d60bed0352dd",
+                "target": "a3412af4-9075-4807-a0af-835f9580df8d",
+                "sourceHandle": "output",
+                "targetHandle": "input"
+              },
+              {
+                "id": "13d4f832-e63c-4ede-97e9-a79eaef7b219",
+                "source": "c6c087ba-d6df-468f-9fa9-51c20fb59d0f",
+                "target": "2c68e53f-f8b1-4ea3-b3ff-2f98b5e6bd62",
+                "sourceHandle": "output",
+                "targetHandle": "input"
+              },
+              {
+                "id": "57f9495b-8c79-4811-88d3-ec59511f76aa",
+                "source": "a3412af4-9075-4807-a0af-835f9580df8d",
+                "target": "c4514fdd-3aff-4878-9cc5-63cc35ed4e6f",
+                "sourceHandle": "output",
+                "targetHandle": "input"
+              },
+              {
+                "id": "392cfa52-ff73-4a29-9298-ef45f5ef7db5",
+                "source": "c4514fdd-3aff-4878-9cc5-63cc35ed4e6f",
+                "target": "78b0fd58-4b2d-4ba1-b5a9-1f828d18876b",
+                "sourceHandle": "output",
+                "targetHandle": "input"
+              },
+              {
+                "id": "add24a49-e4c5-44fe-8a5a-b707758af02a",
+                "source": "c4514fdd-3aff-4878-9cc5-63cc35ed4e6f",
+                "target": "e0079808-81ee-4c41-8a2e-973f120d1d76",
+                "sourceHandle": "error",
+                "targetHandle": "input"
+              },
+              {
+                "id": "75f82122-3afd-429c-a8cd-400f7cf95c8d",
+                "source": "9067425b-f220-4a00-a2aa-766dd66b6b41",
+                "target": "e0079808-81ee-4c41-8a2e-973f120d1d76",
+                "sourceHandle": "output",
+                "targetHandle": "input"
+              },
+              {
+                "id": "a0256266-a527-414c-a229-d4b3a6954d9c",
+                "source": "f888ee8c-af11-4395-8333-70323ec1f3b1",
+                "target": "0b9da6d5-a039-47f4-9063-5f87d050dab4",
+                "sourceHandle": "output",
+                "targetHandle": "input"
+              },
+              {
+                "id": "74563c6f-b418-4031-8e68-d37bb735f627",
+                "source": "e0079808-81ee-4c41-8a2e-973f120d1d76",
+                "target": "71585418-ce44-40e0-af15-c18fb0e08ab5",
+                "sourceHandle": "output",
+                "targetHandle": "input"
+              }
+            ],
+            "variables": [],
+            "createdAt": "2026-05-25T07:59:36.326Z",
+            "updatedAt": "2026-05-25T07:59:36.326Z",
+            "isTemplate": false,
+            "isSubsystem": true,
+            "tags": [
+              "子工作流"
+            ],
+            "curveGroups": [
+              {
+                "id": "speed-pwm",
+                "name": "PWM-速度映射",
+                "description": "PWM占空比到电机速度的映射关系（可自定义公式）",
+                "curves": [
+                  {
+                    "id": "xlsx-curve-1778754493521-2d9q",
+                    "name": "测试电机1-真实转速曲线",
+                    "data": [
+                      {
+                        "x": 0,
+                        "y": 0
+                      },
+                      {
+                        "x": 10,
+                        "y": 1537
+                      },
+                      {
+                        "x": 20,
+                        "y": 3080
+                      },
+                      {
+                        "x": 30,
+                        "y": 4655
+                      },
+                      {
+                        "x": 40,
+                        "y": 6210
+                      },
+                      {
+                        "x": 50,
+                        "y": 7770
+                      },
+                      {
+                        "x": 60,
+                        "y": 9318
+                      },
+                      {
+                        "x": 70,
+                        "y": 10874
+                      },
+                      {
+                        "x": 80,
+                        "y": 12402
+                      },
+                      {
+                        "x": 90,
+                        "y": 13930
+                      },
+                      {
+                        "x": 100,
+                        "y": 15469
+                      }
+                    ],
+                    "color": "#4ade80",
+                    "unit": "RPM",
+                    "xLabel": "测试电机1 (占空比 %)",
+                    "yLabel": "真实转速 (RPM)",
+                    "editMode": "custom",
+                    "isManuallyEdited": true
+                  }
+                ]
+              }
+            ],
+            "curveBindings": []
+          },
+          "portMappings": {},
+          "parameterOverrides": {}
+        },
+        "selected": false
+      },
+      {
+        "id": "f77ded6b-caf7-4807-868a-80f20f1a8128",
+        "type": "end",
+        "position": {
+          "x": -640,
+          "y": -688
+        },
+        "data": {
+          "label": "结束",
+          "status": "success"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "de42f120-a4c4-43ba-8a43-799fe5df00f9",
+        "source": "node-53972bda-823e-4404-8edb-f868bbba97f9",
+        "target": "f77ded6b-caf7-4807-868a-80f20f1a8128",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      },
+      {
+        "id": "9cc02ddc-4ab2-4095-9789-b61aeaa12445",
+        "source": "9c622d21-dc93-49e9-8071-ded52c58dd63",
+        "target": "node-53972bda-823e-4404-8edb-f868bbba97f9",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      }
+    ],
+    "variables": [],
+    "curveGroups": [
+      {
+        "id": "speed-pwm",
+        "name": "PWM-速度映射",
+        "description": "PWM占空比到电机速度的映射关系（可自定义公式）",
+        "curves": [
+          {
+            "id": "xlsx-curve-1778754493521-2d9q",
+            "name": "测试电机1-真实转速曲线",
+            "data": [
+              {
+                "x": 0,
+                "y": 0
+              },
+              {
+                "x": 10,
+                "y": 1537
+              },
+              {
+                "x": 20,
+                "y": 3080
+              },
+              {
+                "x": 30,
+                "y": 4655
+              },
+              {
+                "x": 40,
+                "y": 6210
+              },
+              {
+                "x": 50,
+                "y": 7770
+              },
+              {
+                "x": 60,
+                "y": 9318
+              },
+              {
+                "x": 70,
+                "y": 10874
+              },
+              {
+                "x": 80,
+                "y": 12402
+              },
+              {
+                "x": 90,
+                "y": 13930
+              },
+              {
+                "x": 100,
+                "y": 15469
+              }
+            ],
+            "color": "#4ade80",
+            "unit": "RPM",
+            "xLabel": "测试电机1 (占空比 %)",
+            "yLabel": "真实转速 (RPM)",
+            "editMode": "custom",
+            "isManuallyEdited": true
+          }
+        ]
+      },
+      {
+        "id": "pid-response",
+        "name": "PID 响应曲线",
+        "description": "PID 控制器阶跃响应",
+        "curves": [
+          {
+            "id": "pid-step-response",
+            "name": "阶跃响应",
+            "data": [],
+            "color": "#f97316",
+            "unit": "RPM",
+            "xLabel": "时间 (ms)",
+            "yLabel": "转速 (RPM)"
+          },
+          {
+            "id": "pid-setpoint",
+            "name": "设定值",
+            "data": [
+              {
+                "x": 0,
+                "y": 100
+              },
+              {
+                "x": 11.11,
+                "y": 100
+              },
+              {
+                "x": 22.22,
+                "y": 100
+              },
+              {
+                "x": 33.33,
+                "y": 100
+              },
+              {
+                "x": 44.44,
+                "y": 100
+              },
+              {
+                "x": 55.56,
+                "y": 100
+              },
+              {
+                "x": 66.67,
+                "y": 100
+              },
+              {
+                "x": 77.78,
+                "y": 100
+              },
+              {
+                "x": 88.89,
+                "y": 100
+              },
+              {
+                "x": 100,
+                "y": 100
+              }
+            ],
+            "color": "#3b82f6",
+            "unit": "RPM",
+            "xLabel": "时间 (ms)",
+            "yLabel": "转速 (RPM)"
+          }
+        ]
+      },
+      {
+        "id": "current-amplitude",
+        "name": "电流环幅值曲线",
+        "description": "速度环PID幅值上下限",
+        "curves": [
+          {
+            "id": "current-upper",
+            "name": "幅值上限",
+            "data": [
+              {
+                "x": 0,
+                "y": 10
+              },
+              {
+                "x": 1684.21,
+                "y": 14.733
+              },
+              {
+                "x": 3368.42,
+                "y": 19.465
+              },
+              {
+                "x": 5052.63,
+                "y": 24.198
+              },
+              {
+                "x": 6736.84,
+                "y": 28.931
+              },
+              {
+                "x": 8421.05,
+                "y": 33.663
+              },
+              {
+                "x": 10105.26,
+                "y": 38.396
+              },
+              {
+                "x": 11789.47,
+                "y": 43.128
+              },
+              {
+                "x": 13473.68,
+                "y": 47.861
+              },
+              {
+                "x": 15157.89,
+                "y": 52.594
+              },
+              {
+                "x": 16842.11,
+                "y": 57.326
+              },
+              {
+                "x": 18526.32,
+                "y": 62.059
+              },
+              {
+                "x": 20210.53,
+                "y": 66.792
+              },
+              {
+                "x": 21894.74,
+                "y": 71.524
+              },
+              {
+                "x": 23578.95,
+                "y": 76.257
+              },
+              {
+                "x": 25263.16,
+                "y": 80.989
+              },
+              {
+                "x": 26947.37,
+                "y": 85.722
+              },
+              {
+                "x": 28631.58,
+                "y": 90.455
+              },
+              {
+                "x": 30315.79,
+                "y": 95.187
+              },
+              {
+                "x": 32000,
+                "y": 99.92
+              }
+            ],
+            "color": "#f87171",
+            "unit": "%",
+            "xLabel": "速度 (RPM)",
+            "yLabel": "幅值 (%)"
+          },
+          {
+            "id": "current-lower",
+            "name": "幅值下限",
+            "data": [
+              {
+                "x": 0,
+                "y": 10
+              },
+              {
+                "x": 1684.21,
+                "y": 10.522
+              },
+              {
+                "x": 3368.42,
+                "y": 11.044
+              },
+              {
+                "x": 5052.63,
+                "y": 11.566
+              },
+              {
+                "x": 6736.84,
+                "y": 12.088
+              },
+              {
+                "x": 8421.05,
+                "y": 12.611
+              },
+              {
+                "x": 10105.26,
+                "y": 13.133
+              },
+              {
+                "x": 11789.47,
+                "y": 13.655
+              },
+              {
+                "x": 13473.68,
+                "y": 14.177
+              },
+              {
+                "x": 15157.89,
+                "y": 14.699
+              },
+              {
+                "x": 16842.11,
+                "y": 15.221
+              },
+              {
+                "x": 18526.32,
+                "y": 15.743
+              },
+              {
+                "x": 20210.53,
+                "y": 16.265
+              },
+              {
+                "x": 21894.74,
+                "y": 16.787
+              },
+              {
+                "x": 23578.95,
+                "y": 17.309
+              },
+              {
+                "x": 25263.16,
+                "y": 17.832
+              },
+              {
+                "x": 26947.37,
+                "y": 18.354
+              },
+              {
+                "x": 28631.58,
+                "y": 18.876
+              },
+              {
+                "x": 30315.79,
+                "y": 19.398
+              },
+              {
+                "x": 32000,
+                "y": 19.92
+              }
+            ],
+            "color": "#22d3ee",
+            "unit": "%",
+            "xLabel": "速度 (RPM)",
+            "yLabel": "幅值 (%)"
+          }
+        ]
+      }
+    ],
+    "curveBindings": []
+  }
+}

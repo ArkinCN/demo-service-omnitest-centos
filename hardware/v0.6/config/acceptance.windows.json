@@ -1,0 +1,11 @@
+{
+  "_comment": "Windows overlay：只写随机器变化的字段（serial.port / scope.resource），深合并覆盖 acceptance.json。使用：$env:FAN_CONFIG_PATH = 'acceptance.windows.json'",
+  "serial": {
+    "port": "COM4"
+  },
+  "scope": {
+    "resource": "",
+    "_waveformPoints_note": "2026-10-08 起 Windows 走 NI-VISA(@ivi) 后端，大块读取稳定，恢复 1200 点完整分辨率。若回退 @py(pyvisa-py+libusbK) 需改回 100（该组合 >~100 点必超时）。",
+    "waveformPoints": 1200
+  }
+}

@@ -1,0 +1,13 @@
+# 风扇实验硬件包（Python 跨平台重写）依赖
+# 安装：python -m pip install -r requirements.txt
+pyserial>=3.5          # 串口（UNO，跨平台）
+pyvisa>=1.15           # VISA 高层 API（pyvisa-py 0.8 要求 >=1.15）
+pyvisa-py>=0.8         # 纯 Python VISA 后端（@py），替代 NI-VISA，跨平台
+pyusb>=1.2             # USB-TMC 枚举必需（pyvisa-py 的 usbtmc 后端依赖 libusb/pyusb）
+python-usbtmc==0.8      # Linux USB-TMC 设备访问（import 名 usbtmc）。
+                       # ⚠️ Linux 必需：RIGOL 的 USB 接口类 0xFE/0x03 被内核 usbtmc
+                       #   驱动独占，libusb 无法 claim（报 USBError Errno 5），
+                       #   pyvisa-py 的 usbtmc 后端靠本包的 usbtmc ioctl 封装访问。
+                       #   缺了只能枚举到串口，报「No RIGOL USB-TMC scope found」。
+                       #   Windows 走 NI-VISA(@ivi)，不需要本包。
+libusb-package>=1.0    # 自带 libusb-1.0.dll；避免依赖系统 PATH（Windows 关键）

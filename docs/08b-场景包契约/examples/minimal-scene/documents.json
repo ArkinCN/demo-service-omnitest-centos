@@ -1,0 +1,34 @@
+{
+  "schema": "documents/v1",
+  "scene_id": "example.minimal.skeleton",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-20",
+  "belongs_to_flow": "F1 知识库管理（文档一路）",
+  "total": 1,
+  "count_by_type": {
+    "我方文档": 1
+  },
+  "conversion_status_legend": {
+    "not_converted": "尚未做文档→知识库的转化"
+  },
+  "documents": [
+    {
+      "id": "DOC-EX-001",
+      "type": "我方文档",
+      "title": "场景包契约 README v1.0（本项目自产，路径见 _source）",
+      "path": "[源] 08b-场景包契约/README-场景包契约-v1.1.md",
+      "size_bytes": 0,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "not_converted",
+      "usage": "产品说明书",
+      "usage_class": "A2 应用方案与用户手册",
+      "_source": {
+        "file": "[源] 08b-场景包契约/README-场景包契约-v1.1.md",
+        "locator": "第 10 节 新建第三个场景包的步骤"
+      }
+    }
+  ]
+}

@@ -1,0 +1,2040 @@
+{
+  "schema": "test-requirements/v1",
+  "scene_id": "motor.cooling-fan.fortior-fu6832",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-19",
+  "belongs_to_flow": "F3 测试需求确认（标准与判据来源）→ F4 启动测试及结果分析（执行与判定）",
+  "categories": [
+    "启动可靠性",
+    "转速一致性",
+    "转速精度",
+    "动态响应",
+    "电流",
+    "调速",
+    "顺逆风",
+    "保护",
+    "硬件自检",
+    "可靠性"
+  ],
+  "demo_profile": {
+    "note": "演示模式暴露的判据清单（2026-10-08 改）。**当前指向台架实测判据集**（TR-BENCH-*）：本台架（UNO 发 PWM + Rigol DS1104Z 三通道）能真实采到 PWM 占空比/频率/供电电压/波形有效性，判定卡据此出结论。其中 TR-BENCH-05 变量取自 control-parameters、结论随采纳值变化（当前 0.9<1.0 判不通过 → 采纳上调 1.0 后重测转通过），是「改参数 → 重测 → 结论变好」闭环的承载判据，必须进演示面，否则闭环无从演示。原 6 条芯片级判据（TR-START-01 起动成功率等）所需的量（MCU 故障寄存器、FG/红外转速、母线电流、100 次启停回归）本台架采不到，改由全量模式如实显示「未采集」，不删数据。",
+    "requirements": [
+      "TR-BENCH-01",
+      "TR-BENCH-02",
+      "TR-BENCH-03",
+      "TR-BENCH-04",
+      "TR-BENCH-05"
+    ]
+  },
+  "group_tiers": [
+    {
+      "id": "req-perf",
+      "title": "性能",
+      "groups": [
+        {
+          "id": "req-start",
+          "title": "启动可靠性",
+          "members": [
+            "启动可靠性"
+          ]
+        },
+        {
+          "id": "req-speed",
+          "title": "转速一致性与精度",
+          "members": [
+            "转速一致性",
+            "转速精度"
+          ]
+        },
+        {
+          "id": "req-dyn",
+          "title": "动态响应",
+          "members": [
+            "动态响应"
+          ]
+        },
+        {
+          "id": "req-pwm",
+          "title": "调速",
+          "members": [
+            "调速"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "req-cond",
+      "title": "工况",
+      "groups": [
+        {
+          "id": "req-curr",
+          "title": "电流",
+          "members": [
+            "电流"
+          ]
+        },
+        {
+          "id": "req-wind",
+          "title": "顺逆风",
+          "members": [
+            "顺逆风"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "req-safe",
+      "title": "安全与自检",
+      "groups": [
+        {
+          "id": "req-prot",
+          "title": "保护",
+          "members": [
+            "保护"
+          ],
+          "subgroups": [
+            {
+              "id": "req-prot-v",
+              "title": "电压类",
+              "items": [
+                "TR-PROT-01",
+                "TR-PROT-02",
+                "TR-PROT-03"
+              ]
+            },
+            {
+              "id": "req-prot-i",
+              "title": "电流与转速类",
+              "items": [
+                "TR-PROT-04",
+                "TR-PROT-05",
+                "TR-PROT-06",
+                "TR-PROT-07"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "req-hw",
+          "title": "硬件自检",
+          "members": [
+            "硬件自检"
+          ]
+        },
+        {
+          "id": "req-rel",
+          "title": "可靠性",
+          "members": [
+            "可靠性"
+          ]
+        }
+      ]
+    }
+  ],
+  "criterion_syntax": "JavaScript 表达式（ECMAScript），求值结果为布尔",
+  "criterion_expression_note": "每条判据带三个配套字段：evaluable 说明这条能不能真的求值；criterion 是 JS 语法的判据表达式，散文式、无标志位可取的条目为 null；variables 把表达式里每个自由变量映射到确定的取值来源。variables[].source 四种取值：runtime.measure 指向 runtime_measures 登记表里的运行时测量量；threshold 指向本条自己的 threshold 字段；control-parameters 指向 control-parameters.json 的 parameters[].key；constant 是编译期常量，ref 或 derived_from 指向 safety-interlocks.json 的 fault_bitmap。evaluable 为 false 时 not_evaluable_reason 写明卡在哪。位运算一律加括号：C/JS 里 & 的优先级低于比较运算符。",
+  "criterion_globals": [
+    "Math",
+    "true",
+    "false",
+    "null"
+  ],
+  "runtime_measures": {
+    "pass_count": {
+      "name": "启停回归通过次数",
+      "unit": "次",
+      "obtained_by": "motor_startup_judge 逐次判定累加"
+    },
+    "fault_flag": {
+      "name": "保护标志字（mcFaultState.faultFlag 整值）",
+      "unit": null,
+      "obtained_by": "breakrun + readmem，或虚拟示波器 fault_flag 同窗采集"
+    },
+    "fg2_rpm_min_observed": {
+      "name": "全部回合中 FG2 机械转速的最小值",
+      "unit": "RPM",
+      "obtained_by": "CMD7 FG2 红外转速逐次采集取最小"
+    },
+    "probe_pass": {
+      "name": "probe 阶段通过次数",
+      "unit": "次",
+      "obtained_by": "auto-startup-tune probe 阶段计数"
+    },
+    "full_pass": {
+      "name": "full 阶段通过次数",
+      "unit": "次",
+      "obtained_by": "auto-startup-tune full 阶段计数"
+    },
+    "fg1_freq_hz": {
+      "name": "FG1 电气转速信号频率",
+      "unit": "Hz",
+      "obtained_by": "rigol_measure FREQ（CH1→FG1）"
+    },
+    "fg2_freq_hz": {
+      "name": "FG2 机械转速信号频率",
+      "unit": "Hz",
+      "obtained_by": "rigol_measure FREQ（CH2→FG2）"
+    },
+    "rpm_mean": {
+      "name": "稳态转速 3 次测量均值",
+      "unit": "RPM",
+      "obtained_by": "rigol_measure FREQ ×3 换算 RPM = FREQ × 60 / 极对数"
+    },
+    "target_rpm": {
+      "name": "本次测试设定的目标转速",
+      "unit": "RPM",
+      "obtained_by": "NONEMODE 下等于 control-parameters.nonemode_speed；PWMMODE 下由占空比查调速曲线得到"
+    },
+    "freq_range_over_mean_pct": {
+      "name": "3 次频率测量的极差 / 均值",
+      "unit": "%",
+      "obtained_by": "rigol_measure FREQ ×3 现场计算"
+    },
+    "monotonic_drift_detected": {
+      "name": "3 次测量是否呈单调漂移",
+      "unit": null,
+      "obtained_by": "rigol_measure FREQ ×3 现场判定，布尔"
+    },
+    "rpm_fg": {
+      "name": "FG 脉冲换算转速",
+      "unit": "RPM",
+      "obtained_by": "FG 脉冲频率换算"
+    },
+    "rpm_real": {
+      "name": "红外测速机械真值",
+      "unit": "RPM",
+      "obtained_by": "红外转速计 / CMD7 FG2"
+    },
+    "t_start_to_steady_s": {
+      "name": "启动到全速稳定时间",
+      "unit": "s",
+      "obtained_by": "rigol_waveform_analyze 稳态起始时间"
+    },
+    "t_high_to_low_s": {
+      "name": "高转到低转切换时间",
+      "unit": "s",
+      "obtained_by": "FG 转速时序"
+    },
+    "t_low_to_high_s": {
+      "name": "低转到高转切换时间",
+      "unit": "s",
+      "obtained_by": "FG 转速时序"
+    },
+    "stalled": {
+      "name": "切换过程中是否停转",
+      "unit": null,
+      "obtained_by": "FG 转速时序，布尔"
+    },
+    "i_peak_a": {
+      "name": "启动过程母线峰值电流",
+      "unit": "A",
+      "obtained_by": "示波器母线电流通道 VMAX"
+    },
+    "i_steady_a": {
+      "name": "稳态母线电流",
+      "unit": "A",
+      "obtained_by": "示波器母线电流通道稳态段均值"
+    },
+    "max_abs_rpm_error_pct": {
+      "name": "11 个占空比档位中 RPM 误差绝对值的最大值",
+      "unit": "%",
+      "obtained_by": "PWM·VSP 性能测试表 D 列（公式列）逐档取绝对值最大"
+    },
+    "max_overshoot_pct": {
+      "name": "11 个占空比档位中过冲的最大值",
+      "unit": "%",
+      "obtained_by": "PWM·VSP 性能测试表 G 列（公式列）逐档取最大"
+    },
+    "steady_current_over_limit_count": {
+      "name": "稳态电流超过该档稳态上限的档位数",
+      "unit": "档",
+      "obtained_by": "PWM·VSP 性能测试表 F 列与 H 列逐档比较计数"
+    },
+    "stall_count_lv": {
+      "name": "低电压档降 Duty 过程中的停转次数",
+      "unit": "次",
+      "obtained_by": "FG 转速时序"
+    },
+    "stall_count_sv": {
+      "name": "标准电压档降 Duty 过程中的停转次数",
+      "unit": "次",
+      "obtained_by": "FG 转速时序"
+    },
+    "stall_count_hv": {
+      "name": "高电压档降 Duty 过程中的停转次数",
+      "unit": "次",
+      "obtained_by": "FG 转速时序"
+    },
+    "t_step_s": {
+      "name": "每 10% PWM 阶跃的转速跳变时间",
+      "unit": "s",
+      "obtained_by": "FG 转速时序"
+    },
+    "gears_restarted": {
+      "name": "12 档残速重启中成功重启的档数",
+      "unit": "档",
+      "obtained_by": "tailwind-restart-test 逐档判定累加"
+    },
+    "overshoot_peak_v": {
+      "name": "顺/逆风过程相电压过冲峰值",
+      "unit": "V",
+      "obtained_by": "示波器相电压通道 VMAX"
+    },
+    "overshoot_peak_a": {
+      "name": "顺/逆风过程相电流过冲峰值",
+      "unit": "A",
+      "obtained_by": "示波器相电流通道 VMAX 换算"
+    },
+    "max_normal_running_peak_v": {
+      "name": "常态运行相电压最高值（同工况基线）",
+      "unit": "V",
+      "obtained_by": "同电压同转速常态运行段示波器基线采集"
+    },
+    "max_normal_running_peak_a": {
+      "name": "常态运行相电流最高值（同工况基线）",
+      "unit": "A",
+      "obtained_by": "同电压同转速常态运行段示波器基线采集"
+    },
+    "t_windmilling_exit_s": {
+      "name": "顺逆风处理到强制退出的时间",
+      "unit": "s",
+      "obtained_by": "mcState 时序"
+    },
+    "vbus_0_v": {
+      "name": "改动前的母线电压",
+      "unit": "V",
+      "obtained_by": "程控电源读回 / 母线 ADC 换算"
+    },
+    "vbus_back_v": {
+      "name": "调回后复检的母线电压",
+      "unit": "V",
+      "obtained_by": "程控电源读回 / 母线 ADC 换算"
+    },
+    "stall_trig_count": {
+      "name": "堵转触发计数实测值",
+      "unit": "次",
+      "obtained_by": "readmem 堵转计数变量"
+    },
+    "vbus_measured_v": {
+      "name": "母线 ADC 换算出的电压",
+      "unit": "V",
+      "obtained_by": "breakrun + readmem 母线 ADC"
+    },
+    "vbus_expected_v": {
+      "name": "用户填写的实际母线电压",
+      "unit": "V",
+      "obtained_by": "F2 初始化配置时由用户录入"
+    },
+    "max_phase_error_deg": {
+      "name": "三相输出相位互差与 120° 的最大偏差",
+      "unit": "度",
+      "obtained_by": "示波器 CH2/CH3/CH4 三相输出相位测量"
+    },
+    "onoff_pass_count_lv": {
+      "name": "最低运行电压下 ON/OFF 通过次数",
+      "unit": "次",
+      "obtained_by": "ON-OFF LV 分页波形逐次判定"
+    },
+    "onoff_pass_count_sv": {
+      "name": "额定运行电压下 ON/OFF 通过次数",
+      "unit": "次",
+      "obtained_by": "ON-OFF SV 分页波形逐次判定"
+    },
+    "onoff_pass_count_hv": {
+      "name": "最高运行电压下 ON/OFF 通过次数",
+      "unit": "次",
+      "obtained_by": "ON-OFF HV 分页波形逐次判定"
+    },
+    "run_duration_min": {
+      "name": "无异常连续运行时长",
+      "unit": "min",
+      "obtained_by": "长跑计时 + fault 轮询"
+    },
+    "bench_pwm_duty_err_max_pct": {
+      "name": "各有效档位实测 PWM 占空比偏差绝对值最大值",
+      "unit": "%",
+      "obtained_by": "本轮 /api/fan-tests 实测：按 commanded_pwm_pct 分档，取 |measured_pwm_duty_pct − commanded_pwm_pct| 的最大值"
+    },
+    "bench_pwm_freq_dev_max_pct": {
+      "name": "各有效档位实测 PWM 频率相对命令基准的偏差绝对值最大值",
+      "unit": "%",
+      "obtained_by": "本轮 /api/fan-tests 实测：按 commanded_pwm_pct 分档，取 |pwm_frequency_hz − 基准| / 基准 的最大值"
+    },
+    "bench_voltage_mean_v": {
+      "name": "各有效档位供电电压均值的平均",
+      "unit": "V",
+      "obtained_by": "本轮 /api/fan-tests 实测：按 commanded_pwm_pct 分档取 voltage_v 均值，再对各档取平均"
+    },
+    "bench_valid_duty_count": {
+      "name": "采到有效 PWM 波形的档位数",
+      "unit": "档",
+      "obtained_by": "本轮 /api/fan-tests 实测：measure_pwm_duty_pct 与 pwm_frequency_hz 均非 null 的档位计数（100% 恒高电平档无边沿，不计入）"
+    },
+    "bench_valid_tach_count": {
+      "name": "采到有效转速的档位数",
+      "unit": "档",
+      "obtained_by": "本轮 /api/fan-tests 实测：样本 rpm 非 null 的档位计数（CH4 测速为独立时基档，100% 档照常可测）"
+    },
+    "bench_rpm_mean_min": {
+      "name": "各档转速均值的最小值",
+      "unit": "RPM",
+      "obtained_by": "本轮 /api/fan-tests 实测：按 commanded_pwm_pct 分档取 rpm 档内均值，再取跨档最小值"
+    },
+    "bench_rpm_mean_max": {
+      "name": "各档转速均值的最大值",
+      "unit": "RPM",
+      "obtained_by": "本轮 /api/fan-tests 实测：按 commanded_pwm_pct 分档取 rpm 档内均值，再取跨档最大值"
+    },
+    "bench_rpm_rising_gear_count": {
+      "name": "转速随占空比递增的相邻档对数",
+      "unit": "对",
+      "obtained_by": "本轮 /api/fan-tests 实测：各档 rpm 均值按占空比升序排列后，统计后档严格大于前档的相邻对数（有效测速档不足 3 档时不输出该量，判据落「未采集」）"
+    }
+  },
+  "evaluable_count": 28,
+  "not_evaluable_count": 6,
+  "requirements": [
+    {
+      "id": "TR-START-01",
+      "name": "起动成功率（100 次启停回归）",
+      "category": "启动可靠性",
+      "evaluable": true,
+      "criterion": "pass_count === required_pass && fault_flag === 0 && fg2_rpm_min_observed > fg2_rpm_min",
+      "criterion_text": "默认 100 次启停（可配 1~1000 次），每次都要启动成功且无 fault，转速证据取 FG2 > 10000 RPM",
+      "variables": {
+        "pass_count": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.pass_count",
+          "desc": "启停回归通过次数",
+          "unit": "次"
+        },
+        "required_pass": {
+          "source": "threshold",
+          "ref": "threshold.required_pass",
+          "desc": "要求通过次数",
+          "unit": "次"
+        },
+        "fault_flag": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.fault_flag",
+          "desc": "保护标志字整值"
+        },
+        "fg2_rpm_min_observed": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.fg2_rpm_min_observed",
+          "desc": "全部回合 FG2 转速最小值",
+          "unit": "RPM"
+        },
+        "fg2_rpm_min": {
+          "source": "threshold",
+          "ref": "threshold.fg2_rpm_min",
+          "desc": "FG2 转速下限判据",
+          "unit": "RPM"
+        }
+      },
+      "threshold": {
+        "runs": 100,
+        "runs_range": [
+          1,
+          1000
+        ],
+        "required_pass": 100,
+        "fg2_rpm_min": 10000
+      },
+      "evidence": [
+        "FG2 红外机械转速",
+        "fault 标志位"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_source": [
+        {
+          "file": "[源] startstop-with-scope/SKILL.md",
+          "locator": "frontmatter description 与执行规则"
+        },
+        {
+          "file": "[源] _调研/A-DebugCopilot场景与知识库取证.md",
+          "locator": "第二节第 4 类「startstop-with-scope（默认 100 次可 1~1000，FG2>10000rpm 且无 fault）」"
+        }
+      ],
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需 100 次启停回归由 motor_startup_judge 逐次判定累加，本台架未配置启停回归夹治具"
+    },
+    {
+      "id": "TR-START-02",
+      "name": "自动启动盲试（probe 3 次 + full 100 次）",
+      "category": "启动可靠性",
+      "evaluable": true,
+      "criterion": "probe_pass === probe_runs && full_pass === required_full_pass",
+      "criterion_text": "先 probe 3 次确认可重复，再跑 full 100 次要求 100/100；10 个固定候选按序盲试，每个候选只偏离 baseline 一个轴，耗尽则 need_human",
+      "variables": {
+        "probe_pass": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.probe_pass",
+          "desc": "probe 阶段通过次数",
+          "unit": "次"
+        },
+        "probe_runs": {
+          "source": "threshold",
+          "ref": "threshold.probe_runs",
+          "desc": "probe 阶段要求次数",
+          "unit": "次"
+        },
+        "full_pass": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.full_pass",
+          "desc": "full 阶段通过次数",
+          "unit": "次"
+        },
+        "required_full_pass": {
+          "source": "threshold",
+          "ref": "threshold.required_full_pass",
+          "desc": "full 阶段要求通过次数",
+          "unit": "次"
+        }
+      },
+      "threshold": {
+        "probe_runs": 3,
+        "full_runs": 100,
+        "required_full_pass": 100,
+        "max_candidates": 10
+      },
+      "evidence": [
+        "motor_startup_judge 原子双证据（FG2 红外转速 + 虚拟示波器 fault_flag 同窗采集）"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析",
+        "F5 调优确认及运行"
+      ],
+      "_source": [
+        {
+          "file": "[源] auto-startup-tune/SKILL.md",
+          "locator": "「## 固定候选」与候选推进小节"
+        },
+        {
+          "file": "[源] _调研/A-DebugCopilot场景与知识库取证.md",
+          "locator": "第二节第 4 类"
+        }
+      ],
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需 auto-startup-tune 盲试框架 probe 阶段计数，本台架未部署该自动化框架"
+    },
+    {
+      "id": "TR-SPEED-01",
+      "name": "FG1 / FG2 转速一致性",
+      "category": "转速一致性",
+      "evaluable": true,
+      "criterion": "Math.abs(fg1_freq_hz / fg2_freq_hz - ratio) <= tolerance",
+      "criterion_text": "该电机极对数为 2，电气频率 = 极对数 × 机械频率，所以 FG1 频率应等于 2 × FG2 频率；比值偏离 2.00 超过 ±0.05 即判异常",
+      "variables": {
+        "fg1_freq_hz": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.fg1_freq_hz",
+          "desc": "FG1 频率",
+          "unit": "Hz"
+        },
+        "fg2_freq_hz": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.fg2_freq_hz",
+          "desc": "FG2 频率",
+          "unit": "Hz"
+        },
+        "ratio": {
+          "source": "threshold",
+          "ref": "threshold.ratio",
+          "desc": "标称比值（= 极对数）"
+        },
+        "tolerance": {
+          "source": "threshold",
+          "ref": "threshold.tolerance",
+          "desc": "比值容差"
+        }
+      },
+      "threshold": {
+        "ratio": 2.0,
+        "tolerance": 0.05,
+        "derived_from_pole_pairs": 2
+      },
+      "evidence": [
+        "示波器 CH1→FG1、CH2→FG2 同窗频率"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": [
+        {
+          "file": "[源] memory/fortior-test-bench-hardware.md",
+          "locator": "「核心判据:FG1 频率 = 2 × FG2 频率」段"
+        },
+        {
+          "file": "[源] include/Customer.h",
+          "locator": "Customer.h:56 (#define Pole_Pairs)"
+        }
+      ],
+      "note": "±0.05 的容差带是本场景包给前端演示设定的判定带宽；台架记忆只写了「FG1≠2×FG2 即异常」，未给容差数值",
+      "_placeholder": true,
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需 FG1 电气转速信号接入示波器（rigol_measure FREQ），本台架 CH3 接的是 PWM 而非 FG"
+    },
+    {
+      "id": "TR-SPEED-02",
+      "name": "稳态转速偏差",
+      "category": "转速精度",
+      "evaluable": true,
+      "criterion": "Math.abs(rpm_mean - target_rpm) / target_rpm <= tolerance_pct / 100",
+      "criterion_text": "闭环稳态转速与目标转速的相对偏差不超过容限（缺省 5%）；RPM = FREQ × 60 / 极对数，取 3 次测量均值",
+      "variables": {
+        "rpm_mean": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.rpm_mean",
+          "desc": "稳态转速 3 次均值",
+          "unit": "RPM"
+        },
+        "target_rpm": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.target_rpm",
+          "desc": "本次测试目标转速；NONEMODE 下取 control-parameters.nonemode_speed",
+          "unit": "RPM"
+        },
+        "tolerance_pct": {
+          "source": "threshold",
+          "ref": "threshold.tolerance_pct",
+          "desc": "相对偏差容限",
+          "unit": "%"
+        }
+      },
+      "threshold": {
+        "tolerance_pct": 5,
+        "tolerance_pct_default": 5,
+        "samples": 3,
+        "sample_interval_s": 2
+      },
+      "evidence": [
+        "rigol_measure FREQ ×3",
+        "降级模式下用户回报转速表读数"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_source": [
+        {
+          "file": "[源] coolingfan-openloop-debug/SKILL.md",
+          "locator": "第 4 节 证据二 判据「转速准确度」"
+        },
+        {
+          "file": "[源] 测试数据_20260622/report.xlsm",
+          "locator": "sheet 測試程式規格表 行 29-30「最大/最低轉速範圍 ± 5%」"
+        },
+        {
+          "file": "[源] 测试数据_20260622/report.xlsm",
+          "locator": "sheet PWM·VSP 性能測試 A3「※ 通過條件：RPM 誤差 ≤ ±5%」"
+        }
+      ],
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需 FG 频率换算转速（FREQ × 60 / 极对数），本台架未接入 FG 信号"
+    },
+    {
+      "id": "TR-SPEED-03",
+      "name": "稳态转速稳定性（无振荡）",
+      "category": "转速精度",
+      "evaluable": true,
+      "criterion": "freq_range_over_mean_pct <= range_over_mean_pct && monotonic_drift_detected === false",
+      "criterion_text": "3 次频率测量的极差 / 均值不超过 3%，且无单调漂移",
+      "variables": {
+        "freq_range_over_mean_pct": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.freq_range_over_mean_pct",
+          "desc": "3 次频率极差 / 均值",
+          "unit": "%"
+        },
+        "range_over_mean_pct": {
+          "source": "threshold",
+          "ref": "threshold.range_over_mean_pct",
+          "desc": "极差比上限",
+          "unit": "%"
+        },
+        "monotonic_drift_detected": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.monotonic_drift_detected",
+          "desc": "是否单调漂移（布尔）"
+        }
+      },
+      "threshold": {
+        "range_over_mean_pct": 3,
+        "samples": 3
+      },
+      "evidence": [
+        "rigol_measure FREQ ×3"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析",
+        "F5 调优确认及运行"
+      ],
+      "_source": {
+        "file": "[源] coolingfan-openloop-debug/SKILL.md",
+        "locator": "第 4 节 证据二 判据「转速稳定性」"
+      },
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需 FG 频率 3 次测量现场计算，本台架未接入 FG 信号"
+    },
+    {
+      "id": "TR-SPEED-04",
+      "name": "FG 与实际转速误差",
+      "category": "转速一致性",
+      "evaluable": true,
+      "criterion": "Math.abs(rpm_fg - rpm_real) < max_error_rpm",
+      "criterion_text": "FG 回报转速与实际转速之差小于 50 RPM",
+      "variables": {
+        "rpm_fg": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.rpm_fg",
+          "desc": "FG 脉冲换算转速",
+          "unit": "RPM"
+        },
+        "rpm_real": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.rpm_real",
+          "desc": "红外测速机械真值",
+          "unit": "RPM"
+        },
+        "max_error_rpm": {
+          "source": "threshold",
+          "ref": "threshold.max_error_rpm",
+          "desc": "误差上限",
+          "unit": "RPM"
+        }
+      },
+      "threshold": {
+        "max_error_rpm": 50
+      },
+      "evidence": [
+        "FG 脉冲频率",
+        "红外测速机械真值"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet 測試程式規格表 行 65「FG 與實際轉速誤差 | 小於 50 RPM」"
+      },
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需 FG 脉冲频率换算，本台架未接入 FG 信号"
+    },
+    {
+      "id": "TR-TIME-01",
+      "name": "启动到全速稳定时间",
+      "category": "动态响应",
+      "evaluable": true,
+      "criterion": "t_start_to_steady_s < max_s",
+      "criterion_text": "从启动到全速稳定的时间需小于 10 秒",
+      "variables": {
+        "t_start_to_steady_s": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.t_start_to_steady_s",
+          "desc": "启动到全速稳定时间",
+          "unit": "s"
+        },
+        "max_s": {
+          "source": "threshold",
+          "ref": "threshold.max_s",
+          "desc": "时间上限",
+          "unit": "s"
+        }
+      },
+      "threshold": {
+        "max_s": 10
+      },
+      "evidence": [
+        "rigol_waveform_analyze 的稳态起始时间"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet 測試程式規格表 行 31"
+      },
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需 rigol_waveform_analyze 长时间窗稳态分析，本台架为单档短窗口快照"
+    },
+    {
+      "id": "TR-TIME-02",
+      "name": "高转↔低转切换时间且不停转",
+      "category": "动态响应",
+      "evaluable": true,
+      "criterion": "t_high_to_low_s < max_s && t_low_to_high_s < max_s && stalled === false",
+      "criterion_text": "高转到低转需在 10 秒内完成且不能停转；低转到高转需在 10 秒内完成",
+      "variables": {
+        "t_high_to_low_s": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.t_high_to_low_s",
+          "desc": "高转到低转切换时间",
+          "unit": "s"
+        },
+        "t_low_to_high_s": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.t_low_to_high_s",
+          "desc": "低转到高转切换时间",
+          "unit": "s"
+        },
+        "max_s": {
+          "source": "threshold",
+          "ref": "threshold.max_s",
+          "desc": "切换时间上限",
+          "unit": "s"
+        },
+        "stalled": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.stalled",
+          "desc": "切换过程中是否停转（布尔）"
+        }
+      },
+      "threshold": {
+        "max_s": 10
+      },
+      "evidence": [
+        "FG 转速时序",
+        "PWM 占空比时序"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet 測試程式規格表 行 32-33"
+      },
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需 FG 转速时序（高低转切换全过程），本台架未接入 FG 信号"
+    },
+    {
+      "id": "TR-CURR-01",
+      "name": "启动母线峰值电流",
+      "category": "电流",
+      "evaluable": true,
+      "criterion": "i_peak_a <= peak_over_steady_ratio_max * i_steady_a",
+      "criterion_text": "启动到稳态转速过程中，母线峰值电流不可超过稳态电流的 1.1 倍",
+      "variables": {
+        "i_peak_a": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.i_peak_a",
+          "desc": "启动过程母线峰值电流",
+          "unit": "A"
+        },
+        "i_steady_a": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.i_steady_a",
+          "desc": "稳态母线电流",
+          "unit": "A"
+        },
+        "peak_over_steady_ratio_max": {
+          "source": "threshold",
+          "ref": "threshold.peak_over_steady_ratio_max",
+          "desc": "峰值/稳态比上限"
+        }
+      },
+      "threshold": {
+        "peak_over_steady_ratio_max": 1.1
+      },
+      "_placeholder": true,
+      "note": "待客户确认：峰值/稳态比上限 1.1 倍在 report.xlsm 行 93 里没有写死，是本场景包按工程惯例填的占位值，不得据此判不通过。另注意本判据要的是母线电流，与本轮回放的 CH1 相电流不是同一个量。",
+      "evidence": [
+        "示波器母线电流通道"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet 測試程式規格表 行 93"
+      },
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需母线电流探头通道，本台架 CH1 为相电流原始电压（探头倍率未现场确认）"
+    },
+    {
+      "id": "TR-PWM-01",
+      "name": "PWM 调速曲线全档位验证",
+      "category": "调速",
+      "evaluable": true,
+      "criterion": "max_abs_rpm_error_pct <= rpm_error_pct_max && max_overshoot_pct <= overshoot_pct_max && steady_current_over_limit_count === 0",
+      "criterion_text": "PWM 占空比 0/10/20/…/100 共 11 档，每档记录目标转速、实际转速、RPM 误差、最大电流、稳态电流、过冲、稳态上限、加速时间；三条通过条件同时成立才判 PASS：RPM 误差 ≤ ±5%、过冲 ≤ 10%、稳态电流 ≤ 该档稳态上限",
+      "variables": {
+        "max_abs_rpm_error_pct": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.max_abs_rpm_error_pct",
+          "desc": "11 档中 RPM 误差绝对值最大值",
+          "unit": "%"
+        },
+        "rpm_error_pct_max": {
+          "source": "threshold",
+          "ref": "threshold.rpm_error_pct_max",
+          "desc": "RPM 误差上限",
+          "unit": "%"
+        },
+        "max_overshoot_pct": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.max_overshoot_pct",
+          "desc": "11 档中过冲最大值",
+          "unit": "%"
+        },
+        "overshoot_pct_max": {
+          "source": "threshold",
+          "ref": "threshold.overshoot_pct_max",
+          "desc": "过冲上限",
+          "unit": "%"
+        },
+        "steady_current_over_limit_count": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.steady_current_over_limit_count",
+          "desc": "稳态电流超上限的档位数",
+          "unit": "档"
+        }
+      },
+      "threshold": {
+        "duty_points": [
+          0,
+          10,
+          20,
+          30,
+          40,
+          50,
+          60,
+          70,
+          80,
+          90,
+          100
+        ],
+        "rpm_error_pct_max": 5,
+        "overshoot_pct_max": 10
+      },
+      "evidence": [
+        "PWM·VSP 性能測試 分頁 Inlet / Outlet 两组数据"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析",
+        "F6 测试报告及产出"
+      ],
+      "_source": [
+        {
+          "file": "[源] 测试数据_20260622/report.xlsm",
+          "locator": "sheet PWM·VSP 性能測試 A8:J8 表头、A9:A19 占空比档位"
+        },
+        {
+          "file": "[源] 测试数据_20260622/report.xlsm",
+          "locator": "sheet PWM·VSP 性能測試 A3「※ 通過條件：RPM 誤差 ≤ ±5% | 過衝 (%) ≤ 10% | 穩態電流 ≤ 穩態上限」"
+        },
+        {
+          "file": "[源] writeFile_rust/README.md",
+          "locator": "「CSV 格式说明 · 列定义」8 列"
+        }
+      ],
+      "note": "三条通过条件与 report-template.json 的 performance_table.pass_condition 数组一一对应。过冲 ≤10% 与稳态电流 ≤ 稳态上限两条此前只写在 Excel 的 A3 单元格里，未进判据",
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需 PWM·VSP 性能测试表逐档公式列，本台架未配置 11 档位性能测试流程"
+    },
+    {
+      "id": "TR-PWM-02",
+      "name": "PWM 100% → 最低运行 Duty 不停转",
+      "category": "调速",
+      "evaluable": true,
+      "criterion": "stall_count_lv === 0 && stall_count_sv === 0 && stall_count_hv === 0",
+      "criterion_text": "PWM 从 100% 降到最低运行占空比，在高、中、低三档电压下都不能停转",
+      "variables": {
+        "stall_count_lv": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.stall_count_lv",
+          "desc": "低压档停转次数",
+          "unit": "次"
+        },
+        "stall_count_sv": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.stall_count_sv",
+          "desc": "标准电压档停转次数",
+          "unit": "次"
+        },
+        "stall_count_hv": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.stall_count_hv",
+          "desc": "高压档停转次数",
+          "unit": "次"
+        }
+      },
+      "threshold": {
+        "voltage_levels": [
+          "LV",
+          "SV",
+          "HV"
+        ]
+      },
+      "evidence": [
+        "FG 转速时序"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet 測試程式規格表 行 95"
+      },
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需 FG 转速时序逐档判定停转，本台架未接入 FG 信号"
+    },
+    {
+      "id": "TR-PWM-03",
+      "name": "每 10% PWM 阶跃响应时间",
+      "category": "调速",
+      "evaluable": false,
+      "not_evaluable_reason": "threshold.max_s 在模板里是空白待填项，表达式写得出来但求不出结果",
+      "criterion": "t_step_s < max_s",
+      "criterion_text": "每 10% 的 PWM 转速跳变（阶跃响应）时间需小于规定秒数",
+      "variables": {
+        "t_step_s": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.t_step_s",
+          "desc": "单次 10% 阶跃的转速跳变时间",
+          "unit": "s"
+        },
+        "max_s": {
+          "source": "threshold",
+          "ref": "threshold.max_s",
+          "desc": "阶跃时间上限（未定）",
+          "unit": "s"
+        }
+      },
+      "threshold": {
+        "max_s": null
+      },
+      "evidence": [
+        "FG 转速时序"
+      ],
+      "flows": [
+        "F3 测试需求确认"
+      ],
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet 測試程式規格表 行 94「時間需小於 _____ 秒」"
+      },
+      "_placeholder": true,
+      "note": "模板里该阈值是空白待填项，源材料未给数值"
+    },
+    {
+      "id": "TR-WIND-01",
+      "name": "12 档顺风残速重启",
+      "category": "顺逆风",
+      "evaluable": true,
+      "criterion": "gears_restarted === gears && fault_flag === 0",
+      "criterion_text": "固定 12 档残速重启测试，断电到重启的间隔从 500 ms 扫到 6000 ms，每档都要能重启成功，并区分真顺风与静止退化",
+      "variables": {
+        "gears_restarted": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.gears_restarted",
+          "desc": "成功重启档数",
+          "unit": "档"
+        },
+        "gears": {
+          "source": "threshold",
+          "ref": "threshold.gears",
+          "desc": "档数",
+          "unit": "档"
+        },
+        "fault_flag": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.fault_flag",
+          "desc": "保护标志字整值"
+        }
+      },
+      "threshold": {
+        "gears": 12,
+        "interval_ms_min": 500,
+        "interval_ms_max": 6000
+      },
+      "evidence": [
+        "FG2 残速",
+        "fault 标志"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": [
+        {
+          "file": "[源] tailwind-restart-test/SKILL.md",
+          "locator": "frontmatter description"
+        },
+        {
+          "file": "[源] _调研/A-DebugCopilot场景与知识库取证.md",
+          "locator": "第二节第 4 类「tailwind-restart-test（12 档 500~6000ms）」"
+        }
+      ],
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需 tailwind-restart-test 逐档判定累加，本台架未部署该测试规程"
+    },
+    {
+      "id": "TR-WIND-02",
+      "name": "顺逆风相电压/电流过冲",
+      "category": "顺逆风",
+      "evaluable": true,
+      "criterion": "overshoot_peak_v <= max_normal_running_peak_v && overshoot_peak_a <= max_normal_running_peak_a",
+      "criterion_text": "在中心操作电压下，顺风与逆风的相电压、相电流过冲须小于常态运行的最高值；高、中、低速三档都要确认",
+      "variables": {
+        "overshoot_peak_v": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.overshoot_peak_v",
+          "desc": "顺/逆风相电压过冲峰值",
+          "unit": "V"
+        },
+        "max_normal_running_peak_v": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.max_normal_running_peak_v",
+          "desc": "常态运行相电压最高值",
+          "unit": "V"
+        },
+        "overshoot_peak_a": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.overshoot_peak_a",
+          "desc": "顺/逆风相电流过冲峰值",
+          "unit": "A"
+        },
+        "max_normal_running_peak_a": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.max_normal_running_peak_a",
+          "desc": "常态运行相电流最高值",
+          "unit": "A"
+        }
+      },
+      "threshold": {
+        "speed_gears": [
+          "高速",
+          "中速",
+          "低速"
+        ]
+      },
+      "evidence": [
+        "示波器相电压/相电流"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet 測試程式規格表 行 89-90"
+      },
+      "note": "判据要逐个速度档、逐个风向（顺风/逆风）各求值一次，常态运行最高值须取同电压同转速工况的基线采集",
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需母线电压过冲对比同工况基线，本台架未接入母线电压探头与基线采集"
+    },
+    {
+      "id": "TR-WIND-03",
+      "name": "顺逆风强制退出",
+      "category": "顺逆风",
+      "evaluable": false,
+      "not_evaluable_reason": "threshold.max_s 在模板里是空白待填项，表达式写得出来但求不出结果",
+      "criterion": "t_windmilling_exit_s < max_s",
+      "criterion_text": "程序顺逆风处理超时后必须有强制退出",
+      "variables": {
+        "t_windmilling_exit_s": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.t_windmilling_exit_s",
+          "desc": "顺逆风强制退出耗时",
+          "unit": "s"
+        },
+        "max_s": {
+          "source": "threshold",
+          "ref": "threshold.max_s",
+          "desc": "强制退出时限（未定）",
+          "unit": "s"
+        }
+      },
+      "threshold": {
+        "max_s": null
+      },
+      "evidence": [
+        "mcState 时序"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析"
+      ],
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet 測試程式規格表 行 91「_____ 秒」"
+      },
+      "_placeholder": true,
+      "note": "模板里该阈值是空白待填项，源材料未给数值"
+    },
+    {
+      "id": "TR-PROT-01",
+      "name": "过压保护验证",
+      "category": "保护",
+      "evaluable": true,
+      "criterion": "(fault_flag & FAULT_OVP) !== 0 && Math.abs(vbus_back_v - vbus_0_v) / vbus_0_v <= recheck_tolerance_pct / 100",
+      "criterion_text": "把电源调到过压阈值 + 1 V，读 fault 应含 OVP 位；随后必须调回原母线电压并复检，偏差超 5% 判定降级",
+      "variables": {
+        "fault_flag": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.fault_flag",
+          "desc": "保护标志字整值"
+        },
+        "FAULT_OVP": {
+          "source": "constant",
+          "value": 8,
+          "hex": "0x0008",
+          "ref": "safety-interlocks.fault_bitmap.0x0008",
+          "desc": "过电压保护位"
+        },
+        "vbus_back_v": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.vbus_back_v",
+          "desc": "调回后复检母线电压",
+          "unit": "V"
+        },
+        "vbus_0_v": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.vbus_0_v",
+          "desc": "改动前母线电压",
+          "unit": "V"
+        },
+        "recheck_tolerance_pct": {
+          "source": "threshold",
+          "ref": "threshold.recheck_tolerance_pct",
+          "desc": "复检偏差容限",
+          "unit": "%"
+        }
+      },
+      "threshold": {
+        "trigger_offset_v": 1.0,
+        "ovp_thr_v": 18.0,
+        "recheck_tolerance_pct": 5
+      },
+      "evidence": [
+        "breakrun + readmem fault",
+        "母线 ADC 复读"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": [
+        {
+          "file": "[源] protect-verify-ovp/SKILL.md",
+          "locator": "执行流程第 1、2 节"
+        },
+        {
+          "file": "[源] include/Protect.h",
+          "locator": "Protect.h:39 (#define PROTECTION_OV_PROTECT_THRESHOLD)"
+        }
+      ],
+      "note": "位运算已加括号：C/JS 里 & 的优先级低于 !==，写成 fault_flag & FAULT_OVP !== 0 会先算比较再按位与，判据恒为 0",
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需读 MCU 故障寄存器（breakrun + readmem），本台架未配置该读寄存器通道"
+    },
+    {
+      "id": "TR-PROT-02",
+      "name": "欠压保护验证",
+      "category": "保护",
+      "evaluable": true,
+      "criterion": "(fault_flag & FAULT_UVP) !== 0 && Math.abs(vbus_back_v - vbus_0_v) / vbus_0_v <= recheck_tolerance_pct / 100",
+      "criterion_text": "把电源调到欠压阈值 − 1 V，读 fault 应含 UVP 位；随后调回并复检",
+      "variables": {
+        "fault_flag": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.fault_flag",
+          "desc": "保护标志字整值"
+        },
+        "FAULT_UVP": {
+          "source": "constant",
+          "value": 4,
+          "hex": "0x0004",
+          "ref": "safety-interlocks.fault_bitmap.0x0004",
+          "desc": "欠电压保护位"
+        },
+        "vbus_back_v": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.vbus_back_v",
+          "desc": "调回后复检母线电压",
+          "unit": "V"
+        },
+        "vbus_0_v": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.vbus_0_v",
+          "desc": "改动前母线电压",
+          "unit": "V"
+        },
+        "recheck_tolerance_pct": {
+          "source": "threshold",
+          "ref": "threshold.recheck_tolerance_pct",
+          "desc": "复检偏差容限",
+          "unit": "%"
+        }
+      },
+      "threshold": {
+        "trigger_offset_v": -1.0,
+        "uvp_thr_v": 7.0,
+        "recheck_tolerance_pct": 5
+      },
+      "evidence": [
+        "breakrun + readmem fault",
+        "母线 ADC 复读"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": [
+        {
+          "file": "[源] protect-verify-uvp/SKILL.md",
+          "locator": "执行流程第 1、2 节"
+        },
+        {
+          "file": "[源] include/Protect.h",
+          "locator": "Protect.h:42 (#define PROTECTION_UV_PROTECT_THRESHOLD)"
+        }
+      ],
+      "note": "位运算已加括号，理由同 TR-PROT-01",
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需读 MCU 故障寄存器（breakrun + readmem），本台架未配置该读寄存器通道"
+    },
+    {
+      "id": "TR-PROT-03",
+      "name": "低压告警 LVW 验证",
+      "category": "保护",
+      "evaluable": false,
+      "not_evaluable_reason": "本工程 Protect.h 无 LVW 阈值宏，Motor_Protection.h 的 13 个 FAULT_* 位里也没有低压告警位，既无阈值也无可取的标志位，写不出表达式",
+      "criterion": null,
+      "criterion_text": "把电源调到低压告警阈值 − 0.5 V，读 warning（可能不在 fault 字段）应抬起；阈值宏扫不到时由规程反问用户，不得瞎猜",
+      "variables": {},
+      "threshold": {
+        "trigger_offset_v": -0.5,
+        "lvw_thr_v": null,
+        "recheck_tolerance_pct": 5
+      },
+      "evidence": [
+        "breakrun + readmem warning_flag",
+        "母线 ADC 复读"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": {
+        "file": "[源] protect-verify-lvw/SKILL.md",
+        "locator": "第 0 节 阈值缺失分支"
+      },
+      "_placeholder": true,
+      "note": "本散热风扇工程 Protect.h 无 LVW 阈值宏（已 grep 零命中），该项来自吸尘器线规程，散热风扇是否有低压告警待客户确认"
+    },
+    {
+      "id": "TR-PROT-04",
+      "name": "堵转保护验证",
+      "category": "保护",
+      "evaluable": true,
+      "criterion": "(fault_flag & FAULT_STALL_MASK) !== 0 && stall_trig_count >= trig_count",
+      "criterion_text": "人为堵转后，堵转计数达 25 次触发堵转保护，6000 ms 后恢复",
+      "variables": {
+        "fault_flag": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.fault_flag",
+          "desc": "保护标志字整值"
+        },
+        "FAULT_STALL_MASK": {
+          "source": "constant",
+          "value": 224,
+          "hex": "0xE0",
+          "derived_from": [
+            "safety-interlocks.fault_bitmap.0x0020",
+            "safety-interlocks.fault_bitmap.0x0040",
+            "safety-interlocks.fault_bitmap.0x0080"
+          ],
+          "desc": "堵转保护位掩码 = FAULT_STALL_METHOD_SPDES(0x0020) | FAULT_STALL_METHOD_START(0x0040) | FAULT_STALL_METHOD_OFR(0x0080)。头文件里的 FAULT_STALL_METHOD_UQOF(0x0060) 是 0x0020|0x0040 的复合常量，不是独立位，已被本掩码覆盖，无须再单列"
+        },
+        "stall_trig_count": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.stall_trig_count",
+          "desc": "堵转触发计数实测值",
+          "unit": "次"
+        },
+        "trig_count": {
+          "source": "threshold",
+          "ref": "threshold.trig_count",
+          "desc": "堵转触发计数阈值",
+          "unit": "次"
+        }
+      },
+      "threshold": {
+        "trig_count": 25,
+        "recover_times_ms": 6000
+      },
+      "evidence": [
+        "readmem fault",
+        "FG 停止"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": [
+        {
+          "file": "[源] include/Protect.h",
+          "locator": "Protect.h:31 (#define PROTECTION_TRIG_COUNT_THRESHOLD)"
+        },
+        {
+          "file": "[源] include/Protect.h",
+          "locator": "Protect.h:30 (#define PROTECTION_STALL_RECOVER_TIMES)"
+        },
+        {
+          "file": "[源] include/Motor_Protection.h",
+          "locator": "Motor_Protection.h:55 (#define FAULT_STALL_METHOD_SPDES)"
+        }
+      ],
+      "note": "旧掩码写作 0x0020|0x0040|0x0060|0x0080，其中 0x0060 冗余；改用 0xE0 并加括号，见 variables.FAULT_STALL_MASK 的说明",
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需读 MCU 故障寄存器（breakrun + readmem），本台架未配置该读寄存器通道"
+    },
+    {
+      "id": "TR-PROT-05",
+      "name": "超速保护验证",
+      "category": "保护",
+      "evaluable": false,
+      "not_evaluable_reason": "本工程 Protect.h 无超速保护宏，13 个 FAULT_* 位里也没有超速位；该项还要求临时改分支压低阈值，属操作规程而非可求值判据",
+      "criterion": null,
+      "criterion_text": "在 protect-verify/* 临时分支上压低超速阈值使保护必然触发，读 fault 判定保护链路生效；跑完必须 git reset + 重编重烧还原",
+      "variables": {},
+      "threshold": null,
+      "evidence": [
+        "breakrun + readmem fault"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": {
+        "file": "[源] protect-verify-overspeed/SKILL.md",
+        "locator": "全文执行流程"
+      },
+      "_placeholder": true,
+      "note": "该规程针对吸尘器工程的 OVER_SPEED_EN 宏；本散热风扇工程 Protect.h 无超速保护宏，适用性待确认"
+    },
+    {
+      "id": "TR-PROT-06",
+      "name": "启动失败保护验证",
+      "category": "保护",
+      "evaluable": false,
+      "not_evaluable_reason": "Motor_Protection.h 的 13 个 FAULT_* 位里没有启动失败位，取不到可按位判定的标志；该项是「改宏造条件 + 强制还原」的操作规程",
+      "criterion": null,
+      "criterion_text": "临时改宏制造启动失败条件，读 fault 判定启动失败保护是否抬起；跑完强制还原源码与 baseline 固件",
+      "variables": {},
+      "threshold": null,
+      "evidence": [
+        "breakrun + readmem fault"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": {
+        "file": "[源] protect-verify-start-fail/SKILL.md",
+        "locator": "frontmatter description"
+      }
+    },
+    {
+      "id": "TR-PROT-07",
+      "name": "过流保护验证（硬过流 / 软过流）",
+      "category": "保护",
+      "evaluable": true,
+      "criterion": "(fault_flag & FAULT_HW_OCP) !== 0 || (fault_flag & FAULT_SW_OCP) !== 0",
+      "criterion_text": "硬过流走 DAC 比较来源，软过流阈值 10.0 A；两者择一或同测",
+      "variables": {
+        "fault_flag": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.fault_flag",
+          "desc": "保护标志字整值"
+        },
+        "FAULT_HW_OCP": {
+          "source": "constant",
+          "value": 1,
+          "hex": "0x0001",
+          "ref": "safety-interlocks.fault_bitmap.0x0001",
+          "desc": "硬件过电流保护位"
+        },
+        "FAULT_SW_OCP": {
+          "source": "constant",
+          "value": 2,
+          "hex": "0x0002",
+          "ref": "safety-interlocks.fault_bitmap.0x0002",
+          "desc": "软件过电流保护位"
+        }
+      },
+      "threshold": {
+        "soft_threshold_a": 10.0,
+        "hw_source": "DAC_SOURCE",
+        "recover_times_ms": 1500
+      },
+      "evidence": [
+        "readmem fault",
+        "示波器相电流"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": [
+        {
+          "file": "[源] include/Protect.h",
+          "locator": "Protect.h:54 (#define PROTECTION_OC_SOFT_THRESHOLD)"
+        },
+        {
+          "file": "[源] 测试数据_20260622/report.xlsm",
+          "locator": "sheet 測試程式規格表 行 83"
+        }
+      ],
+      "note": "位运算已加括号，理由同 TR-PROT-01",
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需读 MCU 故障寄存器（breakrun + readmem），本台架未配置该读寄存器通道"
+    },
+    {
+      "id": "TR-HW-01",
+      "name": "母线电压检测自检（Vbus ±10%）",
+      "category": "硬件自检",
+      "evaluable": true,
+      "criterion": "Math.abs(vbus_measured_v - vbus_expected_v) / vbus_expected_v <= tolerance_pct / 100",
+      "criterion_text": "读母线 ADC 换算电压，与用户填写的实际母线电压比对，偏差不超过 ±10%",
+      "variables": {
+        "vbus_measured_v": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.vbus_measured_v",
+          "desc": "母线 ADC 换算电压",
+          "unit": "V"
+        },
+        "vbus_expected_v": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.vbus_expected_v",
+          "desc": "用户填写的实际母线电压",
+          "unit": "V"
+        },
+        "tolerance_pct": {
+          "source": "threshold",
+          "ref": "threshold.tolerance_pct",
+          "desc": "偏差容限",
+          "unit": "%"
+        }
+      },
+      "threshold": {
+        "tolerance_pct": 10
+      },
+      "evidence": [
+        "breakrun + readmem 母线 ADC"
+      ],
+      "flows": [
+        "F2 初始化配置",
+        "F4 启动测试及结果分析"
+      ],
+      "_source": [
+        {
+          "file": "[源] hw-selfcheck-vbus/SKILL.md",
+          "locator": "frontmatter description 与判据小节"
+        },
+        {
+          "file": "[源] _调研/A-DebugCopilot场景与知识库取证.md",
+          "locator": "第二节第 2 类「hw-selfcheck-vbus ±10%」"
+        }
+      ],
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需 breakrun + readmem 母线 ADC，本台架未配置该读寄存器通道"
+    },
+    {
+      "id": "TR-HW-02",
+      "name": "三相输出自检（IPM 相位 ±5°）",
+      "category": "硬件自检",
+      "evaluable": true,
+      "criterion": "max_phase_error_deg <= tolerance_deg",
+      "criterion_text": "三相输出相位互差 120°，实测偏差不超过 ±5°",
+      "variables": {
+        "max_phase_error_deg": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.max_phase_error_deg",
+          "desc": "相位互差与 120° 的最大偏差",
+          "unit": "度"
+        },
+        "tolerance_deg": {
+          "source": "threshold",
+          "ref": "threshold.tolerance_deg",
+          "desc": "相位偏差容限",
+          "unit": "度"
+        }
+      },
+      "threshold": {
+        "tolerance_deg": 5,
+        "nominal_phase_deg": 120
+      },
+      "evidence": [
+        "示波器 CH2/CH3/CH4 三相输出"
+      ],
+      "flows": [
+        "F2 初始化配置",
+        "F4 启动测试及结果分析"
+      ],
+      "_source": [
+        {
+          "file": "[源] hw-selfcheck-ipm/SKILL.md",
+          "locator": "frontmatter description 与判据小节"
+        },
+        {
+          "file": "[源] _调研/A-DebugCopilot场景与知识库取证.md",
+          "locator": "第二节第 2 类「hw-selfcheck-ipm 相位±5°」"
+        }
+      ],
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需三相输出同时接入示波器测相位，本台架只有三通道且 CH3 已用于 PWM"
+    },
+    {
+      "id": "TR-ONOFF-01",
+      "name": "三档电压 ON/OFF 次数回归",
+      "category": "可靠性",
+      "evaluable": false,
+      "not_evaluable_reason": "threshold.required_count 在模板原文即写「客戶需求待確認」，表达式写得出来但求不出结果",
+      "criterion": "onoff_pass_count_lv === required_count && onoff_pass_count_sv === required_count && onoff_pass_count_hv === required_count",
+      "criterion_text": "额定、最低、最高运行电压下各做规定次数的 ON/OFF 测试",
+      "variables": {
+        "onoff_pass_count_lv": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.onoff_pass_count_lv",
+          "desc": "最低电压 ON/OFF 通过次数",
+          "unit": "次"
+        },
+        "onoff_pass_count_sv": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.onoff_pass_count_sv",
+          "desc": "额定电压 ON/OFF 通过次数",
+          "unit": "次"
+        },
+        "onoff_pass_count_hv": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.onoff_pass_count_hv",
+          "desc": "最高电压 ON/OFF 通过次数",
+          "unit": "次"
+        },
+        "required_count": {
+          "source": "threshold",
+          "ref": "threshold.required_count",
+          "desc": "要求次数（未定）",
+          "unit": "次"
+        }
+      },
+      "threshold": {
+        "voltage_levels": [
+          "LV",
+          "SV",
+          "HV"
+        ],
+        "required_count": null
+      },
+      "evidence": [
+        "ON-OFF LV / ON-OFF SV / ON-OFF HV 三个分页的波形"
+      ],
+      "flows": [
+        "F3 测试需求确认",
+        "F4 启动测试及结果分析",
+        "F6 测试报告及产出"
+      ],
+      "_source": [
+        {
+          "file": "[源] 测试数据_20260622/report.xlsm",
+          "locator": "sheet 測試程式規格表 行 38-40「_____ 次 (客戶需求待確認)」"
+        },
+        {
+          "file": "[源] 测试数据_20260622/report.xlsm",
+          "locator": "sheets ON-OFF LV / ON-OFF SV / ON-OFF HV"
+        }
+      ],
+      "_placeholder": true,
+      "note": "模板原文即写「客戶需求待確認」，次数未定"
+    },
+    {
+      "id": "TR-RUN-01",
+      "name": "最大工作电压下最低转速长跑 5 分钟",
+      "category": "可靠性",
+      "evaluable": true,
+      "criterion": "run_duration_min >= duration_min && fault_flag === 0 && outer_loop_min >= 0",
+      "criterion_text": "程序中速度外环最小值不能为负值；在最大工作电压下以最低转速运行 5 分钟无异常",
+      "variables": {
+        "run_duration_min": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.run_duration_min",
+          "desc": "无异常连续运行时长",
+          "unit": "min"
+        },
+        "duration_min": {
+          "source": "threshold",
+          "ref": "threshold.duration_min",
+          "desc": "要求运行时长",
+          "unit": "min"
+        },
+        "fault_flag": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.fault_flag",
+          "desc": "保护标志字整值"
+        },
+        "outer_loop_min": {
+          "source": "control-parameters",
+          "ref": "control-parameters.sout_min",
+          "desc": "速度环 PID 幅值下限 SOUT_MIN",
+          "unit": "A"
+        }
+      },
+      "threshold": {
+        "duration_min": 5
+      },
+      "evidence": [
+        "fault 标志",
+        "FG 转速时序"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm",
+        "locator": "sheet 測試程式規格表 行 96"
+      },
+      "bench_applicable": false,
+      "bench_inapplicable_reason": "需 5 分钟长跑计时并轮询 MCU fault 标志，本台架未配置该长期运行工况与读寄存器通道"
+    },
+    {
+      "id": "TR-BENCH-01",
+      "name": "PWM 占空比输出精度",
+      "category": "调速",
+      "evaluable": true,
+      "criterion": "bench_pwm_duty_err_max_pct <= bench_duty_err_max_pct",
+      "criterion_text": "各占空比档位的实测占空比与命令占空比的偏差最大值不超过容限（缺省 5%）。本判据取自本台架真实可测的量：示波器 CH3 测 PWM 波形、按边沿推算占空比。",
+      "variables": {
+        "bench_pwm_duty_err_max_pct": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.bench_pwm_duty_err_max_pct",
+          "desc": "各有效档位实测占空比偏差绝对值最大值",
+          "unit": "%"
+        },
+        "bench_duty_err_max_pct": {
+          "source": "threshold",
+          "ref": "threshold.bench_duty_err_max_pct",
+          "desc": "占空比偏差容限",
+          "unit": "%"
+        }
+      },
+      "threshold": {
+        "bench_duty_err_max_pct": 5
+      },
+      "evidence": [
+        "示波器 CH3 实测 PWM 波形按边沿推算占空比（capture.metrics.pwm.dutyPercent）"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": {
+        "file": "[台架] hardware/v0.6 联合实验采集产物",
+        "locator": "runs/<runId>/cycle*/pwm/capture.json 的 metrics.pwm.dutyPercent 与 commanded_pwm_pct 比对"
+      },
+      "note": "台架实测派生判据，非客户需求基线。阈值缺省 5% 为演示留余量：实测 30/50/70% 档偏差 <0.05%。"
+    },
+    {
+      "id": "TR-BENCH-02",
+      "name": "PWM 载波频率符合性",
+      "category": "调速",
+      "evaluable": true,
+      "criterion": "bench_pwm_freq_dev_max_pct <= bench_freq_dev_max_pct",
+      "criterion_text": "各有效档位实测 PWM 频率与该档命令基准频率的偏差最大值不超过容限（缺省 10%）。本台架目标载波 25 kHz。",
+      "variables": {
+        "bench_pwm_freq_dev_max_pct": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.bench_pwm_freq_dev_max_pct",
+          "desc": "各有效档位实测 PWM 频率相对基准的偏差绝对值最大值",
+          "unit": "%"
+        },
+        "bench_freq_dev_max_pct": {
+          "source": "threshold",
+          "ref": "threshold.bench_freq_dev_max_pct",
+          "desc": "频率偏差容限",
+          "unit": "%"
+        }
+      },
+      "threshold": {
+        "bench_freq_dev_max_pct": 10
+      },
+      "evidence": [
+        "示波器 CH3 实测 PWM 波形按边沿推算频率（capture.metrics.pwm.frequencyHz）"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": {
+        "file": "[台架] hardware/v0.6 联合实验采集产物",
+        "locator": "runs/<runId>/cycle*/pwm/capture.json 的 metrics.pwm.frequencyHz"
+      },
+      "note": "台架实测派生判据，非客户需求基线。阈值缺省 10% 为演示留余量：实测 24961~24967 Hz（目标 25000）。"
+    },
+    {
+      "id": "TR-BENCH-03",
+      "name": "供电电压稳定范围",
+      "category": "硬件自检",
+      "evaluable": true,
+      "criterion": "bench_voltage_mean_v >= bench_voltage_min_v && bench_voltage_mean_v <= bench_voltage_max_v",
+      "criterion_text": "各档位供电电压均值落在合格区间内（缺省 4.0~5.5 V）。本台架 CH2 测供电电压。",
+      "variables": {
+        "bench_voltage_mean_v": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.bench_voltage_mean_v",
+          "desc": "各有效档位供电电压均值的平均",
+          "unit": "V"
+        },
+        "bench_voltage_min_v": {
+          "source": "threshold",
+          "ref": "threshold.bench_voltage_min_v",
+          "desc": "供电电压下限",
+          "unit": "V"
+        },
+        "bench_voltage_max_v": {
+          "source": "threshold",
+          "ref": "threshold.bench_voltage_max_v",
+          "desc": "供电电压上限",
+          "unit": "V"
+        }
+      },
+      "threshold": {
+        "bench_voltage_min_v": 4.0,
+        "bench_voltage_max_v": 5.5
+      },
+      "evidence": [
+        "示波器 CH2 实测供电电压（capture.metrics.voltage.meanV）"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": {
+        "file": "[台架] hardware/v0.6 联合实验采集产物",
+        "locator": "runs/<runId>/cycle*/pwm/capture.json 的 metrics.voltage.meanV"
+      },
+      "note": "台架实测派生判据，非客户需求基线。区间缺省 4.0~5.5 V 为演示留余量：实测 4.76~4.99 V。CH2 探头倍率尚未现场独立确认（physicalProbeRatioConfirmed=false），结论按 provisional 对待。"
+    },
+    {
+      "id": "TR-BENCH-04",
+      "name": "波形采集有效性",
+      "category": "硬件自检",
+      "evaluable": true,
+      "criterion": "bench_valid_duty_count >= bench_min_valid_duty_count",
+      "criterion_text": "至少有一个占空比档位采到可判读的有效 PWM 波形（有边沿、可推算占空比）。覆盖各档采集链路是否真的通。",
+      "variables": {
+        "bench_valid_duty_count": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.bench_valid_duty_count",
+          "desc": "采到有效 PWM 波形的档位数",
+          "unit": "档"
+        },
+        "bench_min_valid_duty_count": {
+          "source": "threshold",
+          "ref": "threshold.bench_min_valid_duty_count",
+          "desc": "要求的最少有效档位数",
+          "unit": "档"
+        }
+      },
+      "threshold": {
+        "bench_min_valid_duty_count": 1
+      },
+      "evidence": [
+        "runs/<runId>/cycle*/pwm/capture.json 的 metrics.pwm.edgeStatus 为 derived_from_displayed_waveform 的档位计数"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": {
+        "file": "[台架] hardware/v0.6 联合实验采集产物",
+        "locator": "runs/<runId>/cycle*/pwm/capture.json 的 metrics.pwm.edgeStatus"
+      },
+      "note": "台架实测派生判据，非客户需求基线。100% 档为恒高电平、无边沿，edgeStatus=constant_output_command_no_frequency_claim，按合理情形不计入有效也不计不通过。"
+    },
+    {
+      "id": "TR-BENCH-05",
+      "name": "输出占空比上限配置覆盖运行档位",
+      "category": "调速",
+      "evaluable": true,
+      "criterion": "max_duty_config >= bench_required_max_duty",
+      "criterion_text": "最大输出占空比配置值须能覆盖台架运行的满档需求（30/50/70/100% 四档中最高 100%）。配置上限低于运行档位时，满档指令会被固件钳位，实测与命令不符。",
+      "variables": {
+        "max_duty_config": {
+          "source": "control-parameters",
+          "ref": "control-parameters.motor_max_duty",
+          "desc": "最大输出占空比 MOTOR_MAX_DUTY（当前生效配置值）"
+        },
+        "bench_required_max_duty": {
+          "source": "threshold",
+          "ref": "threshold.bench_required_max_duty",
+          "desc": "台架运行要求覆盖的最大占空比"
+        }
+      },
+      "threshold": {
+        "bench_required_max_duty": 1.0
+      },
+      "evidence": [
+        "control-parameters.motor_max_duty（当前生效值，含采纳回写）与台架运行档位上限比对"
+      ],
+      "flows": [
+        "F5 调优确认及运行"
+      ],
+      "_source": {
+        "file": "[台架] 本判据为配置合理性检查，变量取自 control-parameters",
+        "locator": "control-parameters.json 的 parameters[key=motor_max_duty]（源 Customer.h:242 MOTOR_MAX_DUTY）"
+      },
+      "note": "台架可修复判据，非客户需求基线。变量取自 control-parameters，结论随采纳值变化：当前配置 0.9 < 1.0 判不通过；采纳「上调至 1.0」后重测转通过。这是本流程「改参数 → 重测 → 结论变好」闭环的承载判据。",
+      "candidate_tags": [
+        "motor_max_duty",
+        "占空比上限",
+        "调速"
+      ]
+    },
+    {
+      "id": "TR-BENCH-06",
+      "name": "转速采集有效性",
+      "category": "硬件自检",
+      "evaluable": true,
+      "criterion": "bench_valid_tach_count >= bench_min_valid_tach_count",
+      "criterion_text": "本轮至少要有 1 个占空比档采到 CH4 测速转速（rpm 非 null），否则判不出转速类结论。",
+      "variables": {
+        "bench_valid_tach_count": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.bench_valid_tach_count",
+          "desc": "采到有效转速的档位数",
+          "unit": "档"
+        },
+        "bench_min_valid_tach_count": {
+          "source": "threshold",
+          "ref": "threshold.bench_min_valid_tach_count",
+          "desc": "要求的最少有效测速档位数",
+          "unit": "档"
+        }
+      },
+      "threshold": {
+        "bench_min_valid_tach_count": 1
+      },
+      "evidence": [
+        "runs/<runId>/cycle*/tach/capture.json 的 metrics.tach.rpm（rpm = 60 × 频率 / PPR）"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": {
+        "file": "[台架] hardware/v0.6 联合实验采集产物",
+        "locator": "runs/<runId>/cycle*/tach/capture.json 的 metrics.tach.rpm"
+      },
+      "note": "测速有效性判据。**刻意不加 bench_applicable=false**：CH4 测速线是本台架「能测、只是当前尚未开启」，与「结构上不具备测量手段」不同。tach 未开启时本判据落「未采集」而不是「不通过」，也不并入「本台架不适用」。",
+      "candidate_tags": [
+        "测速",
+        "CH4",
+        "转速"
+      ]
+    },
+    {
+      "id": "TR-BENCH-07",
+      "name": "稳态转速范围",
+      "category": "硬件自检",
+      "evaluable": true,
+      "criterion": "bench_rpm_mean_min >= bench_rpm_floor && bench_rpm_mean_max <= bench_rpm_ceiling",
+      "criterion_text": "本轮各档转速均值须落在台架合理区间内：最低档不低于 200 RPM（低于此值视为测速信号异常或风扇未转），最高档不超过 6000 RPM（超出视为测速误触发或数据异常）。",
+      "variables": {
+        "bench_rpm_mean_min": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.bench_rpm_mean_min",
+          "desc": "各档转速均值的最小值",
+          "unit": "RPM"
+        },
+        "bench_rpm_mean_max": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.bench_rpm_mean_max",
+          "desc": "各档转速均值的最大值",
+          "unit": "RPM"
+        },
+        "bench_rpm_floor": {
+          "source": "threshold",
+          "ref": "threshold.bench_rpm_floor",
+          "desc": "转速下限",
+          "unit": "RPM"
+        },
+        "bench_rpm_ceiling": {
+          "source": "threshold",
+          "ref": "threshold.bench_rpm_ceiling",
+          "desc": "转速上限",
+          "unit": "RPM"
+        }
+      },
+      "threshold": {
+        "bench_rpm_floor": 200,
+        "bench_rpm_ceiling": 6000
+      },
+      "evidence": [
+        "runs/<runId>/cycle*/tach/capture.json 的 metrics.tach.rpm，按 commanded_pwm_pct 分档取均值"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": {
+        "file": "[台架] hardware/v0.6 联合实验采集产物 + 场景包需求量级",
+        "locator": "requirements 的 TR-RUN-01「5 分钟长跑」与 TR-TIME-*（FG2 > 10000 RPM）给出的转速量级"
+      },
+      "note": "⚠️ **阈值待现场实测标定**：200 / 6000 是按需求文档量级留足余量的宽区间，不是本台架实测标定值。现场跑出各档真实转速后应据实收窄，否则本判据只能当作「量级合理性」检查，不能当作性能验收依据。",
+      "candidate_tags": [
+        "测速",
+        "转速",
+        "量级校核"
+      ]
+    },
+    {
+      "id": "TR-BENCH-08",
+      "name": "转速随占空比递增",
+      "category": "调速",
+      "evaluable": true,
+      "criterion": "bench_rpm_rising_gear_count >= bench_min_rising_gear_count",
+      "criterion_text": "占空比逐档抬高时转速应同步上升：30→50→70→100% 四档至少要有 2 对相邻档满足「后档转速严格大于前档」，否则判调速链路异常。",
+      "variables": {
+        "bench_rpm_rising_gear_count": {
+          "source": "runtime.measure",
+          "ref": "runtime.measure.bench_rpm_rising_gear_count",
+          "desc": "转速随占空比递增的相邻档对数",
+          "unit": "对"
+        },
+        "bench_min_rising_gear_count": {
+          "source": "threshold",
+          "ref": "threshold.bench_min_rising_gear_count",
+          "desc": "要求的最少递增档对数",
+          "unit": "对"
+        }
+      },
+      "threshold": {
+        "bench_min_rising_gear_count": 2
+      },
+      "evidence": [
+        "runs/<runId>/cycle*/tach/capture.json 的 metrics.tach.rpm，按 commanded_pwm_pct 升序做相邻档比较"
+      ],
+      "flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "_source": {
+        "file": "[台架] hardware/v0.6 联合实验采集产物",
+        "locator": "runs/<runId>/cycle*/tach/capture.json 的 metrics.tach.rpm，按 commanded_pwm_pct 升序做跨档比较"
+      },
+      "note": "递增是「相邻档比较」的结论，有效测速档不足 3 档时**不输出** bench_rpm_rising_gear_count → 本判据落「未采集」而非「不通过」：1~2 个点无法断言递增，判 fail 是假失败。阈值 2 = 四档中至少两对上升，允许一个档位持平（如 100% 档与 70% 档同速）。",
+      "candidate_tags": [
+        "调速",
+        "测速",
+        "转速"
+      ]
+    }
+  ],
+  "bench_profile": {
+    "note": "台架（UNO 发 PWM + Rigol DS1104Z 四通道：CH1 电流 / CH2 电压 / CH3 PWM / CH4 测速）真实可测判据集。与客户需求基线 requirements 并存，不覆盖原有条目。其中 TR-BENCH-05 为「可修复」判据（变量取自 control-parameters），承载调优闭环；TR-BENCH-06~08 为转速类判据，变量取自 CH4 测速档（metrics.tach.rpm），测速未开启时落「未采集」。",
+    "requirements": [
+      "TR-BENCH-01",
+      "TR-BENCH-02",
+      "TR-BENCH-03",
+      "TR-BENCH-04",
+      "TR-BENCH-05",
+      "TR-BENCH-06",
+      "TR-BENCH-07",
+      "TR-BENCH-08"
+    ]
+  }
+}

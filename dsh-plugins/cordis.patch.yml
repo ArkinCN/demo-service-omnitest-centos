@@ -1,0 +1,80 @@
+# ATH overlay for DeepSeek Harness — Agentic Test Harness plugin set, Fortior line.
+#
+# Apply with:   dsh web --patch [源] dsh-plugins/cordis.patch.yml
+#          or:  dsh --profile headless --patch [源] dsh-plugins/cordis.patch.yml "<task>"
+#
+# Composition order (dsh 0.1.5-rc.2): each bundle patch in dsh.profile.bundles
+# order, then the profile's cordis.patch.yml, then $DSH_HOME/cordis.patch.yml,
+# then every --patch overlay. This file is last, so it wins every row it names.
+#
+# Three id-targeted rows re-enable the skill stack, which the web bundle ships
+# disabled, and one insert block mounts the three MCP stubs plus the two hook
+# bridges.
+
+# --- skill stack: the web bundle ships these disabled; the headless bundle
+#     already enables them. Re-enabling here is a no-op under headless.
+#     dsh-skill-badge is deliberately NOT re-enabled: it is a Web-UI-only
+#     plugin and force-enabling it crashes the headless profile with
+#     "Cannot read properties of undefined (reading 'prepare')".
+- id: skill-filesystem
+  disabled: false
+  config:
+    customSkillDirs:
+      - [源] dsh-plugins/skills
+
+- id: tool-skill
+  disabled: false
+
+# --- model route: deepseek-v4-pro, confirmed present on
+#     GET https://api.deepseek.com/models (the other id served is deepseek-flash)
+- id: agent-default-model
+  config:
+    provider: deepseek-official
+    model: deepseek-v4-pro
+
+# --- the ATH plugin set
+- insert:
+    # Three MCP stub servers over stdio. Tool names reach the model as
+    # mcp__motor__motor_start, mcp__scope__rigol_measure, mcp__report__fill_report, ...
+    - id: mcp-motor
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: motor
+        transport: stdio
+        command: [源] bin/python
+        args: ['[源] mcp/motor_mcp.py']
+        failOnStartupError: true
+
+    - id: mcp-scope
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: scope
+        transport: stdio
+        command: [源] bin/python
+        args: ['[源] mcp/scope_mcp.py']
+        failOnStartupError: true
+
+    - id: mcp-report
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: report
+        transport: stdio
+        command: [源] bin/python
+        args: ['[源] mcp/report_mcp.py']
+        failOnStartupError: true
+
+    # Enforcing gate. The Claude Code bridge passes the real tool arguments
+    # through as tool_input, so the commanded current is visible to the hook.
+    - id: hooks-ath
+      name: '@deepseek-ai/dsh-hooks-claude-code'
+      config:
+        configPath: [源] hooks/hooks.json
+        projectDir: [源] lab/dsh-plugins
+
+    # Evidence only, never blocks. Records the Codex-shaped payload so the
+    # tool_input flattening in that bridge is documented rather than assumed.
+    - id: hooks-ath-codex-probe
+      name: '@deepseek-ai/dsh-hooks-codex'
+      config:
+        configPath: [源] hooks/hooks.codex.json
+        model: deepseek-v4-pro

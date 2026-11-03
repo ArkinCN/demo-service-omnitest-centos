@@ -1,0 +1,229 @@
+{
+  "taxonomy": {
+    "l1": "motor",
+    "l2": "cooling-fan",
+    "l3": "fortior-fu6832"
+  },
+  "design_note": "三个维度彼此正交：所属流程回答『在哪用』，问题类型回答『治什么』，沉淀方式回答『怎么来的、可信到什么程度』。一条经验在每个维度上取且只取一个值。",
+  "dimensions": [
+    {
+      "key": "process",
+      "name": "所属流程",
+      "question": "这条经验在测试系统的哪一个流程里被用到？",
+      "note": "与系统顶部的六个典型流程一一对应，是经验检索的主入口。",
+      "values": [
+        {
+          "code": "kb-manage",
+          "label": "知识库管理",
+          "desc": "文档与经验本身的组织、上传、转化、增删改查。"
+        },
+        {
+          "code": "init-config",
+          "label": "初始化配置",
+          "desc": "产品选型、本体属性、驱动与保护红线的配置。"
+        },
+        {
+          "code": "req-confirm",
+          "label": "测试需求确认",
+          "desc": "测试标准、质量要求、工作流编排的确认。"
+        },
+        {
+          "code": "run-test",
+          "label": "启动测试及结果分析",
+          "desc": "实际跑测试、采数据、判定结果。"
+        },
+        {
+          "code": "tune",
+          "label": "调优确认及运行",
+          "desc": "针对未达标项给推荐参数并复测。"
+        },
+        {
+          "code": "report",
+          "label": "测试报告及产出",
+          "desc": "模板、信息确认、成稿。"
+        }
+      ]
+    },
+    {
+      "key": "fault_type",
+      "name": "问题类型",
+      "question": "这条经验处理的是哪一类异常？",
+      "note": "按现象归类，不按根因归类——现场先看到的是现象。",
+      "values": [
+        {
+          "code": "start-fail",
+          "label": "起动失败",
+          "desc": "电机不转、起转即停、未进入持续稳定旋转。"
+        },
+        {
+          "code": "speed-short",
+          "label": "转速不达",
+          "desc": "能转但稳态转速达不到目标或偏差超容限。"
+        },
+        {
+          "code": "protect-trip",
+          "label": "保护误触发",
+          "desc": "过流、过压、欠压、堵转等保护在正常工况下动作。"
+        },
+        {
+          "code": "waveform-abn",
+          "label": "波形异常",
+          "desc": "相电流/转速波动、振荡、失步、切闭环掉速。"
+        },
+        {
+          "code": "param-oob",
+          "label": "参数越界",
+          "desc": "配置值超出手册或型号基线的允许范围。"
+        },
+        {
+          "code": "device-link",
+          "label": "设备连接",
+          "desc": "接线、探头、仿真器、示波器、串口一类的连通性问题。"
+        }
+      ]
+    },
+    {
+      "key": "capture_mode",
+      "name": "沉淀方式",
+      "question": "这条经验是怎么进知识库的？决定它的可信度与可核验路径。",
+      "note": "三种方式的证据强度递减顺序：实验沉淀 > 规程沉淀 > 对话沉淀。",
+      "values": [
+        {
+          "code": "experiment",
+          "label": "实验沉淀",
+          "desc": "来自一次有原始数据的实验，可回指 attempt 路径、波形文件与判定报告。",
+          "evidence_required": [
+            "attempt_path",
+            "waveform",
+            "diagnosis_report"
+          ]
+        },
+        {
+          "code": "sop",
+          "label": "规程沉淀",
+          "desc": "来自规程/手册里的约定动作，可回指规程文件与章节。",
+          "evidence_required": [
+            "sop_file",
+            "sop_section"
+          ]
+        },
+        {
+          "code": "dialogue",
+          "label": "对话沉淀",
+          "desc": "来自与大模型的一次调试对话，用户点『沉淀为经验』时生成，需人工确认后才升级为可检索条目。",
+          "evidence_required": [
+            "session_id",
+            "message_range",
+            "confirmed_by"
+          ]
+        }
+      ]
+    }
+  ],
+  "capture_template": {
+    "description": "「从对话一键沉淀为经验」的字段模板。field 是字段名，fill 是填充来源；status=draft 的条目不参与检索，人工确认后置 confirmed 才入库。",
+    "fields": [
+      {
+        "field": "id",
+        "type": "string",
+        "fill": "自动生成 EXP-CHAT-{yyyymmdd}-{seq}"
+      },
+      {
+        "field": "title",
+        "type": "string",
+        "fill": "模型对该轮对话的一句话概括，用户可改"
+      },
+      {
+        "field": "capture_mode",
+        "type": "enum(capture_mode)",
+        "fill": "固定 dialogue"
+      },
+      {
+        "field": "phenomenon.text",
+        "type": "string",
+        "fill": "对话里用户最初描述的现象，原话优先"
+      },
+      {
+        "field": "phenomenon.measured",
+        "type": "object|null",
+        "fill": "本轮引用过的实测量（示波器读数、RAM 变量、FG 转速），没有则 null"
+      },
+      {
+        "field": "root_cause.label",
+        "type": "string",
+        "fill": "对话最终认定的根因"
+      },
+      {
+        "field": "root_cause.rationale",
+        "type": "string",
+        "fill": "为什么是这个根因"
+      },
+      {
+        "field": "action.parameter",
+        "type": "string",
+        "fill": "改动的参数/宏名，取自 params.json 的 name"
+      },
+      {
+        "field": "action.direction",
+        "type": "enum(increase|decrease|set|both)",
+        "fill": "调整方向"
+      },
+      {
+        "field": "action.current_value / action.target_value",
+        "type": "number|null",
+        "fill": "改前/改后值"
+      },
+      {
+        "field": "action.step",
+        "type": "string",
+        "fill": "步长与边界提示"
+      },
+      {
+        "field": "result.status",
+        "type": "enum(已验证|未验证|已推翻)",
+        "fill": "复测结果；默认未验证"
+      },
+      {
+        "field": "confidence",
+        "type": "number 0~1",
+        "fill": "默认 0.4；有复测通过证据升到 0.8"
+      },
+      {
+        "field": "source.session_id / message_range",
+        "type": "string",
+        "fill": "对话定位，供回溯原文"
+      },
+      {
+        "field": "source.confirmed_by",
+        "type": "string",
+        "fill": "确认人；未确认时为空且 status=draft"
+      },
+      {
+        "field": "tags.scenario / product",
+        "type": "string",
+        "fill": "取当前工程的一级场景与三级产品类型"
+      },
+      {
+        "field": "tags.process",
+        "type": "enum(process)",
+        "fill": "取沉淀发生时所在的流程页"
+      },
+      {
+        "field": "tags.fault_type",
+        "type": "enum(fault_type)",
+        "fill": "模型建议 + 用户确认"
+      },
+      {
+        "field": "time",
+        "type": "date",
+        "fill": "对话发生日期"
+      },
+      {
+        "field": "status",
+        "type": "enum(draft|confirmed|archived)",
+        "fill": "默认 draft"
+      }
+    ],
+    "review_rule": "同一 (product, parameter, fault_type) 下已有 confirmed 条目时，新草稿并入该条目的 occurrences 而不是另起一条，避免同一条经验被重复沉淀。"
+  }
+}

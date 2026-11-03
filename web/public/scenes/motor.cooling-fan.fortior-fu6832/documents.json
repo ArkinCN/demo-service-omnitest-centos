@@ -1,0 +1,1386 @@
+{
+  "schema": "documents/v1",
+  "scene_id": "motor.cooling-fan.fortior-fu6832",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-19",
+  "belongs_to_flow": "F1 知识库管理（文档性质那一类：分类、呈现、增删改查、转化）",
+  "total": 61,
+  "count_by_type": {
+    "调试手册": 8,
+    "培训材料": 4,
+    "原理说明": 2,
+    "芯片数据手册": 1,
+    "原理图": 3,
+    "产品驱动程序": 3,
+    "报告模板": 1,
+    "报告样例": 1,
+    "案例表": 1,
+    "调试规程（dc-skills）": 25,
+    "调试纪律（dc-rules）": 5,
+    "我方文档": 7
+  },
+  "conversion_status_legend": {
+    "markdown_native": "本身就是 Markdown，可直接进知识库",
+    "markdown_extracted": "源目录已有同名 .md 抽取版",
+    "parsed_into_pack": "本场景包已把它解析成结构化 JSON，目标见 converted_into",
+    "pdf_renderable": "PDF 可按页渲图给前端",
+    "not_converted": "尚未做文档→知识库的转化"
+  },
+  "conversion_status_note": "conversion_status 是固定枚举（5 个取值），中文说明在 conversion_status_label，转化目标在 converted_into 数组（只有 parsed_into_pack 非空）。converted_into 里的 a.json#b 表示落到 a.json 的 b 字段。",
+  "documents": [
+    {
+      "id": "DOC-MAN-001",
+      "type": "调试手册",
+      "title": "FU-AM-FOC 方案调试手册",
+      "path": "[源] 调试经验文档/FU-AM-FOC方案调试手册-.pdf",
+      "size_bytes": 5792231,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "markdown_extracted",
+      "conversion_status_label": "源目录已有同名 .md 抽取版",
+      "converted_into": [],
+      "note": "同目录已有 Markdown 抽取版：[源] 调试经验文档/FU-AM-FOC方案调试手册-.md",
+      "_source": {
+        "file": "[源] 调试经验文档/FU-AM-FOC方案调试手册-.pdf"
+      },
+      "usage": "工艺",
+      "usage_class": "B2 调试手册与原理说明"
+    },
+    {
+      "id": "DOC-MAN-002",
+      "type": "调试手册",
+      "title": "SMO 和 PLL 估算器",
+      "path": "[源] 调试经验文档/SMO和PLL估算器.pdf",
+      "size_bytes": 4993898,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "markdown_extracted",
+      "conversion_status_label": "源目录已有同名 .md 抽取版",
+      "converted_into": [],
+      "note": "同目录已有 Markdown 抽取版：[源] 调试经验文档/SMO和PLL估算器.md",
+      "_source": {
+        "file": "[源] 调试经验文档/SMO和PLL估算器.pdf"
+      },
+      "usage": "工艺",
+      "usage_class": "B2 调试手册与原理说明"
+    },
+    {
+      "id": "DOC-MAN-003",
+      "type": "调试手册",
+      "title": "有感无感顺逆风启动培训",
+      "path": "[源] 调试经验文档/有感无感顺逆风启动培训.pdf",
+      "size_bytes": 3341145,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "markdown_extracted",
+      "conversion_status_label": "源目录已有同名 .md 抽取版",
+      "converted_into": [],
+      "note": "同目录已有 Markdown 抽取版：[源] 调试经验文档/有感无感顺逆风启动培训.md",
+      "_source": {
+        "file": "[源] 调试经验文档/有感无感顺逆风启动培训.pdf"
+      },
+      "usage": "工艺",
+      "usage_class": "B4 培训与考核材料"
+    },
+    {
+      "id": "DOC-MAN-004",
+      "type": "调试手册",
+      "title": "散热风扇单霍尔方案应用手册",
+      "path": "[源] 调试经验文档/散热风扇单霍尔方案应用手册.pdf",
+      "size_bytes": 2949191,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "markdown_extracted",
+      "conversion_status_label": "源目录已有同名 .md 抽取版",
+      "converted_into": [],
+      "note": "同目录已有 Markdown 抽取版：[源] 调试经验文档/散热风扇单霍尔方案应用手册.md",
+      "_source": {
+        "file": "[源] 调试经验文档/散热风扇单霍尔方案应用手册.pdf"
+      },
+      "usage": "产品说明书",
+      "usage_class": "A2 应用方案与用户手册"
+    },
+    {
+      "id": "DOC-MAN-005",
+      "type": "调试手册",
+      "title": "FOC 执行逻辑",
+      "path": "[源] 调试经验文档/FOC执行逻辑.pdf",
+      "size_bytes": 1681175,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "markdown_extracted",
+      "conversion_status_label": "源目录已有同名 .md 抽取版",
+      "converted_into": [],
+      "note": "同目录已有 Markdown 抽取版：[源] 调试经验文档/FOC执行逻辑.md",
+      "_source": {
+        "file": "[源] 调试经验文档/FOC执行逻辑.pdf"
+      },
+      "usage": "工艺",
+      "usage_class": "B2 调试手册与原理说明"
+    },
+    {
+      "id": "DOC-MAN-006",
+      "type": "调试手册",
+      "title": "AO 估算器",
+      "path": "[源] 调试经验文档/AO估算器.pdf",
+      "size_bytes": 1082113,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "markdown_extracted",
+      "conversion_status_label": "源目录已有同名 .md 抽取版",
+      "converted_into": [],
+      "note": "同目录已有 Markdown 抽取版：[源] 调试经验文档/AO估算器.md",
+      "_source": {
+        "file": "[源] 调试经验文档/AO估算器.pdf"
+      },
+      "usage": "工艺",
+      "usage_class": "B2 调试手册与原理说明"
+    },
+    {
+      "id": "DOC-MAN-007",
+      "type": "调试手册",
+      "title": "OMEGA 启动执行逻辑",
+      "path": "[源] 调试经验文档/OMEGA启动执行逻辑.pdf",
+      "size_bytes": 268828,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "markdown_extracted",
+      "conversion_status_label": "源目录已有同名 .md 抽取版",
+      "converted_into": [],
+      "note": "同目录已有 Markdown 抽取版：[源] 调试经验文档/OMEGA启动执行逻辑.md",
+      "_source": {
+        "file": "[源] 调试经验文档/OMEGA启动执行逻辑.pdf"
+      },
+      "usage": "工艺",
+      "usage_class": "B2 调试手册与原理说明"
+    },
+    {
+      "id": "DOC-MAN-008",
+      "type": "调试手册",
+      "title": "8080 bug 修改原因汇总（2025-04-14）",
+      "path": "[源] 调试经验文档/8080_bug修改原因汇总_20250414.docx",
+      "size_bytes": 3750557,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "markdown_extracted",
+      "conversion_status_label": "源目录已有同名 .md 抽取版",
+      "converted_into": [],
+      "note": "同目录已有 Markdown 抽取版：[源] 调试经验文档/8080_bug修改原因汇总_20250414.md",
+      "_source": {
+        "file": "[源] 调试经验文档/8080_bug修改原因汇总_20250414.docx"
+      },
+      "usage": "工艺",
+      "usage_class": "B2 调试手册与原理说明"
+    },
+    {
+      "id": "DOC-TRN-009",
+      "type": "培训材料",
+      "title": "SVPWM 原理（培训 PPT）",
+      "path": "[源] 调试经验文档/1-SVPWM原理.pptx",
+      "size_bytes": 869631,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "markdown_extracted",
+      "conversion_status_label": "源目录已有同名 .md 抽取版",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] 调试经验文档/1-SVPWM原理.pptx"
+      },
+      "usage": "工艺",
+      "usage_class": "B4 培训与考核材料"
+    },
+    {
+      "id": "DOC-TRN-010",
+      "type": "培训材料",
+      "title": "矢量控制原理（培训 PPT）",
+      "path": "[源] 调试经验文档/2-矢量控制原理.pptx",
+      "size_bytes": 523490,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "markdown_extracted",
+      "conversion_status_label": "源目录已有同名 .md 抽取版",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] 调试经验文档/2-矢量控制原理.pptx"
+      },
+      "usage": "工艺",
+      "usage_class": "B4 培训与考核材料"
+    },
+    {
+      "id": "DOC-TRN-011",
+      "type": "培训材料",
+      "title": "FOC 控制理论介绍（Jamie，培训 PPT）",
+      "path": "[源] 调试经验文档/8.9-【FOC控制理论介绍】-Jamie.pptx",
+      "size_bytes": 11612351,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "markdown_extracted",
+      "conversion_status_label": "源目录已有同名 .md 抽取版",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] 调试经验文档/8.9-【FOC控制理论介绍】-Jamie.pptx"
+      },
+      "usage": "工艺",
+      "usage_class": "B4 培训与考核材料"
+    },
+    {
+      "id": "DOC-TRN-012",
+      "type": "原理说明",
+      "title": "SMO 角度估算的原理介绍和部分寄存器说明",
+      "path": "[源] 调试经验文档/SMO角度估算的原理介绍和部分寄存器说明.docx",
+      "size_bytes": 508663,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "markdown_extracted",
+      "conversion_status_label": "源目录已有同名 .md 抽取版",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] 调试经验文档/SMO角度估算的原理介绍和部分寄存器说明.docx"
+      },
+      "usage": "工艺",
+      "usage_class": "B2 调试手册与原理说明"
+    },
+    {
+      "id": "DOC-TRN-013",
+      "type": "原理说明",
+      "title": "运行逻辑",
+      "path": "[源] 调试经验文档/运行逻辑.docx",
+      "size_bytes": 1315257,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "markdown_extracted",
+      "conversion_status_label": "源目录已有同名 .md 抽取版",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] 调试经验文档/运行逻辑.docx"
+      },
+      "usage": "工艺",
+      "usage_class": "B2 调试手册与原理说明"
+    },
+    {
+      "id": "DOC-TRN-014",
+      "type": "培训材料",
+      "title": "考试题",
+      "path": "[源] 调试经验文档/考试题.docx",
+      "size_bytes": 903345,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "markdown_extracted",
+      "conversion_status_label": "源目录已有同名 .md 抽取版",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] 调试经验文档/考试题.docx"
+      },
+      "usage": "工艺",
+      "usage_class": "B4 培训与考核材料"
+    },
+    {
+      "id": "DOC-DS-015",
+      "type": "芯片数据手册",
+      "title": "MCU-DS-14 FU6832 数据手册 V2.1（2023-06-21），峰岹科技三相电机控制 MCU",
+      "path": "[源] Document/MCU-DS-14_FU6832_V2.1_20230621.pdf",
+      "size_bytes": 18044043,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "note": "296 页；电气特性在 PDF 第 56 页起（绝对最大额定值 表5-1、全局电气特性 表5-2）",
+      "_source": {
+        "file": "[源] Document/MCU-DS-14_FU6832_V2.1_20230621.pdf"
+      },
+      "usage": "产品说明书",
+      "usage_class": "A1 芯片与模块数据手册"
+    },
+    {
+      "id": "DOC-SCH-016",
+      "type": "原理图",
+      "title": "标准方案原理图 FU6832N-Diode-VSP-V1.0",
+      "path": "[源] 標準方案/FU6832N-Diode-VSP-V1.0.pdf",
+      "size_bytes": 89708,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置"
+      ],
+      "conversion_status": "pdf_renderable",
+      "conversion_status_label": "PDF 可按页渲图给前端",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] 標準方案/FU6832N-Diode-VSP-V1.0.pdf"
+      },
+      "altium_schdoc_path": "[源] 標準方案/FU6832N-Diode-VSP-V1.0.SchDoc",
+      "altium_schdoc_size_bytes": 679424,
+      "note": "PDF 可直接用；同目录 .SchDoc 为 Altium 原生格式，需 Altium 才能开，仓内无网表解析器",
+      "usage": "产品说明书",
+      "usage_class": "A3 硬件原理图与 layout"
+    },
+    {
+      "id": "DOC-SCH-017",
+      "type": "原理图",
+      "title": "VSP 调速方案原理图 FU6832N-Diode-VSP-V2.0",
+      "path": "[源] VSP調速方案/FU6832N-Diode-VSP-V2.0.pdf",
+      "size_bytes": 306051,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置"
+      ],
+      "conversion_status": "pdf_renderable",
+      "conversion_status_label": "PDF 可按页渲图给前端",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] VSP調速方案/FU6832N-Diode-VSP-V2.0.pdf"
+      },
+      "altium_schdoc_path": "[源] VSP調速方案/FU6832N-Diode-VSP-V2.0.SchDoc",
+      "altium_schdoc_size_bytes": 693248,
+      "note": "PDF 可直接用；同目录 .SchDoc 为 Altium 原生格式，需 Altium 才能开，仓内无网表解析器",
+      "usage": "产品说明书",
+      "usage_class": "A3 硬件原理图与 layout"
+    },
+    {
+      "id": "DOC-SCH-018",
+      "type": "原理图",
+      "title": "无二极体方案原理图 FU6832N-nonDiode-V1.4",
+      "path": "[源] 無二極體方案/FU6832N-nonDiode-V1.4.pdf",
+      "size_bytes": 90191,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置"
+      ],
+      "conversion_status": "pdf_renderable",
+      "conversion_status_label": "PDF 可按页渲图给前端",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] 無二極體方案/FU6832N-nonDiode-V1.4.pdf"
+      },
+      "altium_schdoc_path": "[源] 無二極體方案/FU6832N-nonDiode-V1.4.SchDoc",
+      "altium_schdoc_size_bytes": 694272,
+      "note": "PDF 可直接用；同目录 .SchDoc 为 Altium 原生格式，需 Altium 才能开，仓内无网表解析器",
+      "usage": "产品说明书",
+      "usage_class": "A3 硬件原理图与 layout"
+    },
+    {
+      "id": "DOC-SRC-019",
+      "type": "产品驱动程序",
+      "title": "Customer.h 参数配置文件（FU6832_CONFIGURATION，202 条 #define）",
+      "path": "[源] include/Customer.h",
+      "size_bytes": 41268,
+      "exists": true,
+      "used_in_flows": [
+        "F2 初始化配置",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "parsed_into_pack",
+      "conversion_status_label": "本场景包已把它解析成结构化 JSON，目标见 converted_into",
+      "converted_into": [
+        "product-attributes.json",
+        "control-parameters.json"
+      ],
+      "_source": {
+        "file": "[源] include/Customer.h"
+      },
+      "usage": "产品说明书",
+      "usage_class": "A4 驱动与参数配置源码"
+    },
+    {
+      "id": "DOC-SRC-020",
+      "type": "产品驱动程序",
+      "title": "Protect.h 保护参数配置文件",
+      "path": "[源] include/Protect.h",
+      "size_bytes": 5590,
+      "exists": true,
+      "used_in_flows": [
+        "F2 初始化配置",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "parsed_into_pack",
+      "conversion_status_label": "本场景包已把它解析成结构化 JSON，目标见 converted_into",
+      "converted_into": [
+        "safety-interlocks.json"
+      ],
+      "_source": {
+        "file": "[源] include/Protect.h"
+      },
+      "usage": "产品说明书",
+      "usage_class": "A4 驱动与参数配置源码"
+    },
+    {
+      "id": "DOC-SRC-021",
+      "type": "产品驱动程序",
+      "title": "Motor_Protection.h 故障位定义（FAULT_* 位图）",
+      "path": "[源] include/Motor_Protection.h",
+      "size_bytes": 3445,
+      "exists": true,
+      "used_in_flows": [
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "parsed_into_pack",
+      "conversion_status_label": "本场景包已把它解析成结构化 JSON，目标见 converted_into",
+      "converted_into": [
+        "safety-interlocks.json#fault_bitmap"
+      ],
+      "_source": {
+        "file": "[源] include/Motor_Protection.h"
+      },
+      "usage": "产品说明书",
+      "usage_class": "A4 驱动与参数配置源码"
+    },
+    {
+      "id": "DOC-TPL-022",
+      "type": "报告模板",
+      "title": "Fortior Motor Checklist 公用模板 7（.xlsm，含 VBA 宏）",
+      "path": "[源] ClientSoftware/Fortior_Motor_Checklist_公用模板_7(1).xlsm",
+      "size_bytes": 3346604,
+      "exists": true,
+      "used_in_flows": [
+        "F6 测试报告及产出"
+      ],
+      "conversion_status": "parsed_into_pack",
+      "conversion_status_label": "本场景包已把它解析成结构化 JSON，目标见 converted_into",
+      "converted_into": [
+        "report-template.json"
+      ],
+      "_source": {
+        "file": "[源] ClientSoftware/Fortior_Motor_Checklist_公用模板_7(1).xlsm"
+      },
+      "usage": "测试需求",
+      "usage_class": "C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-TPL-023",
+      "type": "报告样例",
+      "title": "report.xlsm 已填充报告样例（2026-06-22 批次）",
+      "path": "[源] 测试数据_20260622/report.xlsm",
+      "size_bytes": 5220441,
+      "exists": true,
+      "used_in_flows": [
+        "F6 测试报告及产出"
+      ],
+      "conversion_status": "parsed_into_pack",
+      "conversion_status_label": "本场景包已把它解析成结构化 JSON，目标见 converted_into",
+      "converted_into": [
+        "report-template.json"
+      ],
+      "_source": {
+        "file": "[源] 测试数据_20260622/report.xlsm"
+      },
+      "usage": "测试需求",
+      "usage_class": "C4 报告模板与字段映射"
+    },
+    {
+      "id": "DOC-CASE-024",
+      "type": "案例表",
+      "title": "散热风扇训练知识库（2026-08-12 版，xlsx）",
+      "path": "[源] 典型案例/1_散热风扇训练知识库-8月12日.xlsx",
+      "size_bytes": 14565879,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "note": "14.6 MB；同目录另有 2026-08-04 与一份带 (1) 后缀的早期版本",
+      "_source": {
+        "file": "[源] 典型案例/1_散热风扇训练知识库-8月12日.xlsx"
+      },
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀"
+    },
+    {
+      "id": "DOC-SKILL-025",
+      "type": "调试规程（dc-skills）",
+      "title": "auto-startup-tune",
+      "path": "[源] auto-startup-tune/SKILL.md",
+      "size_bytes": 5473,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] auto-startup-tune/SKILL.md"
+      },
+      "description": "AItior debug-copilot vacuum 应用的自动启动盲试规则。当用户说“自动调启动”“自动调启动参数”“启动调试自动化”，或请求按固定候选执行 probe 3 次与 full 100 次启停回归时使用。仅编排 auto_startup_tune、motor_startup_judge 与现有 keil-c51-tuning 软件烧录链；禁止 Python/COM/Micsig、禁止自定义候选、禁止用 debug/reset/run/freerun 启停电机。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-SKILL-026",
+      "type": "调试规程（dc-skills）",
+      "title": "board-verify",
+      "path": "[源] board-verify/SKILL.md",
+      "size_bytes": 4656,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] board-verify/SKILL.md"
+      },
+      "description": "vacuum 板级三相输出验证规则。用户要求“验板”“板级验证”“IPMTest 三相验证”“CH2/CH3/CH4 三相输出取证”时使用。只编排 vacuum-only board_verify MCP 与现有 keil-c51-tuning 构建烧录链；工具原子拥有 GD32 PG0、虚拟示波器 ADC2_DR 和 Rigol 三相取证，固定 ±10% 判据，任何退出路径都必须完成 safe-off、源码恢复和 baseline 固件恢复。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-SKILL-027",
+      "type": "调试规程（dc-skills）",
+      "title": "coolingfan-openloop-debug",
+      "path": "[源] coolingfan-openloop-debug/SKILL.md",
+      "size_bytes": 14070,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] coolingfan-openloop-debug/SKILL.md"
+      },
+      "description": "Altior 仓库 debug-copilot 散热风扇应用「基础自动调试 · 电机速度闭环调试」子步骤执行规则——当从 PTY 收到以 `[bridge:flow-check:open-loop]` 起首的消息、或消息里点名 `coolingfan-openloop-debug skill` 时强触发本 skill。默认目标:让电机在无调速模式(SPEED_MODE=NONEMODE)下用速度闭环正常启动并稳定运行在闭环目标转速。覆盖:闭环/调速模式/目标转速宏族探测与未命中反问、.bak 文件级备份改宏、Keil 编译 + McuCliClient 烧录时序、RIGOL(rigol_measure / rigol_waveform_analyze) + MCU RAM(symbol_lookup + breakrun/readmem/freerun) 双证据自动判定、≤3 轮失败分诊迭",
+      "applies_to_cooling_fan": true,
+      "source_product_line": "cooling-fan",
+      "note": "唯一面向散热风扇的规程，带 8 现象分诊表、支持无示波器降级",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-SKILL-028",
+      "type": "调试规程（dc-skills）",
+      "title": "fg-output-config",
+      "path": "[源] fg-output-config/SKILL.md",
+      "size_bytes": 2548,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] fg-output-config/SKILL.md"
+      },
+      "description": "吸尘器 FG 反馈输出脚配置(只改 pin)。当从 PTY 收到\"用 fg-output-config skill 把 FG_PIN 配到 <pin>\"这类指令时使用。只按 pin patch Customer.h(FG_MODE + FPin)和软输出时的 GPIO.c(SOFT/THETA 块 SetBit OE/PU),mode 由 pin 派生(P0.1→hard,其它→soft);不碰 FG_K / SOFT_FG_K / 不动其它字段 / 不做验证烧录。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-SKILL-029",
+      "type": "调试规程（dc-skills）",
+      "title": "hw-selfcheck-ipm",
+      "path": "[源] hw-selfcheck-ipm/SKILL.md",
+      "size_bytes": 5032,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] hw-selfcheck-ipm/SKILL.md"
+      },
+      "description": "Altior 仓库 debug-copilot 应用的「硬件自检 · 三相输出自检」执行规则——当从 PTY 收到以 `[bridge:hw-ipm]` 起首、或包含 `请先用 Skill 工具调用 hw-selfcheck-ipm skill` 的消息时强触发本 skill。覆盖:IPMtest 入口标志定位、writemem 使能、人工读波形 + AI 判定准则(±5° 相位 / ±5% 幅值)、退出 IPMtest 还原以及单行 RESULT 摘要的固定格式。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-SKILL-030",
+      "type": "调试规程（dc-skills）",
+      "title": "hw-selfcheck-vbus",
+      "path": "[源] hw-selfcheck-vbus/SKILL.md",
+      "size_bytes": 4857,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] hw-selfcheck-vbus/SKILL.md"
+      },
+      "description": "Altior 仓库 debug-copilot 应用的「硬件自检 · Vbus 电压检测」执行规则——当从 PTY 收到以 `[bridge:hw-vbus]` 起首、或包含 `请先用 Skill 工具调用 hw-selfcheck-vbus skill` 的消息时强触发本 skill。覆盖:母线 ADC 变量定位、ADC→V 换算系数推导、breakrun/readmem/freerun 时序约束、±10% 判定口径以及单行 RESULT 摘要的固定格式。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-SKILL-031",
+      "type": "调试规程（dc-skills）",
+      "title": "protect-verify-lvw",
+      "path": "[源] protect-verify-lvw/SKILL.md",
+      "size_bytes": 4617,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] protect-verify-lvw/SKILL.md"
+      },
+      "description": "Altior 仓库 vacuum 应用「保护功能验证 · 低压告警 LVW」半自动验证执行规则——当从 PTY 收到以 `[bridge:protect-lvw]` 起首、或包含 `请先用 Skill 工具调用 protect-verify-lvw skill` 的消息时强触发本 skill。覆盖:fault/warning 标志定位、breakrun+readmem 观测、Vbus 复检确保电源调回(±5%)、单行 RESULT 摘要格式。本 skill 不改 Customer.h、不改阈值,只读 RAM。stage1 未扫到 LVW 阈值时由 skill 反问用户。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "测试需求",
+      "usage_class": "C3 认证与保护验证要求"
+    },
+    {
+      "id": "DOC-SKILL-032",
+      "type": "调试规程（dc-skills）",
+      "title": "protect-verify-overspeed",
+      "path": "[源] protect-verify-overspeed/SKILL.md",
+      "size_bytes": 7417,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] protect-verify-overspeed/SKILL.md"
+      },
+      "description": "Altior 仓库 vacuum 应用「保护功能验证 · 超速保护」自动验证执行规则——当从 PTY 收到以 `[bridge:protect-overspeed]` 起首、或包含 `请先用 Skill 工具调用 protect-verify-overspeed skill` 的消息时强触发本 skill。覆盖:工作区 clean 校验、protect-verify/* 临时分支隔离、Customer.h 超速宏定位与改写、Keil 编译 + 下载、breakrun + readmem 观测 fault、强制还原(git reset + 重编重烧)以及单行 RESULT 摘要的固定格式。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "测试需求",
+      "usage_class": "C3 认证与保护验证要求"
+    },
+    {
+      "id": "DOC-SKILL-033",
+      "type": "调试规程（dc-skills）",
+      "title": "protect-verify-ovp",
+      "path": "[源] protect-verify-ovp/SKILL.md",
+      "size_bytes": 4455,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] protect-verify-ovp/SKILL.md"
+      },
+      "description": "Altior 仓库 vacuum 应用「保护功能验证 · 母线过压 OVP」半自动验证执行规则——当从 PTY 收到以 `[bridge:protect-ovp]` 起首、或包含 `请先用 Skill 工具调用 protect-verify-ovp skill` 的消息时强触发本 skill。覆盖:fault 标志定位、breakrun+readmem 观测、Vbus 复检确保电源调回(±5%)、单行 RESULT 摘要格式。本 skill 不改 Customer.h、不改阈值,只读 RAM。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "测试需求",
+      "usage_class": "C3 认证与保护验证要求"
+    },
+    {
+      "id": "DOC-SKILL-034",
+      "type": "调试规程（dc-skills）",
+      "title": "protect-verify-start-fail",
+      "path": "[源] protect-verify-start-fail/SKILL.md",
+      "size_bytes": 6516,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] protect-verify-start-fail/SKILL.md"
+      },
+      "description": "Altior 仓库 vacuum 应用「保护功能验证 · 启动失败保护」自动验证执行规则——当从 PTY 收到以 `[bridge:protect-start-fail]` 起首、或包含 `请先用 Skill 工具调用 protect-verify-start-fail skill` 的消息时强触发本 skill。覆盖:工作区 clean 校验、protect-verify/* 临时分支隔离、Customer.h 启动参数改写(MOTOR_START_TIMES=1 + 启动电流减半)、Keil 编译 + 下载、breakrun + readmem 观测 fault、强制还原以及单行 RESULT 摘要的固定格式。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "测试需求",
+      "usage_class": "C3 认证与保护验证要求"
+    },
+    {
+      "id": "DOC-SKILL-035",
+      "type": "调试规程（dc-skills）",
+      "title": "protect-verify-uvp",
+      "path": "[源] protect-verify-uvp/SKILL.md",
+      "size_bytes": 3542,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] protect-verify-uvp/SKILL.md"
+      },
+      "description": "Altior 仓库 vacuum 应用「保护功能验证 · 母线欠压 UVP」半自动验证执行规则——当从 PTY 收到以 `[bridge:protect-uvp]` 起首、或包含 `请先用 Skill 工具调用 protect-verify-uvp skill` 的消息时强触发本 skill。覆盖:fault 标志定位、breakrun+readmem 观测、Vbus 复检确保电源调回(±5%)、单行 RESULT 摘要格式。本 skill 不改 Customer.h、不改阈值,只读 RAM。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "测试需求",
+      "usage_class": "C3 认证与保护验证要求"
+    },
+    {
+      "id": "DOC-SKILL-036",
+      "type": "调试规程（dc-skills）",
+      "title": "pwm-speed-config",
+      "path": "[源] pwm-speed-config/SKILL.md",
+      "size_bytes": 2978,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] pwm-speed-config/SKILL.md"
+      },
+      "description": "吸尘器 PWM 输入调速端口配置(只改 pin / 端口↔定时器映射)。当从 PTY 收到\"用 pwm-speed-config skill 把 PWM_PIN 配到 <pin>\"这类指令时使用。只按端口映射同步 patch TIMER.c + main.c + Interrupt.c 三文件(Timer3/Timer4 + PH_SEL1[T?CT] 位 + ISR ReadBit);Customer.h 只用于推导工程根,不碰极性/duty/功率、不做验证烧录。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-SKILL-037",
+      "type": "调试规程（dc-skills）",
+      "title": "requirement-intake",
+      "path": "[源] requirement-intake/SKILL.md",
+      "size_bytes": 3371,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F3 测试需求确认"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] requirement-intake/SKILL.md"
+      },
+      "description": "Altior 仓库 debug-copilot vacuum 应用的「需求确认」阶段处理规则——当从 PTY 收到包含 \"## requirements (本次变更)\" 段头的需求提交消息时强触发本 skill。覆盖：本次变更字段的 diff 解析、Customer.h 预填映射、与后续阶段判定基准的对齐口径。注意本 skill 只看 diffs(本次实际变更),不处理未变更的字段。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-SKILL-038",
+      "type": "调试规程（dc-skills）",
+      "title": "run-carrier-tune",
+      "path": "[源] run-carrier-tune/SKILL.md",
+      "size_bytes": 7137,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] run-carrier-tune/SKILL.md"
+      },
+      "description": "FU6572 vacuum 运行态载波/死区单点调参规则。用户明确要求查看、预览、修改或恢复运行载波、内部 PWM 频率、PWM_FREQUENCY、运行死区或 PWM_DEADTIME 时使用。只处理 Customer.h 的 PWM_FREQUENCY/PWM_DEADTIME；Pole_Pairs 仅用于理论转速提示；不处理 PWM 输入端口、不做自动扫参或稳定性判定。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-SKILL-039",
+      "type": "调试规程（dc-skills）",
+      "title": "run-current-pi-tune",
+      "path": "[源] run-current-pi-tune/SKILL.md",
+      "size_bytes": 5609,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] run-current-pi-tune/SKILL.md"
+      },
+      "description": "FU6572 vacuum 运行电流环 PI 单点调参规则。用户明确要求查看、预览、修改或恢复运行电流环 DKP/DKI，或提到“调运行电流环”“调电流环 PI”“改 DKP DKI”“还原电流环 PI”时使用。只处理 Customer.h 的 DKP/DKI；QKP/QKI 仅校验别名，绝不直接修改；不做自动扫参或 PI 动态性能判定。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-SKILL-040",
+      "type": "调试规程（dc-skills）",
+      "title": "run-outer-pi-tune",
+      "path": "[源] run-outer-pi-tune/SKILL.md",
+      "size_bytes": 5749,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] run-outer-pi-tune/SKILL.md"
+      },
+      "description": "FU6572 vacuum 运行外环 PI 单点调参规则。用户明确要求查看、预览、修改或恢复外环 SKP/SKI/LOOP_TIME，或提到“调外环 PI”“调功率环”“调速度环”“改 SKP SKI”“调外环周期”“还原外环 PI”时使用。只处理 Customer.h 的 SKP/SKI/LOOP_TIME；不做自动扫参、hunting 或稳定性判定。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-SKILL-041",
+      "type": "调试规程（dc-skills）",
+      "title": "run-stability-sweep",
+      "path": "[源] run-stability-sweep/SKILL.md",
+      "size_bytes": 7171,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] run-stability-sweep/SKILL.md"
+      },
+      "description": "AItior debug-copilot vacuum 应用的 FU6572 运行稳定性逐档观察规则。当用户说“测运行稳定性”“扫功率档”“看 hunting”“跑稳定性”“逐档观察”或请求从小功率扫到最大功率时使用。只编排 run_stability_sweep 与现有 keil-c51-tuning 软件烧录链；逐档只改 POWER_MIN_GEAR，使用 GD32 CMD24/CMD7 与虚拟示波器原子采窗，只报指标和软标记，不判总 PASS/FAIL。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-SKILL-042",
+      "type": "调试规程（dc-skills）",
+      "title": "run-weak-mag-tune",
+      "path": "[源] run-weak-mag-tune/SKILL.md",
+      "size_bytes": 7500,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] run-weak-mag-tune/SKILL.md"
+      },
+      "description": "FU6572 vacuum 运行弱磁/过调制 7 宏单点调参规则。用户明确要求查看、预览、修改或恢复 OverModulation、Weak_MagneticEn、WeakSpeed_Enter、WeakSpeed_Exit、AMIN、AKP、AKI，或明确要求通过这些参数处理高速 Uq 撞顶、弱磁进退转速、弱磁角度或弱磁 PI 时使用。只处理这 7 宏；不修改 UQ 门限、AMAX、WMUs 或控制模式，不做自动整定或稳定性判定。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-SKILL-043",
+      "type": "调试规程（dc-skills）",
+      "title": "sample-verify",
+      "path": "[源] sample-verify/SKILL.md",
+      "size_bytes": 5742,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] sample-verify/SKILL.md"
+      },
+      "description": "vacuum 相电流采样链路验证规则。用户要求“验采样”“验电流采样”“采样链路验证”“采样准不准”“验放大倍数”时使用。只编排 vacuum-only sample_verify MCP 与现有 keil-c51-tuning 构建烧录链；工具临时固定开环验证宏，原子拥有 GD32 PG0、虚拟示波器 fault 与 Rigol CH1 overview/zoom 证据，按 PKPK/2 电流区间和 ±20% 转速双判据验证，任何退出路径都必须完成 safe-off、源码恢复和 baseline 固件恢复。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-SKILL-044",
+      "type": "调试规程（dc-skills）",
+      "title": "startstop-with-scope",
+      "path": "[源] startstop-with-scope/SKILL.md",
+      "size_bytes": 6483,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] startstop-with-scope/SKILL.md"
+      },
+      "description": "FU6572 vacuum 启停示波器回归规则。用户说“启停测试”“反复启停”“100 次启动”“带示波器启停”“startstop”或要求启动可靠性回归时使用。只编排 vacuum-only startstop_with_scope MCP；每次 observe 由工具原子执行 GD32 CMD24/CMD7、虚拟示波器和 Rigol CH1 三源取证，默认 100 次，只报逐轮事实，不提供总 PASS/FAIL。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-SKILL-045",
+      "type": "调试规程（dc-skills）",
+      "title": "tailwind-pi-tune",
+      "path": "[源] tailwind-pi-tune/SKILL.md",
+      "size_bytes": 5532,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] tailwind-pi-tune/SKILL.md"
+      },
+      "description": "FU6572 vacuum 顺风启动接管 PI 单点调参规则。用户明确要求查看、预览、修改或恢复 DQKP_TW_Start/DQKI_TW_Start，或提到“调顺风 PI”“顺风接管 PI”“顺风失步改 PI”“还原顺风 PI”时使用。只处理当前工程沙箱 Customer.h 的两个宏；不做自动扫参或顺风 PI 动态性能判定。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-SKILL-046",
+      "type": "调试规程（dc-skills）",
+      "title": "tailwind-restart-test",
+      "path": "[源] tailwind-restart-test/SKILL.md",
+      "size_bytes": 7718,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] tailwind-restart-test/SKILL.md"
+      },
+      "description": "FU6572 vacuum 固定 12 档顺风残速重启测试规则。用户说“测顺风”“顺风启动测试”“顺风启停”“残速重启”“惯性重启”或要求区分真顺风与静止退化时使用。只编排 vacuum-only tailwind_restart_test MCP；强制使用 GD32 CMD24/CMD7、producer-owned 虚拟示波器和 Rigol CH1 三源证据，不改固件，只测只报数，不判总 PASS/FAIL。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-SKILL-047",
+      "type": "调试规程（dc-skills）",
+      "title": "tune-runtime",
+      "path": "[源] tune-runtime/SKILL.md",
+      "size_bytes": 6549,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] tune-runtime/SKILL.md"
+      },
+      "description": "Altior 仓库 debug-copilot vacuum 应用「运行调优」(stage4)的 Customer.h 回写规则——当从 PTY 收到含 \"## runtime tuning (本次变更)\" 段、或首行含 \"请先用 Skill 工具调用 tune-runtime skill\" 的请求时使用本 skill。覆盖:按 diffs 逐宏锚定 `#define` 回写、保留原包裹函数(_Q11/_Q12/_Q15/I_Value/S_Value/A_Value/(float))、枚举字段写 token(MOTOR_CTRL_MODE/SPEED_MODE/OverModulation/CompensatingAngle/SVPWM_5_Segment_Run_Enale/Current_LIMIT_ENABLE/Weak_MagneticEn 等)、只读派生量不回写。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-SKILL-048",
+      "type": "调试规程（dc-skills）",
+      "title": "tune-startup",
+      "path": "[源] tune-startup/SKILL.md",
+      "size_bytes": 6756,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F5 调优确认及运行"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] tune-startup/SKILL.md"
+      },
+      "description": "Altior 仓库 debug-copilot vacuum 应用「启动调优」(stage3)的 Customer.h 回写规则——当从 PTY 收到含 \"## startup tuning (本次变更)\" 段、或首行含 \"请先用 Skill 工具调用 tune-startup skill\" 的请求时使用本 skill。覆盖:按 diffs 逐宏锚定 `#define` 回写、保留原包裹函数(_Q11/_Q12/_Q15/I_Value/S_Value/A_Value)、枚举字段写 token(Open_Start_Mode/TAILWIND_MODE/ALIGN_MOME)、条件编译宏(#if Squ_Start / #elif Omega_Start)只改活动分支、只读派生量不回写。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-SKILL-049",
+      "type": "调试规程（dc-skills）",
+      "title": "vacuum-customer-h",
+      "path": "[源] vacuum-customer-h/SKILL.md",
+      "size_bytes": 7440,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F2 初始化配置"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] vacuum-customer-h/SKILL.md"
+      },
+      "description": "Altior 仓库 debug-copilot vacuum 应用的 Customer.h / ADC.c / GPIO.c 改写规则——当从 PTY 收到包含 \"## changes (精确定位,执行替换)\" 或 \"## unresolved (未在 Customer.h 中定位)\" 段的改写请求时使用本 skill。覆盖：只改 #define 后的 token、ADC.c / GPIO.c 的 file:line 单行替换、必须先比对 old、严禁自行新增 #define / #if 块 / 假设宏名、unresolved 字段必须先反问候选不得擅自创建新宏。",
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "面向吸尘器（vacuum）产品线，迁移到散热风扇需重新核对宏名与阈值",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-RULE-050",
+      "type": "调试纪律（dc-rules）",
+      "title": "protect-config-check",
+      "path": "[源] dc-rules/protect-config-check.md",
+      "size_bytes": 2826,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] dc-rules/protect-config-check.md"
+      },
+      "applies_to_cooling_fan": true,
+      "source_product_line": "generic",
+      "note": "正文明写「按语义识别，宏名可能因工程而异」，未绑定产品线；散热风扇工程照此检查保护使能宏即可，但工具链仍是吸尘器线的 keil-c51-tuning MCP",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-RULE-051",
+      "type": "调试纪律（dc-rules）",
+      "title": "scene-hw-selfcheck",
+      "path": "[源] dc-rules/scene-hw-selfcheck.md",
+      "size_bytes": 663,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] dc-rules/scene-hw-selfcheck.md"
+      },
+      "applies_to_cooling_fan": true,
+      "source_product_line": "generic",
+      "note": "只做 MCU 连接、母线采样与三相输出自检，判据口径与产品线无关；它转调的 hw-selfcheck-vbus / hw-selfcheck-ipm 两份规程同样未绑定产品线",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-RULE-052",
+      "type": "调试纪律（dc-rules）",
+      "title": "scene-protect-verify",
+      "path": "[源] dc-rules/scene-protect-verify.md",
+      "size_bytes": 742,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] dc-rules/scene-protect-verify.md"
+      },
+      "applies_to_cooling_fan": true,
+      "source_product_line": "generic",
+      "note": "只规定 protect-verify-* 规程的调用时机与回写格式，与产品线无关；但它列的 LVW / 超速两项在本散热风扇工程无对应宏与 fault 位，见 test-requirements.json 的 TR-PROT-03 / TR-PROT-05",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-RULE-053",
+      "type": "调试纪律（dc-rules）",
+      "title": "scene-requirement",
+      "path": "[源] dc-rules/scene-requirement.md",
+      "size_bytes": 628,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] dc-rules/scene-requirement.md"
+      },
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "正文点名「改写 Customer.h 时先调 vacuum-customer-h skill」，该 skill 的宏名清单是吸尘器线的，迁到散热风扇要重新核对宏名",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-RULE-054",
+      "type": "调试纪律（dc-rules）",
+      "title": "vacuum-flow-discipline",
+      "path": "[源] dc-rules/vacuum-flow-discipline.md",
+      "size_bytes": 2168,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "not_converted",
+      "conversion_status_label": "尚未做文档→知识库的转化",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] dc-rules/vacuum-flow-discipline.md"
+      },
+      "applies_to_cooling_fan": false,
+      "source_product_line": "vacuum",
+      "note": "标题即「吸尘器调试通用铁律」，全文 10 条铁律面向吸尘器调优 / 测试场景；safety-interlocks.json 的 SI-PROC-01~04 四条联锁就是从这份摘的，已在那四条上标 source_product_line: vacuum",
+      "usage": "工艺",
+      "usage_class": "B1 调试规程与纪律"
+    },
+    {
+      "id": "DOC-OWN-055",
+      "type": "我方文档",
+      "title": "分析报告：预定位太弱判定的真实台架数据验证（2026-08-12）",
+      "path": "[源] 20260811_启动故障98次实验与30例对照数据包/分析报告-预定位太弱判定-20260812.md",
+      "size_bytes": 42393,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理",
+        "F4 启动测试及结果分析"
+      ],
+      "conversion_status": "markdown_native",
+      "conversion_status_label": "本身就是 Markdown，可直接进知识库",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] 20260811_启动故障98次实验与30例对照数据包/分析报告-预定位太弱判定-20260812.md"
+      },
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀"
+    },
+    {
+      "id": "DOC-OWN-056",
+      "type": "我方文档",
+      "title": "98 次启动故障实验数据包 README",
+      "path": "[源] 20260811_启动故障98次实验与30例对照数据包/README.md",
+      "size_bytes": 5199,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "markdown_native",
+      "conversion_status_label": "本身就是 Markdown，可直接进知识库",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] 20260811_启动故障98次实验与30例对照数据包/README.md"
+      },
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀"
+    },
+    {
+      "id": "DOC-OWN-057",
+      "type": "我方文档",
+      "title": "98 次启动故障实验数据包 · 我方元数据与分析说明",
+      "path": "[源] 20260811_启动故障98次实验与30例对照数据包/README-我方元数据与分析说明.md",
+      "size_bytes": 5717,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "markdown_native",
+      "conversion_status_label": "本身就是 Markdown，可直接进知识库",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] 20260811_启动故障98次实验与30例对照数据包/README-我方元数据与分析说明.md"
+      },
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀"
+    },
+    {
+      "id": "DOC-OWN-058",
+      "type": "我方文档",
+      "title": "writeFile_rust README（报告自动填充工具说明）",
+      "path": "[源] writeFile_rust/README.md",
+      "size_bytes": 9112,
+      "exists": true,
+      "used_in_flows": [
+        "F6 测试报告及产出"
+      ],
+      "conversion_status": "markdown_native",
+      "conversion_status_label": "本身就是 Markdown，可直接进知识库",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] writeFile_rust/README.md"
+      },
+      "usage": "测试需求",
+      "usage_class": "C4 报告模板与字段映射",
+      "usage_review": "待人工复核"
+    },
+    {
+      "id": "DOC-OWN-059",
+      "type": "我方文档",
+      "title": "调研 A：Debug Copilot 场景、两个辨识、输入文件、知识库取证",
+      "path": "[源] _调研/A-DebugCopilot场景与知识库取证.md",
+      "size_bytes": 8098,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "markdown_native",
+      "conversion_status_label": "本身就是 Markdown，可直接进知识库",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] _调研/A-DebugCopilot场景与知识库取证.md"
+      },
+      "usage": "工艺",
+      "usage_class": "（本项目调研件，06a 总表未收录）",
+      "usage_review": "待人工复核"
+    },
+    {
+      "id": "DOC-OWN-060",
+      "type": "我方文档",
+      "title": "调研 B：本地可用文件资产盘点",
+      "path": "[源] _调研/B-本地文件资产盘点.md",
+      "size_bytes": 6936,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "markdown_native",
+      "conversion_status_label": "本身就是 Markdown，可直接进知识库",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] _调研/B-本地文件资产盘点.md"
+      },
+      "usage": "工艺",
+      "usage_class": "（本项目调研件，06a 总表未收录）",
+      "usage_review": "待人工复核"
+    },
+    {
+      "id": "DOC-OWN-061",
+      "type": "我方文档",
+      "title": "用户需求原话（2026-09-19）",
+      "path": "[源] 20260919-通用Agent测试系统v2.0/00-用户需求原话-20260919.md",
+      "size_bytes": 4696,
+      "exists": true,
+      "used_in_flows": [
+        "F1 知识库管理"
+      ],
+      "conversion_status": "markdown_native",
+      "conversion_status_label": "本身就是 Markdown，可直接进知识库",
+      "converted_into": [],
+      "_source": {
+        "file": "[源] 20260919-通用Agent测试系统v2.0/00-用户需求原话-20260919.md"
+      },
+      "usage": "工艺",
+      "usage_class": "（本项目调研件，06a 总表未收录）",
+      "usage_review": "待人工复核"
+    }
+  ]
+}

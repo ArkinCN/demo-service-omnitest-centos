@@ -1,0 +1,18 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"NORM scope capture 1.0",
+  "type":"object",
+  "required":["schemaVersion","startedUtc","finishedUtc","cycle","commandedPwmPercent","profile","source","timebaseSecondsPerDiv","metrics","artifacts","rpmAvailable"],
+  "properties":{
+    "schemaVersion":{"const":"1.0"},"startedUtc":{"type":"string","format":"date-time"},"finishedUtc":{"type":"string","format":"date-time"},
+    "cycle":{"type":"integer","minimum":1},"commandedPwmPercent":{"type":"integer","minimum":0,"maximum":100},
+    "profile":{"enum":["pwm","tach"]},"source":{"type":"string"},"timebaseSecondsPerDiv":{"type":"number","exclusiveMinimum":0},
+    "metrics":{"type":"object","additionalProperties":{"type":"object","required":["points","sampleIntervalS","windowS","meanV","frequencyHz","edgeStatus"],"properties":{"points":{"type":"integer","minimum":2},"frequencyHz":{"type":["number","null"]},"dutyPercent":{"type":["number","null"]},"rpm":{"type":["number","null"]},"physicalProbeRatioConfirmed":{"type":"boolean"}}}},
+    "artifacts":{"type":"array","minItems":1,"items":{"type":"string","minLength":3,"pattern":"^(?:[A-Za-z]:[\\\\/]|\\\\\\\\)"}},"rpmAvailable":{"type":"boolean"}
+  },
+  "allOf":[
+    {"if":{"properties":{"profile":{"const":"pwm"}}},"then":{"properties":{"rpmAvailable":{"const":false},"metrics":{"required":["current","voltage","pwm"],"propertyNames":{"enum":["current","voltage","pwm"]}}}}},
+    {"if":{"properties":{"profile":{"const":"tach"}}},"then":{"properties":{"metrics":{"required":["tach"],"propertyNames":{"const":"tach"}}}}},
+    {"if":{"properties":{"rpmAvailable":{"const":true}}},"then":{"properties":{"profile":{"const":"tach"},"metrics":{"required":["tach"],"properties":{"tach":{"required":["frequencyHz","rpm","pulsesPerRevolution"],"properties":{"frequencyHz":{"type":"number","exclusiveMinimum":0},"rpm":{"type":"number","exclusiveMinimum":0},"pulsesPerRevolution":{"type":"integer","minimum":1}}}}}}}}
+  ]
+}

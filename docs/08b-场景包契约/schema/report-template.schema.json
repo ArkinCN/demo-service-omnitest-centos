@@ -1,0 +1,332 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fortior.local/scene-pack/v1/report-template.schema.json",
+  "title": "report-template.json",
+  "description": "报告模板结构与字段映射。F6 测试报告及产出。",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "report-template/v1",
+      "description": "文件契约标识，换包不得改。"
+    },
+    "scene_id": {
+      "$ref": "common.schema.json#/$defs/sceneId"
+    },
+    "generated_by": {
+      "type": "string",
+      "description": "产出这份文件的脚本相对路径，例如 _build/build_scene_pack.py。"
+    },
+    "generated_at": {
+      "$ref": "common.schema.json#/$defs/genDate"
+    },
+    "belongs_to_flow": {
+      "$ref": "common.schema.json#/$defs/flowMention",
+      "description": "这份文件主要服务哪条业务流程。人读为主，但句中必须至少出现一个合法的 F1~F6 标签，防止写进不存在的流程号。"
+    },
+    "group_tiers": {
+      "$ref": "common.schema.json#/$defs/itemTier"
+    },
+    "template_file": {
+      "type": "string",
+      "description": "Excel 模板绝对路径。模板是表格时用这条。与 template_source 至少写一个，见本文件顶层 anyOf。"
+    },
+    "filled_sample_file": {
+      "type": "string",
+      "description": "已填充样例的绝对路径。"
+    },
+    "template_source": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "file": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "_source": {
+          "$ref": "common.schema.json#/$defs/sourceRefs"
+        }
+      },
+      "required": [],
+      "description": "模板来源。模板是 PDF 报告样张时用这条。与 template_file 至少写一个，见本文件顶层 anyOf。"
+    },
+    "cell_model_note": {
+      "type": "string",
+      "description": "字段定位模型说明：表格模板用单元格地址，PDF 样张用节 + 字段名。"
+    },
+    "filler_tool": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "cli": {
+          "type": "string"
+        },
+        "purpose": {
+          "type": "string"
+        },
+        "_source": {
+          "$ref": "common.schema.json#/$defs/sourceRefs"
+        }
+      },
+      "required": []
+    },
+    "sheets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "max_row": {
+            "type": "integer"
+          },
+          "max_column": {
+            "type": "integer"
+          },
+          "image_count": {
+            "type": "integer"
+          },
+          "_source": {
+            "$ref": "common.schema.json#/$defs/sourceRefs"
+          }
+        },
+        "required": []
+      }
+    },
+    "other_sheets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "from_flow": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    },
+    "header_fields": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/templateField"
+      },
+      "description": "表头字段表（单元格定位口径）。"
+    },
+    "header_fields_note": {
+      "type": "string"
+    },
+    "header_filled_count": {
+      "type": "integer"
+    },
+    "technical_report_documentation_page": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/templateField"
+      },
+      "description": "技术文档页字段表（节 + 槽位定位口径）。"
+    },
+    "technical_page_field_count": {
+      "type": "integer"
+    },
+    "section_count": {
+      "type": "integer"
+    },
+    "photo_count": {
+      "type": "integer"
+    },
+    "performance_table": {
+      "type": "object",
+      "description": "性能表的列映射与判定条件，随模板而变。"
+    },
+    "waveform_image_slots": {
+      "type": "object",
+      "description": "波形图位的命名规则与计数。"
+    },
+    "compliance_basis": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "standard": {
+            "type": "string",
+            "description": "标准全名与版次。"
+          },
+          "required_elements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "_status": {
+            "$ref": "common.schema.json#/$defs/statusText"
+          },
+          "_source": {
+            "$ref": "common.schema.json#/$defs/sourceRefs"
+          }
+        },
+        "required": [
+          "standard"
+        ]
+      }
+    },
+    "conclusion_binding": {
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string",
+          "description": "结论段怎么由逐条判定结果聚合出来。"
+        },
+        "_source": {
+          "$ref": "common.schema.json#/$defs/sourceRefs"
+        }
+      },
+      "required": []
+    },
+    "known_gap": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "_source": {
+          "$ref": "common.schema.json#/$defs/sourceRefs"
+        }
+      },
+      "required": [],
+      "description": "这份模板不能拿来当什么用的明示声明。"
+    },
+    "spec_sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "section": {
+            "type": "string",
+            "description": "节名（表格口径）。"
+          },
+          "section_no": {
+            "type": "string",
+            "description": "节号（PDF 口径）。"
+          },
+          "name_zh": {
+            "type": "string"
+          },
+          "name_en": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "description": "字段名字符串。"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "value_slot": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "key",
+                    "name"
+                  ]
+                }
+              ]
+            },
+            "description": "本节字段。包一写字符串清单，包二写结构化对象。"
+          },
+          "rows": {
+            "type": "string",
+            "description": "在模板里占的行区间。"
+          },
+          "from_flow": {
+            "$ref": "common.schema.json#/$defs/flowLabel",
+            "description": "这一节的内容由哪条流程产出。"
+          },
+          "maps_to": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "映射到本包哪份 JSON；无映射时为 null。"
+          },
+          "note": {
+            "type": "string"
+          },
+          "photo_count": {
+            "type": "integer"
+          },
+          "photo_subjects": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "_source": {
+            "$ref": "common.schema.json#/$defs/sourceRefs"
+          }
+        },
+        "required": [
+          "fields",
+          "from_flow",
+          "maps_to"
+        ]
+      }
+    },
+    "_placeholder": {
+      "$ref": "common.schema.json#/$defs/placeholderFlag"
+    },
+    "_status": {
+      "$ref": "common.schema.json#/$defs/statusText"
+    }
+  },
+  "required": [
+    "belongs_to_flow",
+    "generated_at",
+    "generated_by",
+    "group_tiers",
+    "scene_id",
+    "schema",
+    "spec_sections"
+  ],
+  "anyOf": [
+    {
+      "required": [
+        "template_file"
+      ]
+    },
+    {
+      "required": [
+        "template_source"
+      ]
+    }
+  ],
+  "$comment": "阻-1：报告模板必须有一个可定位的名字。template_file 走表格模板口径、template_source 走 PDF 样张口径，两者至少其一。两者都缺时前端 flow-init 与 flow-report 两个面板取 fileName(undefined) 直接白屏。"
+}

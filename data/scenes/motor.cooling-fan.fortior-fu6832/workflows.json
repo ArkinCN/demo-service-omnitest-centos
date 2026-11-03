@@ -1,0 +1,4131 @@
+{
+  "schema": "workflows/v1",
+  "scene_id": "motor.cooling-fan.fortior-fu6832",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-19",
+  "belongs_to_flow": "F3 测试需求确认（工作流一步步运转、可调整）+ F4 启动测试及结果分析（执行）",
+  "source_roots": [
+    "[源] WORKINGflow/WORKINGflow",
+    "[源] 子流程/子流程"
+  ],
+  "total": 67,
+  "count_by_group": {
+    "HEADWINDTEST": 2,
+    "OPENCLOSEPOWER": 8,
+    "OTHERTEST": 5,
+    "PWMDUTY_0TO100": 8,
+    "PWMDUTY_100TO0": 8,
+    "PWMDUTY_HIGHTOLOW": 8,
+    "PWMDUTY_LOWTOHIGH": 8,
+    "WORKINGflow": 1,
+    "StaticStart": 8,
+    "TAILWINDWIND": 2,
+    "子流程": 9
+  },
+  "node_type_legend": {
+    "start": "开始",
+    "end": "结束",
+    "delay": "延时等待",
+    "subworkflow": "调用子流程",
+    "variable": "变量赋值",
+    "loop": "循环",
+    "loop_break": "跳出循环",
+    "curve_lookup": "曲线查表",
+    "report_generator": "生成报告",
+    "agent_debug": "交给 Agent 调试",
+    "rigol_oscilloscope": "RIGOL 示波器采集",
+    "hid_preset_voltage_set": "设置母线电压",
+    "hid_preset_speed_test": "转速测试",
+    "hid_preset_relay_open": "继电器通断",
+    "hid_preset_power_on": "上电",
+    "hid_preset_power_off": "下电",
+    "hid_preset_fan_start_test": "风扇启动测试",
+    "hid_query_speed": "查询转速",
+    "hid_query_current": "查询电流",
+    "hid_preset_headwind_set": "设置逆风",
+    "hid_preset_tailwind_set": "设置顺风",
+    "hid_preset_tailwind_exit": "退出顺风",
+    "hid_preset_wind_close": "关闭风源",
+    "hid_preset_start_stop_test": "启停测试",
+    "hid_preset_pwm_speed_set": "设置 PWM 调速"
+  },
+  "notes": [
+    ".wfw 实测是明文 UTF-8 JSON（带 BOM），不是 gzip；脚本仍保留 gzip 探测分支。顶层三键：formatVersion / metadata / definition，节点在 definition.nodes。",
+    "任务书写「58 个归档工作流」，与 WORKINGflow/WORKINGflow 下的 .wfw 数量一致；加上 子流程/子流程 下的 9 个，本索引共 67 条。调研文档 B 记的是「63 个主工作流 + 9 个子流程」，与本次实测不符，以本次实测为准。",
+    "purpose 字段由目录分组、电压等级、节点类型组合生成（purpose_derived=true），不是源文件里的原话。"
+  ],
+  "workflows": [
+    {
+      "id": "WF-001",
+      "name": "difSpeedHEADWINDTEST",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "HEADWINDTEST",
+        "name": "逆风测试"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": false,
+      "file_path": "[源] HEADWINDTEST/difSpeedHEADWINDTEST .wfw",
+      "file_size_bytes": 18738,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-06-01T06:39:34.671Z",
+      "node_count": 13,
+      "edge_count": 19,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 1
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 2
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_headwind_set",
+          "name": "设置逆风",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_wind_close",
+          "name": "关闭风源",
+          "count": 1
+        },
+        {
+          "type": "loop",
+          "name": "循环",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 2
+        }
+      ],
+      "purpose": "在涵道内用前置风扇制造逆风，验证被测风扇的逆风识别、制动与重启；含循环回归。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] HEADWINDTEST/difSpeedHEADWINDTEST .wfw",
+        "locator": "definition.nodes 长度 = 13，definition.edges 长度 = 19，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-002",
+      "name": "difSpeedHEADWINDTEST_SUB",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "HEADWINDTEST",
+        "name": "逆风测试"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": true,
+      "file_path": "[源] HEADWINDTEST/difSpeedHEADWINDTEST_SUB.wfw",
+      "file_size_bytes": 27545,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-30T09:36:09.890Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "在涵道内用前置风扇制造逆风，验证被测风扇的逆风识别、制动与重启；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] HEADWINDTEST/difSpeedHEADWINDTEST_SUB.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-003",
+      "name": "HV_OpenClosePower",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "OPENCLOSEPOWER",
+        "name": "上下电测试"
+      },
+      "voltage_level": "HV",
+      "voltage_level_name": "高压",
+      "is_subworkflow": false,
+      "file_path": "[源] HV/HV_OpenClosePower.wfw",
+      "file_size_bytes": 27079,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-06-01T08:17:29.659Z",
+      "node_count": 14,
+      "edge_count": 19,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 1
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 2
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_power_off",
+          "name": "下电",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_power_on",
+          "name": "上电",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "loop",
+          "name": "循环",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 2
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 1
+        }
+      ],
+      "purpose": "反复通断母线电源，验证上电启动与下电停机的可靠性；在高压下执行；带示波器采集，自动出报告，含循环回归。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] HV/HV_OpenClosePower.wfw",
+        "locator": "definition.nodes 长度 = 14，definition.edges 长度 = 19，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-004",
+      "name": "HV_OpenClosePower_SUB",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "OPENCLOSEPOWER",
+        "name": "上下电测试"
+      },
+      "voltage_level": "HV",
+      "voltage_level_name": "高压",
+      "is_subworkflow": true,
+      "file_path": "[源] HV/HV_OpenClosePower_SUB.wfw",
+      "file_size_bytes": 36725,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-06-01T08:02:06.432Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "反复通断母线电源，验证上电启动与下电停机的可靠性；在高压下执行；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] HV/HV_OpenClosePower_SUB.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-005",
+      "name": "HV_SV_LV_OPENCLOSEPOWER",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "OPENCLOSEPOWER",
+        "name": "上下电测试"
+      },
+      "voltage_level": "LV+SV+HV",
+      "voltage_level_name": "三档电压串跑（LV、SV、HV）",
+      "is_subworkflow": false,
+      "file_path": "[源] OPENCLOSEPOWER/HV_SV_LV_OPENCLOSEPOWER.wfw",
+      "file_size_bytes": 95199,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T09:04:29.795Z",
+      "node_count": 8,
+      "edge_count": 7,
+      "node_types": [
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 3
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 3
+        }
+      ],
+      "purpose": "反复通断母线电源，验证上电启动与下电停机的可靠性；在三档电压串跑（LV、SV、HV）下执行。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] OPENCLOSEPOWER/HV_SV_LV_OPENCLOSEPOWER.wfw",
+        "locator": "definition.nodes 长度 = 8，definition.edges 长度 = 7，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-006",
+      "name": "LV_OpenClosePower",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "OPENCLOSEPOWER",
+        "name": "上下电测试"
+      },
+      "voltage_level": "LV",
+      "voltage_level_name": "低压",
+      "is_subworkflow": false,
+      "file_path": "[源] LV/LV_OpenClosePower.wfw",
+      "file_size_bytes": 27081,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-20T09:05:02.766Z",
+      "node_count": 14,
+      "edge_count": 19,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 1
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 2
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_power_off",
+          "name": "下电",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_power_on",
+          "name": "上电",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "loop",
+          "name": "循环",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 2
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 1
+        }
+      ],
+      "purpose": "反复通断母线电源，验证上电启动与下电停机的可靠性；在低压下执行；带示波器采集，自动出报告，含循环回归。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] LV/LV_OpenClosePower.wfw",
+        "locator": "definition.nodes 长度 = 14，definition.edges 长度 = 19，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-007",
+      "name": "LV_OpenClosePower_SUB",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "OPENCLOSEPOWER",
+        "name": "上下电测试"
+      },
+      "voltage_level": "LV",
+      "voltage_level_name": "低压",
+      "is_subworkflow": true,
+      "file_path": "[源] LV/LV_OpenClosePower_SUB.wfw",
+      "file_size_bytes": 36790,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T08:47:41.125Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "反复通断母线电源，验证上电启动与下电停机的可靠性；在低压下执行；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] LV/LV_OpenClosePower_SUB.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-008",
+      "name": "OPENCLOSEPOWER_ThrVol",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "OPENCLOSEPOWER",
+        "name": "上下电测试"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": false,
+      "file_path": "[源] OPENCLOSEPOWER/OPENCLOSEPOWER_ThrVol.wfw",
+      "file_size_bytes": 116193,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T09:09:18.214Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "反复通断母线电源，验证上电启动与下电停机的可靠性。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] OPENCLOSEPOWER/OPENCLOSEPOWER_ThrVol.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-009",
+      "name": "SV_OpenClosePower",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "OPENCLOSEPOWER",
+        "name": "上下电测试"
+      },
+      "voltage_level": "SV",
+      "voltage_level_name": "标准电压",
+      "is_subworkflow": false,
+      "file_path": "[源] SV/SV_OpenClosePower.wfw",
+      "file_size_bytes": 27079,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-20T09:10:48.938Z",
+      "node_count": 14,
+      "edge_count": 19,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 1
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 2
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_power_off",
+          "name": "下电",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_power_on",
+          "name": "上电",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "loop",
+          "name": "循环",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 2
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 1
+        }
+      ],
+      "purpose": "反复通断母线电源，验证上电启动与下电停机的可靠性；在标准电压下执行；带示波器采集，自动出报告，含循环回归。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] SV/SV_OpenClosePower.wfw",
+        "locator": "definition.nodes 长度 = 14，definition.edges 长度 = 19，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-010",
+      "name": "SV_OpenClosePower_SUB",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "OPENCLOSEPOWER",
+        "name": "上下电测试"
+      },
+      "voltage_level": "SV",
+      "voltage_level_name": "标准电压",
+      "is_subworkflow": true,
+      "file_path": "[源] SV/SV_OpenClosePower_SUB.wfw",
+      "file_size_bytes": 36859,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T08:52:29.660Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "反复通断母线电源，验证上电启动与下电停机的可靠性；在标准电压下执行；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] SV/SV_OpenClosePower_SUB.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-011",
+      "name": "BUSVOLTAGEDOWN",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "OTHERTEST",
+        "name": "其他专项测试"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": false,
+      "file_path": "[源] OTHERTEST/BUSVOLTAGEDOWN.wfw",
+      "file_size_bytes": 21438,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-06-01T08:01:04.378Z",
+      "node_count": 9,
+      "edge_count": 12,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 1
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 1
+        }
+      ],
+      "purpose": "母线电压跌落、示波器采集与整机全项串跑等专项流程；带示波器采集，自动出报告。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] OTHERTEST/BUSVOLTAGEDOWN.wfw",
+        "locator": "definition.nodes 长度 = 9，definition.edges 长度 = 12，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-012",
+      "name": "BUSVOLTAGEDOWN_SUB",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "OTHERTEST",
+        "name": "其他专项测试"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": true,
+      "file_path": "[源] OTHERTEST/BUSVOLTAGEDOWN_SUB.wfw",
+      "file_size_bytes": 31224,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T09:42:49.332Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "母线电压跌落、示波器采集与整机全项串跑等专项流程；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] OTHERTEST/BUSVOLTAGEDOWN_SUB.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-013",
+      "name": "SCOPETEST",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "OTHERTEST",
+        "name": "其他专项测试"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": false,
+      "file_path": "[源] OTHERTEST/SCOPETEST.wfw",
+      "file_size_bytes": 33393,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-06-01T08:01:18.483Z",
+      "node_count": 11,
+      "edge_count": 17,
+      "node_types": [
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 1
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_headwind_set",
+          "name": "设置逆风",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 3
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        }
+      ],
+      "purpose": "母线电压跌落、示波器采集与整机全项串跑等专项流程；带示波器采集，自动出报告。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] OTHERTEST/SCOPETEST.wfw",
+        "locator": "definition.nodes 长度 = 11，definition.edges 长度 = 17，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-014",
+      "name": "SCOPETEST_SUB",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "OTHERTEST",
+        "name": "其他专项测试"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": true,
+      "file_path": "[源] OTHERTEST/SCOPETEST_SUB.wfw",
+      "file_size_bytes": 41478,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T09:50:11.676Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "母线电压跌落、示波器采集与整机全项串跑等专项流程；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] OTHERTEST/SCOPETEST_SUB.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-015",
+      "name": "WholeTest",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "OTHERTEST",
+        "name": "其他专项测试"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": false,
+      "file_path": "[源] OTHERTEST/WholeTest.wfw",
+      "file_size_bytes": 846565,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-06-01T08:03:03.658Z",
+      "node_count": 23,
+      "edge_count": 21,
+      "node_types": [
+        {
+          "type": "agent_debug",
+          "name": "交给 Agent 调试",
+          "count": 1
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 10
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 10
+        }
+      ],
+      "purpose": "母线电压跌落、示波器采集与整机全项串跑等专项流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] OTHERTEST/WholeTest.wfw",
+        "locator": "definition.nodes 长度 = 23，definition.edges 长度 = 21，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-016",
+      "name": "HV_PWMdutyChange_0TO100",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_0TO100",
+        "name": "PWM 占空比 0→100 扫描"
+      },
+      "voltage_level": "HV",
+      "voltage_level_name": "高压",
+      "is_subworkflow": false,
+      "file_path": "[源] HV/HV_PWMdutyChange_0TO100.wfw",
+      "file_size_bytes": 30007,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T02:51:46.234Z",
+      "node_count": 16,
+      "edge_count": 21,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 2
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 3
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 2
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 2
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 2
+        }
+      ],
+      "purpose": "占空比从 0% 逐档升到 100%，记录各档转速与电流；在高压下执行；带示波器采集，自动出报告。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] HV/HV_PWMdutyChange_0TO100.wfw",
+        "locator": "definition.nodes 长度 = 16，definition.edges 长度 = 21，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-017",
+      "name": "HV_PWMdutyChange_0TO100_SUB",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_0TO100",
+        "name": "PWM 占空比 0→100 扫描"
+      },
+      "voltage_level": "HV",
+      "voltage_level_name": "高压",
+      "is_subworkflow": true,
+      "file_path": "[源] HV/HV_PWMdutyChange_0TO100_SUB.wfw",
+      "file_size_bytes": 39509,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T03:01:57.077Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "占空比从 0% 逐档升到 100%，记录各档转速与电流；在高压下执行；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] HV/HV_PWMdutyChange_0TO100_SUB.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-018",
+      "name": "HV_SV_LV_PWMDUTY_0TO100",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_0TO100",
+        "name": "PWM 占空比 0→100 扫描"
+      },
+      "voltage_level": "LV+SV+HV",
+      "voltage_level_name": "三档电压串跑（LV、SV、HV）",
+      "is_subworkflow": false,
+      "file_path": "[源] PWMDUTY_0TO100/HV_SV_LV_PWMDUTY_0TO100.wfw",
+      "file_size_bytes": 104552,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T07:39:58.759Z",
+      "node_count": 8,
+      "edge_count": 7,
+      "node_types": [
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 3
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 3
+        }
+      ],
+      "purpose": "占空比从 0% 逐档升到 100%，记录各档转速与电流；在三档电压串跑（LV、SV、HV）下执行。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] PWMDUTY_0TO100/HV_SV_LV_PWMDUTY_0TO100.wfw",
+        "locator": "definition.nodes 长度 = 8，definition.edges 长度 = 7，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-019",
+      "name": "LV_PWMdutyChange_0TO100",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_0TO100",
+        "name": "PWM 占空比 0→100 扫描"
+      },
+      "voltage_level": "LV",
+      "voltage_level_name": "低压",
+      "is_subworkflow": false,
+      "file_path": "[源] LV/LV_PWMdutyChange_0TO100.wfw",
+      "file_size_bytes": 30007,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T07:58:17.430Z",
+      "node_count": 16,
+      "edge_count": 21,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 2
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 3
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 2
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 2
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 2
+        }
+      ],
+      "purpose": "占空比从 0% 逐档升到 100%，记录各档转速与电流；在低压下执行；带示波器采集，自动出报告。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] LV/LV_PWMdutyChange_0TO100.wfw",
+        "locator": "definition.nodes 长度 = 16，definition.edges 长度 = 21，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-020",
+      "name": "LV_PWMdutyChange_0TO100_SUB",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_0TO100",
+        "name": "PWM 占空比 0→100 扫描"
+      },
+      "voltage_level": "LV",
+      "voltage_level_name": "低压",
+      "is_subworkflow": true,
+      "file_path": "[源] LV/LV_PWMdutyChange_0TO100_SUB.wfw",
+      "file_size_bytes": 47718,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T03:30:08.354Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "占空比从 0% 逐档升到 100%，记录各档转速与电流；在低压下执行；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] LV/LV_PWMdutyChange_0TO100_SUB.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-021",
+      "name": "PWMDUTY_0TO100_ThrVol",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_0TO100",
+        "name": "PWM 占空比 0→100 扫描"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": false,
+      "file_path": "[源] PWMDUTY_0TO100/PWMDUTY_0TO100_ThrVol.wfw",
+      "file_size_bytes": 121530,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T07:45:18.788Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "占空比从 0% 逐档升到 100%，记录各档转速与电流。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] PWMDUTY_0TO100/PWMDUTY_0TO100_ThrVol.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-022",
+      "name": "SV_PWMdutyChange_0TO100",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_0TO100",
+        "name": "PWM 占空比 0→100 扫描"
+      },
+      "voltage_level": "SV",
+      "voltage_level_name": "标准电压",
+      "is_subworkflow": false,
+      "file_path": "[源] SV/SV_PWMdutyChange_0TO100.wfw",
+      "file_size_bytes": 30007,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T07:58:31.082Z",
+      "node_count": 16,
+      "edge_count": 21,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 2
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 3
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 2
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 2
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 2
+        }
+      ],
+      "purpose": "占空比从 0% 逐档升到 100%，记录各档转速与电流；在标准电压下执行；带示波器采集，自动出报告。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] SV/SV_PWMdutyChange_0TO100.wfw",
+        "locator": "definition.nodes 长度 = 16，definition.edges 长度 = 21，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-023",
+      "name": "SV_PWMdutyChange_0TO100_SUB",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_0TO100",
+        "name": "PWM 占空比 0→100 扫描"
+      },
+      "voltage_level": "SV",
+      "voltage_level_name": "标准电压",
+      "is_subworkflow": true,
+      "file_path": "[源] SV/SV_PWMdutyChange_0TO100_SUB.wfw",
+      "file_size_bytes": 36671,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T03:11:30.293Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "占空比从 0% 逐档升到 100%，记录各档转速与电流；在标准电压下执行；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] SV/SV_PWMdutyChange_0TO100_SUB.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-024",
+      "name": "HV_PWMdutyChange_100TO0",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_100TO0",
+        "name": "PWM 占空比 100→0 扫描"
+      },
+      "voltage_level": "HV",
+      "voltage_level_name": "高压",
+      "is_subworkflow": false,
+      "file_path": "[源] HV/HV_PWMdutyChange_100TO0.wfw",
+      "file_size_bytes": 30007,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T07:57:10.099Z",
+      "node_count": 16,
+      "edge_count": 21,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 2
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 3
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 2
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 2
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 2
+        }
+      ],
+      "purpose": "占空比从 100% 逐档降到 0%，验证降速不停转；在高压下执行；带示波器采集，自动出报告。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] HV/HV_PWMdutyChange_100TO0.wfw",
+        "locator": "definition.nodes 长度 = 16，definition.edges 长度 = 21，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-025",
+      "name": "HV_PWMdutyChange_100TO0_SUB",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_100TO0",
+        "name": "PWM 占空比 100→0 扫描"
+      },
+      "voltage_level": "HV",
+      "voltage_level_name": "高压",
+      "is_subworkflow": true,
+      "file_path": "[源] HV/HV_PWMdutyChange_100TO0_SUB.wfw",
+      "file_size_bytes": 39852,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T07:55:13.859Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "占空比从 100% 逐档降到 0%，验证降速不停转；在高压下执行；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] HV/HV_PWMdutyChange_100TO0_SUB.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-026",
+      "name": "HV_SV_LV_PWMDUTY_100TO0",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_100TO0",
+        "name": "PWM 占空比 100→0 扫描"
+      },
+      "voltage_level": "LV+SV+HV",
+      "voltage_level_name": "三档电压串跑（LV、SV、HV）",
+      "is_subworkflow": false,
+      "file_path": "[源] PWMDUTY_100TO0/HV_SV_LV_PWMDUTY_100TO0.wfw",
+      "file_size_bytes": 105169,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T08:18:24.572Z",
+      "node_count": 8,
+      "edge_count": 7,
+      "node_types": [
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 3
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 3
+        }
+      ],
+      "purpose": "占空比从 100% 逐档降到 0%，验证降速不停转；在三档电压串跑（LV、SV、HV）下执行。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] PWMDUTY_100TO0/HV_SV_LV_PWMDUTY_100TO0.wfw",
+        "locator": "definition.nodes 长度 = 8，definition.edges 长度 = 7，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-027",
+      "name": "LV_PWMdutyChange_100TO0",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_100TO0",
+        "name": "PWM 占空比 100→0 扫描"
+      },
+      "voltage_level": "LV",
+      "voltage_level_name": "低压",
+      "is_subworkflow": false,
+      "file_path": "[源] LV/LV_PWMdutyChange_100TO0.wfw",
+      "file_size_bytes": 30007,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T07:57:26.432Z",
+      "node_count": 16,
+      "edge_count": 21,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 2
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 3
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 2
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 2
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 2
+        }
+      ],
+      "purpose": "占空比从 100% 逐档降到 0%，验证降速不停转；在低压下执行；带示波器采集，自动出报告。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] LV/LV_PWMdutyChange_100TO0.wfw",
+        "locator": "definition.nodes 长度 = 16，definition.edges 长度 = 21，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-028",
+      "name": "LV_PWMdutyChange_100TO0_SUB",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_100TO0",
+        "name": "PWM 占空比 100→0 扫描"
+      },
+      "voltage_level": "LV",
+      "voltage_level_name": "低压",
+      "is_subworkflow": true,
+      "file_path": "[源] LV/LV_PWMdutyChange_100TO0_SUB.wfw",
+      "file_size_bytes": 40856,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T08:01:28.337Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "占空比从 100% 逐档降到 0%，验证降速不停转；在低压下执行；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] LV/LV_PWMdutyChange_100TO0_SUB.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-029",
+      "name": "PWMDUTY_100TO0_ThrVol",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_100TO0",
+        "name": "PWM 占空比 100→0 扫描"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": false,
+      "file_path": "[源] PWMDUTY_100TO0/PWMDUTY_100TO0_ThrVol.wfw",
+      "file_size_bytes": 128256,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T08:23:13.955Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "占空比从 100% 逐档降到 0%，验证降速不停转。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] PWMDUTY_100TO0/PWMDUTY_100TO0_ThrVol.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-030",
+      "name": "SV_PWMdutyChange_100TO0",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_100TO0",
+        "name": "PWM 占空比 100→0 扫描"
+      },
+      "voltage_level": "SV",
+      "voltage_level_name": "标准电压",
+      "is_subworkflow": false,
+      "file_path": "[源] SV/SV_PWMdutyChange_100TO0.wfw",
+      "file_size_bytes": 30007,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T07:57:44.908Z",
+      "node_count": 16,
+      "edge_count": 21,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 2
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 3
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 2
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 2
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 2
+        }
+      ],
+      "purpose": "占空比从 100% 逐档降到 0%，验证降速不停转；在标准电压下执行；带示波器采集，自动出报告。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] SV/SV_PWMdutyChange_100TO0.wfw",
+        "locator": "definition.nodes 长度 = 16，definition.edges 长度 = 21，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-031",
+      "name": "SV_PWMdutyChange_100TO0_SUB",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_100TO0",
+        "name": "PWM 占空比 100→0 扫描"
+      },
+      "voltage_level": "SV",
+      "voltage_level_name": "标准电压",
+      "is_subworkflow": true,
+      "file_path": "[源] SV/SV_PWMdutyChange_100TO0_SUB.wfw",
+      "file_size_bytes": 42325,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T08:08:12.024Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "占空比从 100% 逐档降到 0%，验证降速不停转；在标准电压下执行；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] SV/SV_PWMdutyChange_100TO0_SUB.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-032",
+      "name": "HIGHTOLOW_THREEVOLTAGE",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_HIGHTOLOW",
+        "name": "PWM 高速切低速"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": false,
+      "file_path": "[源] PWMDUTY_HIGHTOLOW/HIGHTOLOW_THREEVOLTAGE.wfw",
+      "file_size_bytes": 143271,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-26T01:51:30.379Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "占空比由高档直接切到低档，测阶跃降速响应。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] PWMDUTY_HIGHTOLOW/HIGHTOLOW_THREEVOLTAGE.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-033",
+      "name": "HV_PWMdutyChange_HighToLow",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_HIGHTOLOW",
+        "name": "PWM 高速切低速"
+      },
+      "voltage_level": "HV",
+      "voltage_level_name": "高压",
+      "is_subworkflow": false,
+      "file_path": "[源] HV/HV_PWMdutyChange_HighToLow.wfw",
+      "file_size_bytes": 32603,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-21T02:42:22.736Z",
+      "node_count": 19,
+      "edge_count": 26,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 2
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 4
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 2
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "loop",
+          "name": "循环",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 2
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 3
+        }
+      ],
+      "purpose": "占空比由高档直接切到低档，测阶跃降速响应；在高压下执行；带示波器采集，自动出报告，含循环回归。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] HV/HV_PWMdutyChange_HighToLow.wfw",
+        "locator": "definition.nodes 长度 = 19，definition.edges 长度 = 26，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-034",
+      "name": "HV_PWMdutyChange_HighToLow_Sub",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_HIGHTOLOW",
+        "name": "PWM 高速切低速"
+      },
+      "voltage_level": "HV",
+      "voltage_level_name": "高压",
+      "is_subworkflow": true,
+      "file_path": "[源] HV/HV_PWMdutyChange_HighToLow_Sub.wfw",
+      "file_size_bytes": 46584,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T12:26:18.332Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "占空比由高档直接切到低档，测阶跃降速响应；在高压下执行；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] HV/HV_PWMdutyChange_HighToLow_Sub.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-035",
+      "name": "LV_PWMdutyChange_HighToLow",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_HIGHTOLOW",
+        "name": "PWM 高速切低速"
+      },
+      "voltage_level": "LV",
+      "voltage_level_name": "低压",
+      "is_subworkflow": false,
+      "file_path": "[源] LV/LV_PWMdutyChange_HighToLow.wfw",
+      "file_size_bytes": 32562,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-20T10:48:44.140Z",
+      "node_count": 19,
+      "edge_count": 26,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 2
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 4
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 2
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "loop",
+          "name": "循环",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 2
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 3
+        }
+      ],
+      "purpose": "占空比由高档直接切到低档，测阶跃降速响应；在低压下执行；带示波器采集，自动出报告，含循环回归。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] LV/LV_PWMdutyChange_HighToLow.wfw",
+        "locator": "definition.nodes 长度 = 19，definition.edges 长度 = 26，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-036",
+      "name": "LV_PWMdutyChange_HighToLow_sub",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_HIGHTOLOW",
+        "name": "PWM 高速切低速"
+      },
+      "voltage_level": "LV",
+      "voltage_level_name": "低压",
+      "is_subworkflow": true,
+      "file_path": "[源] LV/LV_PWMdutyChange_HighToLow_sub.wfw",
+      "file_size_bytes": 43361,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T12:27:11.330Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "占空比由高档直接切到低档，测阶跃降速响应；在低压下执行；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] LV/LV_PWMdutyChange_HighToLow_sub.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-037",
+      "name": "SV_PWMdutyChange_HighToLow",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_HIGHTOLOW",
+        "name": "PWM 高速切低速"
+      },
+      "voltage_level": "SV",
+      "voltage_level_name": "标准电压",
+      "is_subworkflow": false,
+      "file_path": "[源] SV/SV_PWMdutyChange_HighToLow.wfw",
+      "file_size_bytes": 32603,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-20T11:09:26.646Z",
+      "node_count": 19,
+      "edge_count": 26,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 2
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 4
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 2
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "loop",
+          "name": "循环",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 2
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 3
+        }
+      ],
+      "purpose": "占空比由高档直接切到低档，测阶跃降速响应；在标准电压下执行；带示波器采集，自动出报告，含循环回归。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] SV/SV_PWMdutyChange_HighToLow.wfw",
+        "locator": "definition.nodes 长度 = 19，definition.edges 长度 = 26，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-038",
+      "name": "SV_PWMdutyChange_HighToLow_sub",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_HIGHTOLOW",
+        "name": "PWM 高速切低速"
+      },
+      "voltage_level": "SV",
+      "voltage_level_name": "标准电压",
+      "is_subworkflow": true,
+      "file_path": "[源] SV/SV_PWMdutyChange_HighToLow_sub.wfw",
+      "file_size_bytes": 44617,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T12:30:54.588Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "占空比由高档直接切到低档，测阶跃降速响应；在标准电压下执行；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] SV/SV_PWMdutyChange_HighToLow_sub.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-039",
+      "name": "THREETEST",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_HIGHTOLOW",
+        "name": "PWM 高速切低速"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": false,
+      "file_path": "[源] PWMDUTY_HIGHTOLOW/THREETEST.wfw",
+      "file_size_bytes": 117524,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-26T01:41:01.104Z",
+      "node_count": 8,
+      "edge_count": 7,
+      "node_types": [
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 3
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 3
+        }
+      ],
+      "purpose": "占空比由高档直接切到低档，测阶跃降速响应。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] PWMDUTY_HIGHTOLOW/THREETEST.wfw",
+        "locator": "definition.nodes 长度 = 8，definition.edges 长度 = 7，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-040",
+      "name": "HV_PWMdutyChange_LowToHigh",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_LOWTOHIGH",
+        "name": "PWM 低速切高速"
+      },
+      "voltage_level": "HV",
+      "voltage_level_name": "高压",
+      "is_subworkflow": false,
+      "file_path": "[源] HV/HV_PWMdutyChange_LowToHigh.wfw",
+      "file_size_bytes": 32589,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-20T12:13:39.057Z",
+      "node_count": 19,
+      "edge_count": 26,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 2
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 4
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 2
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "loop",
+          "name": "循环",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 2
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 3
+        }
+      ],
+      "purpose": "占空比由低档直接切到高档，测阶跃升速响应；在高压下执行；带示波器采集，自动出报告，含循环回归。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] HV/HV_PWMdutyChange_LowToHigh.wfw",
+        "locator": "definition.nodes 长度 = 19，definition.edges 长度 = 26，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-041",
+      "name": "HV_PWMdutyChange_LowToHigh_Sub",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_LOWTOHIGH",
+        "name": "PWM 低速切高速"
+      },
+      "voltage_level": "HV",
+      "voltage_level_name": "高压",
+      "is_subworkflow": true,
+      "file_path": "[源] HV/HV_PWMdutyChange_LowToHigh_Sub.wfw",
+      "file_size_bytes": 42455,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-21T09:15:03.242Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "占空比由低档直接切到高档，测阶跃升速响应；在高压下执行；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] HV/HV_PWMdutyChange_LowToHigh_Sub.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-042",
+      "name": "LTH_PWMDUTY_THREETEST",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_LOWTOHIGH",
+        "name": "PWM 低速切高速"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": false,
+      "file_path": "[源] PWMDUTY_LOWTOHIGH/LTH_PWMDUTY_THREETEST.wfw",
+      "file_size_bytes": 123341,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-21T11:36:26.513Z",
+      "node_count": 8,
+      "edge_count": 7,
+      "node_types": [
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 3
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 3
+        }
+      ],
+      "purpose": "占空比由低档直接切到高档，测阶跃升速响应。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] PWMDUTY_LOWTOHIGH/LTH_PWMDUTY_THREETEST.wfw",
+        "locator": "definition.nodes 长度 = 8，definition.edges 长度 = 7，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-043",
+      "name": "LTH_PWMDUTY_THREETEST_LIBRARY",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_LOWTOHIGH",
+        "name": "PWM 低速切高速"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": false,
+      "file_path": "[源] PWMDUTY_LOWTOHIGH/LTH_PWMDUTY_THREETEST_LIBRARY.wfw",
+      "file_size_bytes": 139061,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-23T08:08:23.362Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "占空比由低档直接切到高档，测阶跃升速响应。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] PWMDUTY_LOWTOHIGH/LTH_PWMDUTY_THREETEST_LIBRARY.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-044",
+      "name": "LV_PWMdutyChange_LowToHigh",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_LOWTOHIGH",
+        "name": "PWM 低速切高速"
+      },
+      "voltage_level": "LV",
+      "voltage_level_name": "低压",
+      "is_subworkflow": false,
+      "file_path": "[源] LV/LV_PWMdutyChange_LowToHigh.wfw",
+      "file_size_bytes": 32532,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-20T12:11:44.585Z",
+      "node_count": 19,
+      "edge_count": 26,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 2
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 4
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 2
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "loop",
+          "name": "循环",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 2
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 3
+        }
+      ],
+      "purpose": "占空比由低档直接切到高档，测阶跃升速响应；在低压下执行；带示波器采集，自动出报告，含循环回归。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] LV/LV_PWMdutyChange_LowToHigh.wfw",
+        "locator": "definition.nodes 长度 = 19，definition.edges 长度 = 26，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-045",
+      "name": "LV_PWMdutyChange_LowToHigh_Sub",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_LOWTOHIGH",
+        "name": "PWM 低速切高速"
+      },
+      "voltage_level": "LV",
+      "voltage_level_name": "低压",
+      "is_subworkflow": true,
+      "file_path": "[源] LV/LV_PWMdutyChange_LowToHigh_Sub.wfw",
+      "file_size_bytes": 42340,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-20T12:21:11.664Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "占空比由低档直接切到高档，测阶跃升速响应；在低压下执行；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] LV/LV_PWMdutyChange_LowToHigh_Sub.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-046",
+      "name": "SV_PWMdutyChange_LowToHigh",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_LOWTOHIGH",
+        "name": "PWM 低速切高速"
+      },
+      "voltage_level": "SV",
+      "voltage_level_name": "标准电压",
+      "is_subworkflow": false,
+      "file_path": "[源] SV/SV_PWMdutyChange_LowToHigh.wfw",
+      "file_size_bytes": 32532,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-20T12:22:57.415Z",
+      "node_count": 19,
+      "edge_count": 26,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 2
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 4
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 2
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "loop",
+          "name": "循环",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 2
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 3
+        }
+      ],
+      "purpose": "占空比由低档直接切到高档，测阶跃升速响应；在标准电压下执行；带示波器采集，自动出报告，含循环回归。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] SV/SV_PWMdutyChange_LowToHigh.wfw",
+        "locator": "definition.nodes 长度 = 19，definition.edges 长度 = 26，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-047",
+      "name": "SV_PWMdutyChange_LowToHigh_Sub",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "PWMDUTY_LOWTOHIGH",
+        "name": "PWM 低速切高速"
+      },
+      "voltage_level": "SV",
+      "voltage_level_name": "标准电压",
+      "is_subworkflow": true,
+      "file_path": "[源] SV/SV_PWMdutyChange_LowToHigh_Sub.wfw",
+      "file_size_bytes": 42462,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-20T12:26:50.231Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "占空比由低档直接切到高档，测阶跃升速响应；在标准电压下执行；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] SV/SV_PWMdutyChange_LowToHigh_Sub.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-048",
+      "name": "SPEEDTEST",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "WORKINGflow",
+        "name": "未分组主流程"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": false,
+      "file_path": "[源] WORKINGflow/SPEEDTEST.wfw",
+      "file_size_bytes": 15075,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-06-01T02:52:14.236Z",
+      "node_count": 5,
+      "edge_count": 7,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "hid_query_speed",
+          "name": "查询转速",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        }
+      ],
+      "purpose": "直接放在 WORKINGflow 根目录的工作流。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] WORKINGflow/SPEEDTEST.wfw",
+        "locator": "definition.nodes 长度 = 5，definition.edges 长度 = 7，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-049",
+      "name": "HSLV_StaticStart",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "StaticStart",
+        "name": "静止启动测试"
+      },
+      "voltage_level": "LV",
+      "voltage_level_name": "低压",
+      "is_subworkflow": false,
+      "file_path": "[源] StaticStart/HSLV_StaticStart.wfw",
+      "file_size_bytes": 113559,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-30T10:23:34.679Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "风扇静止状态下按各档占空比启动，测起动成功率与起动时间；在低压下执行。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] StaticStart/HSLV_StaticStart.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-050",
+      "name": "HV_StaticStart",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "StaticStart",
+        "name": "静止启动测试"
+      },
+      "voltage_level": "HV",
+      "voltage_level_name": "高压",
+      "is_subworkflow": false,
+      "file_path": "[源] HV/HV_StaticStart.wfw",
+      "file_size_bytes": 28408,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-21T12:02:02.330Z",
+      "node_count": 14,
+      "edge_count": 20,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 1
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 2
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "loop",
+          "name": "循环",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 2
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 2
+        }
+      ],
+      "purpose": "风扇静止状态下按各档占空比启动，测起动成功率与起动时间；在高压下执行；带示波器采集，自动出报告，含循环回归。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] HV/HV_StaticStart.wfw",
+        "locator": "definition.nodes 长度 = 14，definition.edges 长度 = 20，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-051",
+      "name": "HV_StaticStart_Sub",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "StaticStart",
+        "name": "静止启动测试"
+      },
+      "voltage_level": "HV",
+      "voltage_level_name": "高压",
+      "is_subworkflow": true,
+      "file_path": "[源] HV/HV_StaticStart_Sub.wfw",
+      "file_size_bytes": 38119,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T11:44:44.074Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "风扇静止状态下按各档占空比启动，测起动成功率与起动时间；在高压下执行；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] HV/HV_StaticStart_Sub.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-052",
+      "name": "HV_SV_LV_StaticStart",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "StaticStart",
+        "name": "静止启动测试"
+      },
+      "voltage_level": "LV+SV+HV",
+      "voltage_level_name": "三档电压串跑（LV、SV、HV）",
+      "is_subworkflow": false,
+      "file_path": "[源] StaticStart/HV_SV_LV_StaticStart.wfw",
+      "file_size_bytes": 92108,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T11:55:50.789Z",
+      "node_count": 7,
+      "edge_count": 6,
+      "node_types": [
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 2
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 3
+        }
+      ],
+      "purpose": "风扇静止状态下按各档占空比启动，测起动成功率与起动时间；在三档电压串跑（LV、SV、HV）下执行。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] StaticStart/HV_SV_LV_StaticStart.wfw",
+        "locator": "definition.nodes 长度 = 7，definition.edges 长度 = 6，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-053",
+      "name": "LV_StaticStart",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "StaticStart",
+        "name": "静止启动测试"
+      },
+      "voltage_level": "LV",
+      "voltage_level_name": "低压",
+      "is_subworkflow": false,
+      "file_path": "[源] LV/LV_StaticStart.wfw",
+      "file_size_bytes": 28295,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-21T12:14:53.393Z",
+      "node_count": 14,
+      "edge_count": 20,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 1
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 2
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "loop",
+          "name": "循环",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 2
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 2
+        }
+      ],
+      "purpose": "风扇静止状态下按各档占空比启动，测起动成功率与起动时间；在低压下执行；带示波器采集，自动出报告，含循环回归。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] LV/LV_StaticStart.wfw",
+        "locator": "definition.nodes 长度 = 14，definition.edges 长度 = 20，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-054",
+      "name": "LV_StaticStart_SUB",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "StaticStart",
+        "name": "静止启动测试"
+      },
+      "voltage_level": "LV",
+      "voltage_level_name": "低压",
+      "is_subworkflow": true,
+      "file_path": "[源] LV/LV_StaticStart_SUB.wfw",
+      "file_size_bytes": 37923,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T11:48:59.084Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "风扇静止状态下按各档占空比启动，测起动成功率与起动时间；在低压下执行；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] LV/LV_StaticStart_SUB.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-055",
+      "name": "SV_StaticStart",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "StaticStart",
+        "name": "静止启动测试"
+      },
+      "voltage_level": "SV",
+      "voltage_level_name": "标准电压",
+      "is_subworkflow": false,
+      "file_path": "[源] SV/SV_StaticStart.wfw",
+      "file_size_bytes": 28257,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-21T12:25:07.131Z",
+      "node_count": 14,
+      "edge_count": 20,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 1
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 2
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "loop",
+          "name": "循环",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 1
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 2
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 2
+        }
+      ],
+      "purpose": "风扇静止状态下按各档占空比启动，测起动成功率与起动时间；在标准电压下执行；带示波器采集，自动出报告，含循环回归。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] SV/SV_StaticStart.wfw",
+        "locator": "definition.nodes 长度 = 14，definition.edges 长度 = 20，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-056",
+      "name": "SV_StaticStart_Sub",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "StaticStart",
+        "name": "静止启动测试"
+      },
+      "voltage_level": "SV",
+      "voltage_level_name": "标准电压",
+      "is_subworkflow": true,
+      "file_path": "[源] SV/SV_StaticStart_Sub.wfw",
+      "file_size_bytes": 37925,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T11:49:49.992Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "风扇静止状态下按各档占空比启动，测起动成功率与起动时间；在标准电压下执行；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] SV/SV_StaticStart_Sub.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-057",
+      "name": "difSpeedTAILWINDTEST",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "TAILWINDWIND",
+        "name": "顺风测试"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": false,
+      "file_path": "[源] TAILWINDWIND/difSpeedTAILWINDTEST.wfw",
+      "file_size_bytes": 23757,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T09:32:51.050Z",
+      "node_count": 14,
+      "edge_count": 21,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 1
+        },
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 2
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_tailwind_exit",
+          "name": "退出顺风",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_tailwind_set",
+          "name": "设置顺风",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "hid_query_speed",
+          "name": "查询转速",
+          "count": 1
+        },
+        {
+          "type": "loop",
+          "name": "循环",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 2
+        }
+      ],
+      "purpose": "被测风扇带残速时重新启动，验证顺风识别与接管；含循环回归。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] TAILWINDWIND/difSpeedTAILWINDTEST.wfw",
+        "locator": "definition.nodes 长度 = 14，definition.edges 长度 = 21，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-058",
+      "name": "difSpeedTAILWINDTEST_SUB",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "TAILWINDWIND",
+        "name": "顺风测试"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": true,
+      "file_path": "[源] TAILWINDWIND/difSpeedTAILWINDTEST_SUB.wfw",
+      "file_size_bytes": 32357,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "direction:COOLING_FAN"
+      ],
+      "updated_at": "2026-05-25T09:43:33.126Z",
+      "node_count": 3,
+      "edge_count": 2,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "subworkflow",
+          "name": "调用子流程",
+          "count": 1
+        }
+      ],
+      "purpose": "被测风扇带残速时重新启动，验证顺风识别与接管；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] TAILWINDWIND/difSpeedTAILWINDTEST_SUB.wfw",
+        "locator": "definition.nodes 长度 = 3，definition.edges 长度 = 2，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-059",
+      "name": "12V启停测试",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "子流程",
+        "name": "可复用子流程"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": true,
+      "file_path": "[源] 子流程/12V启停测试.wfw",
+      "file_size_bytes": 2708,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [],
+      "updated_at": "2026-04-11T08:03:05.554Z",
+      "node_count": 4,
+      "edge_count": 3,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_start_stop_test",
+          "name": "启停测试",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        }
+      ],
+      "purpose": "被主工作流以 subworkflow 节点引用的原子测试片段；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] 子流程/12V启停测试.wfw",
+        "locator": "definition.nodes 长度 = 4，definition.edges 长度 = 3，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-060",
+      "name": "PWM_VSP插入",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "子流程",
+        "name": "可复用子流程"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": true,
+      "file_path": "[源] 子流程/PWM_VSP插入.wfw",
+      "file_size_bytes": 26666,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [],
+      "updated_at": "2026-05-08T06:21:01.412Z",
+      "node_count": 15,
+      "edge_count": 22,
+      "node_types": [
+        {
+          "type": "curve_lookup",
+          "name": "曲线查表",
+          "count": 1
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_fan_start_test",
+          "name": "风扇启动测试",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_relay_open",
+          "name": "继电器通断",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "hid_query_current",
+          "name": "查询电流",
+          "count": 1
+        },
+        {
+          "type": "hid_query_speed",
+          "name": "查询转速",
+          "count": 1
+        },
+        {
+          "type": "loop",
+          "name": "循环",
+          "count": 1
+        },
+        {
+          "type": "report_generator",
+          "name": "生成报告",
+          "count": 2
+        },
+        {
+          "type": "rigol_oscilloscope",
+          "name": "RIGOL 示波器采集",
+          "count": 2
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 2
+        }
+      ],
+      "purpose": "被主工作流以 subworkflow 节点引用的原子测试片段；本文件是被主流程引用的子流程；带示波器采集，自动出报告，含循环回归。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] 子流程/PWM_VSP插入.wfw",
+        "locator": "definition.nodes 长度 = 15，definition.edges 长度 = 22，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-061",
+      "name": "关闭PWM测试",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "子流程",
+        "name": "可复用子流程"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": true,
+      "file_path": "[源] 子流程/关闭PWM测试 .wfw",
+      "file_size_bytes": 6236,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [],
+      "updated_at": "2026-04-21T08:31:38.355Z",
+      "node_count": 10,
+      "edge_count": 10,
+      "node_types": [
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 1
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 2
+        },
+        {
+          "type": "hid_preset_fan_start_test",
+          "name": "风扇启动测试",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_power_on",
+          "name": "上电",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "loop",
+          "name": "循环",
+          "count": 1
+        },
+        {
+          "type": "loop_break",
+          "name": "跳出循环",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 1
+        }
+      ],
+      "purpose": "被主工作流以 subworkflow 节点引用的原子测试片段；本文件是被主流程引用的子流程；含循环回归。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] 子流程/关闭PWM测试 .wfw",
+        "locator": "definition.nodes 长度 = 10，definition.edges 长度 = 10，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-062",
+      "name": "启动PWM测试",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "子流程",
+        "name": "可复用子流程"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": true,
+      "file_path": "[源] 子流程/启动PWM测试.wfw",
+      "file_size_bytes": 5713,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [],
+      "updated_at": "2026-04-21T06:13:25.200Z",
+      "node_count": 9,
+      "edge_count": 9,
+      "node_types": [
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 1
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 2
+        },
+        {
+          "type": "hid_preset_fan_start_test",
+          "name": "风扇启动测试",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "loop",
+          "name": "循环",
+          "count": 1
+        },
+        {
+          "type": "loop_break",
+          "name": "跳出循环",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 1
+        }
+      ],
+      "purpose": "被主工作流以 subworkflow 节点引用的原子测试片段；本文件是被主流程引用的子流程；含循环回归。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] 子流程/启动PWM测试.wfw",
+        "locator": "definition.nodes 长度 = 9，definition.edges 长度 = 9，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-063",
+      "name": "启动到全速的时间测试",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "子流程",
+        "name": "可复用子流程"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": true,
+      "file_path": "[源] 子流程/启动到全速的时间测试.wfw",
+      "file_size_bytes": 13849,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [],
+      "updated_at": "2026-05-07T03:08:16.882Z",
+      "node_count": 5,
+      "edge_count": 4,
+      "node_types": [
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 1
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        }
+      ],
+      "purpose": "被主工作流以 subworkflow 节点引用的原子测试片段；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] 子流程/启动到全速的时间测试.wfw",
+        "locator": "definition.nodes 长度 = 5，definition.edges 长度 = 4，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-064",
+      "name": "启动电压值确定",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "子流程",
+        "name": "可复用子流程"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": true,
+      "file_path": "[源] 子流程/启动电压值确定.wfw",
+      "file_size_bytes": 16933,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [],
+      "updated_at": "2026-05-08T08:20:07.979Z",
+      "node_count": 10,
+      "edge_count": 10,
+      "node_types": [
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 1
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 2
+        },
+        {
+          "type": "hid_preset_fan_start_test",
+          "name": "风扇启动测试",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "loop",
+          "name": "循环",
+          "count": 1
+        },
+        {
+          "type": "loop_break",
+          "name": "跳出循环",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "variable",
+          "name": "变量赋值",
+          "count": 2
+        }
+      ],
+      "purpose": "被主工作流以 subworkflow 节点引用的原子测试片段；本文件是被主流程引用的子流程；含循环回归。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] 子流程/启动电压值确定.wfw",
+        "locator": "definition.nodes 长度 = 10，definition.edges 长度 = 10，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-065",
+      "name": "逆风启动",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "子流程",
+        "name": "可复用子流程"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": true,
+      "file_path": "[源] 子流程/逆风启动.wfw",
+      "file_size_bytes": 14680,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [],
+      "updated_at": "2026-05-12T09:39:30.152Z",
+      "node_count": 5,
+      "edge_count": 7,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_headwind_set",
+          "name": "设置逆风",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        }
+      ],
+      "purpose": "被主工作流以 subworkflow 节点引用的原子测试片段；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] 子流程/逆风启动.wfw",
+        "locator": "definition.nodes 长度 = 5，definition.edges 长度 = 7，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-066",
+      "name": "速度1到速度2的稳定设置",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "子流程",
+        "name": "可复用子流程"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": true,
+      "file_path": "[源] 子流程/速度1到速度2的稳定设置.wfw",
+      "file_size_bytes": 3838,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [],
+      "updated_at": "2026-04-21T03:34:15.504Z",
+      "node_count": 6,
+      "edge_count": 5,
+      "node_types": [
+        {
+          "type": "delay",
+          "name": "延时等待",
+          "count": 1
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_power_on",
+          "name": "上电",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_pwm_speed_set",
+          "name": "设置 PWM 调速",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        }
+      ],
+      "purpose": "被主工作流以 subworkflow 节点引用的原子测试片段；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] 子流程/速度1到速度2的稳定设置.wfw",
+        "locator": "definition.nodes 长度 = 6，definition.edges 长度 = 5，metadata.name / metadata.tags"
+      }
+    },
+    {
+      "id": "WF-067",
+      "name": "顺风启动",
+      "metadata_name": "新工作流",
+      "group": {
+        "key": "子流程",
+        "name": "可复用子流程"
+      },
+      "voltage_level": null,
+      "voltage_level_name": "未标电压等级",
+      "is_subworkflow": true,
+      "file_path": "[源] 子流程/顺风启动.wfw",
+      "file_size_bytes": 14154,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [],
+      "updated_at": "2026-05-13T02:56:36.709Z",
+      "node_count": 5,
+      "edge_count": 5,
+      "node_types": [
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_speed_test",
+          "name": "转速测试",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_tailwind_set",
+          "name": "设置顺风",
+          "count": 1
+        },
+        {
+          "type": "hid_preset_voltage_set",
+          "name": "设置母线电压",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        }
+      ],
+      "purpose": "被主工作流以 subworkflow 节点引用的原子测试片段；本文件是被主流程引用的子流程。",
+      "purpose_derived": true,
+      "_source": {
+        "file": "[源] 子流程/顺风启动.wfw",
+        "locator": "definition.nodes 长度 = 5，definition.edges 长度 = 5，metadata.name / metadata.tags"
+      }
+    }
+  ]
+}

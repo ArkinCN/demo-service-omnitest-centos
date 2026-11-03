@@ -1,0 +1,548 @@
+{
+  "schema": "safety-interlocks/v1",
+  "scene_id": "motor.cooling-fan.fortior-fu6832",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-19",
+  "belongs_to_flow": "F2 初始化配置（呈现与确认）+ F4 启动测试及结果分析（不确认不允许运行）",
+  "types": {
+    "硬件": "由固件阈值或仪器状态判定",
+    "流程": "由规程纪律约束执行顺序与动作",
+    "人员": "需要操作者显式确认才能放行"
+  },
+  "demo_profile": {
+    "note": "演示模式在左栏逐条放行的是流程与人员两类共 9 条；硬件 10 条由固件阈值保证，收进二级折叠，追问时展开。",
+    "interlocks": [
+      "SI-PROC-01",
+      "SI-PROC-02",
+      "SI-PROC-03",
+      "SI-PROC-04",
+      "SI-PROC-05",
+      "SI-PROC-06",
+      "SI-PROC-07",
+      "SI-PERSON-01",
+      "SI-PERSON-02"
+    ]
+  },
+  "group_tiers": [
+    {
+      "id": "ilk-hw",
+      "title": "硬件电气红线",
+      "groups": [
+        {
+          "id": "ilk-hw-e",
+          "title": "电压与电流",
+          "items": [
+            "SI-HW-01",
+            "SI-HW-02",
+            "SI-HW-03",
+            "SI-HW-04"
+          ]
+        },
+        {
+          "id": "ilk-hw-m",
+          "title": "机械与热",
+          "items": [
+            "SI-HW-05",
+            "SI-HW-06",
+            "SI-HW-07"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ilk-proc",
+      "title": "流程纪律",
+      "groups": [
+        {
+          "id": "ilk-proc-base",
+          "title": "基线与顺序",
+          "items": [
+            "SI-PROC-01",
+            "SI-PROC-02",
+            "SI-PROC-04"
+          ]
+        },
+        {
+          "id": "ilk-proc-edit",
+          "title": "改动纪律",
+          "items": [
+            "SI-PROC-03",
+            "SI-PROC-05",
+            "SI-PROC-06",
+            "SI-PROC-07"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ilk-eq",
+      "title": "设备校验",
+      "groups": [
+        {
+          "id": "ilk-eq-all",
+          "title": "仪器与接线",
+          "items": [
+            "SI-EQ-01",
+            "SI-EQ-02",
+            "SI-EQ-03"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ilk-person",
+      "title": "人员与现场",
+      "groups": [
+        {
+          "id": "ilk-person-all",
+          "title": "人工闸口",
+          "items": [
+            "SI-PERSON-01",
+            "SI-PERSON-02"
+          ]
+        }
+      ]
+    }
+  ],
+  "fault_bitmap": {
+    "_source": {
+      "file": "[源] include/Motor_Protection.h",
+      "locator": "Motor_Protection.h:49-61 FAULT_* 位定义"
+    },
+    "total": 13,
+    "value_range": "0x0000 ~ 0x8000",
+    "matching_rule": "13 条不是 13 个互斥的独立位，查表要分两步：第一步先拿 fault 整值去 bits 做精确匹配，命中就用该条的名字——0x0000（FAULT_NONE 无错误）与 0x0060（FAULT_STALL_METHOD_UQOF）必须走这一步，前者按位与任何掩码都为 0，后者是 0x0020 | 0x0040 的复合常量而不是独立位；第二步整值未命中时才按位拆，逐位与 bits 里的单位常量做 & 运算列出全部命中项。堵转一族（0x0020 / 0x0040 / 0x0060 / 0x0080）合起来占 bit5~bit7，按位判定用掩码 0xE0 即可全覆盖，无须再单列 0x0060。",
+    "composite_values": {
+      "0x0060": "FAULT_STALL_METHOD_UQOF = FAULT_STALL_METHOD_SPDES(0x0020) | FAULT_STALL_METHOD_START(0x0040)，复合常量，不是独立位"
+    },
+    "masks": {
+      "0xE0": "堵转保护一族（0x0020 | 0x0040 | 0x0080），已覆盖复合值 0x0060"
+    },
+    "bits": {
+      "0x0000": "FAULT_NONE 無錯誤",
+      "0x0001": "FAULT_HW_OCP 硬體過電流保護",
+      "0x0002": "FAULT_SW_OCP 軟體過電流保護",
+      "0x0004": "FAULT_UVP 欠電壓保護",
+      "0x0008": "FAULT_OVP 過電壓保護",
+      "0x0010": "FAULT_PHASELOSS 缺相保護",
+      "0x0020": "FAULT_STALL_METHOD_SPDES 堵轉保護（轉速-反電動勢比值演算法）",
+      "0x0040": "FAULT_STALL_METHOD_START 堵轉保護（演算法）",
+      "0x0060": "FAULT_STALL_METHOD_UQOF 堵轉保護（演算法）",
+      "0x0080": "FAULT_STALL_METHOD_OFR 堵轉保護（演算法）",
+      "0x0100": "FAULT_CURROFFSET_OFR 偏置電流異常",
+      "0x0200": "FAULT_POWERLOSE 輸入電源遺失保護",
+      "0x8000": "FAULT_TEST 測試用保護"
+    }
+  },
+  "interlocks": [
+    {
+      "id": "SI-HW-01",
+      "name": "母线过压保护阈值",
+      "type": "硬件",
+      "threshold": {
+        "value": 18.0,
+        "unit": "V",
+        "min": null,
+        "max": 30.0,
+        "recover": 14.0,
+        "recover_unit": "V"
+      },
+      "action": "超过阈值触发 FAULT_OVP(0x0008)，停机并按恢复阈值自动恢复",
+      "blocking": true,
+      "_source": [
+        {
+          "file": "[源] include/Protect.h",
+          "locator": "Protect.h:39 (#define PROTECTION_OV_PROTECT_THRESHOLD)"
+        },
+        {
+          "file": "[源] include/Protect.h",
+          "locator": "Protect.h:40 (#define PROTECTION_OV_RECOVER_THRESHOLD)"
+        },
+        {
+          "file": "[源] include/Motor_Protection.h",
+          "locator": "Motor_Protection.h:53 (#define FAULT_OVP)"
+        }
+      ],
+      "quote": "PROTECTION_OV_PROTECT_THRESHOLD (18.0) 過電壓保護觸發閾值 [範圍: (PROTECTION_OV_RECOVER_THRESHOLD + 0.5) ~ 30.0]"
+    },
+    {
+      "id": "SI-HW-02",
+      "name": "母线欠压保护阈值",
+      "type": "硬件",
+      "threshold": {
+        "value": 7.0,
+        "unit": "V",
+        "min": 6.0,
+        "max": null,
+        "recover": 8.0,
+        "recover_unit": "V"
+      },
+      "action": "低于阈值触发 FAULT_UVP(0x0004)，停机并按恢复阈值自动恢复",
+      "blocking": true,
+      "_source": [
+        {
+          "file": "[源] include/Protect.h",
+          "locator": "Protect.h:42 (#define PROTECTION_UV_PROTECT_THRESHOLD)"
+        },
+        {
+          "file": "[源] include/Protect.h",
+          "locator": "Protect.h:41 (#define PROTECTION_UV_RECOVER_THRESHOLD)"
+        },
+        {
+          "file": "[源] include/Motor_Protection.h",
+          "locator": "Motor_Protection.h:52 (#define FAULT_UVP)"
+        }
+      ],
+      "quote": "PROTECTION_UV_PROTECT_THRESHOLD (7.0) 欠電壓保護觸發閾值 [範圍: (6.0 ~ (PROTECTION_UV_RECOVER_THRESHOLD - 0.5)]"
+    },
+    {
+      "id": "SI-HW-03",
+      "name": "下电保护阈值",
+      "type": "硬件",
+      "threshold": {
+        "value": 6.5,
+        "unit": "V",
+        "min": 5.0,
+        "max": 6.5
+      },
+      "action": "低于阈值触发 FAULT_POWERLOSE(0x0200)",
+      "blocking": true,
+      "_source": [
+        {
+          "file": "[源] include/Protect.h",
+          "locator": "Protect.h:43 (#define PROTECTION_POWERLOSE_THRESHOLD)"
+        },
+        {
+          "file": "[源] include/Motor_Protection.h",
+          "locator": "Motor_Protection.h:60 (#define FAULT_POWERLOSE)"
+        }
+      ]
+    },
+    {
+      "id": "SI-HW-04",
+      "name": "软件过流阈值",
+      "type": "硬件",
+      "threshold": {
+        "value": 10.0,
+        "unit": "A",
+        "min": null,
+        "max": null
+      },
+      "action": "超过阈值触发 FAULT_SW_OCP(0x0002)；硬件过流走 DAC 比较触发 FAULT_HW_OCP(0x0001)，过流恢复时间 1500 ms",
+      "blocking": true,
+      "_source": [
+        {
+          "file": "[源] include/Protect.h",
+          "locator": "Protect.h:54 (#define PROTECTION_OC_SOFT_THRESHOLD)"
+        },
+        {
+          "file": "[源] include/Protect.h",
+          "locator": "Protect.h:53 (#define PROTECTION_OC_DAC_VALUE)"
+        },
+        {
+          "file": "[源] include/Protect.h",
+          "locator": "Protect.h:51 (#define PROTECTION_OC_RECOVER_TIMES)"
+        },
+        {
+          "file": "[源] include/Motor_Protection.h",
+          "locator": "Motor_Protection.h:51 (#define FAULT_SW_OCP)"
+        }
+      ]
+    },
+    {
+      "id": "SI-HW-05",
+      "name": "堵转保护超时与重启",
+      "type": "硬件",
+      "threshold": {
+        "trig_count": 25,
+        "trig_count_range": [
+          5,
+          60
+        ],
+        "recover_times_ms": 6000,
+        "recover_range_ms": [
+          1000,
+          60000
+        ],
+        "retry_enabled": 0,
+        "retry_count": 1
+      },
+      "action": "堵转计数达阈值触发 FAULT_STALL_*（0x0020 / 0x0040 / 0x0060 / 0x0080 四种算法），6000 ms 后恢复；当前工程堵转重启尝试为禁用",
+      "blocking": true,
+      "_source": [
+        {
+          "file": "[源] include/Protect.h",
+          "locator": "Protect.h:27 (#define PROTECTION_STALL_ENABLED)"
+        },
+        {
+          "file": "[源] include/Protect.h",
+          "locator": "Protect.h:31 (#define PROTECTION_TRIG_COUNT_THRESHOLD)"
+        },
+        {
+          "file": "[源] include/Protect.h",
+          "locator": "Protect.h:30 (#define PROTECTION_STALL_RECOVER_TIMES)"
+        },
+        {
+          "file": "[源] include/Protect.h",
+          "locator": "Protect.h:32 (#define PROTECTION_RETRY_START_ENABLED)"
+        },
+        {
+          "file": "[源] include/Motor_Protection.h",
+          "locator": "Motor_Protection.h:55 (#define FAULT_STALL_METHOD_SPDES)"
+        }
+      ]
+    },
+    {
+      "id": "SI-HW-06",
+      "name": "缺相保护",
+      "type": "硬件",
+      "threshold": {
+        "enabled": 1,
+        "recover_times_ms": 3000,
+        "recover_range_ms": [
+          1000,
+          60000
+        ]
+      },
+      "action": "触发 FAULT_PHASELOSS(0x0010)。规程口径：判到缺相立即停止迭代，转人工查接线",
+      "blocking": true,
+      "_source": [
+        {
+          "file": "[源] include/Protect.h",
+          "locator": "Protect.h:58 (#define PROTECTION_PHASELOSS_ENABLED)"
+        },
+        {
+          "file": "[源] include/Motor_Protection.h",
+          "locator": "Motor_Protection.h:54 (#define FAULT_PHASELOSS)"
+        },
+        {
+          "file": "[源] coolingfan-openloop-debug/SKILL.md",
+          "locator": "第 5 节 失败分诊表「fault=5(缺相) → 停止迭代，反问用户检查接线」"
+        }
+      ]
+    },
+    {
+      "id": "SI-HW-07",
+      "name": "温度上限",
+      "type": "硬件",
+      "threshold": {
+        "ambient_max_c": 85,
+        "junction_max_c": 150,
+        "ambient_max_derated_c": 105,
+        "ambient_derate_conditions": [
+          {
+            "key": "dual_supply",
+            "text": "双电源模式：VCC_MODE = 1，VDD5 = 5 V，VCC < 28 V"
+          },
+          {
+            "key": "single_supply",
+            "text": "单电源模式：VCC_MODE = 0，VCC < 15 V"
+          }
+        ],
+        "ambient_derate_logic": "any_of"
+      },
+      "action": "超出即超规格运行，测试台架必须停测",
+      "blocking": true,
+      "_placeholder": true,
+      "note": "两层缺口。其一，本工程 Customer.h / Protect.h 无 NTC 或过温保护宏（已 grep TEMP / NTC 零命中），此处温度上限取自 FU6832 数据手册的器件级规格，不是驱动板的整机过温联锁，整机过温判据待客户确认。其二，105 ℃ 不是无条件上限：数据手册给的是双电源与单电源两种供电条件，满足其一才放宽（ambient_derate_logic = any_of），两种条件都不满足时上限仍是 85 ℃。本板走哪种供电模式、VCC 实际值多少，本包未核实，前端不得直接按 105 ℃ 放行",
+      "_source": {
+        "file": "[源] Document/MCU-DS-14_FU6832_V2.1_20230621.pdf",
+        "locator": "PDF 第 56 页 表5-1 绝对最大额定值：「工作时环境温度TA」三行（无条件 -40~85 ℃；双电源模式 VCC_MODE=1、VDD5=5V、VCC<28V 时 -40~105 ℃；单电源模式 VCC_MODE=0、VCC<15V 时 -40~105 ℃）与「工作时结温TJ」-40~150 ℃"
+      }
+    },
+    {
+      "id": "SI-PROC-01",
+      "name": "PASS 基线禁改",
+      "type": "流程",
+      "source_product_line": "vacuum",
+      "applies_to_cooling_fan_note": "纪律本身与产品线无关，可直接沿用；但条款里点名的工具链与阶段清单是吸尘器线的，迁到散热风扇要重新核对",
+      "threshold": null,
+      "action": "已判 PASS 的参数视为基线，后续阶段不得擅自改动；确需改动先说明理由并征得用户同意",
+      "blocking": true,
+      "_source": {
+        "file": "[源] dc-rules/vacuum-flow-discipline.md",
+        "locator": "第 3 条铁律"
+      },
+      "quote": "**PASS 基线禁擅改**:已判 PASS 的参数视为基线,后续阶段不得擅自改动;确需改动先说明理由并征得同意。"
+    },
+    {
+      "id": "SI-PROC-02",
+      "name": "跑完必停机",
+      "type": "流程",
+      "source_product_line": "vacuum",
+      "applies_to_cooling_fan_note": "纪律本身与产品线无关，可直接沿用；但条款里点名的工具链与阶段清单是吸尘器线的，迁到散热风扇要重新核对",
+      "threshold": null,
+      "action": "任何让电机运转的流程，所有退出路径必须把使能拉低（吸尘器线为 GD32 CMD24 控制 PG0 关断）；debug / reset / run / freerun 都不得用于启停电机",
+      "blocking": true,
+      "_source": {
+        "file": "[源] dc-rules/vacuum-flow-discipline.md",
+        "locator": "第 5 条铁律"
+      },
+      "quote": "**跑完必停机**:任何让电机运转的流程都只允许由原子工具使用 GD32 CMD24 控制 PG0 启停,所有退出路径必须 PG0-off;`debug` / `reset` / `run` / `freerun` 都不得用于启停电机。"
+    },
+    {
+      "id": "SI-PROC-03",
+      "name": "改参先问用户",
+      "type": "流程",
+      "source_product_line": "vacuum",
+      "applies_to_cooling_fan_note": "纪律本身与产品线无关，可直接沿用；但条款里点名的工具链与阶段清单是吸尘器线的，迁到散热风扇要重新核对",
+      "threshold": null,
+      "action": "改任何源码或参数前先向用户说明并征得同意，拿到明确答复再动手",
+      "blocking": true,
+      "_source": {
+        "file": "[源] dc-rules/vacuum-flow-discipline.md",
+        "locator": "第 2 条铁律"
+      },
+      "quote": "**改参先问用户**:改任何源码 / 参数前先向用户说明并征得同意,拿到明确答复再动手。"
+    },
+    {
+      "id": "SI-PROC-04",
+      "name": "阶段顺序不可乱（功率标定必须排在运行稳定前）",
+      "type": "流程",
+      "source_product_line": "vacuum",
+      "applies_to_cooling_fan_note": "纪律本身与产品线无关，可直接沿用；但条款里点名的工具链与阶段清单是吸尘器线的，迁到散热风扇要重新核对",
+      "threshold": null,
+      "action": "识别 → 灌默认基线 →（验板 → 验采样）→ 启动 → 顺风 → 功率标定 → 运行稳定 → 保护 → 启停测试",
+      "blocking": true,
+      "_source": {
+        "file": "[源] dc-rules/vacuum-flow-discipline.md",
+        "locator": "第 9 条铁律"
+      },
+      "quote": "**阶段順序**:识别 → 灌默认基线 → (验板 → 验采样) → 启动 → 顺风 → 功率标定 → 运行稳定 → 保护 → 启停测试。**功率标定(Power_k)必须排在运行稳定之前**,否则 sweep 全是错工作点。",
+      "note": "调研文档 A 已记录缺口：power-calibration 在场景清单里仍是 planned，流程链有断点"
+    },
+    {
+      "id": "SI-PROC-05",
+      "name": "保护阈值严禁在线改写",
+      "type": "流程",
+      "threshold": null,
+      "action": "OVP / UVP / LVW 验证一律只读 RAM 观测，禁止用 writemem 写阈值变量；触发条件只能由用户手动调电源产生",
+      "blocking": true,
+      "_source": [
+        {
+          "file": "[源] protect-verify-ovp/SKILL.md",
+          "locator": "设计约束段"
+        },
+        {
+          "file": "[源] protect-verify-uvp/SKILL.md",
+          "locator": "设计约束段"
+        }
+      ],
+      "quote": "设计约束:**严禁在线改 OVP 阈值**(writemem 写阈值变量是违规)。所有触发依赖用户手动调电源,本 skill 只做观测 + 调回校验。"
+    },
+    {
+      "id": "SI-PROC-06",
+      "name": "改固件前工作区必须 clean，中断即还原",
+      "type": "流程",
+      "threshold": null,
+      "action": "超速 / 启动失败保护验证走 protect-verify/* 临时分支隔离；任一步骤失败立即进中断保护，git reset + 重编重烧回 baseline，不得让用户在临时分支固件上下机",
+      "blocking": true,
+      "_source": {
+        "file": "[源] protect-verify-overspeed/SKILL.md",
+        "locator": "设计前提段与「## 中断保护」小节"
+      }
+    },
+    {
+      "id": "SI-PROC-07",
+      "name": "电源调回复检（±5%）",
+      "type": "流程",
+      "threshold": {
+        "tolerance_pct": 5
+      },
+      "action": "过压/欠压/低压告警验证结束后，必须提示用户把电源调回原母线电压，等用户明确回「已调回」，再读母线 ADC 复检；偏差 > 5% 判定降级",
+      "blocking": true,
+      "_source": {
+        "file": "[源] protect-verify-ovp/SKILL.md",
+        "locator": "第 2 节 Vbus 复检(强约束)"
+      }
+    },
+    {
+      "id": "SI-EQ-01",
+      "name": "示波器在线校验",
+      "type": "硬件",
+      "threshold": {
+        "expected_idn": "RIGOL TECHNOLOGIES,DS1104Z",
+        "visa_resource_pattern": "USB0::0x1AB1::0x04CE::<serial>::INSTR"
+      },
+      "action": "开跑前用 rigol_measure 试探示波器；返回数值记「示波器模式」，失败或用户选「无示波器」记「降级模式」并改用用户回报转速口径。不中断流程",
+      "blocking": false,
+      "_source": [
+        {
+          "file": "[源] coolingfan-openloop-debug/SKILL.md",
+          "locator": "第 0 节 前置检查"
+        },
+        {
+          "file": "[源] capture/采集信息.json",
+          "locator": "idn / resource 字段"
+        }
+      ]
+    },
+    {
+      "id": "SI-EQ-02",
+      "name": "程控电源在线校验",
+      "type": "硬件",
+      "threshold": null,
+      "action": "保护验证与开关电源类场景要求程控电源在册可控；场景清单标注 hw-selfcheck、protect-verify、reliability 三类需要程控电源",
+      "blocking": true,
+      "_source": {
+        "file": "[源] _调研/A-DebugCopilot场景与知识库取证.md",
+        "locator": "第一节 场景表「需要设备」列"
+      }
+    },
+    {
+      "id": "SI-EQ-03",
+      "name": "台架信号接线校验（FG1/FG2/PWM1/PWM2）",
+      "type": "硬件",
+      "threshold": {
+        "ch1": "FG1（电气转速）",
+        "ch2": "FG2（红外机械真值，1 脉冲/转）",
+        "ch3": "PWM1（驱动被测风扇）",
+        "ch4": "PWM2（驱动逆风风扇）或 48V"
+      },
+      "action": "开跑前核对示波器四通道接线；FG 多为开漏，可能需上拉才能看到方波",
+      "blocking": true,
+      "_source": {
+        "file": "[源] memory/fortior-test-bench-hardware.md",
+        "locator": "「示波器接线」段"
+      }
+    },
+    {
+      "id": "SI-PERSON-01",
+      "name": "人员离场确认",
+      "type": "人员",
+      "threshold": {
+        "confirm_required": true
+      },
+      "action": "启动测试前必须由操作者显式确认「人已离开设备旁」，未确认不得启动",
+      "blocking": true,
+      "_source": {
+        "file": "[源] 20260919-通用Agent测试系统v2.0/00-用户需求原话-20260919.md",
+        "locator": "典型流程 2「测试保护/不能违背的原则（如人不能在设备旁否则不能启动、电压绝对不能大于多少伏——名字待定）」"
+      },
+      "note": "来自用户需求原话，属产品需求而非现有规程条款；现有 25 份 dc-skills 无对应实现"
+    },
+    {
+      "id": "SI-PERSON-02",
+      "name": "半自动步骤的人工确认闸口",
+      "type": "人员",
+      "threshold": {
+        "accepted_replies": [
+          "已调回",
+          "done"
+        ]
+      },
+      "action": "半自动验证（OVP / UVP / LVW）必须等用户明确回复确认，不允许模型自行脑补已完成；烧录完成后不得自动发 debug 启动电机，须等用户确认已上电",
+      "blocking": true,
+      "_source": [
+        {
+          "file": "[源] protect-verify-ovp/SKILL.md",
+          "locator": "第 2 节第 2 步「不要 AI 自己脑补已调回」"
+        },
+        {
+          "file": "[源] coolingfan-openloop-debug/SKILL.md",
+          "locator": "第 3 节第 3 步"
+        }
+      ]
+    }
+  ]
+}

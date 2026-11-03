@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.0",
+  "serial": {
+    "_comment": "port 留空：由 overlay(acceptance.windows.json / acceptance.linux.json) 或环境变量 FAN_SERIAL_PORT 补齐",
+    "port": "COM3",
+    "baud": 115200,
+    "expectedIdentity": "READY UNO_FAN_V2 25000",
+    "wiringConfirmed": true
+  },
+  "experiment": {
+    "dutiesPercent": [
+      30,
+      50,
+      70,
+      100
+    ],
+    "holdSeconds": 20,
+    "cycles": 1,
+    "settleSeconds": 2,
+    "capturesPerStep": 5,
+    "captureIntervalSeconds": 0.5
+  },
+  "output": {
+    "root": "../runs"
+  },
+  "scope": {
+    "_comment": "resource 留空 → 运行时按 VID=0x1AB1/PID=0x04CE 自动枚举；如需写死由 overlay 覆盖",
+    "enabled": true,
+    "resource": "USB0::6833::1230::DS1ZC271600575::0::INSTR",
+    "expectedIdentity": "RIGOL TECHNOLOGIES,DS1104Z Plus,DS1ZC271600575,00.04.05.SP2",
+    "inputImpedanceOhm": 1000000,
+    "pwmTimebaseSecondsPerDiv": 2e-05,
+    "triggerLevelV": 2.5,
+    "channels": {
+      "current": {
+        "channel": 1,
+        "probeRatio": 1,
+        "coupling": "DC",
+        "scaleVoltsPerDiv": 0.02,
+        "offsetV": 0,
+        "physicalProbeRatioConfirmed": true
+      },
+      "voltage": {
+        "channel": 2,
+        "probeRatio": 10,
+        "coupling": "DC",
+        "scaleVoltsPerDiv": 2,
+        "offsetV": 0,
+        "physicalProbeRatioConfirmed": false
+      },
+      "pwm": {
+        "channel": 3,
+        "probeRatio": 10,
+        "coupling": "DC",
+        "scaleVoltsPerDiv": 1,
+        "offsetV": -2.5,
+        "physicalProbeRatioConfirmed": false
+      }
+    },
+    "currentConversion": {
+      "enabled": false,
+      "gainAmpsPerVolt": 10,
+      "turns": 1,
+      "lowRangeConfirmed": true,
+      "zeroConfirmed": true,
+      "singleConductorConfirmed": false,
+      "probeModel": "CYBERTEK CPL8100A",
+      "range": "L 0.1 V/A",
+      "minimumSpecifiedCurrentA": 0.05
+    },
+    "tach": {
+      "_comment": "probe3（2026-10-09）：按现场万用表实测「反光条在位 1.8V / 离位 0V」修正 —— ① probeRatio 1→10（CH4 与台架其余通道同为 10× 探头；此前设 1 导致读数被缩小 10 倍，峰峰仅 0.36~0.44V，过不了 get_wave_metrics 的 0.5V 幅值门限）；② scaleVoltsPerDiv 0.5→1（×10 后极值可达 ±2.4V，0.5V/div 的削波阈值仅 ±1.98V 会误判削波并置空频率）；③ triggerLevelV 0.5→0.9（落在 0V 与 1.8V 中间）；④ timebaseSecondsPerDiv 0.02→0.05（0.02 s/div 时窗内 30% 档只有约 2 个完整周期，过不了 periods>=3 门槛；0.05 s/div 时约有 7 个）。",
+      "enabled": true,
+      "channel": 4,
+      "sensorModel": "JINGJIAKE LZ-MK10 NPN",
+      "supplyVoltageV": 5,
+      "signalWire": "BK black OUT; BU blue 0V; BN brown supply",
+      "outputVoltageV": 1.8,
+      "outputType": "NPN; internal output circuit and pull-up conditions require verification",
+      "wiringConfirmed": true,
+      "probeRatio": 10,
+      "physicalProbeRatioConfirmed": true,
+      "pulsesPerRevolution": 1,
+      "timebaseSecondsPerDiv": 0.05,
+      "scaleVoltsPerDiv": 1,
+      "triggerLevelV": 0.9,
+      "supplyVoltageRangeV": [
+        12,
+        24
+      ]
+    },
+    "waveformPoints": 1200
+  }
+}

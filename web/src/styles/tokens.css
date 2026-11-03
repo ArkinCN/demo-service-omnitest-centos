@@ -1,0 +1,184 @@
+/* ===========================================================================
+   OmniTest 设计令牌 v2
+   方向：仪器级冷静（instrument-grade calm）。中大墨绿为骨架，冷白偏绿的纸面，
+   三级表面靠"白+阴影 / 浅绿无阴影 / 无框行"区分，而不是靠一样的描边框。
+   基准画布 1920×1080（16:9），1440 与 1600 宽度按栅格收缩不裁切。
+   =========================================================================== */
+
+:root {
+  /* --- 主色阶：中大墨绿 #2E5E45 = primary-700，HSL 均匀推 10 档 --- */
+  --p-50: hsl(150 38% 96.5%);
+  --p-100: hsl(150 34% 92%);
+  --p-200: hsl(150 29% 84%);
+  --p-300: hsl(149 26% 72%);
+  --p-400: hsl(149 25% 57%);
+  --p-500: hsl(149 30% 43%);
+  --p-600: hsl(149 33% 34%);
+  --p-700: hsl(149 34% 27.5%); /* #2E5E45 品牌主色 */
+  --p-800: hsl(149 36% 20%);
+  --p-900: hsl(150 38% 13%);
+
+  /* --- 骨架别名（旧类名继续可用） --- */
+  --tp-ink: var(--p-700);
+  --tp-ink-deep: var(--p-800);
+  --tp-ink-soft: var(--p-300);
+  --tp-ink-wash: var(--p-50);
+  --tp-ink-veil: hsl(149 34% 27.5% / 0.08);
+  /* 色阶别名：index.css 的流光/粒子与部分卡片背景直接引用 --tp-p-200/--tp-p-700，
+     但全仓此前**没有定义**（引用失效 → 流动线与粒子实际不可见）。此处补齐，一处修复同时点亮。 */
+  --tp-p-200: var(--p-200);
+  --tp-p-700: var(--p-700);
+
+  /* --- 中性 --- */
+  --tp-bg: #f6f8f6; /* 冷白偏绿的页面底 */
+  --tp-surface: #ffffff; /* 主表面 */
+  --tp-surface-sunk: var(--p-50); /* 次表面 / 下沉输入 */
+  --tp-line: #e3e8e4; /* 边框 */
+  --tp-line-soft: #eef2ef; /* 卡内分隔线 */
+
+  /* --- 文字三档 --- */
+  --tp-text: #1f2a24;
+  --tp-text-2: #5b6b62;
+  --tp-text-3: #9aa69f;
+  --tp-text-on-ink: #ffffff;
+
+  /* --- 状态：只三档，极克制 --- */
+  --tp-ok: var(--p-700);
+  --tp-warn: #b7791f;
+  --tp-warn-wash: #fdf6e9;
+  --tp-alert: #a6353a;
+  --tp-alert-wash: #fbf0f0;
+
+  /* --- 唯一允许的渐变：品牌区与主按钮，600→700 --- */
+  --tp-grad: linear-gradient(140deg, var(--p-600) 0%, var(--p-700) 62%, var(--p-800) 100%);
+
+  /* --- 字体 --- */
+  --tp-font-sans: 'Inter Variable', 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --tp-font-display: var(--tp-font-sans);
+  --tp-font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  /* --- 形状：三级表面各自的圆角 --- */
+  --tp-radius: 12px; /* 主表面 */
+  --tp-radius-2: 10px; /* 次表面 */
+  --tp-radius-sm: 8px; /* 按钮、输入、徽标 */
+  --tp-radius-xs: 6px;
+  --tp-border: 1px;
+
+  /* --- 阴影：只有主表面有 --- */
+  --tp-shadow-1: 0 1px 2px rgba(31, 42, 36, 0.06), 0 8px 24px rgba(31, 42, 36, 0.06);
+  --tp-shadow-2: 0 2px 6px rgba(31, 42, 36, 0.08), 0 18px 48px rgba(31, 42, 36, 0.14);
+  --tp-shadow-ink: 0 1px 2px rgba(31, 42, 36, 0.12), 0 6px 16px rgba(46, 94, 69, 0.28);
+
+  /* --- 8pt 节奏 --- */
+  --tp-gap-x: 24px;
+  --tp-gap-y: 24px;
+  --tp-shell-pad: 32px;
+  --tp-topbar-h: 80px;
+  --tp-actionbar-h: 48px;
+  --tp-left-w: 380px;
+  --tp-rail-w: 56px;
+}
+
+@theme {
+  --color-p50: var(--p-50);
+  --color-p100: var(--p-100);
+  --color-p200: var(--p-200);
+  --color-p300: var(--p-300);
+  --color-p400: var(--p-400);
+  --color-p500: var(--p-500);
+  --color-p600: var(--p-600);
+  --color-p700: var(--p-700);
+  --color-p800: var(--p-800);
+  --color-p900: var(--p-900);
+
+  --color-ink: var(--tp-ink);
+  --color-ink-deep: var(--tp-ink-deep);
+  --color-ink-soft: var(--tp-ink-soft);
+  --color-ink-wash: var(--tp-ink-wash);
+  --color-ink-veil: var(--tp-ink-veil);
+
+  --color-page: var(--tp-bg);
+  --color-surface: var(--tp-surface);
+  --color-sunk: var(--tp-surface-sunk);
+  --color-line: var(--tp-line);
+  --color-line-soft: var(--tp-line-soft);
+
+  --color-t1: var(--tp-text);
+  --color-t2: var(--tp-text-2);
+  --color-t3: var(--tp-text-3);
+  --color-on-ink: var(--tp-text-on-ink);
+
+  --color-warn: var(--tp-warn);
+  --color-warn-wash: var(--tp-warn-wash);
+  --color-alert: var(--tp-alert);
+  --color-alert-wash: var(--tp-alert-wash);
+
+  --font-sans: var(--tp-font-sans);
+  --font-display: var(--tp-font-display);
+  --font-mono: var(--tp-font-mono);
+
+  --radius-tp: var(--tp-radius);
+  --radius-tp2: var(--tp-radius-2);
+  --radius-tps: var(--tp-radius-sm);
+  --radius-tpx: var(--tp-radius-xs);
+
+  --shadow-tp1: var(--tp-shadow-1);
+  --shadow-tp2: var(--tp-shadow-2);
+  --shadow-tpink: var(--tp-shadow-ink);
+
+  --animate-rise: rise 0.34s cubic-bezier(0.22, 0.75, 0.3, 1) both;
+  --animate-fade: fade 0.2s ease-out both;
+  --animate-pop: pop 0.18s cubic-bezier(0.22, 0.9, 0.3, 1) both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.82);
+  }
+}
+
+@keyframes sweep {
+  from {
+    background-position: 180% 0;
+  }
+  to {
+    background-position: -60% 0;
+  }
+}

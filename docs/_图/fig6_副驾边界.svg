@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="880" viewBox="0 0 1280 880">
+<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E5E45"/></marker>
+<marker id="ahw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A8C5B5"/></marker>
+<marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A6353A"/></marker>
+</defs>
+<rect width="1280" height="880" fill="#FFFFFF"/>
+<rect x="40" y="104" width="580" height="44" rx="6" fill="#EAF2EC"/>
+<text x="40" y="52" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="18" font-weight="600" fill="#2E5E45">副驾的边界　能做什么，什么必须人点</text>
+<text x="40" y="78" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#9A9A9A">统一规则：副驾可以读、可以算、可以建议、可以写草稿；凡是会改变被测对象状态或落盘生效的动作，必须人点按钮</text>
+<rect x="40" y="104" width="580" height="380" rx="6" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="60" y="132" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="14" font-weight="600" fill="#2E5E45">副驾可以自己做</text>
+<text x="60" y="186" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2E5E45">读</text>
+<text x="136" y="186" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#2C2C2C">检索知识库 · 解析文档 · 读设备读数与波形</text>
+<text x="136" y="208" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#9A9A9A">只读工具，调用不需要人逐次确认</text>
+<text x="60" y="260" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2E5E45">算</text>
+<text x="136" y="260" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#2C2C2C">曲线特征分析 · 逐条对判据 · 影响面检查</text>
+<text x="136" y="282" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#9A9A9A">计算不改变任何对象的状态</text>
+<line x1="60" y1="228" x2="600" y2="228" stroke="#C8C5BD" stroke-width="1"/>
+<text x="60" y="334" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2E5E45">建议</text>
+<text x="136" y="334" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#2C2C2C">参数候选与排序 · 工作流模板 · 分类归属</text>
+<text x="136" y="356" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#9A9A9A">建议只进队列，不自动生效</text>
+<line x1="60" y1="302" x2="600" y2="302" stroke="#C8C5BD" stroke-width="1"/>
+<text x="60" y="408" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2E5E45">写草稿</text>
+<text x="136" y="408" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#2C2C2C">结论段 · 异常说明 · 经验条目 · 报告字段</text>
+<text x="136" y="430" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#9A9A9A">草稿标「待复核」，不可直接导出</text>
+<line x1="60" y1="376" x2="600" y2="376" stroke="#C8C5BD" stroke-width="1"/>
+<rect x="660" y="104" width="580" height="380" rx="6" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="680" y="132" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="14" font-weight="600" fill="#A6353A">必须人点，副驾不能碰</text>
+<line x1="680" y1="148" x2="1220" y2="148" stroke="#C8C5BD" stroke-width="1"/>
+<text x="680" y="186" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2C2C2C">落盘生效</text>
+<text x="786" y="186" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#2C2C2C">提交并锁定 · 冻结需求基线 · 写回参数 · 导出并归档</text>
+<text x="786" y="208" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#9A9A9A">副驾可备好草稿与差异，按钮由人点</text>
+<text x="680" y="260" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2C2C2C">控设备</text>
+<text x="786" y="260" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#2C2C2C">启动 · 停止 · 急停 · 编译烧录</text>
+<text x="786" y="282" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#9A9A9A">有物理后果，人点之外还须联锁全绿</text>
+<line x1="680" y1="228" x2="1220" y2="228" stroke="#C8C5BD" stroke-width="1"/>
+<text x="680" y="334" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2C2C2C">删除与豁免</text>
+<text x="786" y="334" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#2C2C2C">删已有条目 · 联锁豁免 · 解除确认</text>
+<text x="786" y="356" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#9A9A9A">需二次确认并记一条审计</text>
+<line x1="680" y1="302" x2="1220" y2="302" stroke="#C8C5BD" stroke-width="1"/>
+<text x="680" y="428" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">共同点：都会产生不可逆后果，或改变别人看到的事实。</text>
+<text x="680" y="452" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">副驾在这一栏里的角色是「把材料备齐」，不是「替人决定」。</text>
+<rect x="40" y="520" width="1200" height="270" rx="6" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="56" y="548" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="14" font-weight="600" fill="#2E5E45">权限三档　与安全联锁的关系</text>
+<line x1="56" y1="560" x2="1224" y2="560" stroke="#C8C5BD" stroke-width="1"/>
+<rect x="56" y="578" width="370" height="110" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="241" y="608" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2C2C2C">第一档 · 自动执行</text>
+<text x="241" y="636" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="600" fill="#2E5E45">只读与推断类工具</text>
+<text x="241" y="662" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">副驾直接调用，事后可在审计里查到</text>
+<rect x="444" y="578" width="370" height="110" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="629" y="608" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2C2C2C">第二档 · 人工确认</text>
+<text x="629" y="636" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="600" fill="#2E5E45">会落盘生效的动作</text>
+<text x="629" y="662" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">副驾备好草稿与差异，人点按钮才生效</text>
+<rect x="832" y="578" width="370" height="110" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="1017" y="608" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2C2C2C">第三档 · 闸门放行</text>
+<text x="1017" y="636" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="600" fill="#2E5E45">会动被测对象的动作</text>
+<text x="1017" y="662" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">人点之外，还须安全联锁与预检全绿</text>
+<text x="56" y="736" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">三档由服务端的 Hook 统一校验：前端只负责把不可点的按钮置灰，</text>
+<text x="56" y="760" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">并在按钮下方给一行说明，指出差在哪一项、点击直达该项。</text>
+<rect x="832" y="720" width="370" height="54" rx="4" fill="none" stroke="#A6353A" stroke-width="1.5" stroke-dasharray="6 4"/>
+<line x1="1017" y1="718" x2="1017" y2="694" stroke="#A6353A" stroke-width="1.5" marker-end="url(#ahr)"/>
+<text x="1017" y="744" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="600" fill="#A6353A">安全联锁闸门</text>
+<text x="1017" y="762" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">联锁项全满足 · 预检全通过 · 现场安全总闸已开</text>
+<text x="40" y="826" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">第一档与第二档的差别是「会不会落盘」，第二档与第三档的差别是「会不会动被测对象」。</text>
+<text x="40" y="850" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">急停独立于三档与闸门：任何时刻可点，点后先发停机指令，再记录当时的全部状态快照。</text>
+</svg>

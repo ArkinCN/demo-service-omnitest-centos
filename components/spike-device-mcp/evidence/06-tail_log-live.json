@@ -1,0 +1,22 @@
+{
+    "mode": "live",
+    "ts": 1789831809.3931544,
+    "device_id": "bench",
+    "status": "ok",
+    "logfile": "C:\\Users\\Administrator\\AppData\\Local\\MotorDebug\\logs\\motordebug.2026-09-11.log",
+    "line_count": 11,
+    "lines": [
+        "[2026-09-11 11:02:47.780] [INFO] [motordebug_lib] ========== MotorDebug 启动 ==========",
+        "[2026-09-11 11:02:47.780] [INFO] [motordebug_lib] 日志文件: \"C:\\\\Users\\\\Administrator\\\\AppData\\\\Local\\\\MotorDebug\\\\logs\\\\motordebug.2026-09-11.log\"",
+        "[2026-09-11 11:02:50.472] [INFO] [motordebug_lib::backend::launcher] [后端] 拉起随包后端: \"\\\\\\\\?\\\\C:\\\\Users\\\\Administrator\\\\AppData\\\\Local\\\\MotorDebug\\\\resources\\\\backend\\\\motordebug-api.exe\"",
+        "[2026-09-11 11:03:15.022] [INFO] [motordebug_lib::backend::launcher] [后端] 就绪: http://127.0.0.1:8011/health",
+        "[2026-09-11 11:03:15.035] [INFO] [motordebug_lib] [conpty] 已注册随包 ConPTY 目录: \"\\\\\\\\?\\\\C:\\\\Users\\\\Administrator\\\\AppData\\\\Local\\\\MotorDebug\\\\resources\\\\conpty\"",
+        "[2026-09-11 11:03:16.093] [WARN] [motordebug_lib] [初始化] 已复制 dll-bridge.exe 到 IDE 目录",
+        "[2026-09-11 11:03:16.422] [WARN] [motordebug_lib] [初始化] ASICDebugger 资源已解压，版本: 260529",
+        "[2026-09-11 11:03:16.426] [INFO] [debug-agent] [VibeTesting-MCP] Bridge exe 已更新到版本 1.0.0 (C:\\Users\\Administrator\\AppData\\Roaming\\com.motordebug.app\\vibe-testing-bridge\\vibe-testing-bridge.exe)",
+        "[2026-09-11 11:03:16.426] [INFO] [debug-agent] [VibeTesting-MCP] WS listener bound on port 60750",
+        "[2026-09-11 11:03:16.427] [INFO] [debug-agent] [VibeTesting-MCP] WS server started on port 60750",
+        "[2026-09-11 11:03:16.427] [INFO] [debug-agent] [MCP] WebSocket server started on port 60750"
+    ],
+    "stderr_tail": null
+}

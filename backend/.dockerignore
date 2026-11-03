@@ -1,0 +1,43 @@
+# OmniTest 后端 .dockerignore
+# 目的：缩小构建上下文、避免把本机环境与凭据打进镜像。
+
+# 虚拟环境与缓存
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# 环境与凭据（.env 由 compose 的 env_file 注入，绝不进镜像）
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# 运行期数据（由 compose 卷挂载，镜像内不需要）
+.deploy/
+uploads/
+logs/
+*.log
+
+# 版本控制与编辑器
+.git/
+.gitignore
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# 一次性排障残留（项目根/后端下的临时探针文件）
+_dump*.txt
+_probe_out*.txt
+_pip_before.txt
+_run.json
+_uv.log
+backend_start.log
+uvicorn_*.log
+kb-pipeline/

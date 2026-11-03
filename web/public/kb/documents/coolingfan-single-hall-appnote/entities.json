@@ -1,0 +1,283 @@
+{
+  "doc_id": "coolingfan-single-hall-appnote",
+  "summary": {
+    "parameters": 5,
+    "parameters_matching_customer_h": 0,
+    "registers": 0,
+    "thresholds": 3,
+    "units": 3,
+    "procedure_steps": 21
+  },
+  "parameters": [
+    {
+      "name": "FOC_ESQU",
+      "count": 3,
+      "in_customer_h": false,
+      "first_chunk": "coolingfan-single-hall-appnote#c0036",
+      "first_page": 25,
+      "context": "通过检测估算器计算出来的 FOC_ESQU （估算器计算的反电动势的平方）判断，正常情况下，电机转速 越高， FOC_ESQU 会越大。在电机发生堵转时，电机失步"
+    },
+    {
+      "name": "DRV_CMR",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "coolingfan-single-hall-appnote#c0013",
+      "first_page": 14,
+      "context": "片输出低电平驱动， 为了兼容 48V 电压通过硬件电路特殊处理后 PMOS 为芯片输出高电平驱动，为重要参数，影响所有 DRV_CMR 与 DRV_OUT 配置，如果是常规电路选择 PMOSLOW ，如果 48V 选择 PMOSHIGH 。"
+    },
+    {
+      "name": "DRV_OUT",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "coolingfan-single-hall-appnote#c0013",
+      "first_page": 14,
+      "context": "为了兼容 48V 电压通过硬件电路特殊处理后 PMOS 为芯片输出高电平驱动，为重要参数，影响所有 DRV_CMR 与 DRV_OUT 配置，如果是常规电路选择 PMOSLOW ，如果 48V 选择 PMOSHIGH 。"
+    },
+    {
+      "name": "MOTOR_SPEED_SMOMIN_RPM1",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "coolingfan-single-hall-appnote#c0040",
+      "first_page": 27,
+      "context": "宽和电流环 PI 。. 高速顺风母线电压过冲较大 注意事项 :, 顺逆风.解决方法 = 1. 调节顺风滑模最小观测系数 MOTOR_SPEED_SMOMIN_RPM1 ； 2. 调节顺风电流环 PI 。 修改参数后，基本都会影响启动和运行性能，解决好问题后要重新测试确认。"
+    },
+    {
+      "name": "MOTOR_SPEED_SMOMIN_RPM2",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "coolingfan-single-hall-appnote#c0040",
+      "first_page": 27,
+      "context": "jectOffsetAngle. 高速逆风负电流无法使电机静止, 顺逆风.解决方法 = 1. 调节逆风滑模最小观测系数 MOTOR_SPEED_SMOMIN_RPM2 ； 2. 调节电阻 RS_Wind ； 3. 调节负电流锁相环带宽和电流环 PI 。. 高速顺风母线电压过冲较大 注意"
+    }
+  ],
+  "registers": [],
+  "thresholds": [
+    {
+      "value": 1.0,
+      "unit": "%",
+      "chunk_id": "coolingfan-single-hall-appnote#c0009",
+      "page": 12,
+      "context": "2. R13 、 R15 需要用 1% 精度电阻； 3. 最大采样电压 = (R13 + R15)/(R15)*VREF ； 4. 最大采样电压一般选择为 2"
+    },
+    {
+      "value": 12.0,
+      "unit": "V",
+      "chunk_id": "coolingfan-single-hall-appnote#c0020",
+      "page": 16,
+      "context": "1. FU6861 不需要配置 PMOSTYPE ；对于 FU6832 ， 12V 供电 PMOS 正常逻辑驱动，则 PMOSTYPE 选择 PMOSLOW ，硬件原理图如下："
+    },
+    {
+      "value": 48.0,
+      "unit": "V",
+      "chunk_id": "coolingfan-single-hall-appnote#c0021",
+      "page": 16,
+      "context": "如果 FU6832 是 48V 供电 , 由于硬件特殊处理 PMOS 的驱动逻辑取反， PMOSTYPE 选择 PMOSHIGH ， 硬件原理图如下："
+    }
+  ],
+  "units": [
+    {
+      "unit": "V",
+      "count": 7
+    },
+    {
+      "unit": "%",
+      "count": 2
+    },
+    {
+      "unit": "RPM",
+      "count": 1
+    }
+  ],
+  "procedure_steps": [
+    {
+      "order": 2,
+      "text": "最大采样电压一般选择为 2 倍的最大应用电压， OVP 此处的电压需要低于 0.8*VREF 。",
+      "chunk_id": "coolingfan-single-hall-appnote#c0005",
+      "page": 7,
+      "heading_path": [
+        "注意事项 :"
+      ]
+    },
+    {
+      "order": 1,
+      "text": "C33 、 C18 、 C42 参数不可调整，精度要求 10% ；",
+      "chunk_id": "coolingfan-single-hall-appnote#c0008",
+      "page": 11,
+      "heading_path": [
+        "注意事项 :"
+      ]
+    },
+    {
+      "order": 2,
+      "text": "采用单电阻采样的方式，使用' AMP0 '的运放电路有效。放大倍数 =  R34/R33  =  R56/R55  = 20K/2K = 10 ，放大倍数可以根据需要修改，需要保证 R34 、 R56 电阻值相等、 R33 、 R55 电阻值相 等；",
+      "chunk_id": "coolingfan-single-hall-appnote#c0008",
+      "page": 11,
+      "heading_path": [
+        "注意事项 :"
+      ]
+    },
+    {
+      "order": 4,
+      "text": "最大采样电压一般选择为 2 倍的最大应用电压， OVP 此处的电压需要低于 0.8*VREF 。",
+      "chunk_id": "coolingfan-single-hall-appnote#c0009",
+      "page": 12,
+      "heading_path": [
+        "Application Note"
+      ]
+    },
+    {
+      "order": 1,
+      "text": "电机静止--预定位-- HALL 启动--无感运行；",
+      "chunk_id": "coolingfan-single-hall-appnote#c0011",
+      "page": 13,
+      "heading_path": [
+        "3.1 电机启动流程图如下"
+      ]
+    },
+    {
+      "order": 2,
+      "text": "电机转速低于一定阈值--刹车--预定位-- HALL 启动--无感运行；",
+      "chunk_id": "coolingfan-single-hall-appnote#c0011",
+      "page": 13,
+      "heading_path": [
+        "3.1 电机启动流程图如下"
+      ]
+    },
+    {
+      "order": 3,
+      "text": "电机顺风--运行；",
+      "chunk_id": "coolingfan-single-hall-appnote#c0011",
+      "page": 13,
+      "heading_path": [
+        "3.1 电机启动流程图如下"
+      ]
+    },
+    {
+      "order": 4,
+      "text": "电机中低速逆风--刹车--预定位-- HALL 启动--无感运行；",
+      "chunk_id": "coolingfan-single-hall-appnote#c0011",
+      "page": 13,
+      "heading_path": [
+        "3.1 电机启动流程图如下"
+      ]
+    },
+    {
+      "order": 5,
+      "text": "电机高速逆风--刹车--负电流--强拖--无感运行。",
+      "chunk_id": "coolingfan-single-hall-appnote#c0011",
+      "page": 13,
+      "heading_path": [
+        "3.1 电机启动流程图如下"
+      ]
+    },
+    {
+      "order": 3,
+      "text": "mcStart: 启动状态，该状态主要用于电机的启动代码配置，对相关寄存器代码与变量进行配置之后 则转入下一个状态 mcRun 。电机启动过程由 ME 内核实现；",
+      "chunk_id": "coolingfan-single-hall-appnote#c0012",
+      "page": 13,
+      "heading_path": [
+        "说明 :"
+      ]
+    },
+    {
+      "order": 4,
+      "text": "mcRun: 运行状态，该状态包含 : 电机启动阶段 , 电机运行阶段，电机速度的控制在该状态进行。",
+      "chunk_id": "coolingfan-single-hall-appnote#c0012",
+      "page": 13,
+      "heading_path": [
+        "说明 :"
+      ]
+    },
+    {
+      "order": 1,
+      "text": "FU6861 不需要配置 PMOSTYPE ；对于 FU6832 ， 12V 供电 PMOS 正常逻辑驱动，则 PMOSTYPE 选择 PMOSLOW ，硬件原理图如下：",
+      "chunk_id": "coolingfan-single-hall-appnote#c0020",
+      "page": 16,
+      "heading_path": [
+        "3.3 顺逆风方向判断调试步骤"
+      ]
+    },
+    {
+      "order": 2,
+      "text": "SingleHallEn 使能，即选择单 HALL 模式；",
+      "chunk_id": "coolingfan-single-hall-appnote#c0022",
+      "page": 17,
+      "heading_path": [
+        "Application Note"
+      ]
+    },
+    {
+      "order": 3,
+      "text": "TailWind_Mode 选择 HALLFOCMethod ，即通过开窗注入的方式进行顺逆风方向检测；",
+      "chunk_id": "coolingfan-single-hall-appnote#c0022",
+      "page": 17,
+      "heading_path": [
+        "Application Note"
+      ]
+    },
+    {
+      "order": 4,
+      "text": "InjectType 可以先直接选择 Uinject ，即 U 相注入，后面根据实际效果再调整；",
+      "chunk_id": "coolingfan-single-hall-appnote#c0022",
+      "page": 17,
+      "heading_path": [
+        "Application Note"
+      ]
+    },
+    {
+      "order": 5,
+      "text": "TriggerType 先选择 DoubleTrigger ，后面根据实际效果再调整；",
+      "chunk_id": "coolingfan-single-hall-appnote#c0022",
+      "page": 17,
+      "heading_path": [
+        "Application Note"
+      ]
+    },
+    {
+      "order": 7,
+      "text": "其它参数暂时按程序默认设置不变；",
+      "chunk_id": "coolingfan-single-hall-appnote#c0022",
+      "page": 17,
+      "heading_path": [
+        "Application Note"
+      ]
+    },
+    {
+      "order": 8,
+      "text": "用其它电机或设备将调试电机吹到一定转速，如果选择 U 相注入则需要测量 U 相电流， U 相电压及其 HALL 信号。并采用一个 IO 口进行信号翻转，用于判断相电流 ADC 采样开始和完成，目前采用的是 GP00 作为 IO 翻转，根据实际电路选择任意一个 IO 即可，如下图：",
+      "chunk_id": "coolingfan-single-hall-appnote#c0022",
+      "page": 17,
+      "heading_path": [
+        "Application Note"
+      ]
+    },
+    {
+      "order": 9,
+      "text": "配置正常会看到如下的波形：",
+      "chunk_id": "coolingfan-single-hall-appnote#c0022",
+      "page": 17,
+      "heading_path": [
+        "Application Note"
+      ]
+    },
+    {
+      "order": 10,
+      "text": "HallFocInjectPeriod 的调整，如果相电流太小可以将 HallFocInjectPeriod 改大，但是过大会产生电磁噪音， 建议取 1-5 ，即在一个 HALL 跳变沿注入 1-5 个载波周期后再采样；修改该参数的效果如下，第一张图片 是 HallFocInjectPeriod 设置为 2 ，可以看出相电流有两段阶梯变化；第二张图是 HallFocInjectPeriod 设置 为 5 ，可以看出相电流有五段阶梯变化。",
+      "chunk_id": "coolingfan-single-hall-appnote#c0024",
+      "page": 18,
+      "heading_path": [
+        "Application Note"
+      ]
+    },
+    {
+      "order": 12,
+      "text": "HallFocInjectOffsetAngle 的调整，由于 HALL 安装位置不同，存在有些安装位置顺逆风下相电流没有明显 差异，导致无法判断顺逆风方向，可以通过调整 HallFocInjectOffsetAngle 在 HALL 跳变沿偏置一定角度 后开始开窗注入，调整的范围为 0-180 度。修改该参数的效果如下，第一张图是选择偏置 30 度后开窗注 入，第二张图是选择 90 度后开窗注入。",
+      "chunk_id": "coolingfan-single-hall-appnote#c0025",
+      "page": 19,
+      "heading_path": [
+        "Application Note"
+      ]
+    }
+  ],
+  "method": "regex+heuristic, no LLM; 参数名=全大写下划线标识符, 寄存器=标识符±40字符内出现『寄存器/register』, 阈值=数值+单位且±40字符内含阈值语境词, 规程步骤=编号行且含操作动词"
+}

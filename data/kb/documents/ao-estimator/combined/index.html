@@ -1,0 +1,131 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>AO 估算器（合成图文稿）</title><style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 20px 22px 40px; background: #fff; color: #1f2a24;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 13px; line-height: 1.75;
+}
+h1 { font-size: 19px; margin: 4px 0 14px; }
+h2 { font-size: 16px; margin: 22px 0 10px; padding-bottom: 4px; border-bottom: 1px solid #e3e8e4; }
+h3 { font-size: 14px; margin: 18px 0 8px; }
+h4, h5, h6 { font-size: 13px; margin: 14px 0 6px; color: #2e5e45; }
+p { margin: 8px 0; }
+ul, ol { margin: 8px 0; padding-left: 22px; }
+li { margin: 3px 0; }
+code { background: #f4f7f4; border: 1px solid #e3e8e4; border-radius: 3px; padding: 0 4px; font-size: 12px; }
+pre { background: #f7f9f7; border: 1px solid #e3e8e4; border-radius: 4px; padding: 10px; overflow-x: auto; }
+pre code { background: none; border: none; padding: 0; }
+table { border-collapse: collapse; margin: 10px 0; width: 100%; font-size: 12px; }
+th, td { border: 1px solid #e3e8e4; padding: 5px 8px; text-align: left; vertical-align: top; }
+th { background: #f0f5f1; font-weight: 600; }
+hr { border: none; border-top: 1px solid #e3e8e4; margin: 16px 0; }
+.kb-fig { margin: 14px 0; text-align: center; }
+.kb-fig img { max-width: 100%; height: auto; border: 1px solid #e3e8e4; border-radius: 4px; }
+/* 代码块：整体成块，保留原始换行与缩进 */
+.kb-code {
+  background: #f7f9f7; border: 1px solid #e3e8e4; border-left: 3px solid #9bb8a8;
+  border-radius: 4px; padding: 10px 12px; margin: 12px 0; overflow-x: auto;
+  white-space: pre; font-size: 12px; line-height: 1.65;
+}
+.kb-code code { background: none; border: none; padding: 0; font-size: 12px; }
+/* 公式块：居中、衬线、留白（干净文本样式，不引排版引擎） */
+.kb-formula {
+  margin: 12px auto; padding: 8px 12px; max-width: 100%; text-align: center;
+  font-family: "Cambria Math", "Times New Roman", "Georgia", serif;
+  font-size: 14px; line-height: 2; color: #22302a;
+  background: #fbfcfb; border-radius: 4px; white-space: pre-wrap; word-break: break-word;
+}
+</style></head><body><h1>AO 估算器</h1><div style="margin:0 0 14px;padding:8px 10px;border:1px solid #e3e8e4;border-radius:4px;background:#f7faf8;color:#5b6b62;font-size:12px;">系统合成图文稿（由抽取产物重建，非客户原件 PDF）。</div><h3>AO 估算器</h3>
+
+<h3>Stella 孙彤</h3>
+
+<p>本次探讨基本以SPMSM为例进行A0估算器的探讨 一、无模型电流控制 我们对一阶系统做如下表示：</p>
+
+
+
+<p>其中u和y分别代表了系统的输入和输出，α为使得系统输入输出为同一数量级的比例因子；F中包 含了系统的已知部分，也包含了未知的部分，也就是需要进行估算的整体。 在α-β坐标系下，电机的状态方程有：</p>
+
+
+
+<p>将电机状态方程代入(1)中可以得到</p>
+
+
+
+
+
+<p>其中Fα和Fβ代表系统的已知部分和未知部分，在较短得采样间隔内可以认为是一个常数。对比公 式(1)和公式(2)可以知道，Fα和Fβ中包含反电动势、电阻压降、多种不确定性与扰动(此处暂时 不考虑）。</p>
+
+<p>根据电机方程可以得到：</p>
+
+
+
+<p>用F参数表示则有</p>
+
+
+
+<p>(1-5)</p>
+
+<p>从计算过程中可以看出F中包含了Rs上的分量，我们最终的目标时要估算α和β上的反电动势的 值，于是可以把电阻上的电压分量放在系统输入上，则可以得到</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/ao-estimator/figure?name=p001_x6.png" alt="插图 1" loading="lazy"></figure>
+
+<p>此时F的表达式为：</p>
+
+
+
+<p>(1-6)</p>
+
+<h3>二、对参数F的进行估计</h3>
+
+<p>公式(1)经过S变换，并且使用f来表示F的估计值可以得到：</p>
+
+
+
+<p>(2-1)</p>
+
+<p>y0是系统的初始状态，为了消除y0的影响，可以对左右两边同时对s进行微分，可以得到</p>
+
+
+
+
+
+<p>为了避免测量噪声微分带来的噪声放大的效果，将(2-2)等式两边同时乘以s-2 可以得到：</p>
+
+
+
+
+
+<p>d/ds等效于-t，假设采样间隔为[0，Tf]，则可以将式(2-3)进行逆变换，可以得到：</p>
+
+
+
+<p>基于代数参数便是方法的F估计值在时域下的表达式为：</p>
+
+<p>Ê = 3! d1J F((TF − 2δ)y(δ) + αδ(TF − δ)u(δ)) dδ J0 (2-5) Stella_孙彤 使用复化梯形公式求解(2-5)中定积分的数值解，则F的估计值实时表达式为：</p>
+
+
+
+<p>(2-6)</p>
+
+<p>其中，m表示第k个控制周期的采样点：TF=nFT，nF表示时间窗口长度，T表示控制周期；在每一个 控制周期采样获得的系统输入与输出分别表示为u[0]……u[nF]与y[0]……y[nF]；</p>
+
+<p>(2-4)</p>
+
+<p>(2-4)</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/ao-estimator/figure?name=p001_x7.png" alt="插图 2" loading="lazy"></figure>
+
+<h3>三、与程序对应</h3>
+
+<pre><code>
+<pre class="kb-code"><code>#define OBS_K1T
+#define OBS_K2T define OBS_K3T</code></pre>
+</code></pre>
+
+<pre><code>
+<div class="kb-formula">( B  /    ( _Q11 (RS*HW_BOARD_CURR_BASE/HW_BOARD_VOLTAGE_BASE) _Q8(2.5)</div>
+</code></pre>
+
+<p>其中0BS_K1T为上面公式中的α参数；OBS_K2T为Rs相关的参数；即用于计算Rs上的分量；OBS_K3T 为补偿的周期数，现在芯片中是以前5个周期的数据进行角度估算，可以近似地认为存在2.5个周期 Stella孙彤 地角度滞后，因此补偿2.5个周期。</p>
+</body></html>

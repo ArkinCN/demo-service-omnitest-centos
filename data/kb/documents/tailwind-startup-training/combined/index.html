@@ -1,0 +1,139 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>有感无感顺逆风启动培训（合成图文稿）</title><style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 20px 22px 40px; background: #fff; color: #1f2a24;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 13px; line-height: 1.75;
+}
+h1 { font-size: 19px; margin: 4px 0 14px; }
+h2 { font-size: 16px; margin: 22px 0 10px; padding-bottom: 4px; border-bottom: 1px solid #e3e8e4; }
+h3 { font-size: 14px; margin: 18px 0 8px; }
+h4, h5, h6 { font-size: 13px; margin: 14px 0 6px; color: #2e5e45; }
+p { margin: 8px 0; }
+ul, ol { margin: 8px 0; padding-left: 22px; }
+li { margin: 3px 0; }
+code { background: #f4f7f4; border: 1px solid #e3e8e4; border-radius: 3px; padding: 0 4px; font-size: 12px; }
+pre { background: #f7f9f7; border: 1px solid #e3e8e4; border-radius: 4px; padding: 10px; overflow-x: auto; }
+pre code { background: none; border: none; padding: 0; }
+table { border-collapse: collapse; margin: 10px 0; width: 100%; font-size: 12px; }
+th, td { border: 1px solid #e3e8e4; padding: 5px 8px; text-align: left; vertical-align: top; }
+th { background: #f0f5f1; font-weight: 600; }
+hr { border: none; border-top: 1px solid #e3e8e4; margin: 16px 0; }
+.kb-fig { margin: 14px 0; text-align: center; }
+.kb-fig img { max-width: 100%; height: auto; border: 1px solid #e3e8e4; border-radius: 4px; }
+/* 代码块：整体成块，保留原始换行与缩进 */
+.kb-code {
+  background: #f7f9f7; border: 1px solid #e3e8e4; border-left: 3px solid #9bb8a8;
+  border-radius: 4px; padding: 10px 12px; margin: 12px 0; overflow-x: auto;
+  white-space: pre; font-size: 12px; line-height: 1.65;
+}
+.kb-code code { background: none; border: none; padding: 0; font-size: 12px; }
+/* 公式块：居中、衬线、留白（干净文本样式，不引排版引擎） */
+.kb-formula {
+  margin: 12px auto; padding: 8px 12px; max-width: 100%; text-align: center;
+  font-family: "Cambria Math", "Times New Roman", "Georgia", serif;
+  font-size: 14px; line-height: 2; color: #22302a;
+  background: #fbfcfb; border-radius: 4px; white-space: pre-wrap; word-break: break-word;
+}
+</style></head><body><h1>有感无感顺逆风启动培训</h1><div style="margin:0 0 14px;padding:8px 10px;border:1px solid #e3e8e4;border-radius:4px;background:#f7faf8;color:#5b6b62;font-size:12px;">系统合成图文稿（由抽取产物重建，非客户原件 PDF）。</div><h3>有感、无感顺逆风启动培训</h3>
+
+<figure class="kb-fig"><img src="/api/kb/documents/tailwind-startup-training/figure?name=p001_x5.png" alt="插图 1" loading="lazy"></figure>
+
+<h3>有感顺风</h3>
+
+<ul>
+<li>·根据hall得到角度信息，另外根据hall得到的速度信息来作顺风启 动 季哥之前修改此类FOC EKP=0;FOC_EKI=0</li>
+<li>顺风启动根据不同速度需赋值不同的初始UQ， UD由IDREF等于0, 来快速收敛，顺风启动瞬间需注意PI适当大点，以求更快收敛</li>
+<li>·角度部分，注意观察，hall角度平滑切逼近hall跳变沿实际角度</li>
+</ul>
+
+<h3>有感逆风</h3>
+
+<ul>
+<li>·由于hall角度能提供准确角度信息，直接正电流来拉就行</li>
+<li>·逆风时由于hall边沿的角度代表不同，需注意hall目标角度、hall 当前角度的区别</li>
+<li>·Hall的回滞特性，需注意正反转的补偿角度会有不同</li>
+</ul>
+
+<figure class="kb-fig"><img src="/api/kb/documents/tailwind-startup-training/figure?name=p001_x6.png" alt="插图 2" loading="lazy"></figure>
+
+<h3>角度补偿影响因素：</h3>
+
+<p>顺时针和逆时针假设同时到扇区5：顺时针到扇区5时电角度是 60°，逆时针到扇区5时电角度时0° ，所以正反转补偿的角度不</p>
+
+<p>同</p>
+
+<p>Hall的滞回特性，导致切换角度的时候，比如逆时针刚到扇区5 时电角度时0°，一进入到扇区内，可能会变成5°，或者-5°，这 个也是要考虑在角度补偿之内的因素。</p>
+
+<h3>有感顺逆风程序</h3>
+
+<ul>
+<li>·Hall判断方向，</li>
+<li>判断完根据hall跳变间隔时间得到上一时刻的平均速度</li>
+<li>平均速度+补偿速度得到当前的速度，角度由速度积分得到(超 过当前扇区的限制角度会强制矫正，其它时刻不去矫正)</li>
+<li>补偿速度由上一扇区边沿角度差来决定(有两种方式)</li>
+</ul>
+
+<figure class="kb-fig"><img src="/api/kb/documents/tailwind-startup-training/figure?name=p001_x7.png" alt="插图 3" loading="lazy"></figure>
+
+<h3>Hall边沿校准和补偿</h3>
+
+<figure class="kb-fig"><img src="/api/kb/documents/tailwind-startup-training/figure?name=p002_x10.png" alt="插图 4" loading="lazy"></figure>
+
+<figure class="kb-fig"><img src="/api/kb/documents/tailwind-startup-training/figure?name=p002_x11.png" alt="插图 5" loading="lazy"></figure>
+
+<p>S A S</p>
+
+<h3>补偿方式</h3>
+
+<figure class="kb-fig"><img src="/api/kb/documents/tailwind-startup-training/figure?name=p003_x14.png" alt="插图 6" loading="lazy"></figure>
+
+<h3>无感顺风启动</h3>
+
+<ul>
+<li>·顺风启动有BEMF、FOC等方式得到当前的速度信息，FOC顺风启 动由于开的占空比很小，容易导致负电流，从而冲母线电压。 BEMF方式可直接得到当前角度信息，不会冲电压，使用得更多。</li>
+<li>·顺风启动需要注意写入顺风初始角度、初始速度。SPD_BW需要 在切入瞬间给大，要不然给的初始速度由于滤波作用，导致不起 作用。</li>
+<li>·另外带宽ATO_BW也需要给大，否则，角度收敛比较慢也不行</li>
+<li>·根据转速给不同的初始UQ，因为要克服反电动势，以免电压反</li>
+<li>电流PI给大，快速闭环</li>
+</ul>
+
+<h3>无感逆风启动</h3>
+
+
+
+<figure class="kb-fig"><img src="/api/kb/documents/tailwind-startup-training/figure?name=p003_x15.png" alt="插图 7" loading="lazy"></figure>
+
+<p>当电机反转时，反电动势信号会乘以转速的负号，导致估 算出的角度与实际的角度相差180度（实际测试中，AO差 180度，SMO差120度左右)。因此，反转时切入角度闭 环并给正的iq指令，电机会持续反转。</p>
+
+<p>即使电机反转，估算器得到的ωe仍然是正值，导致估算角度和 实际角度会有差异。</p>
+
+<h3>无感估算角度差测试图</h3>
+
+<figure class="kb-fig"><img src="/api/kb/documents/tailwind-startup-training/figure?name=p003_x16.png" alt="插图 8" loading="lazy"></figure>
+
+<figure class="kb-fig"><img src="/api/kb/documents/tailwind-startup-training/figure?name=p004_x16.png" alt="插图 9" loading="lazy"></figure>
+
+<p>实测AO估算器角度差异：差异在150°左右</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/tailwind-startup-training/figure?name=p004_x19.png" alt="插图 10" loading="lazy"></figure>
+
+<h3>无感逆风图</h3>
+
+<figure class="kb-fig"><img src="/api/kb/documents/tailwind-startup-training/figure?name=p004_x20.png" alt="插图 11" loading="lazy"></figure>
+
+<h3>无感逆风启动</h3>
+
+<p>知乎 @正点原子</p>
+
+<p>因为角度估算误差，导致实际计算的仍然是正确角度的正电流</p>
+
+<ul>
+<li>·无感逆风启动由于角度相差太多无法用正电流+角度补偿去拉， 所以通常会采用负电流的方式来减速。但估算角度的差异会导致 需要再另外补偿一下角度。</li>
+<li>·但对于散热风扇等高转速应用，逆风速度太大如果直接负电流刹 车会导致冲电压，通常会采用先下桥臂刹车，速度降下来然后再</li>
+</ul>
+
+<p>中</p>
+
+<p>负电流减速。 这样冲电压会小些。</p></body></html>

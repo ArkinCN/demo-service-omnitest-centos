@@ -1,0 +1,579 @@
+{
+  "taxonomy": {
+    "l1": "motor",
+    "l2": "cooling-fan",
+    "l3": "fortior-fu6832"
+  },
+  "process_tags_vocab": [
+    "初始化配置",
+    "测试需求",
+    "启动测试",
+    "调优",
+    "报告"
+  ],
+  "summary": {
+    "documents": 13,
+    "converted_ok": 13,
+    "failed": 0,
+    "total_chunks": 374,
+    "total_figures": 174,
+    "by_doc_type": {
+      "原理与寄存器说明": 1,
+      "原理文档": 5,
+      "培训材料": 1,
+      "应用手册": 1,
+      "源码参数配置": 1,
+      "考核题库": 1,
+      "芯片数据手册": 1,
+      "调试手册": 1,
+      "问题汇总": 1
+    },
+    "by_process_tag": {
+      "初始化配置": 5,
+      "测试需求": 3,
+      "启动测试": 6,
+      "调优": 9,
+      "报告": 1
+    }
+  },
+  "documents": [
+    {
+      "doc_id": "foc-debug-manual",
+      "title": "FU-AM-FOC 方案调试手册",
+      "doc_type": "调试手册",
+      "knowledge_class": "文档性质",
+      "taxonomy": {
+        "l1": "motor",
+        "l2": "cooling-fan",
+        "l3": "fortior-fu6832"
+      },
+      "process_tags": [
+        "初始化配置",
+        "启动测试",
+        "调优"
+      ],
+      "format": "pdf",
+      "pages": 55,
+      "page_limit": null,
+      "tables": 9,
+      "chunks": 126,
+      "figures": 20,
+      "entities": {
+        "parameters": 23,
+        "parameters_matching_customer_h": 9,
+        "registers": 2,
+        "thresholds": 16,
+        "units": 11,
+        "procedure_steps": 13
+      },
+      "convert_status": "ok",
+      "converter": "docling",
+      "sha256": "d46cf11807a4c0b6514c5c285379283bc0f2c0c72255e77f2afbcf9a479d8fc0",
+      "bytes": 5792231,
+      "source_path": "[源] manuals/FU-AM-FOC方案调试手册-.pdf",
+      "note": null,
+      "artifacts": [
+        "source.json",
+        "content.md",
+        "chunks.jsonl",
+        "entities.json",
+        "figures/"
+      ]
+    },
+    {
+      "doc_id": "coolingfan-single-hall-appnote",
+      "title": "散热风扇单霍尔方案应用手册",
+      "doc_type": "应用手册",
+      "knowledge_class": "文档性质",
+      "taxonomy": {
+        "l1": "motor",
+        "l2": "cooling-fan",
+        "l3": "fortior-fu6832"
+      },
+      "process_tags": [
+        "初始化配置",
+        "测试需求",
+        "启动测试"
+      ],
+      "format": "pdf",
+      "pages": 29,
+      "page_limit": null,
+      "tables": 5,
+      "chunks": 44,
+      "figures": 20,
+      "entities": {
+        "parameters": 5,
+        "parameters_matching_customer_h": 0,
+        "registers": 0,
+        "thresholds": 3,
+        "units": 3,
+        "procedure_steps": 21
+      },
+      "convert_status": "ok",
+      "converter": "docling",
+      "sha256": "00417909217d92d4adeab4ec35f5e2a23970b7bdc77b12fd772ae0d0736fb173",
+      "bytes": 2949191,
+      "source_path": "[源] manuals/散热风扇单霍尔方案应用手册.pdf",
+      "note": null,
+      "artifacts": [
+        "source.json",
+        "content.md",
+        "chunks.jsonl",
+        "entities.json",
+        "figures/"
+      ]
+    },
+    {
+      "doc_id": "smo-pll-estimator",
+      "title": "SMO 和 PLL 估算器",
+      "doc_type": "原理文档",
+      "knowledge_class": "文档性质",
+      "taxonomy": {
+        "l1": "motor",
+        "l2": "cooling-fan",
+        "l3": "fortior-fu6832"
+      },
+      "process_tags": [
+        "调优"
+      ],
+      "format": "pdf",
+      "pages": 9,
+      "page_limit": null,
+      "tables": 0,
+      "chunks": 16,
+      "figures": 20,
+      "entities": {
+        "parameters": 7,
+        "parameters_matching_customer_h": 2,
+        "registers": 0,
+        "thresholds": 0,
+        "units": 0,
+        "procedure_steps": 0
+      },
+      "convert_status": "ok",
+      "converter": "docling",
+      "sha256": "4cbaa2503c4c4b85c9f25196ad4116729eb01ce4353fc8d7ad473f33643a8f59",
+      "bytes": 4993898,
+      "source_path": "[源] manuals/SMO和PLL估算器.pdf",
+      "note": null,
+      "artifacts": [
+        "source.json",
+        "content.md",
+        "chunks.jsonl",
+        "entities.json",
+        "figures/"
+      ]
+    },
+    {
+      "doc_id": "ao-estimator",
+      "title": "AO 估算器",
+      "doc_type": "原理文档",
+      "knowledge_class": "文档性质",
+      "taxonomy": {
+        "l1": "motor",
+        "l2": "cooling-fan",
+        "l3": "fortior-fu6832"
+      },
+      "process_tags": [
+        "调优"
+      ],
+      "format": "pdf",
+      "pages": 3,
+      "page_limit": null,
+      "tables": 0,
+      "chunks": 12,
+      "figures": 9,
+      "entities": {
+        "parameters": 4,
+        "parameters_matching_customer_h": 0,
+        "registers": 0,
+        "thresholds": 0,
+        "units": 0,
+        "procedure_steps": 0
+      },
+      "convert_status": "ok",
+      "converter": "docling",
+      "sha256": "640f766be2b3b021c22a2507455a84296937d2d22a1d8916193844317bcbdef8",
+      "bytes": 1082113,
+      "source_path": "[源] manuals/AO估算器.pdf",
+      "note": null,
+      "artifacts": [
+        "source.json",
+        "content.md",
+        "chunks.jsonl",
+        "entities.json",
+        "figures/"
+      ]
+    },
+    {
+      "doc_id": "foc-exec-logic",
+      "title": "FOC 执行逻辑",
+      "doc_type": "原理文档",
+      "knowledge_class": "文档性质",
+      "taxonomy": {
+        "l1": "motor",
+        "l2": "cooling-fan",
+        "l3": "fortior-fu6832"
+      },
+      "process_tags": [
+        "启动测试",
+        "调优"
+      ],
+      "format": "pdf",
+      "pages": 14,
+      "page_limit": null,
+      "tables": 3,
+      "chunks": 28,
+      "figures": 20,
+      "entities": {
+        "parameters": 6,
+        "parameters_matching_customer_h": 0,
+        "registers": 0,
+        "thresholds": 0,
+        "units": 0,
+        "procedure_steps": 0
+      },
+      "convert_status": "ok",
+      "converter": "docling",
+      "sha256": "dc6eb72a39b00822004a84ba33cf91cbaebdac5ea747f6eb1d00b140db723cd1",
+      "bytes": 1681175,
+      "source_path": "[源] manuals/FOC执行逻辑.pdf",
+      "note": null,
+      "artifacts": [
+        "source.json",
+        "content.md",
+        "chunks.jsonl",
+        "entities.json",
+        "figures/"
+      ]
+    },
+    {
+      "doc_id": "omega-startup-logic",
+      "title": "OMEGA 启动执行逻辑",
+      "doc_type": "原理文档",
+      "knowledge_class": "文档性质",
+      "taxonomy": {
+        "l1": "motor",
+        "l2": "cooling-fan",
+        "l3": "fortior-fu6832"
+      },
+      "process_tags": [
+        "启动测试",
+        "调优"
+      ],
+      "format": "pdf",
+      "pages": 3,
+      "page_limit": null,
+      "tables": 0,
+      "chunks": 4,
+      "figures": 6,
+      "entities": {
+        "parameters": 1,
+        "parameters_matching_customer_h": 0,
+        "registers": 0,
+        "thresholds": 1,
+        "units": 1,
+        "procedure_steps": 0
+      },
+      "convert_status": "ok",
+      "converter": "docling",
+      "sha256": "3883c3d95108eacea3ca6ff6aef053a78d665e9eef135a280a76d7aa7c921c43",
+      "bytes": 268828,
+      "source_path": "[源] manuals/OMEGA启动执行逻辑.pdf",
+      "note": null,
+      "artifacts": [
+        "source.json",
+        "content.md",
+        "chunks.jsonl",
+        "entities.json",
+        "figures/"
+      ]
+    },
+    {
+      "doc_id": "tailwind-startup-training",
+      "title": "有感无感顺逆风启动培训",
+      "doc_type": "培训材料",
+      "knowledge_class": "文档性质",
+      "taxonomy": {
+        "l1": "motor",
+        "l2": "cooling-fan",
+        "l3": "fortior-fu6832"
+      },
+      "process_tags": [
+        "启动测试",
+        "调优"
+      ],
+      "format": "pdf",
+      "pages": 5,
+      "page_limit": null,
+      "tables": 0,
+      "chunks": 8,
+      "figures": 13,
+      "entities": {
+        "parameters": 1,
+        "parameters_matching_customer_h": 0,
+        "registers": 0,
+        "thresholds": 0,
+        "units": 1,
+        "procedure_steps": 0
+      },
+      "convert_status": "ok",
+      "converter": "docling",
+      "sha256": "d6110b9e06c420f483ffeddc8c2d2649792fee2d2f48f1b690544a972cb62d3a",
+      "bytes": 3341145,
+      "source_path": "[源] manuals/有感无感顺逆风启动培训.pdf",
+      "note": null,
+      "artifacts": [
+        "source.json",
+        "content.md",
+        "chunks.jsonl",
+        "entities.json",
+        "figures/"
+      ]
+    },
+    {
+      "doc_id": "smo-angle-register-note",
+      "title": "SMO 角度估算的原理介绍和部分寄存器说明",
+      "doc_type": "原理与寄存器说明",
+      "knowledge_class": "文档性质",
+      "taxonomy": {
+        "l1": "motor",
+        "l2": "cooling-fan",
+        "l3": "fortior-fu6832"
+      },
+      "process_tags": [
+        "初始化配置",
+        "调优"
+      ],
+      "format": "docx",
+      "pages": null,
+      "page_limit": null,
+      "tables": 1,
+      "chunks": 48,
+      "figures": 7,
+      "entities": {
+        "parameters": 8,
+        "parameters_matching_customer_h": 3,
+        "registers": 4,
+        "thresholds": 0,
+        "units": 0,
+        "procedure_steps": 0
+      },
+      "convert_status": "ok",
+      "converter": "docling",
+      "sha256": "84679c09e0f06b1636d38a4a0273889a917b230634f3123535cf44388008dfcc",
+      "bytes": 508663,
+      "source_path": "[源] manuals/SMO角度估算的原理介绍和部分寄存器说明.docx",
+      "note": "转化失败：docling 2.129.0 的 msword 后端在这份 docx 的 VML 旧式图形上陷入死循环（卡在 msword_backend.py 的 _handle_vml_pictures），已由子进程超时兜底；换 docling 版本或先用 Word 另存为新式 docx 可再试。",
+      "artifacts": [
+        "source.json",
+        "content.md",
+        "chunks.jsonl",
+        "entities.json",
+        "figures/"
+      ]
+    },
+    {
+      "doc_id": "runtime-logic",
+      "title": "运行逻辑",
+      "doc_type": "原理文档",
+      "knowledge_class": "文档性质",
+      "taxonomy": {
+        "l1": "motor",
+        "l2": "cooling-fan",
+        "l3": "fortior-fu6832"
+      },
+      "process_tags": [
+        "启动测试"
+      ],
+      "format": "docx",
+      "pages": null,
+      "page_limit": null,
+      "tables": 0,
+      "chunks": 5,
+      "figures": 9,
+      "entities": {
+        "parameters": 0,
+        "parameters_matching_customer_h": 0,
+        "registers": 0,
+        "thresholds": 0,
+        "units": 0,
+        "procedure_steps": 1
+      },
+      "convert_status": "ok",
+      "converter": "docling",
+      "sha256": "bdceabb81c9606ef3cea70e222a038e4c471253ed76b79867bde547963f9385b",
+      "bytes": 1315257,
+      "source_path": "[源] manuals/运行逻辑.docx",
+      "note": null,
+      "artifacts": [
+        "source.json",
+        "content.md",
+        "chunks.jsonl",
+        "entities.json",
+        "figures/"
+      ]
+    },
+    {
+      "doc_id": "bug-fix-summary-8080",
+      "title": "8080 bug 修改原因汇总（2025-04-14）",
+      "doc_type": "问题汇总",
+      "knowledge_class": "文档性质",
+      "taxonomy": {
+        "l1": "motor",
+        "l2": "cooling-fan",
+        "l3": "fortior-fu6832"
+      },
+      "process_tags": [
+        "调优",
+        "报告"
+      ],
+      "format": "docx",
+      "pages": null,
+      "page_limit": null,
+      "tables": 0,
+      "chunks": 6,
+      "figures": 18,
+      "entities": {
+        "parameters": 1,
+        "parameters_matching_customer_h": 0,
+        "registers": 1,
+        "thresholds": 0,
+        "units": 0,
+        "procedure_steps": 0
+      },
+      "convert_status": "ok",
+      "converter": "docling",
+      "sha256": "8a81e7d7c3755fbc03f6f33e2b44d74470ceb5b15a3108ef0fd26a7fa9aa6ad4",
+      "bytes": 3750557,
+      "source_path": "[源] manuals/8080_bug修改原因汇总_20250414.docx",
+      "note": null,
+      "artifacts": [
+        "source.json",
+        "content.md",
+        "chunks.jsonl",
+        "entities.json",
+        "figures/"
+      ]
+    },
+    {
+      "doc_id": "foc-exam-questions",
+      "title": "FOC 方案考核题",
+      "doc_type": "考核题库",
+      "knowledge_class": "文档性质",
+      "taxonomy": {
+        "l1": "motor",
+        "l2": "cooling-fan",
+        "l3": "fortior-fu6832"
+      },
+      "process_tags": [
+        "测试需求"
+      ],
+      "format": "docx",
+      "pages": null,
+      "page_limit": null,
+      "tables": 0,
+      "chunks": 18,
+      "figures": 12,
+      "entities": {
+        "parameters": 3,
+        "parameters_matching_customer_h": 1,
+        "registers": 0,
+        "thresholds": 0,
+        "units": 0,
+        "procedure_steps": 0
+      },
+      "convert_status": "ok",
+      "converter": "docling",
+      "sha256": "5e1460fb3694afd71c84a4d24bf2f6acea5a1767fbe5f27a00dac11d10b58717",
+      "bytes": 903345,
+      "source_path": "[源] manuals/考试题.docx",
+      "note": null,
+      "artifacts": [
+        "source.json",
+        "content.md",
+        "chunks.jsonl",
+        "entities.json",
+        "figures/"
+      ]
+    },
+    {
+      "doc_id": "fu6832-datasheet",
+      "title": "MCU-DS-14 FU6832 数据手册 V2.1（2023-06-21）",
+      "doc_type": "芯片数据手册",
+      "knowledge_class": "文档性质",
+      "taxonomy": {
+        "l1": "motor",
+        "l2": "cooling-fan",
+        "l3": "fortior-fu6832"
+      },
+      "process_tags": [
+        "初始化配置",
+        "测试需求"
+      ],
+      "format": "pdf",
+      "pages": 40,
+      "page_limit": 40,
+      "tables": 27,
+      "chunks": 59,
+      "figures": 20,
+      "entities": {
+        "parameters": 344,
+        "parameters_matching_customer_h": 0,
+        "registers": 2,
+        "thresholds": 0,
+        "units": 4,
+        "procedure_steps": 0
+      },
+      "convert_status": "ok",
+      "converter": "docling",
+      "sha256": "228f97391f9a4490d10720270ee0d0afec59e7dd7fe7d857dc59d3746af0bd09",
+      "bytes": 18044043,
+      "source_path": "[源] datasheet/MCU-DS-14_FU6832_V2.1_20230621.pdf",
+      "note": "源文件 18 MB、完整篇幅较长，本原型只转换前 40 页作演示",
+      "artifacts": [
+        "source.json",
+        "content.md",
+        "chunks.jsonl",
+        "entities.json",
+        "figures/"
+      ]
+    },
+    {
+      "doc_id": "customer-h-fu6832",
+      "title": "Customer.h 工程参数配置文件（FU6832 散热风扇）",
+      "doc_type": "源码参数配置",
+      "knowledge_class": "文档性质",
+      "taxonomy": {
+        "l1": "motor",
+        "l2": "cooling-fan",
+        "l3": "fortior-fu6832"
+      },
+      "process_tags": [
+        "初始化配置",
+        "调优"
+      ],
+      "format": "h",
+      "pages": null,
+      "tables": null,
+      "chunks": 0,
+      "figures": 0,
+      "entities": {
+        "macro_count": 203,
+        "numeric_editable": 164,
+        "with_range": 43,
+        "with_unit": 72,
+        "group_l1_count": 6
+      },
+      "convert_status": "ok",
+      "converter": "custom regex parser (02_parse_customer_h.py)",
+      "sha256": "df869f93bb6bc6501e3cbbe6b055dac18ec6d41c0e933584d7f07175eb3dc01c",
+      "bytes": 41268,
+      "source_path": "[源] code/Customer.h",
+      "note": "转化产物是 params.json（结构化参数表），不是 markdown 切片",
+      "artifacts": [
+        "params.json"
+      ]
+    }
+  ]
+}

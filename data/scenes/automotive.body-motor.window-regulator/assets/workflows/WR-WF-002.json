@@ -1,0 +1,273 @@
+{
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "start",
+      "label": "开始",
+      "group": "控制流",
+      "params": {},
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n2",
+      "type": "set_force_actuator",
+      "label": "设置加载作动器",
+      "group": "设置",
+      "params": {
+        "mode": "REACTION_MEASURE",
+        "range_n": 500.0,
+        "trip_n": 700.0,
+        "supply_voltage_v": 13.5,
+        "supply_tolerance_v": 0.3
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n3",
+      "type": "cmd_up",
+      "label": "下发上升指令",
+      "group": "激励",
+      "params": {
+        "to": "上止点",
+        "hold_after_stall_s": 1.0,
+        "max_stall_s": 30.0,
+        "note": "征求意见稿 6.9.1 注 3 的单循环波形就是上止点堵转 1 s；台架侧的堵转持续上限 30 s 见 SI-HW-03"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n4",
+      "type": "acq_current",
+      "label": "采集电流时序",
+      "group": "采集",
+      "params": {
+        "sample_rate_sa_per_s": 2000,
+        "window": "堵转平台段"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n5",
+      "type": "acq_force",
+      "label": "采集力时序",
+      "group": "采集",
+      "params": {
+        "sample_rate_sa_per_s": 2000,
+        "window": "堵转平台段"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n6",
+      "type": "calc_peak",
+      "label": "提取峰值与平台值",
+      "group": "数据处理",
+      "params": {
+        "targets": [
+          "stall_current_a",
+          "stall_force_n"
+        ],
+        "method": "平台段均值与峰值双出"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n7",
+      "type": "judge_current",
+      "label": "判定工作与堵转电流",
+      "group": "判定",
+      "params": {
+        "requirement_id": "TR-BASIC-03",
+        "max_a": 28.0,
+        "max_a_80c": 29.0,
+        "max_a_minus30c": 30.0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n8",
+      "type": "judge_force",
+      "label": "判定堵转力",
+      "group": "判定",
+      "params": {
+        "requirement_id": "TR-BASIC-04",
+        "min_n": 212.0,
+        "min_n_80c": 164.0,
+        "min_n_minus30c": 190.0,
+        "note": "与上一节点方向相反：电流判上限、力判下限，同一段波形出两个反向判据"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "label": "结束",
+      "group": "控制流",
+      "params": {},
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n99",
+      "type": "error_exit",
+      "label": "异常出口",
+      "group": "控制流",
+      "params": {
+        "on_fault": "立即断电。堵转连续施加不得超过 30 s（SI-HW-03）"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-n1-n2-output",
+      "source": "n1",
+      "target": "n2",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n2-n3-output",
+      "source": "n2",
+      "target": "n3",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n3-n4-output",
+      "source": "n3",
+      "target": "n4",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n4-n5-output",
+      "source": "n4",
+      "target": "n5",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n5-n6-output",
+      "source": "n5",
+      "target": "n6",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n6-n7-output",
+      "source": "n6",
+      "target": "n7",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n7-n8-output",
+      "source": "n7",
+      "target": "n8",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n8-n9-output",
+      "source": "n8",
+      "target": "n9",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n2-n99-error",
+      "source": "n2",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n3-n99-error",
+      "source": "n3",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n4-n99-error",
+      "source": "n4",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n5-n99-error",
+      "source": "n5",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n6-n99-error",
+      "source": "n6",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n7-n99-error",
+      "source": "n7",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n8-n99-error",
+      "source": "n8",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    }
+  ],
+  "meta": {
+    "id": "WR-WF-002",
+    "name": "堵转试验",
+    "formatVersion": "1.0.0",
+    "compressed": false,
+    "tags": [
+      "scene:automotive.body-motor.window-regulator",
+      "group:堵转",
+      "placeholder:true"
+    ],
+    "isSubsystem": false,
+    "category": "堵转",
+    "isTemplate": true,
+    "note": "示例工作流，不是任何客户的真实 .wfw 文件。节点类型是本包定义的六类抽象，不是峰岹客户端 WorkflowNodeType 枚举里的成员。"
+  },
+  "variables": []
+}

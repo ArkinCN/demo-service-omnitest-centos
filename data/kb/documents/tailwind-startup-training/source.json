@@ -1,0 +1,25 @@
+{
+  "doc_id": "tailwind-startup-training",
+  "title": "有感无感顺逆风启动培训",
+  "doc_type": "培训材料",
+  "taxonomy": {
+    "l1": "motor",
+    "l2": "cooling-fan",
+    "l3": "fortior-fu6832"
+  },
+  "process_tags": [
+    "启动测试",
+    "调优"
+  ],
+  "format": "pdf",
+  "pages": 5,
+  "page_limit": null,
+  "tables": 0,
+  "source_path": "[源] manuals/有感无感顺逆风启动培训.pdf",
+  "staged_input": "[源] manuals/有感无感顺逆风启动培训.pdf",
+  "sha256": "d6110b9e06c420f483ffeddc8c2d2649792fee2d2f48f1b690544a972cb62d3a",
+  "bytes": 3341145,
+  "converter": "docling",
+  "ocr": true,
+  "note": null
+}

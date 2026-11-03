@@ -1,0 +1,6 @@
+mcp 2.2.0
+paramiko 5.0.0
+fastapi 0.141.1
+uvicorn 0.53.0
+pydantic 2.13.5
+python 3.12.13

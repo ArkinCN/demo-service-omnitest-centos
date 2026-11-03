@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="880" viewBox="0 0 1600 880">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#39725f"/></marker></defs>
+<rect width="1600" height="880" fill="#f5f8f5"/>
+<g font-family="Microsoft YaHei,Noto Sans CJK SC,Arial,sans-serif">
+<text x="62" y="68" font-size="36" font-weight="700" fill="#143d31">点一下“文档预填”，后台到底要做什么？</text>
+<text x="62" y="110" font-size="21" fill="#607169">目标实现示意 · 上面是人看到的操作，下面是开发要接通的工作；当前助手仍有回放实现</text>
+<rect x="50" y="190" width="345" height="405" rx="16" fill="#fff" stroke="#c9dcd1" stroke-width="2"/>
+<text x="68" y="236" font-size="24" font-weight="700" fill="#203e32">① 人在初始化页点按钮</text>
+<text x="68" y="300" font-size="22" font-weight="400" fill="#203e32">选择了当前样机</text>
+<text x="68" y="344" font-size="22" font-weight="400" fill="#203e32">选定说明书或固件资料</text>
+<line x1="68" y1="384" x2="377" y2="384" stroke="#d6e3db"/>
+<text x="68" y="441" font-size="20" font-weight="400" fill="#476753">前端发送：</text>
+<text x="68" y="485" font-size="20" font-weight="400" fill="#476753">任务 ID、文档 ID、当前表单</text>
+<path d="M 400 310 L 430 310" fill="none" stroke="#39725f" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="439" y="190" width="345" height="405" rx="16" fill="#fff" stroke="#c9dcd1" stroke-width="2"/>
+<text x="457" y="236" font-size="24" font-weight="700" fill="#203e32">② 助手后台查资料</text>
+<text x="457" y="300" font-size="22" font-weight="400" fill="#203e32">读取用户可访问的文档</text>
+<text x="457" y="344" font-size="22" font-weight="400" fill="#203e32">找到型号、参数和原文位置</text>
+<line x1="457" y1="384" x2="766" y2="384" stroke="#d6e3db"/>
+<text x="457" y="441" font-size="20" font-weight="400" fill="#476753">服务端负责：</text>
+<text x="457" y="485" font-size="20" font-weight="400" fill="#476753">权限、检索、模型调用、引用</text>
+<path d="M 789 310 L 819 310" fill="none" stroke="#39725f" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="828" y="190" width="345" height="405" rx="16" fill="#fff" stroke="#c9dcd1" stroke-width="2"/>
+<text x="846" y="236" font-size="24" font-weight="700" fill="#203e32">③ 页面显示待确认值</text>
+<text x="846" y="300" font-size="22" font-weight="400" fill="#203e32">逐项显示建议值和来源</text>
+<text x="846" y="344" font-size="22" font-weight="400" fill="#203e32">冲突或缺材料直接标出来</text>
+<line x1="846" y1="384" x2="1155" y2="384" stroke="#d6e3db"/>
+<text x="846" y="441" font-size="20" font-weight="400" fill="#476753">返回结构化草稿：</text>
+<text x="846" y="485" font-size="20" font-weight="400" fill="#476753">字段、旧值、新值、单位、依据</text>
+<path d="M 1178 310 L 1208 310" fill="none" stroke="#39725f" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1217" y="190" width="345" height="405" rx="16" fill="#fff" stroke="#c9dcd1" stroke-width="2"/>
+<text x="1235" y="236" font-size="24" font-weight="700" fill="#203e32">④ 人采纳后正式保存</text>
+<text x="1235" y="300" font-size="22" font-weight="400" fill="#203e32">检查差异，再点采纳</text>
+<text x="1235" y="344" font-size="22" font-weight="400" fill="#203e32">刷新页面仍能读回结果</text>
+<line x1="1235" y1="384" x2="1544" y2="384" stroke="#d6e3db"/>
+<text x="1235" y="441" font-size="20" font-weight="400" fill="#476753">业务后端负责：</text>
+<text x="1235" y="485" font-size="20" font-weight="400" fill="#476753">校验、存储、版本和操作记录</text>
+<rect x="50" y="645" width="1505" height="145" rx="16" fill="#fff1dc" stroke="#ecd0a1" stroke-width="2"/>
+<text x="75" y="690" font-size="26" font-weight="700" fill="#79521d">如果接下来要启动设备或写参数，还必须经过人工批准和设备检查。</text>
+<text x="75" y="741" font-size="23" font-weight="400" fill="#79521d">模型说“已完成”不能替代保存结果或设备回执。开发验收要检查真实请求、真实文件和实际设备状态。</text>
+</g></svg>

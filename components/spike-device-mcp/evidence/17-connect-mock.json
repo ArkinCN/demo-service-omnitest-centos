@@ -1,0 +1,18 @@
+{
+    "mode": "mock",
+    "ts": 1789831809.59537,
+    "device_id": "bench",
+    "mock_warning": "合成数据，非台架实测，不得作为测试结论的证据",
+    "status": "ok",
+    "name": "峰岹台架工控机",
+    "model": "SK-20251218QPBB / Windows 11",
+    "kind": "host",
+    "target": "administrator@172.25.5.166:5011",
+    "connected": false,
+    "hostname": "MOCK-BENCH",
+    "connected_at": 1789831809.5953615,
+    "uptime_s": 0.0,
+    "last_error": "force_mock=true，调用方明确要求 mock",
+    "key_env": "FORTIOR_WIN_KEY",
+    "key_present": true
+}

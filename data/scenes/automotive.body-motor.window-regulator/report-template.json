@@ -1,0 +1,908 @@
+{
+  "schema": "report-template/v1",
+  "group_tiers": [
+    {
+      "id": "rpt-id",
+      "title": "报告标识",
+      "groups": [
+        {
+          "id": "rpt-id-no",
+          "title": "编号",
+          "items": [
+            "report_no",
+            "performing_org_report_no",
+            "gov_accession_no",
+            "recipients_catalog_no"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rpt-body",
+      "title": "报告内容",
+      "groups": [
+        {
+          "id": "rpt-body-all",
+          "title": "标题与周期",
+          "items": [
+            "title_and_subtitle",
+            "report_date",
+            "type_of_report_and_period",
+            "authors"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rpt-org",
+      "title": "机构与合同",
+      "groups": [
+        {
+          "id": "rpt-org-do",
+          "title": "执行机构",
+          "items": [
+            "performing_org_code",
+            "performing_org_name_address"
+          ]
+        },
+        {
+          "id": "rpt-org-pay",
+          "title": "主办与合同",
+          "items": [
+            "sponsoring_agency_name_address",
+            "work_unit_no",
+            "contract_or_grant_no"
+          ]
+        }
+      ]
+    }
+  ],
+  "scene_id": "automotive.body-motor.window-regulator",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-19",
+  "belongs_to_flow": "F6 测试报告及产出（模板确认、信息确认）",
+  "template_source": {
+    "kind": "PDF 报告样张（非 Excel 模板）",
+    "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+    "title": "REPORT NUMBER 118-GTL-11-002, SAFETY COMPLIANCE TESTING FOR FMVSS NO. 118, POWER-OPERATED WINDOW, PARTITION AND ROOF PANEL SYSTEMS — 2011 NISSAN JUKE S MPV, NHTSA NO. CB5201",
+    "lab": "General Testing Laboratories, Inc., 1623 Leedstown Road, Colonial Beach, Virginia 22443",
+    "sponsor": "U.S. Department of Transportation, National Highway Traffic Safety Administration, Office of Vehicle Safety Compliance (NVS-220)",
+    "report_date": "2011-03-17",
+    "test_date": "2011-03-15",
+    "contract_no": "DTNH22-06-C-00032",
+    "page_count": 36,
+    "url": "https://www.carsandracingstuff.com/library/reports/5683.pdf",
+    "_source": {
+      "file": "[源] _调研/B-汽车场景测试案例素材.md",
+      "locator": "第 387 行：报告全名、检测方、委托方、人员、日期与合同号"
+    }
+  },
+  "cell_model_note": "场景一的报告模板是 Excel（.xlsm），字段定位用 label_cell / value_cell 两个单元格地址。本场景的模板是 PDF 报告，没有单元格，同一个概念落成 **节（section）+ 字段（field）** 两级：label_section 定位到哪一节，label_slot 与 value_slot 定位到节内的字段标题位与取值位。前端渲染器只要认「一个标题位 + 一个取值位」这个抽象，两个场景的模板就能共用同一套填充逻辑。",
+  "section_count": 9,
+  "technical_page_field_count": 13,
+  "photo_count": 15,
+  "compliance_basis": [
+    {
+      "standard": "ISO/IEC 17025:2017 §7.8 Reporting of results",
+      "required_elements": [
+        "标题",
+        "实验室标识",
+        "每页唯一报告编号",
+        "客户信息",
+        "方法引用",
+        "样品描述",
+        "接收日期",
+        "试验日期",
+        "签发日期",
+        "带单位的结果",
+        "授权签字",
+        "修订条款"
+      ],
+      "_status": "标准编号与版次已核实；字段清单经 Perry Johnson Laboratory Accreditation, Inc. (PJLA) 公开培训讲义转述，待核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 411 行：ISO/IEC 17025:2017 第 7.8 条必含要素"
+      }
+    },
+    {
+      "standard": "CNAS-EL-13《检测报告和校准证书相关要求的认可说明》（2019-12-25）",
+      "required_elements": [
+        "国内报告字段合规性的主依据，正文未取得"
+      ],
+      "_status": "待核实（PDF 文本层抽取失败）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 412 行：CNAS-EL-13 全名、机构与日期"
+      }
+    },
+    {
+      "standard": "45.2 Question on Amendments to Test Reports, ISO/IEC 17025 Clause 7.8.8.1（欧洲认可合作组织 European Accreditation 官方问答）",
+      "required_elements": [
+        "报告修订与换版字段的设计依据"
+      ],
+      "_status": "待核实",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 413 行：European Accreditation 关于试验报告修订的官方问答"
+      }
+    },
+    {
+      "standard": "QC/T 626 征求意见稿第 7 章检验规则",
+      "required_elements": [
+        "型式检验与出厂检验的分组、抽样与判定规则，是报告「结论」段的生成逻辑"
+      ],
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 414 行：QC/T 626 征求意见稿第 7 章检验规则"
+      }
+    }
+  ],
+  "technical_report_documentation_page": [
+    {
+      "field_no": 1,
+      "key": "report_no",
+      "name_en": "Report No.",
+      "name_zh": "报告号",
+      "type": "text",
+      "label_section": "Technical Report Documentation Page",
+      "label_slot": "字段 1 标题",
+      "value_slot": "字段 1 取值",
+      "sample_value": "118-GTL-11-002",
+      "from_flow": "F6 测试报告及产出",
+      "required_by": "ISO/IEC 17025:2017 §7.8.2",
+      "_source": {
+        "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+        "locator": "第 3 页 Technical Report Documentation Page，字段 1"
+      }
+    },
+    {
+      "field_no": 2,
+      "key": "gov_accession_no",
+      "name_en": "Government Accession No.",
+      "name_zh": "政府入藏号",
+      "type": "text",
+      "label_section": "Technical Report Documentation Page",
+      "label_slot": "字段 2 标题",
+      "value_slot": "字段 2 取值",
+      "sample_value": null,
+      "from_flow": "F6 测试报告及产出",
+      "required_by": null,
+      "_source": {
+        "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+        "locator": "第 3 页 Technical Report Documentation Page，字段 2"
+      }
+    },
+    {
+      "field_no": 3,
+      "key": "recipients_catalog_no",
+      "name_en": "Recipient's Catalog No.",
+      "name_zh": "接收方目录号",
+      "type": "text",
+      "label_section": "Technical Report Documentation Page",
+      "label_slot": "字段 3 标题",
+      "value_slot": "字段 3 取值",
+      "sample_value": null,
+      "from_flow": "F6 测试报告及产出",
+      "required_by": null,
+      "_source": {
+        "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+        "locator": "第 3 页 Technical Report Documentation Page，字段 3"
+      }
+    },
+    {
+      "field_no": 4,
+      "key": "title_and_subtitle",
+      "name_en": "Title and Subtitle",
+      "name_zh": "标题与副标题",
+      "type": "text",
+      "label_section": "Technical Report Documentation Page",
+      "label_slot": "字段 4 标题",
+      "value_slot": "字段 4 取值",
+      "sample_value": "SAFETY COMPLIANCE TESTING FOR FMVSS NO. 118",
+      "from_flow": "F6 测试报告及产出",
+      "required_by": "ISO/IEC 17025:2017 §7.8.2",
+      "_source": {
+        "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+        "locator": "第 3 页 Technical Report Documentation Page，字段 4"
+      }
+    },
+    {
+      "field_no": 5,
+      "key": "report_date",
+      "name_en": "Report Date",
+      "name_zh": "报告日期",
+      "type": "date",
+      "label_section": "Technical Report Documentation Page",
+      "label_slot": "字段 5 标题",
+      "value_slot": "字段 5 取值",
+      "sample_value": "2011-03-17",
+      "from_flow": "F6 测试报告及产出",
+      "required_by": "ISO/IEC 17025:2017 §7.8.2",
+      "_source": {
+        "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+        "locator": "第 3 页 Technical Report Documentation Page，字段 5"
+      }
+    },
+    {
+      "field_no": 6,
+      "key": "performing_org_code",
+      "name_en": "Performing Organization Code",
+      "name_zh": "执行机构代码",
+      "type": "text",
+      "label_section": "Technical Report Documentation Page",
+      "label_slot": "字段 6 标题",
+      "value_slot": "字段 6 取值",
+      "sample_value": null,
+      "from_flow": "F6 测试报告及产出",
+      "required_by": null,
+      "_source": {
+        "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+        "locator": "第 3 页 Technical Report Documentation Page，字段 6"
+      }
+    },
+    {
+      "field_no": 7,
+      "key": "authors",
+      "name_en": "Author(s)",
+      "name_zh": "作者",
+      "type": "text",
+      "label_section": "Technical Report Documentation Page",
+      "label_slot": "字段 7 标题",
+      "value_slot": "字段 7 取值",
+      "sample_value": "Grant Farrand / Debbie Messick",
+      "from_flow": "F6 测试报告及产出",
+      "required_by": null,
+      "_source": {
+        "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+        "locator": "第 3 页 Technical Report Documentation Page，字段 7"
+      }
+    },
+    {
+      "field_no": 8,
+      "key": "performing_org_report_no",
+      "name_en": "Performing Organization Report No.",
+      "name_zh": "执行机构报告号",
+      "type": "text",
+      "label_section": "Technical Report Documentation Page",
+      "label_slot": "字段 8 标题",
+      "value_slot": "字段 8 取值",
+      "sample_value": null,
+      "from_flow": "F6 测试报告及产出",
+      "required_by": null,
+      "_source": {
+        "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+        "locator": "第 3 页 Technical Report Documentation Page，字段 8"
+      }
+    },
+    {
+      "field_no": 9,
+      "key": "performing_org_name_address",
+      "name_en": "Performing Organization Name and Address",
+      "name_zh": "执行机构名称与地址",
+      "type": "textarea",
+      "label_section": "Technical Report Documentation Page",
+      "label_slot": "字段 9 标题",
+      "value_slot": "字段 9 取值",
+      "sample_value": "General Testing Laboratories, Inc., 1623 Leedstown Road, Colonial Beach, Virginia 22443",
+      "from_flow": "F6 测试报告及产出",
+      "required_by": "ISO/IEC 17025:2017 §7.8.2",
+      "_source": {
+        "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+        "locator": "第 3 页 Technical Report Documentation Page，字段 9"
+      }
+    },
+    {
+      "field_no": 10,
+      "key": "work_unit_no",
+      "name_en": "Work Unit No.",
+      "name_zh": "工作单元号",
+      "type": "text",
+      "label_section": "Technical Report Documentation Page",
+      "label_slot": "字段 10 标题",
+      "value_slot": "字段 10 取值",
+      "sample_value": null,
+      "from_flow": "F6 测试报告及产出",
+      "required_by": null,
+      "_source": {
+        "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+        "locator": "第 3 页 Technical Report Documentation Page，字段 10"
+      }
+    },
+    {
+      "field_no": 11,
+      "key": "contract_or_grant_no",
+      "name_en": "Contract or Grant No.",
+      "name_zh": "合同或资助号",
+      "type": "text",
+      "label_section": "Technical Report Documentation Page",
+      "label_slot": "字段 11 标题",
+      "value_slot": "字段 11 取值",
+      "sample_value": "DTNH22-06-C-00032",
+      "from_flow": "F6 测试报告及产出",
+      "required_by": null,
+      "_source": {
+        "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+        "locator": "第 3 页 Technical Report Documentation Page，字段 11"
+      }
+    },
+    {
+      "field_no": 12,
+      "key": "sponsoring_agency_name_address",
+      "name_en": "Sponsoring Agency Name and Address",
+      "name_zh": "主办机构名称与地址",
+      "type": "textarea",
+      "label_section": "Technical Report Documentation Page",
+      "label_slot": "字段 12 标题",
+      "value_slot": "字段 12 取值",
+      "sample_value": "U.S. Department of Transportation, National Highway Traffic Safety Administration, Office of Vehicle Safety Compliance (NVS-220)",
+      "from_flow": "F6 测试报告及产出",
+      "required_by": null,
+      "_source": {
+        "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+        "locator": "第 3 页 Technical Report Documentation Page，字段 12"
+      }
+    },
+    {
+      "field_no": 13,
+      "key": "type_of_report_and_period",
+      "name_en": "Type of Report and Period Covered",
+      "name_zh": "报告类型与周期",
+      "type": "text",
+      "label_section": "Technical Report Documentation Page",
+      "label_slot": "字段 13 标题",
+      "value_slot": "字段 13 取值",
+      "sample_value": "FINAL REPORT",
+      "from_flow": "F6 测试报告及产出",
+      "required_by": null,
+      "_source": {
+        "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+        "locator": "第 3 页 Technical Report Documentation Page，字段 13"
+      }
+    }
+  ],
+  "spec_sections": [
+    {
+      "section_no": "封面",
+      "name_en": "Cover",
+      "name_zh": "封面",
+      "fields": [
+        {
+          "key": "report_no",
+          "name": "报告编号",
+          "value_slot": "封面首行"
+        },
+        {
+          "key": "standard_no_title",
+          "name": "标准号与标题",
+          "value_slot": "SAFETY COMPLIANCE TESTING FOR FMVSS NO. 118 / POWER-OPERATED WINDOW, PARTITION AND ROOF PANEL SYSTEMS"
+        },
+        {
+          "key": "vehicle_make_model",
+          "name": "被测车辆制造商与型号",
+          "value_slot": "2011 NISSAN JUKE S MPV"
+        },
+        {
+          "key": "nhtsa_no",
+          "name": "NHTSA 编号",
+          "value_slot": "CB5201"
+        },
+        {
+          "key": "lab_name_address",
+          "name": "检测实验室名称与地址",
+          "value_slot": "General Testing Laboratories, Inc. 及地址"
+        },
+        {
+          "key": "date",
+          "name": "日期",
+          "value_slot": "最终报告日期"
+        },
+        {
+          "key": "final_report_mark",
+          "name": "FINAL REPORT 字样",
+          "value_slot": "封面标记"
+        },
+        {
+          "key": "sponsor_name_address",
+          "name": "委托机构全称与地址",
+          "value_slot": "U.S. DOT / NHTSA, NVS-220 及地址"
+        }
+      ],
+      "from_flow": "F6 测试报告及产出",
+      "maps_to": null,
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+          "locator": "第 1 页 封面"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 397 行：封面字段清单"
+        }
+      ]
+    },
+    {
+      "section_no": "免责声明页",
+      "name_en": "Disclaimer",
+      "name_zh": "免责声明页",
+      "fields": [
+        {
+          "key": "distribution_statement",
+          "name": "分发声明",
+          "value_slot": "正文段"
+        },
+        {
+          "key": "prepared_by",
+          "name": "Prepared By 数字签名",
+          "value_slot": "签名位"
+        },
+        {
+          "key": "approved_by",
+          "name": "Approved By 数字签名",
+          "value_slot": "签名位"
+        },
+        {
+          "key": "approval_date",
+          "name": "批准日期",
+          "value_slot": "日期位"
+        }
+      ],
+      "from_flow": "F6 测试报告及产出",
+      "maps_to": null,
+      "note": "双签名是 ISO/IEC 17025:2017 §7.8.2 的授权签字要求在本模板里的落点。",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+          "locator": "第 2 页 免责声明页"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 398 行：免责声明页字段"
+        }
+      ]
+    },
+    {
+      "section_no": "技术著录页",
+      "name_en": "Technical Report Documentation Page",
+      "name_zh": "技术报告著录页",
+      "fields": [
+        {
+          "key": "report_no",
+          "name": "报告号",
+          "value_slot": "字段 1 取值"
+        },
+        {
+          "key": "gov_accession_no",
+          "name": "政府入藏号",
+          "value_slot": "字段 2 取值"
+        },
+        {
+          "key": "recipients_catalog_no",
+          "name": "接收方目录号",
+          "value_slot": "字段 3 取值"
+        },
+        {
+          "key": "title_and_subtitle",
+          "name": "标题与副标题",
+          "value_slot": "字段 4 取值"
+        },
+        {
+          "key": "report_date",
+          "name": "报告日期",
+          "value_slot": "字段 5 取值"
+        },
+        {
+          "key": "performing_org_code",
+          "name": "执行机构代码",
+          "value_slot": "字段 6 取值"
+        },
+        {
+          "key": "authors",
+          "name": "作者",
+          "value_slot": "字段 7 取值"
+        },
+        {
+          "key": "performing_org_report_no",
+          "name": "执行机构报告号",
+          "value_slot": "字段 8 取值"
+        },
+        {
+          "key": "performing_org_name_address",
+          "name": "执行机构名称与地址",
+          "value_slot": "字段 9 取值"
+        },
+        {
+          "key": "work_unit_no",
+          "name": "工作单元号",
+          "value_slot": "字段 10 取值"
+        },
+        {
+          "key": "contract_or_grant_no",
+          "name": "合同或资助号",
+          "value_slot": "字段 11 取值"
+        },
+        {
+          "key": "sponsoring_agency_name_address",
+          "name": "主办机构名称与地址",
+          "value_slot": "字段 12 取值"
+        },
+        {
+          "key": "type_of_report_and_period",
+          "name": "报告类型与周期",
+          "value_slot": "字段 13 取值"
+        }
+      ],
+      "from_flow": "F6 测试报告及产出",
+      "maps_to": "report-template.json technical_report_documentation_page",
+      "note": "13 个编号字段，详见 technical_report_documentation_page 数组。",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+          "locator": "第 3 页"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 399 行：13 个编号字段清单"
+        }
+      ]
+    },
+    {
+      "section_no": "1",
+      "name_en": "Purpose of Compliance Test",
+      "name_zh": "第 1 节 试验目的",
+      "fields": [
+        {
+          "key": "purpose",
+          "name": "1.0 试验目的",
+          "value_slot": "正文段"
+        },
+        {
+          "key": "vin",
+          "name": "1.1 车辆识别代号 VIN",
+          "value_slot": "字段"
+        },
+        {
+          "key": "nhtsa_no",
+          "name": "1.1 NHTSA 编号",
+          "value_slot": "字段"
+        },
+        {
+          "key": "manufacturer",
+          "name": "1.1 制造商",
+          "value_slot": "字段"
+        },
+        {
+          "key": "manufacture_date",
+          "name": "1.1 制造日期",
+          "value_slot": "字段"
+        },
+        {
+          "key": "color",
+          "name": "1.1 颜色",
+          "value_slot": "字段"
+        },
+        {
+          "key": "test_date",
+          "name": "1.2 试验日期",
+          "value_slot": "字段"
+        }
+      ],
+      "from_flow": "F6 测试报告及产出",
+      "maps_to": "scene.json product + product-attributes.json",
+      "note": "被测件识别段。本场景若测的是升降器总成而不是整车，VIN / 颜色 / 制造日期三个字段应换成总成件号、批次号与生产日期——**这是模板从整车级移植到零部件级时必须改的一处**，本包只登记不擅改。",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+          "locator": "第 5 页 SECTION 1"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 400 行：第 1 节字段清单"
+        }
+      ]
+    },
+    {
+      "section_no": "2",
+      "name_en": "Test Procedure and Summary of Results",
+      "name_zh": "第 2 节 试验程序与结果摘要",
+      "fields": [
+        {
+          "key": "procedure_ref",
+          "name": "2.0 试验程序引用",
+          "value_slot": "TP-118-06 与实验室内部程序 TP-118-03A"
+        },
+        {
+          "key": "steps_a_to_h",
+          "name": "2.0 八个步骤的执行序列 A 至 H",
+          "value_slot": "步骤表"
+        },
+        {
+          "key": "summary_of_results",
+          "name": "2.1 结果摘要",
+          "value_slot": "摘要段"
+        }
+      ],
+      "from_flow": "F6 测试报告及产出",
+      "maps_to": "workflows.json（执行序列）+ test-requirements.json（判定结论）",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+          "locator": "第 6 页 SECTION 2"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 401 行：第 2 节字段清单"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 391 行：TP-118-06 与 TP-118-03A"
+        }
+      ]
+    },
+    {
+      "section_no": "3",
+      "name_en": "Test Data",
+      "name_zh": "第 3 节 试验数据",
+      "fields": [
+        {
+          "key": "data_sheet_1",
+          "name": "DATA SHEET 1 内部锁止系统试验",
+          "value_slot": "数据表"
+        },
+        {
+          "key": "data_sheet_2",
+          "name": "DATA SHEET 2 钥匙拔出后的锁止试验",
+          "value_slot": "数据表"
+        },
+        {
+          "key": "data_sheet_3",
+          "name": "DATA SHEET 3 外部锁止系统试验",
+          "value_slot": "数据表"
+        },
+        {
+          "key": "data_sheet_4",
+          "name": "DATA SHEET 4 遥控促动装置",
+          "value_slot": "数据表"
+        },
+        {
+          "key": "data_sheet_5",
+          "name": "DATA SHEET 5 乘员舱促动装置试验（球体试验）",
+          "value_slot": "数据表"
+        },
+        {
+          "key": "data_sheet_6",
+          "name": "DATA SHEET 6 乘员舱促动装置试验（仅电动车窗）",
+          "value_slot": "数据表"
+        },
+        {
+          "key": "data_sheet_7",
+          "name": "DATA SHEET 7 物理接触反向能力",
+          "value_slot": "数据表"
+        },
+        {
+          "key": "pre_operational_check",
+          "name": "WPRP 预操作检查",
+          "value_slot": "数据表"
+        },
+        {
+          "key": "compliance_data_summary",
+          "name": "合规数据汇总表",
+          "value_slot": "汇总表"
+        }
+      ],
+      "from_flow": "F6 测试报告及产出",
+      "maps_to": "test-requirements.json（判据）+ datasets.json（时序证据）",
+      "note": "原报告的七张数据表全部是整车级的锁止与促动装置试验。本场景若做零部件级的 QC/T 626 判据，这一节要整套换成基本性能、自锁、防夹、环境与耐久五组数据表——**换的是本节内容，不是报告骨架**，这正是模板可复用的证明。",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+          "locator": "第 7 至 16 页 SECTION 3"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 402 行：第 3 节数据表清单"
+        }
+      ]
+    },
+    {
+      "section_no": "4",
+      "name_en": "Test Equipment List",
+      "name_zh": "第 4 节 试验设备清单",
+      "fields": [
+        {
+          "key": "equipment_list",
+          "name": "设备清单（名称、型号、序列号、校准日期）",
+          "value_slot": "设备表"
+        }
+      ],
+      "from_flow": "F6 测试报告及产出",
+      "maps_to": "control-parameters.json 台架与工装组 + 数据采集组",
+      "note": "本场景的设备清单应覆盖：程控电源（13.5 ± 0.3 V、纹波 ≤100 mV）、力传感器（防夹与自锁两个量级分开选型）、位移传感器（最小刻度 ≤0.05 mm）、电流传感器、声级计、环境箱、盐雾箱、振动台、耐压仪。",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+          "locator": "第 17 页 SECTION 4"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 403 行：第 4 节设备清单"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 134 行：仪器精度 6.1 a)"
+        }
+      ]
+    },
+    {
+      "section_no": "5",
+      "name_en": "Photographs",
+      "name_zh": "第 5 节 照片",
+      "fields": [
+        {
+          "key": "figure_5_1",
+          "name": "FIGURE 5.1",
+          "value_slot": "照片位 1"
+        },
+        {
+          "key": "figure_5_2",
+          "name": "FIGURE 5.2",
+          "value_slot": "照片位 2"
+        },
+        {
+          "key": "figure_5_3",
+          "name": "FIGURE 5.3",
+          "value_slot": "照片位 3"
+        },
+        {
+          "key": "figure_5_4",
+          "name": "FIGURE 5.4",
+          "value_slot": "照片位 4"
+        },
+        {
+          "key": "figure_5_5",
+          "name": "FIGURE 5.5",
+          "value_slot": "照片位 5"
+        },
+        {
+          "key": "figure_5_6",
+          "name": "FIGURE 5.6",
+          "value_slot": "照片位 6"
+        },
+        {
+          "key": "figure_5_7",
+          "name": "FIGURE 5.7",
+          "value_slot": "照片位 7"
+        },
+        {
+          "key": "figure_5_8",
+          "name": "FIGURE 5.8",
+          "value_slot": "照片位 8"
+        },
+        {
+          "key": "figure_5_9",
+          "name": "FIGURE 5.9",
+          "value_slot": "照片位 9"
+        },
+        {
+          "key": "figure_5_10",
+          "name": "FIGURE 5.10",
+          "value_slot": "照片位 10"
+        },
+        {
+          "key": "figure_5_11",
+          "name": "FIGURE 5.11",
+          "value_slot": "照片位 11"
+        },
+        {
+          "key": "figure_5_12",
+          "name": "FIGURE 5.12",
+          "value_slot": "照片位 12"
+        },
+        {
+          "key": "figure_5_13",
+          "name": "FIGURE 5.13",
+          "value_slot": "照片位 13"
+        },
+        {
+          "key": "figure_5_14",
+          "name": "FIGURE 5.14",
+          "value_slot": "照片位 14"
+        },
+        {
+          "key": "figure_5_15",
+          "name": "FIGURE 5.15",
+          "value_slot": "照片位 15"
+        }
+      ],
+      "from_flow": "F6 测试报告及产出",
+      "maps_to": "scene.json images",
+      "photo_count": 15,
+      "photo_subjects": [
+        "整车左前 3/4 视图",
+        "整车右后 3/4 视图",
+        "车辆认证标签特写",
+        "轮胎信息标签特写",
+        "四个车窗开关特写（4 张）",
+        "钥匙",
+        "点火开关",
+        "仪器装配",
+        "四处球体试验照片（4 张）"
+      ],
+      "note": "15 张编号照片。本包已把 FIGURE 5.1 渲染成 assets/product-photo-nhtsa-fig5-1.png 作为场景示意图。零部件级试验的照片清单应换成：总成件全貌、铭牌特写、试验棒布置、力传感器安装、位移传感器安装、声级计测点、试验前后对比、拆机检查照片。",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+          "locator": "第 18 至 33 页 SECTION 5"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 404 行：15 张编号照片清单"
+        }
+      ]
+    },
+    {
+      "section_no": "6",
+      "name_en": "Owner's Manual Information",
+      "name_zh": "第 6 节 用户手册信息",
+      "fields": [
+        {
+          "key": "owners_manual_pages",
+          "name": "用户手册相关页",
+          "value_slot": "扫描件"
+        },
+        {
+          "key": "pinch_warning_present",
+          "name": "被夹住可能性的说明是否存在",
+          "value_slot": "勾选"
+        },
+        {
+          "key": "driver_switch_instruction",
+          "name": "驾驶员控制开关使用方法",
+          "value_slot": "勾选"
+        },
+        {
+          "key": "child_warning_present",
+          "name": "针对儿童的警告信息是否存在",
+          "value_slot": "勾选"
+        }
+      ],
+      "from_flow": "F6 测试报告及产出",
+      "maps_to": "test-requirements.json TR-RULE-03",
+      "note": "对应 GB 11552-2009 §4.8.6 的用户手册要求。这一节是 evaluable: false 那三条判据里唯一进报告的。",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/nhtsa118-gtl-11-002.pdf",
+          "locator": "第 34 页 SECTION 6"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 405 行：第 6 节"
+        },
+        {
+          "file": "[源] 汽车场景素材-20260919/gb11552.txt",
+          "locator": "gb11552.txt:456-462 §4.8.6"
+        }
+      ]
+    }
+  ],
+  "conclusion_binding": {
+    "note": "报告「结论」段不是人写的自由文本，而是由 test-requirements.json 的逐条判定结果按检验规则聚合出来的。本场景的聚合规则：型式检验按组判，组内任一项 FAIL 则该组 FAIL；防夹三条（TR-PINCH-01/03/04）按目标市场只取其一参与聚合，不参与的两条在报告里标 N/A 而不是 PASS。",
+    "_source": [
+      {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 414 行：QC/T 626 征求意见稿第 7 章检验规则"
+      },
+      {
+        "file": "[源] _调研/B-汽车场景测试案例素材.md",
+        "locator": "第 415 行：QC/T 29090-2023 第 6 章检验规则（已核实）"
+      }
+    ]
+  },
+  "known_gap": {
+    "text": "NHTSA 官方声明：合规报告公开是为信息交流，其意见、发现与结论不应被视为产品是否合规的最终判定。因此这份样张只能作为**版式与字段骨架**的来源，不能把它的判定口径直接搬成本系统的判定口径。",
+    "_source": {
+      "file": "[源] _调研/B-汽车场景测试案例素材.md",
+      "locator": "第 390 行：NHTSA 官方声明"
+    }
+  }
+}

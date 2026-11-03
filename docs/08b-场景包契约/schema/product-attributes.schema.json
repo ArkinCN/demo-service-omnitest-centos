@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fortior.local/scene-pack/v1/product-attributes.schema.json",
+  "title": "product-attributes.json",
+  "description": "产品本体属性，F2 初始化配置左栏的数据源。描述被测件「是什么」，不描述「怎么整定」。",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "product-attributes/v1",
+      "description": "文件契约标识，换包不得改。"
+    },
+    "scene_id": {
+      "$ref": "common.schema.json#/$defs/sceneId"
+    },
+    "generated_by": {
+      "type": "string",
+      "description": "产出这份文件的脚本相对路径，例如 _build/build_scene_pack.py。"
+    },
+    "generated_at": {
+      "$ref": "common.schema.json#/$defs/genDate"
+    },
+    "belongs_to_flow": {
+      "$ref": "common.schema.json#/$defs/flowMention",
+      "description": "这份文件主要服务哪条业务流程。人读为主，但句中必须至少出现一个合法的 F1~F6 标签，防止写进不存在的流程号。"
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "本文件出现过的一级分组名清单，取值随场景而变，不设固定枚举。"
+    },
+    "group_tiers": {
+      "$ref": "common.schema.json#/$defs/memberTier"
+    },
+    "value_source_note": {
+      "type": "string",
+      "description": "本文件数值来自哪几处的总说明。"
+    },
+    "attributes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "属性键，蛇形小写，跨包同义属性应沿用同名。"
+          },
+          "name": {
+            "type": "string",
+            "description": "中文名。"
+          },
+          "value": {
+            "$ref": "common.schema.json#/$defs/scalar"
+          },
+          "unit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "min": {
+            "$ref": "common.schema.json#/$defs/numberOrNull"
+          },
+          "max": {
+            "$ref": "common.schema.json#/$defs/numberOrNull"
+          },
+          "step": {
+            "$ref": "common.schema.json#/$defs/numberOrNull"
+          },
+          "editable": {
+            "type": "boolean",
+            "description": "是否允许在界面上改。板级硬件常数为 false。"
+          },
+          "group": {
+            "type": "string",
+            "description": "所属一级分组，取值须落在本文件 groups 里。"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "common.schema.json#/$defs/option"
+            },
+            "description": "枚举型才有。有它时 min/max/step 必须为 null。"
+          },
+          "note": {
+            "type": "string"
+          },
+          "not_applicable": {
+            "type": "boolean",
+            "description": "本场景不适用该属性，界面按「不适用」渲染。"
+          },
+          "_placeholder": {
+            "$ref": "common.schema.json#/$defs/placeholderFlag"
+          },
+          "_status": {
+            "$ref": "common.schema.json#/$defs/statusText"
+          },
+          "_source": {
+            "$ref": "common.schema.json#/$defs/sourceRefs"
+          }
+        },
+        "required": [
+          "_source",
+          "editable",
+          "group",
+          "key",
+          "max",
+          "min",
+          "name",
+          "step",
+          "value"
+        ]
+      }
+    }
+  },
+  "required": [
+    "attributes",
+    "belongs_to_flow",
+    "generated_at",
+    "generated_by",
+    "group_tiers",
+    "groups",
+    "scene_id",
+    "schema"
+  ]
+}

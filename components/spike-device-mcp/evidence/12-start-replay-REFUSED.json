@@ -1,0 +1,6 @@
+{
+    "status": "confirmation_invalid",
+    "executed": false,
+    "reason": "confirm_token 状态为 consumed，拒绝执行",
+    "tool": "start"
+}

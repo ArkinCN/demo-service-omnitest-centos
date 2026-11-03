@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1540" height="820" viewBox="0 0 1540 820">
+<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E5E45"/></marker>
+<marker id="ahw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A8C5B5"/></marker>
+<marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A6353A"/></marker>
+</defs>
+<rect width="1540" height="820" fill="#FFFFFF"/>
+<text x="40" y="52" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="18" font-weight="600" fill="#2E5E45">五流程主线与知识库层带　保留原编号，1 号位空出</text>
+<text x="40" y="78" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#9A9A9A">② ~ ⑥ 为流程序号，沿用原图不动；知识库不再占流程序号，下沉为承托五条流程的基础模块</text>
+<rect x="40" y="210" width="196" height="152" rx="6" fill="none" stroke="#A6353A" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="138" y="254" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="16" font-weight="600" fill="#A6353A">① 位空出</text>
+<text x="138" y="286" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">知识库原占此位</text>
+<text x="138" y="310" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">现移出流程列</text>
+<text x="138" y="334" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">下沉为基础模块</text>
+<line x1="138" y1="368" x2="138" y2="464" stroke="#A6353A" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#ahr)"/>
+<rect x="40" y="470" width="1460" height="214" rx="6" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="60" y="502" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="15" font-weight="600" fill="#2E5E45">基础模块 · 知识库</text>
+<text x="216" y="502" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">不编号，五条流程共用；三轴正交，一条知识同时落在三个轴上</text>
+<rect x="60.0" y="518" width="454.6666666666667" height="96" rx="4" fill="#EAF2EC" stroke="#A8C5B5" stroke-width="1"/>
+<text x="76.0" y="546" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="14" font-weight="600" fill="#2E5E45">归属轴</text>
+<text x="130.0" y="546" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#9A9A9A">挂在哪个产品下</text>
+<text x="76.0" y="576" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">场景 / 子类 / 产品类型，三级，已实装</text>
+<rect x="542.6666666666667" y="518" width="454.6666666666667" height="96" rx="4" fill="#EAF2EC" stroke="#A8C5B5" stroke-width="1"/>
+<text x="558.6666666666667" y="546" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="14" font-weight="600" fill="#2E5E45">来源轴</text>
+<text x="612.6666666666667" y="546" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#9A9A9A">谁产生的</text>
+<text x="558.6666666666667" y="576" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">文档类外部上传；经验类系统自己长出来</text>
+<rect x="1025.3333333333335" y="518" width="454.6666666666667" height="96" rx="4" fill="#EAF2EC" stroke="#A8C5B5" stroke-width="1"/>
+<text x="1041.3333333333335" y="546" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="14" font-weight="600" fill="#2E5E45">用途轴</text>
+<text x="1095.3333333333335" y="546" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#9A9A9A">回答什么问题</text>
+<text x="1041.3333333333335" y="576" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">产品说明书 / 测试需求 / 工艺，本轮新增</text>
+<line x1="60" y1="634" x2="1480" y2="634" stroke="#C8C5BD" stroke-width="1"/>
+<text x="60" y="660" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">转化流水线　识别 → 抽取 → 切片 → 结构化 → 索引　　转化后才可被流程检索；每个流程页的 B 区顶部都有上传入口与条目数</text>
+<rect x="270" y="210" width="196" height="152" rx="6" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="368.0" y="244" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="17" font-weight="600" fill="#2C2C2C">② 初始化配置</text>
+<line x1="284" y1="278" x2="452" y2="278" stroke="#C8C5BD" stroke-width="1"/>
+<text x="368.0" y="302" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">入　产品文档与工程</text>
+<text x="368.0" y="332" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">出　锁定配置与联锁实例</text>
+<line x1="368.0" y1="368" x2="368.0" y2="464" stroke="#A8C5B5" stroke-width="1" stroke-dasharray="5 4" marker-end="url(#ahw)" marker-start="url(#ahw)"/>
+<rect x="500" y="210" width="196" height="152" rx="6" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="598.0" y="244" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="17" font-weight="600" fill="#2C2C2C">③ 测试需求确认</text>
+<line x1="514" y1="278" x2="682" y2="278" stroke="#C8C5BD" stroke-width="1"/>
+<text x="598.0" y="302" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">入　标准与工作流模板</text>
+<text x="598.0" y="332" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">出　冻结的需求基线</text>
+<line x1="598.0" y1="368" x2="598.0" y2="464" stroke="#A8C5B5" stroke-width="1" stroke-dasharray="5 4" marker-end="url(#ahw)" marker-start="url(#ahw)"/>
+<rect x="836" y="210" width="196" height="152" rx="6" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="934.0" y="244" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="17" font-weight="600" fill="#2C2C2C">④ 启动测试</text>
+<text x="934.0" y="264" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#9A9A9A">及结果分析</text>
+<line x1="850" y1="278" x2="1018" y2="278" stroke="#C8C5BD" stroke-width="1"/>
+<text x="934.0" y="302" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">入　配置快照与需求基线</text>
+<text x="934.0" y="332" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">出　轮次产物与判定表</text>
+<line x1="934.0" y1="368" x2="934.0" y2="464" stroke="#A8C5B5" stroke-width="1" stroke-dasharray="5 4" marker-end="url(#ahw)" marker-start="url(#ahw)"/>
+<rect x="1066" y="210" width="196" height="152" rx="6" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="1164.0" y="244" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="17" font-weight="600" fill="#2C2C2C">⑤ 调优确认</text>
+<text x="1164.0" y="264" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#9A9A9A">及运行</text>
+<line x1="1080" y1="278" x2="1248" y2="278" stroke="#C8C5BD" stroke-width="1"/>
+<text x="1164.0" y="302" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">入　未达标项与经验库</text>
+<text x="1164.0" y="332" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">出　参数改动与重跑指令</text>
+<line x1="1164.0" y1="368" x2="1164.0" y2="464" stroke="#A8C5B5" stroke-width="1" stroke-dasharray="5 4" marker-end="url(#ahw)" marker-start="url(#ahw)"/>
+<rect x="1296" y="210" width="196" height="152" rx="6" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="1394.0" y="244" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="17" font-weight="600" fill="#2C2C2C">⑥ 测试报告</text>
+<text x="1394.0" y="264" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#9A9A9A">及产出</text>
+<line x1="1310" y1="278" x2="1478" y2="278" stroke="#C8C5BD" stroke-width="1"/>
+<text x="1394.0" y="302" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">入　模板与全部产物</text>
+<text x="1394.0" y="332" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">出　报告成品与归档记录</text>
+<line x1="1394.0" y1="368" x2="1394.0" y2="464" stroke="#A8C5B5" stroke-width="1" stroke-dasharray="5 4" marker-end="url(#ahw)" marker-start="url(#ahw)"/>
+<line x1="470" y1="286.0" x2="492" y2="286.0" stroke="#2E5E45" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="700" y1="286.0" x2="828" y2="286.0" stroke="#2E5E45" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="1036" y1="286.0" x2="1058" y2="286.0" stroke="#2E5E45" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="1266" y1="286.0" x2="1288" y2="286.0" stroke="#2E5E45" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="758.0" y1="266" x2="758.0" y2="306" stroke="#2E5E45" stroke-width="3"/>
+<line x1="774.0" y1="266" x2="774.0" y2="306" stroke="#2E5E45" stroke-width="3"/>
+<text x="766.0" y="332" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="600" fill="#2E5E45">安全联锁闸门</text>
+<text x="766.0" y="350" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">三项全绿才可启动</text>
+<polyline points="1164.0,204 1164.0,156 934.0,156 934.0,202" fill="none" stroke="#2E5E45" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ah)"/>
+<text x="1049.0" y="146" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="600" fill="#2E5E45">有未达标项 → 改参数 → 重跑</text>
+<line x1="40" y1="720" x2="1500" y2="720" stroke="#C8C5BD" stroke-width="1"/>
+<text x="40" y="744" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">实线粗箭头＝主链顺序　　绿虚线折回＝调优回环　　淡绿虚线双向＝流程与知识库之间：上行取知识（填参数 / 抽判据 / 套模板），下行存产物（沉淀经验 / 归档报告）</text>
+<text x="40" y="768" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">墨绿双竖线＝安全联锁闸门，卡在「测试需求确认」与「启动测试」之间：联锁项全满足、预检全通过、现场安全总闸已开，启动按钮才可点。</text>
+<text x="40" y="792" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">暗红＝本版唯一的变化点：原 ① 知识库管理已移出流程列。两版差别只在编号，层带与连线完全相同。</text>
+</svg>

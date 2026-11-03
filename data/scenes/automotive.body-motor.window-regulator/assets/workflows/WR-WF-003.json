@@ -1,0 +1,289 @@
+{
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "start",
+      "label": "开始",
+      "group": "控制流",
+      "params": {},
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n2",
+      "type": "set_antipinch_params",
+      "label": "下发防夹参数",
+      "group": "设置",
+      "params": {
+        "force_threshold_n": 80.0,
+        "window_lower_mm": 4.0,
+        "window_upper_mm": 200.0,
+        "retract_mode": "PLUS_50MM",
+        "retract_distance_mm": 60.0,
+        "startup_blanking_ms": 150.0,
+        "target_market": "CN"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n3",
+      "type": "cmd_up",
+      "label": "下发上升指令",
+      "group": "激励",
+      "params": {
+        "from": "开口 200 mm 以上",
+        "to": "上止点"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n4",
+      "type": "apply_obstacle",
+      "label": "投入障碍物（试验棒）",
+      "group": "激励",
+      "params": {
+        "mode": "FIXED_ROD",
+        "opening_mm": 170.0,
+        "rod_stiffness_n_per_mm": 10.0,
+        "rod_tolerance_n_per_mm": 0.5,
+        "rod_diameter_mm": 200.0,
+        "note": "棒的圆柱面与构成车窗边界的车辆结构部分接触；整个试验期间棒相对于边框及关闭方向的位置保持不变"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n5",
+      "type": "acq_force",
+      "label": "采集力时序",
+      "group": "采集",
+      "params": {
+        "sample_rate_sa_per_s": 2000,
+        "channels": [
+          "pinch_force_n",
+          "position_mm",
+          "opening_mm",
+          "current_a"
+        ]
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n6",
+      "type": "branch",
+      "label": "条件分支",
+      "group": "控制流",
+      "params": {
+        "condition": "retract_triggered == True",
+        "true_to": "n7",
+        "false_to": "n99",
+        "note": "没触发回缩不是「判据不达标」而是「防夹功能未工作」，两者在报告里的定性不同，所以走异常出口而不是 FAIL 分支"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n7",
+      "type": "calc_retract",
+      "label": "换算回缩量与触发开口",
+      "group": "数据处理",
+      "params": {
+        "outputs": [
+          "peak_pinch_force_n",
+          "opening_at_trigger_mm",
+          "opening_after_mm",
+          "detect_latency_ms"
+        ]
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n8",
+      "type": "judge_pinch",
+      "label": "判定防夹力与回缩",
+      "group": "判定",
+      "params": {
+        "requirement_id_by_market": {
+          "CN": "TR-PINCH-01 + TR-PINCH-02",
+          "US": "TR-PINCH-03",
+          "EU": "TR-PINCH-04"
+        },
+        "max_force_n": 100.0,
+        "opening_range_mm": [
+          4.0,
+          200.0
+        ],
+        "note": "同一次采集，换目标市场即换判据表——本场景最有演示价值的一屏"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "label": "结束",
+      "group": "控制流",
+      "params": {},
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n99",
+      "type": "error_exit",
+      "label": "异常出口",
+      "group": "控制流",
+      "params": {
+        "on_fault": "力越过 100 N 立即切断被测件供电（SI-HW-01），本次判 FAIL 且不可自动重试"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-n1-n2-output",
+      "source": "n1",
+      "target": "n2",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n2-n3-output",
+      "source": "n2",
+      "target": "n3",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n3-n4-output",
+      "source": "n3",
+      "target": "n4",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n4-n5-output",
+      "source": "n4",
+      "target": "n5",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n5-n6-output",
+      "source": "n5",
+      "target": "n6",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n6-n7-output",
+      "source": "n6",
+      "target": "n7",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n7-n8-output",
+      "source": "n7",
+      "target": "n8",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n8-n9-output",
+      "source": "n8",
+      "target": "n9",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n2-n99-error",
+      "source": "n2",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n3-n99-error",
+      "source": "n3",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n4-n99-error",
+      "source": "n4",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n5-n99-error",
+      "source": "n5",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n7-n99-error",
+      "source": "n7",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n8-n99-error",
+      "source": "n8",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n6-n99-false",
+      "source": "n6",
+      "target": "n99",
+      "sourceHandle": "false",
+      "targetHandle": "input"
+    }
+  ],
+  "meta": {
+    "id": "WR-WF-003",
+    "name": "防夹试验",
+    "formatVersion": "1.0.0",
+    "compressed": false,
+    "tags": [
+      "scene:automotive.body-motor.window-regulator",
+      "group:防夹",
+      "placeholder:true"
+    ],
+    "isSubsystem": false,
+    "category": "防夹",
+    "isTemplate": true,
+    "note": "示例工作流，不是任何客户的真实 .wfw 文件。节点类型是本包定义的六类抽象，不是峰岹客户端 WorkflowNodeType 枚举里的成员。"
+  },
+  "variables": []
+}

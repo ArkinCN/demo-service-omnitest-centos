@@ -1,0 +1,26 @@
+{
+  "simulation": true,
+  "run_id": "demo-001",
+  "samples": [
+    {
+      "sequence": 2,
+      "t_s": 1.8,
+      "measurement_started_t_s": 1.7,
+      "measurement_finished_t_s": 1.9000000000000001,
+      "commanded_pwm_pct": 30,
+      "voltage_v": 4.95,
+      "current_probe_v": 0.003,
+      "current_a": null,
+      "measured_pwm_duty_pct": 29.9,
+      "pwm_frequency_hz": 24950,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    }
+  ],
+  "next_after_sequence": 2
+}

@@ -1,0 +1,19 @@
+{
+    "status": "confirmation_required",
+    "executed": false,
+    "reason": "红线动作，未带 confirm_token，已拒绝执行",
+    "how_to_proceed": "把下面这张凭据交给人：前端在 C 区看板弹出确认条，人点确认后调桥的 POST /confirmations/{token}/approve，再带着同一个 confirm_token 和同一组参数重调本工具。",
+    "confirm_token": "ct_PVQKOnLrA-Quvo7u0xme_dDd",
+    "tool": "write_param",
+    "state": "pending",
+    "prompt": "把参数写回驱动板：改变被测对象的行为",
+    "args_preview": {
+        "key": "kp_speed",
+        "value": 1.25
+    },
+    "created_at": 1789831809.5130587,
+    "expires_at": 1789831989.5130587,
+    "seconds_left": 180.0,
+    "approved_by": null,
+    "rejected_reason": null
+}

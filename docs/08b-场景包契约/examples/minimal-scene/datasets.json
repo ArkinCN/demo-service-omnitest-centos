@@ -1,0 +1,42 @@
+{
+  "schema": "datasets/v1",
+  "scene_id": "example.minimal.skeleton",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-20",
+  "belongs_to_flow": "F4 启动测试及结果分析",
+  "demo_profile": {
+    "note": "演示回放这一条。",
+    "datasets": [
+      "example-waveform"
+    ]
+  },
+  "datasets": [
+    {
+      "id": "example-waveform",
+      "name": "示例时序（占位）",
+      "mode": "copied_into_pack",
+      "file_path": "./assets/waveforms/example.csv",
+      "file_size_bytes": 41,
+      "columns": [
+        {
+          "key": "t_s",
+          "name": "时间（s）"
+        },
+        {
+          "key": "i_a",
+          "name": "电流（A）"
+        }
+      ],
+      "label": {
+        "meaning": "占位条目，本骨架包不带真实波形文件。"
+      },
+      "note": "新建包时换成真实登记：实测走 copied_into_pack，合成走 generated_into_pack 并挂 synthetic 与合成横幅。",
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] 08b-场景包契约/README-场景包契约-v1.1.md",
+        "locator": "第 10 节 新建第三个场景包的步骤"
+      },
+      "row_count": 3
+    }
+  ]
+}

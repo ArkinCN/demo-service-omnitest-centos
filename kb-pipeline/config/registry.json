@@ -1,0 +1,149 @@
+{
+  "taxonomy": {
+    "l1": "motor",
+    "l2": "cooling-fan",
+    "l3": "fortior-fu6832"
+  },
+  "process_tags_vocab": [
+    "初始化配置",
+    "测试需求",
+    "启动测试",
+    "调优",
+    "报告"
+  ],
+  "documents": [
+    {
+      "doc_id": "foc-debug-manual",
+      "file": "manuals/FU-AM-FOC方案调试手册-.pdf",
+      "title": "FU-AM-FOC 方案调试手册",
+      "doc_type": "调试手册",
+      "process_tags": [
+        "初始化配置",
+        "启动测试",
+        "调优"
+      ]
+    },
+    {
+      "doc_id": "coolingfan-single-hall-appnote",
+      "file": "manuals/散热风扇单霍尔方案应用手册.pdf",
+      "title": "散热风扇单霍尔方案应用手册",
+      "doc_type": "应用手册",
+      "process_tags": [
+        "初始化配置",
+        "测试需求",
+        "启动测试"
+      ]
+    },
+    {
+      "doc_id": "smo-pll-estimator",
+      "file": "manuals/SMO和PLL估算器.pdf",
+      "title": "SMO 和 PLL 估算器",
+      "doc_type": "原理文档",
+      "process_tags": [
+        "调优"
+      ]
+    },
+    {
+      "doc_id": "ao-estimator",
+      "file": "manuals/AO估算器.pdf",
+      "title": "AO 估算器",
+      "doc_type": "原理文档",
+      "process_tags": [
+        "调优"
+      ]
+    },
+    {
+      "doc_id": "foc-exec-logic",
+      "file": "manuals/FOC执行逻辑.pdf",
+      "title": "FOC 执行逻辑",
+      "doc_type": "原理文档",
+      "process_tags": [
+        "启动测试",
+        "调优"
+      ]
+    },
+    {
+      "doc_id": "omega-startup-logic",
+      "file": "manuals/OMEGA启动执行逻辑.pdf",
+      "title": "OMEGA 启动执行逻辑",
+      "doc_type": "原理文档",
+      "process_tags": [
+        "启动测试",
+        "调优"
+      ]
+    },
+    {
+      "doc_id": "tailwind-startup-training",
+      "file": "manuals/有感无感顺逆风启动培训.pdf",
+      "title": "有感无感顺逆风启动培训",
+      "doc_type": "培训材料",
+      "process_tags": [
+        "启动测试",
+        "调优"
+      ]
+    },
+    {
+      "doc_id": "smo-angle-register-note",
+      "file": "manuals/SMO角度估算的原理介绍和部分寄存器说明.docx",
+      "title": "SMO 角度估算的原理介绍和部分寄存器说明",
+      "doc_type": "原理与寄存器说明",
+      "process_tags": [
+        "初始化配置",
+        "调优"
+      ],
+      "note": "转化很慢但能成：docling 2.129.0 的 msword 后端处理这份 docx 的 VML 旧式图形（msword_backend.py 的 _handle_vml_pictures）实测耗时 651 秒，其余 docx 都在 1 秒内。跑它时 DOC_TIMEOUT_S 不要低于 900。"
+    },
+    {
+      "doc_id": "runtime-logic",
+      "file": "manuals/运行逻辑.docx",
+      "title": "运行逻辑",
+      "doc_type": "原理文档",
+      "process_tags": [
+        "启动测试"
+      ]
+    },
+    {
+      "doc_id": "bug-fix-summary-8080",
+      "file": "manuals/8080_bug修改原因汇总_20250414.docx",
+      "title": "8080 bug 修改原因汇总（2025-04-14）",
+      "doc_type": "问题汇总",
+      "process_tags": [
+        "调优",
+        "报告"
+      ]
+    },
+    {
+      "doc_id": "foc-exam-questions",
+      "file": "manuals/考试题.docx",
+      "title": "FOC 方案考核题",
+      "doc_type": "考核题库",
+      "process_tags": [
+        "测试需求"
+      ]
+    },
+    {
+      "doc_id": "fu6832-datasheet",
+      "file": "datasheet/MCU-DS-14_FU6832_V2.1_20230621.pdf",
+      "title": "MCU-DS-14 FU6832 数据手册 V2.1（2023-06-21）",
+      "doc_type": "芯片数据手册",
+      "process_tags": [
+        "初始化配置",
+        "测试需求"
+      ],
+      "page_limit": 40,
+      "note": "源文件 18 MB、完整篇幅较长，本原型只转换前 40 页作演示"
+    }
+  ],
+  "code_configs": [
+    {
+      "doc_id": "customer-h-fu6832",
+      "file": "code/Customer.h",
+      "title": "Customer.h 工程参数配置文件（FU6832 散热风扇）",
+      "doc_type": "源码参数配置",
+      "process_tags": [
+        "初始化配置",
+        "调优"
+      ]
+    }
+  ]
+}

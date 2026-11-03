@@ -1,0 +1,15 @@
+{
+  "_comment": "Linux overlay：只写随机器变化的字段（serial.port / scope.resource / scope.waveformPoints），深合并覆盖 acceptance.json。使用：由后端自动按 os.name!='nt' 选中，无需手工 export FAN_CONFIG_PATH（设了反而会顶掉本自动选择）。",
+  "_comment_waveformPoints": "2026-10-11：改用 NI-VISA(@ivi) 后端后，libusb 的 450 点上限已不适用——实测 @ivi 读 1200 点不报错。恢复与 Windows 一致的全分辨率。（此前 450 的限制源于 pyvisa-py+libusb，现已不用该通路。）⚠️ 该字段必须位于 scope 内——scope_capture._save_profile_capture 读的是 scope 段。",
+  "serial": {
+    "port": "/dev/ttyUSB0"
+  },
+  "scope": {
+    "resource": "",
+    "_resource_note": "留空 → 运行时按 VID=0x1AB1/PID=0x04CE 自动枚举（见 acceptance.json）。若设备节点非 usbtmc0 或枚举不稳，再在此写死完整 resource 名。",
+    "waveformPoints": 1200,
+    "tach": {
+      "scaleVoltsPerDiv": 0.05
+    }
+  }
+}

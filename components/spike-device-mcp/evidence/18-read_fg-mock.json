@@ -1,0 +1,38 @@
+{
+    "mode": "mock",
+    "ts": 1789831810.2128146,
+    "device_id": "bench",
+    "mock_warning": "合成数据，非台架实测，不得作为测试结论的证据",
+    "status": "ok",
+    "samples": [
+        {
+            "i": 0,
+            "fg1_hz": 292.4274,
+            "fg2_hz": 133.8783,
+            "raw": "FG2=1.338783E+02 FG1=2.924274E+02",
+            "elapsed_ms": 3,
+            "rpm": 8032.7,
+            "fg1_over_fg2": 2.184
+        },
+        {
+            "i": 1,
+            "fg1_hz": 293.5815,
+            "fg2_hz": 134.8215,
+            "raw": "FG2=1.348215E+02 FG1=2.935815E+02",
+            "elapsed_ms": 3,
+            "rpm": 8089.3,
+            "fg1_over_fg2": 2.178
+        },
+        {
+            "i": 2,
+            "fg1_hz": 295.3024,
+            "fg2_hz": 135.0229,
+            "raw": "FG2=1.350229E+02 FG1=2.953024E+02",
+            "elapsed_ms": 3,
+            "rpm": 8101.4,
+            "fg1_over_fg2": 2.187
+        }
+    ],
+    "rpm_mean": 8074.5,
+    "motor_spinning": true
+}

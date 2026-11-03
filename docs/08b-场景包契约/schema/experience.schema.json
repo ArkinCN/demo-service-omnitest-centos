@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fortior.local/scene-pack/v1/experience.schema.json",
+  "title": "experience.json",
+  "description": "经验条目。F1 知识库的经验一路，F4/F5 调参时被检索命中。",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "experience/v1",
+      "description": "文件契约标识，换包不得改。"
+    },
+    "scene_id": {
+      "$ref": "common.schema.json#/$defs/sceneId"
+    },
+    "generated_by": {
+      "type": "string",
+      "description": "产出这份文件的脚本相对路径，例如 _build/build_scene_pack.py。"
+    },
+    "generated_at": {
+      "$ref": "common.schema.json#/$defs/genDate"
+    },
+    "belongs_to_flow": {
+      "$ref": "common.schema.json#/$defs/flowMention",
+      "description": "这份文件主要服务哪条业务流程。人读为主，但句中必须至少出现一个合法的 F1~F6 标签，防止写进不存在的流程号。"
+    },
+    "count": {
+      "type": "integer"
+    },
+    "schema_note": {
+      "type": "string",
+      "description": "单条经验的字段口径说明。"
+    },
+    "difference_from_scene1": {
+      "type": "string",
+      "description": "与另一个场景包在证据构成上的差别。"
+    },
+    "evidence_levels": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "证据档位释义表。档位名随场景的知识来源而变——有实物台架的包才有「台架实测数据」，全靠公开材料的包才有「法规条款」。不设固定枚举，但每条经验的 evidence_level 必须是这张表里的键。"
+    },
+    "evidence_level_counts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer"
+      }
+    },
+    "experiences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "经验标识，形如 EXP-001。"
+          },
+          "symptom": {
+            "type": "string",
+            "description": "问题现象。"
+          },
+          "cause": {
+            "type": "string",
+            "description": "原因。"
+          },
+          "action": {
+            "type": "string",
+            "description": "调整动作。"
+          },
+          "result": {
+            "type": "string",
+            "description": "结果，含「什么情况说明不是调参能解决的」。"
+          },
+          "tags": {
+            "type": "object",
+            "description": "检索标签。包一用英文键 scene/flow/parameters/topic，包二用中文键 参数/现象/流程，前端 normalize() 会抹平。新包建议直接用英文键。",
+            "properties": {
+              "flow": {
+                "$ref": "common.schema.json#/$defs/flowLabel",
+                "description": "这条经验主要在哪条流程里命中。包二用中文键「流程」，本键缺省即可；写了就必须是合法流程标签。"
+              }
+            }
+          },
+          "evidence_level": {
+            "type": "string",
+            "description": "证据档位，须是顶层 evidence_levels 的键之一。"
+          },
+          "usage": {
+            "$ref": "common.schema.json#/$defs/usageAxis"
+          },
+          "usage_class": {
+            "type": "string",
+            "description": "知识分类体系里的归类标签，形如「D1 实验沉淀」。"
+          },
+          "usage_review": {
+            "type": "string",
+            "description": "归类待人工复核的标记。"
+          },
+          "parameters_resolved": {
+            "type": "boolean",
+            "description": "tags.parameters 里的参数名是否已对上 control-parameters 的 key。"
+          },
+          "note": {
+            "type": "string"
+          },
+          "_status": {
+            "$ref": "common.schema.json#/$defs/statusText"
+          },
+          "_source": {
+            "$ref": "common.schema.json#/$defs/sourceRefs"
+          }
+        },
+        "required": [
+          "_source",
+          "action",
+          "cause",
+          "evidence_level",
+          "id",
+          "result",
+          "symptom",
+          "tags",
+          "usage",
+          "usage_class"
+        ]
+      }
+    }
+  },
+  "required": [
+    "belongs_to_flow",
+    "count",
+    "evidence_levels",
+    "experiences",
+    "generated_at",
+    "generated_by",
+    "scene_id",
+    "schema",
+    "schema_note"
+  ]
+}

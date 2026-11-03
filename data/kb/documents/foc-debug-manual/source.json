@@ -1,0 +1,26 @@
+{
+  "doc_id": "foc-debug-manual",
+  "title": "FU-AM-FOC 方案调试手册",
+  "doc_type": "调试手册",
+  "taxonomy": {
+    "l1": "motor",
+    "l2": "cooling-fan",
+    "l3": "fortior-fu6832"
+  },
+  "process_tags": [
+    "初始化配置",
+    "启动测试",
+    "调优"
+  ],
+  "format": "pdf",
+  "pages": 55,
+  "page_limit": null,
+  "tables": 9,
+  "source_path": "[源] manuals/FU-AM-FOC方案调试手册-.pdf",
+  "staged_input": "[源] manuals/FU-AM-FOC方案调试手册-.pdf",
+  "sha256": "d46cf11807a4c0b6514c5c285379283bc0f2c0c72255e77f2afbcf9a479d8fc0",
+  "bytes": 5792231,
+  "converter": "docling",
+  "ocr": false,
+  "note": null
+}

@@ -1,0 +1,770 @@
+{
+  "simulation": true,
+  "synthetic": true,
+  "run_id": "synthetic-40s",
+  "planned_duration_s": 40,
+  "time_source": "synthetic_fixture_not_hardware_clock",
+  "samples": [
+    {
+      "sequence": 1,
+      "t_s": 0.5,
+      "measurement_started_t_s": 0.4,
+      "measurement_finished_t_s": 0.6,
+      "commanded_pwm_pct": 30,
+      "voltage_v": 5.0,
+      "current_probe_v": 0.006,
+      "current_a": null,
+      "measured_pwm_duty_pct": 29.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 2,
+      "t_s": 1.5,
+      "measurement_started_t_s": 1.4,
+      "measurement_finished_t_s": 1.6,
+      "commanded_pwm_pct": 30,
+      "voltage_v": 4.999,
+      "current_probe_v": 0.006,
+      "current_a": null,
+      "measured_pwm_duty_pct": 29.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 3,
+      "t_s": 2.5,
+      "measurement_started_t_s": 2.4,
+      "measurement_finished_t_s": 2.6,
+      "commanded_pwm_pct": 30,
+      "voltage_v": 4.998,
+      "current_probe_v": 0.006,
+      "current_a": null,
+      "measured_pwm_duty_pct": 29.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 4,
+      "t_s": 3.5,
+      "measurement_started_t_s": 3.4,
+      "measurement_finished_t_s": 3.6,
+      "commanded_pwm_pct": 30,
+      "voltage_v": 4.997,
+      "current_probe_v": 0.006,
+      "current_a": null,
+      "measured_pwm_duty_pct": 29.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 5,
+      "t_s": 4.5,
+      "measurement_started_t_s": 4.4,
+      "measurement_finished_t_s": 4.6,
+      "commanded_pwm_pct": 30,
+      "voltage_v": 4.996,
+      "current_probe_v": 0.006,
+      "current_a": null,
+      "measured_pwm_duty_pct": 29.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 6,
+      "t_s": 5.5,
+      "measurement_started_t_s": 5.4,
+      "measurement_finished_t_s": 5.6,
+      "commanded_pwm_pct": 30,
+      "voltage_v": 4.995,
+      "current_probe_v": 0.006,
+      "current_a": null,
+      "measured_pwm_duty_pct": 29.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 7,
+      "t_s": 6.5,
+      "measurement_started_t_s": 6.4,
+      "measurement_finished_t_s": 6.6,
+      "commanded_pwm_pct": 30,
+      "voltage_v": 4.994,
+      "current_probe_v": 0.006,
+      "current_a": null,
+      "measured_pwm_duty_pct": 29.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 8,
+      "t_s": 7.5,
+      "measurement_started_t_s": 7.4,
+      "measurement_finished_t_s": 7.6,
+      "commanded_pwm_pct": 30,
+      "voltage_v": 4.993,
+      "current_probe_v": 0.006,
+      "current_a": null,
+      "measured_pwm_duty_pct": 29.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 9,
+      "t_s": 8.5,
+      "measurement_started_t_s": 8.4,
+      "measurement_finished_t_s": 8.6,
+      "commanded_pwm_pct": 30,
+      "voltage_v": 4.992,
+      "current_probe_v": 0.006,
+      "current_a": null,
+      "measured_pwm_duty_pct": 29.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 10,
+      "t_s": 9.5,
+      "measurement_started_t_s": 9.4,
+      "measurement_finished_t_s": 9.6,
+      "commanded_pwm_pct": 30,
+      "voltage_v": 4.991,
+      "current_probe_v": 0.006,
+      "current_a": null,
+      "measured_pwm_duty_pct": 29.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 11,
+      "t_s": 10.5,
+      "measurement_started_t_s": 10.4,
+      "measurement_finished_t_s": 10.6,
+      "commanded_pwm_pct": 50,
+      "voltage_v": 4.99,
+      "current_probe_v": 0.008,
+      "current_a": null,
+      "measured_pwm_duty_pct": 49.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 12,
+      "t_s": 11.5,
+      "measurement_started_t_s": 11.4,
+      "measurement_finished_t_s": 11.6,
+      "commanded_pwm_pct": 50,
+      "voltage_v": 4.989,
+      "current_probe_v": 0.008,
+      "current_a": null,
+      "measured_pwm_duty_pct": 49.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 13,
+      "t_s": 12.5,
+      "measurement_started_t_s": 12.4,
+      "measurement_finished_t_s": 12.6,
+      "commanded_pwm_pct": 50,
+      "voltage_v": 4.988,
+      "current_probe_v": 0.008,
+      "current_a": null,
+      "measured_pwm_duty_pct": 49.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 14,
+      "t_s": 13.5,
+      "measurement_started_t_s": 13.4,
+      "measurement_finished_t_s": 13.6,
+      "commanded_pwm_pct": 50,
+      "voltage_v": 4.987,
+      "current_probe_v": 0.008,
+      "current_a": null,
+      "measured_pwm_duty_pct": 49.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 15,
+      "t_s": 14.5,
+      "measurement_started_t_s": 14.4,
+      "measurement_finished_t_s": 14.6,
+      "commanded_pwm_pct": 50,
+      "voltage_v": 4.986,
+      "current_probe_v": 0.008,
+      "current_a": null,
+      "measured_pwm_duty_pct": 49.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 16,
+      "t_s": 15.5,
+      "measurement_started_t_s": 15.4,
+      "measurement_finished_t_s": 15.6,
+      "commanded_pwm_pct": 50,
+      "voltage_v": null,
+      "current_probe_v": null,
+      "current_a": null,
+      "measured_pwm_duty_pct": 49.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "missing",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 17,
+      "t_s": 16.5,
+      "measurement_started_t_s": 16.4,
+      "measurement_finished_t_s": 16.6,
+      "commanded_pwm_pct": 50,
+      "voltage_v": 4.984,
+      "current_probe_v": 0.008,
+      "current_a": null,
+      "measured_pwm_duty_pct": 49.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 18,
+      "t_s": 17.5,
+      "measurement_started_t_s": 17.4,
+      "measurement_finished_t_s": 17.6,
+      "commanded_pwm_pct": 50,
+      "voltage_v": 4.983,
+      "current_probe_v": 0.008,
+      "current_a": null,
+      "measured_pwm_duty_pct": 49.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 19,
+      "t_s": 18.5,
+      "measurement_started_t_s": 18.4,
+      "measurement_finished_t_s": 18.6,
+      "commanded_pwm_pct": 50,
+      "voltage_v": 4.982,
+      "current_probe_v": 0.008,
+      "current_a": null,
+      "measured_pwm_duty_pct": 49.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 20,
+      "t_s": 19.5,
+      "measurement_started_t_s": 19.4,
+      "measurement_finished_t_s": 19.6,
+      "commanded_pwm_pct": 50,
+      "voltage_v": 4.981,
+      "current_probe_v": 0.008,
+      "current_a": null,
+      "measured_pwm_duty_pct": 49.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 21,
+      "t_s": 20.5,
+      "measurement_started_t_s": 20.4,
+      "measurement_finished_t_s": 20.6,
+      "commanded_pwm_pct": 70,
+      "voltage_v": 4.98,
+      "current_probe_v": 0.01,
+      "current_a": null,
+      "measured_pwm_duty_pct": 69.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 22,
+      "t_s": 21.5,
+      "measurement_started_t_s": 21.4,
+      "measurement_finished_t_s": 21.6,
+      "commanded_pwm_pct": 70,
+      "voltage_v": 4.979,
+      "current_probe_v": 0.01,
+      "current_a": null,
+      "measured_pwm_duty_pct": 69.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 23,
+      "t_s": 22.5,
+      "measurement_started_t_s": 22.4,
+      "measurement_finished_t_s": 22.6,
+      "commanded_pwm_pct": 70,
+      "voltage_v": 4.978,
+      "current_probe_v": 0.01,
+      "current_a": null,
+      "measured_pwm_duty_pct": 69.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 24,
+      "t_s": 23.5,
+      "measurement_started_t_s": 23.4,
+      "measurement_finished_t_s": 23.6,
+      "commanded_pwm_pct": 70,
+      "voltage_v": 4.977,
+      "current_probe_v": 0.01,
+      "current_a": null,
+      "measured_pwm_duty_pct": 69.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 25,
+      "t_s": 24.5,
+      "measurement_started_t_s": 24.4,
+      "measurement_finished_t_s": 24.6,
+      "commanded_pwm_pct": 70,
+      "voltage_v": 4.976,
+      "current_probe_v": 0.01,
+      "current_a": null,
+      "measured_pwm_duty_pct": 69.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 26,
+      "t_s": 25.5,
+      "measurement_started_t_s": 25.4,
+      "measurement_finished_t_s": 25.6,
+      "commanded_pwm_pct": 70,
+      "voltage_v": 4.975,
+      "current_probe_v": 0.01,
+      "current_a": null,
+      "measured_pwm_duty_pct": 69.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 27,
+      "t_s": 26.5,
+      "measurement_started_t_s": 26.4,
+      "measurement_finished_t_s": 26.6,
+      "commanded_pwm_pct": 70,
+      "voltage_v": 4.974,
+      "current_probe_v": 0.01,
+      "current_a": null,
+      "measured_pwm_duty_pct": 69.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 28,
+      "t_s": 27.5,
+      "measurement_started_t_s": 27.4,
+      "measurement_finished_t_s": 27.6,
+      "commanded_pwm_pct": 70,
+      "voltage_v": 4.973,
+      "current_probe_v": 0.01,
+      "current_a": null,
+      "measured_pwm_duty_pct": 69.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 29,
+      "t_s": 28.5,
+      "measurement_started_t_s": 28.4,
+      "measurement_finished_t_s": 28.6,
+      "commanded_pwm_pct": 70,
+      "voltage_v": 4.972,
+      "current_probe_v": 0.01,
+      "current_a": null,
+      "measured_pwm_duty_pct": 69.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 30,
+      "t_s": 29.5,
+      "measurement_started_t_s": 29.4,
+      "measurement_finished_t_s": 29.6,
+      "commanded_pwm_pct": 70,
+      "voltage_v": 4.971,
+      "current_probe_v": 0.01,
+      "current_a": null,
+      "measured_pwm_duty_pct": 69.9,
+      "pwm_frequency_hz": 25000,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 31,
+      "t_s": 30.5,
+      "measurement_started_t_s": 30.4,
+      "measurement_finished_t_s": 30.6,
+      "commanded_pwm_pct": 100,
+      "voltage_v": 4.97,
+      "current_probe_v": 0.013,
+      "current_a": null,
+      "measured_pwm_duty_pct": null,
+      "pwm_frequency_hz": null,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 32,
+      "t_s": 31.5,
+      "measurement_started_t_s": 31.4,
+      "measurement_finished_t_s": 31.6,
+      "commanded_pwm_pct": 100,
+      "voltage_v": 4.969,
+      "current_probe_v": 0.013,
+      "current_a": null,
+      "measured_pwm_duty_pct": null,
+      "pwm_frequency_hz": null,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 33,
+      "t_s": 32.5,
+      "measurement_started_t_s": 32.4,
+      "measurement_finished_t_s": 32.6,
+      "commanded_pwm_pct": 100,
+      "voltage_v": 4.968,
+      "current_probe_v": 0.013,
+      "current_a": null,
+      "measured_pwm_duty_pct": null,
+      "pwm_frequency_hz": null,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 34,
+      "t_s": 33.5,
+      "measurement_started_t_s": 33.4,
+      "measurement_finished_t_s": 33.6,
+      "commanded_pwm_pct": 100,
+      "voltage_v": 4.967,
+      "current_probe_v": 0.013,
+      "current_a": null,
+      "measured_pwm_duty_pct": null,
+      "pwm_frequency_hz": null,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 35,
+      "t_s": 34.5,
+      "measurement_started_t_s": 34.4,
+      "measurement_finished_t_s": 34.6,
+      "commanded_pwm_pct": 100,
+      "voltage_v": 4.966,
+      "current_probe_v": 0.013,
+      "current_a": null,
+      "measured_pwm_duty_pct": null,
+      "pwm_frequency_hz": null,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 36,
+      "t_s": 35.5,
+      "measurement_started_t_s": 35.4,
+      "measurement_finished_t_s": 35.6,
+      "commanded_pwm_pct": 100,
+      "voltage_v": 4.965,
+      "current_probe_v": 0.013,
+      "current_a": null,
+      "measured_pwm_duty_pct": null,
+      "pwm_frequency_hz": null,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 37,
+      "t_s": 36.5,
+      "measurement_started_t_s": 36.4,
+      "measurement_finished_t_s": 36.6,
+      "commanded_pwm_pct": 100,
+      "voltage_v": 4.964,
+      "current_probe_v": 0.013,
+      "current_a": null,
+      "measured_pwm_duty_pct": null,
+      "pwm_frequency_hz": null,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 38,
+      "t_s": 37.5,
+      "measurement_started_t_s": 37.4,
+      "measurement_finished_t_s": 37.6,
+      "commanded_pwm_pct": 100,
+      "voltage_v": 4.963,
+      "current_probe_v": 0.013,
+      "current_a": null,
+      "measured_pwm_duty_pct": null,
+      "pwm_frequency_hz": null,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 39,
+      "t_s": 38.5,
+      "measurement_started_t_s": 38.4,
+      "measurement_finished_t_s": 38.6,
+      "commanded_pwm_pct": 100,
+      "voltage_v": 4.962,
+      "current_probe_v": 0.013,
+      "current_a": null,
+      "measured_pwm_duty_pct": null,
+      "pwm_frequency_hz": null,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    },
+    {
+      "sequence": 40,
+      "t_s": 39.5,
+      "measurement_started_t_s": 39.4,
+      "measurement_finished_t_s": 39.6,
+      "commanded_pwm_pct": 100,
+      "voltage_v": 4.961,
+      "current_probe_v": 0.013,
+      "current_a": null,
+      "measured_pwm_duty_pct": null,
+      "pwm_frequency_hz": null,
+      "rpm": null,
+      "quality": {
+        "voltage": "provisional_probe_ratio",
+        "current": "conversion_not_confirmed",
+        "rpm": "not_connected"
+      },
+      "capture_id": null
+    }
+  ],
+  "next_after_sequence": 40
+}

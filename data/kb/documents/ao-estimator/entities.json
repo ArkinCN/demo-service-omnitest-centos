@@ -1,0 +1,50 @@
+{
+  "doc_id": "ao-estimator",
+  "summary": {
+    "parameters": 4,
+    "parameters_matching_customer_h": 0,
+    "registers": 0,
+    "thresholds": 0,
+    "units": 0,
+    "procedure_steps": 0
+  },
+  "parameters": [
+    {
+      "name": "OBS_K3T",
+      "count": 2,
+      "in_customer_h": false,
+      "first_chunk": "ao-estimator#c0009",
+      "first_page": 3,
+      "context": "``` #define OBS_K1T #define OBS K2T define OBS_K3T ```"
+    },
+    {
+      "name": "HW_BOARD_CURR_BASE",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "ao-estimator#c0010",
+      "first_page": 3,
+      "context": "``` ( B / ( _Q11 (RS*HW_BOARD_CURR_BASE/HW_BOARD_VOLTAGE_BASE) _Q8(2.5) ```"
+    },
+    {
+      "name": "HW_BOARD_VOLTAGE_BASE",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "ao-estimator#c0010",
+      "first_page": 3,
+      "context": "``` ( B / ( _Q11 (RS*HW_BOARD_CURR_BASE/HW_BOARD_VOLTAGE_BASE) _Q8(2.5) ```"
+    },
+    {
+      "name": "OBS_K1T",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "ao-estimator#c0009",
+      "first_page": 3,
+      "context": "``` #define OBS_K1T #define OBS K2T define OBS_K3T ```"
+    }
+  ],
+  "registers": [],
+  "thresholds": [],
+  "units": [],
+  "procedure_steps": [],
+  "method": "regex+heuristic, no LLM; 参数名=全大写下划线标识符, 寄存器=标识符±40字符内出现『寄存器/register』, 阈值=数值+单位且±40字符内含阈值语境词, 规程步骤=编号行且含操作动词"
+}

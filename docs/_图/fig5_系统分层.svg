@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1480" height="1010" viewBox="0 0 1480 1010">
+<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E5E45"/></marker>
+<marker id="ahw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A8C5B5"/></marker>
+<marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A6353A"/></marker>
+</defs>
+<rect width="1480" height="1010" fill="#FFFFFF"/>
+<text x="40" y="52" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="18" font-weight="600" fill="#2E5E45">系统分层　浏览器 → 服务端 → 台架侧 → 硬件</text>
+<text x="40" y="78" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#9A9A9A">系统基于浏览器，不装客户端；单机设备的四种接入形态用四条不同线型标在台架侧与硬件之间</text>
+<rect x="40" y="104" width="1400" height="118" rx="6" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="56" y="130" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2E5E45">① 浏览器　网页四块，不装客户端</text>
+<rect x="56" y="144" width="328" height="62" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="220" y="170" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2C2C2C">A 顶栏</text>
+<text x="220" y="192" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">产品选择 · 六流程标签 · 动作条</text>
+<rect x="400" y="144" width="328" height="62" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="564" y="170" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2C2C2C">B 左栏</text>
+<text x="564" y="192" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">参数配置与确认</text>
+<rect x="744" y="144" width="328" height="62" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="908" y="170" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2C2C2C">C 右上</text>
+<text x="908" y="192" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">面板卡片与竖向工具条</text>
+<rect x="1088" y="144" width="328" height="62" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="1252" y="170" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2C2C2C">D 右下</text>
+<text x="1252" y="192" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">测试副驾对话</text>
+<line x1="740" y1="224" x2="740" y2="258" stroke="#2E5E45" stroke-width="2" marker-end="url(#ah)" marker-start="url(#ah)"/>
+<text x="756" y="248" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">HTTP / WebSocket</text>
+<rect x="40" y="262" width="1400" height="178" rx="6" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="56" y="288" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2E5E45">② 服务端</text>
+<line x1="748" y1="302" x2="748" y2="424" stroke="#C8C5BD" stroke-width="1"/>
+<text x="56" y="330" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2E5E45">FastAPI 应用服务</text>
+<text x="56" y="358" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">用户与权限　账号 · 三档权限 · 审计留痕</text>
+<text x="56" y="382" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">知识库　上传 · 五阶段转化 · 检索服务</text>
+<text x="56" y="406" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">场景包与会话　包加载 · 流程状态机 · 产物留档</text>
+<rect x="768" y="312" width="200" height="26" rx="4" fill="#1F4232" stroke="#1F4232" stroke-width="1"/>
+<text x="778" y="330" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF">DeepSeek Harness 运行时</text>
+<text x="768" y="358" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">技能包　把规程与判据转成可调用技能</text>
+<text x="768" y="382" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">Hook　动作前置校验：联锁 · 权限 · 闸门</text>
+<text x="768" y="406" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">MCP 桥接　把设备工具挂成统一接口</text>
+<line x1="740" y1="442" x2="740" y2="476" stroke="#2E5E45" stroke-width="2" marker-end="url(#ah)" marker-start="url(#ah)"/>
+<text x="756" y="466" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">设备服务 API / SSH 网关</text>
+<rect x="40" y="480" width="1400" height="220" rx="6" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="56" y="506" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2E5E45">③ 台架侧　台架机与单机设备所在的那几台机器</text>
+<rect x="56" y="520" width="440" height="76" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="276" y="550" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2C2C2C">设备服务</text>
+<text x="276" y="574" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">台架机上的统一硬件接口，常驻采集出口</text>
+<rect x="516" y="520" width="440" height="76" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="736" y="550" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2C2C2C">桌面版工具端口</text>
+<text x="736" y="574" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">只能在单机上跑的原生软件，网页不重写它</text>
+<rect x="976" y="520" width="440" height="76" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="1196" y="550" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2C2C2C">SSH 网关</text>
+<text x="1196" y="574" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">凭据只存服务端，浏览器不直连远程会话</text>
+<text x="56" y="634" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">凡只能在某台机器上跑的设备，界面不重写它的控制面板，而是把那台机器的会话拉过来。</text>
+<text x="56" y="658" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">接入形态由场景包的设备记录声明。峰岹场景里示波器同时用三种：拉数值画曲线、开命令行跑深存储脚本、切远程桌面调游标。</text>
+<text x="56" y="682" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="600" fill="#A6353A">凭据只存服务端，浏览器侧不管理任何凭据。</text>
+<line x1="220" y1="702" x2="220" y2="754" stroke="#2E5E45" stroke-width="2" marker-end="url(#ah)"/>
+<text x="232" y="722" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="600" fill="#2C2C2C">数据拉取</text>
+<text x="232" y="740" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="10" font-weight="400" fill="#9A9A9A">只取数值与波形，不控设备</text>
+<line x1="564" y1="702" x2="564" y2="754" stroke="#2E5E45" stroke-width="1.5" stroke-dasharray="8 5" marker-end="url(#ah)"/>
+<text x="576" y="722" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="600" fill="#2C2C2C">命令行会话</text>
+<text x="576" y="740" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="10" font-weight="400" fill="#9A9A9A">远程登录跑脚本 · 取文件 · 查日志</text>
+<line x1="908" y1="702" x2="908" y2="754" stroke="#2E5E45" stroke-width="1.5" stroke-dasharray="2 4" marker-end="url(#ah)"/>
+<text x="920" y="722" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="600" fill="#2C2C2C">远程桌面内嵌</text>
+<text x="920" y="740" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="10" font-weight="400" fill="#9A9A9A">卡内实时画面，放大态可交互</text>
+<line x1="1252" y1="702" x2="1252" y2="754" stroke="#A8C5B5" stroke-width="1.5" stroke-dasharray="12 4 2 4" marker-end="url(#ahw)"/>
+<text x="1264" y="722" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="600" fill="#2C2C2C">独立窗口跳转</text>
+<text x="1264" y="740" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="10" font-weight="400" fill="#9A9A9A">新窗口拉起，网页侧接收回传产物</text>
+<rect x="40" y="760" width="1400" height="118" rx="6" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="56" y="786" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2E5E45">④ 硬件　台架上的真实设备</text>
+<rect x="56" y="800" width="328" height="62" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="220" y="826" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2C2C2C">电机与风洞台架</text>
+<text x="220" y="848" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">被测风扇 · 逆风风扇 · 红外测速</text>
+<rect x="400" y="800" width="328" height="62" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="564" y="826" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2C2C2C">示波器</text>
+<text x="564" y="848" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">四通道，只有单机图形软件</text>
+<rect x="744" y="800" width="328" height="62" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="908" y="826" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2C2C2C">程控电源</text>
+<text x="908" y="848" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">可编程调压与限流</text>
+<rect x="1088" y="800" width="328" height="62" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="1252" y="826" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2C2C2C">调试器与烧录器</text>
+<text x="1252" y="848" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="11" font-weight="400" fill="#555555">编译烧录 · 寄存器读写</text>
+<line x1="40" y1="916" x2="1440" y2="916" stroke="#C8C5BD" stroke-width="1"/>
+<text x="40" y="940" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">线型即接入形态：实线＝数据拉取　长虚线＝命令行会话　点线＝远程桌面内嵌　点划淡线＝独立窗口跳转。</text>
+<text x="40" y="964" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">四种形态按设备能力选，同一台设备可以同时用多种；接哪一种写在场景包的设备记录里，不写在前端。</text>
+</svg>

@@ -1,0 +1,189 @@
+/*
+ * All colours are consumed through CSS variables so the host application can
+ * re-theme the widget without touching component code. The defaults below are
+ * the Fortior palette; override them on any ancestor element.
+ */
+.ts-root {
+  --color-primary: #2E5E45;
+  --color-accent: #A6353A;
+  --color-text: #2C2C2C;
+  --color-text-muted: #555555;
+  --color-text-faint: #9A9A9A;
+  --color-tint: #EAF2EC;
+  --color-bg: #ffffff;
+  --color-rule: #C8C5BD;
+  --color-grid: #ECEAE5;
+
+  /* Channel ramp: two hues only (green family + the accent) plus a neutral.
+     Ordered so that any subset of the first four stays mutually legible on
+     white; the pale sage is last because it is the weakest at 1.4 px. */
+  --ts-ch-1: var(--color-primary);
+  --ts-ch-2: #6B9E82;
+  --ts-ch-3: #2C2C2C;
+  --ts-ch-4: var(--color-accent);
+  --ts-ch-5: #A8C5B5;
+
+  position: relative;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: inherit;
+  box-sizing: border-box;
+}
+.ts-root *,
+.ts-root *::before,
+.ts-root *::after { box-sizing: border-box; }
+
+.ts-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-bottom: 6px;
+  min-height: 20px;
+}
+
+.ts-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.ts-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+  color: var(--color-text);
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+}
+.ts-legend-item[aria-pressed='false'] { color: var(--color-text-faint); }
+.ts-legend-swatch {
+  width: 14px;
+  height: 0;
+  border-top-width: 2.5px;
+  border-top-style: solid;
+  flex: none;
+}
+.ts-legend-item[aria-pressed='false'] .ts-legend-swatch { border-top-color: var(--color-text-faint) !important; }
+
+.ts-readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 14px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  min-height: 18px;
+}
+.ts-readout-t { color: var(--color-text); font-weight: 600; }
+.ts-readout-v { color: var(--color-text); }
+
+.ts-plot { width: 100%; }
+.ts-hint {
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--color-text-faint);
+}
+
+/* --- uPlot overrides: strip its default chrome, adopt our palette --- */
+.ts-root .uplot,
+.ts-root .u-wrap { font-family: inherit; }
+.ts-root .u-legend { display: none; }
+.ts-root .u-cursor-x,
+.ts-root .u-cursor-y { border-color: var(--color-rule); }
+.ts-root .u-select {
+  background: var(--color-tint);
+  opacity: 0.55;
+}
+
+/* --- WaveformCard --- */
+.ts-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-rule);
+  text-align: left;
+  font: inherit;
+  color: var(--color-text);
+  width: 100%;
+  cursor: default;
+}
+.ts-card--clickable { cursor: pointer; }
+.ts-card--clickable:hover { border-color: var(--color-primary); }
+.ts-card--clickable:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.ts-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+.ts-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.35;
+}
+.ts-card-sub {
+  font-size: 11px;
+  color: var(--color-text-faint);
+  margin: 2px 0 0;
+  line-height: 1.4;
+}
+.ts-card-verdict {
+  flex: none;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border: 1px solid currentColor;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+.ts-card-verdict--pass { color: var(--color-primary); background: var(--color-tint); }
+.ts-card-verdict--fail { color: var(--color-accent); }
+
+.ts-card-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  border-top: 1px solid var(--color-grid);
+  padding-top: 10px;
+}
+.ts-card-metric { min-width: 0; }
+.ts-card-metric-label {
+  font-size: 10.5px;
+  color: var(--color-text-faint);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ts-card-metric-value {
+  font-size: 16px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.3;
+  margin-top: 1px;
+}
+.ts-card-metric-unit {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  margin-left: 2px;
+}
+
+@media (max-width: 520px) {
+  .ts-card-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

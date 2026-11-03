@@ -1,0 +1,235 @@
+{
+  "formatVersion": "1.0.0",
+  "metadata": {
+    "name": "新工作流",
+    "createdAt": "2026-04-15T03:10:14.957Z",
+    "updatedAt": "2026-04-21T08:31:38.355Z",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0
+    },
+    "isTemplate": false
+  },
+  "definition": {
+    "nodes": [
+      {
+        "id": "40f4643a-d96b-4823-9f22-b501ab212e05",
+        "type": "start",
+        "position": {
+          "x": 1744,
+          "y": 832
+        },
+        "data": {
+          "label": "开始"
+        },
+        "selected": false
+      },
+      {
+        "id": "040f2dba-35dc-447b-b199-fc9db80f5319",
+        "type": "end",
+        "position": {
+          "x": 3856,
+          "y": 736
+        },
+        "data": {
+          "label": "结束",
+          "status": "success"
+        },
+        "selected": false
+      },
+      {
+        "id": "502b09dd-68cb-4871-8fb7-444b08e5d0e5",
+        "type": "loop",
+        "position": {
+          "x": 2480,
+          "y": 832
+        },
+        "data": {
+          "label": "循环",
+          "loopType": "count",
+          "count": 1000,
+          "maxIterations": 1001
+        },
+        "selected": false
+      },
+      {
+        "id": "1dc9170d-5b3c-4a6a-8f51-df79f1dfaf0c",
+        "type": "variable",
+        "position": {
+          "x": 2752,
+          "y": 576
+        },
+        "data": {
+          "label": "变量操作",
+          "operation": "decrement",
+          "variableName": "PWMduty",
+          "value": "1",
+          "initialValue": "20",
+          "minValue": "0",
+          "maxValue": "100",
+          "useVariableValue": false
+        },
+        "selected": false
+      },
+      {
+        "id": "0bc50cc1-8607-4324-9d9e-296fffd6d471",
+        "type": "loop_break",
+        "position": {
+          "x": 3472,
+          "y": 640
+        },
+        "data": {
+          "label": "循环跳出"
+        },
+        "selected": false
+      },
+      {
+        "id": "09b19216-1b64-478d-a7ce-39bb1e7583e3",
+        "type": "end",
+        "position": {
+          "x": 3440,
+          "y": 976
+        },
+        "data": {
+          "label": "结束",
+          "status": "success"
+        },
+        "selected": false
+      },
+      {
+        "id": "006f6e14-6210-4320-b0e9-bf253ce74e15",
+        "type": "hid_preset_fan_start_test",
+        "position": {
+          "x": 3088,
+          "y": 704
+        },
+        "data": {
+          "label": "启动风扇测试",
+          "presetFunction": "FAN_START_TEST",
+          "paramValues": {
+            "pwm": {
+              "mode": "variable",
+              "variableName": "PWMduty"
+            }
+          }
+        },
+        "selected": false
+      },
+      {
+        "id": "c7c221e8-d3af-4a25-8417-176b0c293046",
+        "type": "delay",
+        "position": {
+          "x": 3744,
+          "y": 896
+        },
+        "data": {
+          "label": "延时",
+          "duration": 2000,
+          "useVariable": false,
+          "remainingTime": 0
+        }
+      },
+      {
+        "id": "cef06153-cbdd-4ae3-b888-57fa2e0b7f62",
+        "type": "hid_preset_voltage_set",
+        "position": {
+          "x": 2048,
+          "y": 832
+        },
+        "data": {
+          "label": "设置电压",
+          "presetFunction": "VOLTAGE_SET",
+          "paramValues": {
+            "voltage": 12
+          }
+        }
+      },
+      {
+        "id": "94af84cc-53ea-49f4-a99d-f6cee68bc4df",
+        "type": "hid_preset_power_on",
+        "position": {
+          "x": 2320,
+          "y": 688
+        },
+        "data": {
+          "label": "打开电源",
+          "presetFunction": "POWER_ON"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge-305bdabd-2762-4678-a1bf-66b1b0bad75d",
+        "source": "502b09dd-68cb-4871-8fb7-444b08e5d0e5",
+        "target": "09b19216-1b64-478d-a7ce-39bb1e7583e3",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      },
+      {
+        "id": "edge-48e7907f-c4c0-4fa6-a74f-22197fa5456f",
+        "source": "0bc50cc1-8607-4324-9d9e-296fffd6d471",
+        "target": "040f2dba-35dc-447b-b199-fc9db80f5319",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      },
+      {
+        "id": "e08cfc7c-014b-4e15-9f27-582e111678b3",
+        "source": "c7c221e8-d3af-4a25-8417-176b0c293046",
+        "target": "502b09dd-68cb-4871-8fb7-444b08e5d0e5",
+        "sourceHandle": "output",
+        "targetHandle": "loop_end"
+      },
+      {
+        "id": "33c8650a-0e6b-46af-95d2-2e5026a77021",
+        "source": "40f4643a-d96b-4823-9f22-b501ab212e05",
+        "target": "cef06153-cbdd-4ae3-b888-57fa2e0b7f62",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      },
+      {
+        "id": "42e5f394-cc25-4183-b0f4-73ec5921655e",
+        "source": "cef06153-cbdd-4ae3-b888-57fa2e0b7f62",
+        "target": "94af84cc-53ea-49f4-a99d-f6cee68bc4df",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      },
+      {
+        "id": "7e9ed8c6-7a6a-4f14-bcf6-0544ca3b9b33",
+        "source": "94af84cc-53ea-49f4-a99d-f6cee68bc4df",
+        "target": "502b09dd-68cb-4871-8fb7-444b08e5d0e5",
+        "sourceHandle": "error",
+        "targetHandle": "input"
+      },
+      {
+        "id": "3f7da63c-e213-4d21-9c2b-b4d3b51125f5",
+        "source": "502b09dd-68cb-4871-8fb7-444b08e5d0e5",
+        "target": "1dc9170d-5b3c-4a6a-8f51-df79f1dfaf0c",
+        "sourceHandle": "loop_start",
+        "targetHandle": "input"
+      },
+      {
+        "id": "89268c9d-68fa-4a13-b61d-40a8b0bc7e39",
+        "source": "1dc9170d-5b3c-4a6a-8f51-df79f1dfaf0c",
+        "target": "006f6e14-6210-4320-b0e9-bf253ce74e15",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      },
+      {
+        "id": "50ab1b03-ed44-441b-84a4-095a980c3a6a",
+        "source": "006f6e14-6210-4320-b0e9-bf253ce74e15",
+        "target": "c7c221e8-d3af-4a25-8417-176b0c293046",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      },
+      {
+        "id": "744dab6b-65be-49e7-b784-3b2c5b079389",
+        "source": "006f6e14-6210-4320-b0e9-bf253ce74e15",
+        "target": "0bc50cc1-8607-4324-9d9e-296fffd6d471",
+        "sourceHandle": "error",
+        "targetHandle": "input"
+      }
+    ],
+    "variables": []
+  }
+}

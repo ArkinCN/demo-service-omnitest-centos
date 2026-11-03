@@ -1,0 +1,150 @@
+{
+  "formatVersion": "1.0.0",
+  "metadata": {
+    "name": "新工作流",
+    "createdAt": "2026-04-13T08:27:01.695Z",
+    "updatedAt": "2026-04-21T03:34:15.504Z",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0
+    },
+    "isTemplate": false
+  },
+  "definition": {
+    "nodes": [
+      {
+        "id": "c8631068-cc0e-41e6-a440-fa4a712f7a34",
+        "type": "start",
+        "position": {
+          "x": 560,
+          "y": 416
+        },
+        "data": {
+          "label": "开始"
+        },
+        "selected": false
+      },
+      {
+        "id": "9cbde73a-95d0-4ff9-99ec-fef4dfe0a9f0",
+        "type": "end",
+        "position": {
+          "x": 1904,
+          "y": 800
+        },
+        "data": {
+          "label": "结束",
+          "status": "success"
+        },
+        "selected": false
+      },
+      {
+        "id": "9dd78f09-eeaa-4b7f-a55c-a94a81cf5066",
+        "type": "hid_preset_power_on",
+        "position": {
+          "x": 1344,
+          "y": 288
+        },
+        "data": {
+          "label": "打开电源",
+          "presetFunction": "POWER_ON"
+        },
+        "selected": false
+      },
+      {
+        "id": "ca60b569-07e7-445f-96cf-32934f1827c1",
+        "type": "hid_preset_pwm_speed_set",
+        "position": {
+          "x": 880,
+          "y": 288
+        },
+        "data": {
+          "label": "设置PWM",
+          "presetFunction": "PWM_SPEED_SET",
+          "paramValues": {
+            "pwm": 10
+          }
+        },
+        "selected": false
+      },
+      {
+        "id": "955ebfd0-503d-49d9-96a4-d10899b236db",
+        "type": "hid_preset_speed_test",
+        "position": {
+          "x": 1584,
+          "y": 800
+        },
+        "data": {
+          "label": "转速测试",
+          "presetFunction": "SPEED_TEST",
+          "paramValues": {
+            "dutyCycle": 30,
+            "speed": 5100,
+            "time": 20
+          },
+          "lastQueryResult": {
+            "success": true,
+            "value": 6,
+            "unit": "s",
+            "displayText": "通过 6s",
+            "timestamp": 1776742452576
+          }
+        },
+        "selected": false
+      },
+      {
+        "id": "3eda2a21-6721-4cf1-9420-3d8aa49d3fd0",
+        "type": "delay",
+        "position": {
+          "x": 1600,
+          "y": 496
+        },
+        "data": {
+          "label": "延时",
+          "duration": 15000,
+          "useVariable": false,
+          "remainingTime": 0
+        },
+        "selected": false
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge-eb0d97c9-3a2b-45dd-af2b-e173b47288ef",
+        "source": "9dd78f09-eeaa-4b7f-a55c-a94a81cf5066",
+        "target": "3eda2a21-6721-4cf1-9420-3d8aa49d3fd0",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      },
+      {
+        "id": "edge-a648dc86-d10d-4508-880f-9cb6c6c569e4",
+        "source": "3eda2a21-6721-4cf1-9420-3d8aa49d3fd0",
+        "target": "955ebfd0-503d-49d9-96a4-d10899b236db",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      },
+      {
+        "id": "edge-c2d2c4dc-478e-49db-a41d-3fcead246474",
+        "source": "ca60b569-07e7-445f-96cf-32934f1827c1",
+        "target": "9dd78f09-eeaa-4b7f-a55c-a94a81cf5066",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      },
+      {
+        "id": "21a95def-fb8f-4f5d-897e-176ee3164ffe",
+        "source": "c8631068-cc0e-41e6-a440-fa4a712f7a34",
+        "target": "ca60b569-07e7-445f-96cf-32934f1827c1",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      },
+      {
+        "id": "4e82c7f8-e44e-448a-9ba4-f5178a13b3d2",
+        "source": "955ebfd0-503d-49d9-96a4-d10899b236db",
+        "target": "9cbde73a-95d0-4ff9-99ec-fef4dfe0a9f0",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      }
+    ],
+    "variables": []
+  }
+}

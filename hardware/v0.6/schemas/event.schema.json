@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Fan experiment JSONL event 1.0",
+  "type": "object",
+  "required": ["schemaVersion", "runId", "sequence", "timestampUtc", "type", "state", "data"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {"const":"1.0"},
+    "runId": {"type":"string","pattern":"^[a-zA-Z0-9_-]{1,100}$"},
+    "sequence": {"type":"integer","minimum":1},
+    "timestampUtc": {"type":"string","format":"date-time"},
+    "type": {"enum":["run_started","controller_identified","command_ack","scope_configured","simulation_notice","step_started","capture_completed","timing_overrun","step_completed","cycle_completed","run_error","run_finished"]},
+    "state": {"enum":["starting","running","stopping","stopped","completed","failed"]},
+    "data": {"type":"object"}
+  },
+  "allOf": [
+    {"if":{"properties":{"type":{"const":"command_ack"}}},"then":{"properties":{"data":{"required":["cycle","dutyPercent","command","ack","meaning"],"properties":{"dutyPercent":{"type":["integer","null"],"minimum":0,"maximum":100},"command":{"type":"string"},"ack":{"type":"string"}}}}}},
+    {"if":{"properties":{"type":{"const":"capture_completed"}}},"then":{"properties":{"data":{"$ref":"capture.schema.json"}}}},
+    {"if":{"properties":{"type":{"const":"run_finished"}}},"then":{"properties":{"data":{"$ref":"summary.schema.json"}}}}
+  ]
+}

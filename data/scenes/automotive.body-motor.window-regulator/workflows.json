@@ -1,0 +1,497 @@
+{
+  "schema": "workflows/v1",
+  "scene_id": "automotive.body-motor.window-regulator",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-19",
+  "belongs_to_flow": "F3 测试需求确认（工作流一步步运转、可调整）+ F4 启动测试及结果分析（执行）",
+  "source_roots": [
+    "./assets/workflows"
+  ],
+  "total": 4,
+  "count_by_group": {
+    "基本性能": 1,
+    "堵转": 1,
+    "防夹": 1,
+    "耐久": 1
+  },
+  "all_placeholder": true,
+  "node_groups": {
+    "设置": "把台架与被测件置于试验要求的初始状态（电压、温度、配重、工装位置、固件参数）",
+    "激励": "对被测件施加动作或应力（升降指令、施加障碍物、施加加载力、施加过压）",
+    "采集": "从传感器与被测件读数（电流、位移、力、声压、故障字）",
+    "判定": "拿采集到的量与 test-requirements.json 的判据比对，出 PASS / FAIL",
+    "控制流": "流程骨架（开始、结束、延时、循环、跳出、条件分支）",
+    "数据处理": "从原始时序算出判据需要的派生量（速度、峰值、偏差、纹波计数），以及导出报告"
+  },
+  "node_type_legend": {
+    "start": "开始",
+    "end": "结束",
+    "error_exit": "异常出口",
+    "delay": "延时等待",
+    "loop": "循环",
+    "loop_break": "跳出循环",
+    "branch": "条件分支",
+    "set_supply": "设置程控电源",
+    "set_harness_resistance": "设置回路串联电阻",
+    "set_chamber": "设置环境箱温湿度",
+    "set_load": "设置模拟工装配重",
+    "set_rod": "布置防夹试验棒",
+    "set_antipinch_params": "下发防夹参数",
+    "set_force_actuator": "设置加载作动器",
+    "cmd_up": "下发上升指令",
+    "cmd_down": "下发下降指令",
+    "cmd_stop": "下发停止指令",
+    "apply_obstacle": "投入障碍物（试验棒）",
+    "apply_static_load": "施加静态加载力",
+    "acq_current": "采集电流时序",
+    "acq_position": "采集位移时序",
+    "acq_force": "采集力时序",
+    "acq_noise": "采集声压级",
+    "acq_fault": "读取故障字",
+    "calc_speed": "换算运行速度",
+    "calc_peak": "提取峰值与平台值",
+    "calc_retract": "换算回缩量与触发开口",
+    "calc_deviation": "与基线比对求偏差",
+    "ripple_count": "纹波计数换算位置",
+    "export_report": "导出报告数据段",
+    "judge_speed": "判定运行速度",
+    "judge_current": "判定工作与堵转电流",
+    "judge_force": "判定堵转力",
+    "judge_pinch": "判定防夹力与回缩",
+    "judge_self_lock": "判定自锁下降量",
+    "judge_noise": "判定工作噪音",
+    "judge_deviation": "判定性能偏差"
+  },
+  "model_format": {
+    "note": "assets/workflows/*.json 用的是工作流画布组件的统一内部模型，可直接喂给 WorkflowCanvas，不需要经过 parseWfw。",
+    "shape": "{ nodes: [{id, type, label, group, params, position}], edges: [{id, source, target, sourceHandle, targetHandle}], meta: {...}, variables: [] }",
+    "source_handles": {
+      "output": "主干，画墨绿实线",
+      "error": "异常出口，画暗红虚线",
+      "true": "条件分支真支",
+      "false": "条件分支假支，画暗红虚线"
+    },
+    "_source": {
+      "file": "[源] workflow/README.md",
+      "locator": "§2.2 结构层、§2.3 坑 2（sourceHandle 承载分支语义）、§3.1 统一内部模型 WorkflowModel"
+    }
+  },
+  "notes": [
+    "**本场景没有任何现成的 .wfw 文件。** 这 4 条全部是本包按第一个场景包的结构造的示例，每条都带 _placeholder: true。它们证明的是「同一套画布与索引结构能装下新场景」，不是「客户已有这些工作流」。",
+    "节点类型是本包定义的六类抽象（设置 / 激励 / 采集 / 判定 / 控制流 / 数据处理），与场景一里那 25 个峰岹客户端专有节点类型（hid_preset_* / rigol_oscilloscope 等）没有一个重合——这正是「换场景只换包」要证明的：画布与索引不变，节点词汇表随包走。",
+    "每个非起止节点都拉一条 error 边到公共异常出口，所以连线数多于节点数。这个做法是从场景一的真实 .wfw 文件里学来的（14 节点 / 20 连线的图，多出的正是 error 边）。"
+  ],
+  "workflows": [
+    {
+      "id": "WR-WF-001",
+      "name": "上升下降循环（基本性能）",
+      "metadata_name": "上升下降循环（基本性能）",
+      "group": {
+        "key": "基本性能",
+        "name": "基本性能"
+      },
+      "voltage_level": "12V",
+      "voltage_level_name": "12 V 系统",
+      "is_subworkflow": false,
+      "file_path": "./assets/workflows/WR-WF-001.json",
+      "file_size_bytes": 6096,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "scene:automotive.body-motor.window-regulator",
+        "group:基本性能",
+        "placeholder:true"
+      ],
+      "updated_at": "2026-09-19",
+      "node_count": 10,
+      "edge_count": 15,
+      "node_types": [
+        {
+          "type": "acq_current",
+          "name": "采集电流时序",
+          "count": 1
+        },
+        {
+          "type": "calc_speed",
+          "name": "换算运行速度",
+          "count": 1
+        },
+        {
+          "type": "cmd_up",
+          "name": "下发上升指令",
+          "count": 1
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "error_exit",
+          "name": "异常出口",
+          "count": 1
+        },
+        {
+          "type": "judge_current",
+          "name": "判定工作与堵转电流",
+          "count": 1
+        },
+        {
+          "type": "judge_speed",
+          "name": "判定运行速度",
+          "count": 1
+        },
+        {
+          "type": "set_load",
+          "name": "设置模拟工装配重",
+          "count": 1
+        },
+        {
+          "type": "set_supply",
+          "name": "设置程控电源",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        }
+      ],
+      "node_group_counts": {
+        "控制流": 3,
+        "设置": 2,
+        "激励": 1,
+        "采集": 1,
+        "数据处理": 1,
+        "判定": 2
+      },
+      "purpose": "在试验电压 13.5 ± 0.3 V、额定负载下跑完整上升与下降，换算运行速度并判定速度区间与工作电流上限。耐高温与耐低温条款各跑 5 个循环。",
+      "purpose_derived": false,
+      "covers_requirements": [
+        "TR-BASIC-01",
+        "TR-BASIC-02",
+        "TR-BASIC-05",
+        "TR-BASIC-06",
+        "TR-ENV-01",
+        "TR-ENV-02"
+      ],
+      "_placeholder": true,
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 188-207 行：流程 3 判据表：本工作流覆盖的判据逐条出自该表"
+        },
+        {
+          "file": "[源] automotive.body-motor.window-regulator/test-requirements.json",
+          "locator": "requirements 数组中 id 为 TR-BASIC-01 / TR-BASIC-02 / TR-BASIC-05 / TR-BASIC-06 / TR-ENV-01 / TR-ENV-02 的条目"
+        }
+      ]
+    },
+    {
+      "id": "WR-WF-002",
+      "name": "堵转试验",
+      "metadata_name": "堵转试验",
+      "group": {
+        "key": "堵转",
+        "name": "堵转"
+      },
+      "voltage_level": "12V",
+      "voltage_level_name": "12 V 系统",
+      "is_subworkflow": false,
+      "file_path": "./assets/workflows/WR-WF-002.json",
+      "file_size_bytes": 5967,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "scene:automotive.body-motor.window-regulator",
+        "group:堵转",
+        "placeholder:true"
+      ],
+      "updated_at": "2026-09-19",
+      "node_count": 10,
+      "edge_count": 15,
+      "node_types": [
+        {
+          "type": "acq_current",
+          "name": "采集电流时序",
+          "count": 1
+        },
+        {
+          "type": "acq_force",
+          "name": "采集力时序",
+          "count": 1
+        },
+        {
+          "type": "calc_peak",
+          "name": "提取峰值与平台值",
+          "count": 1
+        },
+        {
+          "type": "cmd_up",
+          "name": "下发上升指令",
+          "count": 1
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "error_exit",
+          "name": "异常出口",
+          "count": 1
+        },
+        {
+          "type": "judge_current",
+          "name": "判定工作与堵转电流",
+          "count": 1
+        },
+        {
+          "type": "judge_force",
+          "name": "判定堵转力",
+          "count": 1
+        },
+        {
+          "type": "set_force_actuator",
+          "name": "设置加载作动器",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        }
+      ],
+      "node_group_counts": {
+        "控制流": 3,
+        "设置": 1,
+        "激励": 1,
+        "采集": 2,
+        "数据处理": 1,
+        "判定": 2
+      },
+      "purpose": "托架升到上止点使电机堵转，同步测堵转电流与堵转力，两项判据一个是上限（≤28 A）一个是下限（≥212 N），方向相反。",
+      "purpose_derived": false,
+      "covers_requirements": [
+        "TR-BASIC-03",
+        "TR-BASIC-04"
+      ],
+      "_placeholder": true,
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 188-207 行：流程 3 判据表：本工作流覆盖的判据逐条出自该表"
+        },
+        {
+          "file": "[源] automotive.body-motor.window-regulator/test-requirements.json",
+          "locator": "requirements 数组中 id 为 TR-BASIC-03 / TR-BASIC-04 的条目"
+        }
+      ]
+    },
+    {
+      "id": "WR-WF-003",
+      "name": "防夹试验",
+      "metadata_name": "防夹试验",
+      "group": {
+        "key": "防夹",
+        "name": "防夹"
+      },
+      "voltage_level": "12V",
+      "voltage_level_name": "12 V 系统",
+      "is_subworkflow": false,
+      "file_path": "./assets/workflows/WR-WF-003.json",
+      "file_size_bytes": 6579,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "scene:automotive.body-motor.window-regulator",
+        "group:防夹",
+        "placeholder:true"
+      ],
+      "updated_at": "2026-09-19",
+      "node_count": 10,
+      "edge_count": 15,
+      "node_types": [
+        {
+          "type": "acq_force",
+          "name": "采集力时序",
+          "count": 1
+        },
+        {
+          "type": "apply_obstacle",
+          "name": "投入障碍物（试验棒）",
+          "count": 1
+        },
+        {
+          "type": "branch",
+          "name": "条件分支",
+          "count": 1
+        },
+        {
+          "type": "calc_retract",
+          "name": "换算回缩量与触发开口",
+          "count": 1
+        },
+        {
+          "type": "cmd_up",
+          "name": "下发上升指令",
+          "count": 1
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "error_exit",
+          "name": "异常出口",
+          "count": 1
+        },
+        {
+          "type": "judge_pinch",
+          "name": "判定防夹力与回缩",
+          "count": 1
+        },
+        {
+          "type": "set_antipinch_params",
+          "name": "下发防夹参数",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        }
+      ],
+      "node_group_counts": {
+        "控制流": 4,
+        "设置": 1,
+        "激励": 2,
+        "采集": 1,
+        "数据处理": 1,
+        "判定": 1
+      },
+      "purpose": "在开口 170 mm 处布置刚度 10 N/mm 的半刚性试验棒，验证夹持力超过 100 N 之前是否回缩、回缩后是否达到法规要求的位置。目标市场不同则判据换表（中国 TR-PINCH-01 / 美国 TR-PINCH-03 / 欧洲 TR-PINCH-04）。",
+      "purpose_derived": false,
+      "covers_requirements": [
+        "TR-PINCH-01",
+        "TR-PINCH-02",
+        "TR-PINCH-03",
+        "TR-PINCH-04",
+        "TR-PINCH-05"
+      ],
+      "_placeholder": true,
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 188-207 行：流程 3 判据表：本工作流覆盖的判据逐条出自该表"
+        },
+        {
+          "file": "[源] automotive.body-motor.window-regulator/test-requirements.json",
+          "locator": "requirements 数组中 id 为 TR-PINCH-01 / TR-PINCH-02 / TR-PINCH-03 / TR-PINCH-04 / TR-PINCH-05 的条目"
+        }
+      ]
+    },
+    {
+      "id": "WR-WF-004",
+      "name": "耐久试验",
+      "metadata_name": "耐久试验",
+      "group": {
+        "key": "耐久",
+        "name": "耐久"
+      },
+      "voltage_level": "12V",
+      "voltage_level_name": "12 V 系统",
+      "is_subworkflow": false,
+      "file_path": "./assets/workflows/WR-WF-004.json",
+      "file_size_bytes": 7435,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "scene:automotive.body-motor.window-regulator",
+        "group:耐久",
+        "placeholder:true"
+      ],
+      "updated_at": "2026-09-19",
+      "node_count": 10,
+      "edge_count": 16,
+      "node_types": [
+        {
+          "type": "acq_current",
+          "name": "采集电流时序",
+          "count": 1
+        },
+        {
+          "type": "calc_deviation",
+          "name": "与基线比对求偏差",
+          "count": 1
+        },
+        {
+          "type": "cmd_down",
+          "name": "下发下降指令",
+          "count": 1
+        },
+        {
+          "type": "cmd_up",
+          "name": "下发上升指令",
+          "count": 1
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        },
+        {
+          "type": "error_exit",
+          "name": "异常出口",
+          "count": 1
+        },
+        {
+          "type": "judge_deviation",
+          "name": "判定性能偏差",
+          "count": 1
+        },
+        {
+          "type": "loop",
+          "name": "循环",
+          "count": 1
+        },
+        {
+          "type": "set_chamber",
+          "name": "设置环境箱温湿度",
+          "count": 1
+        },
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        }
+      ],
+      "node_group_counts": {
+        "控制流": 4,
+        "设置": 1,
+        "激励": 2,
+        "采集": 1,
+        "数据处理": 1,
+        "判定": 1
+      },
+      "purpose": "最大额定负载下按表 7 的 13 道工序累计 10 000 个循环（后门 5 000），各温度段之间喷洒泥水，试验后与基线比对求偏差。",
+      "purpose_derived": false,
+      "covers_requirements": [
+        "TR-DUR-01",
+        "TR-DUR-02"
+      ],
+      "_placeholder": true,
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 188-207 行：流程 3 判据表：本工作流覆盖的判据逐条出自该表"
+        },
+        {
+          "file": "[源] automotive.body-motor.window-regulator/test-requirements.json",
+          "locator": "requirements 数组中 id 为 TR-DUR-01 / TR-DUR-02 的条目"
+        }
+      ]
+    }
+  ]
+}

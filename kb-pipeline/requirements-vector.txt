@@ -1,0 +1,26 @@
+# 向量检索一路的依赖清单（阶段 3 补全）。
+#
+# ⚠️ 只装进 c/kb-pipeline/.venv，**绝不装进后端环境**。
+#
+# 为什么要单独一个文件而不是并进后端的 requirements.txt：
+#   后端 requirements.txt 是**客户原依赖逐字锁定**（阶段 1 红线），
+#   且 3-K 记录过一次真实事故：直接往后端环境装 docling，把
+#   pydantic 2.5.0→2.13.5、httpx 0.26.0→0.28.1 **静默顶掉**，
+#   而这两项是后端能跑起来的前提。
+#   lancedb 依赖 pyarrow + pydantic>=2.7.4，装进后端同样会顶掉 pydantic 2.5.0。
+#
+# 装法（在 kb-pipeline 目录下）：
+#   .venv/Scripts/python.exe -m pip install -r requirements-vector.txt \
+#       --retries 10 --timeout 120
+#
+# 后端调用方式是**子进程**（同 docling 那条路），见 backend/app/services/
+# kb_embed_service.py 与 kb-pipeline/scripts/_vector_worker.py。
+
+# 向量库：附录技术栈指定的选型
+# 「唯一 Node 与 Python 双侧可进程内嵌入且无需起服务的候选」（Apache-2.0）
+lancedb==0.39.0
+
+# 说明：embedding 模型不在这里列 —— 它由 torch + 模型权重组成，
+# 而 torch 2.14.0+cpu 已随 docling 装在本 venv 里（见 3-K）。
+# 向量化走**本地**做法，不引 sentence-transformers 这一层额外依赖：
+# 具体见 _embed_worker.py 顶部的「为什么不用 sentence-transformers」。

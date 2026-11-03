@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "serial": {
+    "_comment": "port 留空：由 overlay(acceptance.windows.json / acceptance.linux.json) 或环境变量 FAN_SERIAL_PORT 补齐",
+    "port": "",
+    "baud": 115200,
+    "expectedIdentity": "READY UNO_FAN_V2 25000",
+    "wiringConfirmed": true
+  },
+  "experiment": {
+    "dutiesPercent": [
+      30,
+      50,
+      70,
+      100
+    ],
+    "holdSeconds": 20,
+    "cycles": 1,
+    "settleSeconds": 2,
+    "capturesPerStep": 5,
+    "captureIntervalSeconds": 0.5
+  },
+  "output": {
+    "root": "../runs"
+  },
+  "scope": {
+    "_comment": "resource 留空 → 运行时按 VID=0x1AB1/PID=0x04CE 自动枚举；如需写死由 overlay 覆盖",
+    "enabled": true,
+    "resource": "",
+    "expectedIdentity": "RIGOL TECHNOLOGIES,DS1104Z Plus,DS1ZC271600575,00.04.05.SP2",
+    "inputImpedanceOhm": 1000000,
+    "pwmTimebaseSecondsPerDiv": 2e-05,
+    "triggerLevelV": 2.5,
+    "channels": {
+      "current": {
+        "channel": 1,
+        "probeRatio": 1,
+        "coupling": "DC",
+        "scaleVoltsPerDiv": 0.02,
+        "offsetV": 0,
+        "physicalProbeRatioConfirmed": true
+      },
+      "voltage": {
+        "channel": 2,
+        "probeRatio": 10,
+        "coupling": "DC",
+        "scaleVoltsPerDiv": 2,
+        "offsetV": 0,
+        "physicalProbeRatioConfirmed": false
+      },
+      "pwm": {
+        "channel": 3,
+        "probeRatio": 10,
+        "coupling": "DC",
+        "scaleVoltsPerDiv": 1,
+        "offsetV": -2.5,
+        "physicalProbeRatioConfirmed": false
+      }
+    },
+    "currentConversion": {
+      "enabled": false,
+      "gainAmpsPerVolt": 10,
+      "turns": 1,
+      "lowRangeConfirmed": true,
+      "zeroConfirmed": true,
+      "singleConductorConfirmed": false,
+      "probeModel": "CYBERTEK CPL8100A",
+      "range": "L 0.1 V/A",
+      "minimumSpecifiedCurrentA": 0.05
+    },
+    "tach": {
+      "_comment": "转速通道（2026-10-09 正式启用）。依据：现场万用表实测传感器 OUT 反光条在位 1.8V / 离位 0V；示波器屏幕核对 CH4 为 直流耦合 / 10X 探头 / 1.00V/div / 宽带限制关 / 反向关。写入前已用 acceptance.probe3.json 真机验证：30/50/70/100% 档实测 714/1212/1644/2143 rpm（单调上升，同档重复性一致），且离线回归（历史正样本 32/32 全对、420 例噪声样本零误报）通过。字段口径：probeRatio=10 与台架 CH2/CH3 一致（实测读数 1.8V 级与万用表吻合）；scaleVoltsPerDiv=1 为 ×10 折算后极值 ±2.4V 留余量（削波阈值 ±3.96V）；triggerLevelV=0.9 落在 0V 与 1.8V 中间；timebaseSecondsPerDiv=0.05 保证 30% 档窗内不少于 5 个脉冲（0.02 时只有 2~3 个，会被脉冲数校验如实拒绝）。",
+      "enabled": true,
+      "channel": 4,
+      "sensorModel": "JINGJIAKE LZ-MK10 NPN",
+      "supplyVoltageV": 5,
+      "signalWire": "BK black OUT; BU blue 0V; BN brown supply",
+      "outputVoltageV": 1.8,
+      "outputType": "NPN; internal output circuit and pull-up conditions require verification",
+      "wiringConfirmed": true,
+      "probeRatio": 10,
+      "physicalProbeRatioConfirmed": true,
+      "pulsesPerRevolution": 1,
+      "timebaseSecondsPerDiv": 0.05,
+      "scaleVoltsPerDiv": 1,
+      "triggerLevelV": 0.9,
+      "supplyVoltageRangeV": [
+        12,
+        24
+      ],
+      "_timebase_comment": "2026-10-12 晚 终修：回 0.05（50ms/div，窗口 0.6s）。当日早间『Linux 下 ≥10ms/div 读不到数据』的结论经复测【不成立】——那是两个已修 bug 的叠加假象：(a) :RUN 后未等扫描周期就 :STOP（慢时基扫描需 12×timebase=0.6s；该等待已按 max(0.6, 12×timebase×10) 实现）；(b) CH4 自触发电平 0.9V 永不满足（已改 triggerSource=pwm）。两处修复后时基复核（裸命令 + 项目真实采集函数两轮）：10/20/50 ms/div 全部可读、1200 点完整。故回 50ms/div：窗内低转速档（30%·周期 ~81ms）也能装 7 个周期，【四档转速全部可测】（实测 30/50/70/100% → 741/1250/1690/2222 rpm，与历史 Windows 值一致）。代价：tach 单次采集等待从 0.6s 增至 6s（扫描周期×10），整轮时长增加约 60~80s。",
+      "triggerSource": "pwm",
+      "_trigger_comment": "2026-10-12 增：触发源指向 PWM 通道，而不用转速通道自己。原因：实测 CH4 信号峰值仅 0.12~0.16V（传感器规格标称 1.8V），而 tach.triggerLevelV 配的是 0.9V → 边沿条件永不满足 → 整档 0 点、转速恒为 None。改用 PWM 通道触发后，实测 4/4 全成功、每次 1200 点，CH4 波形正常落盘。⚠️ 若日后修好传感器上拉（使 CH4 峰值回到 ~1.8V），可删掉本字段恢复自触发。"
+    }
+  }
+}

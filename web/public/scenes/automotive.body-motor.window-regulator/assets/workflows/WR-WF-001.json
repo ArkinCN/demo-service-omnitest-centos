@@ -1,0 +1,283 @@
+{
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "start",
+      "label": "开始",
+      "group": "控制流",
+      "params": {},
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n2",
+      "type": "set_supply",
+      "label": "设置程控电源",
+      "group": "设置",
+      "params": {
+        "voltage_v": 13.5,
+        "tolerance_v": 0.3,
+        "ripple_pp_mv_max": 100,
+        "harness_resistance_ohm": 0.15,
+        "harness_tolerance_ohm": 0.02
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n3",
+      "type": "set_load",
+      "label": "设置模拟工装配重",
+      "group": "设置",
+      "params": {
+        "mode": "RATED_LOAD",
+        "up_definition": "玻璃重量 + 胶条滑动阻力",
+        "down_definition": "玻璃重量 − 胶条滑动阻力",
+        "cycles": 5,
+        "note": "耐高温与耐低温条款各要求在目标温度下跑 5 个工作循环"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n4",
+      "type": "cmd_up",
+      "label": "下发上升指令",
+      "group": "激励",
+      "params": {
+        "from": "下止点",
+        "to": "上止点",
+        "then_down": true,
+        "stop_on_stall": true,
+        "dwell_s": 4.0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n5",
+      "type": "acq_current",
+      "label": "采集电流时序",
+      "group": "采集",
+      "params": {
+        "sample_rate_sa_per_s": 2000,
+        "channels": [
+          "current_a",
+          "bus_voltage_v",
+          "position_mm",
+          "speed_mm_s"
+        ]
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n6",
+      "type": "calc_speed",
+      "label": "换算运行速度",
+      "group": "数据处理",
+      "params": {
+        "formula": "travel_mm / duration_s",
+        "directions": [
+          "UP",
+          "DOWN"
+        ],
+        "displacement_resolution_mm": 0.05
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n7",
+      "type": "judge_speed",
+      "label": "判定运行速度",
+      "group": "判定",
+      "params": {
+        "requirement_ids": [
+          "TR-BASIC-05",
+          "TR-BASIC-06"
+        ],
+        "up_min_mm_s": 80.0,
+        "up_max_mm_s": 160.0,
+        "down_max_mm_s": 200.0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n8",
+      "type": "judge_current",
+      "label": "判定工作与堵转电流",
+      "group": "判定",
+      "params": {
+        "requirement_id": "TR-BASIC-02",
+        "max_a": 12.0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "label": "结束",
+      "group": "控制流",
+      "params": {},
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "n99",
+      "type": "error_exit",
+      "label": "异常出口",
+      "group": "控制流",
+      "params": {
+        "on_fault": "停机并置本次试验为 INVALID，不计入 5 个循环"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-n1-n2-output",
+      "source": "n1",
+      "target": "n2",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n2-n3-output",
+      "source": "n2",
+      "target": "n3",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n3-n4-output",
+      "source": "n3",
+      "target": "n4",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n4-n5-output",
+      "source": "n4",
+      "target": "n5",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n5-n6-output",
+      "source": "n5",
+      "target": "n6",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n6-n7-output",
+      "source": "n6",
+      "target": "n7",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n7-n8-output",
+      "source": "n7",
+      "target": "n8",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n8-n9-output",
+      "source": "n8",
+      "target": "n9",
+      "sourceHandle": "output",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n2-n99-error",
+      "source": "n2",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n3-n99-error",
+      "source": "n3",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n4-n99-error",
+      "source": "n4",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n5-n99-error",
+      "source": "n5",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n6-n99-error",
+      "source": "n6",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n7-n99-error",
+      "source": "n7",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    },
+    {
+      "id": "e-n8-n99-error",
+      "source": "n8",
+      "target": "n99",
+      "sourceHandle": "error",
+      "targetHandle": "input"
+    }
+  ],
+  "meta": {
+    "id": "WR-WF-001",
+    "name": "上升下降循环（基本性能）",
+    "formatVersion": "1.0.0",
+    "compressed": false,
+    "tags": [
+      "scene:automotive.body-motor.window-regulator",
+      "group:基本性能",
+      "placeholder:true"
+    ],
+    "isSubsystem": false,
+    "category": "基本性能",
+    "isTemplate": true,
+    "note": "示例工作流，不是任何客户的真实 .wfw 文件。节点类型是本包定义的六类抽象，不是峰岹客户端 WorkflowNodeType 枚举里的成员。"
+  },
+  "variables": []
+}

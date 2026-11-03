@@ -1,0 +1,245 @@
+{
+  "schema": "copilot-actions/v1",
+  "version": "1.0",
+  "generated_at": "2026-09-20",
+  "title": "测试助手预置动作定义（最小骨架）",
+  "applies_to": {
+    "scene_id": "example.minimal.skeleton",
+    "note": "最小骨架包的助手预置动作，每条作用域各一枚解释类按钮。"
+  },
+  "_field_docs": {
+    "id": "按钮唯一标识，形如 <flowKey>.<slug>；前端按它做埋点与折叠记忆，换场景包不得改名。",
+    "label": "按钮面上的中文名，不超过 6 个字。",
+    "icon": "图标名，取值必须落在 [源] app/icons.ts 的 COPILOT_ACTION_ICON_NAMES 之内。",
+    "icon_draft": "草案里写的 lucide-react 组件名，仅作追溯用，前端不读。",
+    "type": "explain 解释类 / prepare 准备类 / execute 执行类。",
+    "source": "customer 直接复用客户规程；ours 我方新写。",
+    "skill_ref": "客户规程名或我方规程名。",
+    "skill_verify": "verified 已核到该规程名；unverified 待打开正文确认入参与步骤。",
+    "prompt": "预置 prompt 全文。以 {{ }} 包裹的占位符由前端按 JSON 指针取值后替换。",
+    "operation": "点击后助手实际执行的动作序列，逐条对应一次 tool_call。",
+    "touches_redline": "是否触碰六个只能人点的动作：启动、停止、急停、写回参数、导出、归档。",
+    "redline_action": "触碰的是哪一个红线动作；不触碰时为 null。",
+    "degraded_to": "触碰红线时的降级形态，固定 prepare_and_wait。",
+    "confirm_required": "执行前是否弹人工确认。execute 类一律为 true。",
+    "echo": "点击后先在气泡里回显的一句话。",
+    "success_feedback": "执行成功后的反馈形态与落点。",
+    "context_requires": "这个按钮必须拿到的上下文字段，用 JSON 指针写。",
+    "available": "按钮在本场景是否开放，缺省视为 true。",
+    "unavailable_reason": "available 为 false 时的说明文字。"
+  },
+  "redline_actions": [
+    "start",
+    "stop",
+    "estop",
+    "write_back",
+    "export",
+    "archive"
+  ],
+  "button_types": {
+    "explain": {
+      "label": "解释类",
+      "rule": "只读当前页面与场景包，产出文字与依据，不改任何状态。",
+      "confirm_required": false
+    },
+    "prepare": {
+      "label": "准备类",
+      "rule": "产出草稿、缺项清单、候选方案，写进表单的暂存态，不落盘、不动被测对象。",
+      "confirm_required": false
+    },
+    "execute": {
+      "label": "执行类",
+      "rule": "触发流程内允许自动化的只读或零风险步骤，走人工确认闸门。",
+      "confirm_required": true
+    }
+  },
+  "ui": {
+    "placement": "对话框输入区上方一行，横向排列",
+    "max_visible": 5,
+    "overflow": "more_menu",
+    "overflow_label": "更多",
+    "switch_on_flow_change": true,
+    "echo_before_execute": true,
+    "disabled_when_context_missing": true
+  },
+  "_derived_from": {
+    "file": "[源] 06-第三轮改版/06c-copilot-actions.draft.json",
+    "note": "结构层与编排层原样继承草案；本骨架包只保留每条作用域一枚解释类按钮。"
+  },
+  "flows": {
+    "init": {
+      "label": "初始化配置",
+      "buttons": [
+        {
+          "id": "init.explain-page",
+          "label": "讲讲本页",
+          "icon": "explain",
+          "icon_draft": "BookOpen",
+          "type": "explain",
+          "source": "ours",
+          "skill_ref": "explain-current-view",
+          "skill_verify": "unverified",
+          "prompt": "读取当前流程「{{/flow/label}}」的表单结构与分组，分三段讲清楚这一页在做什么、要人确认什么、缺什么。",
+          "operation": [
+            "读取当前流程的表单结构与分组",
+            "按三组生成讲解"
+          ],
+          "touches_redline": false,
+          "redline_action": null,
+          "degraded_to": null,
+          "confirm_required": false,
+          "echo": "我先把这一页的结构读一遍，然后分三段讲给你听。",
+          "success_feedback": "气泡内三段讲解，提到的字段在 B 区高亮联动。",
+          "context_requires": [
+            "/flow/label"
+          ]
+        }
+      ]
+    },
+    "req": {
+      "label": "测试需求确认",
+      "buttons": [
+        {
+          "id": "req.explain-page",
+          "label": "讲讲本页",
+          "icon": "explain",
+          "icon_draft": "BookOpen",
+          "type": "explain",
+          "source": "ours",
+          "skill_ref": "explain-current-view",
+          "skill_verify": "unverified",
+          "prompt": "读取当前流程「{{/flow/label}}」的表单结构与分组，分三段讲清楚这一页在做什么、要人确认什么、缺什么。",
+          "operation": [
+            "读取当前流程的表单结构与分组",
+            "按三组生成讲解"
+          ],
+          "touches_redline": false,
+          "redline_action": null,
+          "degraded_to": null,
+          "confirm_required": false,
+          "echo": "我先把这一页的结构读一遍，然后分三段讲给你听。",
+          "success_feedback": "气泡内三段讲解，提到的字段在 B 区高亮联动。",
+          "context_requires": [
+            "/flow/label"
+          ]
+        }
+      ]
+    },
+    "run": {
+      "label": "启动测试及结果分析",
+      "buttons": [
+        {
+          "id": "run.explain-page",
+          "label": "讲讲本页",
+          "icon": "explain",
+          "icon_draft": "BookOpen",
+          "type": "explain",
+          "source": "ours",
+          "skill_ref": "explain-current-view",
+          "skill_verify": "unverified",
+          "prompt": "读取当前流程「{{/flow/label}}」的表单结构与分组，分三段讲清楚这一页在做什么、要人确认什么、缺什么。",
+          "operation": [
+            "读取当前流程的表单结构与分组",
+            "按三组生成讲解"
+          ],
+          "touches_redline": false,
+          "redline_action": null,
+          "degraded_to": null,
+          "confirm_required": false,
+          "echo": "我先把这一页的结构读一遍，然后分三段讲给你听。",
+          "success_feedback": "气泡内三段讲解，提到的字段在 B 区高亮联动。",
+          "context_requires": [
+            "/flow/label"
+          ]
+        }
+      ]
+    },
+    "tune": {
+      "label": "调优确认及运行",
+      "buttons": [
+        {
+          "id": "tune.explain-page",
+          "label": "讲讲本页",
+          "icon": "explain",
+          "icon_draft": "BookOpen",
+          "type": "explain",
+          "source": "ours",
+          "skill_ref": "explain-current-view",
+          "skill_verify": "unverified",
+          "prompt": "读取当前流程「{{/flow/label}}」的表单结构与分组，分三段讲清楚这一页在做什么、要人确认什么、缺什么。",
+          "operation": [
+            "读取当前流程的表单结构与分组",
+            "按三组生成讲解"
+          ],
+          "touches_redline": false,
+          "redline_action": null,
+          "degraded_to": null,
+          "confirm_required": false,
+          "echo": "我先把这一页的结构读一遍，然后分三段讲给你听。",
+          "success_feedback": "气泡内三段讲解，提到的字段在 B 区高亮联动。",
+          "context_requires": [
+            "/flow/label"
+          ]
+        }
+      ]
+    },
+    "report": {
+      "label": "测试报告及产出",
+      "buttons": [
+        {
+          "id": "report.explain-page",
+          "label": "讲讲本页",
+          "icon": "explain",
+          "icon_draft": "BookOpen",
+          "type": "explain",
+          "source": "ours",
+          "skill_ref": "explain-current-view",
+          "skill_verify": "unverified",
+          "prompt": "读取当前流程「{{/flow/label}}」的表单结构与分组，分三段讲清楚这一页在做什么、要人确认什么、缺什么。",
+          "operation": [
+            "读取当前流程的表单结构与分组",
+            "按三组生成讲解"
+          ],
+          "touches_redline": false,
+          "redline_action": null,
+          "degraded_to": null,
+          "confirm_required": false,
+          "echo": "我先把这一页的结构读一遍，然后分三段讲给你听。",
+          "success_feedback": "气泡内三段讲解，提到的字段在 B 区高亮联动。",
+          "context_requires": [
+            "/flow/label"
+          ]
+        }
+      ]
+    },
+    "knowledge": {
+      "label": "知识库",
+      "buttons": [
+        {
+          "id": "knowledge.explain-page",
+          "label": "讲讲本页",
+          "icon": "explain",
+          "icon_draft": "BookOpen",
+          "type": "explain",
+          "source": "ours",
+          "skill_ref": "explain-current-view",
+          "skill_verify": "unverified",
+          "prompt": "读取当前流程「{{/flow/label}}」的表单结构与分组，分三段讲清楚这一页在做什么、要人确认什么、缺什么。",
+          "operation": [
+            "读取当前流程的表单结构与分组",
+            "按三组生成讲解"
+          ],
+          "touches_redline": false,
+          "redline_action": null,
+          "degraded_to": null,
+          "confirm_required": false,
+          "echo": "我先把这一页的结构读一遍，然后分三段讲给你听。",
+          "success_feedback": "气泡内三段讲解，提到的字段在 B 区高亮联动。",
+          "context_requires": [
+            "/flow/label"
+          ]
+        }
+      ]
+    }
+  }
+}

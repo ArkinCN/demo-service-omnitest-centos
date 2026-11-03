@@ -1,0 +1,16 @@
+{
+  "doc_id": "smo-angle-register-note",
+  "title": "SMO 角度估算的原理介绍和部分寄存器说明",
+  "generated_at": "2026-10-10T14:52:29.045083+08:00",
+  "html_bytes": 22135,
+  "placeholder_count": 115,
+  "figure_count": 2,
+  "matched": 2,
+  "dropped_placeholders": 113,
+  "unused_figures": 0,
+  "formula_removed": 0,
+  "code_blocks": 0,
+  "formula_blocks": 19,
+  "fragments_dropped": 0,
+  "toc_dropped": 10
+}

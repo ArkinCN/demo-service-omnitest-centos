@@ -1,0 +1,3688 @@
+{
+  "doc_id": "customer-h-fu6832",
+  "title": "Customer.h 工程参数配置文件（FU6832 散热风扇）",
+  "doc_type": "源码参数配置",
+  "taxonomy": {
+    "l1": "motor",
+    "l2": "cooling-fan",
+    "l3": "fortior-fu6832"
+  },
+  "process_tags": [
+    "初始化配置",
+    "调优"
+  ],
+  "source": {
+    "path": "[源] code/Customer.h",
+    "origin": "10_外部资料/客户材料/AI_散热风扇开发资料/AI_散热风扇开发资料/CoolingFan_Program/Software/User/include/Customer.h",
+    "sha256": "df869f93bb6bc6501e3cbbe6b055dac18ec6d41c0e933584d7f07175eb3dc01c",
+    "bytes": 41268,
+    "lines": 549
+  },
+  "summary": {
+    "macro_count": 203,
+    "numeric_editable": 164,
+    "with_range": 43,
+    "with_unit": 72,
+    "group_l1_count": 6
+  },
+  "groups": [
+    {
+      "l1": "基礎與採樣配置",
+      "l2": [
+        "FU6832_CONFIGURATION FU/PU6832 參數配置檔",
+        "PWM 驅動信配置",
+        "SMO 估算器角度補償相關配置",
+        "專案開發版本號，不使用參數追朔功能可忽略",
+        "母線電壓量測相關配置",
+        "速度基準值",
+        "電機參數相關配置",
+        "電機旋向配置",
+        "電機預定位相關配置",
+        "電流採樣相關配置"
+      ]
+    },
+    {
+      "l1": "電機基礎運行配置",
+      "l2": [
+        "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)",
+        "方波啟動相關配置(實驗性功能)  (SQUARE_START_ENABLED 為 SQUARE_START 有效)",
+        "電機基礎運行相關配置"
+      ]
+    },
+    {
+      "l1": "電機運行控制迴路配置項目",
+      "l2": [
+        "PWM 調速佔空比節點",
+        "PWM 開關機配置",
+        "VSP 調速電壓節點",
+        "調速控制模式配置",
+        "調速節點數量",
+        "速度環 PID 幅值配置",
+        "速度環 PID 配置  ( @ref OUTLOOP_ENABLED 為 1 時有效)",
+        "開環調速控制佔空比節點",
+        "開環配置  ( @ref OUTLOOP_ENABLED 為 0 時有效)",
+        "電機轉速節點",
+        "電機運行控制迴路相關配置"
+      ]
+    },
+    {
+      "l1": "電機順逆風配置項目",
+      "l2": [
+        "電機逆轉啟動設置",
+        "電機逆風設置",
+        "電機順逆風啟動",
+        "電機順風設置"
+      ]
+    },
+    {
+      "l1": "電機可選功能配置項目",
+      "l2": [
+        "假轉速輸入來源表  ( @warning PWM_FULLCONTROL_ENABLED 與本功能衝突，不得同時啟用)",
+        "假轉速輸出倍率表  ( @warning PWM_FULLCONTROL_ENABLED 與本功能衝突，不得同時啟用)",
+        "假轉速輸出節點數量  ( @warning PWM_FULLCONTROL_ENABLED 與本功能衝突，不得同時啟用)",
+        "多節點限功率配置  ( @ref POWER_LIMITER_MODE 為 MULTI 時有效)",
+        "多節點限電流配置  ( @ref CURRENT_LIMITER_MODE 為 MULTI 時有效)",
+        "設定 Cisco-SmartFan 相關項目",
+        "設定 Dell-CoastMode 相關項目",
+        "設定 HP-FCOL 相關項目",
+        "設定 Lenovo-TurboFan 相關項目",
+        "設定 功率限制器 相關項目",
+        "設定 電機制動 相關項目",
+        "設定 電流限制器 相關項目",
+        "電機轉速信號輸出配置"
+      ]
+    },
+    {
+      "l1": "電機實驗性配置項目",
+      "l2": [
+        "理想二極體(ORing) 控制相關項目",
+        "設定 Uart1 相關項目",
+        "跳電壓抑制器相關項目",
+        "電機實驗性功能相關選項",
+        "電機爬坡算法相關項目"
+      ]
+    }
+  ],
+  "params": [
+    {
+      "name": "__CUSTOMER_H",
+      "value": "",
+      "raw_value": "",
+      "numeric": null,
+      "value_kind": "expression",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 37,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "FU6832_CONFIGURATION FU/PU6832 參數配置檔"
+      },
+      "editable": false
+    },
+    {
+      "name": "PROJECT_PARAM_LOG_ENABLED",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 51,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "專案開發版本號，不使用參數追朔功能可忽略"
+      },
+      "editable": true
+    },
+    {
+      "name": "PROJECT_VERSION",
+      "value": "24805_Beta_STDCODE",
+      "raw_value": "(24805_Beta_STDCODE)",
+      "numeric": null,
+      "value_kind": "expression",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 52,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "專案開發版本號，不使用參數追朔功能可忽略"
+      },
+      "editable": false
+    },
+    {
+      "name": "Pole_Pairs",
+      "value": 2.0,
+      "raw_value": "(2)",
+      "numeric": 2.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 56,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "電機參數相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "RS",
+      "value": 0.098667,
+      "raw_value": "(0.098667)",
+      "numeric": 0.098667,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 57,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "電機參數相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "LD",
+      "value": 4.4e-05,
+      "raw_value": "(0.000044)",
+      "numeric": 4.4e-05,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 58,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "電機參數相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "LQ",
+      "value": "LD",
+      "raw_value": "(LD)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 59,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "電機參數相關配置"
+      },
+      "editable": false
+    },
+    {
+      "name": "Ke",
+      "value": 0.288201,
+      "raw_value": "(0.288201)",
+      "numeric": 0.288201,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 60,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "電機參數相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_SPEED_BASE",
+      "value": 50000.0,
+      "raw_value": "(50000)",
+      "numeric": 50000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "(典型值: 電機最高轉速 * 2) 速度基準值",
+      "line": 65,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "速度基準值"
+      },
+      "editable": true
+    },
+    {
+      "name": "PWM_FREQUENCY",
+      "value": 25.0,
+      "raw_value": "(25.0)",
+      "numeric": 25.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "Khz",
+      "range": null,
+      "comment": "(單位: Khz) 載波頻率",
+      "line": 69,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "PWM 驅動信配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "PWM_DEADTIME",
+      "value": 0.6,
+      "raw_value": "(0.6)",
+      "numeric": 0.6,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "uS",
+      "range": null,
+      "comment": "(單位: uS) 載波死區時間",
+      "line": 70,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "PWM 驅動信配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "MIN_WIND_TIME",
+      "value": "PWM_DEADTIME + 0.6",
+      "raw_value": "(PWM_DEADTIME + 0.6)",
+      "numeric": null,
+      "value_kind": "expression",
+      "wrapper": null,
+      "unit": "uS",
+      "range": null,
+      "comment": "(單位: uS) 最小取樣時間",
+      "line": 71,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "PWM 驅動信配置"
+      },
+      "editable": false
+    },
+    {
+      "name": "PWM_DT_OFFSET",
+      "value": 0.4,
+      "raw_value": "(0.4)",
+      "numeric": 0.4,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "uS",
+      "range": null,
+      "comment": "(單位: uS) 死區時間補償  ( @ref HW_SHUNT_MODE 為 DUAL_SHUNT、THREE_SHUNT 時有效)",
+      "line": 72,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "PWM 驅動信配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "PWM_MIN_WIDTH",
+      "value": 1.3,
+      "raw_value": "(1.3)",
+      "numeric": 1.3,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "uS",
+      "range": null,
+      "comment": "(單位: uS) 最小脈寬時間  ( @ref HW_SHUNT_MODE 為 DUAL_SHUNT，且 OVER_MODULATION_ENABLED 為 0 時有效)",
+      "line": 73,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "PWM 驅動信配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "SVPWM_MODE",
+      "value": "SEG7_SVPWM_MODE",
+      "raw_value": "(SEG7_SVPWM_MODE)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "SVPWM 輸出模式  @see SEG7_SVPWM_MODE 7段式SVPWM @see SEG5_SVPWM_MODE 5段式SVPWM  ( @ref HW_SHUNT_MODE 為 DUAL_SHUNT、THREE_SHUNT 時有效)",
+      "line": 74,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "PWM 驅動信配置"
+      },
+      "editable": false
+    },
+    {
+      "name": "SMOTHECOMP_ENABLED",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用 SMO 估算器角度補償  @param (0) 禁用 @param (1) 啟用",
+      "line": 78,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "SMO 估算器角度補償相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "SMOTHECOMP_DEGREES",
+      "value": 5.0,
+      "raw_value": "(5.0)",
+      "numeric": 5.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "度",
+      "range": {
+        "min": -30.0,
+        "max": 30.0
+      },
+      "comment": "(單位: 度) SMO 估算器角度補償量  [範圍: -30.0 ~ 30.0]",
+      "line": 79,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "SMO 估算器角度補償相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "HW_SHUNT_MODE",
+      "value": "SINGLE_SHUNT",
+      "raw_value": "(SINGLE_SHUNT)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "取樣電阻模式配置  @see SINGLE_SHUNT 使用單電阻採樣 @see DUAL_SHUNT 使用雙電阻採樣 @see THREE_SHUNT 使用三電阻採樣",
+      "line": 83,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "電流採樣相關配置"
+      },
+      "editable": false
+    },
+    {
+      "name": "SHUNT_CYCLE_MODE",
+      "value": "SAMPLE_1_CYCLE",
+      "raw_value": "(SAMPLE_1_CYCLE)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "採樣週期模式  @see SAMPLE_1_CYCLE 單週期採樣  @see SAMPLE_2_CYCLE 2週期採樣  ( @ref HW_SHUNT_MODE 為 DUAL_SHUNT、THREE_SHUNT 時有效)",
+      "line": 84,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "電流採樣相關配置"
+      },
+      "editable": false
+    },
+    {
+      "name": "HW_RSHUNT",
+      "value": 0.01,
+      "raw_value": "(0.01)",
+      "numeric": 0.01,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "Ω",
+      "range": null,
+      "comment": "(單位: Ω) 取樣電阻配置 [建議值: 0.02 ~ 0x005]",
+      "line": 85,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "電流採樣相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "HW_AMPGAIN",
+      "value": "GAIN_16",
+      "raw_value": "(GAIN_16)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "放大倍率配置  @see GAIN_2 使用內部 2倍放大 @see GAIN_4 使用內部 4倍放大 @see GAIN_8 使用內部8倍放大 @see GAIN_16 使用內部 16倍放大 @see GAIN_32 使用內部 32倍放大",
+      "line": 86,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "電流採樣相關配置"
+      },
+      "editable": false
+    },
+    {
+      "name": "HW_ADC_REF_TYPE",
+      "value": "REF_5V0",
+      "raw_value": "(REF_5V0)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "(FU6832N 僅支援 REF_5V0) 參考電壓  @see REF_5V 5V參考電壓 @see REF_4V5 4.5V參考電壓 @see REF_4V 4V參考電壓 @see REF_3V 3V參考電壓",
+      "line": 87,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "電流採樣相關配置"
+      },
+      "editable": false
+    },
+    {
+      "name": "TRGDLY_POSITION",
+      "value": 8.0,
+      "raw_value": "(8)",
+      "numeric": 8.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": {
+        "min": -127.0,
+        "max": 127.0
+      },
+      "comment": "(預設: 8) 採樣位置  [範圍: -127 ~ 127]  @note 時間換算: (41.67nS * TRGDLY_POSITION)，當參數為正數時為延遲；反之，為提前",
+      "line": 88,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "電流採樣相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "HW_IBUS_SOURCE",
+      "value": "USED_AD1",
+      "raw_value": "(USED_AD1)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "母線電流檢測來源  @param USED_AD1 使用AD1 @param USED_AD3 使用AD3 @param USED_AD13 使用AD13",
+      "line": 89,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "電流採樣相關配置"
+      },
+      "editable": false
+    },
+    {
+      "name": "HW_RV_MODE",
+      "value": "RVEXT",
+      "raw_value": "(RVEXT)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "母線電壓量測來源配置  @see RVEXT 使用外部分壓配置 @see RV6P5 使用內部分壓配置 (1 / 6.5) @see RV12 使用內部分壓配置 (1 / 12)",
+      "line": 92,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "母線電壓量測相關配置"
+      },
+      "editable": false
+    },
+    {
+      "name": "RV1",
+      "value": 100.0,
+      "raw_value": "(100.0)",
+      "numeric": 100.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "kΩ",
+      "range": null,
+      "comment": "(單位: kΩ) 母線分壓電阻1 (當 @ref HW_RV_MODE 為 @ref RVEXT 時有效)",
+      "line": 93,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "母線電壓量測相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "RV2",
+      "value": 30.0,
+      "raw_value": "(30.0)",
+      "numeric": 30.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "kΩ",
+      "range": null,
+      "comment": "(單位: kΩ) 母線分壓電阻2 ( @ref HW_RV_MODE 為 @ref RVEXT 時有效)",
+      "line": 94,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "母線電壓量測相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_DIRECTION",
+      "value": "FORWARD",
+      "raw_value": "(FORWARD)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "電機旋向配置  @see FORWARD 電機正轉 @see BACKWARD 電機反轉",
+      "line": 98,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "電機旋向配置"
+      },
+      "editable": false
+    },
+    {
+      "name": "MOTOR_ALIGN_ENABLED",
+      "value": 1.0,
+      "raw_value": "(1)",
+      "numeric": 1.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "電機預定位致能設置  @param (0) 禁用 @param (1) 啟用",
+      "line": 102,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "電機預定位相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_ALIGNMENT_TEST_ENABLED",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "電機預定位測試模式  @param (0) 禁用 @param (1) 啟用",
+      "line": 103,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "電機預定位相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_ALIGNMENT_DOUT",
+      "value": 0.06,
+      "raw_value": "_Q15(0.06)",
+      "numeric": 0.06,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": null,
+      "range": {
+        "min": 0.01,
+        "max": 0.4
+      },
+      "comment": "電機預定位 D軸輸出強度  [範圍: 0.01 ~ 0.4]",
+      "line": 104,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "電機預定位相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_ALIGNMENT_DEGREES",
+      "value": 50.0,
+      "raw_value": "(50.0)",
+      "numeric": 50.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "度",
+      "range": {
+        "min": -60.0,
+        "max": 60.0
+      },
+      "comment": "(單位: 度) 電機預定位角度  [範圍: -60 ~ 60]",
+      "line": 105,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "電機預定位相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_ALIGNMENT_TIMES",
+      "value": 450.0,
+      "raw_value": "(450)",
+      "numeric": 450.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "mS",
+      "range": {
+        "min": 300.0,
+        "max": 2000.0
+      },
+      "comment": "(單位: mS) 電機預定位時間  [範圍: 300 ~ 2000]",
+      "line": 106,
+      "group": {
+        "l1": "基礎與採樣配置",
+        "l2": "電機預定位相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_START_MODE",
+      "value": "OPEN_OMEGA_START",
+      "raw_value": "(OPEN_OMEGA_START)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "電機啟動模式  @see OPEN_OMEGA_START Open-Omega啟動 @see SQUARE_START 方波啟動",
+      "line": 119,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "電機基礎運行相關配置"
+      },
+      "editable": false
+    },
+    {
+      "name": "SQUARE_START_THETAOFFSET",
+      "value": 8.0,
+      "raw_value": "(8.0)",
+      "numeric": 8.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "度",
+      "range": null,
+      "comment": "(單位: 度)   方波動採樣窗口 [範圍: 單電阻:0~29、雙電阻:0]",
+      "line": 123,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "方波啟動相關配置(實驗性功能)  (SQUARE_START_ENABLED 為 SQUARE_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "SQUARE_START_SECTOR",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": {
+        "min": -1.0,
+        "max": 1.0
+      },
+      "comment": "(預設:0)     方波啟動係數 [範圍: -1 ~ 1]",
+      "line": 124,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "方波啟動相關配置(實驗性功能)  (SQUARE_START_ENABLED 為 SQUARE_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "SQUARE_START_CURRENT",
+      "value": 0.8,
+      "raw_value": "I_Value(0.8)",
+      "numeric": 0.8,
+      "value_kind": "number",
+      "wrapper": "I_Value",
+      "unit": "A",
+      "range": null,
+      "comment": "(單位: A)    方波啟動電流",
+      "line": 125,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "方波啟動相關配置(實驗性功能)  (SQUARE_START_ENABLED 為 SQUARE_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "SQUARE_START_MIN_PERIOD",
+      "value": "_Q11(0.010)",
+      "raw_value": "_Q11(0.010)",
+      "numeric": null,
+      "value_kind": "expression",
+      "wrapper": null,
+      "unit": null,
+      "range": {
+        "min": 0.01,
+        "max": 0.125
+      },
+      "comment": "(預設: 0.01) 最小啟動站空比 [範圍: 0.01 ~ 0.125]",
+      "line": 126,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "方波啟動相關配置(實驗性功能)  (SQUARE_START_ENABLED 為 SQUARE_START 有效)"
+      },
+      "editable": false
+    },
+    {
+      "name": "CW_THETA_BASE",
+      "value": -20.0,
+      "raw_value": "(-20.0)",
+      "numeric": -20.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "度",
+      "range": {
+        "min": -20.0,
+        "max": 20.0
+      },
+      "comment": "(單位: 度)   null [範圍: -20 ~ 20]",
+      "line": 127,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "方波啟動相關配置(實驗性功能)  (SQUARE_START_ENABLED 為 SQUARE_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "SQUARE_START_STEP_CURRENT",
+      "value": 0.2,
+      "raw_value": "I_Value(0.2)",
+      "numeric": 0.2,
+      "value_kind": "number",
+      "wrapper": "I_Value",
+      "unit": "A",
+      "range": {
+        "min": 0.1,
+        "max": 0.5
+      },
+      "comment": "(單位: A)    null [範圍: 0.1 ~ 0.5]",
+      "line": 128,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "方波啟動相關配置(實驗性功能)  (SQUARE_START_ENABLED 為 SQUARE_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "SQUARE_START_ATO_BW",
+      "value": 0.0,
+      "raw_value": "(0.0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "方波啟動速度帶寬濾波",
+      "line": 129,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "方波啟動相關配置(實驗性功能)  (SQUARE_START_ENABLED 為 SQUARE_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_OPEN_ACC",
+      "value": 0.009,
+      "raw_value": "_Q15(0.009)",
+      "numeric": 0.009,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": null,
+      "range": null,
+      "comment": "強拖啟動增量",
+      "line": 132,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_OPEN_ACC_MIN",
+      "value": 0.0,
+      "raw_value": "(0.0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "RPM",
+      "range": null,
+      "comment": "(單位: RPM) 強拖啟動初始數值",
+      "line": 133,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_OPEN_ACC_CNT",
+      "value": 65.0,
+      "raw_value": "(65)",
+      "numeric": 65.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "[型別: 整數] 強拖啟動執行次數",
+      "line": 134,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_OMEGA_RAMP_ACC",
+      "value": 2.0,
+      "raw_value": "(2)",
+      "numeric": 2.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "[型別: 整數] Omega 啟動增量",
+      "line": 135,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_OMEGA_ACC_MIN",
+      "value": 0.015,
+      "raw_value": "_Q15(0.015)",
+      "numeric": 0.015,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": null,
+      "range": null,
+      "comment": "Omega 啟動最低數值",
+      "line": 136,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_OMEGA_ACC_END",
+      "value": 0.035,
+      "raw_value": "_Q15(0.035)",
+      "numeric": 0.035,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": null,
+      "range": null,
+      "comment": "Omega 啟動限制數值",
+      "line": 137,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_LOOP_RPM",
+      "value": 900.0,
+      "raw_value": "(900)",
+      "numeric": 900.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "RPM",
+      "range": null,
+      "comment": "(單位: RPM) Omega 啟動進入閉環轉速",
+      "line": 139,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_START_DQKP",
+      "value": 1.0,
+      "raw_value": "_Q12(1.0)",
+      "numeric": 1.0,
+      "value_kind": "number",
+      "wrapper": "_Q12",
+      "unit": null,
+      "range": null,
+      "comment": "電機啟動階段 DQ軸 PID Kp",
+      "line": 141,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_START_DQKI",
+      "value": 0.01,
+      "raw_value": "_Q15(0.01)",
+      "numeric": 0.01,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": null,
+      "range": null,
+      "comment": "電機啟動階段 DQ軸 PID Ki",
+      "line": 142,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_START_IQ_CURRENT",
+      "value": 1.3,
+      "raw_value": "I_Value(1.3)",
+      "numeric": 1.3,
+      "value_kind": "number",
+      "wrapper": "I_Value",
+      "unit": "A",
+      "range": null,
+      "comment": "(單位: A) 電機啟動階段 Q軸電流",
+      "line": 143,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_START_TIMES",
+      "value": 700.0,
+      "raw_value": "(700)",
+      "numeric": 700.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "mS",
+      "range": {
+        "min": 700.0,
+        "max": 2500.0
+      },
+      "comment": "(單位: mS) 電機啟動 ATO 運行時間  [範圍: 700 ~ 2500]",
+      "line": 145,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "SPD_BW",
+      "value": 20.0,
+      "raw_value": "(20.0)",
+      "numeric": 20.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": {
+        "min": 5.0,
+        "max": 40.0
+      },
+      "comment": "速度帶寬濾波 [範圍:5 ~ 40]",
+      "line": 146,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "ATO_BW",
+      "value": 20.0,
+      "raw_value": "(20.0)",
+      "numeric": 20.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 147,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "ATO_BW_RUN",
+      "value": 20.0,
+      "raw_value": "(20.0)",
+      "numeric": 20.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 148,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "ATO_BW_RUN1",
+      "value": 30.0,
+      "raw_value": "(30.0)",
+      "numeric": 30.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 149,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "ATO_BW_RUN2",
+      "value": 53.0,
+      "raw_value": "(53.0)",
+      "numeric": 53.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 150,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "ATO_BW_RUN3",
+      "value": 65.0,
+      "raw_value": "(65.0)",
+      "numeric": 65.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 151,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "ATO_BW_RUN4",
+      "value": 65.0,
+      "raw_value": "(65.0)",
+      "numeric": 65.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 152,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_MIN_SMO_SPEED",
+      "value": 900.0,
+      "raw_value": "(900)",
+      "numeric": 900.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 153,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_RUN_DQKP",
+      "value": 0.8,
+      "raw_value": "_Q12(0.8)",
+      "numeric": 0.8,
+      "value_kind": "number",
+      "wrapper": "_Q12",
+      "unit": null,
+      "range": null,
+      "comment": "電機運行階段 DQ軸 PID Kp",
+      "line": 155,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_RUN_DQKI",
+      "value": 0.01,
+      "raw_value": "_Q15(0.01)",
+      "numeric": 0.01,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": null,
+      "range": null,
+      "comment": "電機運行階段 DQ軸 PID Ki",
+      "line": 156,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_RUN_IQ_CURRENT",
+      "value": 0.6,
+      "raw_value": "I_Value(0.6)",
+      "numeric": 0.6,
+      "value_kind": "number",
+      "wrapper": "I_Value",
+      "unit": "A",
+      "range": null,
+      "comment": "(單位: A) 電機運行階段 Q軸初始電流",
+      "line": 157,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "DOUT_MAX",
+      "value": 0.98,
+      "raw_value": "_Q15(0.98)",
+      "numeric": 0.98,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": null,
+      "range": null,
+      "comment": "電機運行 D軸最大幅值 [範圍: _Q15(0.2) ~ _Q(0.999)]",
+      "line": 159,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "QOUT_MAX",
+      "value": 0.98,
+      "raw_value": "_Q15(0.98)",
+      "numeric": 0.98,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": null,
+      "range": null,
+      "comment": "電機運行 Q軸最大幅值 [範圍: _Q15(0.2) ~ _Q(0.999)]",
+      "line": 160,
+      "group": {
+        "l1": "電機基礎運行配置",
+        "l2": "Open-Omega 啟動相關配置  (SQUARE_START_ENABLED 為 OPEN_OMEGA_START 有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "OUTLOOP_ENABLED",
+      "value": 1.0,
+      "raw_value": "(1)",
+      "numeric": 1.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用外環控制  @param (0) 禁用 @param (1) 啟用",
+      "line": 175,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "電機運行控制迴路相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "SPEED_REFRESH_TIMES",
+      "value": 15.0,
+      "raw_value": "(15)",
+      "numeric": 15.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "mS",
+      "range": {
+        "min": 5.0,
+        "max": 200.0
+      },
+      "comment": "(單位: mS) 轉速偵測刷新時間  [範圍: 5 ~ 200]",
+      "line": 176,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "電機運行控制迴路相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "SPEED_JERK_TIMES",
+      "value": 400.0,
+      "raw_value": "(400)",
+      "numeric": 400.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "mS",
+      "range": {
+        "min": 100.0,
+        "max": 1000.0
+      },
+      "comment": "(單位: mS) 電機加加速執行時間  [範圍: 100 ~ 1000]",
+      "line": 177,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "電機運行控制迴路相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "SPEED_JERK_MAX_VALUE",
+      "value": 80.0,
+      "raw_value": "(80)",
+      "numeric": 80.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": {
+        "min": 10.0,
+        "max": 120.0
+      },
+      "comment": "電機加加速最大增量  [範圍: 10 ~ 120]",
+      "line": 178,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "電機運行控制迴路相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "SPEED_DEC",
+      "value": 20.0,
+      "raw_value": "(20)",
+      "numeric": 20.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "速度環 遞減量  ( @ref OUTLOOP_ENABLED 啟用時時有效)",
+      "line": 179,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "電機運行控制迴路相關配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "QOUTINC",
+      "value": 5.0,
+      "raw_value": "(5)",
+      "numeric": 5.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "電流環遞增量  ( @ref OUTLOOP_Enable 禁用時時有效)",
+      "line": 182,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "開環配置  ( @ref OUTLOOP_ENABLED 為 0 時有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "QOUTMINVALUE",
+      "value": 0.04,
+      "raw_value": "I_Value(0.04)",
+      "numeric": 0.04,
+      "value_kind": "number",
+      "wrapper": "I_Value",
+      "unit": null,
+      "range": null,
+      "comment": "電流環輸出下限  ( @ref OUTLOOP_ENABLED 禁用時時有效)",
+      "line": 183,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "開環配置  ( @ref OUTLOOP_ENABLED 為 0 時有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "QOUTMAXVALUE",
+      "value": 3.7,
+      "raw_value": "I_Value(3.7)",
+      "numeric": 3.7,
+      "value_kind": "number",
+      "wrapper": "I_Value",
+      "unit": null,
+      "range": null,
+      "comment": "電流環輸出上限  ( @ref OUTLOOP_Enable 禁用時時有效)",
+      "line": 184,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "開環配置  ( @ref OUTLOOP_ENABLED 為 0 時有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "SPEED_KP",
+      "value": 0.8,
+      "raw_value": "_Q12(0.8)",
+      "numeric": 0.8,
+      "value_kind": "number",
+      "wrapper": "_Q12",
+      "unit": null,
+      "range": {
+        "min": 0.0,
+        "max": 6.999
+      },
+      "comment": "速度環 PID Kp [範圍: 0 ~ 6.999]  ( @ref OUTLOOP_ENABLED 啟用時時有效)",
+      "line": 188,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "速度環 PID 配置  ( @ref OUTLOOP_ENABLED 為 1 時有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "SPEED_KI",
+      "value": 0.015,
+      "raw_value": "_Q15(0.015)",
+      "numeric": 0.015,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": null,
+      "range": {
+        "min": 0.0,
+        "max": 0.999
+      },
+      "comment": "速度環 PID Ki [範圍: 0 ~ 0.999]  ( @ref OUTLOOP_ENABLED 啟用時時有效)",
+      "line": 189,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "速度環 PID 配置  ( @ref OUTLOOP_ENABLED 為 1 時有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "SPEED_KD",
+      "value": 0.004,
+      "raw_value": "_Q15(0.004)",
+      "numeric": 0.004,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": null,
+      "range": {
+        "min": 0.0,
+        "max": 0.999
+      },
+      "comment": "速度環 PID Kd [範圍: 0 ~ 0.999]  ( @ref OUTLOOP_ENABLED 啟用時時有效)",
+      "line": 190,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "速度環 PID 配置  ( @ref OUTLOOP_ENABLED 為 1 時有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "SOUT_MIN",
+      "value": 0.1,
+      "raw_value": "I_Value(0.1)",
+      "numeric": 0.1,
+      "value_kind": "number",
+      "wrapper": "I_Value",
+      "unit": null,
+      "range": null,
+      "comment": "速度環 PID 幅值下限  ( @ref OUTLOOP_ENABLED 啟用時時有效)",
+      "line": 193,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "速度環 PID 幅值配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "SOUT_MAX",
+      "value": 10.0,
+      "raw_value": "I_Value(10.0)",
+      "numeric": 10.0,
+      "value_kind": "number",
+      "wrapper": "I_Value",
+      "unit": null,
+      "range": null,
+      "comment": "速度環 PID 幅值上限  ( @ref OUTLOOP_ENABLED 啟用時時有效)",
+      "line": 194,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "速度環 PID 幅值配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "SPEED_MODE",
+      "value": "PWMMODE",
+      "raw_value": "(PWMMODE)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "調速控制模式配置  @see NONEMODE 無調速模式 @see PWMMODE PWM調速模式 @see VSPMODE VSP調速模式(試驗性功能)",
+      "line": 198,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "調速控制模式配置"
+      },
+      "editable": false
+    },
+    {
+      "name": "NONEMODE_SPEED",
+      "value": 4000.0,
+      "raw_value": "(4000)",
+      "numeric": 4000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "RPM",
+      "range": {
+        "min": 1000.0,
+        "max": 40000.0
+      },
+      "comment": "(單位: RPM) 無調速轉速 (範圍: 1000 ~ 40000)  ( @ref SPEED_MODE 為 NONEMODE 時有效)",
+      "line": 200,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "調速控制模式配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "PWM_INVERT_ENABLED",
+      "value": 1.0,
+      "raw_value": "(1)",
+      "numeric": 1.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用 PWM 信號倒相  @param (0) 禁用 @param (1) 啟用  ( @ref SPEED_MODE 為 PWMMODE 時有效",
+      "line": 202,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "調速控制模式配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "VSP_INVERT_ENABLED",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用 VSP 信號倒相  @param (0) 禁用 @param (1) 啟用  ( @ref SPEED_MODE 為 VSPMODE 時有效",
+      "line": 203,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "調速控制模式配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "PWM_WINDBAND_SUPPORT_ENABLED",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用 PWM 寬頻支援  @param (0) 禁用 @param (1) 啟用  ( @ref SPEED_MODE 為 PWMMODE 時有效)",
+      "line": 205,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "調速控制模式配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "PWM_FULLCONTROL_ENABLED",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用 無 PWM 時執行放轉  @param (0) 禁用 @param (1) 啟用",
+      "line": 207,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "調速控制模式配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "PWM_FULLCONTROL_MAX_VALUE",
+      "value": 0.75,
+      "raw_value": "_Q15(0.75)",
+      "numeric": 0.75,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": null,
+      "range": {
+        "min": 0.5,
+        "max": 0.75
+      },
+      "comment": "無 PWM 時執行放轉最大估算值  [範圍: 0.5 ~ 0.75]  ( @ref PWM_FULLCONTROL_ENABLED 啟用時時有效)",
+      "line": 208,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "調速控制模式配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_SHUTDOWN_ENABLED",
+      "value": 1.0,
+      "raw_value": "(1)",
+      "numeric": 1.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用 PWM 開關機控制  @param (0) 禁用 @param (1) 啟用  ( @ref SPEED_MODE 為 PWMMODE 時有效)",
+      "line": 211,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "PWM 開關機配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "PWM_TURNOFF_DUTY",
+      "value": 0.03,
+      "raw_value": "_Q15(0.03)",
+      "numeric": 0.03,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": "%",
+      "range": {
+        "min": 0.0,
+        "max": 0.999
+      },
+      "comment": "(單位: %)  PWM 關機站空比    [範圍: 0 ~ 0.999]  ( @ref SPEED_MODE 為 PWMMODE 時有效)",
+      "line": 212,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "PWM 開關機配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "PWM_TURNON_DUTY",
+      "value": 0.04,
+      "raw_value": "_Q15(0.04)",
+      "numeric": 0.04,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": "%",
+      "range": {
+        "min": 0.0,
+        "max": 0.999
+      },
+      "comment": "(單位: %)  PWM 開機站空比    [範圍: 0 ~ 0.999]  ( @ref SPEED_MODE 為 PWMMODE 時有效)",
+      "line": 213,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "PWM 開關機配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "VSP_TURNOFF_VOLT",
+      "value": "M_5Volt(2)",
+      "raw_value": "M_5Volt(2)",
+      "numeric": null,
+      "value_kind": "expression",
+      "wrapper": null,
+      "unit": "V",
+      "range": null,
+      "comment": "(單位: V)  VSP 信號關機電壓  [範圍: 0 ~ VSP_TURNON_VOLT - 0.1]  ( @ref SPEED_MODE 為 VSPMODE 時有效)",
+      "line": 215,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "PWM 開關機配置"
+      },
+      "editable": false
+    },
+    {
+      "name": "VSP_TURNON_VOLT",
+      "value": "M_5Volt(2.4)",
+      "raw_value": "M_5Volt(2.4)",
+      "numeric": null,
+      "value_kind": "expression",
+      "wrapper": null,
+      "unit": "V",
+      "range": null,
+      "comment": "(單位: V)  VSP 信號開機電壓  [範圍: VSP_TURNOFF_VOLT + 0.1 ~ ADC_REF]  ( @ref SPEED_MODE 為 VSPMODE 時有效)",
+      "line": 216,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "PWM 開關機配置"
+      },
+      "editable": false
+    },
+    {
+      "name": "MOTOR_SHUTDOWN_FILTER_PERIOD",
+      "value": 100.0,
+      "raw_value": "(100)",
+      "numeric": 100.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "mS",
+      "range": {
+        "min": 20.0,
+        "max": 200.0
+      },
+      "comment": "(單位: mS) 開關機濾波計數值  [範圍: 20 ~ 200]  ( @ref SPEED_MODE 不為 PWMMODE 時有效)",
+      "line": 218,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "PWM 開關機配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "OPENLOOP_ENABLED",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用 開環調速控制  @param (0) 禁用 @param (1) 啟用",
+      "line": 220,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "PWM 開關機配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "OPENLOOP_MAX_SPEED",
+      "value": 17000.0,
+      "raw_value": "(17000)",
+      "numeric": 17000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "RPM",
+      "range": null,
+      "comment": "(單位: RPM) 開環調速控最高轉速限制",
+      "line": 221,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "PWM 開關機配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "OPENLOOP_START_UQ",
+      "value": 0.1,
+      "raw_value": "_Q15(0.1)",
+      "numeric": 0.1,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": "%",
+      "range": {
+        "min": 0.05,
+        "max": 0.5
+      },
+      "comment": "(單位: %)   開環調速閉環初始佔空比  [範圍: 0.05 ~ 0.5]",
+      "line": 222,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "PWM 開關機配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "OPENLOOP_INC",
+      "value": 0.005,
+      "raw_value": "_Q15(0.005)",
+      "numeric": 0.005,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": "%",
+      "range": null,
+      "comment": "(單位: %)   開環調速 遞增量  ( @ref OPENLOOP_ENABLED 啟用時時有效)",
+      "line": 223,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "PWM 開關機配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "OPENLOOP_DEC",
+      "value": 0.001,
+      "raw_value": "_Q15(0.001)",
+      "numeric": 0.001,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": "%",
+      "range": null,
+      "comment": "(單位: %)   開環調速 遞減量  ( @ref OPENLOOP_ENABLED 啟用時時有效)",
+      "line": 224,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "PWM 開關機配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_SPEEDMODE_MAX_NODE",
+      "value": 2.0,
+      "raw_value": "(2)",
+      "numeric": 2.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 232,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "調速節點數量"
+      },
+      "editable": true
+    },
+    {
+      "name": "PWM_MIN_DUTY",
+      "value": 0.1,
+      "raw_value": "_Q15(0.1)",
+      "numeric": 0.1,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": "%",
+      "range": null,
+      "comment": "(單位: %) PWM 最低站空比 範圍: ( @ref 0 ~ 0.999]  ( @ref SPEED_MODE 為 PWMMODE 時有效)",
+      "line": 235,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "調速節點數量"
+      },
+      "editable": true
+    },
+    {
+      "name": "PWM_MAX_DUTY",
+      "value": 0.9,
+      "raw_value": "_Q15(0.9)",
+      "numeric": 0.9,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": "%",
+      "range": null,
+      "comment": "(單位: %) PWM 最高站空比 範圍: ( @ref 0 ~ 0.999]  ( @ref SPEED_MODE 為 PWMMODE 時有效)",
+      "line": 236,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "調速節點數量"
+      },
+      "editable": true
+    },
+    {
+      "name": "VSP_MIN_VOLT",
+      "value": "M_5Volt(2.4)",
+      "raw_value": "M_5Volt(2.4)",
+      "numeric": null,
+      "value_kind": "expression",
+      "wrapper": null,
+      "unit": "V",
+      "range": null,
+      "comment": "(單位: V) VSP 最低電壓 範圍: ( @ref 0 ~ VSP_MAX_VOLT - 0.1]  ( @ref SPEED_MODE 為 VSPMODE 時有效)",
+      "line": 237,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "調速節點數量"
+      },
+      "editable": false
+    },
+    {
+      "name": "VSP_MAX_VOLT",
+      "value": "M_5Volt(4)",
+      "raw_value": "M_5Volt(4)",
+      "numeric": null,
+      "value_kind": "expression",
+      "wrapper": null,
+      "unit": "V",
+      "range": null,
+      "comment": "(單位: V) VSP 最高電壓 範圍: ( @ref VSP_MIN_VOLT + 0.1 ~ ADC_REF]  ( @ref SPEED_MODE 為 VSPMODE 時有效)",
+      "line": 238,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "調速節點數量"
+      },
+      "editable": false
+    },
+    {
+      "name": "MOTOR_MIN_DUTY",
+      "value": 0.1,
+      "raw_value": "_Q15(0.1)",
+      "numeric": 0.1,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": "%",
+      "range": null,
+      "comment": "(單位: %) 電機最小輸出佔空比 ( @ref OPENLOOP_ENABLED 為 1 時有效)",
+      "line": 241,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "調速節點數量"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_MAX_DUTY",
+      "value": 0.9,
+      "raw_value": "_Q15(0.9)",
+      "numeric": 0.9,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": "%",
+      "range": null,
+      "comment": "(單位: %) 電機最大輸出佔空比 ( @ref OPENLOOP_ENABLED 為 1 時有效)",
+      "line": 242,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "調速節點數量"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_MIN_SPEED",
+      "value": 18000.0,
+      "raw_value": "(18000)",
+      "numeric": 18000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "RPM",
+      "range": null,
+      "comment": "(單位: RPM) 電機最低轉速 ( @ref SPEED_MODE 為 PWMMODE 時有效)",
+      "line": 243,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "調速節點數量"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_MAX_SPEED",
+      "value": 28000.0,
+      "raw_value": "(28000)",
+      "numeric": 28000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "RPM",
+      "range": null,
+      "comment": "(單位: RPM) 電機最高轉速 ( @ref SPEED_MODE 為 PWMMODE 時有效)",
+      "line": 244,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "調速節點數量"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_PWMMODE_DUTY_NODE",
+      "value": "{PWM_MIN_DUTY, PWM_MAX_DUTY}",
+      "raw_value": "{PWM_MIN_DUTY, PWM_MAX_DUTY}",
+      "numeric": null,
+      "value_kind": "expression",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 250,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "PWM 調速佔空比節點"
+      },
+      "editable": false
+    },
+    {
+      "name": "MOTOR_VSPMODE_VOLT_NODE",
+      "value": "{VSP_MIN_VOLT, VSP_MAX_VOLT}",
+      "raw_value": "{VSP_MIN_VOLT, VSP_MAX_VOLT}",
+      "numeric": null,
+      "value_kind": "expression",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 256,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "VSP 調速電壓節點"
+      },
+      "editable": false
+    },
+    {
+      "name": "MOTOR_SPEED_NODE",
+      "value": "{(MOTOR_MIN_SPEED), (MOTOR_MAX_SPEED)}",
+      "raw_value": "{(MOTOR_MIN_SPEED), (MOTOR_MAX_SPEED)}",
+      "numeric": null,
+      "value_kind": "expression",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 262,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "電機轉速節點"
+      },
+      "editable": false
+    },
+    {
+      "name": "MOTOR_CTRLDUTY_NODE",
+      "value": "{(MOTOR_MIN_DUTY), (MOTOR_MAX_DUTY)}",
+      "raw_value": "{(MOTOR_MIN_DUTY), (MOTOR_MAX_DUTY)}",
+      "numeric": null,
+      "value_kind": "expression",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 268,
+      "group": {
+        "l1": "電機運行控制迴路配置項目",
+        "l2": "開環調速控制佔空比節點"
+      },
+      "editable": false
+    },
+    {
+      "name": "MOTOR_TAILWIND_ENABLED",
+      "value": 1.0,
+      "raw_value": "(1)",
+      "numeric": 1.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用電機順逆風啟動  @param (0) 禁用 @param (1) 啟用",
+      "line": 281,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機順逆風啟動"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_TAILWIND_DETECT_MIN_SPEED",
+      "value": 900.0,
+      "raw_value": "(900)",
+      "numeric": 900.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "RPM",
+      "range": null,
+      "comment": "(單位: RPM) 最小順逆風檢測閾值",
+      "line": 282,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機順逆風啟動"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_TAILWIND_DETECT_MAX_SPEED",
+      "value": "MOTOR_MAX_SPEED * 0.8",
+      "raw_value": "(MOTOR_MAX_SPEED * 0.8)",
+      "numeric": null,
+      "value_kind": "expression",
+      "wrapper": null,
+      "unit": "RPM",
+      "range": null,
+      "comment": "(單位: RPM) 最大順逆風檢測閾值",
+      "line": 283,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機順逆風啟動"
+      },
+      "editable": false
+    },
+    {
+      "name": "MOTOR_TAILWIND_DETECT_TIMES",
+      "value": 150.0,
+      "raw_value": "(150)",
+      "numeric": 150.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "mS",
+      "range": {
+        "min": 100.0,
+        "max": 1000.0
+      },
+      "comment": "(單位: mS)  順逆風檢測時間  [範圍: 100 ~ 1000]",
+      "line": 284,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機順逆風啟動"
+      },
+      "editable": true
+    },
+    {
+      "name": "TAILWIND_START_ANGLE",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": {
+        "min": -80.0,
+        "max": 80.0
+      },
+      "comment": "(預設: 0) 電機順風啟動角度  [範圍: -80 ~ 80]  @note 注意: 此設置僅是適用於 TAILWIND_START_UQ 已超過 12000 閾值相電流還是無法抑制的情況使用",
+      "line": 287,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機順風設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "TAILWIND_DQKP",
+      "value": 3.5,
+      "raw_value": "_Q12(3.5)",
+      "numeric": 3.5,
+      "value_kind": "number",
+      "wrapper": "_Q12",
+      "unit": null,
+      "range": {
+        "min": 0.0,
+        "max": 7.0
+      },
+      "comment": "電機順風啟動 DQ軸 KP 係數  [範圍: 0 ~ 7]",
+      "line": 288,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機順風設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "TAILWIND_DQKI",
+      "value": 0.4,
+      "raw_value": "_Q15(0.4)",
+      "numeric": 0.4,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": null,
+      "range": {
+        "min": 0.0,
+        "max": 1.0
+      },
+      "comment": "電機順風啟動 DQ軸 KI 係數  [範圍: 0 ~ 1]",
+      "line": 289,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機順風設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "TAILWIND_START_UQ",
+      "value": 8000.0,
+      "raw_value": "(8000)",
+      "numeric": 8000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "電機順風啟動 UQ 初始值",
+      "line": 290,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機順風設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "TAILWIND_START_IQ_CURRENT",
+      "value": 0.8,
+      "raw_value": "I_Value(0.8)",
+      "numeric": 0.8,
+      "value_kind": "number",
+      "wrapper": "I_Value",
+      "unit": null,
+      "range": null,
+      "comment": "電機順風啟動 IQ 啟動電流  [範圍: 0.1 ~ MOTOR_IQ_MAX]",
+      "line": 291,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機順風設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "HEADWIND_LOWSPEED_THRESHOLD",
+      "value": 4000.0,
+      "raw_value": "(4000)",
+      "numeric": 4000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "RPM",
+      "range": null,
+      "comment": "(單位: RPM) 低速逆風檢測閾值  @note 注意: 當 HEADWIND_IQ_BRAKE_ENABLED 為 1 時，此參數不得高於 IQ_BRAKE_START_SPEED 設置",
+      "line": 294,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆風設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "HEADWIND_BRAKE_TIME_BASE",
+      "value": 1000.0,
+      "raw_value": "(1000)",
+      "numeric": 1000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "mS",
+      "range": {
+        "min": 800.0,
+        "max": 60000.0
+      },
+      "comment": "(單位: mS)  電機逆風制動時間基礎  [範圍: 800 ~ 60000]",
+      "line": 295,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆風設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "HEADWIND_ALIGNMENT_TIMES",
+      "value": 1000.0,
+      "raw_value": "(1000)",
+      "numeric": 1000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "mS",
+      "range": {
+        "min": 800.0,
+        "max": 60000.0
+      },
+      "comment": "(單位: mS)  電機逆風預定位時間  [範圍: 800 ~ 60000]",
+      "line": 296,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆風設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "HEADWIND_ALIGNMENT_DOUT",
+      "value": 0.1,
+      "raw_value": "_Q15(0.1)",
+      "numeric": 0.1,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": null,
+      "range": {
+        "min": 0.01,
+        "max": 0.4
+      },
+      "comment": "電機逆風狀態預定位 D軸輸出強度  [範圍: 0.01 ~ 0.4]",
+      "line": 297,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆風設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "HEADWIND_START_IQ_CURRENT",
+      "value": 2.5,
+      "raw_value": "I_Value(2.5)",
+      "numeric": 2.5,
+      "value_kind": "number",
+      "wrapper": "I_Value",
+      "unit": "A",
+      "range": null,
+      "comment": "(單位: A)   電機逆風啟動電流  [範圍: 0.1 ~ MOTOR_IQ_MAX]",
+      "line": 298,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆風設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "HEADWIND_IQ_BRAKE_ENABLED",
+      "value": 1.0,
+      "raw_value": "(1)",
+      "numeric": 1.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用 電機逆轉啟動  @param (0) 禁用 @param (1) 啟用",
+      "line": 301,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆轉啟動設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "IQ_BRAKE_START_SPEED",
+      "value": 4000.0,
+      "raw_value": "(4000)",
+      "numeric": 4000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "RPM",
+      "range": null,
+      "comment": "(單位: RPM) 電機逆轉啟動觸發轉速  @note 注意: 此參數不得低於 HEADWIND_LOWSPEED_THRESHOLD 設置",
+      "line": 302,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆轉啟動設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "IQ_BRAKE_DQKP",
+      "value": 2.8,
+      "raw_value": "_Q12(2.8)",
+      "numeric": 2.8,
+      "value_kind": "number",
+      "wrapper": "_Q12",
+      "unit": null,
+      "range": {
+        "min": 0.0,
+        "max": 7.0
+      },
+      "comment": "電機逆轉啟動 DQ軸 KP 係數  [範圍: 0 ~ 7]",
+      "line": 303,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆轉啟動設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "IQ_BRAKE_DQKI",
+      "value": 0.1,
+      "raw_value": "_Q15(0.1)",
+      "numeric": 0.1,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": null,
+      "range": {
+        "min": 0.0,
+        "max": 1.0
+      },
+      "comment": "電機逆轉啟動 DQ軸 KI 係數  [範圍: 0 ~ 1]",
+      "line": 304,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆轉啟動設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "IQ_BRAKE_ATO_BW_THRESHOLD",
+      "value": 6000.0,
+      "raw_value": "(6000)",
+      "numeric": 6000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "RPM",
+      "range": null,
+      "comment": "(單位: RPM) 電機逆轉啟動係數切換閾值",
+      "line": 306,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆轉啟動設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "IQ_BRAKE_ATO_BW_1",
+      "value": 15.0,
+      "raw_value": "(15.0)",
+      "numeric": 15.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "電機逆轉啟動 觀測器係數1",
+      "line": 307,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆轉啟動設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "IQ_BRAKE_SMO_RPM_1",
+      "value": 4000.0,
+      "raw_value": "(4000)",
+      "numeric": 4000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "RPM",
+      "range": null,
+      "comment": "(單位: RPM) 電機逆轉啟動 SMO 最小估算轉速1",
+      "line": 308,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆轉啟動設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "IQ_BRAKE_RS_MULTI_1",
+      "value": 25.0,
+      "raw_value": "(25.0)",
+      "numeric": 25.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "(預設: 2.0) 電機逆轉啟動 RS 倍率係數",
+      "line": 309,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆轉啟動設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "IQ_BRAKE_ATO_BW_2",
+      "value": 15.0,
+      "raw_value": "(15.0)",
+      "numeric": 15.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "電機逆轉啟動 觀測器係數2",
+      "line": 310,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆轉啟動設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "IQ_BRAKE_SMO_RPM_2",
+      "value": 4000.0,
+      "raw_value": "(4000)",
+      "numeric": 4000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "RPM",
+      "range": null,
+      "comment": "(單位: RPM) 電機逆轉啟動 SMO 最小估算轉速2",
+      "line": 311,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆轉啟動設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "IQ_BRAKE_RS_MULTI_2",
+      "value": 25.0,
+      "raw_value": "(25.0)",
+      "numeric": 25.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "(預設: 2.0) 電機逆轉啟動 RS 倍率係數",
+      "line": 312,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆轉啟動設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "IQ_BRAKE_START_DEGREES",
+      "value": 135.0,
+      "raw_value": "(135.0)",
+      "numeric": 135.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "度",
+      "range": {
+        "min": -180.0,
+        "max": 180.0
+      },
+      "comment": "(單位: 度) 電機逆轉啟動初始角度  [範圍: -180 ~ 180]",
+      "line": 314,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆轉啟動設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "IQ_BRAKE_RUN_ID_CURRENT",
+      "value": 0.0,
+      "raw_value": "I_Value(0.0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": "I_Value",
+      "unit": "A",
+      "range": null,
+      "comment": "(單位: A)  電機逆轉啟動 ID 啟動電流  [範圍: 0.1 ~ MOTOR_ID_MAX]",
+      "line": 315,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆轉啟動設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "IQ_BRAKE_RUN_IQ_CURRENT",
+      "value": -3.5,
+      "raw_value": "I_Value(-3.5)",
+      "numeric": -3.5,
+      "value_kind": "number",
+      "wrapper": "I_Value",
+      "unit": "A",
+      "range": null,
+      "comment": "(單位: A)  電機逆轉啟動 IQ 啟動電流  [範圍: -0.1 ~ -MOTOR_IQ_MAX]",
+      "line": 316,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆轉啟動設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "IQ_BRAKE_TRANSIENT_IQ_CURRENT",
+      "value": 3.5,
+      "raw_value": "I_Value(3.5)",
+      "numeric": 3.5,
+      "value_kind": "number",
+      "wrapper": "I_Value",
+      "unit": "A",
+      "range": null,
+      "comment": "(單位: A)  電機逆轉閉環暫態 IQ 電流  [範圍: 0.1 ~ MOTOR_IQ_MAX]",
+      "line": 317,
+      "group": {
+        "l1": "電機順逆風配置項目",
+        "l2": "電機逆轉啟動設置"
+      },
+      "editable": true
+    },
+    {
+      "name": "ROTATE_SIGNAL_TYPE",
+      "value": "FG_TYPE",
+      "raw_value": "(FG_TYPE)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "轉速信號輸出類型  @see NO_TYPE 無信號 @see RD_TYPE RD信號 @see FG_TYPE FG信號",
+      "line": 329,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "電機轉速信號輸出配置"
+      },
+      "editable": false
+    },
+    {
+      "name": "RD_TRIGGER_DELAY_TIMES",
+      "value": 10000.0,
+      "raw_value": "(10000)",
+      "numeric": 10000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "mS",
+      "range": null,
+      "comment": "(單位: mS)  RD 信號遲滯時間  ( @ref ROTATE_SIGNAL_TYPE 為 RD_TYPE 時有效)",
+      "line": 331,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "電機轉速信號輸出配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "FG_INITIAL_DELAY_TIMES",
+      "value": 1500.0,
+      "raw_value": "(1500)",
+      "numeric": 1500.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "mS",
+      "range": {
+        "min": 1000.0,
+        "max": 6000.0
+      },
+      "comment": "(單位: mS) FG 輸出時機  (注意: FG輸出時機是以預定位結束後開始計數，設置時須注意堵轉參數合理性)  [範圍: 1000 ~ 6000]",
+      "line": 333,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "電機轉速信號輸出配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "FG_PULSE_PERIOD",
+      "value": 2.0,
+      "raw_value": "(2)",
+      "numeric": 2.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "FG 每轉脈波數量  ( @ref ROTATE_SIGNAL_TYPE 為 RD_TYPE 時有效)",
+      "line": 334,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "電機轉速信號輸出配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "FG_ALARM_LOGIC",
+      "value": "LOGIC_HIGH",
+      "raw_value": "(LOGIC_HIGH)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "FG 信號警報狀態  @see LOGIC_HIGH 高態信號 @see LOGIC_LOW 低態信號",
+      "line": 335,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "電機轉速信號輸出配置"
+      },
+      "editable": false
+    },
+    {
+      "name": "FG_FAKE_ENABLED",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用假轉速輸出功能  (注意: PWM_FULLCONTROL_ENABLED 與本功能衝突，不得同時啟用)  @param (0) 禁用 @param (1) 啟用",
+      "line": 336,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "電機轉速信號輸出配置"
+      },
+      "editable": true
+    },
+    {
+      "name": "FAKE_FG_MAX_NODE",
+      "value": 2.0,
+      "raw_value": "(2)",
+      "numeric": 2.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 343,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "假轉速輸出節點數量  ( @warning PWM_FULLCONTROL_ENABLED 與本功能衝突，不得同時啟用)"
+      },
+      "editable": true
+    },
+    {
+      "name": "FAKE_FG_INPUT_NODE",
+      "value": "{_Q15(0.3), _Q15(0.5)}",
+      "raw_value": "{_Q15(0.3), _Q15(0.5)}",
+      "numeric": null,
+      "value_kind": "expression",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 349,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "假轉速輸入來源表  ( @warning PWM_FULLCONTROL_ENABLED 與本功能衝突，不得同時啟用)"
+      },
+      "editable": false
+    },
+    {
+      "name": "FAKE_FG_OUTPUT_NODE",
+      "value": "{(1.0), (1.1)}",
+      "raw_value": "{(1.0), (1.1)}",
+      "numeric": null,
+      "value_kind": "expression",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 355,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "假轉速輸出倍率表  ( @warning PWM_FULLCONTROL_ENABLED 與本功能衝突，不得同時啟用)"
+      },
+      "editable": false
+    },
+    {
+      "name": "HPFCOL_ENABLED",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用 HP-FCOL 功能  @param (0) 禁用 @param (1) 啟用",
+      "line": 366,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 HP-FCOL 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "HPFCOL_FUNC_TYPE",
+      "value": "TYPE_LEGACY",
+      "raw_value": "(TYPE_LEGACY)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 367,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 HP-FCOL 相關項目"
+      },
+      "editable": false
+    },
+    {
+      "name": "HPFCOL_USED_SWCRC_ENABLED",
+      "value": 1.0,
+      "raw_value": "(1)",
+      "numeric": 1.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "(預設: 1) 啟用 HP-FCOL 軟體驗證 CRC 功能  @param (0) 禁用 @param (1) 啟用",
+      "line": 368,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 HP-FCOL 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "HPFCOL_DUALDATA_ENABLED",
+      "value": 1.0,
+      "raw_value": "(1)",
+      "numeric": 1.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用 HP-FCOL Dual_Data 功能  @param (0) 禁用 @param (1) 啟用",
+      "line": 370,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 HP-FCOL 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "HPFCOL_DUALDATA_FREQ0",
+      "value": 25.0,
+      "raw_value": "(25.0)",
+      "numeric": 25.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "khz",
+      "range": null,
+      "comment": "(單位: khz) HP-FCOL Dual_Data  資料0 頻率",
+      "line": 371,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 HP-FCOL 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "HPFCOL_DUALDATA_FREQ1",
+      "value": 30.0,
+      "raw_value": "(30.0)",
+      "numeric": 30.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "khz",
+      "range": null,
+      "comment": "(單位: khz) HP-FCOL Dual_Data  資料1 頻率",
+      "line": 372,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 HP-FCOL 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "HPFCOL_DUALDATA_THRESHOLD",
+      "value": 1.0,
+      "raw_value": "(1.0)",
+      "numeric": 1.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "khz",
+      "range": null,
+      "comment": "(單位: khz) HP-FCOL Dual_Data  頻率閾值",
+      "line": 373,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 HP-FCOL 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "CISCOSMF_ENABLED",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用 Cisco-SmartFan 功能  @param (0) 禁用 @param (1) 啟用",
+      "line": 384,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 Cisco-SmartFan 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "CISCOSMF_USED_SWCRC_ENABLED",
+      "value": 1.0,
+      "raw_value": "(1)",
+      "numeric": 1.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "(預設: 1) 啟用 Cisco-SmartFan 軟體驗證 CRC 功能  @param (0) 禁用 @param (1) 啟用",
+      "line": 385,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 Cisco-SmartFan 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "LENOVO_TURBOFAN_ENABLED",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用 TruboFan功能  @param (0) 禁用 @param (1) 啟用",
+      "line": 398,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 Lenovo-TurboFan 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "LENOVO_TURBOFAN_ROLE",
+      "value": "SUCCOR",
+      "raw_value": "(SUCCOR)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "TruboFan模式設置  @param INITIATOR 發起者 @param SUCCOR 備援者",
+      "line": 399,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 Lenovo-TurboFan 相關項目"
+      },
+      "editable": false
+    },
+    {
+      "name": "LENOVO_TURBOFAN_UNLINK_ENABLED",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用通訊異常警報  @param (0) 禁用 @param (1) 啟用",
+      "line": 400,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 Lenovo-TurboFan 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "LENOVO_TURBOFAN_RESPONSE_TIMES",
+      "value": 10000.0,
+      "raw_value": "(10000)",
+      "numeric": 10000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "mS",
+      "range": {
+        "min": 10000.0,
+        "max": 30000.0
+      },
+      "comment": "(單位: mS) TruboFan異常響應時間  [範圍: 10000 ~ 30000]",
+      "line": 401,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 Lenovo-TurboFan 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "LENOVO_TURBOFAN_SUCCOR_SPEED",
+      "value": 6000.0,
+      "raw_value": "(6000)",
+      "numeric": 6000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "RPM",
+      "range": null,
+      "comment": "(單位: RPM) TruboFan備援轉速",
+      "line": 402,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 Lenovo-TurboFan 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "DELL_COASTMODE_ENABLED",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用 Dell-CoastMode 功能  @param (0) 禁用 @param (1) 啟用",
+      "line": 409,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 Dell-CoastMode 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "DELL_COASTMODE_RESTART_TIMES",
+      "value": 1000.0,
+      "raw_value": "(1000)",
+      "numeric": 1000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "mS",
+      "range": {
+        "min": 10.0,
+        "max": 8000.0
+      },
+      "comment": "(單位: mS) Dell-CoastMode 延遲啟動時間  [範圍: 10 ~ 8000]",
+      "line": 410,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 Dell-CoastMode 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "CURRENT_LIMITER_MODE",
+      "value": "NONE",
+      "raw_value": "(NONE)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "電流限制器模式  @param NONE 不啟用 @param LEGACY 傳統限流 @param MULTI 多節點",
+      "line": 422,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 電流限制器 相關項目"
+      },
+      "editable": false
+    },
+    {
+      "name": "CURRENT_LIMITER_THRESHOLD",
+      "value": 0.6,
+      "raw_value": "(0.6)",
+      "numeric": 0.6,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "A",
+      "range": null,
+      "comment": "(單位: A) 電流限制閾值  [範圍: 1.0 ~ HW_BOARD_CURR_MAX]",
+      "line": 423,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 電流限制器 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "CURRENT_LIMITER_OFFSET",
+      "value": 0.0,
+      "raw_value": "(0.0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "(預設: A) 電流限制偏移  [範圍: -CURRENT_LIMITER_THRESHOLD ~ (HW_BOARD_CURR_MAX - CURRENT_LIMITER_THRESHOLD)]",
+      "line": 424,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 電流限制器 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "CURRENT_LIMITER_MAX_NODE",
+      "value": 2.0,
+      "raw_value": "(2)",
+      "numeric": 2.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 427,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "多節點限電流配置  ( @ref CURRENT_LIMITER_MODE 為 MULTI 時有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "CURRENT_LIMITER_DUTY_NODE",
+      "value": "{_Q15(0.4),            _Q15(0.8)}",
+      "raw_value": "{_Q15(0.4),            _Q15(0.8)}",
+      "numeric": null,
+      "value_kind": "expression",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 428,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "多節點限電流配置  ( @ref CURRENT_LIMITER_MODE 為 MULTI 時有效)"
+      },
+      "editable": false
+    },
+    {
+      "name": "CURRENT_LIMITER_VALUE_NODE",
+      "value": "{M_Current2Value(0.2), M_Current2Value(0.5)}",
+      "raw_value": "{M_Current2Value(0.2), M_Current2Value(0.5)}",
+      "numeric": null,
+      "value_kind": "expression",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 429,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "多節點限電流配置  ( @ref CURRENT_LIMITER_MODE 為 MULTI 時有效)"
+      },
+      "editable": false
+    },
+    {
+      "name": "POWER_LIMITER_MODE",
+      "value": "NONE",
+      "raw_value": "(NONE)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "功率限制器模式  @param NONE 不啟用 @param LEGACY 傳統限功率 @param MULTI 多節點",
+      "line": 439,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 功率限制器 相關項目"
+      },
+      "editable": false
+    },
+    {
+      "name": "POWER_LIMITER_THRESHOLD",
+      "value": 3.0,
+      "raw_value": "(3.0)",
+      "numeric": 3.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "W",
+      "range": null,
+      "comment": "(單位: W) 功率限制閾值  [範圍: 1.0 ~ MAX_PWOER]",
+      "line": 440,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 功率限制器 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "POWER_LIMITER_OFFSET",
+      "value": 0.0,
+      "raw_value": "(0.0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "(預設: W) 功率限制偏移  [範圍: -POWER_LIMITER_THRESHOLD ~ (MAX_POWER - POWER_LIMITER_THRESHOLD)]",
+      "line": 441,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 功率限制器 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "POWER_LIMITER_MAX_NODE",
+      "value": 2.0,
+      "raw_value": "(2)",
+      "numeric": 2.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 444,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "多節點限功率配置  ( @ref POWER_LIMITER_MODE 為 MULTI 時有效)"
+      },
+      "editable": true
+    },
+    {
+      "name": "POWER_LIMITER_DUTY_NODE",
+      "value": "{PWM_MIN_DUTY, PWM_MAX_DUTY}",
+      "raw_value": "{PWM_MIN_DUTY, PWM_MAX_DUTY}",
+      "numeric": null,
+      "value_kind": "expression",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 445,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "多節點限功率配置  ( @ref POWER_LIMITER_MODE 為 MULTI 時有效)"
+      },
+      "editable": false
+    },
+    {
+      "name": "POWER_LIMITER_VALUE_NODE",
+      "value": "{(3.0),        (12.0)}",
+      "raw_value": "{(3.0),        (12.0)}",
+      "numeric": null,
+      "value_kind": "expression",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 446,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "多節點限功率配置  ( @ref POWER_LIMITER_MODE 為 MULTI 時有效)"
+      },
+      "editable": false
+    },
+    {
+      "name": "MOTOR_BRAKE_MODE",
+      "value": "NONE",
+      "raw_value": "(NONE)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 456,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 電機制動 相關項目"
+      },
+      "editable": false
+    },
+    {
+      "name": "MOTOR_POWERON_BRAKE_TIMES",
+      "value": 3000.0,
+      "raw_value": "(3000)",
+      "numeric": 3000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "mS",
+      "range": {
+        "min": 1000.0,
+        "max": 10000.0
+      },
+      "comment": "(單位: mS) 上電制動時間  [範圍: 1000 ~ 10000] ( @ref MOTOR_BRAKE_MODE 有 POWERON 成員時有效)",
+      "line": 457,
+      "group": {
+        "l1": "電機可選功能配置項目",
+        "l2": "設定 電機制動 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "CODE_SANITYCHECK_EBABLED",
+      "value": 1.0,
+      "raw_value": "(1)",
+      "numeric": 1.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用程序安全檢測  @param (0) 禁用 @param (1) 啟用",
+      "line": 469,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "電機實驗性功能相關選項"
+      },
+      "editable": true
+    },
+    {
+      "name": "PWM_DIR_CONTROL_ENABLED",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用正反轉控制  @param (0) 禁用 @param (1) 啟用",
+      "line": 472,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "電機實驗性功能相關選項"
+      },
+      "editable": true
+    },
+    {
+      "name": "VOLTJUMP_SUPPRESSOR_ENABLED",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用 跳電壓抑制器 @param (0) 禁用 @param (1) 啟用",
+      "line": 482,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "跳電壓抑制器相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "VOLTJUMP_UQ_THRESHOLD",
+      "value": 0.7,
+      "raw_value": "_Q15(0.7)",
+      "numeric": 0.7,
+      "value_kind": "number",
+      "wrapper": "_Q15",
+      "unit": "_Q15",
+      "range": null,
+      "comment": "(單位: _Q15) 跳電壓抑制輸出檢測閾值  [範圍: 0.5 ~ QOUT_MAX]",
+      "line": 483,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "跳電壓抑制器相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "VOLTJUMP_VOLT_THRESHOLD",
+      "value": 2.0,
+      "raw_value": "(2.0)",
+      "numeric": 2.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "V",
+      "range": {
+        "min": 0.1,
+        "max": 5.0
+      },
+      "comment": "(單位: V) 跳電壓抑制器觸發電壓  [範圍: 0.1 ~ 5]",
+      "line": 484,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "跳電壓抑制器相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "VOLTJUMP_INIT_CURRENT",
+      "value": 0.4,
+      "raw_value": "I_Value(0.4)",
+      "numeric": 0.4,
+      "value_kind": "number",
+      "wrapper": "I_Value",
+      "unit": "I",
+      "range": null,
+      "comment": "(單位: I) 跳電壓抑制器抑制電流  [範圍: 0.5 ~ MOTOR_RUN_IQ_CURRENT]",
+      "line": 485,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "跳電壓抑制器相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "ORING_CONTROL_ENABLED",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用理想二極體控制  @param (0) 禁用 @param (1) 啟用",
+      "line": 496,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "理想二極體(ORing) 控制相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "ORING_CONTROL_GPIO_PIN",
+      "value": "GPIO_PIN_34",
+      "raw_value": "(GPIO_PIN_34)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "理想二極體控制接腳  @param GPIO_PIN_20 @param GPIO_PIN_34",
+      "line": 497,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "理想二極體(ORing) 控制相關項目"
+      },
+      "editable": false
+    },
+    {
+      "name": "ORING_CONTROL_IQIBUS_THRESHOLD",
+      "value": 1.0,
+      "raw_value": "(1)",
+      "numeric": 1.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "理想二極體控制觸發閾值",
+      "line": 498,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "理想二極體(ORing) 控制相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "ORING_CONTROL_FOC_POW_THRESHOLD",
+      "value": 300.0,
+      "raw_value": "(300)",
+      "numeric": 300.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "理想二極體控制 FOC_POW 觸發閾值",
+      "line": 499,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "理想二極體(ORing) 控制相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "ORING_CONTROL_FOC_UQ_THRESHOLD",
+      "value": 27000.0,
+      "raw_value": "(27000)",
+      "numeric": 27000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "理想二極體控制 FOC_UQ 觸發閾值 [範圍: 16383 ~ QOUT_MAX]",
+      "line": 500,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "理想二極體(ORing) 控制相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "ORING_CONTROL_IBUS_THRESHOLD",
+      "value": 16580.0,
+      "raw_value": "(16580)",
+      "numeric": 16580.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "理想二極體控制 IBus 觸發閾值 [範圍: 16383 ~ QOUT_MAX]",
+      "line": 501,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "理想二極體(ORing) 控制相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "ORING_CONTROL_IBUS_BUFFER",
+      "value": 100.0,
+      "raw_value": "(100)",
+      "numeric": 100.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": {
+        "min": 100.0,
+        "max": 16383.0
+      },
+      "comment": "理想二極體控制 IBus 遲滯區間 [範圍: 100 ~ 16383]",
+      "line": 502,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "理想二極體(ORing) 控制相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "ORING_CONTROL_IQIBUS_RECOVER",
+      "value": 10.0,
+      "raw_value": "(10)",
+      "numeric": 10.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "理想二極體控制恢復閾值",
+      "line": 503,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "理想二極體(ORing) 控制相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_RAMP_METHOD_ENABLED",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用 電機爬坡 V2.0  @param (0) 禁用 @param (1) 啟用",
+      "line": 515,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "電機爬坡算法相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_RAMP_ACC_MIN",
+      "value": 20.0,
+      "raw_value": "(20)",
+      "numeric": 20.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "電機爬坡最小加速值 [範圍: 12 ~ MOTOR_RAMP_ACC_MAX] ( @ref MOTOR_RAMP_METHOD_ENABLED 為 1 時有效)",
+      "line": 516,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "電機爬坡算法相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_RAMP_ACC_MAX",
+      "value": 80.0,
+      "raw_value": "(80)",
+      "numeric": 80.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "電機爬坡最大加速值 [範圍: MOTOR_RAMP_ACC_MIN ~ 300] ( @ref MOTOR_RAMP_METHOD_ENABLED 為 1 時有效)",
+      "line": 517,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "電機爬坡算法相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_RAMP_THRESHOLD_MIN",
+      "value": 1000.0,
+      "raw_value": "(1000)",
+      "numeric": 1000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "RPM",
+      "range": null,
+      "comment": "(單位: RPM) 電機爬坡計算最小閾值 [範圍: 100 ~ MOTOR_RAMP_ACC_MAX] ( @ref MOTOR_RAMP_METHOD_ENABLED 為 1 時有效)",
+      "line": 518,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "電機爬坡算法相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_RAMP_THRESHOLD_MAX",
+      "value": 10000.0,
+      "raw_value": "(10000)",
+      "numeric": 10000.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "RPM",
+      "range": null,
+      "comment": "(單位: RPM) 電機爬坡計算最大閾值 [範圍: MOTOR_RAMP_ACC_MIN ~ MOTOR_MAX_SPEED] ( @ref MOTOR_RAMP_METHOD_ENABLED 為 1 時有效)",
+      "line": 519,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "電機爬坡算法相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "MOTOR_RAMP_DEC",
+      "value": 25.0,
+      "raw_value": "(25)",
+      "numeric": 25.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": {
+        "min": 20.0,
+        "max": 120.0
+      },
+      "comment": "電機爬坡減量  [範圍: 20 ~ 120] ( @ref MOTOR_RAMP_METHOD_ENABLED 為 1 時有效)",
+      "line": 520,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "電機爬坡算法相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "SPEED_REFRESH_TIMES",
+      "value": 25.0,
+      "raw_value": "(25)",
+      "numeric": 25.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": "mS",
+      "range": {
+        "min": 5.0,
+        "max": 200.0
+      },
+      "comment": "(單位: mS) 轉速偵測刷新時間  [範圍: 5 ~ 200]",
+      "line": 524,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "電機爬坡算法相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "UART1_ENABLED",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "啟用 UART1 支援  @param (0) 禁用 @param (1) 啟用",
+      "line": 533,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "設定 Uart1 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "UART1_MODE",
+      "value": "NORMAL_MODE",
+      "raw_value": "(NORMAL_MODE)",
+      "numeric": null,
+      "value_kind": "macro_ref",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "設置 UART1 模式  @param NORMAL_MODE 標準模式 @param ONEWIRE_MODE 單線模式",
+      "line": 534,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "設定 Uart1 相關項目"
+      },
+      "editable": false
+    },
+    {
+      "name": "UART1_BAUDRATE",
+      "value": 9600.0,
+      "raw_value": "(9600)",
+      "numeric": 9600.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": {
+        "min": 1200.0,
+        "max": 38400.0
+      },
+      "comment": "(建議: 9600) 設置 UART1 鮑率  [範圍: 1200 ~ 38400]",
+      "line": 535,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "設定 Uart1 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "UART1_STACK_MAXLEN",
+      "value": 16.0,
+      "raw_value": "(16)",
+      "numeric": 16.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": {
+        "min": 1200.0,
+        "max": 38400.0
+      },
+      "comment": "(預設: 16) 設置 UART1 緩衝區大小  [範圍: 1200 ~ 38400]",
+      "line": 536,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "設定 Uart1 相關項目"
+      },
+      "editable": true
+    },
+    {
+      "name": "Slowdown_Response_Enable",
+      "value": 0.0,
+      "raw_value": "(0)",
+      "numeric": 0.0,
+      "value_kind": "number",
+      "wrapper": null,
+      "unit": null,
+      "range": null,
+      "comment": "",
+      "line": 539,
+      "group": {
+        "l1": "電機實驗性配置項目",
+        "l2": "設定 Uart1 相關項目"
+      },
+      "editable": true
+    }
+  ]
+}

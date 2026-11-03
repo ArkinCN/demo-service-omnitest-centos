@@ -1,0 +1,26 @@
+{
+  "doc_id": "coolingfan-single-hall-appnote",
+  "title": "散热风扇单霍尔方案应用手册",
+  "doc_type": "应用手册",
+  "taxonomy": {
+    "l1": "motor",
+    "l2": "cooling-fan",
+    "l3": "fortior-fu6832"
+  },
+  "process_tags": [
+    "初始化配置",
+    "测试需求",
+    "启动测试"
+  ],
+  "format": "pdf",
+  "pages": 29,
+  "page_limit": null,
+  "tables": 5,
+  "source_path": "[源] manuals/散热风扇单霍尔方案应用手册.pdf",
+  "staged_input": "[源] manuals/散热风扇单霍尔方案应用手册.pdf",
+  "sha256": "00417909217d92d4adeab4ec35f5e2a23970b7bdc77b12fd772ae0d0736fb173",
+  "bytes": 2949191,
+  "converter": "docling",
+  "ocr": false,
+  "note": null
+}

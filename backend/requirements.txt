@@ -1,0 +1,50 @@
+# MotorDebug 业务后端依赖清单
+#
+# 来源：客户脱敏工程 api/requirements.txt（原依赖为起点，保持可复现版本锁）
+# 说明：阶段 1 保真沿用原依赖，未做增删；新增业务的依赖在阶段 2 起按需追加。
+# 环境：Python 3.10+（原始配置 ^3.10，实测 3.10 / 3.11 均可）
+
+# FastAPI 核心
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+
+# 数据库和 ORM
+sqlmodel==0.0.14
+pymysql==1.1.0
+cryptography==41.0.7
+alembic==1.13.1
+
+# 数据验证和配置
+pydantic==2.5.0
+pydantic-settings==2.1.0
+email-validator==2.1.0
+
+# 认证和安全
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+bcrypt==4.0.1
+python-multipart==0.0.6
+
+# 图片处理
+Pillow==10.2.0
+openpyxl==3.1.5
+
+# LDAP 认证
+ldap3==2.9.1
+
+# 环境变量
+python-dotenv==1.0.0
+
+# 日志
+structlog==24.1.0
+
+# 定时任务
+apscheduler==3.10.4
+
+# 开发工具
+pytest==7.4.3
+pytest-asyncio==0.23.3
+httpx==0.26.0
+black==23.12.1
+flake8==6.1.0
+mypy==1.8.0

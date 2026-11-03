@@ -1,0 +1,155 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>8080 bug 修改原因汇总（2025-04-14）（合成图文稿）</title><style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 20px 22px 40px; background: #fff; color: #1f2a24;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 13px; line-height: 1.75;
+}
+h1 { font-size: 19px; margin: 4px 0 14px; }
+h2 { font-size: 16px; margin: 22px 0 10px; padding-bottom: 4px; border-bottom: 1px solid #e3e8e4; }
+h3 { font-size: 14px; margin: 18px 0 8px; }
+h4, h5, h6 { font-size: 13px; margin: 14px 0 6px; color: #2e5e45; }
+p { margin: 8px 0; }
+ul, ol { margin: 8px 0; padding-left: 22px; }
+li { margin: 3px 0; }
+code { background: #f4f7f4; border: 1px solid #e3e8e4; border-radius: 3px; padding: 0 4px; font-size: 12px; }
+pre { background: #f7f9f7; border: 1px solid #e3e8e4; border-radius: 4px; padding: 10px; overflow-x: auto; }
+pre code { background: none; border: none; padding: 0; }
+table { border-collapse: collapse; margin: 10px 0; width: 100%; font-size: 12px; }
+th, td { border: 1px solid #e3e8e4; padding: 5px 8px; text-align: left; vertical-align: top; }
+th { background: #f0f5f1; font-weight: 600; }
+hr { border: none; border-top: 1px solid #e3e8e4; margin: 16px 0; }
+.kb-fig { margin: 14px 0; text-align: center; }
+.kb-fig img { max-width: 100%; height: auto; border: 1px solid #e3e8e4; border-radius: 4px; }
+/* 代码块：整体成块，保留原始换行与缩进 */
+.kb-code {
+  background: #f7f9f7; border: 1px solid #e3e8e4; border-left: 3px solid #9bb8a8;
+  border-radius: 4px; padding: 10px 12px; margin: 12px 0; overflow-x: auto;
+  white-space: pre; font-size: 12px; line-height: 1.65;
+}
+.kb-code code { background: none; border: none; padding: 0; font-size: 12px; }
+/* 公式块：居中、衬线、留白（干净文本样式，不引排版引擎） */
+.kb-formula {
+  margin: 12px auto; padding: 8px 12px; max-width: 100%; text-align: center;
+  font-family: "Cambria Math", "Times New Roman", "Georgia", serif;
+  font-size: 14px; line-height: 2; color: #22302a;
+  background: #fbfcfb; border-radius: 4px; white-space: pre-wrap; word-break: break-word;
+}
+</style></head><body><h1>8080 bug 修改原因汇总（2025-04-14）</h1><div style="margin:0 0 14px;padding:8px 10px;border:1px solid #e3e8e4;border-radius:4px;background:#f7faf8;color:#5b6b62;font-size:12px;">系统合成图文稿（由抽取产物重建，非客户原件 PDF）。</div><p><strong>讯强未通过测试项</strong></p>
+
+<p><strong>修改原因汇总</strong></p>
+
+<p>峰岹科技(深圳)股份有限公司</p>
+
+<p>风险：使用时超出正常Xdata空间，会溢出。影响ADC采样。可能会误报欠压保护，软件过流保护等导致停机。</p>
+
+<p>解决：加上空间限制。（理论推导）</p>
+
+<p>空间限制值的选取：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/bug-fix-summary-8080/figure?name=image1.png" alt="插图 1" loading="lazy"></figure>
+
+<p>程序中修改：</p>
+
+<p>修改前：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/bug-fix-summary-8080/figure?name=image10.png" alt="插图 2" loading="lazy"></figure>
+
+<p>修改后：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/bug-fix-summary-8080/figure?name=image11.png" alt="插图 3" loading="lazy"></figure>
+
+<h3>2 问题2：比较器迟滞电压：程序定义的是±5mv。（客诉问题）</h3>
+
+<p>风险：顺逆风检测时迟滞电压设置为±5mv，有芯片会出现误触发比较器情况，当时为静止状态，误触为反转，状态机一直不往下走，电机无法启动。（扫地宝客诉）</p>
+
+<p>解决：修改成±10mV。</p>
+
+<p>比较器迟滞电压设置作用：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/bug-fix-summary-8080/figure?name=image12.png" alt="插图 4" loading="lazy"></figure>
+
+<figure class="kb-fig"><img src="/api/kb/documents/bug-fix-summary-8080/figure?name=image13.png" alt="插图 5" loading="lazy"></figure>
+
+<p>程序中修改：</p>
+
+<p>修改前：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/bug-fix-summary-8080/figure?name=image14.png" alt="插图 6" loading="lazy"></figure>
+
+<p>修改后：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/bug-fix-summary-8080/figure?name=image15.png" alt="插图 7" loading="lazy"></figure>
+
+<h3>3 问题3：中断标志位清零方式：标志位清零的方式用ClrBit的方式。（客诉问题）</h3>
+
+<p>风险：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/bug-fix-summary-8080/figure?name=image16.png" alt="插图 8" loading="lazy"></figure>
+
+<p>DRV_SR寄存器中的DRV中断和SYSTIC中断：当DRV中断在清标志位操作的时候，ClrBit(DRV_SR, DCIF);读完寄存器的值之后，这个时候突然来了SYSTIC中断，ClrBit(DRV_SR, DCIF)会将SYSTIC中断标志位清零，从而少一次SYSTIC中断触发，所以此时清除DCIF标志位要用“DRV_SR = (DRV_SR | SYSTIF) &amp; (~DCIF);”的方式替代“ClrBit(DRV_SR, DCIF);”。可能会无法进入1ms中断，从而状态机不能切换，电机无法启动。（涉及到对中断要求比较高的通信遇到）</p>
+
+<p>解决：用“|”的方式对同个寄存器的中断进行清零，如清除DRV中断:</p>
+
+<div class="kb-formula">DRV_SR = (DRV_SR | SYSTIF) &amp; (~DCIF)</div>
+
+<p>程序中修改：</p>
+
+<p>修改前：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/bug-fix-summary-8080/figure?name=image17.png" alt="插图 9" loading="lazy"></figure>
+
+<p>修改后：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/bug-fix-summary-8080/figure?name=image18.png" alt="插图 10" loading="lazy"></figure>
+
+<h3>4 问题4：预充电：预充电前未对DRV_CMR清零。（散热风扇客诉问题：顺风二次启动上三个MOS同时导通，导致充电压，硬件TVS会吸收一部分）</h3>
+
+<p>风险：预充电时候DRV_CMR应该先用DRV_CMR&amp;=0xffc0，将DRV_CMR清零，关闭6路输出。不然在停机的时候程序只关闭MOE并没有关闭DRV_CMR，会导致预充电过流。（各种保护和PWM波的二次启动产生）</p>
+
+<p>解决：在程序中加入DRV_CMR&amp;=0xffc0，将DRV_CMR清零。</p>
+
+<p>程序中修改：</p>
+
+<p>修改前：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/bug-fix-summary-8080/figure?name=image19.png" alt="插图 11" loading="lazy"></figure>
+
+<p>修改后：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/bug-fix-summary-8080/figure?name=image20.png" alt="插图 12" loading="lazy"></figure>
+
+<h3>5 问题5：Q格式定义审查</h3>
+
+<p>风险：旧版本程序Q格式定义，有些存在溢出风险；如：_Q8(A),当A为1时，则为128溢出了。溢出会导致估算器估算角度不准确，电机运行异常。（理论上推导出来）</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/bug-fix-summary-8080/figure?name=image4.png" alt="插图 13" loading="lazy"></figure>
+
+<p>解决：修改成最新定义。</p>
+
+<p>程序中修改：</p>
+
+<p>修改前：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/bug-fix-summary-8080/figure?name=image5.png" alt="插图 14" loading="lazy"></figure>
+
+<p>修改后：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/bug-fix-summary-8080/figure?name=image6.png" alt="插图 15" loading="lazy"></figure>
+
+<h3>6 问题6：驱动有效电平配置</h3>
+
+<p>风险：</p>
+
+<p>如果在初始化前未对DRV_CMR进行清零，那么用“&amp;=”可能会导致tong是对上下桥进行驱动，出现上下桥直通从而过流的现象。（各种保护和PWM波的二次启动产生）</p>
+
+<p>程序中修改：</p>
+
+<p>修改前：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/bug-fix-summary-8080/figure?name=image7.png" alt="插图 16" loading="lazy"></figure>
+
+<p>修改后：</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/bug-fix-summary-8080/figure?name=image8.png" alt="插图 17" loading="lazy"></figure></body></html>

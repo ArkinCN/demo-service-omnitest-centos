@@ -1,0 +1,110 @@
+{
+  "formatVersion": "1.0.0",
+  "metadata": {
+    "name": "新工作流",
+    "createdAt": "2026-04-11T07:59:57.650Z",
+    "updatedAt": "2026-04-11T08:03:05.554Z",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0
+    },
+    "isTemplate": false
+  },
+  "definition": {
+    "nodes": [
+      {
+        "id": "069418a3-bc96-4f7e-9eb0-25c1a2843e52",
+        "type": "start",
+        "position": {
+          "x": -192,
+          "y": 240
+        },
+        "data": {
+          "label": "开始"
+        }
+      },
+      {
+        "id": "dfb50e9c-c7ac-45d1-bb6b-3fdd32ea4f53",
+        "type": "end",
+        "position": {
+          "x": 688,
+          "y": 208
+        },
+        "data": {
+          "label": "结束",
+          "status": "success"
+        }
+      },
+      {
+        "id": "f3eb97f3-3ccf-49c0-8b73-4de0ff5598a5",
+        "type": "hid_preset_start_stop_test",
+        "position": {
+          "x": 384,
+          "y": 192
+        },
+        "data": {
+          "label": "启停测试",
+          "presetFunction": "START_STOP_TEST",
+          "paramValues": {
+            "count": {
+              "fixedValue": 5,
+              "useVariable": false
+            },
+            "onTime": {
+              "fixedValue": 5,
+              "useVariable": false
+            },
+            "offTime": {
+              "fixedValue": 2,
+              "useVariable": false
+            },
+            "dutyCycle": {
+              "fixedValue": 30,
+              "useVariable": false
+            }
+          }
+        }
+      },
+      {
+        "id": "9fca6221-673e-44ba-853c-fa17b0c1bb3e",
+        "type": "hid_preset_voltage_set",
+        "position": {
+          "x": 96,
+          "y": 224
+        },
+        "data": {
+          "label": "设置电压",
+          "presetFunction": "VOLTAGE_SET",
+          "paramValues": {
+            "voltage": 12
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "31d7cdb0-b0bc-4fda-999a-7767c3c0a59f",
+        "source": "f3eb97f3-3ccf-49c0-8b73-4de0ff5598a5",
+        "target": "dfb50e9c-c7ac-45d1-bb6b-3fdd32ea4f53",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      },
+      {
+        "id": "0e9f5163-5a9f-4edd-9890-42fe7e3bed66",
+        "source": "069418a3-bc96-4f7e-9eb0-25c1a2843e52",
+        "target": "9fca6221-673e-44ba-853c-fa17b0c1bb3e",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      },
+      {
+        "id": "2aabdf95-85d0-4340-a1c8-3e6d631fd402",
+        "source": "9fca6221-673e-44ba-853c-fa17b0c1bb3e",
+        "target": "f3eb97f3-3ccf-49c0-8b73-4de0ff5598a5",
+        "sourceHandle": "output",
+        "targetHandle": "input"
+      }
+    ],
+    "variables": []
+  }
+}

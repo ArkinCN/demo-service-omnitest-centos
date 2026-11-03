@@ -1,0 +1,22 @@
+{
+    "mode": "live",
+    "ts": 1789831809.4010558,
+    "device_id": "bench",
+    "status": "planned",
+    "executed": false,
+    "plan": {
+        "channels": [
+            1,
+            2,
+            3,
+            4
+        ],
+        "time_per_div_s": 10.0,
+        "window_s": 120.0,
+        "assumed_depth_points": 3000000,
+        "effective_sample_rate_sa_s": 25000.0,
+        "tool": "C:\\fc_pull\\DeepCapture4.exe",
+        "expected_csv_mb": 96,
+        "caveat": "PWM 载波约 25 kHz，在 25 kSa/s 下只有 1 点/周期，看不了波形形状；要看载波须另开 1 ms/div 的高速短抓。"
+    }
+}

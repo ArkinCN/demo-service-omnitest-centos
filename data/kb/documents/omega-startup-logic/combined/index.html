@@ -1,0 +1,68 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>OMEGA 启动执行逻辑（合成图文稿）</title><style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 20px 22px 40px; background: #fff; color: #1f2a24;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 13px; line-height: 1.75;
+}
+h1 { font-size: 19px; margin: 4px 0 14px; }
+h2 { font-size: 16px; margin: 22px 0 10px; padding-bottom: 4px; border-bottom: 1px solid #e3e8e4; }
+h3 { font-size: 14px; margin: 18px 0 8px; }
+h4, h5, h6 { font-size: 13px; margin: 14px 0 6px; color: #2e5e45; }
+p { margin: 8px 0; }
+ul, ol { margin: 8px 0; padding-left: 22px; }
+li { margin: 3px 0; }
+code { background: #f4f7f4; border: 1px solid #e3e8e4; border-radius: 3px; padding: 0 4px; font-size: 12px; }
+pre { background: #f7f9f7; border: 1px solid #e3e8e4; border-radius: 4px; padding: 10px; overflow-x: auto; }
+pre code { background: none; border: none; padding: 0; }
+table { border-collapse: collapse; margin: 10px 0; width: 100%; font-size: 12px; }
+th, td { border: 1px solid #e3e8e4; padding: 5px 8px; text-align: left; vertical-align: top; }
+th { background: #f0f5f1; font-weight: 600; }
+hr { border: none; border-top: 1px solid #e3e8e4; margin: 16px 0; }
+.kb-fig { margin: 14px 0; text-align: center; }
+.kb-fig img { max-width: 100%; height: auto; border: 1px solid #e3e8e4; border-radius: 4px; }
+/* 代码块：整体成块，保留原始换行与缩进 */
+.kb-code {
+  background: #f7f9f7; border: 1px solid #e3e8e4; border-left: 3px solid #9bb8a8;
+  border-radius: 4px; padding: 10px 12px; margin: 12px 0; overflow-x: auto;
+  white-space: pre; font-size: 12px; line-height: 1.65;
+}
+.kb-code code { background: none; border: none; padding: 0; font-size: 12px; }
+/* 公式块：居中、衬线、留白（干净文本样式，不引排版引擎） */
+.kb-formula {
+  margin: 12px auto; padding: 8px 12px; max-width: 100%; text-align: center;
+  font-family: "Cambria Math", "Times New Roman", "Georgia", serif;
+  font-size: 14px; line-height: 2; color: #22302a;
+  background: #fbfcfb; border-radius: 4px; white-space: pre-wrap; word-break: break-word;
+}
+</style></head><body><h1>OMEGA 启动执行逻辑</h1><div style="margin:0 0 14px;padding:8px 10px;border:1px solid #e3e8e4;border-radius:4px;background:#f7faf8;color:#5b6b62;font-size:12px;">系统合成图文稿（由抽取产物重建，非客户原件 PDF）。</div><h3>程序中关于 omega 启动的配置：</h3>
+
+<h3>程序中关于omega启动的配置：</h3>
+
+<figure class="kb-fig"><img src="/api/kb/documents/omega-startup-logic/figure?name=p001_x6.png" alt="插图 1" loading="lazy"></figure>
+
+<ul>
+<li>每个载波，电机转速增量：FOC_EFREQACC（5），我们 可以通过 观测相电流波形，看出该值的取值对电机 强拖阶段的影响。 判断该值的取值是否符合需求：如果 设置的值太小，我们能看到相电流波形是缓慢增加，在有 限的启动时间内可能没办法增加到切换估算器的转速值， 可能会误报堵转保护。如果设置的太大，启动相电流会增 的很快，可能会导致失步。 1.</li>
+<li>估算转速大于FOC_EFREQMIN（60rpm）会开始切估算 器，可以观测电机实际转速在60rpm-120rpm之间是否成 功切换到估算器，切换成功标志位为： 2.</li>
+</ul>
+
+<h3>OMIF为1（可以通过keil仿真看寄存器观测到，也可 以把该寄存器赋给一个变量去观测）</h3>
+
+<figure class="kb-fig"><img src="/api/kb/documents/omega-startup-logic/figure?name=p001_x8.png" alt="插图 2" loading="lazy"></figure>
+
+<p>如果切换不成功，电机的表现为：按照120rpm的转 速一直运行，不再升速。（该情况也可以作为设置两 个转速值的标准，取值时能够满足电机启动并且成功 切换估算器就可以，没有固定的取值要求，看实际效 果）</p>
+
+<ul>
+<li>启动模式配置完以后，会进到mcRUN状态，进行600ms 的ATO爬坡赋值： 3.</li>
+</ul>
+
+<figure class="kb-fig"><img src="/api/kb/documents/omega-startup-logic/figure?name=p002_x11.png" alt="插图 3" loading="lazy"></figure>
+
+<p>在600ms之内，电机转速要升高到大于 切闭环转速</p>
+
+<p>（Motor_Loop_Speed） ，同时相电流波形从强拖阶段 到切闭环时一直保持连续，没有震荡，才是一个完美的启动， 能保证电机后续的正常运行。</p>
+
+<figure class="kb-fig"><img src="/api/kb/documents/omega-startup-logic/figure?name=p002_x12.png" alt="插图 4" loading="lazy"></figure>
+
+<figure class="kb-fig"><img src="/api/kb/documents/omega-startup-logic/figure?name=p002_x13.png" alt="插图 5" loading="lazy"></figure></body></html>

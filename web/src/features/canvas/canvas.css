@@ -1,0 +1,150 @@
+/* C 区统一画板的皮肤覆盖。React Flow 自带样式只保留交互层，外观一律回到 DESIGN.md。 */
+
+.cv-wrap {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* 节点外观完全交给 PanelCard，React Flow 只负责定位 */
+.cv-wrap .react-flow__node {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  cursor: grab;
+}
+.cv-wrap .react-flow__node.dragging { cursor: grabbing; }
+.cv-wrap .react-flow__node.selected { box-shadow: 0 0 0 2px var(--p-400); }
+.cv-wrap .react-flow__handle { opacity: 0; pointer-events: none; }
+.cv-wrap .react-flow__attribution { display: none; }
+
+.cv-wrap .react-flow__edge-text {
+  font-size: 12px;
+  fill: var(--tp-text-2);
+}
+.cv-wrap .react-flow__edge-textbg { fill: #fff; }
+
+/* 右下角缩放条：位置与客户参考页一致（编排者裁决第 1 条）。
+   缩略导航图让到左下角，两者分处两角、互不遮挡。 */
+.cv-zoom {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--tp-line);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 1px 2px rgba(31, 42, 36, 0.05);
+}
+.cv-zoom button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  min-width: 24px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--tp-text-2);
+  font-size: 12px;
+  cursor: pointer;
+}
+.cv-zoom button:hover { background: var(--p-50); color: var(--p-700); }
+.cv-zoom .pct {
+  min-width: 42px;
+  text-align: center;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--tp-text-2);
+}
+
+/* 左上角图例：两种边的语义各一行，通道口径的「待客户确认」挂在这里 */
+.cv-legend {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 10px;
+  border: 1px solid var(--tp-line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  font-size: 12px;
+  color: var(--tp-text-3);
+}
+.cv-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.cv-legend i {
+  width: 18px;
+  height: 0;
+  border-top: 1.5px solid var(--p-700);
+}
+.cv-legend i.dash {
+  border-top: 1px dashed var(--p-300);
+}
+
+.cv-drop {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px dashed var(--p-300);
+  border-radius: 12px;
+  background: rgba(234, 242, 236, 0.45);
+  font-size: 13px;
+  color: var(--p-700);
+  pointer-events: none;
+}
+
+/* 缩略导航图：React Flow 的 position="bottom-right" 只给定位，外观回到 DESIGN.md。
+   描边取 --p-200 而不是最浅的 --tp-line——它浮在带点阵的画板底上，
+   用最浅那档会看不出这是一个控件。 */
+.cv-wrap .react-flow__minimap {
+  margin: 12px;
+  /* 与右下角缩放条同列：往上让出缩放条那一条（30 高 + 12 间距）的位置 */
+  margin-bottom: 54px;
+  border: 1px solid var(--p-200);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(31, 42, 36, 0.08);
+  overflow: hidden;
+}
+
+/* 节点内容区：高度由节点尺寸决定，内容超出时可滚，底部一层渐隐提示「下面还有」。
+   不用 .fade-b：那一条留了 scrollbar-gutter 水槽，在 240px 宽的节点里会吃掉
+   一截正文宽度；节点这么小也不适合挂经典滚动条，按 DESIGN.md 第 3 节第 3 条
+   走「渐隐 + 无滚动条」。渐隐层用 position: sticky 钉在视口下沿、margin-top
+   取负值不占高度，所以内容不超出时它落在卡底、与卡面同色，看不出来。 */
+.cv-node-scroll {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+.cv-node-scroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+.cv-node-scroll::after {
+  content: '';
+  display: block;
+  position: sticky;
+  bottom: 0;
+  height: 16px;
+  margin-top: -16px;
+  background: linear-gradient(to top, var(--tp-surface) 35%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+}

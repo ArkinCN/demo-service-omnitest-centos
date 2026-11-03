@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1480" height="800" viewBox="0 0 1480 800">
+<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E5E45"/></marker>
+<marker id="ahw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A8C5B5"/></marker>
+<marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A6353A"/></marker>
+</defs>
+<rect width="1480" height="800" fill="#FFFFFF"/>
+<text x="40" y="52" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="18" font-weight="600" fill="#2E5E45">知识库体系　两大类知识 × 三级分类树</text>
+<text x="40" y="78" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#9A9A9A">左：按知识来源分两大类；右：按对象归属分三级，不设第四级，二级即使只有一个分类也照常显示</text>
+<text x="40" y="118" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="15" font-weight="600" fill="#2E5E45">两大类知识　按来源分</text>
+<rect x="40" y="134" width="660" height="186" rx="6" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="56" y="164" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2C2C2C">文档性质　别人给的，基本不变，换版本才更新</text>
+<rect x="56" y="178" width="180" height="54" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="146" y="200" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="600" fill="#2C2C2C">上传 / 导入</text>
+<text x="146" y="220" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="9" font-weight="400" fill="#9A9A9A">单文件 · 批量 · 目录</text>
+<rect x="266" y="178" width="180" height="54" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="356" y="200" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="600" fill="#2C2C2C">五阶段转化</text>
+<text x="356" y="220" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="9" font-weight="400" fill="#9A9A9A">识别→抽取→切片→结构化→索引</text>
+<line x1="238" y1="205" x2="260" y2="205" stroke="#2E5E45" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="476" y="178" width="180" height="54" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="566" y="200" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="600" fill="#2C2C2C">可取字段的形态</text>
+<text x="566" y="220" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="9" font-weight="400" fill="#9A9A9A">切片 · 参数表 · 判据表</text>
+<line x1="448" y1="205" x2="470" y2="205" stroke="#2E5E45" stroke-width="1.5" marker-end="url(#ah)"/>
+<text x="56" y="258" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">对象类　产品描述 · 驱动与固件 · 功能清单 · 原理图</text>
+<text x="56" y="280" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">规则类　标准与规范 · 测试规程</text>
+<text x="56" y="302" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">产出类　报告模板 · 历史报告</text>
+<rect x="40" y="340" width="660" height="186" rx="6" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="56" y="370" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="13" font-weight="600" fill="#2C2C2C">经验性质　自己用出来的，一直在长</text>
+<rect x="56" y="384" width="180" height="54" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="146" y="406" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="600" fill="#2C2C2C">对话与操作</text>
+<text x="146" y="426" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="9" font-weight="400" fill="#9A9A9A">六个流程里一键沉淀</text>
+<rect x="266" y="384" width="180" height="54" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="356" y="406" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="600" fill="#2C2C2C">沉淀为条目</text>
+<text x="356" y="426" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="9" font-weight="400" fill="#9A9A9A">四个类型，分两组</text>
+<line x1="238" y1="411" x2="260" y2="411" stroke="#2E5E45" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="476" y="384" width="180" height="54" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="566" y="406" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="600" fill="#2C2C2C">三种呈现</text>
+<text x="566" y="426" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="9" font-weight="400" fill="#9A9A9A">标签树 · 时间线 · 引用榜</text>
+<line x1="448" y1="411" x2="470" y2="411" stroke="#2E5E45" stroke-width="1.5" marker-end="url(#ah)"/>
+<text x="56" y="464" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">过程记录　问答 · 调参决策</text>
+<text x="56" y="486" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">问题记录　失败案例 · 判据修正</text>
+<text x="56" y="508" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">三个视图　标签树按维度筛 · 时间线看一个对象的全过程 · 引用榜找最有用的</text>
+<text x="40" y="556" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">两类共用同一棵分类树：每个三级节点下固定挂两个抽屉 —— 文档、经验。</text>
+<text x="740" y="118" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="15" font-weight="600" fill="#2E5E45">三级分类树　场景 › 子类 › 产品类型</text>
+<rect x="740" y="140" width="180" height="40" rx="4" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="830" y="165" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="600" fill="#2C2C2C">知识库根</text>
+<line x1="756" y1="180" x2="756" y2="220" stroke="#A8C5B5" stroke-width="1"/>
+<polyline points="756,220 756,456" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<rect x="790" y="200" width="200" height="40" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="800" y="225" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#2C2C2C">一级 · 场景　电机</text>
+<line x1="756" y1="220" x2="786" y2="220" stroke="#A8C5B5" stroke-width="1"/>
+<rect x="790" y="372" width="200" height="40" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="800" y="397" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#2C2C2C">一级 · 场景　汽车</text>
+<line x1="756" y1="392" x2="786" y2="392" stroke="#A8C5B5" stroke-width="1"/>
+<rect x="790" y="436" width="200" height="40" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="800" y="461" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#2C2C2C">一级 · 场景　通用</text>
+<line x1="756" y1="456" x2="786" y2="456" stroke="#A8C5B5" stroke-width="1"/>
+<rect x="1010" y="200" width="200" height="40" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="1020" y="225" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#2C2C2C">二级 · 子类　家电电机</text>
+<rect x="1010" y="372" width="200" height="40" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="1020" y="397" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#2C2C2C">二级 · 子类　车身电机</text>
+<rect x="1010" y="436" width="200" height="40" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="1020" y="461" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#2C2C2C">二级 · 子类　通用规范</text>
+<line x1="990" y1="220" x2="1006" y2="220" stroke="#A8C5B5" stroke-width="1"/>
+<line x1="990" y1="392" x2="1006" y2="392" stroke="#A8C5B5" stroke-width="1"/>
+<line x1="990" y1="456" x2="1006" y2="456" stroke="#A8C5B5" stroke-width="1"/>
+<rect x="1230" y="200" width="210" height="40" rx="4" fill="#EAF2EC" stroke="#2E5E45" stroke-width="1"/>
+<text x="1240" y="225" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="600" fill="#2C2C2C">三级 · 产品类型　散热风扇</text>
+<rect x="1230" y="254" width="210" height="40" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="1240" y="279" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#2C2C2C">三级　吸尘器（占位）</text>
+<rect x="1230" y="308" width="210" height="40" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="1240" y="333" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#2C2C2C">三级　吹风筒（占位）</text>
+<rect x="1230" y="372" width="210" height="40" rx="4" fill="none" stroke="#2E5E45" stroke-width="1"/>
+<text x="1240" y="397" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#2C2C2C">三级　玻璃升降器（已选）</text>
+<rect x="1230" y="436" width="210" height="40" rx="4" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<text x="1240" y="461" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#2C2C2C">三级　安全与电气通用</text>
+<polyline points="1220,220 1220,328" fill="none" stroke="#A8C5B5" stroke-width="1"/>
+<line x1="1210" y1="220" x2="1226" y2="220" stroke="#A8C5B5" stroke-width="1"/>
+<line x1="1220" y1="220" x2="1226" y2="220" stroke="#A8C5B5" stroke-width="1"/>
+<line x1="1210" y1="274" x2="1226" y2="274" stroke="#A8C5B5" stroke-width="1"/>
+<line x1="1220" y1="274" x2="1226" y2="274" stroke="#A8C5B5" stroke-width="1"/>
+<line x1="1210" y1="328" x2="1226" y2="328" stroke="#A8C5B5" stroke-width="1"/>
+<line x1="1220" y1="328" x2="1226" y2="328" stroke="#A8C5B5" stroke-width="1"/>
+<line x1="1210" y1="392" x2="1226" y2="392" stroke="#A8C5B5" stroke-width="1"/>
+<line x1="1210" y1="456" x2="1226" y2="456" stroke="#A8C5B5" stroke-width="1"/>
+<text x="740" y="500" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">散热风扇是第一个完整节点：FU6832 驱动板，文档与经验素材齐全，也是这套结构的验证样本。</text>
+<text x="740" y="522" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">汽车侧已定为电动玻璃升降器（含防夹），第二个场景包已生成。</text>
+<text x="740" y="544" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">具体型号、批次、样机编号不进分类树，放流程 2 初始化配置的参数里。</text>
+<rect x="40" y="600" width="1400" height="92" rx="6" fill="none" stroke="#2E5E45" stroke-width="1.5"/>
+<text x="56" y="628" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="14" font-weight="600" fill="#2E5E45">增删改查　两类知识共用同一套操作</text>
+<line x1="56" y1="640" x2="1424" y2="640" stroke="#C8C5BD" stroke-width="1"/>
+<text x="56" y="670" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">增　上传文档 · 新建分类 · 沉淀为经验</text>
+<text x="400" y="670" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">删　删条目与分类，需二次确认</text>
+<line x1="380" y1="648" x2="380" y2="680" stroke="#C8C5BD" stroke-width="1"/>
+<text x="744" y="670" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">改　改分类归属 · 编辑标签 · 重跑转化</text>
+<line x1="724" y1="648" x2="724" y2="680" stroke="#C8C5BD" stroke-width="1"/>
+<text x="1088" y="670" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">查　关键词 + 四维筛选 + 引用榜排序</text>
+<line x1="1068" y1="648" x2="1068" y2="680" stroke="#C8C5BD" stroke-width="1"/>
+<text x="40" y="730" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">四个筛选维度：场景与产品（来自三级体系）· 流程（六个）· 问题类型 · 结论。</text>
+<text x="40" y="754" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif" font-size="12" font-weight="400" fill="#555555">经验的三种呈现是同一批数据的三个视图，不是三份数据。</text>
+</svg>

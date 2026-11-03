@@ -1,0 +1,29 @@
+/* 工作流组件的 .wf-root 原本是整页演示壳（100vh 三栏网格）。
+   嵌进卡槽时只保留它身上的色板变量，布局交给宿主。 */
+.wf-root.wf-embed {
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--tp-line-soft);
+  border-radius: 4px;
+}
+.wf-root.wf-embed .react-flow__attribution {
+  display: none;
+}
+.wf-root.wf-embed .react-flow__minimap {
+  transform: scale(0.72);
+  transform-origin: bottom right;
+}
+.wf-root.wf-embed .react-flow__controls {
+  transform: scale(0.8);
+  transform-origin: bottom left;
+}
+
+/* 缩略态：小到 380×200 时小地图与控制条会盖住图，收起来只留图本体。 */
+.wf-root.wf-thumb .react-flow__minimap,
+.wf-root.wf-thumb .react-flow__controls {
+  display: none;
+}
+.wf-root.wf-thumb .wf-node {
+  font-size: 10px;
+}

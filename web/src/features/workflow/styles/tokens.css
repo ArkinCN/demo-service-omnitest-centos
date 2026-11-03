@@ -1,0 +1,24 @@
+/* 色板：主色中大墨绿 #2E5E45，强调暗红 #A6353A，浅底 #EAF2EC，文字 #2C2C2C，背景白。
+   层次靠线宽、虚实、色深区分，不引入第三色相。 */
+.wf-root {
+  --wf-primary: #2e5e45;
+  --wf-primary-dark: #1f4232;
+  --wf-primary-soft: #a8c5b5;
+  --wf-accent: #a6353a;
+  --wf-tint: #eaf2ec;
+  --wf-text: #2c2c2c;
+  --wf-text-muted: #555555;
+  --wf-text-faint: #9a9a9a;
+  --wf-rule: #c8c5bd;
+  --wf-bg: #ffffff;
+
+  --wf-radius: 6px;
+  --wf-gap: 12px;
+  --wf-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Microsoft YaHei', Roboto, sans-serif;
+  --wf-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  font-family: var(--wf-font);
+  color: var(--wf-text);
+  background: var(--wf-bg);
+}

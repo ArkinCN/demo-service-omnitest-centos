@@ -1,0 +1,282 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fortior.local/scene-pack/v1/test-requirements.schema.json",
+  "title": "test-requirements.json",
+  "description": "测试项与合格判据，含可求值的判据表达式与变量来源。F3 确认、F4 判定。",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "test-requirements/v1",
+      "description": "文件契约标识，换包不得改。"
+    },
+    "scene_id": {
+      "$ref": "common.schema.json#/$defs/sceneId"
+    },
+    "generated_by": {
+      "type": "string",
+      "description": "产出这份文件的脚本相对路径，例如 _build/build_scene_pack.py。"
+    },
+    "generated_at": {
+      "$ref": "common.schema.json#/$defs/genDate"
+    },
+    "belongs_to_flow": {
+      "$ref": "common.schema.json#/$defs/flowMention",
+      "description": "这份文件主要服务哪条业务流程。人读为主，但句中必须至少出现一个合法的 F1~F6 标签，防止写进不存在的流程号。"
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "本文件出现过的判据一级类别清单，随场景而变。"
+    },
+    "demo_profile": {
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "requirements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "note",
+        "requirements"
+      ]
+    },
+    "group_tiers": {
+      "$ref": "common.schema.json#/$defs/memberTier"
+    },
+    "criterion_syntax": {
+      "type": "string",
+      "description": "判据表达式的语法声明。两包均为「JavaScript 表达式（ECMAScript），求值结果为布尔」。"
+    },
+    "criterion_expression_note": {
+      "type": "string",
+      "description": "四个配套字段 evaluable / criterion / variables / criterion_text 的口径说明。"
+    },
+    "criterion_globals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "表达式里允许出现的全局标识符白名单。两包实测为 Math / true / false / null。"
+    },
+    "runtime_measures": {
+      "type": "object",
+      "description": "运行时测量量登记表。键是变量名，被 variables 里 source 为 runtime.measure 的条目按 ref 指向。",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "中文名。"
+          },
+          "unit": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "布尔量为 null。"
+          },
+          "obtained_by": {
+            "type": "string",
+            "description": "这个量怎么测出来：仪器、测点与取值口径。"
+          }
+        },
+        "required": [
+          "name",
+          "obtained_by",
+          "unit"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "runtime_measures_note": {
+      "type": "string"
+    },
+    "regulation_switch_note": {
+      "type": "string"
+    },
+    "evaluable_count": {
+      "type": "integer",
+      "description": "evaluable 为 true 的条数，须与 requirements 实际一致。"
+    },
+    "not_evaluable_count": {
+      "type": "integer"
+    },
+    "requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "判据标识，形如 TR-BASIC-01。"
+          },
+          "name": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string",
+            "description": "所属类别，须落在顶层 categories 里。"
+          },
+          "evaluable": {
+            "type": "boolean",
+            "description": "这条能不能真的求值。false 时必须写 not_evaluable_reason（由本文件 items.allOf 的 if/then 强制）；criterion 惯例上写 null，但包一有写半截表达式留痕的条目，契约不拦。"
+          },
+          "criterion": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "判据表达式；散文式、无可测量量可取的条目为 null。"
+          },
+          "criterion_text": {
+            "type": "string",
+            "description": "人读版判据。"
+          },
+          "not_evaluable_reason": {
+            "type": "string",
+            "description": "evaluable 为 false 时必填：为什么写不出或求不出。v1.1 起由本文件 items.allOf 的 if/then 机读强制，不再依赖各包 selfcheck.py 的 C3。"
+          },
+          "variables": {
+            "type": "object",
+            "description": "表达式里每个自由变量的取值来源。键名须与表达式里的标识符逐字相同。",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "$ref": "common.schema.json#/$defs/varSource"
+                },
+                "ref": {
+                  "type": "string",
+                  "description": "指向取值目标的引用串，形如 runtime.measure.<key> / threshold.<key> / control-parameters.<key>。"
+                },
+                "desc": {
+                  "type": "string",
+                  "description": "这个变量是什么。"
+                },
+                "unit": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "value": {
+                  "description": "source 为 constant 时的字面值。"
+                },
+                "derived_from": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "常量由哪几个位定义按位或得来，指向 safety-interlocks.fault_bitmap 的键。"
+                },
+                "hex": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "desc",
+                "source"
+              ]
+            }
+          },
+          "threshold": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "本条自己的阈值字段。键随判据而变，被 variables 里 source 为 threshold 的条目指向；无阈值的判据为 null。"
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "判这条需要哪些证据（仪器读数、录音、照片、报告段落）。"
+          },
+          "flows": {
+            "type": "array",
+            "items": {
+              "$ref": "common.schema.json#/$defs/flowLabel"
+            }
+          },
+          "note": {
+            "type": "string"
+          },
+          "_placeholder": {
+            "$ref": "common.schema.json#/$defs/placeholderFlag"
+          },
+          "_status": {
+            "$ref": "common.schema.json#/$defs/statusText"
+          },
+          "_source": {
+            "$ref": "common.schema.json#/$defs/sourceRefs"
+          }
+        },
+        "required": [
+          "_source",
+          "category",
+          "criterion",
+          "criterion_text",
+          "evaluable",
+          "evidence",
+          "flows",
+          "id",
+          "name",
+          "threshold",
+          "variables"
+        ],
+        "allOf": [
+          {
+            "$comment": "红线四（README 第 5.2 节）：判不出来要说清为什么判不出来，不许留空、更不许当不通过处理。",
+            "if": {
+              "properties": {
+                "evaluable": {
+                  "const": false
+                }
+              },
+              "required": [
+                "evaluable"
+              ]
+            },
+            "then": {
+              "properties": {
+                "not_evaluable_reason": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "not_evaluable_reason"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "belongs_to_flow",
+    "categories",
+    "criterion_expression_note",
+    "criterion_globals",
+    "criterion_syntax",
+    "demo_profile",
+    "evaluable_count",
+    "generated_at",
+    "generated_by",
+    "group_tiers",
+    "not_evaluable_count",
+    "requirements",
+    "runtime_measures",
+    "scene_id",
+    "schema"
+  ]
+}

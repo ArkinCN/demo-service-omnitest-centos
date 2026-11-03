@@ -1,0 +1,502 @@
+{
+  "schema": "experience/v1",
+  "scene_id": "automotive.body-motor.window-regulator",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-19",
+  "belongs_to_flow": "F1 知识库管理（经验性质那一类的样例数据）；被 F4 / F5 在调参时检索命中",
+  "count": 18,
+  "evidence_levels": {
+    "厂商文档（已核实）": "来自芯片厂或框架厂的公开文档，本次调研已打开正文逐字确认",
+    "厂商文档": "来自芯片厂公开文档，但本次未打开正文逐字确认",
+    "文献": "来自单篇公开论文，未打开正文逐字确认",
+    "文献综合": "本包对多份参考设计资料的综合，非任一来源原文",
+    "法规条款": "来自 GB / FMVSS / ECE 法规原文，已逐字核实",
+    "标准条款": "来自 QC/T 626-2019 征求意见稿，整体待核实",
+    "标准条款推断": "由标准给出的多个数值推出的结论，不是标准原文",
+    "标准状态（已核实）": "标准的发布、代替与换版关系，已在官方登记库核实",
+    "来源状态（已核实）": "文档来源的授权状态，已核实",
+    "检索结论（已核实）": "本次调研的检索覆盖与零命中结论"
+  },
+  "evidence_level_counts": {
+    "文献综合": 4,
+    "文献": 2,
+    "文献综合 + 法规条款": 1,
+    "法规条款": 1,
+    "厂商文档（已核实）": 3,
+    "厂商文档": 2,
+    "标准条款": 1,
+    "标准状态（已核实）": 1,
+    "检索结论（已核实）": 1,
+    "来源状态（已核实）": 1,
+    "标准条款推断": 1
+  },
+  "schema_note": "每条 = 问题现象 symptom / 原因 cause / 调整动作 action / 结果 result / 标签 tags / 证据档位 evidence_level / 来源 _source。与场景一的差别：场景一的经验大多来自客户台架实测与成文规程，本场景的经验全部来自公开文献与标准条款，一条实测都没有——这正是「公开标准驱动」与「客户私有经验驱动」两类知识库的分野。",
+  "difference_from_scene1": "场景一的 evidence_level 有「台架实测数据」「判定工具输出」两档，本场景一条都没有，因为没有实物台架。反过来本场景多出「法规条款」「标准状态」「来源状态」三档，因为它的知识全部是可被第三方复核的公开材料。",
+  "experiences": [
+    {
+      "id": "EXP-001",
+      "symptom": "正常关窗到最后几厘米就被判成夹持，窗关不上",
+      "cause": "防夹生效区间的上沿或软停位置压进了密封压紧段，密封条阻力带来的电流上翘被当成夹持",
+      "action": "把 soft_stop_position 提到密封段之前，或把防夹力阈值上调；两者都不能把生效区间下沿抬到 4 mm 以上，那会直接不合规",
+      "result": "误触发消失且下沿仍守在 4 mm 则通过；若必须抬下沿才能关窗，说明密封设计要改，不是调参能解决的",
+      "tags": {
+        "参数": "antipinch_window_lower / soft_stop_position",
+        "现象": "误触发",
+        "流程": "F5 调优确认及运行"
+      },
+      "evidence_level": "文献综合",
+      "_status": "待核实（来源为素材综述文档对多份参考设计资料的综合，非任一来源原文）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 350 行：防夹调参清单「防夹生效区间（行程窗口）」行：进入密封压紧段仍生效则无法正常关窗"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 354 行：回缩行程量行"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-002",
+      "symptom": "启动瞬间就报夹持，一按上升就回缩",
+      "cause": "启动浪涌电流被误判为夹持特征",
+      "action": "延长 startup_blanking_time；同时把 soft_start_ramp 拉长以削低浪涌峰值，两个参数一起调",
+      "result": "屏蔽时间够长则误触发消失，但屏蔽窗内的真实夹持会漏检——必须用 TR-PINCH-05 复测启动段夹持",
+      "tags": {
+        "参数": "startup_blanking_time / soft_start_ramp",
+        "现象": "误触发",
+        "流程": "F5 调优确认及运行"
+      },
+      "evidence_level": "文献综合",
+      "_status": "待核实（该文献未确认期刊/会议全名与作者）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 351 行：防夹调参清单「启动段屏蔽时间」行"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 341 行：Research on Anti-pinch Control Strategy of Window Start-up Phase based on Ripple Motor，ResearchGate 2021，https://www.researchgate.net/publication/349300884"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-003",
+      "symptom": "启动段的夹持检不出来，力已经压上去了才反应",
+      "cause": "屏蔽时间设得太长，夹持发生在屏蔽窗内",
+      "action": "缩短 startup_blanking_time，改用对浪涌不敏感的判据——转矩变化率对电机参数不确定性的敏感度低于转矩或角速度本身",
+      "result": "换判据后启动段能检出且不误触发则通过；仍两难则说明启动浪涌本身要靠软启动斜坡压下去",
+      "tags": {
+        "参数": "startup_blanking_time / antipinch_detect_method",
+        "现象": "漏检",
+        "流程": "F5 调优确认及运行"
+      },
+      "evidence_level": "文献",
+      "_status": "待核实（未打开正文逐字确认）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 339 行：Practical pinch detection algorithm for low-cost anti-pinch window control system，IEEE 会议论文，https://ieeexplore.ieee.org/document/1600781"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-004",
+      "symptom": "夹持力实测逼近 100 N 才回缩，余量太小",
+      "cause": "防夹力阈值设得太贴近法规上限，加上检出延迟，实际峰值冲过门限",
+      "action": "把 antipinch_force_threshold 从 100 N 往下压（本包默认 80 N），同时缩短 current_slope_window 与 antipinch_confirm_count 以减小检出延迟",
+      "result": "峰值退回 100 N 以下且误触发率不升则通过；若一压阈值就误触发，说明判据信噪比不够，要换判据",
+      "tags": {
+        "参数": "antipinch_force_threshold",
+        "现象": "力峰值超标",
+        "流程": "F5 调优确认及运行"
+      },
+      "evidence_level": "文献综合 + 法规条款",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 349 行：防夹调参清单「防夹力阈值」行：调大逼近或超出 100 N 法规上限，判定不合格"
+        },
+        {
+          "file": "[源] 汽车场景素材-20260919/gb11552.txt",
+          "locator": "gb11552.txt:440 §4.8.3.1.1 100 N 硬顶"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-005",
+      "symptom": "同一台被测件在中国判 PASS、在美国判 FAIL",
+      "cause": "回缩后位置策略选了 PLUS_50MM。中国四选一里有「多开 50 mm」，美国二选一里最少要「多开 125 mm」",
+      "action": "把 antipinch_retract_mode 改成 PLUS_125MM 或 INITIAL_POSITION，两地同时满足",
+      "result": "改成 PLUS_125MM 后三地都过；代价是用户体验变差（回缩太多），要与整车厂确认能否接受",
+      "tags": {
+        "参数": "antipinch_retract_mode",
+        "现象": "换市场即失效",
+        "流程": "F3 测试需求确认"
+      },
+      "evidence_level": "法规条款",
+      "_source": [
+        {
+          "file": "[源] 汽车场景素材-20260919/gb11552.txt",
+          "locator": "gb11552.txt:445-452 §4.8.3.1.2 四选一"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 215 行：GB 11552-2009 回缩后要求四选一"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 216 行：FMVSS 118 回缩后要求二选一（多开 125 mm）"
+        }
+      ],
+      "usage": "测试需求",
+      "usage_class": "D2 规程沉淀 · 判据修正"
+    },
+    {
+      "id": "EXP-006",
+      "symptom": "低速段位置累计误差越跑越大，上止点位置对不上",
+      "cause": "纹波计数在低速段丢脉冲——滤波带宽或比较器迟滞设得太保守",
+      "action": "降低 ripple_comparator_hysteresis 或放宽 ripple_filter_bandwidth；同时打开 position_reset_at_top，每次上止点堵转后清零",
+      "result": "误差被上止点归零截断则可接受；若单次行程内误差就已超标，说明纹波计数本身不够用，要上霍尔锁存脉冲",
+      "tags": {
+        "参数": "ripple_filter_bandwidth / ripple_comparator_hysteresis / position_reset_at_top",
+        "现象": "位置漂移",
+        "流程": "F5 调优确认及运行"
+      },
+      "evidence_level": "文献",
+      "_status": "待核实（TI 设计指南本次未打开正文逐字确认）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 352 行：防夹调参清单「纹波计数滤波带宽与迟滞」行"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 146 行：Automotive Brushed-Motor Ripple Counter Reference Design，德州仪器，设计指南 TIDUD30A，https://www.ti.com/lit/ug/tidud30a/tidud30a.pdf"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-007",
+      "symptom": "到达上止点被误判成夹持，窗关不到位",
+      "cause": "堵转判定门限设得太低，或防夹生效区间盖住了上止点",
+      "action": "把 stall_current_threshold 上调（但必须低于 28 A 判据上限），并确认防夹区外切换成堵转检测而不是继续跑夹持判据",
+      "result": "到位不再误判且遇障仍能检出则通过",
+      "tags": {
+        "参数": "stall_current_threshold / stall_debounce_time",
+        "现象": "误触发",
+        "流程": "F5 调优确认及运行"
+      },
+      "evidence_level": "文献综合",
+      "_status": "待核实（RDS12VR 资料单 PDF 超 10 MB 抓取失败，特征来自社区条目转述）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 353 行：防夹调参清单「堵转判定电流门限与去抖时间」行"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 343 行：Anti-Pinch Window Lift Reference Design（RDS12VR），恩智浦半导体，https://www.nxp.com/docs/en/fact-sheet/RDS12VRFS.pdf：防夹区外做堵转检测"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-008",
+      "symptom": "遇障后电机仍继续加力，力峰值冲过 100 N",
+      "cause": "堵转判定门限设得太高，去抖时间太长，保护动作来不及",
+      "action": "下调 stall_current_threshold 与 stall_debounce_time",
+      "result": "力峰值退回限内则通过；下调后若上止点被误判，说明两条判据的门限窗口太窄，必须靠位置信息分区而不是靠门限分",
+      "tags": {
+        "参数": "stall_current_threshold / stall_debounce_time",
+        "现象": "力峰值超标",
+        "流程": "F5 调优确认及运行"
+      },
+      "evidence_level": "文献综合",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 353 行：防夹调参清单「堵转判定电流门限与去抖时间」行"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-009",
+      "symptom": "电流环响应慢、跟不上给定",
+      "cause": "相位裕度取得太大（MCAF 默认 80°），增益被压得太低",
+      "action": "把 phase_margin 从 80° 降到 50° 至 70°；把 pi_phase_lag 从默认 45° 降到 8° 至 20°，低于 5° 不建议",
+      "result": "响应变快；代价是超调风险升高，须复测有无振荡",
+      "tags": {
+        "参数": "phase_margin / pi_phase_lag",
+        "现象": "响应慢",
+        "流程": "F5 调优确认及运行"
+      },
+      "evidence_level": "厂商文档（已核实）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 373 行：Motor Control Application Framework (MCAF) 文档 5.1.6 节 Current loop tuning，微芯科技 MCAF R7 RC37 文档版本 7.0.2，https://microchiptech.github.io/mcaf-doc/7.0.2/algorithms/foc/tuning.html"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 374 行：同文档「PI 在穿越频率处的相位滞后 φz」行"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-010",
+      "symptom": "电流环带宽设高了就振荡",
+      "cause": "带宽超出了 PWM 载波与机械时间常数允许的窗口",
+      "action": "把 current_loop_bandwidth 收回到 PWM 频率的 5 % 至 15 %（20 kHz 载波对应 1 至 3 kHz），并校核约束：机械时间常数 × 带宽须大于 1",
+      "result": "振荡消失；若收到 5 % 仍振荡，问题不在带宽而在采样延迟或死区补偿",
+      "tags": {
+        "参数": "current_loop_bandwidth / pwm_frequency",
+        "现象": "振荡",
+        "流程": "F5 调优确认及运行"
+      },
+      "evidence_level": "厂商文档（已核实）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 375 行：MCAF 7.0.2「电流环带宽」行：典型取 PWM 频率的 5 % 至 15 %；约束条件机械时间常数 × 带宽须大于 1"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-011",
+      "symptom": "启动时序跑不通，无法切入闭环",
+      "cause": "在闭环换相不稳的前提下整定电流环，两件事互相干扰",
+      "action": "按 MCAF 的明文顺序：先在开环换相下整定电流环，再调开闭环切换",
+      "result": "顺序对了之后两件事各自收敛；顺序反了则永远在互相打架",
+      "tags": {
+        "参数": "tuning_order",
+        "现象": "启动失败",
+        "流程": "F5 调优确认及运行"
+      },
+      "evidence_level": "厂商文档（已核实）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 377 行：同一文档另外明确：若正常启动时序跑不通或无法正确切入闭环换相，电流环整定需在开环换相下进行"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-012",
+      "symptom": "启动斜坡上不去，大惯量负载带不动",
+      "cause": "单段加速斜坡对大惯量负载太陡",
+      "action": "改多段斜坡：大惯量电机先缓斜坡后陡斜坡；另一口径是把速度斜坡终值提到最大应用转速的 40 %、把最小启动输出转速降到 10 %",
+      "result": "起转成功率上升；斜坡过缓则启动时间变长，会影响上升速度判据的计时口径",
+      "tags": {
+        "参数": "soft_start_ramp",
+        "现象": "启动失败",
+        "流程": "F5 调优确认及运行"
+      },
+      "evidence_level": "厂商文档",
+      "_status": "待核实（UM3259 抓取超时；FAQ 页未逐字确认）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 361 行：UM3259 — STM32 motor control SDK: 6-step firmware sensorless parameter optimization，意法半导体"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 362 行：STM32 Motor Control Frequently Asked Questions：Speed ramp final value 提到最大应用转速的 40 %，Minimum startup output speed 降到 10 %"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-013",
+      "symptom": "工作噪音卡在 60 dB(A) 判据边上下不来",
+      "cause": "PWM 调制方式与死区补偿没优化，开关噪声进了可听频段",
+      "action": "开自动死区补偿、调 PWM 调制方式；把载波推到人耳听阈之上（20 kHz）",
+      "result": "噪音下来则通过；载波提高会加大开关损耗与温升，要复测热保护相关判据",
+      "tags": {
+        "参数": "pwm_frequency / deadtime",
+        "现象": "噪音超标",
+        "流程": "F5 调优确认及运行"
+      },
+      "evidence_level": "厂商文档",
+      "_status": "待核实（两篇均未打开正文逐字确认）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 364 行：How to Reduce Motor Noise with Code-Free, Sensorless FOC，德州仪器，文献号 SLLA567，https://www.ti.com/lit/an/slla567/slla567.pdf"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 365 行：Driving Brushed DC Motors Using PWM Output: Losses and Points to be Noted，罗姆半导体 TechWeb 技术专栏条目 346，https://techweb.rohm.com/product/motor/motor-types/346/"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    },
+    {
+      "id": "EXP-014",
+      "symptom": "低温下上升速度掉到 80 mm/s 以下被判 FAIL",
+      "cause": "拿常温判据去判低温工况。低温下润滑脂黏度上升、阻力增大，判据本身就该换表",
+      "action": "把判据从 TR-BASIC-05（80 至 160 mm/s）切到 TR-ENV-02（−30 ℃ 下 ≥60 mm/s）",
+      "result": "换表后合格；若在低温判据下仍不合格，才是真问题，该查润滑脂牌号与装配预紧",
+      "tags": {
+        "参数": "chamber_temperature",
+        "现象": "误判 FAIL",
+        "流程": "F3 测试需求确认"
+      },
+      "evidence_level": "标准条款",
+      "_status": "待核实（QC/T 626-2019 正式版可能调整）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 193 行：耐低温特性 5.6.2 / 6.6.2：上升速度 ≥60 mm/s，工作电流放宽到 20 A"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 127 行：常温上升运行速度 80 至 160 mm/s"
+        }
+      ],
+      "usage": "测试需求",
+      "usage_class": "D2 规程沉淀 · 判据修正"
+    },
+    {
+      "id": "EXP-015",
+      "symptom": "EMC 报告按标准做完了，评审说引错了标准",
+      "cause": "QC/T 626 征求意见稿引的 GB/T 18655-2010 与 GB/T 21437.2-2008 都已换版",
+      "action": "改引现行版：GB/T 18655-2025（已代替 2018 版）与 GB/T 21437.2-2021；盐雾条款引的 GB/T 10125-2012 同样要改成 2021 版",
+      "result": "改引后通过。知识库必须内置换版预警元数据，靠人记不住",
+      "tags": {
+        "参数": "无",
+        "现象": "引用过期",
+        "流程": "F1 知识库管理"
+      },
+      "evidence_level": "标准状态（已核实）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 206 行：电磁兼容性 5.12.4：两本引用标准均已换版"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 81 行：GB/T 18655-2025 已代替 GB/T 18655-2018"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 85 行：GB/T 10125-2021 全部代替 GB/T 10125-2012"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 105-110 行：换版预警表"
+        }
+      ],
+      "usage": "测试需求",
+      "usage_class": "D2 规程沉淀 · 判据修正"
+    },
+    {
+      "id": "EXP-016",
+      "symptom": "想找实测波形来验证防夹算法，十三个平台都没搜到",
+      "cause": "汽车低压执行器电机的专用公开波形数据集确实是空白，不是没搜到",
+      "action": "走三层数据方案：车用工况级慢速时序（真实但 2 Hz）+ 波形级有刷直流故障集（真实但非汽车执行器）+ 参数化仿真合成（补齐执行器空白）",
+      "result": "本包实际只落地了第三层（三条合成 CSV），前两层只登记不下载。合成数据必须在界面标注来源，且不得进合规报告",
+      "tags": {
+        "参数": "无",
+        "现象": "数据缺口",
+        "流程": "F4 启动测试及结果分析"
+      },
+      "evidence_level": "检索结论（已核实）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 286 行：核心结论先说：十三个平台确认为空白"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 429 行：与峰岹案例对照表流程 4 行：合成数据必须在界面标注来源"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀",
+      "usage_review": "待人工复核"
+    },
+    {
+      "id": "EXP-017",
+      "symptom": "OEM 规范里的参数拿来就用，法务打回",
+      "cause": "LV 124、VW 80000、LV 148、BMW GS 95024 的本地副本都是公网流传的非授权版本",
+      "action": "内容可做工程参考，正式引用前须经采购渠道取得授权原本复核",
+      "result": "取得授权原本后通过。知识库里这类文档要单独打「非授权副本」标记",
+      "tags": {
+        "参数": "无",
+        "现象": "引用资格不足",
+        "流程": "F1 知识库管理"
+      },
+      "evidence_level": "来源状态（已核实）",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 94 行：LV 124：该 PDF 为公网流传的非授权副本"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 95 行：VW 80000：同为非授权副本"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 464 行：OEM 规范通道：内容可信但均为公网流传的非授权副本"
+        }
+      ],
+      "usage": "测试需求",
+      "usage_class": "D2 规程沉淀 · 判据修正",
+      "usage_review": "待人工复核"
+    },
+    {
+      "id": "EXP-018",
+      "symptom": "力传感器一支想通吃所有工位，结果两头不讨好",
+      "cause": "同一场景里有三个量级：防夹 100 N 要分辨率、堵转力 212 N 要量程、自锁 600 N 要更大量程",
+      "action": "分开选型：防夹工位用小量程高分辨率，自锁工位用大量程；不要用一支 500 N 的去凑",
+      "result": "分开后三项判据都能测准。这个冲突应该在 F2 初始化配置就暴露给用户确认，而不是等测出问题再回头查",
+      "tags": {
+        "参数": "force_sensor_range",
+        "现象": "量程冲突",
+        "流程": "F2 初始化配置"
+      },
+      "evidence_level": "标准条款推断",
+      "_status": "「分开选型」是本包从三个量级并存这一事实推出的结论，不是标准原文",
+      "_source": [
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 126 行：堵转力 ≥212 N，力传感器量程选型依据"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 131 行：自锁能力 600 N 保持 5 s"
+        },
+        {
+          "file": "[源] _调研/B-汽车场景测试案例素材.md",
+          "locator": "第 166 行：防夹力 100 N"
+        }
+      ],
+      "usage": "工艺",
+      "usage_class": "D1 实验沉淀 / D3 对话沉淀"
+    }
+  ]
+}

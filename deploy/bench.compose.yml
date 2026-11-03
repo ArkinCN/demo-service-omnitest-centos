@@ -1,0 +1,60 @@
+# =============================================================================
+# OmniTest 台架机部署（门户「纳管」形态）
+#
+# 定位：项目落在本机、由 compose 编排镜像部署；门户只纳管（只读+启停），
+#       不改本文件、不重建容器。因此本文件可以自由使用 devices / 挂载 / 任意环境变量。
+#
+# 为什么采集走宿主 agent 而不是容器内 subprocess：
+#   本机 CentOS 7.9 只能装 NI-VISA 21.0（2026 Q3 无 el7 仓库），而 21.0 在容器
+#   命名空间内 viFindRsrc 恒为 VI_ERROR_RSRC_NFOUND（连 ASRL 都枚举不到），
+#   宿主上同一套库完全正常。故采集脚本由宿主 hw-agent 执行，容器通过 HTTP 调用。
+#   详见 hardware/agent/README.md。
+#
+# 用法（不要直接 up，需要注入令牌与路径）：
+#   bash deploy/bench-up.sh
+# =============================================================================
+services:
+  omnitest:
+    image: ${OMNITEST_IMAGE:-omnitest:manualtest}
+    container_name: omnitest          # 门户纳管按容器名匹配，必须固定
+    restart: unless-stopped
+    mem_limit: 2g
+    cpus: 2.0
+    ports:
+      - "${HOST_PORT:-10003}:5100"
+    environment:
+      TZ: Asia/Shanghai
+      ENVIRONMENT: production
+      AUTH_DISABLED: "true"
+      KB_BACKEND: local
+      PYTHONIOENCODING: utf-8
+      LANG: C.UTF-8
+      # 容器内解释器只用于依赖预检（import serial/pyvisa），不真正采集
+      FAN_PYTHON: /usr/local/bin/python
+      FAN_CONFIG_PATH: /srv/omnitest/c/hardware/v0.6/config/acceptance.linux.json
+      # 采集入口指向「容器内代理脚本」→ 由它转发给宿主 agent
+      FAN_START_SCRIPT: /srv/omnitest/c/hardware/agent/run_via_agent.py
+      FAN_STOP_SCRIPT: /srv/omnitest/c/hardware/agent/stop_via_agent.py
+      FAN_AGENT_URL: http://172.21.0.1:8790
+      FAN_AGENT_TOKEN: ${FAN_AGENT_TOKEN:?必须由 bench-up.sh 注入 FAN_AGENT_TOKEN}
+      FAN_AGENT_START_SCRIPT: ${SRC}/hardware/py/entrypoints/start.py
+      FAN_AGENT_STOP_SCRIPT: ${SRC}/hardware/py/entrypoints/stop.py
+      FAN_AGENT_CONFIG_PATH: ${SRC}/hardware/v0.6/config/acceptance.linux.json
+      FAN_AGENT_RUNS_ROOT_HOST: ${SRC}/hardware/v0.6/runs
+      FAN_AGENT_RUNS_ROOT_CONTAINER: /srv/omnitest/c/hardware/v0.6/runs
+      MOTORDEBUG_LLM_BASE_URL: https://openrouter.ai/api
+      MOTORDEBUG_LLM_MODEL: deepseek/deepseek-v4.1-flash-1017
+    volumes:
+      # 代码与配置：以服务器上的仓库为准（bind-mount），改完 restart 即生效
+      - ${SRC}/backend/app:/srv/omnitest/c/backend/app
+      - ${SRC}/backend/.env:/srv/omnitest/c/backend/.env
+      - ${SRC}/hardware:/srv/omnitest/c/hardware
+      - ${SRC}/web/public:/srv/omnitest/c/web/public:ro
+      - ${SRC}/data:/srv/omnitest/c/data:ro
+    networks:
+      - aicube
+
+networks:
+  aicube:
+    external: true
+    name: demo-platform-core_aicube-net

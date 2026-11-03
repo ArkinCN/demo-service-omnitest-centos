@@ -1,0 +1,11 @@
+{
+  "simulation": true,
+  "run_id": "demo-001",
+  "status": "completed",
+  "planned_duration_s": 40,
+  "actual_elapsed_s": 41.2,
+  "overrun": true,
+  "terminal_published": true,
+  "physical_stop_verified": false,
+  "last_sequence": 2
+}

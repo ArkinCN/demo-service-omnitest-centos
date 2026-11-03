@@ -1,0 +1,31 @@
+{
+  "doc_id": "tailwind-startup-training",
+  "summary": {
+    "parameters": 1,
+    "parameters_matching_customer_h": 0,
+    "registers": 0,
+    "thresholds": 0,
+    "units": 1,
+    "procedure_steps": 0
+  },
+  "parameters": [
+    {
+      "name": "FOC_EKI",
+      "count": 1,
+      "in_customer_h": false,
+      "first_chunk": "tailwind-startup-training#c0000",
+      "first_page": 1,
+      "context": "- ·根据hall得到角度信息，另外根据hall得到的速度信息来作顺风启 动 季哥之前修改此类FOC EKP=0;FOC_EKI=0 - 顺风启动根据不同速度需赋值不同的初始UQ， UD由IDREF等于0, 来快速收敛，顺风启动瞬间需注意PI适当大"
+    }
+  ],
+  "registers": [],
+  "thresholds": [],
+  "units": [
+    {
+      "unit": "°",
+      "count": 2
+    }
+  ],
+  "procedure_steps": [],
+  "method": "regex+heuristic, no LLM; 参数名=全大写下划线标识符, 寄存器=标识符±40字符内出现『寄存器/register』, 阈值=数值+单位且±40字符内含阈值语境词, 规程步骤=编号行且含操作动词"
+}

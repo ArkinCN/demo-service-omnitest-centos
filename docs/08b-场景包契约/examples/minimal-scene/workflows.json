@@ -1,0 +1,68 @@
+{
+  "schema": "workflows/v1",
+  "scene_id": "example.minimal.skeleton",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-20",
+  "belongs_to_flow": "F3 测试需求确认 + F4 启动测试及结果分析",
+  "source_roots": [
+    "./assets/workflows"
+  ],
+  "total": 1,
+  "all_placeholder": true,
+  "count_by_group": {
+    "基本性能": 1
+  },
+  "node_type_legend": {
+    "start": "开始",
+    "end": "结束",
+    "delay": "延时等待",
+    "loop": "循环",
+    "loop_break": "跳出循环"
+  },
+  "notes": [
+    "本包的工作流是骨架示例，不是任何客户已有的工作流；新建包时整段替换。"
+  ],
+  "workflows": [
+    {
+      "id": "EX-WF-001",
+      "name": "示例工作流",
+      "metadata_name": "示例工作流",
+      "group": {
+        "key": "基本性能",
+        "name": "基本性能"
+      },
+      "voltage_level": "LV",
+      "voltage_level_name": "低压",
+      "is_subworkflow": false,
+      "file_path": "./assets/workflows/EX-WF-001.json",
+      "file_size_bytes": 320,
+      "gzip": false,
+      "format_version": "1.0.0",
+      "tags": [
+        "scene:example.minimal.skeleton"
+      ],
+      "updated_at": "2026-09-20",
+      "node_count": 2,
+      "edge_count": 1,
+      "node_types": [
+        {
+          "type": "start",
+          "name": "开始",
+          "count": 1
+        },
+        {
+          "type": "end",
+          "name": "结束",
+          "count": 1
+        }
+      ],
+      "purpose": "只有开始与结束两个节点的骨架工作流，用来演示索引字段形状。",
+      "purpose_derived": false,
+      "_placeholder": true,
+      "_source": {
+        "file": "[源] 08b-场景包契约/README-场景包契约-v1.1.md",
+        "locator": "第 10 节 新建第三个场景包的步骤"
+      }
+    }
+  ]
+}

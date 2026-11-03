@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "mcp__motor__motor_start",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[源] hooks/pretooluse_motor_current.py",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}

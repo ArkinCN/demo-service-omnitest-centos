@@ -1,0 +1,107 @@
+{
+  "schema": "scene/v1",
+  "id": "motor.cooling-fan.fortior-fu6832",
+  "generated_by": "_build/build_scene_pack.py",
+  "generated_at": "2026-09-19",
+  "taxonomy": {
+    "level1_scene": {
+      "key": "motor",
+      "name": "电机"
+    },
+    "level2_category": {
+      "key": "cooling-fan",
+      "name": "散热风扇"
+    },
+    "level3_product_type": {
+      "key": "fortior-fu6832",
+      "name": "FU6832 散热风扇驱动板"
+    },
+    "_source": {
+      "file": "[源] 20260919-通用Agent测试系统v2.0/00-用户需求原话-20260919.md",
+      "locator": "「体系三级：一级场景（汽车/芯片/电机/…），二级，三级=产品类型」段"
+    }
+  },
+  "product": {
+    "name": "FU6832 散热风扇驱动板（峰岹 AI_散热风扇开发资料 CoolingFan_Program 工程）",
+    "chip": "FU6832N（峰岹科技三相电机控制 MCU，含 Pre-driver 与运放）",
+    "control_scheme": "无感 FOC + Open-Omega 起转 + 速度闭环，PWM 占空比调速，FG 转速回报",
+    "_source": [
+      {
+        "file": "[源] include/Customer.h",
+        "locator": "Customer.h:1-40 文件头 @brief FU6832_CONFIGURATION FU/PU6832 參數配置檔"
+      },
+      {
+        "file": "[源] Document/MCU-DS-14_FU6832_V2.1_20230621.pdf",
+        "locator": "第 1 页 封面「三相电机控制MCU FU6832」"
+      }
+    ]
+  },
+  "summary": "峰岹散热风扇参考工程：以 FU6832N 为主控的三相无感 FOC 风扇驱动板，Open-Omega 强拖起转后切速度闭环，PWM 占空比调速、FG 脉冲回报转速，带过欠压/过流/堵转/缺相保护与顺逆风重启。本场景包把该产品的本体属性、控制参数、安全联锁、测试判据、归档工作流、可回放时序数据、经验条目、文档清单与报告模板字段整理成前端可直接加载的 JSON。",
+  "default_view": {
+    "_note": "C 区默认视图：canvas 统一画板 / grid 卡片网格。依据《第三轮需求变更方案 v0.1》第 2.5 节那张表——初始化与需求确认要讲接线与拓扑，走画板；启动测试、调优、报告要并排盯多样东西，走网格。前端读这一段，不写死在代码里。",
+    "init": "canvas",
+    "req": "canvas",
+    "run": "grid",
+    "tune": "grid",
+    "report": "grid"
+  },
+  "images": [
+    {
+      "id": "schematic-standard-p1",
+      "title": "标准方案原理图（首页）",
+      "path": "assets/schematic-standard-p1.png",
+      "width": 1755,
+      "height": 1240,
+      "render": "PyMuPDF get_pixmap(dpi=150) 渲染 PDF 第 1 页",
+      "_source": {
+        "file": "[源] 標準方案/FU6832N-Diode-VSP-V1.0.pdf",
+        "locator": "第 1 页"
+      }
+    }
+  ],
+  "schematic_variants": [
+    {
+      "name": "標準方案",
+      "file": "[源] 標準方案/FU6832N-Diode-VSP-V1.0.pdf",
+      "note": "目录名为「標準方案」，但文件名写作 FU6832N-Diode-VSP-V1.0，按原样登记不改名"
+    },
+    {
+      "name": "VSP調速方案",
+      "file": "[源] VSP調速方案/FU6832N-Diode-VSP-V2.0.pdf"
+    },
+    {
+      "name": "無二極體方案",
+      "file": "[源] 無二極體方案/FU6832N-nonDiode-V1.4.pdf"
+    }
+  ],
+  "flows": [
+    {
+      "id": "F1",
+      "name": "知识库管理"
+    },
+    {
+      "id": "F2",
+      "name": "初始化配置"
+    },
+    {
+      "id": "F3",
+      "name": "测试需求确认"
+    },
+    {
+      "id": "F4",
+      "name": "启动测试及结果分析"
+    },
+    {
+      "id": "F5",
+      "name": "调优确认及运行"
+    },
+    {
+      "id": "F6",
+      "name": "测试报告及产出"
+    }
+  ],
+  "_source": {
+    "file": "[源] 20260919-通用Agent测试系统v2.0/00-用户需求原话-20260919.md",
+    "locator": "全文（六个流程与三级知识库体系）"
+  }
+}

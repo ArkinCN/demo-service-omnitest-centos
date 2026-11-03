@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="620" viewBox="0 0 1680 620">
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3z" fill="#39725f"/></marker></defs>
+<rect width="1680" height="620" fill="#f5f8f5"/>
+<g font-family="Noto Sans CJK SC,Microsoft YaHei,Arial,sans-serif">
+<text x="50" y="65" font-size="36" font-weight="700" fill="#143d31">后端开发，按这个顺序交付</text>
+<text x="50" y="108" font-size="23" fill="#607169">新仓尚未迁入完整后端。先复用客户 API，再补测试业务、适配页面和设备。</text>
+<rect x="40" y="170" width="205" height="232" rx="15" fill="white" stroke="#c9dcd1" stroke-width="2"/>
+<circle cx="71" cy="207" r="19" fill="#2c7656"/>
+<text x="64" y="215" font-size="23" fill="white">1</text>
+<text x="55" y="264" font-size="24" font-weight="700" fill="#143d31">复用 API 加任务</text>
+<text x="55" y="316" font-size="18" fill="#52695d">先跑客户 API 和数据库</text>
+<text x="55" y="368" font-size="18" fill="#2c7656">重启后仍查得到</text>
+<path d="M249 281 L270 281" stroke="#39725f" stroke-width="3" marker-end="url(#a)"/>
+<rect x="275" y="170" width="205" height="232" rx="15" fill="white" stroke="#c9dcd1" stroke-width="2"/>
+<circle cx="306" cy="207" r="19" fill="#2c7656"/>
+<text x="299" y="215" font-size="23" fill="white">2</text>
+<text x="290" y="264" font-size="24" font-weight="700" fill="#143d31">接页面保存</text>
+<text x="290" y="316" font-size="18" fill="#52695d">页面通过 API 保存字段</text>
+<text x="290" y="368" font-size="18" fill="#2c7656">刷新后仍能读回</text>
+<path d="M484 281 L505 281" stroke="#39725f" stroke-width="3" marker-end="url(#a)"/>
+<rect x="510" y="170" width="205" height="232" rx="15" fill="white" stroke="#c9dcd1" stroke-width="2"/>
+<circle cx="541" cy="207" r="19" fill="#2c7656"/>
+<text x="534" y="215" font-size="23" fill="white">3</text>
+<text x="525" y="264" font-size="24" font-weight="700" fill="#143d31">接已有助手</text>
+<text x="525" y="316" font-size="18" fill="#52695d">适配原会话与当前任务</text>
+<text x="525" y="368" font-size="18" fill="#2c7656">真实回答，正确报错</text>
+<path d="M719 281 L740 281" stroke="#39725f" stroke-width="3" marker-end="url(#a)"/>
+<rect x="745" y="170" width="205" height="232" rx="15" fill="white" stroke="#c9dcd1" stroke-width="2"/>
+<circle cx="776" cy="207" r="19" fill="#2c7656"/>
+<text x="769" y="215" font-size="23" fill="white">4</text>
+<text x="760" y="264" font-size="24" font-weight="700" fill="#143d31">跑通文档预填</text>
+<text x="760" y="316" font-size="18" fill="#52695d">查资料 → 草稿 → 采纳</text>
+<text x="760" y="368" font-size="18" fill="#2c7656">有依据，能保存</text>
+<path d="M954 281 L975 281" stroke="#39725f" stroke-width="3" marker-end="url(#a)"/>
+<rect x="980" y="170" width="205" height="232" rx="15" fill="white" stroke="#c9dcd1" stroke-width="2"/>
+<circle cx="1011" cy="207" r="19" fill="#2c7656"/>
+<text x="1004" y="215" font-size="23" fill="white">5</text>
+<text x="995" y="264" font-size="24" font-weight="700" fill="#143d31">模拟完整测试</text>
+<text x="995" y="316" font-size="18" fill="#52695d">复用执行器与报告库</text>
+<text x="995" y="368" font-size="18" fill="#2c7656">得到真实报告文件</text>
+<path d="M1189 281 L1210 281" stroke="#39725f" stroke-width="3" marker-end="url(#a)"/>
+<rect x="1215" y="170" width="205" height="232" rx="15" fill="white" stroke="#c9dcd1" stroke-width="2"/>
+<circle cx="1246" cy="207" r="19" fill="#2c7656"/>
+<text x="1239" y="215" font-size="23" fill="white">6</text>
+<text x="1230" y="264" font-size="24" font-weight="700" fill="#143d31">换成真实设备</text>
+<text x="1230" y="316" font-size="18" fill="#52695d">先读取，再受控执行</text>
+<text x="1230" y="368" font-size="18" fill="#2c7656">有设备回执和读回</text>
+<path d="M1424 281 L1445 281" stroke="#39725f" stroke-width="3" marker-end="url(#a)"/>
+<rect x="1450" y="170" width="205" height="232" rx="15" fill="white" stroke="#c9dcd1" stroke-width="2"/>
+<circle cx="1481" cy="207" r="19" fill="#2c7656"/>
+<text x="1474" y="215" font-size="23" fill="white">7</text>
+<text x="1465" y="264" font-size="24" font-weight="700" fill="#143d31">新机器部署</text>
+<text x="1465" y="316" font-size="18" fill="#52695d">补齐范围、安装与恢复</text>
+<text x="1465" y="368" font-size="18" fill="#2c7656">别人按说明能启动</text>
+<rect x="40" y="448" width="1615" height="125" rx="16" fill="#e5f1e9"/>
+<text x="65" y="491" font-size="27" font-weight="700" fill="#143d31">第一份代码只验收一件事：创建任务 → 重启服务 → 读回同一任务</text>
+<text x="65" y="537" font-size="23" fill="#39604b">同时验证无权限用户不能读取；不需要先连电机。客户源码、模型账号和现场条件由负责人并行准备。</text>
+</g></svg>

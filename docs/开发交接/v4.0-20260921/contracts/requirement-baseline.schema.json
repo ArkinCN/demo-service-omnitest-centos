@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "requirement-baseline/v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "baseline_id",
+    "scene_id",
+    "version",
+    "frozen_at",
+    "frozen_by",
+    "criteria",
+    "verdict_rule",
+    "workflow_instance"
+  ],
+  "properties": {
+    "schema": {
+      "const": "requirement-baseline/v1"
+    },
+    "baseline_id": {
+      "type": "string"
+    },
+    "scene_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "description": "冻结后改动一律发新版本，不原地改"
+    },
+    "frozen_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "frozen_by": {
+      "type": "string"
+    },
+    "criteria": {
+      "type": "array",
+      "description": "字段形状与场景包 test-requirements.json 的 requirements 数组对齐",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "category",
+          "criterion",
+          "criterion_text",
+          "threshold",
+          "level"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "criterion": {
+            "type": "string",
+            "description": "可求值表达式，变量名与 evidence 字段对应"
+          },
+          "criterion_text": {
+            "type": "string",
+            "description": "人读版"
+          },
+          "threshold": {
+            "type": "object"
+          },
+          "tolerance": {},
+          "unit": {
+            "type": "string"
+          },
+          "level": {
+            "enum": [
+              "fatal",
+              "major",
+              "minor"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "这条判据要用哪些采集量，用于与工作流做对账"
+          },
+          "_source": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "verdict_rule": {
+      "type": "object",
+      "required": [
+        "expression"
+      ],
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "如 all(fatal) && rate(major) >= 0.9"
+        },
+        "major_pass_rate_min": {
+          "type": "number"
+        }
+      }
+    },
+    "workflow_instance": {
+      "type": "object",
+      "required": [
+        "workflow_id",
+        "format_version",
+        "nodes",
+        "edges"
+      ],
+      "properties": {
+        "workflow_id": {
+          "type": "string"
+        },
+        "template_file": {
+          "type": "string",
+          "description": "来源 .wfw 的完整路径"
+        },
+        "format_version": {
+          "type": "string",
+          "description": "客户 .wfw 的 formatVersion，实测 1.0.0"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "type",
+              "node_class"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "description": "具体实现类型，可能超出已知枚举，解析器不得假设封闭"
+              },
+              "node_class": {
+                "enum": [
+                  "setup",
+                  "stimulus",
+                  "acquire",
+                  "verdict",
+                  "control-flow",
+                  "data-process",
+                  "subworkflow",
+                  "loop-container"
+                ],
+                "description": "9.3.2 的六类加两个结构节点"
+              },
+              "composite": {
+                "type": "boolean",
+                "default": false,
+                "description": "为真表示节点内部是一整套固定流程，画折叠角标，内部只读"
+              },
+              "params": {
+                "type": "object"
+              },
+              "embedded": {
+                "type": "object",
+                "description": "子流程节点内嵌的整份工作流"
+              }
+            }
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "source",
+              "target"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              },
+              "source_handle": {
+                "enum": [
+                  "output",
+                  "error",
+                  "true",
+                  "false"
+                ],
+                "description": "分支语义挂在这里，不在节点上"
+              },
+              "target_handle": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "repeat_count": {
+          "type": "integer"
+        },
+        "level_sequence": {
+          "type": "array"
+        }
+      }
+    },
+    "case_list": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

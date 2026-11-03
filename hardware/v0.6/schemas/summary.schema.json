@@ -1,0 +1,10 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"Experiment terminal summary 1.0",
+  "type":"object",
+  "required":["schemaVersion","runId","state","simulation","startedUtc","endedUtc","completedCycles","activeCycle","captureCount","cancelled","failed","failureMessage","cleanup","physicalStopVerified","exitCode","eventsPath","commandsPath"],
+  "properties":{
+    "schemaVersion":{"const":"1.0"},"runId":{"type":"string"},"state":{"enum":["stopped","completed","failed"]},"simulation":{"type":"boolean"},"terminalPublished":{"type":"boolean"},"startedUtc":{"type":"string","format":"date-time"},"endedUtc":{"type":"string","format":"date-time"},
+    "completedCycles":{"type":"integer","minimum":0},"activeCycle":{"type":"integer","minimum":0},"captureCount":{"type":"integer","minimum":0},"cancelled":{"type":"boolean"},"failed":{"type":"boolean"},"failureMessage":{"type":"string"},"cleanup":{"type":"string"},"physicalStopVerified":{"const":false},"exitCode":{"enum":[0,1]},"eventsPath":{"type":"string"},"commandsPath":{"type":"string"}
+  }
+}

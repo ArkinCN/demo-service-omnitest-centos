@@ -1,0 +1,25 @@
+{
+  "doc_id": "omega-startup-logic",
+  "title": "OMEGA 启动执行逻辑",
+  "doc_type": "原理文档",
+  "taxonomy": {
+    "l1": "motor",
+    "l2": "cooling-fan",
+    "l3": "fortior-fu6832"
+  },
+  "process_tags": [
+    "启动测试",
+    "调优"
+  ],
+  "format": "pdf",
+  "pages": 3,
+  "page_limit": null,
+  "tables": 0,
+  "source_path": "[源] manuals/OMEGA启动执行逻辑.pdf",
+  "staged_input": "[源] manuals/OMEGA启动执行逻辑.pdf",
+  "sha256": "3883c3d95108eacea3ca6ff6aef053a78d665e9eef135a280a76d7aa7c921c43",
+  "bytes": 268828,
+  "converter": "docling",
+  "ocr": false,
+  "note": null
+}

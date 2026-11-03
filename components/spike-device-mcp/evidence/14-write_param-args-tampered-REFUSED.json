@@ -1,0 +1,6 @@
+{
+    "status": "confirmation_invalid",
+    "executed": false,
+    "reason": "参数与批准时不一致，拒绝执行；请重新申请确认",
+    "tool": "write_param"
+}

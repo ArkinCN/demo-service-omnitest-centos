@@ -1,0 +1,456 @@
+{
+    "devices": [
+        {
+            "id": "bench",
+            "name": "峰岹台架工控机",
+            "model": "SK-20251218QPBB / Windows 11",
+            "kind": "host",
+            "via": null,
+            "tags": [
+                "ssh",
+                "windows",
+                "session0"
+            ],
+            "transport": "mcp:device-bench",
+            "backend": "ssh",
+            "target": "administrator@172.25.5.166:5011",
+            "status": {
+                "mode": "live",
+                "ts": 1789831805.4777622,
+                "device_id": "bench",
+                "status": "ok",
+                "pending_confirmations": 0,
+                "pending_tokens": [],
+                "name": "峰岹台架工控机",
+                "model": "SK-20251218QPBB / Windows 11",
+                "kind": "host",
+                "target": "administrator@172.25.5.166:5011",
+                "connected": true,
+                "hostname": "SK-20251218QPBB",
+                "connected_at": 1789831805.3624957,
+                "uptime_s": 0.1,
+                "last_error": null,
+                "key_env": "FORTIOR_WIN_KEY",
+                "key_present": true
+            },
+            "tool_groups": {
+                "connection": [
+                    {
+                        "name": "connect",
+                        "title": "连接台架",
+                        "description": "通过 SSH 连接峰岹台架工控机。连不上时降级为 mock 并在返回里标明原因。",
+                        "layer": "连接层",
+                        "guarded": false,
+                        "human_gate": null,
+                        "risk": null,
+                        "input_schema": {
+                            "properties": {
+                                "force_mock": {
+                                    "default": false,
+                                    "title": "Force Mock",
+                                    "type": "boolean"
+                                }
+                            },
+                            "title": "connectArguments",
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "title": "台架状态",
+                        "description": "返回连接状态、真实/mock 模式、主机名、在线时长与最近一次错误。C 区画布节点靠它显示连接徽章。",
+                        "layer": "连接层",
+                        "guarded": false,
+                        "human_gate": null,
+                        "risk": null,
+                        "input_schema": {
+                            "properties": {},
+                            "title": "statusArguments",
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "disconnect",
+                        "title": "断开台架",
+                        "description": "关闭 SSH 会话，释放通道。",
+                        "layer": "连接层",
+                        "guarded": false,
+                        "human_gate": null,
+                        "risk": null,
+                        "input_schema": {
+                            "properties": {},
+                            "title": "disconnectArguments",
+                            "type": "object"
+                        }
+                    }
+                ],
+                "observation": [
+                    {
+                        "name": "read_fg",
+                        "title": "读转速反馈",
+                        "description": "读 FG1（电气转速方波）与 FG2（红外机械转速，1 脉冲/转）的频率，并换算转速与 FG1/FG2 比值（极对数 2，理论应为 2.0）。台架上跑的是 C:\\fc_pull\\FgPoll.exe。",
+                        "layer": "观测层",
+                        "guarded": false,
+                        "human_gate": null,
+                        "risk": null,
+                        "input_schema": {
+                            "properties": {
+                                "samples": {
+                                    "default": 1,
+                                    "title": "Samples",
+                                    "type": "integer"
+                                },
+                                "interval_s": {
+                                    "default": 1.0,
+                                    "title": "Interval S",
+                                    "type": "number"
+                                }
+                            },
+                            "title": "read_fgArguments",
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "read_pwm",
+                        "title": "读 PWM 占空比",
+                        "description": "读 PWM1（驱动被测电机）的占空比。实现方式是取一段 CH4 采样、按高于中点的采样占比算占空比——低采样率混叠下该比例仍准确（实测零偏差），载波形状则需要 capture_scope 单独高速短抓。",
+                        "layer": "观测层",
+                        "guarded": false,
+                        "human_gate": null,
+                        "risk": null,
+                        "input_schema": {
+                            "properties": {
+                                "channel": {
+                                    "default": 4,
+                                    "title": "Channel",
+                                    "type": "integer"
+                                }
+                            },
+                            "title": "read_pwmArguments",
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "capture_scope",
+                        "title": "抓示波器波形",
+                        "description": "从示波器深存储读逐点时序（电流 CH1 / FG1 CH2 / FG2 CH3 / PWM1 CH4）。默认只做 dry_run 返回计划与预估，不真抓——真抓一次约 20 到 25 秒、出约 100 MB CSV，且会独占示波器，必须由调用方显式把 dry_run 置 false。",
+                        "layer": "观测层",
+                        "guarded": false,
+                        "human_gate": null,
+                        "risk": null,
+                        "input_schema": {
+                            "properties": {
+                                "channels": {
+                                    "anyOf": [
+                                        {
+                                            "items": {
+                                                "type": "integer"
+                                            },
+                                            "type": "array"
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ],
+                                    "default": null,
+                                    "title": "Channels"
+                                },
+                                "time_per_div_s": {
+                                    "default": 10.0,
+                                    "title": "Time Per Div S",
+                                    "type": "number"
+                                },
+                                "dry_run": {
+                                    "default": true,
+                                    "title": "Dry Run",
+                                    "type": "boolean"
+                                }
+                            },
+                            "title": "capture_scopeArguments",
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "tail_log",
+                        "title": "读软件运行日志",
+                        "description": "读台架机上 MotorDebug（原 Altior）的后端运行日志尾部。节点执行的真相在这里：预设命令完成、RIGOL 截图保存、SCPI 下发都会留痕。整屏只有 save_workflow_autosave 则说明工作流根本没在跑。",
+                        "layer": "观测层",
+                        "guarded": false,
+                        "human_gate": null,
+                        "risk": null,
+                        "input_schema": {
+                            "properties": {
+                                "lines": {
+                                    "default": 40,
+                                    "title": "Lines",
+                                    "type": "integer"
+                                },
+                                "date": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ],
+                                    "default": null,
+                                    "title": "Date"
+                                }
+                            },
+                            "title": "tail_logArguments",
+                            "type": "object"
+                        }
+                    }
+                ],
+                "action": [
+                    {
+                        "name": "start",
+                        "title": "启动电机（需人工确认）",
+                        "description": "启动被测电机。红线动作：无人工批准过的 confirm_token 一律拒绝执行。",
+                        "layer": "动作层",
+                        "guarded": true,
+                        "human_gate": "confirm_token",
+                        "risk": "物理后果：台架会真的转起来",
+                        "input_schema": {
+                            "properties": {
+                                "duty_percent": {
+                                    "default": 50.0,
+                                    "title": "Duty Percent",
+                                    "type": "number"
+                                },
+                                "duration_s": {
+                                    "default": 30.0,
+                                    "title": "Duration S",
+                                    "type": "number"
+                                },
+                                "confirm_token": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ],
+                                    "default": null,
+                                    "title": "Confirm Token"
+                                }
+                            },
+                            "title": "startArguments",
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "stop",
+                        "title": "停止电机（需人工确认）",
+                        "description": "正常停止被测电机。红线动作，需人工批准过的 confirm_token。",
+                        "layer": "动作层",
+                        "guarded": true,
+                        "human_gate": "confirm_token",
+                        "risk": "改变被测对象运行状态",
+                        "input_schema": {
+                            "properties": {
+                                "confirm_token": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ],
+                                    "default": null,
+                                    "title": "Confirm Token"
+                                }
+                            },
+                            "title": "stopArguments",
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "estop",
+                        "title": "急停（需人工确认）",
+                        "description": "急停：立即切断驱动输出。红线动作，需人工批准过的 confirm_token。注意急停在权限模型里独立于常规三档权限，落地时应另有一条物理急停回路，软件急停只是补充、不能作为唯一手段。",
+                        "layer": "动作层",
+                        "guarded": true,
+                        "human_gate": "confirm_token",
+                        "risk": "立即切断输出",
+                        "input_schema": {
+                            "properties": {
+                                "reason": {
+                                    "default": "",
+                                    "title": "Reason",
+                                    "type": "string"
+                                },
+                                "confirm_token": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ],
+                                    "default": null,
+                                    "title": "Confirm Token"
+                                }
+                            },
+                            "title": "estopArguments",
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "write_param",
+                        "title": "写回参数（需人工确认）",
+                        "description": "把控制参数写回驱动板。红线动作，需人工批准过的 confirm_token。",
+                        "layer": "动作层",
+                        "guarded": true,
+                        "human_gate": "confirm_token",
+                        "risk": "改变被测对象行为，且可能不可逆",
+                        "input_schema": {
+                            "properties": {
+                                "key": {
+                                    "title": "Key",
+                                    "type": "string"
+                                },
+                                "value": {
+                                    "title": "Value",
+                                    "type": "number"
+                                },
+                                "confirm_token": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ],
+                                    "default": null,
+                                    "title": "Confirm Token"
+                                }
+                            },
+                            "required": [
+                                "key",
+                                "value"
+                            ],
+                            "title": "write_paramArguments",
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "export",
+                        "title": "导出产物（需人工确认）",
+                        "description": "把本轮产物导出成对外交付文件。红线动作，需人工批准过的 confirm_token。",
+                        "layer": "动作层",
+                        "guarded": true,
+                        "human_gate": "confirm_token",
+                        "risk": "落盘成对外交付物",
+                        "input_schema": {
+                            "properties": {
+                                "run_id": {
+                                    "title": "Run Id",
+                                    "type": "string"
+                                },
+                                "fmt": {
+                                    "default": "xlsx",
+                                    "title": "Fmt",
+                                    "type": "string"
+                                },
+                                "confirm_token": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ],
+                                    "default": null,
+                                    "title": "Confirm Token"
+                                }
+                            },
+                            "required": [
+                                "run_id"
+                            ],
+                            "title": "exportArguments",
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "archive",
+                        "title": "归档本轮（需人工确认）",
+                        "description": "把本轮结果写入存档。红线动作，需人工批准过的 confirm_token。",
+                        "layer": "动作层",
+                        "guarded": true,
+                        "human_gate": "confirm_token",
+                        "risk": "写入不可随意回退的存档",
+                        "input_schema": {
+                            "properties": {
+                                "run_id": {
+                                    "title": "Run Id",
+                                    "type": "string"
+                                },
+                                "note": {
+                                    "default": "",
+                                    "title": "Note",
+                                    "type": "string"
+                                },
+                                "confirm_token": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ],
+                                    "default": null,
+                                    "title": "Confirm Token"
+                                }
+                            },
+                            "required": [
+                                "run_id"
+                            ],
+                            "title": "archiveArguments",
+                            "type": "object"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": "scope",
+            "name": "RIGOL DS1104Z Plus 示波器",
+            "model": "DS1104Z Plus · VISA over USB",
+            "kind": "instrument",
+            "via": "bench",
+            "tags": [
+                "visa",
+                "usbtmc"
+            ],
+            "transport": "mcp:device-bench",
+            "backend": "ssh",
+            "target": "administrator@172.25.5.166:5011",
+            "status": {
+                "mode": "live",
+                "via": "bench"
+            },
+            "tool_groups": {}
+        }
+    ],
+    "guarded_actions": {
+        "start": "启动被测电机：台架会真的转起来",
+        "stop": "停止被测电机",
+        "estop": "急停：立即切断驱动输出",
+        "write_param": "把参数写回驱动板：改变被测对象的行为",
+        "export": "导出本轮产物：落盘成对外交付文件",
+        "archive": "归档本轮结果：写入不可随意回退的存档"
+    },
+    "server": {
+        "name": "device-bench",
+        "version": "0.1.0",
+        "tool_count": 13
+    }
+}
