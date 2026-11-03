@@ -72,9 +72,17 @@ services:
       # 否则【AI 助手会连到镜像内置的 openrouter.ai】而不是本地网关。
       # 模型名取 qwen/qwen-plus：非推理版，实测 finish=stop 且正常返回中文正文
       # （qwen3.7-max 等推理模型在 max_tokens 下 content 为空）。
-      MOTORDEBUG_LLM_BASE_URL: "${OPENAI_BASE_URL}"
+      # ⚠️ base_url **不能带 /v1**：网关 PROTOCOL_PATHS 已自带 /v1/chat/completions，
+      #    再带 /v1 会拼成 /v1/v1/chat/completions → 上游 404（config.py:188 有明示）。
+      #    门户注入的 OPENAI_BASE_URL 是给标准 OpenAI SDK 用的（带 /v1），不能直接复用。
+      MOTORDEBUG_LLM_BASE_URL: "http://llm-gateway:4000"
       MOTORDEBUG_LLM_API_KEY: "${OPENAI_API_KEY}"
-      MOTORDEBUG_LLM_MODEL: "qwen/qwen-plus"
+      MOTORDEBUG_LLM_MODEL: "deepseek-v4.1-flash-1017"
+      # 高频轻任务（起标题/内容安全）用的便宜档；必须是**网关认的名字**。
+      # 留空会复用 MOTORDEBUG_LLM_MODEL，但 content_safety 另有独立默认值
+      # deepseek-v4-flash（网关没有该模型）→ 必须显式覆盖，否则建议生成 502。
+      MOTORDEBUG_LLM_FAST_MODEL: "qwen-plus"
+      CONTENT_SAFETY_LLM_MODEL: "qwen-plus"
     mem_limit: 1g
     cpus: "1.0"
     healthcheck:
@@ -112,9 +120,11 @@ services:
     #    /api/agent/models 返回空数组（首页对话模型下拉为空）。
     environment:
       TZ: "Asia/Shanghai"
-      MOTORDEBUG_LLM_BASE_URL: "${OPENAI_BASE_URL}"
+      MOTORDEBUG_LLM_BASE_URL: "http://llm-gateway:4000"
       MOTORDEBUG_LLM_API_KEY: "${OPENAI_API_KEY}"
-      MOTORDEBUG_LLM_MODEL: "qwen/qwen-plus"
+      MOTORDEBUG_LLM_MODEL: "deepseek-v4.1-flash-1017"
+      MOTORDEBUG_LLM_FAST_MODEL: "qwen-plus"
+      CONTENT_SAFETY_LLM_MODEL: "qwen-plus"
     networks:
       - aicube-net
 
