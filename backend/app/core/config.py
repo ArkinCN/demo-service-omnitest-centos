@@ -49,12 +49,13 @@ class Settings(BaseSettings):
     DB_MODE: Literal["live", "demo"] = "live"
 
     # ---- 连接池 ----
-    # 默认值按「单 worker + 每项目 4 连接」估算：
-    # 100 个 demo × 4 = 400，但演示场景是「点开一个看一个」，峰值远低于此。
-    # PG 的 max_connections 是 100，pool_size+max_overflow 必须留足余量，
-    # 否则一个 worker 就能吃满全部连接。
-    DB_POOL_SIZE: int = 5
-    DB_MAX_OVERFLOW: int = 5
+    # 每 engine 2+2 = 4 条。注意 **live 与 demo 两个 engine 共用同一个数据库账号**，
+    # 所以单账号峰值 = 4 × 2 = 8，账号的 CONNECTION LIMIT 设 12 留余量。
+    # 早期写 5+5 时，两个 engine 峰值 20 条，超过账号上限 → 一执行切换就
+    # 「FATAL: too many connections for role」，且只在切换后才复现，极难联想。
+    # 要调大就同时改 provision_app_accounts.sql 的 CONNECTION LIMIT。
+    DB_POOL_SIZE: int = 2
+    DB_MAX_OVERFLOW: int = 2
     DB_POOL_TIMEOUT: int = 30
     DB_POOL_RECYCLE: int = 3600
 

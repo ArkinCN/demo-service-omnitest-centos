@@ -129,7 +129,12 @@ def get_demo_dataset() -> str:
 
     try:
         with _engine_demo.connect() as conn:
-            mode = conn.execute(text("select mode from runs limit 1")).scalar()
+            # 必须带 mode like 'demo-%' 过滤：演示模式下用户正常操作会新建 run，
+            # 那些记录的 mode 是 'mock'（应用默认值），不加过滤可能取到它们，
+            # 导致「明明灌的是 fault，界面显示别的场景」。
+            mode = conn.execute(
+                text("select mode from runs where mode like 'demo-%' limit 1")
+            ).scalar()
     except Exception:  # noqa: BLE001 - 状态查询失败不该影响主流程
         return ""
     if not mode:
