@@ -20,7 +20,7 @@ from pydantic import BaseModel, Field
 
 from app.api.deps import require_admin
 from app.core.config import settings
-from app.db.session import get_mode, is_demo_available, set_mode
+from app.db.session import get_demo_dataset, get_mode, is_demo_available, set_mode
 from app.models.user import User
 from app.schemas.common import success_response
 
@@ -36,6 +36,11 @@ class DemoStatus(BaseModel):
     )
     schema_live: str = Field(default="", description="真机数据所在 schema")
     schema_demo: str = Field(default="", description="演示数据所在 schema")
+    dataset: str = Field(
+        default="",
+        description="演示数据集名（normal / fault / stress）。live 模式下也返回，"
+        "表示「切过去会看到哪套」；为空表示读不到。",
+    )
 
 
 class ActivateRequest(BaseModel):
@@ -53,6 +58,7 @@ def _status_payload() -> dict:
         demo_available=is_demo_available(),
         schema_live=settings.DB_SCHEMA,
         schema_demo=settings.DB_DEMO_SCHEMA,
+        dataset=get_demo_dataset(),
     ).model_dump()
 
 

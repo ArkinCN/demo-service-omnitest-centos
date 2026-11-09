@@ -110,6 +110,33 @@ def get_engine():
     return _engine_demo if _current_mode == "demo" else _engine_live
 
 
+def get_demo_dataset() -> str:
+    """读演示 schema 里当前灌的是哪套数据集（normal / fault / stress）。
+
+    不额外建一张「当前数据集」标记表，而是从数据本身取：
+    三套演示数据的 runs.mode 分别是 demo-normal / demo-fault / demo-stress，
+    取一行就知道当前是哪套。
+
+    这样做的好处是没有「标记与实际数据不一致」的可能 —— 换数据集时如果忘记
+    同步标记表，界面会显示错的场景名，而那种错误没人会主动去查。
+    标记来自数据，天然一致。
+
+    读不到（库未连、表为空、非 PG 部署）返回空串，调用方按「未知」处理。
+    """
+    if not is_demo_available():
+        return ""
+    from sqlalchemy import text
+
+    try:
+        with _engine_demo.connect() as conn:
+            mode = conn.execute(text("select mode from runs limit 1")).scalar()
+    except Exception:  # noqa: BLE001 - 状态查询失败不该影响主流程
+        return ""
+    if not mode:
+        return ""
+    return str(mode).removeprefix("demo-")
+
+
 def get_session() -> Generator[Session, None, None]:
     """
     Get database session for dependency injection

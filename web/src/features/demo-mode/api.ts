@@ -43,6 +43,8 @@ export interface DemoStatus {
   demo_available: boolean
   schema_live: string
   schema_demo: string
+  /** 演示数据集名（normal / fault / stress）；空串表示读不到 */
+  dataset: string
 }
 
 export function fetchDemoStatus(): Promise<DemoStatus> {

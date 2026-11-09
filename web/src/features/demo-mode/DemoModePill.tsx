@@ -19,6 +19,13 @@ import { Database, FlaskConical } from 'lucide-react'
 import { Tooltip, cn } from '../../components/ui'
 import { activateMode, fetchDemoStatus, type DataMode, type DemoStatus } from './api'
 
+/** 数据集内部名 → 界面短标签。认不出的名字原样显示，不要吞掉。 */
+const DATASET_LABEL: Record<string, string> = {
+  normal: '正常',
+  fault: '故障',
+  stress: '极限',
+}
+
 export function DemoModePill() {
   const [status, setStatus] = useState<DemoStatus | null>(null)
   const [busy, setBusy] = useState(false)
@@ -61,10 +68,13 @@ export function DemoModePill() {
 
   const isDemo = status.mode === 'demo'
   const Icon = isDemo ? FlaskConical : Database
-  const label = isDemo ? '演示数据' : '真机数据'
+
+  // 认不出的数据集名原样显示：宁可难看，也不要静默隐藏「当前是哪套数据」
+  const datasetLabel = DATASET_LABEL[status.dataset] ?? status.dataset
+  const label = isDemo ? (datasetLabel ? `演示 · ${datasetLabel}` : '演示数据') : '真机数据'
   const hint = isDemo
-    ? '当前显示为演示数据集，非真机采集结果。点击切回真机。'
-    : '当前显示为真机采集数据。点击切换到演示数据集。'
+    ? `当前显示为演示数据集${datasetLabel ? `（${datasetLabel}场景）` : ''}，非真机采集结果。点击切回真机。`
+    : `当前显示为真机采集数据。点击切换到演示数据集${datasetLabel ? `（${datasetLabel}场景）` : ''}。`
 
   return (
     <Tooltip side="bottom" content={hint}>
@@ -74,7 +84,7 @@ export function DemoModePill() {
         disabled={busy}
         aria-label={hint}
         className={cn(
-          'flex h-[30px] items-center gap-1.5 rounded-full border px-2.5 transition-colors',
+          'flex h-[30px] items-center gap-1.5 whitespace-nowrap rounded-full border px-2.5 transition-colors',
           'min-[1536px]:h-[38px] min-[1536px]:px-3',
           isDemo
             ? 'border-warn/50 bg-warn/10 text-warn hover:bg-warn/15'
