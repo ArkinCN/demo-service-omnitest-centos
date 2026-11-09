@@ -51,7 +51,7 @@ from app.core.exceptions import (
     general_exception_handler
 )
 from app.db.session import init_db
-from app.api.v1 import auth, users, chats, updates, feedbacks, feedback_modules, code_reviews, user_groups, external_links, favorites, presence, dashboard, mculib, registration, invitations, invitation_applications, vibe_coding, gpt_proxy, feature_access, webhooks, agreements, gateway, gateway_admin, agent_chat, agent_image, credits, skills, tasks, agent_stream, kb, kb_entries, kb_documents, runs, interlocks, reports, evaluate, fan_tests, automation_judge
+from app.api.v1 import auth, users, chats, updates, feedbacks, feedback_modules, code_reviews, user_groups, external_links, favorites, presence, dashboard, mculib, registration, invitations, invitation_applications, vibe_coding, gpt_proxy, feature_access, webhooks, agreements, gateway, gateway_admin, agent_chat, agent_image, credits, skills, tasks, agent_stream, kb, kb_entries, kb_documents, runs, interlocks, reports, evaluate, fan_tests, automation_judge, demo
 from app.core.scheduler import init_scheduler, shutdown_scheduler
 from app.middleware.activity import update_user_activity
 
@@ -255,6 +255,9 @@ app.include_router(evaluate.router)
 app.include_router(fan_tests.router, prefix="/api")
 # 非致命报错判定清单落盘：/api/automation-judge（汇报模式 · 编号 1，纯追加）
 app.include_router(automation_judge.router)
+
+# 数据源模式切换（真机 / 演示）。需要 API_V1_PREFIX，与上面两个自带 /api 前缀的模块不同。
+app.include_router(demo.router, prefix=settings.API_V1_PREFIX)
 
 
 # Mount static files for uploads

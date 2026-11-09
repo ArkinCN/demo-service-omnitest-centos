@@ -56,6 +56,17 @@ services:
       - plugdev
     environment:
       TZ: "Asia/Shanghai"
+      # ---- 数据库（2026-11 数据纳管）----
+      # 覆盖 Dockerfile 内置的 sqlite:///.deploy/motordebug.db。
+      # 真机数据在 omnitest schema，演示数据在 omnitest_demo，两者表结构相同，
+      # 靠连接时的 search_path 切换 —— 切换是毫秒级的，不动数据。
+      # 口令用 ${PG_APP_PASSWORD:-123456}：不配也能跑（内网演示环境），
+      # 生产在 .env 里设 PG_APP_PASSWORD 即可覆盖，不用改文件。
+      # 回滚到 SQLite：把下面四行注释掉、重新 up，容器会退回镜像内置的 SQLite。
+      DATABASE_URL: "postgresql+psycopg://omnitest_app:${PG_APP_PASSWORD:-123456}@pg:5432/demos"
+      DB_SCHEMA: "omnitest"
+      DB_DEMO_SCHEMA: "omnitest_demo"
+      DB_MODE: "live"
       # ---- NI-VISA ----
       # 关键：让 pyvisa 用「库文件全路径」而不是 '@ivi'。
       # 容器内 @ivi 按名字查找会失败（ld.so.cache 无 ni-visa 路径，报错列表为空），

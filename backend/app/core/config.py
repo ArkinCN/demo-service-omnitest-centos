@@ -38,6 +38,26 @@ class Settings(BaseSettings):
     # Database
     DATABASE_URL: str = Field(..., description="Database connection URL")
 
+    # ---- PostgreSQL schema 与演示模式（2026-11 数据纳管引入）----
+    # SQLite / MySQL 部署时这两项被忽略，代码按 DATABASE_URL 前缀自动判断。
+    # 设计意图：真机数据与演示数据物理隔离在两个 schema，
+    # 演示重置（TRUNCATE）从语法上就碰不到真机数据。
+    DB_SCHEMA: str = "omnitest"
+    DB_DEMO_SCHEMA: str = "omnitest_demo"
+    # 启动时的默认模式：live=真机数据，demo=演示数据。
+    # 运行期可通过 POST /api/v1/demo/activate 切换。
+    DB_MODE: Literal["live", "demo"] = "live"
+
+    # ---- 连接池 ----
+    # 默认值按「单 worker + 每项目 4 连接」估算：
+    # 100 个 demo × 4 = 400，但演示场景是「点开一个看一个」，峰值远低于此。
+    # PG 的 max_connections 是 100，pool_size+max_overflow 必须留足余量，
+    # 否则一个 worker 就能吃满全部连接。
+    DB_POOL_SIZE: int = 5
+    DB_MAX_OVERFLOW: int = 5
+    DB_POOL_TIMEOUT: int = 30
+    DB_POOL_RECYCLE: int = 3600
+
     # LDAP
     LDAP_URL: str
     LDAP_ADMIN_DN: str

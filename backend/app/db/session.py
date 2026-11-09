@@ -7,29 +7,107 @@ from app.core.config import settings
 from app.core.logger import logger
 
 
-# Create database engine
-engine = create_engine(
-    settings.DATABASE_URL,
-    echo=False,  # Disable SQL logging to reduce noise
-    pool_pre_ping=True,  # Test connections before using
-    pool_recycle=3600,  # Recycle connections after 1 hour
-    # 连接池上限 = pool_size + max_overflow = 100 + 300 = 400 条并发连接。
-    # 8核16GB 服务器 + MySQL max_connections=500：400 条约占 ~1GB MySQL 内存，余量充裕。
-    # 注意：池是「每 worker 一套」，本服务必须保持单 uvicorn worker（不要加 --workers），
-    # 否则 N×400 会撑爆 MySQL 的 500 上限。修复后单连接为毫秒级借还，400 主要用于吸收突发峰值。
-    pool_size=100,  # Base pool size（常驻连接，用完归还不关闭）
-    max_overflow=300,  # Additional connections when pool is exhausted（用完即关）
-    pool_timeout=30,  # Wait up to 30s for a connection（池满 400 仍拿不到=真过载，早失败优于干等）
-    # NOTE: init_command 是 PyMySQL 专属参数，SQLite/其他驱动不支持。
-    # 本地 SQLite 部署时自动跳过，仅 MySQL 连接串才注入。
-    **(
-        {"connect_args": {"init_command": "SET time_zone='+00:00'"}}
-        if settings.DATABASE_URL.startswith("mysql")
-        else {"connect_args": {"check_same_thread": False}}
-        if settings.DATABASE_URL.startswith("sqlite")
-        else {}
-    ),
+# ---------------------------------------------------------------------------
+# 方言适配：同一份代码要能在 SQLite（本地开发）/ MySQL（边缘）/ PostgreSQL（门户）上跑
+# ---------------------------------------------------------------------------
+
+def is_postgres(url: str) -> bool:
+    return url.startswith(("postgresql", "postgres"))
+
+
+def is_sqlite(url: str) -> bool:
+    return url.startswith("sqlite")
+
+
+def _build_connect_args(url: str, schema: str) -> dict:
+    """按方言给出驱动参数。三者互斥，不能共用一个字典。
+
+    PG   : options 注入 search_path —— 这是「真机/演示两套数据、模型零改动」的关键，
+           模型定义里不写 schema 前缀，换 search_path 等于换一整套数据。
+    SQLite: FastAPI 的同步依赖运行在线程池中，必须关掉跨线程检查。
+    MySQL: init_command 统一时区（PyMySQL 专属参数，其他驱动会报 TypeError）。
+    """
+    if is_postgres(url):
+        return {"options": f"-csearch_path={schema}"}
+    if is_sqlite(url):
+        return {"check_same_thread": False}
+    if url.startswith("mysql"):
+        return {"init_command": "SET time_zone='+00:00'"}
+    return {}
+
+
+def _build_pool_kwargs(url: str) -> dict:
+    """连接池参数按方言给。
+
+    SQLite 是单文件，没有并发连接概念，用默认池即可。
+    PG / MySQL 必须严格限制：原值 pool_size=100 + max_overflow=300 是为 MySQL
+    max_connections=500 设计的，直接搬到 max_connections=100 的 PG 上，
+    单个 worker 就能把连接吃满，表现为「突然全部请求超时」。
+    """
+    if is_sqlite(url):
+        return {}
+    return {
+        "pool_size": settings.DB_POOL_SIZE,
+        "max_overflow": settings.DB_MAX_OVERFLOW,
+        "pool_timeout": settings.DB_POOL_TIMEOUT,
+        "pool_recycle": settings.DB_POOL_RECYCLE,
+        "pool_pre_ping": True,
+    }
+
+
+def _create_engine(url: str, schema: str):
+    return create_engine(
+        url,
+        echo=False,
+        connect_args=_build_connect_args(url, schema),
+        **_build_pool_kwargs(url),
+    )
+
+
+# ---------------------------------------------------------------------------
+# 引擎与运行模式
+# ---------------------------------------------------------------------------
+
+#: 真机数据引擎
+_engine_live = _create_engine(settings.DATABASE_URL, settings.DB_SCHEMA)
+
+#: 演示数据引擎。非 PG 没有 schema 概念，两者指向同一个库，
+#: 演示模式因此不可用（由 is_demo_available 判断）。
+_engine_demo = (
+    _create_engine(settings.DATABASE_URL, settings.DB_DEMO_SCHEMA)
+    if is_postgres(settings.DATABASE_URL)
+    else _engine_live
 )
+
+#: 向后兼容：大量模块直接 `from app.db.session import engine`
+engine = _engine_live
+
+_VALID_MODES = ("live", "demo")
+_current_mode: str = settings.DB_MODE if is_postgres(settings.DATABASE_URL) else "live"
+
+
+def is_demo_available() -> bool:
+    """演示模式依赖 PG 的两个 schema，SQLite/MySQL 部署不提供。"""
+    return is_postgres(settings.DATABASE_URL)
+
+
+def get_mode() -> str:
+    return _current_mode
+
+
+def set_mode(mode: str) -> None:
+    """切换数据源模式。只改进程内状态，不重启、不迁移数据。"""
+    global _current_mode
+    if mode not in _VALID_MODES:
+        raise ValueError(f"非法模式 {mode!r}，只接受 {_VALID_MODES}")
+    if mode == "demo" and not is_demo_available():
+        raise RuntimeError("演示模式需要 PostgreSQL（omnitest / omnitest_demo 双 schema）")
+    _current_mode = mode
+
+
+def get_engine():
+    """按当前模式返回引擎。业务代码请通过 get_session 拿会话，不要直接用它。"""
+    return _engine_demo if _current_mode == "demo" else _engine_live
 
 
 def get_session() -> Generator[Session, None, None]:
@@ -44,7 +122,7 @@ def get_session() -> Generator[Session, None, None]:
         def get_users(session: Session = Depends(get_session)):
             return session.query(User).all()
     """
-    with Session(engine) as session:
+    with Session(get_engine()) as session:
         try:
             yield session
         except Exception as e:
@@ -92,11 +170,19 @@ def init_db() -> None:
     )
 
     try:
-        SQLModel.metadata.create_all(engine)
-        logger.info("Database tables created successfully")
-
-        # Auto-migrate: add missing columns to existing tables
-        _run_migrations(engine)
+        if is_postgres(settings.DATABASE_URL):
+            # PG 下应用账号（*_app）**故意没有 CREATE 权限** —— 应用不能改库结构，
+            # 建表/改列必须走显式迁移。所以这里不调用 create_all：
+            # 它需要 CREATE 权限，会直接报 "no schema has been selected to create in"。
+            # 改为漂移检测：表缺失或列缺失会在日志里明确告警，提示先跑建表脚本。
+            _check_pg_column_drift(engine, settings.DB_SCHEMA)
+            if is_demo_available():
+                _check_pg_column_drift(_engine_demo, settings.DB_DEMO_SCHEMA)
+        else:
+            SQLModel.metadata.create_all(engine)
+            logger.info("Database tables created successfully")
+            # Auto-migrate: 历史增量列（仅 MySQL / SQLite 生效）
+            _run_migrations(engine)
 
         # Seed vibe coding default config
         from app.services.vibe_coding_service import VibeCodingService
@@ -192,8 +278,55 @@ def _backfill_cache_read_tokens(conn, inspector) -> None:
     ))
 
 
+def _check_pg_column_drift(eng, schema: str) -> None:
+    """PostgreSQL 环境下的结构漂移检测。
+
+    create_all 只建「缺失的表」，不会给已存在的表补列 —— 这正是 MySQL 时代
+    那一大堆 ALTER 存在的原因。PG 上我们不自动 ALTER（方言不同、误改风险高），
+    改为启动时显式告警：让结构差异在日志里暴露，而不是等某个接口 500 才发现。
+
+    schema 必须显式传入，不能靠 search_path 推断：has_table() 不带 schema 时
+    取的是 dialect.default_schema_name（连接首次建立时缓存），
+    对第二个引擎会取错，导致「表全在却报全缺失」的假警报。
+    """
+    from sqlalchemy import inspect
+    from sqlmodel import SQLModel
+
+    inspector = inspect(eng)
+    drifted: list[str] = []
+    for table in SQLModel.metadata.sorted_tables:
+        if not inspector.has_table(table.name, schema=schema):
+            drifted.append(f"{table.name}(整表缺失)")
+            continue
+        existing = {col["name"] for col in inspector.get_columns(table.name, schema=schema)}
+        missing = [col.name for col in table.columns if col.name not in existing]
+        if missing:
+            drifted.append(f"{table.name}.{','.join(missing)}")
+
+    if drifted:
+        logger.warning(
+            "PostgreSQL[%s] 结构漂移（model 有、库表无）：%s。"
+            "PG 不自动 ALTER，请显式执行迁移后重启。",
+            schema, "; ".join(drifted),
+        )
+    else:
+        logger.info("PostgreSQL[%s] 结构检查通过：model 与库表一致", schema)
+
+
 def _run_migrations(eng) -> None:
-    """Run incremental ALTER TABLE migrations for existing tables"""
+    """历史增量 ALTER（MySQL / SQLite 专用）。
+
+    ⚠️ 下面这批 SQL 全是 MySQL 方言：TINYINT(1)、MODIFY COLUMN、CHANGE ...
+    在 PostgreSQL 上执行必然语法错误。PG 是新建库，结构以 model 定义为准
+    （create_all 一次建全），不走这段历史迁移。
+
+    为什么不在 PG 上做等价转换：两套迁移分支迟早不同步，而 PG 这边没有历史包袱，
+    唯一正确的来源就是 model。真要改 PG 结构，走显式迁移 + 版本化，而不是这里。
+    """
+    if is_postgres(settings.DATABASE_URL):
+        _check_pg_column_drift(eng, settings.DB_SCHEMA)
+        return
+
     from sqlalchemy import text, inspect
 
     # Add new columns: (table, column, SQL)

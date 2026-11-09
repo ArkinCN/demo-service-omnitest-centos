@@ -11,6 +11,10 @@ uvicorn[standard]==0.27.0
 # 数据库和 ORM
 sqlmodel==0.0.14
 pymysql==1.1.0
+# PostgreSQL 驱动（2026-11 数据纳管引入）。用 psycopg 3 而不是 psycopg2：
+# SQLAlchemy 2.x 原生支持 postgresql+psycopg://，且 binary 版本免装系统级 libpq。
+# 连接串写法：postgresql+psycopg://user:pwd@host:5432/dbname
+psycopg[binary]==3.1.18
 cryptography==41.0.7
 alembic==1.13.1
 
