@@ -22,6 +22,7 @@ from app.api.deps import require_admin
 from app.core.config import settings
 from app.db.session import get_mode, is_demo_available, set_mode
 from app.models.user import User
+from app.schemas.common import success_response
 
 router = APIRouter(prefix="/demo", tags=["demo"])
 
@@ -41,30 +42,35 @@ class ActivateRequest(BaseModel):
     mode: Literal["live", "demo"]
 
 
-def _status() -> DemoStatus:
+def _status_payload() -> dict:
+    """统一响应体里的 data 部分。
+
+    必须走 success_response 包装 —— 前端 call<T> 只认
+    {success, code, message, data} 这一层，裸对象会被读成 undefined。
+    """
     return DemoStatus(
         mode=get_mode(),
         demo_available=is_demo_available(),
         schema_live=settings.DB_SCHEMA,
         schema_demo=settings.DB_DEMO_SCHEMA,
-    )
+    ).model_dump()
 
 
-@router.get("/status", response_model=DemoStatus)
-def read_status() -> DemoStatus:
+@router.get("/status")
+def read_status() -> dict:
     """查询当前数据源模式。只读，登录用户即可访问。
 
     前端应在全局顶栏展示 mode：``demo`` 时必须有明显标识，
     避免把演示数据误当成真实测试结果。
     """
-    return _status()
+    return success_response(data=_status_payload())
 
 
-@router.post("/activate", response_model=DemoStatus)
+@router.post("/activate")
 def activate(
     payload: ActivateRequest,
     _admin: User = Depends(require_admin),
-) -> DemoStatus:
+) -> dict:
     """切换数据源模式。仅管理员。
 
     切到 ``demo`` 前请确认 omnitest_demo 里已灌好目标数据集
@@ -75,4 +81,7 @@ def activate(
     except (ValueError, RuntimeError) as exc:
         # ValueError: 非法模式值；RuntimeError: 当前部署不支持演示模式
         raise HTTPException(status_code=400, detail=str(exc)) from exc
-    return _status()
+    return success_response(
+        data=_status_payload(),
+        message="已切换到演示数据" if payload.mode == "demo" else "已切换到真机数据",
+    )

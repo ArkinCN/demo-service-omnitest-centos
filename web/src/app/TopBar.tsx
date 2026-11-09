@@ -32,6 +32,7 @@ import { FLOWS, FLOW_BY_PATH } from '../data/flows'
 import type { FlowId } from '../data/types'
 import { FLOW_ICON, FLOW_SHORT, MODULE_ICON, MODULE_SHORT } from './icons'
 import { useKnowledgeTotal } from '../features/knowledge/data'
+import { DemoModePill } from '../features/demo-mode/DemoModePill'
 import { RUN_PHASE_LABEL, flowStateOf, useAppStore } from '../state/useAppStore'
 import { useFlowActions } from '../features/redline'
 import { useStageReturnCue } from '../features/automation/useStageReturnCue'
@@ -527,6 +528,9 @@ export function TopBar() {
               <span className="num text-[12px] min-[1536px]:text-[15px]">{pending ? pending : uiT('就绪')}</span>
             </span>
           </Tooltip>
+          {/* 数据源标识：演示数据集与真机数据表结构相同、界面一样，
+              没有持续可见的标记就无法事后判断某张截图属于哪套数据 */}
+          <DemoModePill />
           <Avatar name="张" size={30} />
         </div>
       </div>
