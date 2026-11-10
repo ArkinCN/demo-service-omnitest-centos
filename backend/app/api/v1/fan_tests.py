@@ -37,7 +37,10 @@ from app.services.fan_executor import (
 
 router = APIRouter(prefix="/fan-tests", tags=["Fan Tests"])
 
-_executor = get_executor()
+# 执行器**不在模块加载时固定**。演示模式要求走模拟执行器，而模式是运行时可切换的，
+# 启动时抓一个实例会把模式永久钉死在启动那一刻 —— 这正是「UI 显示演示中、
+# 后台还在开串口」的成因。改为每次取用；get_executor() 内部已做单例缓存，
+# 反复调用不会重复构造。
 
 
 class GateSnapshot(BaseModel):
@@ -155,7 +158,7 @@ async def start_fan_test(
     # 计划体传给执行器时排除 gate（那是闸门凭据，不属计划）
     plan = payload.model_dump(exclude={"gate"})
     try:
-        st = _executor.start(run_id, plan)
+        st = get_executor().start(run_id, plan)
     except ConflictException as e:
         return error_response(str(e), 409)
 
@@ -169,7 +172,7 @@ async def get_fan_test(
     current_user: User = Depends(get_current_user),
 ):
     """查询一次运行的计划与状态。"""
-    st = _executor.status(run_id)
+    st = get_executor().status(run_id)
     if st.status == "unknown":
         return error_response("运行不存在", 404)
     return success_response(data=_status_dict(st))
@@ -182,10 +185,10 @@ async def get_samples(
     current_user: User = Depends(get_current_user),
 ):
     """返回 sequence > after_sequence 的增量点，及新的游标。字段对齐 02_samples.json。"""
-    st = _executor.status(run_id)
+    st = get_executor().status(run_id)
     if st.status == "unknown":
         return error_response("运行不存在", 404)
-    samples, next_seq = _executor.samples(run_id, after_sequence)
+    samples, next_seq = get_executor().samples(run_id, after_sequence)
     time_source = (
         "executor_monotonic_measurement_midpoint"
         if st.simulation
@@ -206,10 +209,10 @@ async def stop_fan_test(
     current_user: User = Depends(get_current_user),
 ):
     """请求停止一次运行（写 stop.request，不强制杀进程）。"""
-    st = _executor.status(run_id)
+    st = get_executor().status(run_id)
     if st.status == "unknown":
         return error_response("运行不存在", 404)
-    _executor.stop(run_id)
+    get_executor().stop(run_id)
     logger.info("[fan-tests] run %s stop requested by user %s", run_id, current_user.id)
     return success_response(data={"run_id": run_id, "status": "stopping"}, message="停止请求已提交")
 
@@ -230,11 +233,11 @@ async def get_capture(
       - 有索引但文件不可读 → `available=false` + 逐通道 reason，**绝不补零/伪造数组**；
       - 未接通道（如 tach 关闭）不出现在 channels 里，符合 `not_applicable` 语义。
     """
-    st = _executor.status(run_id)
+    st = get_executor().status(run_id)
     if st.status == "unknown":
         return error_response("运行不存在", 404)
 
-    meta = _executor.capture_meta(run_id, capture_id)
+    meta = get_executor().capture_meta(run_id, capture_id)
     if meta is None:
         return error_response(
             "未找到该采集（capture_id 不属于本轮，或该采集尚未落盘）", 404

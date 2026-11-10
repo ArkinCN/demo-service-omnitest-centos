@@ -31,6 +31,7 @@ from typing import Any, Protocol
 
 from app.core.exceptions import BadRequestException, ConflictException
 from app.core.logger import logger
+from app.db.session import get_mode
 
 # 默认计划：30/50/70/100% 各 20 秒，一轮共 80 秒（对齐 acceptance.json，2026-10-09）。
 # 为什么由 10s 改为 20s：硬件改为每档连续多次采集（capturesPerStep，默认 5），
@@ -1545,17 +1546,46 @@ class RealFanExecutor:
         return False
 
 
-def get_executor() -> FanExecutor:
-    """选择执行器：默认真实台架；显式 `FAN_EXECUTOR=sim` 才走模拟兜底。
+#: 两个执行器各保留一份单例。切换模式时换的是「用哪一个」，不是「新建一个」——
+#: 各自都有 _runs 状态（这里是类属性，两类共享各自的字典），实例复用可避免
+#: 重复构造与日志噪声。
+_real_executor: "FanExecutor | None" = None
+_sim_executor: "FanExecutor | None" = None
 
+
+def get_executor() -> FanExecutor:
+    """按当前**数据源模式**返回执行器。
+
+    demo 模式强制走模拟执行器 —— 演示时绝不能碰真硬件，否则会去连示波器/串口，
+    无设备环境下必然报错。这条优先级**高于** FAN_EXECUTOR 环境变量：
+
+      · FAN_EXECUTOR 是「开发联调时选哪个」，属于部署配置
+      · 数据源模式是「此刻必须是什么」，属于业务约束
+
+    配置不能盖掉业务约束，否则就会出现「界面显示演示中，后台还在开串口」。
+
+    live 模式保持原行为：默认真实台架，显式 `FAN_EXECUTOR=sim` 才走模拟兜底。
     为什么默认 real 而非 sim：本系统以真实台架采集为目标，模拟仅是「无仪器联调」
     的开发兜底。默认 sim 会在有仪器时静默回退成合成数据，造成「图在动、风扇没转」
     的误导（实测踩过）。因此默认 real，模拟必须显式声明，杜绝静默降级。
     """
+    global _real_executor, _sim_executor
+
+    if get_mode() == "demo":
+        if _sim_executor is None:
+            _sim_executor = SimFanExecutor()
+            logger.info("[fan-executor] 演示模式启用模拟执行器")
+        return _sim_executor
+
     mode = os.environ.get("FAN_EXECUTOR", "real").lower()
     if mode == "sim":
-        return SimFanExecutor()
-    return RealFanExecutor()
+        if _sim_executor is None:
+            _sim_executor = SimFanExecutor()
+        return _sim_executor
+
+    if _real_executor is None:
+        _real_executor = RealFanExecutor()
+    return _real_executor
 
 
 def make_run_id() -> str:
