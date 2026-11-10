@@ -42,6 +42,7 @@ from sqlmodel import Session, select
 
 from app.api.deps import get_current_user, get_db
 from app.core.exceptions import BadRequestException, NotFoundException
+from app.db.session import get_mode
 from app.core.logger import logger
 from app.core.paths import (
     C_DIR,
@@ -413,6 +414,13 @@ def _find_bench_run_dir(run_id: str, flow_finished_at: Any) -> Path | None:
     ⚠️ ② 是关联缺失下的近似，不是精确关联；日志会把命中的目录与层级打出来，
     便于人工核对。找到即用、找不到返回 None（报告如实写「（无）」）。
     """
+    # 演示模式不读真实采集目录。
+    # 下面的「时间窗口兜底」会命中最近的真实轮次 —— 演示运行的 finished_at 就是此刻，
+    # 必然落在窗口内。后果是把真机波形画进演示报告：判定是演示的 pass、
+    # 波形是真机的，这种「混血报告」比一张空图更糟，因为它看起来完全正常。
+    if get_mode() == "demo":
+        return None
+
     runs_root = C_DIR / "hardware" / "v0.6" / "runs"
     if not runs_root.is_dir():
         return None
