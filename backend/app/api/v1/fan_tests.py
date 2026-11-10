@@ -31,6 +31,7 @@ from app.models.run import Run
 from app.models.user import User
 from app.schemas.common import error_response, success_response
 from app.services.demo_artifacts import persist_demo_artifacts
+from app.services.demo_capture import write_demo_capture
 from app.services.fan_executor import (
     DEFAULT_STEPS,
     FanRunState,
@@ -100,6 +101,12 @@ def _persist_demo_run(session: Session, st: FanRunState) -> None:
         finished_at=stamp,
     )
     session.commit()
+
+    # 采集目录：报告的波形图/趋势图从这里取数。模拟执行器不产文件，
+    # 由 demo_capture 按真实目录结构落一份合成波形（带 .demo-marker 标记）。
+    # 失败不抛异常 —— 少一张图不该让整轮演示失败。
+    write_demo_capture(st.run_id, st.steps or [], dataset)
+
     logger.info("[fan-tests] 演示运行 %s 已落库（mode=demo-%s，%d 个采样点）",
                 st.run_id, dataset, len(samples))
 
