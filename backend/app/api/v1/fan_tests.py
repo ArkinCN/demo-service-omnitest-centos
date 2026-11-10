@@ -16,6 +16,7 @@
 from __future__ import annotations
 
 import time
+from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, Query
 from pydantic import BaseModel
@@ -24,9 +25,12 @@ from sqlmodel import Session, select
 from app.api.deps import get_current_user, get_db
 from app.core.exceptions import ConflictException
 from app.core.logger import logger
+from app.db.session import get_demo_dataset, get_mode
 from app.models.interlock import GateState
+from app.models.run import Run
 from app.models.user import User
 from app.schemas.common import error_response, success_response
+from app.services.demo_artifacts import persist_demo_artifacts
 from app.services.fan_executor import (
     DEFAULT_STEPS,
     FanRunState,
@@ -41,6 +45,63 @@ router = APIRouter(prefix="/fan-tests", tags=["Fan Tests"])
 # 启动时抓一个实例会把模式永久钉死在启动那一刻 —— 这正是「UI 显示演示中、
 # 后台还在开串口」的成因。改为每次取用；get_executor() 内部已做单例缓存，
 # 反复调用不会重复构造。
+
+#: 演示运行固定的场景与归属。真实运行由计划/配置带场景；模拟运行没有计划上下文，
+#: 用演示数据集里那一个，保证与 gen_demo_data.py 灌入的数据同源。
+_DEMO_SCENE_ID = "motor.cooling-fan.fortior-fu6832"
+_DEMO_USER_ID = 1
+
+
+def _persist_demo_run(session: Session, st: FanRunState) -> None:
+    """演示模式下把「已完成的模拟运行」落库，供历史列表与报告使用。
+
+    为什么放在 API 层而不是 Executor 里：
+      真实执行器的产物是 runs/<run_id>/events.jsonl，由采集脚本写盘；
+      模拟执行器没有文件产物。不在应用侧补这一步，结果就是
+      「图在动、刷新就没了、报告拿不到数据」——演示等于白演。
+
+    为什么必须幂等：
+      前端按秒轮询状态，同一个 run 会被反复观察到 terminal。
+      没有幂等就会写出一堆重复记录。
+    """
+    if get_mode() != "demo" or not st.terminal:
+        return
+
+    existing = session.exec(select(Run).where(Run.run_id == st.run_id)).first()
+    if existing is not None:
+        return
+
+    now = datetime.now(timezone.utc)
+    dataset = get_demo_dataset() or "normal"
+    session.add(
+        Run(
+            run_id=st.run_id,
+            user_id=_DEMO_USER_ID,
+            scene_id=_DEMO_SCENE_ID,
+            status=st.status,
+            # 与演示数据集同前缀：get_demo_dataset() 就是靠这个认出当前是哪套
+            mode=f"demo-{dataset}",
+            created_at=now,
+            finished_at=now,
+        )
+    )
+
+    # 产物和 Run 一起提交（persist_demo_artifacts 内部不 commit）。
+    # 模拟执行器没有 events.jsonl 之类的文件产物，这里必须补齐，
+    # 否则报告模块拿不到 verdict-table / report-instance，生成即失败。
+    samples, _ = get_executor().samples(st.run_id, 0)
+    stamp = now.isoformat()
+    persist_demo_artifacts(
+        session=session,
+        run_id=st.run_id,
+        scene_id=_DEMO_SCENE_ID,
+        samples=samples,
+        started_at=stamp,
+        finished_at=stamp,
+    )
+    session.commit()
+    logger.info("[fan-tests] 演示运行 %s 已落库（mode=demo-%s，%d 个采样点）",
+                st.run_id, dataset, len(samples))
 
 
 class GateSnapshot(BaseModel):
@@ -170,11 +231,16 @@ async def start_fan_test(
 async def get_fan_test(
     run_id: str,
     current_user: User = Depends(get_current_user),
+    session: Session = Depends(get_db),
 ):
-    """查询一次运行的计划与状态。"""
+    """查询一次运行的计划与状态。
+
+    演示模式下这一步顺带把已完成的模拟运行落库（幂等），详见 _persist_demo_run。
+    """
     st = get_executor().status(run_id)
     if st.status == "unknown":
         return error_response("运行不存在", 404)
+    _persist_demo_run(session, st)
     return success_response(data=_status_dict(st))
 
 
