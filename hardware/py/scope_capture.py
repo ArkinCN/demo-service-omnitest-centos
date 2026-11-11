@@ -663,9 +663,27 @@ def get_tach_pulse_metrics(values: list[float], increment: float) -> dict:
     if period <= 0 or not ivals:
         metric["edgeStatus"] = "unstable_pulse_intervals"
         return metric
-    if not all(abs(x - period) <= PULSE_PERIOD_TOLERANCE * period for x in ivals):
+    # ── 漏检倍数修正（2026-11-06 首次加入，2026-11-11 因未入库丢失后恢复）──
+    # 实测：异常间隔全部是中位周期的整数倍（50% 档 97.0=2x47.5、70% 档 70.5=2x35.5、
+    # 100% 档 53.5=2x27.0 / 83.0=3x27.0），是个别脉冲漏检造成的空洞，不是转速不稳。
+    # 原判据「每个间隔都贴近中位周期」会整档否决（现象：只有 30% 有转速）。
+    # 做法：按中位周期折算整数倍 k（漏检 k-1 个），落在 k*period ±25% 内即接受，
+    # 再用「累计周期数 / 总时长」重算周期。无法对齐的仍判 unstable，不放宽本质判据。
+    total_cycles = 0
+    for x in ivals:
+        k = max(1, int(round(x / period)))
+        if abs(x - k * period) > PULSE_PERIOD_TOLERANCE * k * period:
+            metric["edgeStatus"] = "unstable_pulse_intervals"
+            return metric
+        total_cycles += k
+    _span_s = (merged[-1] - merged[0]) * increment
+    if total_cycles <= 0 or _span_s <= 0:
         metric["edgeStatus"] = "unstable_pulse_intervals"
         return metric
+    period = _span_s / total_cycles
+    metric["medianPeriodS"] = period
+    metric["detectedPulses"] = len(merged)
+    metric["correctedCycles"] = total_cycles
 
     # 凹陷宽度/周期 守卫（2026-10-12 增，取值依据见 PULSE_DEPRESSION_WIDTH_FRACTION_MAX）。
     # 作用：挡住「纯 50Hz 市电干扰」这类同样"周期性"、但凹陷形状明显更宽
