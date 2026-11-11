@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import json
+import math
 import os
 import subprocess
 import sys
@@ -320,6 +321,61 @@ def _runs_root_path() -> Path:
     return _CONFIG_DIR.parent / "runs"
 
 
+def _parse_demo_capture_id(capture_id: str) -> tuple[int, int] | None:
+    """解析演示用的 capture_id（形如 `c1_d030`）为 (cycle, duty)。
+
+    约定与 `demo_capture.write_demo_capture` 的目录命名同源：
+    `c{cycle}_d{duty:03d}` ↔ `cycle{cycle:04d}_duty{duty:03d}`。
+    这样从样本上的 capture_id 就能直接定位到磁盘目录，不需要额外映射表。
+
+    格式不符返回 None —— 未知 id 一律交给路由层回 404，不猜、不编路径。
+    """
+    try:
+        cycle_part, duty_part = capture_id.split("_", 1)
+    except (AttributeError, ValueError):
+        return None
+    if not cycle_part.startswith("c") or not duty_part.startswith("d"):
+        return None
+    try:
+        cycle = int(cycle_part[1:])
+        duty = int(duty_part[1:])
+    except ValueError:
+        return None
+    if cycle <= 0 or not 0 <= duty <= 100:
+        return None
+    return cycle, duty
+
+
+def _step_response(prev: float, target: float, dt: float,
+                   tau: float = 0.12, zeta: float = 0.65) -> float:
+    """二阶欠阻尼系统的阶跃响应，用于模拟档位切换时的真实过渡。
+
+    为什么不用一阶惯性：一阶响应是**单调**趋近，画出来仍然是"圆角阶梯"，
+    还是假。真实电机/风扇闭环在阶跃指令下会**先冲过头再回落**（超调），
+    这是最能一眼看出"真的在控制"的特征。
+
+    tau=0.12 / zeta=0.65 的依据：
+      · 超调量 Mp = exp(-pi*zeta/sqrt(1-zeta^2)) ≈ 5%（落在 3~5% 目标区间）
+      · 峰值时间 tp = pi/wd = pi/((1/tau)*sqrt(1-zeta^2)) ≈ 0.5s
+        —— 0.12 而不是更大的值，是因为档位只持续几秒；tau 太大会让超调峰
+        落到下一个档位里，曲线上根本看不到"冲高回落"，等于白做。
+
+    t=0 时返回 prev，t→∞ 时收敛到 target。
+    """
+    if dt <= 0:
+        return prev
+    delta = target - prev
+    if delta == 0:
+        return target
+    wn = 1.0 / max(tau, 1e-6)
+    wd = wn * math.sqrt(max(1.0 - zeta * zeta, 1e-9))
+    dt = min(dt, 8.0 * tau)  # 8τ 后视为稳态，避免 exp 下溢到无意义值
+    envelope = math.exp(-zeta * wn * dt)
+    return target - delta * envelope * (
+        math.cos(wd * dt) + (zeta * wn / wd) * math.sin(wd * dt)
+    )
+
+
 def _iter_events(events_path: Path) -> list[dict]:
     """容错解析 events.jsonl 为事件列表（坏行跳过；文件缺失/不可读返回空表）。"""
     try:
@@ -605,13 +661,129 @@ class SimFanExecutor:
     _lock = threading.Lock()
     _runs: dict[str, FanRunState] = {}
 
+    # ---- 以下常量与逻辑**只服务演示执行器**，真实台架（RealFanExecutor）完全不参与 ----
+    #: 演示轮次超时余量：超过「计划时长 + 该余量」仍未收敛，判为失控并强制收尾。
+    STALE_GRACE_S = 30.0
+    #: 采样间隔（秒）。真机约 1s 一点，但演示要"看得见在动"，压到 100ms；
+    #: 80 秒计划 → 约 800 点，前端轮询 samples 即可滚动刷新。
+    # 2026-11-11 改：0.1 → 10.0。
+    # 真机一轮是「4 档 × 每档 2 次采集」= 8 个样本（单次采集约 10s）；
+    # 0.1s 产点会在 80s 内堆出 ~800 个点，趋势图变成密线，与真机形态完全不同，
+    # 一眼就能看出是假的。改成 10s 后每档 2 点、一轮 8 点，与真机同构。
+    SAMPLE_INTERVAL_S = 10.0
+    #: 合成波形采样点数。取真实示波器单文件量级（约 1200 行），
+    #: 这样前端「每个数据都显示」时是一条有细节的曲线，而不是几根折线。
+    DEMO_WAVE_POINTS = 1200
+    #: 合成波形时间窗与 PWM 频率（25kHz × 48ms ≈ 1200 点，覆盖整周期群）。
+    DEMO_WAVE_WINDOW_S = 0.048
+    DEMO_PWM_FREQ_HZ = 25000
+    #: 与真实样本一致的量级（见 _run_loop 里的 sample 构造）。
+    DEMO_VOLTAGE_BASE_V = 4.95
+    DEMO_CURRENT_PROBE_V = 0.003
+    DEMO_PWM_HIGH_V = 3.3
+
+    def _reap_stale_runs(self) -> list[str]:
+        """把明显超时且仍未收敛的**演示**轮次强制收尾，返回被收尾的 run_id。
+
+        为什么需要它：`_run_loop` 跑在后台 daemon 线程里，一旦它因为意外退出
+        而没有落终态，内存里的 status 会永远停在 running，单设备锁再也不释放 ——
+        演示时的表现就是「409 已有风扇实验在进行」，而且重启前端毫无作用，
+        只能重启后端。有了这一步，锁会自己恢复。
+
+        只处理演示执行器自己的内存态；planned_duration_s<=0（rolling 模式）
+        不参与回收，避免把「本来就该一直跑」的轮次误杀。
+        """
+        now = time.monotonic()
+        reaped: list[str] = []
+        with self._lock:
+            for rid, st in self._runs.items():
+                if st.status not in ("running", "stopping"):
+                    continue
+                planned = float(st.planned_duration_s or 0)
+                if planned <= 0:
+                    continue
+                started = st.started_at or now
+                if now - started <= planned + self.STALE_GRACE_S:
+                    continue
+                st.status = "completed"
+                st.terminal = True
+                st.stop_requested = True
+                st.finished_at = now
+                st.overrun = True
+                st.error = "演示轮次超时未收尾，已由单设备锁自愈回收"
+                reaped.append(rid)
+        if reaped:
+            logger.warning("[fan-executor] sim 自愈回收超时轮次: %s", ", ".join(reaped))
+        return reaped
+
     def has_active_run(self) -> bool:
         with self._lock:
             return any(s.status in ("running", "stopping") for s in self._runs.values())
 
+    def active_runs(self) -> list[dict]:
+        """列出当前占用单设备锁的**演示**轮次摘要。
+
+        前端据此显示「实验进行中（还剩 xx 秒）」，避免演示时盲点再点一次、
+        拿到 409 还不知道为什么。真实执行器不带这个方法，路由层用 getattr 兜底
+        返回空列表 —— 演示与真实在这里也是隔离的。
+        """
+        now = time.monotonic()
+        items: list[dict] = []
+        with self._lock:
+            for rid, st in self._runs.items():
+                if st.status not in ("running", "stopping"):
+                    continue
+                elapsed = now - (st.started_at or now)
+                planned = float(st.planned_duration_s or 0)
+                items.append({
+                    "run_id": rid,
+                    "status": st.status,
+                    "simulation": st.simulation,
+                    "elapsed_s": round(elapsed, 1),
+                    "planned_duration_s": planned,
+                    "remain_s": max(0.0, round(planned - elapsed, 1)) if planned else 0.0,
+                    "samples": len(st.samples),
+                })
+        items.sort(key=lambda x: x["elapsed_s"], reverse=True)
+        return items
+
+    def _takeover_active_runs(self) -> list[str]:
+        """把仍在 running/stopping 的**演示**轮次收尾，允许新轮次直接接管。
+
+        为什么演示允许抢占、真机不允许
+        ------------------------------
+        真机上「同一时刻只能有一轮实验」是**硬件硬约束**，抢了就是两台实验互相干扰，
+        所以 RealFanExecutor 的 409 必须保留。
+        但演示里用户点两次「自动测试」是正常操作（甚至流程会自动重跑），
+        弹「409 已有风扇实验在进行」纯属把真机的物理限制泄漏到演示体验里。
+
+        为什么是"真收尾"而不是"假装拿到锁"
+        --------------------------------
+        若只改锁标志而旧轮次还在跑，两轮会同时往同一条 samples 队列写，
+        前端图会花、报告也会串档。这里置 stop_requested=True，
+        旧轮次的 _run_loop 下一拍就会退出，不再产样本。
+        """
+        now = time.monotonic()
+        taken: list[str] = []
+        with self._lock:
+            for rid, st in self._runs.items():
+                if st.status not in ("running", "stopping"):
+                    continue
+                st.status = "stopped"
+                st.stop_requested = True
+                st.terminal = True
+                st.finished_at = now
+                st.error = "演示重跑：旧轮次已被新轮次接管"
+                taken.append(rid)
+        if taken:
+            logger.info("[fan-executor] 演示接管，已收尾旧轮次: %s", ", ".join(taken))
+        return taken
+
     def start(self, run_id: str, plan: dict) -> FanRunState:
-        if self.has_active_run():
-            raise ConflictException("已有风扇实验在进行，请先停止再启动")
+        # 演示语义：重跑是常态，不是冲突。先接管旧轮次，再启动新的。
+        # （超时自愈在 takeover 里已覆盖；单独保留 reap 是为了清理"没有新轮次也要收"的场景）
+        self._reap_stale_runs()
+        self._takeover_active_runs()
         steps = plan.get("steps") or DEFAULT_STEPS
         cycles = int(plan.get("cycles", 1))
         duration = _planned_duration(steps, cycles)
@@ -628,6 +800,19 @@ class SimFanExecutor:
         )
         with self._lock:
             self._runs[run_id] = state
+
+        # 运行中就把合成波形落盘（只写波形+标记，不写 events）：
+        # 演示时启动后立刻能看到波形，不必等整轮结束。
+        # events=False 是为了不写入 run_finished —— 否则磁盘态会把"还在跑"判成已收尾。
+        # 失败不影响运行：少一张图不该让整轮实验失败。
+        try:
+            from app.db.session import get_demo_dataset  # noqa: PLC0415 - 避免模块级循环导入
+            from app.services.demo_capture import write_demo_capture  # noqa: PLC0415
+
+            write_demo_capture(run_id, steps, get_demo_dataset(), events=False)
+        except BaseException as exc:  # noqa: BLE001 - 出图失败不得拖垮实验
+            logger.warning("[fan-executor] sim 预生成波形失败（不影响运行）：%r", exc)
+
         threading.Thread(target=self._run, args=(run_id,), daemon=True).start()
         logger.info("[fan-executor] sim run %s started (simulation=True)", run_id)
         return state
@@ -656,10 +841,98 @@ class SimFanExecutor:
             return picked, max(after_sequence, latest)
 
     def capture_meta(self, run_id: str, capture_id: str) -> dict | None:
-        """模拟执行器不产真实波形文件，一律返回 None（前端据此显示「未采集」）。"""
-        return None
+        """从演示采集目录里解析某档位的波形索引。
+
+        波形文件由 `demo_capture.write_demo_capture` 按**与真实采集同构**的目录结构落盘
+        （`cycle{idx}_duty{duty}/pwm/CH*.csv` + `tach/CH4.csv`），所以这里只负责
+        「capture_id → 目录 → 文件清单」这一步索引，波形本体仍由路由层既有的
+        `read_capture_waveforms` 读取 —— 演示与真实共用同一条读取链路，不开后门。
+
+        capture_id 形如 `c1_d030`（第 1 档 / 占空比 30%）。
+        目录不存在（本轮还没落盘、或已清理）时返回 None，由路由层如实回 404，
+        绝不编造路径。
+        """
+        parsed = _parse_demo_capture_id(capture_id)
+        if parsed is None:
+            return None
+        cycle, duty = parsed
+        run_dir = _runs_root_path() / run_id
+        cycle_dir = run_dir / f"cycle{cycle:04d}_duty{duty:03d}"
+        if not cycle_dir.is_dir():
+            return None
+        artifacts = sorted(str(p) for p in cycle_dir.rglob("CH*.csv"))
+        if not artifacts:
+            return None
+        stamp = None
+        marker = run_dir / ".demo-marker"
+        if marker.is_file():
+            try:
+                stamp = json.loads(marker.read_text(encoding="utf-8")).get("generatedAt")
+            except (OSError, ValueError):
+                stamp = None
+        return {
+            "capture_id": capture_id,
+            "cycle": cycle,
+            "profile": f"duty{duty:03d}",
+            "commanded_pwm_pct": duty,
+            "artifacts": artifacts,
+            "startedUtc": stamp,
+            "finishedUtc": stamp,
+            # 演示标记贯穿到 meta：排查时一眼能看出这是合成数据
+            "simulation": True,
+        }
 
     def _run(self, run_id: str) -> None:
+        """线程入口：**无论正常结束还是异常，都必须把内存态落到终态**。
+
+        `_run_loop` 跑在 daemon 线程里，抛出的异常不会回传到请求线程。
+        如果不在这里兜底，一旦异常，status 会永久停在 running，
+        单设备锁再也不释放 —— 这正是「409 已有风扇实验在进行」的来源。
+        """
+        try:
+            self._run_loop(run_id)
+        except BaseException as exc:  # noqa: BLE001 - 线程入口必须兜住一切
+            logger.exception("[fan-executor] sim run %s 异常终止", run_id)
+            with self._lock:
+                st = self._runs.get(run_id)
+                if st is not None and not st.terminal:
+                    st.status = "failed"
+                    st.terminal = True
+                    st.error = repr(exc)
+                    st.finished_at = time.monotonic()
+        finally:
+            # 二次保险：任何路径退出都要有终态，绝不留 running 占着锁
+            with self._lock:
+                st = self._runs.get(run_id)
+                if st is not None and not st.terminal:
+                    st.status = "completed"
+                    st.terminal = True
+                    st.finished_at = st.finished_at or time.monotonic()
+
+    # 真机实测转速锚点（2026-11-06/11-11 两次采集一致）：
+    #   30% → 745  |  50% → 1245  |  70% → 1690  |  100% → 2226 rpm
+    # 演示要「像真的」，转速必须随档位单调上升且落在真机量级，不能是 None。
+    _DEMO_RPM_ANCHORS = ((0, 0), (30, 745), (50, 1245), (70, 1690), (100, 2226))
+
+    @classmethod
+    def _demo_rpm(cls, pwm: int, seq: int) -> int | None:
+        """按档位插值出合成转速，叠加 ±0.6% 抖动（真机同档重复性 <1%）。"""
+        if pwm <= 0:
+            return None  # 0% 档风扇停转，真实数据同样是 None
+        pts = cls._DEMO_RPM_ANCHORS
+        for i in range(1, len(pts)):
+            x0, y0 = pts[i - 1]
+            x1, y1 = pts[i]
+            if pwm <= x1:
+                ratio = (pwm - x0) / (x1 - x0) if x1 > x0 else 0.0
+                base = y0 + (y1 - y0) * ratio
+                break
+        else:
+            base = pts[-1][1]
+        jitter = 1.0 + 0.006 * ((seq * 37 % 21) - 10) / 10.0
+        return int(round(base * jitter))
+
+    def _run_loop(self, run_id: str) -> None:
         with self._lock:
             st = self._runs[run_id]
         # 展开计划：cycles<=0 视为 rolling（无限循环），此处按单轮有限时长生成
@@ -668,11 +941,22 @@ class SimFanExecutor:
         for _ in range(cycles):
             step_list.extend(st.steps)
 
-        # 以启动时刻为单调时钟原点；每秒产一个点，取测量中点作为 t_s
+        # 以启动时刻为单调时钟原点；每 SAMPLE_INTERVAL_S 产一个点，t_s 取测量中点
         start_mono = st.started_at or time.monotonic()
         step_idx = 0
         t_in_step = 0.0
         current_pwm = None
+        # 当前档位对应的合成波形 capture_id；每切换档位重新生成一份
+        current_capture_id: str | None = None
+
+        # 确定性噪声（与 demo_capture 共用同一份实现，避免两套随机源行为不一致）
+        from app.services.demo_capture import _noise as _demo_noise  # noqa: PLC0415
+
+        # 阶跃过渡状态：档位切换时从「上一拍的实测值」出发，按二阶响应逼近新目标
+        last_pwm: int | None = None
+        transit_started = 0.0
+        transit_from = 0.0
+        measured_prev = 0.0
         while True:
             with self._lock:
                 if st.stop_requested:
@@ -688,6 +972,10 @@ class SimFanExecutor:
             if step_idx < len(step_list):
                 step = step_list[step_idx]
                 current_pwm = int(step.get("commanded_pwm_pct", 0))
+                # 该档位对应的合成波形 capture_id（目录由 write_demo_capture 落盘）。
+                # 多轮时按档位序号取模，映射回同一批目录 —— 演示通常 cycles=1。
+                cycle_no = step_idx % max(len(st.steps), 1) + 1
+                current_capture_id = f"c{cycle_no}_d{current_pwm:03d}"
                 if elapsed >= step.get("duration_s", 10) + t_in_step:
                     t_in_step += step.get("duration_s", 10)
                     step_idx += 1
@@ -703,30 +991,66 @@ class SimFanExecutor:
                         st.overrun = True
                 break
 
-            # 采样点（合成值，t_s 取测量中点）
-            t_s = round(elapsed, 2)
+            # ---- 合成采样点 ----
+            # 三条原则（都是为了消掉"一眼假"）：
+            #   ① 档位切换不走直角：按二阶欠阻尼响应过渡，带 3~5% 超调后回落
+            #   ② 稳态值叠加白噪声：模拟传感器抖动与 ADC 量化
+            #   ③ 电压/探针电压随占空比变化：不是写死的常量
+            t_s = round(elapsed, 3)
             pwm = current_pwm if current_pwm is not None else 0
-            # 实测占空比 = 命令值 ± 小幅抖动（合成，仅演示）
-            measured = round(pwm + (0.0 if pwm in (0, 100) else (pwm % 7 - 3) * 0.3), 1)
+            seq = st.next_sequence
+
+            if last_pwm != pwm:
+                transit_started = elapsed
+                transit_from = measured_prev
+                last_pwm = pwm
+
+            # 真机每档采样间隔约 10s，早已越过阶跃过渡期，采到的都是稳态值；
+            # 若照搬过渡曲线，切换后首点会读到「上一档的值」（实测出现命令 50 而实测 30），
+            # 与真机形态不符。故演示点直接取稳态目标 + 噪声。
+            # 另：真机固件会把 100% 钳到 99%，实测落在 98.0~98.2，这里一并还原。
+            base_duty = 98.0 if pwm >= 100 else float(pwm)
+            measured_cmd = base_duty
+            # clamp 到 [0,100]：二阶超调会把低档起始值算成负数（实测出现过 -0.01%），
+            # 物理上不存在负占空比，真机数据也从未出现。
+            measured = round(min(100.0, max(0.0, measured_cmd + _demo_noise(seq, 0, 0.22))), 2)
+            measured_prev = measured
+
+            # 母线电压：4.95V 基线 + 纹波噪声（恒定值画出来是一条死直线）
+            # 母线电压随负载下降（真机实测 30%→5.05V、100%→4.92V，负载压降约 0.13V）。
+            # 之前用恒定 4.95 画出来是一条死平线，与真机「随档位轻微下滑」的趋势不符，容易被看出。）
+            voltage = round(5.06 - 0.0014 * pwm + _demo_noise(seq, 1, 0.011), 3)
+            # 电流探头电压：随占空比抬升（保持 mV 量级）+ 噪声
+            probe = round(0.003 + 0.00004 * pwm + _demo_noise(seq, 2, 0.00018), 5)
+
             sample = {
-                "sequence": st.next_sequence,
+                "sequence": seq,
                 "t_s": t_s,
-                "measurement_started_t_s": round(t_s - 0.1, 2),
-                "measurement_finished_t_s": round(t_s + 0.1, 2),
+                # 测量窗口按采样间隔的一半计，比固定 0.1s 更贴近实际节奏
+                "measurement_started_t_s": round(t_s - self.SAMPLE_INTERVAL_S / 2, 3),
+                "measurement_finished_t_s": round(t_s + self.SAMPLE_INTERVAL_S / 2, 3),
                 "commanded_pwm_pct": pwm,
-                "voltage_v": 4.95,
-                "current_probe_v": 0.003,
+                "voltage_v": voltage,
+                "current_probe_v": probe,
                 "current_a": None,  # 换算未确认，不编值
                 "measured_pwm_duty_pct": measured,
-                "pwm_frequency_hz": 24950 if pwm not in (0, 100) else None,
-                "rpm": None,  # 测速未接入，不编值
-                "quality": _quality("provisional_probe_ratio", "conversion_not_confirmed", "not_connected"),
-                "capture_id": None,
+                # 真机 100% 档同样能测到频率（实测 24945~24969Hz），
+                # 只有 0% 档因无开通脉冲才为 None —— 与真机对齐。
+                "pwm_frequency_hz": round(24955 + _demo_noise(seq, 3, 12)) if pwm > 0 else None,
+                # 转速按真机实测曲线合成（30/50/70/100% → 745/1245/1690/2226 rpm）
+                "rpm": self._demo_rpm(pwm, seq),
+                # simulation 必须显式为 True：项目数据纪律要求模拟数据可被下游识别，
+                # 之前缺这个字段导致前端拿到 None，无法区分真假。
+                "simulation": True,
+                "quality": _quality("provisional_probe_ratio", "conversion_not_confirmed",
+                                    "synthesized" if pwm > 0 else "not_connected"),
+                # 关联到该档位的合成波形，前端点样本即可取到 CH1-CH4
+                "capture_id": current_capture_id,
             }
             with self._lock:
                 st.samples.append(sample)
                 st.next_sequence += 1
-            time.sleep(1.0)
+            time.sleep(self.SAMPLE_INTERVAL_S)
 
 
 class RealFanExecutor:

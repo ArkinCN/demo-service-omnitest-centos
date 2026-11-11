@@ -27,6 +27,11 @@ services:
       # ---- 持久化数据（容器重建不丢）----
       - ./backend/.deploy:/srv/omnitest/c/backend/.deploy
       - ./backend/uploads:/srv/omnitest/c/backend/uploads
+      # 2026-11-11 加：后端代码挂载。
+      # 此前 backend/app 只存在于镜像内，改宿主源码不生效（运维以为改了、实际跑的是旧代码，
+      # 11-11 的演示数据修复就因此「改了没反应」）。挂上后改源码重启容器即生效，
+      # 与 hardware/ 的迭代方式一致，避免每次改动都要重建 465MB 镜像。
+      - ./backend/app:/srv/omnitest/c/backend/app
       - /var/log/demo:/var/log/demo
       # ---- 静态资源与知识库 ----
       # ⚠️ 只挂 public/，**不能挂整个 web/**：
