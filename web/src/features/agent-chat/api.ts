@@ -351,7 +351,7 @@ function toStream(req: SendRequest, pace: number): AsyncGenerator<AgentEvent, vo
 /** 脚本化回放适配器：用于演示，带真实节奏 */
 export const mockAdapter: AgentAdapter = {
   id: 'mock',
-  label: '演示回放（mock）',
+  label: '内置回放',
   send(req: SendRequest) {
     return toStream(req, 1);
   },
