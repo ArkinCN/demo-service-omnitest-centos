@@ -1784,13 +1784,29 @@ function getOrchestrator(): Orchestrator {
       useAppStore.setState({ runPhase: 'running', runProgress: 0, runMeasures: {} })
       tool('fan-start', '下发台架启动', 'running')
       const plan = await startFanTest({ gate })
-      // 真机流程拒绝模拟数据：后端若返回 simulation=true 说明未接真台架，如实报错。
+      // 真机流程拒绝模拟数据（数据纪律不变）；**演示模式是唯一例外**。
+      //
+      // 为什么要有例外（2026-11-13）：演示环境下没有接真台架，后端 startFanTest
+      // 必然返回 simulation=true。原实现在任何模式下都 throw，导致自动化回归在
+      // 演示环境永远停在「启动测试及结果分析」——初始化能过、后面全断。
+      //
+      // 放行不等于放松：只认 store 里的 demoMode（顶栏胶囊控制），
+      // 且日志里显式写「演示数据（未接真台架）」，不冒充实测。
       if (plan.simulation) {
-        useAppStore.setState({ runPhase: 'idle' })
-        tool('fan-start', '下发台架启动', 'failed', '后端返回模拟数据（simulation=true），已拒绝')
-        throw new Error('后端返回的是模拟数据（simulation=true），拒绝在真机流程中使用')
+        if (!useAppStore.getState().demoMode) {
+          useAppStore.setState({ runPhase: 'idle' })
+          tool('fan-start', '下发台架启动', 'failed', '后端返回模拟数据（simulation=true），已拒绝')
+          throw new Error('后端返回的是模拟数据（simulation=true），拒绝在真机流程中使用')
+        }
+        tool(
+          'fan-start',
+          '下发台架启动',
+          'done',
+          `演示数据（未接真台架）· run_id ${plan.run_id.slice(0, 8)} · 计划 ${plan.planned_duration_s}s`,
+        )
+      } else {
+        tool('fan-start', '下发台架启动', 'done', `run_id ${plan.run_id.slice(0, 8)} · 计划 ${plan.planned_duration_s}s`)
       }
-      tool('fan-start', '下发台架启动', 'done', `run_id ${plan.run_id.slice(0, 8)} · 计划 ${plan.planned_duration_s}s`)
 
       // ③ 增量轮询真实样本 + 以 terminal 判终态（串行锁 + after_sequence 游标）。
       // ⚠️ 声明为 let：每轮用 mergeSamples 重新绑定（去重 + 按 t_s 排序后的新数组）。
