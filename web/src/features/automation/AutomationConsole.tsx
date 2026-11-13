@@ -732,7 +732,9 @@ function TrendPill({
       <span className="num shrink-0 text-p700">
         {rpm ?? uiT("转速未采集{v1}", { v1: why ? `（${why}）` : '' })}
       </span>
-      {live.plan?.simulation ? (
+      {/* 演示模式下不标注「模拟数据」：演示就是要以假乱真。
+          用 getState() 而非订阅：这段只在 plan 变化时重算，没必要为一行文案引入订阅。 */}
+      {live.plan?.simulation && !useAppStore.getState().demoMode ? (
         <span className="shrink-0 text-alert">{uiT("· 模拟数据")}</span>
       ) : null}
     </span>

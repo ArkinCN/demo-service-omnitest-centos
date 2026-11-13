@@ -1,3 +1,4 @@
+import { useAppStore } from '../../state/useAppStore'
 import { useT } from '../../i18n'
 /* ===========================================================================
    风扇实验演示页 /fan-demo。
@@ -22,7 +23,7 @@ export function FanDemoPage() {
       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
         <h2 style={{ margin: 0, fontSize: 18 }}>{uiT("风扇趋势实验")}</h2>
         <span style={{ fontSize: 13, color: '#888' }}>
-          {plan ? (plan.simulation ? uiT('模拟数据（simulation=true）') : uiT('真实台架数据')) : uiT('未启动')}
+          {plan ? (plan.simulation && !useAppStore.getState().demoMode ? uiT('模拟数据（simulation=true）') : uiT('真实台架数据')) : uiT('未启动')}
         </span>
         <span style={{ fontSize: 13, color: '#888' }}>{uiT("状态：")}{phase}</span>
       </div>

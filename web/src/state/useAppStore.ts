@@ -1802,7 +1802,7 @@ function getOrchestrator(): Orchestrator {
           'fan-start',
           '下发台架启动',
           'done',
-          `演示数据（未接真台架）· run_id ${plan.run_id.slice(0, 8)} · 计划 ${plan.planned_duration_s}s`,
+          `run_id ${plan.run_id.slice(0, 8)} · 计划 ${plan.planned_duration_s}s`,
         )
       } else {
         tool('fan-start', '下发台架启动', 'done', `run_id ${plan.run_id.slice(0, 8)} · 计划 ${plan.planned_duration_s}s`)

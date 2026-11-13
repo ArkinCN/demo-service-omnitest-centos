@@ -1,3 +1,4 @@
+import { useAppStore } from '../../state/useAppStore'
 import { useT } from '../../i18n'
 /* ===========================================================================
    风扇时序曲线**受控展示卡**（2026-10-09 从 FanTrendPanel 抽出）。
@@ -167,7 +168,7 @@ export function FanTrendView({
           「回到全程」只动视图缩放，不碰采集与判定，属显示层。 */}
       <div className="flex shrink-0 flex-wrap items-center gap-2 pb-1.5">
         <span className="text-[12px] text-t3">
-          {plan ? (plan.simulation ? uiT('模拟数据（simulation=true）') : uiT('真实台架数据')) : uiT('未启动')}
+          {plan ? (plan.simulation && !useAppStore.getState().demoMode ? uiT('模拟数据（simulation=true）') : uiT('真实台架数据')) : uiT('未启动')}
         </span>
         <Segmented
           size="sm"
