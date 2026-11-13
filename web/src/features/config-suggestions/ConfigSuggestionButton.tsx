@@ -66,15 +66,15 @@ export function ConfigSuggestionButton({ stage, getSelection, updateSelection, p
       const snapshot = snapshotFor(stage, getSelection?.())
       const changes = createDemoChanges(snapshot)
       if (!changes.length) {
-        useAppStore.getState().setNotice(uiT('本阶段没有适用的演示字段，未修改配置。'))
+        useAppStore.getState().setNotice(uiT('本阶段没有适用的字段，未修改配置。'))
         return
       }
       close()
       applyChanges(snapshot, changes, snapshotFor(stage, getSelection?.()), updateSelection)
       useAppStore.setState(state => ({ configSuggestionDemoDrafts: { ...state.configSuggestionDemoDrafts, [demoKey]: true } }))
-      useAppStore.getState().setNotice(uiT('已载入人为偏差的演示草稿，请让模型检查；未保存或操作设备。'))
+      useAppStore.getState().setNotice(uiT('已载入人为偏差的草稿，请让模型检查；未保存或操作设备。'))
     } catch (reason) {
-      useAppStore.getState().setNotice(reason instanceof Error ? reason.message : uiT('未能载入演示配置。'))
+      useAppStore.getState().setNotice(reason instanceof Error ? reason.message : uiT('未能载入配置。'))
     }
   }
   const generate = async () => {
@@ -87,7 +87,7 @@ export function ConfigSuggestionButton({ stage, getSelection, updateSelection, p
     try {
       guard()
       const snapshot = snapshotFor(stage, getSelection?.())
-      if (DEMO_DRAFT_ENABLED && demoLoaded) snapshot.evidence.push({ id: 'demo:deliberate-draft', title: uiT('人为偏差演示'), text: 'This stage previously loaded a synthetic draft with deliberately changed settings or an omitted test. Current values may already be corrected. Review the current editable values against the scenario-package references and criteria; propose only remaining supported repairs. These are demo inputs, not measurements or device recommendations.' })
+      if (DEMO_DRAFT_ENABLED && demoLoaded) snapshot.evidence.push({ id: 'demo:deliberate-draft', title: uiT('人为偏差草稿'), text: 'This stage previously loaded a synthetic draft with deliberately changed settings or an omitted test. Current values may already be corrected. Review the current editable values against the scenario-package references and criteria; propose only remaining supported repairs. These are demo inputs, not measurements or device recommendations.' })
       const models = await fetchModels(abort.signal)
       if (!models.length) throw new Error(uiT('当前没有可用的大模型。'))
       // 模型 id 由后端 .env 的 MOTORDEBUG_LLM_MODEL 派生，前端不能写死
@@ -130,7 +130,7 @@ export function ConfigSuggestionButton({ stage, getSelection, updateSelection, p
       <Button block variant="secondary" size="lg" icon={<Sparkles size={17} />} disabled={unavailable || busy} onClick={() => void generate()}>{uiT('大模型设置建议')}</Button>
       <p>{pending ? uiT('正在保存配置，请稍后。') : locked ? uiT('先解除本阶段确认，再生成建议。') : running ? uiT('请等待当前测试结束。') : uiT('查看修改说明，勾选确认后填入配置。')}</p>
       {DEMO_DRAFT_ENABLED ? <div className="config-suggestion-demo"><Button variant="ghost" size="sm" icon={<FlaskConical size={14} />} disabled={unavailable || busy} onClick={loadDemo}>{uiT('载入待修正示例')}</Button>
-        {demoLoaded ? <span role="status">{uiT('本阶段已载入人为偏差示例，草稿仅供演示。')}</span> : null}
+        {demoLoaded ? <span role="status">{uiT('本阶段已载入人为偏差示例，草稿仅供参考核对。')}</span> : null}
       </div> : null}
     </div>
     <Modal open={open} onClose={close} title={uiT('大模型设置建议')} meta={`${STAGE_PRESENTATION[stage].index} · ${uiT(STAGE_PRESENTATION[stage].title)}`} footer={footer}>

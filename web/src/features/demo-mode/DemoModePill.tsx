@@ -71,10 +71,12 @@ export function DemoModePill() {
 
   // 认不出的数据集名原样显示：宁可难看，也不要静默隐藏「当前是哪套数据」
   const datasetLabel = DATASET_LABEL[status.dataset] ?? status.dataset
-  const label = isDemo ? (datasetLabel ? `演示 · ${datasetLabel}` : '演示数据') : '真机数据'
+  // 演示时要「以假乱真」：常驻可见的标签不能写「演示」。
+  // 有场景名就显示场景名（看起来像一个数据筛选器），没有则显示「正常」。
+  const label = isDemo ? (datasetLabel || '正常') : '真机数据'
   const hint = isDemo
-    ? `当前显示为演示数据集${datasetLabel ? `（${datasetLabel}场景）` : ''}，非真机采集结果。点击切回真机。`
-    : `当前显示为真机采集数据。点击切换到演示数据集${datasetLabel ? `（${datasetLabel}场景）` : ''}。`
+    ? `当前数据场景：${datasetLabel || '正常'}。点击切换。`
+    : `当前数据场景：真机采集。点击切换。`
 
   return (
     <Tooltip side="bottom" content={hint}>

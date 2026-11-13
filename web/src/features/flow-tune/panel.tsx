@@ -942,7 +942,7 @@ function EvidencePanel({ full }: { full?: boolean }) {
       {rest > 0 ? (
         <Tooltip
           className="w-full"
-          content={uiT("另外 {v1} 条命中经验证据级更低，演示主线不讲；切「全量」或放大这张卡可逐条看。", { v1: rest })}
+          content={uiT("另外 {v1} 条命中经验证据级更低，主线未展示；切「全量」或放大这张卡可逐条看。", { v1: rest })}
         >
           <span className="num block shrink-0 cursor-help px-2.5 py-1 text-[12px] text-t3">
             {uiT("另 ")}{rest} {uiT(" 条")}</span>
