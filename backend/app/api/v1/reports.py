@@ -390,7 +390,17 @@ def _bench_dir_has_captures(p: Path) -> bool:
     return '"capture_completed"' in text
 
 
-def _find_bench_run_dir(run_id: str, flow_finished_at: Any) -> Path | None:
+# 只有「确定」或「最优近似」的关联才值得固化到库里。
+# tier2/tier3 是兜底匹配，固化等于把误差永久留档，下次连"再猜一次"的机会都没了。
+_RELIABLE_BENCH_LINKS = ("same-name", "tier1", "recorded")
+
+
+def _find_bench_run_dir(
+    run_id: str,
+    flow_finished_at: Any,
+    known_bench_run_id: str | None = None,
+    link_hint: list | None = None,
+) -> Path | None:
     """找与 flow 轮次关联的**硬件运行目录**（图表数据源）。
 
     背景（2026-10-12）：flow 轮次与 fan-tests 硬件运行是**两个不同的 run_id**
@@ -419,7 +429,19 @@ def _find_bench_run_dir(run_id: str, flow_finished_at: Any) -> Path | None:
         return None
     direct = runs_root / _safe_name(run_id)
     if direct.is_dir():
+        if link_hint is not None:
+            link_hint.extend(["same-name", direct.name])
         return direct
+
+    # 已固化的关联（上次可靠命中时写进 runs.bench_run_id）。
+    # 这一级放在 demo 早退之前：它是**确定**的关联，不是窗口猜测，
+    # 即使在 demo 模式下也应当直接采用。
+    if known_bench_run_id:
+        recorded = runs_root / _safe_name(known_bench_run_id)
+        if recorded.is_dir():
+            if link_hint is not None:
+                link_hint.extend(["recorded", recorded.name])
+            return recorded
 
     # 演示模式到此为止：有同名目录就用（由 demo_capture 生成），没有就是没有。
     # **绝不退到下面的时间窗口兜底** —— 演示运行的 finished_at 就是此刻，
@@ -460,6 +482,8 @@ def _find_bench_run_dir(run_id: str, flow_finished_at: Any) -> Path | None:
         return None
     cands.sort(key=lambda t: (t[0], t[1]))
     tier, neg_m, best = cands[0]
+    if link_hint is not None:
+        link_hint.extend(["tier%d" % tier, best.name])
     tier_note = {
         1: "含采集数据且在轮次结束前活跃",
         2: "含采集数据",
@@ -473,7 +497,13 @@ def _find_bench_run_dir(run_id: str, flow_finished_at: Any) -> Path | None:
     return best
 
 
-def _self_built_report(run_id: str, data: dict, flow_finished_at: Any = None) -> Path:
+def _self_built_report(
+    run_id: str,
+    data: dict,
+    flow_finished_at: Any = None,
+    known_bench_run_id: str | None = None,
+    link_hint: list | None = None,
+) -> Path:
     """用**系统内置模板**生成正式报告：真文件、可下载、能在 Excel 里打开。
 
     2026-10-13 口径变更（用户拍板「报告使用这个模板出」「只填写报告上有的参数或问题」）：
@@ -502,7 +532,9 @@ def _self_built_report(run_id: str, data: dict, flow_finished_at: Any = None) ->
     dest = _report_path(run_id, "xlsm")
     # 图表数据：先按 run_id 找同名目录，找不到退时间窗口匹配（见 _find_bench_run_dir）
     chart_data = None
-    run_dir = _find_bench_run_dir(run_id, flow_finished_at)
+    run_dir = _find_bench_run_dir(
+        run_id, flow_finished_at, known_bench_run_id, link_hint
+    )
     if run_dir is not None:
         try:
             chart_data = report_charts.collect(run_dir)
@@ -626,7 +658,20 @@ async def generate_report(
     # scene_id 一并传入：本轮没有已确认表头时，按场景回退到最近一份已确认实例
     data = _collect_report_data(session, run_id, run.scene_id)
     try:
-        dest = _self_built_report(run_id, data, run.finished_at)
+        # 命中可靠关联（同名目录 / tier1 / 已固化）时顺手写回 runs，
+        # 让这份报告之后的每一次查询都不再依赖时间窗口猜测。
+        link_hint: list = []
+        dest = _self_built_report(
+            run_id, data, run.finished_at, run.bench_run_id or None, link_hint
+        )
+        if len(link_hint) == 2 and link_hint[0] in _RELIABLE_BENCH_LINKS:
+            source, dir_name = link_hint
+            if run.bench_run_id != dir_name:
+                run.bench_run_id = dir_name
+                run.bench_link_source = source
+                session.add(run)
+                session.commit()
+                logger.info(f"report: 固化 bench 关联 {dir_name}（来源 {source}）")
     except Exception as exc:  # noqa: BLE001 —— 生成失败必须如实报，不能假装成功
         logger.exception(f"report: self-built build failed for {run_id}")
         return success_response(data={

@@ -61,6 +61,18 @@ class Run(SQLModel, table=True):
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), description="创建时间")
     finished_at: Optional[datetime] = Field(default=None, description="结束时间（运行中为 None）")
 
+    # 硬件运行目录名（hardware/v0.6/runs/<id>）。空 = 尚未建立关联，
+    # 此时报告图表只能按时间窗口近似匹配（见 reports._find_bench_run_dir）。
+    bench_run_id: str = Field(
+        default="", max_length=128,
+        description="硬件运行目录名；空表示未关联，报告图表走时间窗口近似",
+    )
+    # 关联是怎么来的：same-name（目录名就是本 run_id，确定）/ tier1（时间窗口最优档）
+    # 只固化这两类，tier2/tier3 会把近似误差永久留在库里。
+    bench_link_source: str = Field(
+        default="", max_length=24, description="关联来源标记：same-name / tier1 / recorded",
+    )
+
     class Config:
         from_attributes = True
 
