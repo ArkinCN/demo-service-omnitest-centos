@@ -234,6 +234,24 @@ async def start_fan_test(
     return success_response(data=_status_dict(st), message="运行已启动")
 
 
+@router.get("")
+async def list_active_fan_tests(current_user: User = Depends(get_current_user)):
+    """列出当前占用单设备锁的演示轮次。
+
+    为什么需要：单设备锁没有可见性时，演示中第二次点「启动」只会拿到
+    409「已有风扇实验在进行」，但界面不告诉用户是谁在跑、还剩多久，
+    只能靠重启后端解脱。这个接口把状态暴露出来，前端可以据此提示
+    「实验进行中（还剩 xx 秒）」并禁用启动按钮。
+
+    仅演示执行器实现 active_runs；真实台架没有该方法，getattr 兜底返回空列表，
+    因此这条链路不会碰到真机。
+    """
+    executor = get_executor()
+    probe = getattr(executor, "active_runs", None)
+    items = probe() if callable(probe) else []
+    return success_response(data={"items": items, "active": bool(items)})
+
+
 @router.get("/{run_id}")
 async def get_fan_test(
     run_id: str,
